@@ -1,0 +1,5 @@
+<custom-component>
+  <view>{{myProperty}}</view>
+  <button bindtap='onMyButtonTap'>Button</button>
+  <button bindtap='jumpToTest'>Jump</button>
+</custom-component>

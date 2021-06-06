@@ -1,0 +1,7 @@
+<!--logs.wxml-->
+<view>
+ <text>this is a text \n </text>
+ <block>
+  <text>{{text}}</text>
+ </block>
+</view>
