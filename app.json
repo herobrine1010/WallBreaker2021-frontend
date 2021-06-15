@@ -2,13 +2,18 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/testPage/testPage"
+    "pages/testPage/testPage",
+    "pages/login/login"
   ],
   "window":{
     "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "测试程序",
     "navigationBarTextStyle":"black"
+  },
+  "useExtendedLib": {
+    "kbone": true,
+    "weui": true
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

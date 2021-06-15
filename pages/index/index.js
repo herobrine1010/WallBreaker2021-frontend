@@ -9,7 +9,21 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
+    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'),
+    list: [{
+      "text": "对话",
+      "iconPath": "../../images/tabbar_icon_chat_default.png",
+    "selectedIconPath": "../../images/tabbar_icon_chat_active.png",
+      // dot: true
+  },
+  {
+      "text": "设置",
+    "iconPath": "../../images/tabbar_icon_setting_default.png",
+    "selectedIconPath": "../../images/tabbar_icon_setting_active.png",
+      // badge: 'New'
+  }] 
+    
+    // 如需尝试获取用户信息可改为false
   },
   // 事件处理函数
   bindViewTap() {
