@@ -1,3 +1,9 @@
 {
-  "usingComponents": {}
+  
+    "usingComponents": {
+      "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
+      "mp-searchbar": "weui-miniprogram/searchbar/searchbar",
+      "my-card":"/components/card/card"
+    },
+    "navigationStyle": "custom"
 }

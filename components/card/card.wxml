@@ -1,0 +1,30 @@
+<!--components/card/card.js.wxml-->
+<view class="card">
+<view class="tag" > 
+ <text class="tagText">求职之路</text>
+ </view>
+ <view class="title">这是一个标题
+ </view>
+ <view class="rightTag">
+    <text class="rightTagText">我发布的</text>
+ </view>
+ <view >
+  <image src="/static/icon/default-user.png" class="icon" mode="scaleToFill"/>
+</view>
+<view>
+    <text class="userName">破壁人1号
+    </text>
+</view>
+<view>
+    <text class="time">2小时前</text>
+</view>
+<view>
+    <text class="description">这是一段描述性文字，仅用于测试</text>
+</view>
+<view class="image">
+    <image ></image>
+</view>
+</view>
+
+
+

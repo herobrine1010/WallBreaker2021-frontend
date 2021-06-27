@@ -41,6 +41,22 @@ Component({
       wx.navigateTo({
         url: '/pages/testPage/testPage'
       })
+    },
+    jumpToJiren: function(){
+      wx.navigateTo({
+        url: '/pages/jiren/main'
+      })
+    },
+    jumpToJishi: function(){
+      wx.navigateTo({
+        url: '/pages/jishi/main'
+      })
+    },
+    jumpToPersonal: function(){
+      wx.navigateTo({
+        url: '/pages/personal/main'
+      })
     }
+    
   }
 })

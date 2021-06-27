@@ -1,0 +1,182 @@
+/* components/card/card.js.wxss */
+.card{
+  width: 360px;
+  height: 92px;
+  position: absolute;
+  left: 2%;
+  right: 0.3%;
+  top: 0%;
+  bottom: 0%;
+  background: #F9F2FF;
+border-radius: 8px;
+}
+.tag{
+  
+position: absolute;
+left: 2.74%;
+right: 79.64%;
+top: 8%;
+bottom: 70%;
+
+/* Purple3 */
+background: #8937DB;
+border-radius: 8px;
+
+}
+.tagText{
+position: absolute;
+left: 8.26%;
+/* tag1/medium//12 */
+font-family: Noto Sans SC;
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 17px;
+display: flex;
+align-items: center;
+/* white */
+color: #FFFFFF;
+}
+.title{
+  /* 同济大学春季招聘会 */
+
+position: absolute;
+left: 23.1%;
+right: 19.15%;
+top: 11%;
+bottom: 73%;
+
+/* title/bold/14 */
+font-family: PingFang SC;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+line-height: 20px;
+display: flex;
+align-items: center;
+
+/* gray4_P */
+color: #524A59;
+}
+.rightTag{
+  /* JiRen/Home/Card/右侧标签 */
+
+position: absolute;
+left: 86.32%;
+right: -0.3%;
+top: 10.87%;
+bottom: 71.74%;
+
+/* blue6_80 */
+background: rgba(23, 178, 230, 0.8);
+border-radius: 20px 0px 0px 20px;
+}
+
+.rightTagText{
+  /* 我发起的 */
+
+position: absolute;
+left: 8.7%;
+right: 2.17%;
+top: 6.25%;
+bottom: 6.25%;
+
+/* tag/medium/10 */
+font-family: PingFang SC;
+font-size: 10px;
+line-height: 12px;
+display: flex;
+align-items: center;
+text-align: center;
+
+/* white */
+color: #FFFFFF;
+
+
+}
+
+.icon{
+  /* Icon/User01 */
+height: 20px;
+width: 20px;
+position: absolute;
+left: 3.04%;
+right: 90.88%;
+top: 34.78%;
+bottom: 43.48%;
+
+}
+.userName{
+  /* 破壁者1号 */
+
+position: absolute;
+left: 10.64%;
+right: 72.34%;
+top: 40%;
+bottom: 48%;
+
+/* tag/medium/11 */
+font-family: PingFang SC;
+font-size: 11px;
+line-height: 13px;
+display: flex;
+align-items: center;
+
+/* Purple3 */
+color: #8937DB;
+
+
+}
+.time{
+  /* 1小时前 */
+
+position: absolute;
+left: 28.88%;
+right: 59.88%;
+top: 39.5%;
+bottom: 48.5%;
+
+/* content/regular/10 */
+font-family: PingFang SC;
+font-style: normal;
+font-weight: normal;
+font-size: 10px;
+line-height: 14px;
+display: flex;
+align-items: center;
+
+/* gray3_P */
+color: #7E7685;
+
+}
+.description{
+  
+position: absolute;
+left: 2.74%;
+right: 19.15%;
+top: 60%;
+bottom: 8%;
+
+/* content/medium/11 */
+font-family: PingFang SC;
+font-size: 11px;
+line-height: 13px;
+display: flex;
+align-items: center;
+
+/* gray2_P */
+color: #99989A;
+
+}
+.image{/* Rectangle 15 */
+
+  position: absolute;
+  left: 81.16%;
+  right: 2.43%;
+  top: 34.78%;
+  bottom: 6.52%;
+  
+  /* Gray1 */
+  background: #E6E6E6;
+  border-radius: 8px;
+  }

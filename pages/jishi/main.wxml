@@ -1,2 +1,14 @@
 <!--pages/jishi/main.wxml-->
-<text>pages/jishi/main.wxml</text>
+<view class="main">
+<view class="navibar">  <mp-navigation-bar title="济事广场"></mp-navigation-bar></view>
+<view class="searchbar">
+  <mp-searchbar  bindselectresult="selectResult"></mp-searchbar>
+</view>
+ <view class="list">
+  <my-card></my-card>
+ </view>
+ <view class="list">
+  <my-card></my-card>
+ </view>
+</view>
+

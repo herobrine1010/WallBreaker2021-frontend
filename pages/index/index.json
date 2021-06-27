@@ -1,6 +1,8 @@
 {
   "usingComponents": {
     "my-component":"/components/testComponent/testComponent",
-    "mp-tabbar": "weui-miniprogram/tabbar/tabbar"
+    "mp-tabbar": "weui-miniprogram/tabbar/tabbar",
+    "my-tabbar":"/components/navCustom/navCustom",
+    "my-card":"/components/card/card"
   }
 }
