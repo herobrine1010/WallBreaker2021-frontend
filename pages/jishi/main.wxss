@@ -1,4 +1,9 @@
 /* pages/jishi/main.wxss */
+.list-item{
+  position: relative;
+}
 .list{
-  position: absolute;
+  position: relative;
+  height:92px;
+  margin-top: 10px;
 }

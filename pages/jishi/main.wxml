@@ -4,11 +4,13 @@
 <view class="searchbar">
   <mp-searchbar  bindselectresult="selectResult"></mp-searchbar>
 </view>
- <view class="list">
-  <my-card></my-card>
+<view >
+<view class="list">
+  <my-card ></my-card>
  </view>
  <view class="list">
-  <my-card></my-card>
- </view>
+ <my-card ></my-card>
+</view>
+</view>
 </view>
 
