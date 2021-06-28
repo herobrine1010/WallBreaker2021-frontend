@@ -1,4 +1,4 @@
-// pages/jiren/main.js
+// pages/jishi/main.js
 Page({
 
   /**
@@ -26,7 +26,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 1 //0,1,2 0-济事  1-济人  2-我的
+      })
+   }
   },
 
   /**
