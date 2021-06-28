@@ -1,2 +1,18 @@
-<!--pages/jiren/main.wxml-->
-<text>pages/jiren/main.wxml</text>
+<!--pages/jishi/main.wxml-->
+<view class="main">
+  <view>
+   <my-navi></my-navi>
+  </view>
+<view class="searchBar">
+  <mp-searchbar  bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
+</view>
+<view >
+<view class="list">
+  <my-card ></my-card>
+ </view>
+ <view class="list">
+ <my-card ></my-card>
+</view>
+</view>
+</view>
+

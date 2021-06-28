@@ -1,12 +1,12 @@
 <!--components/card/card.js.wxml-->
 <view class="card">
 <view class="tag" > 
- <text class="tagText">求职之路</text>
+    求职之路
  </view>
  <view class="title">这是一个标题
  </view>
  <view class="rightTag">
-    <text class="rightTagText">我发布的</text>
+    我发布的
  </view>
  <view >
   <image src="/static/icon/default-user.png" class="icon" mode="scaleToFill"/>

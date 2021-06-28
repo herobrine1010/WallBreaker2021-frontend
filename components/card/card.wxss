@@ -1,6 +1,6 @@
 /* components/card/card.js.wxss */
 .card{
-  width: 360px;
+  width: 96%;
   height: 92px;
   position: absolute;
   left: 2%;
@@ -11,26 +11,37 @@
   border-radius: 8px;
 }
 .tag{
-  
+
 position: absolute;
 left: 2.74%;
 right: 79.64%;
 top: 8%;
 bottom: 70%;
+text-align: center;
 
 /* Purple3 */
 background: #8937DB;
 border-radius: 8px;
+
+font-family: Noto Sans SC;
+font-style: normal;
+font-weight: 500;
+font-size: 1.7vh;
+line-height: 17px;
+align-items: center;
+/* white */
+color: #FFFFFF;
 
 }
 .tagText{
 position: absolute;
 left: 8.26%;
 /* tag1/medium//12 */
+
 font-family: Noto Sans SC;
 font-style: normal;
 font-weight: 500;
-font-size: 12px;
+font-size: 1.7vh;
 line-height: 17px;
 display: flex;
 align-items: center;
@@ -62,14 +73,26 @@ color: #524A59;
   /* JiRen/Home/Card/右侧标签 */
 
 position: absolute;
-left: 86.32%;
+left: 80.32%;
 right: -0.3%;
-top: 10.87%;
-bottom: 71.74%;
+top: 9.87%;
+height:17%;
 
 /* blue6_80 */
 background: rgba(23, 178, 230, 0.8);
 border-radius: 20px 0px 0px 20px;
+
+/* tag/medium/10 */
+font-family: PingFang SC;
+font-size: 2%;
+line-height: 13px;
+letter-spacing: 3em;
+align-items: center;
+text-align: center;
+
+/* white */
+color: #FFFFFF;
+
 }
 
 .rightTagText{
@@ -85,7 +108,7 @@ bottom: 6.25%;
 font-family: PingFang SC;
 font-size: 10px;
 line-height: 12px;
-display: flex;
+
 align-items: center;
 text-align: center;
 
@@ -132,7 +155,7 @@ color: #8937DB;
 
 position: absolute;
 left: 28.88%;
-right: 59.88%;
+/*right: 59.88%;*/
 top: 39.5%;
 bottom: 48.5%;
 
