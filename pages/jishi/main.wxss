@@ -5,11 +5,11 @@
   margin-top: 10px;
 }
 .list{
-  top:18%;
+
   height:80%;
   width:100%;
   left:0;
-  position: absolute;
+  position: relative;
   scroll-behavior: smooth;
 }
 .main{
@@ -60,6 +60,7 @@ color: #FFFFFF;
   height: 24px;
 }
 .buttonArea{
+  position: relative;
   /* position: relative; */
   height: 18px;
 }
@@ -85,9 +86,7 @@ color: #7E17E6;
   position: absolute;
   right: 10%;
   bottom: 10%;
-
   background: #FFFFFF;
   border: 1px solid #9B50E6;
   box-sizing: border-box;
-
  }
