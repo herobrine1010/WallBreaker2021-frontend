@@ -7,3 +7,17 @@
   height:92px;
   margin-top: 10px;
 }
+.main{
+  /* GM/Background/JiShi */
+
+/* Background */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+/* JianBian_background2 */
+background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193, 255, 0) 27.37%), linear-gradient(198.24deg, rgba(140, 26, 255, 0.25) 3.34%, rgba(185, 115, 255, 0) 90.78%), linear-gradient(195.29deg, #A3E5FA 2.51%, #DCBCFB 56.49%);
+}
