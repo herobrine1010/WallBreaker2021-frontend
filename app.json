@@ -1,11 +1,12 @@
 {
   "pages": [
+    "pages/jishi/main",
     "pages/index/index",
     "pages/logs/logs",
     "pages/testPage/testPage",
     "pages/login/login",
     "pages/jiren/main",
-    "pages/jishi/main",
+   
     "pages/personal/main"
   ],
   "window": {
