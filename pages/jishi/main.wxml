@@ -4,7 +4,7 @@
     <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="济事广场"></mp-navigation-bar>
   </view>
 <view class="searchBar">
-  <mp-searchbar ext-class="searchBar" ></mp-searchbar>
+  <mp-searchbar  bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
 </view>
 <view >
 <view class="list">

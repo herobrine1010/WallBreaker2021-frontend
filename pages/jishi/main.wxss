@@ -34,7 +34,6 @@ text-align: center;
 /* white */
 color: #FFFFFF;
 }
-
 .weui-search-bar {
   /* position:absolute;
   height: 3vh; */
