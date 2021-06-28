@@ -6,13 +6,34 @@
 <view class="searchBar">
   <mp-searchbar  bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
 </view>
-<view >
-<view class="list">
+<scroll-view class="list" scroll-y="true">
+ <view class="list-item">
   <my-card ></my-card>
  </view>
- <view class="list">
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
  <my-card ></my-card>
 </view>
+<view class="list-item">
+ <my-card ></my-card>
 </view>
+<view class="list-item">
+ <my-card ></my-card>
+</view>
+<view class="list-item">
+ <my-card ></my-card>
+</view>
+</scroll-view>
 </view>
 

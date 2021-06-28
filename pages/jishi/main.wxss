@@ -1,11 +1,16 @@
 /* pages/jishi/main.wxss */
 .list-item{
   position: relative;
-}
-.list{
-  position: relative;
   height:92px;
   margin-top: 10px;
+}
+.list{
+  top:18%;
+  height:85%;
+  width:100%;
+  left:0;
+  position: absolute;
+  scroll-behavior: smooth;
 }
 .main{
   /* GM/Background/JiShi */
