@@ -1,6 +1,42 @@
 // components/card/card.js.js
-Page({
+Component({
 
+  properties:{
+    labelText:{
+      type:String,
+      value:'未分类'
+    },
+    title:{
+      type:String,
+      value:'示例标题'
+    },
+    badgeType:{
+      type:String,
+      value:'我发起的'
+    },
+    userAvatar:{
+      type:String,
+      value:'/static/icon/default-user.png'
+    },
+    userName:{
+      type:String,
+      value:'示例用户'
+    },
+    publishTime:{
+      type:String,
+      value:'1天前'
+    },
+    postingPic:{
+      type:String,
+      value:''
+    },
+    description:{
+      type:String,
+      value:'这是一段描述性文字，仅用于测试。'
+    }
+
+
+  },
   /**
    * 页面的初始数据
    */

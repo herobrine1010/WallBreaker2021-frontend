@@ -7,6 +7,10 @@
   height:92px;
   margin-top: 10px;
 }
+.buttonArea{
+  position: relative;
+  margin-top: 10px;
+}
 .main{
   /* GM/Background/JiShi */
 
@@ -53,4 +57,26 @@ color: #FFFFFF;
 .weui-search-bar__box .weui-search-bar__input{
   padding:0 0 0 0 ;
   height: 24px;
+}
+
+.orderByTime{
+ /* Rectangle 18 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+/* Rectangle 18 */
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+/* white1_P */
+background: #F9F2FF;
+border-radius: 5px;
+
+
 }

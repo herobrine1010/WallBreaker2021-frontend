@@ -77,46 +77,21 @@ left: 80.32%;
 right: -0.3%;
 top: 9.87%;
 height:17%;
-
-/* blue6_80 */
 background: rgba(23, 178, 230, 0.8);
 border-radius: 20px 0px 0px 20px;
-
-/* tag/medium/10 */
 font-family: PingFang SC;
 font-size: 2%;
 line-height: 13px;
 letter-spacing: 3em;
 align-items: center;
 text-align: center;
-
-/* white */
 color: #FFFFFF;
-
 }
 
-.rightTagText{
-  /* 我发起的 */
-
-position: absolute;
-left: 8.7%;
-right: 2.17%;
-top: 6.25%;
-bottom: 6.25%;
-
-/* tag/medium/10 */
-font-family: PingFang SC;
-font-size: 10px;
-line-height: 12px;
-
-align-items: center;
-text-align: center;
-
-/* white */
-color: #FFFFFF;
+/*font-size: 10px;*/
 
 
-}
+
 
 .icon{
   /* Icon/User01 */
