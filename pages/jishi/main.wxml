@@ -1,10 +1,10 @@
 <!--pages/jishi/main.wxml-->
 <view class="main">
-  <view>
-   <my-navi></my-navi>
+  <view> 
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="济事广场"></mp-navigation-bar>
   </view>
 <view class="searchBar">
-  <mp-searchbar  bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
+  <mp-searchbar ext-class="searchBar" ></mp-searchbar>
 </view>
 <view >
 <view class="list">
