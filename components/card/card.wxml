@@ -1,10 +1,12 @@
 <!--components/card/card.js.wxml-->
 <view class="card">
 <view class="tag" > 
-    求职之路
+    {{labelText}}
  </view>
- <view class="title">这是一个标题
+ <view class="title">{{title}}
  </view>
+
+
  <view class="rightTag">
     我发布的
  </view>
@@ -12,14 +14,14 @@
   <image src="/static/icon/default-user.png" class="icon" mode="scaleToFill"/>
 </view>
 <view>
-    <text class="userName">破壁人1号
+    <text class="userName">{{userName}}
     </text>
 </view>
 <view>
-    <text class="time">2小时前</text>
+    <text class="time">{{publishTime}}</text>
 </view>
 <view>
-    <text class="description">这是一段描述性文字，仅用于测试</text>
+    <text class="description">{{description}}</text>
 </view>
 <view class="image">
     <image ></image>
