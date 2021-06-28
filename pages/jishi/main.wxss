@@ -47,6 +47,7 @@ color: #FFFFFF;
   border-radius: 44px;
   left:2vw;
   width:96vw;
+  bottom: 5px;
 }
 .weui-search-bar__form{
   height: 24px;
@@ -57,4 +58,26 @@ color: #FFFFFF;
 .weui-search-bar__box .weui-search-bar__input{
   padding:0 0 0 0 ;
   height: 24px;
+}
+.buttonArea{
+  /* position: relative; */
+  height: 18px;
+}
+.orderByTime{
+background: #F9F2FF;
+border-radius: 5px;
+}
+.buttonText{
+  /* 按时间排序 */
+/* tag/medium/10 */
+font-family: PingFang SC;
+font-size: 10px;
+line-height: 12px;
+
+/* purple5 */
+color: #7E17E6;
+}
+.select{
+  background: #F9F2FF;
+  border-radius: 5px;
 }
