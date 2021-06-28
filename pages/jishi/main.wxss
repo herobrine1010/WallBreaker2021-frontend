@@ -81,3 +81,13 @@ color: #7E17E6;
   background: #F9F2FF;
   border-radius: 5px;
 }
+.backTop{
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+
+  background: #FFFFFF;
+  border: 1px solid #9B50E6;
+  box-sizing: border-box;
+
+ }

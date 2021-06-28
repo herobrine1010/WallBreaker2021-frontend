@@ -15,7 +15,7 @@
   <image src="/static/icon/select.png" style="width:10px;height:10px;position:absolute;right:15%;bottom:15%"></image>
   </button>
 </view>
-<scroll-view class="list" scroll-y="true">
+<scroll-view class="list" scroll-y="true" with-animation='true' scroll-top='{{ topNum }}'>
  <view class="list-item">
   <my-card ></my-card>
  </view>
@@ -32,5 +32,7 @@
  <my-card ></my-card>
 </view>
 </scroll-view>
+<view class='backTop' catchtap='returnTop'>
+backToTop</view>
 </view>
 

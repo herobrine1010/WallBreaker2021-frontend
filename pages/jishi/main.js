@@ -5,8 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
-  },
+    topNum: 0
+   },
 
   /**
    * 生命周期函数--监听页面加载
@@ -66,5 +66,10 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  returnTop: function () {
+    this.setData({
+     topNum: this.data.topNum = 0
+    });
+   }
 })
