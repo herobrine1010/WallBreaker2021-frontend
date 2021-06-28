@@ -27,7 +27,7 @@ Component({
     {
       "pagePath": "/pages/personal/main",
       "iconPath": "/static/icon/personal.png",
-      "selectedIconPath": "/static/icon/jiren-solid.png"
+      "selectedIconPath": "/static/icon/personal-solid.png"
     }]
   },
  

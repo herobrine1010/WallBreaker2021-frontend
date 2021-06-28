@@ -25,15 +25,9 @@
  <view class="list-item">
  <my-card ></my-card>
 </view>
-<view class="list-item">
- <my-card ></my-card>
-</view>
-<view class="list-item">
- <my-card ></my-card>
-</view>
-<view class="list-item">
- <my-card ></my-card>
-</view>
+
 </scroll-view>
+<view class="tabbar">
+</view>
 </view>
 
