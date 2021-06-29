@@ -1,31 +1,39 @@
 <!--pages/jishi/main.wxml-->
 <view class="main">
-  <view>
-    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="济人广场"></mp-navigation-bar>
+  <view> 
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="济事广场"></mp-navigation-bar>
   </view>
-  <view class="searchBar">
-    <mp-searchbar bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
-  </view>
-  <view class="area2">
-    <view class="shade"></view>
-    <view class="buttonArea">
-      <view class="myPublishButton">我发起的组队</view>
-      <view class="myJoinButton">我参与的组队</view>
-    </view>
-    <view class="filterArea">
-      <view class="timeFilter">
-        <view class="timeText">按时间排序</view>
-        <image src="/static/icon/sort-down-blue.png" class="timeIcon"></image>
-      </view>
-      <view class="conditionFilter">
-        
-      </view>
-    </view>
-    <scroll-view class="listArea" scroll-y="true">
-      <view class="list-item">
-        <my-card></my-card>
-      </view>
-
-    </scroll-view>
-  </view>
+<view class="searchBar">
+  <mp-searchbar  bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
 </view>
+<scroll-view class="list" scroll-y="true">
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
+ <my-card ></my-card>
+</view>
+<view class="list-item">
+ <my-card ></my-card>
+</view>
+<view class="list-item">
+ <my-card ></my-card>
+</view>
+<view class="list-item">
+ <my-card ></my-card>
+</view>
+</scroll-view>
+</view>
+
