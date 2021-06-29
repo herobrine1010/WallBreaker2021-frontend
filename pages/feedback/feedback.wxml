@@ -1,2 +1,19 @@
 <!--pages/feedback/feedback.wxml-->
-<text>pages/feedback/feedback.wxml</text>
+<view class="main">
+  <!-- nav 组件调用 -->
+  <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="用户反馈"></mp-navigation-bar>
+  <!-- 以下是container，包含了除标题外的其余内容 -->
+  <view class="feedback-container">
+    <view class="feedback-title">
+      您对破壁有什么建议和意见，欢迎发送给我们，我们会认真考虑您的意见~
+    </view>
+    <form bindsubmit="formSubmit">
+      <view class="feedback-body">
+      <textarea name="feedbackText"  maxlength="300" placeholder="请输入您的建议！(不超过300字)"></textarea>
+      </view>
+      <view class="feedback-message">{{feedbackMessage}}</view>
+      <button class="feedback-btn" form-type="submit">提交</button>
+    </form>
+
+  </view>
+</view>

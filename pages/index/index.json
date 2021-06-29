@@ -2,11 +2,7 @@
   "usingComponents": {
     "my-component":"/components/testComponent/testComponent",
     "mp-tabbar": "weui-miniprogram/tabbar/tabbar",
-<<<<<<< Updated upstream
-    "my-tabbar":"/components/navCustom/navCustom"
-=======
-    "my-tabbar":"/components/navCustom/navCustom",
     "my-card":"/components/jishi-card/card"
->>>>>>> Stashed changes
+
   }
 }
