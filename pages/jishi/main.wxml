@@ -10,11 +10,20 @@
   <button class="orderByTime" style="width:70px;position:absolute;left:3%">
   <text class="buttonText" style="position:absolute;left:5%;bottom:10%">按时间排序</text>
   </button>
-  <button class="select" style="width:45px;position:absolute;left:28%">
-  <text class="buttonText" style="position:absolute;left:15%;bottom:10%">筛选</text>
+  <button class="select" style="width:45px;position:absolute;left:28%" bindtap="hideModal">
+  <text class="buttonText" style="position:absolute;left:15%;bottom:10%" bindtap="showModal">筛选</text>
   <image src="/static/icon/select.png" style="width:10px;height:10px;position:absolute;right:15%;bottom:15%"></image>
   </button>
 </view>
+
+<view class="half-screen">
+  <!--屏幕背景变暗的背景  -->
+  <view class="background_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+  <!--弹出框  -->
+  <view animation="{{animationData}}" class="attr_box" wx:if="{{showModalStatus}}"></view>
+</view>
+
+
 <scroll-view class="list" scroll-y="true" with-animation='true' scroll-top='{{ topNum }}'>
  <view class="list-item">
   <my-card ></my-card>

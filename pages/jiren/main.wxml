@@ -7,6 +7,27 @@
   <mp-searchbar  bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
 </view>
 <scroll-view class="list" scroll-y="true">
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
+  <my-card ></my-card>
+ </view>
+ <view class="list-item">
+ <my-card ></my-card>
+</view>
+<view class="list-item">
+ <my-card ></my-card>
+</view>
 <view class="list-item">
  <my-card ></my-card>
 </view>
