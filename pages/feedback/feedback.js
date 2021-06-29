@@ -1,11 +1,11 @@
-// pages/personal/main.js
+// pages/feedback/feedback.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
- 
+
   },
 
   /**
@@ -26,11 +26,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 2 //0,1,2 0-济事  1-济人  2-我的
-      })
-   }
+
   },
 
   /**

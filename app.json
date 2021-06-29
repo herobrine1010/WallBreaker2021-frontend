@@ -27,8 +27,16 @@
     "pages/logs/logs",
     "pages/testPage/testPage",
     "pages/login/login",
+<<<<<<< Updated upstream
     "pages/jishi/main",
     "pages/personal/main"
+=======
+    "pages/jiren/main",
+    "pages/personal/main",
+    "pages/collection/collection",
+    "pages/feedback/feedback",
+    "pages/introduction/introduction"
+>>>>>>> Stashed changes
   ],
   "window": {
     "backgroundTextStyle": "dark",
