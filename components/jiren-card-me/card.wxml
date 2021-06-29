@@ -1,4 +1,4 @@
-<!--components/jishi-card/card.js.wxml-->
+<!--components/jiren-card/card.js.wxml-->
 <view class="card">
 <view class="tag" > 
     {{labelText}}
@@ -10,16 +10,11 @@
  <view class="rightTag">
     我发布的
  </view>
- <view >
-  <image src="/static/icon/default-user.png" class="icon" mode="scaleToFill"/>
+<view class="dueTime">
+{{dueTime}}
 </view>
-<view>
-    <text class="userName">{{userName}}
-    </text>
-</view>
-<view>
-    <text class="time">{{publishTime}}</text>
-</view>
+<image class="peopleIcon" src="/static/icon/people-02.png"></image>
+<view class="peopleCount">{{peopleCount}}</view>
 <view>
     <text class="description">{{description}}</text>
 </view>

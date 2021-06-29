@@ -1,16 +1,107 @@
 /* pages/jishi/main.wxss */
+.area2{
+  position:fixed;
+  top:17%;
+  width: 100%;
+  left:0;
+  height: 100%;
+}
+.shade{
+  position: absolute;
+  top:0%;
+  background-color: #F2FCFF;
+  opacity: 35%;
+  height:100%;
+  left:0%;
+  width:100%;
+  border-radius: 25px 25px 0 0;
+  z-index: 1;
+}
 .list-item{
   position: relative;
 }
-.list{
+.listArea{
   position: relative;
   height:92px;
   margin-top: 10px;
+  z-index: 2;
 }
 .buttonArea{
   position: relative;
-  margin-top: 10px;
+  top:1%;
+  height:4%;
+  /* background-color: #ff0000; */
+  left:0;
+  width:100%;
+  z-index:2;
 }
+.myPublishButton,.myJoinButton{
+  position: relative;
+  top:0%;
+  height:100%;
+  width:35%;
+  border-radius: 18px;
+  color:#FFFFFF;
+  align-items: center;
+  font-size:4vw;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 1px;
+  float:left;
+}
+.myPublishButton{
+  background-color: #17B2E5;
+  left:10%;
+}
+.myJoinButton{
+  background-color: #8C1AFF;
+  left:20%;
+}
+.filterArea{
+  position: relative;
+  top:1%;
+  height:4%;
+  /* background-color: #00ff00; */
+  left:0;
+  width:100%;
+  z-index:2;
+}
+.timeFilter,.conditionFilter{
+
+  position: relative;
+  top:10%;
+
+  height:100%;
+  border-radius: 5px;
+  color:#FFFFFF;
+  align-items: center;
+  font-size:4vw;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 1px;
+  float:left;
+  /* z-index:3; */
+  background-color: #F2FCFF;
+}
+.timeFilter{
+  left:3%;
+  width:25%;
+}
+.timeText{
+  position: relative;
+  float:left;
+  left:-4%;
+  color: #17B2E5;
+  font-size: 3vw;
+  letter-spacing: 0.5px;
+}
+.timeIcon{
+  position:relative;
+  float: left;
+  height:3.2vw;
+  width: 3.2vw;
+}
+
 .main{
   /* GM/Background/JiShi */
 

@@ -1,29 +1,33 @@
-{  "tabBar": {
-  "custom": true,
-  "list": [{
-    "pagePath": "pages/jishi/main",
-    
-    "iconPath": "static/icon/jishi.png",
-    "selectedIconPath": "static/icon/jishi-solid.png"
+{
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/jishi/main",
+        "iconPath": "static/icon/jishi.png",
+        "selectedIconPath": "static/icon/jishi-solid.png"
+      },
+      {
+        "pagePath": "pages/jiren/main",
+        "iconPath": "static/icon/jiren.png",
+        "selectedIconPath": "static/icon/jiren-solid.png"
+      },
+      {
+        "pagePath": "pages/personal/main",
+        "iconPath": "static/icon/personal.png",
+        "selectedIconPath": "static/icon/jiren-solid.png"
+      }
+    ]
   },
-  {
-    "pagePath": "pages/jiren/main",  
-    "iconPath": "static/icon/jiren.png",
-    "selectedIconPath": "static/icon/jiren-solid.png"
-  },
-  {
-    "pagePath": "pages/personal/main",
-    "iconPath": "static/icon/personal.png",
-    "selectedIconPath": "static/icon/jiren-solid.png"
-  }]
-},
   "pages": [
-    "pages/jishi/main",
+    "pages/jiren/main",
+    "pages/jiren/myPublish",
+    
     "pages/index/index",
     "pages/logs/logs",
     "pages/testPage/testPage",
     "pages/login/login",
-    "pages/jiren/main",
+    "pages/jishi/main",
     "pages/personal/main"
   ],
   "window": {
