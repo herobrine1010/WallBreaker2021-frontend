@@ -76,7 +76,23 @@ Page({
    },
 
    hideModal: function () {
-   
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    //this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
+    }.bind(this), 200)
   },
   showModal: function () {
     // 背景遮罩层
@@ -86,7 +102,7 @@ Page({
       delay: 0
     })
     //this.animation = animation
-    animation.translateY(200).step()
+    animation.translateY(-100).step()
     this.setData({
       animationData: animation.export(),
       showModalStatus: true
