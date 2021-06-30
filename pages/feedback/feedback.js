@@ -5,7 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    feedbackMessage : ""
+  },
+  formSubmit: function(e){
+    let text = e.detail.value.feedbackText;
+    let str = text.trim();//去除收尾字符串
+    // 判断是否全是空格 空字符串
+    if(str == null || str == '' || str == undefined){
+      this.setData({
+        feedbackMessage : "该项未填写！"
+      });
+    }
   },
 
   /**

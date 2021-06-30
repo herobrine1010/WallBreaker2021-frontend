@@ -27,8 +27,14 @@
     "pages/logs/logs",
     "pages/testPage/testPage",
     "pages/login/login",
+
     "pages/jishi/main",
-    "pages/personal/main"
+
+    "pages/personal/main",
+    "pages/collection/collection",
+    "pages/feedback/feedback",
+    "pages/introduction/introduction"
+
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -37,6 +43,8 @@
     "navigationBarTextStyle": "black"
   },
   "useExtendedLib": {
+    "kbone": true,
+    "weui": true
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
