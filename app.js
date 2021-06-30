@@ -26,6 +26,7 @@ App({
     //小程序发生脚本错误或者API报错时触发。
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    personalManagementOrCollection:0
   }
 })
