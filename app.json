@@ -43,8 +43,7 @@
     "navigationBarTextStyle": "black"
   },
   "useExtendedLib": {
-    "kbone": true,
-    "weui": true
+  
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
