@@ -20,30 +20,20 @@
     ]
   },
   "pages": [
-<<<<<<< Updated upstream
     "pages/jishi/main",
     "pages/jiren/main",
     "pages/jiren/myPublish",
-=======
->>>>>>> Stashed changes
     
-    
-    "pages/jiren/groupDetail",    "pages/jiren/main",
-    "pages/jiren/myPublish",
     "pages/index/index",
     "pages/logs/logs",
     "pages/testPage/testPage",
     "pages/login/login",
-<<<<<<< Updated upstream
 
-=======
-    "pages/jishi/main",
->>>>>>> Stashed changes
     "pages/personal/main",
     "pages/collection/collection",
     "pages/feedback/feedback",
     "pages/introduction/introduction"
-  
+
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -51,7 +41,9 @@
     "navigationBarTitleText": "济星云",
     "navigationBarTextStyle": "black"
   },
-  "useExtendedLib": {},
+  "useExtendedLib": {
+  
+  },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }
