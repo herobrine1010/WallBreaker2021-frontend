@@ -67,9 +67,5 @@ Page({
   onShareAppMessage: function () {
 
   },
-  returnTop: function () {
-    this.setData({
-     topNum: this.data.topNum = 0
-    });
-   }
+  
 })

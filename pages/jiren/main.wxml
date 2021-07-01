@@ -9,23 +9,55 @@
   <view class="area2">
     <view class="shade"></view>
     <view class="buttonArea">
-      <view class="myPublishButton">我发起的组队</view>
-      <view class="myJoinButton">我参与的组队</view>
+      <view class="myPublishButton" bindtap="goMyPublish">我发起的组队</view>
+      <view class="myJoinButton" bindtap="goMyJoin">我参与的组队</view>
     </view>
     <view class="filterArea">
-      <view class="timeFilter">
+      <view class="timeFilter" bindtap="clickTimeIndex">
         <view class="timeText">按时间排序</view>
-        <image src="/static/icon/sort-down-blue.png" class="timeIcon"></image>
+        <image wx:if="{{timeIndex=='desc'}}" src="/static/icon/sort-down-blue.png" class="timeIcon"></image>
+        <image wx:if="{{timeIndex=='asc'}}" src="/static/icon/sort-up-blue.png" class="timeIcon"></image>
       </view>
-      <view class="conditionFilter">
-        
+      <view class="conditionFilter" bindtap="clickConditionFilter">
+        <block wx:if="{{conditionIndex==''}}">
+          <view class="conditionText">筛选</view>
+          <image class="conditionIcon" src="/static/icon/select.png"></image>
+        </block>
+        <block wx:else>
+          <view class="conditionTextBlue">筛选</view>
+          <image class="conditionIcon" src="/static/icon/select-blue.png"></image>
+        </block>
       </view>
     </view>
-    <scroll-view class="listArea" scroll-y="true">
-      <view class="list-item">
-        <my-card></my-card>
+    <view wx:if="{{conditionFilterOpen}}" class="filterExtended">
+      <view class="conditionArea">
+        <view class="whiteBG">
+        <block wx:for="{{conditions}}">
+          <view bindtap="clickConditionBlue" wx:if="{{conditionsSelected[index]}}" class="conditionsSelected">{{item}}</view>
+          <view data-condition='{{item}}'bindtap="clickConditionGray" wx:else class="conditionsNotSelected">{{item}}</view>
+        </block>
       </view>
-
+      </view>
+      <view class="shade2" bindtap="clickShade2"></view>
+    </view>
+    <scroll-view bindscroll="onMyScroll" class="listArea" scroll-y="true" with-animation='true' scroll-top='{{ topNum }}'>
+      <view class="list-item">
+      <block wx:for="{{jirenItemList}}">
+        <my-card 
+        labelText="{{item.labelText}}"
+        title="{{item.title}}"
+        dueTime="{{item.dueTime}}"
+        description="{{item.description}}"
+        initiator="{{item.initiator}}"
+        badgeType="{{item.badgeType}}"
+        peopleCount="{{item.peopleCount}}"
+        postingPic="{{item.postingPic}}"
+        ></my-card>
+        </block>
+      </view>
     </scroll-view>
+    
   </view>
+  <image hidden="{{!showGoTopButton}}" class="backTopButton" bindtap="returnTop" src="/static/icon/back-to-top-blue-circle.png"></image>
+  <image class="addButton" bindtap="createNewTeam" src='/static/icon/add-blue-big.png'></image>
 </view>
