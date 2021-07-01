@@ -40,7 +40,7 @@
       </view>
       <view class="shade2" bindtap="clickShade2"></view>
     </view>
-    <scroll-view bindscroll="onMyScroll" class="listArea" scroll-y="true" with-animation='true' scroll-top='{{ topNum }}'>
+    <scroll-view enable-back-to-top="true" refresher-enabled="true" bindscroll="onMyScroll" class="listArea" scroll-y="true" with-animation='true' scroll-top='{{ topNum }}'>
       <view class="list-item">
       <block wx:for="{{jirenItemList}}">
         <my-card 

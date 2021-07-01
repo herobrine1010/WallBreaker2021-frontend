@@ -1,0 +1,3 @@
+<view class="padding"></view>
+<avatar-list avatarList="{{avatarList}}"></avatar-list>
+<view class="padding"></view>
