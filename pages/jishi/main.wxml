@@ -1,45 +1,61 @@
 <!--pages/jishi/main.wxml-->
 <view class="main">
-  <view> 
+  <view>
     <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="济事广场"></mp-navigation-bar>
   </view>
-<view class="searchBar">
-  <mp-searchbar  bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
+  <view class="searchBar">
+    <mp-searchbar bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
+  </view>
+  <view class="area2">
+    <view class="buttonArea">
+    </view>
+    <view class="filterArea">
+      <view class="timeFilter" bindtap="clickTimeIndex">
+        <view class="timeText">按时间排序</view>
+        <image wx:if="{{timeIndex=='desc'}}" src="/static/icon/sort-down-blue.png" class="timeIcon"></image>
+        <image wx:if="{{timeIndex=='asc'}}" src="/static/icon/sort-up-blue.png" class="timeIcon"></image>
+      </view>
+      <view class="conditionFilter" bindtap="clickConditionFilter">
+        <block wx:if="{{conditionIndex==''}}">
+          <view class="conditionText">筛选</view>
+          <image class="conditionIcon" src="/static/icon/select.png"></image>
+        </block>
+        <block wx:else>
+          <view class="conditionTextBlue">筛选</view>
+          <image class="conditionIcon" src="/static/icon/select-blue.png"></image>
+        </block>
+      </view>
+    </view>
+    <view wx:if="{{conditionFilterOpen}}" class="filterExtended">
+      <view class="conditionArea">
+        <view class="whiteBG">
+        <block wx:for="{{conditions}}">
+          <view bindtap="clickConditionBlue" wx:if="{{conditionsSelected[index]}}" class="conditionsSelected">{{item}}</view>
+          <view data-condition='{{item}}'bindtap="clickConditionGray" wx:else class="conditionsNotSelected">{{item}}</view>
+        </block>
+      </view>
+      </view>
+      <view class="shade2" bindtap="clickShade2"></view>
+    </view>
+    <scroll-view bindscroll="onMyScroll" class="listArea" scroll-y="true" with-animation='true' scroll-top='{{ topNum }}'>
+    
+      <block wx:for="{{jishiItemList}}">
+      <view  class="list-item">
+        <my-card  
+        labelText="{{item.labelText}}"
+        title="{{item.title}}"
+        description="{{item.description}}"
+        createTime="{{item.publishTime}}"
+        postingPic="{{item.postingPic}}"
+        userName="{{item.userName}}"
+        userAvater="{{item.userAvater}}"
+        ></my-card>
+        </view>
+        </block>
+      
+    </scroll-view>
+    
+  </view>
+  <image hidden="{{!showGoTopButton}}" class="backTopButton" bindtap="returnTop" src="/static/icon/back-to-top-blue-circle.png"></image>
+  <image class="addButton" bindtap="createNewTeam" src='/static/icon/add-blue-big.png'></image>
 </view>
-<view class="buttonArea">
-  <button class="orderByTime" style="width:70px;position:absolute;left:3%">
-  <text class="buttonText" style="position:absolute;left:5%;bottom:10%">按时间排序</text>
-  </button>
-  <button class="select" style="width:45px;position:absolute;left:28%" >
-  <text class="buttonText" style="position:absolute;left:15%;bottom:10%" bindtap="showModal">筛选</text>
-  <image src="/static/icon/select.png" style="width:10px;height:10px;position:absolute;right:15%;bottom:15%"></image>
-  </button>
-</view>
-<view animation="{{animationData}}" class="attr_box" wx:if="{{showModalStatus}}"></view>
-<view class="half-screen" bindtap="hideModal">
-  <!--屏幕背景变暗的背景  -->
-  <view class="background_screen"  wx:if="{{showModalStatus}}" bindtap="hideModal"></view>
-  <!--弹出框  -->
-<scroll-view class="list" scroll-y="true" with-animation='true' scroll-top='{{ topNum }}'>
- <view class="list-item">
-  <my-card ></my-card>
- </view>
- <view class="list-item">
- <my-card ></my-card>
-</view>
-<view class="list-item">
- <my-card ></my-card>
-</view>
-<view class="list-item">
- <my-card ></my-card>
-</view>
-<view class="list-item">
- <my-card ></my-card>
-</view>
-</scroll-view>
-</view>
-<view class='backTop' catchtap='returnTop'>
-<image src="/static/icon/back-to-top-purple-circle.png" style="width:30px;height:30px;position:absolute;right:10%;bottom:10%"></image>
-</view>
-</view>
-

@@ -4,6 +4,7 @@
   "description": "破壁（一期）",
   "main": "app.js",
   "dependencies": {
+    "kbone": "0.0.1",
     "miniprogram-sm-crypto": "^0.3.0",
     "weui-miniprogram": "^1.0.8"
   },

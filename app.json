@@ -1,6 +1,6 @@
 {
   "tabBar": {
-    "custom": true,
+   
     "list": [
       {
         "pagePath": "pages/jishi/main",
@@ -15,11 +15,12 @@
       {
         "pagePath": "pages/personal/main",
         "iconPath": "static/icon/personal.png",
-        "selectedIconPath": "static/icon/jiren-solid.png"
+        "selectedIconPath": "static/icon/personal-solid.png"
       }
     ]
   },
   "pages": [
+    "pages/jishi/main",
     "pages/jiren/main",
     "pages/jiren/myPublish",
     
@@ -27,8 +28,6 @@
     "pages/logs/logs",
     "pages/testPage/testPage",
     "pages/login/login",
-
-    "pages/jishi/main",
 
     "pages/personal/main",
     "pages/collection/collection",
