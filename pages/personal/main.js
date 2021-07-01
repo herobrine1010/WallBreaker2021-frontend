@@ -5,7 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+ 
+  },
+  // 以下两个事件，目的用户进入“管理帖子”页面，或者“收藏帖子”页面
+  changeToPersonalManagement:function(){
+    let app = getApp();
+    app.globalData.personalManagementOrCollection = 0;
+  },
+  changeToPersonalCollection:function(){
+    let app = getApp();
+    app.globalData.personalManagementOrCollection = 1;
   },
 
   /**
