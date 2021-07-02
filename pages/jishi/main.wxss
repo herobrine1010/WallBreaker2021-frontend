@@ -20,7 +20,7 @@
 }
 .buttonArea{
   position: relative;
-  top:0%;
+  top:2%;
   height:1%;
   /* background-color: #ff0000; */
   left:0;
@@ -205,7 +205,7 @@ color: #FFFFFF;
   height:9vw;
   width:9vw;
   right: 5.9%;
-  bottom: 21%;
+  bottom: 22%;
  }
  .addButton{
   position: fixed;
