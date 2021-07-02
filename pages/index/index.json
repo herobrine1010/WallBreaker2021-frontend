@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "my-component":"/components/testComponent/testComponent",
-    "mp-tabbar": "weui-miniprogram/tabbar/tabbar",
-    "my-card":"/components/jishi-card/card"
-
-  }
-}

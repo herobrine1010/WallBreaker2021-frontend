@@ -1,8 +1,0 @@
-<!--components/navCustom/navCustom.wxml-->
-<component-nav-custom >
-<view class="navCustom" style="height:{{navBarHeight}}px;">
-  <view  class="nav-icon iconfont icon-Vector" style="top:{{menuTop}}px; left:{{menuRight}}px; height:{{menuHeight}}px; line-height:{{menuHeight}}px;"></view>
-  <view class="nav-title" style="top:{{menuTop}}px;  height:{{menuHeight}}px; line-height:{{menuHeight}}px;font-family: PingFang SC;font-style: normal;font-weight: bold;font-size: 18px;line-height: 25px;">{{navTitleName}}</view>
-</view>
-
-</component-nav-custom>
