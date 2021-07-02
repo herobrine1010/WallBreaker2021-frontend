@@ -5,7 +5,7 @@
   height:16vw;
   width:100vw;
   left:0;
-  background-color: #00ff00;
+  /* background-color: #00ff00; */
 }
 
 scroll-view {
@@ -16,7 +16,7 @@ scroll-view {
   width: 20%;
   display: inline-block;
   text-align: center;
-  background-color: red;
+  /* background-color: red; */
   height:17.5vw;
   width:17.5vw;
   position: relative;
@@ -28,7 +28,7 @@ scroll-view {
   height:14vw;
   width:14vw;
   border-radius: 7vw;
-  background-color: #00ff00;
+  /* background-color: #00ff00; */
 }
 .me,.initiator{
   position: absolute;
@@ -37,7 +37,9 @@ scroll-view {
   left:2.75vw;
   top:11vw;
   border-radius: 3vw;
-  background-color:#17B2E5;
+  /*background-color:#17B2E5;*/
+  /*!!opacity和Hex混用会导致文字透明*/
+  background-color: rgba(23,178,229,0.8);
   font-size: 2.3vw;
   letter-spacing: 0.2vw;
   color:#ffffff;
