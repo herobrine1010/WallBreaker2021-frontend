@@ -2,13 +2,14 @@
 .card{
   width: 94%;
   height: 92px;
-  position: absolute;
+  position: relative;
   left: 3%;
   right: 0.3%;
   top: 0%;
   bottom: 0%;
   background: #F9F2FF;
   border-radius: 8px;
+  margin-bottom: 1vh;
 }
 .tag{
 

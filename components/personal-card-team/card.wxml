@@ -4,11 +4,11 @@
     {{labelText}}
  </view>
  <view class="title">{{title}}
- </view>
+ </view> 
 
 
- <view class="rightTag">
-    我发布的
+ <view class="rightTag {{rightTagBackgroundClass}}">
+    {{rightTagText}}
  </view>
 <view class="dueTime">
 {{dueTime}}

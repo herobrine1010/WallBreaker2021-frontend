@@ -1,14 +1,11 @@
 /* components/card/card.js.wxss */
 .card{
-  width: 94%;
-  height: 92px;
-  position: absolute; 
-  left: 3%;
-  right: 0.3%;
-  top: 0%;
-  bottom: 0%;
+  position: relative;
+  width: 100%;
+  height: 184rpx;
+  margin-bottom: 20rpx;
   background: #F9F2FF;
-  border-radius: 8px;
+  border-radius: 16rpx;
 }
 .tag{
 
@@ -27,8 +24,7 @@ font-family: Noto Sans SC;
 font-style: normal;
 font-weight: 500;
 font-size: 1.7vh;
-line-height: 19.5px;
-letter-spacing: 1px;
+line-height: 17px;
 align-items: center;
 /* white */
 color: #FFFFFF;
@@ -57,7 +53,6 @@ left: 23.1%;
 right: 19.15%;
 top: 11%;
 bottom: 73%;
-letter-spacing: 0.5px;
 
 /* title/bold/14 */
 font-family: PingFang SC;
@@ -78,13 +73,11 @@ position: absolute;
 left: 80.32%;
 right: -0.3%;
 top: 9.87%;
-height:17%;
 background: rgba(23, 178, 230, 0.8);
 border-radius: 20px 0px 0px 20px;
 font-family: PingFang SC;
-font-size: 2%;
-line-height: 13px;
-letter-spacing: 3em;
+font-size: 24rpx;
+line-height: 26rpx;
 align-items: center;
 text-align: center;
 color: #FFFFFF;
@@ -105,35 +98,6 @@ right: 90.88%;
 top: 34.78%;
 bottom: 43.48%;
 
-}
-.dueTime{
-  color:#1D99C3;
-  position: absolute;
-  top: 32%;
-  letter-spacing: 0.5px;
-  left: 3%;
-  font-family: PingFang SC;
-font-style: normal;
-font-size: 13px;
-line-height: 20px;
-}
-.peopleIcon{
-  position: absolute;
-  top:33.5%;
-  left:63%;
-  height: 18%;
-  width: 5%;
-}
-.peopleCount{
-  color:#007399;
-  position: absolute;
-  top: 32%;
-  letter-spacing: 1px;
-  left: 70%;
-  font-family: PingFang SC;
-font-style: normal;
-font-size: 13px;
-line-height: 20px;
 }
 .userName{
   /* 破壁者1号 */
@@ -160,7 +124,7 @@ color: #8937DB;
   /* 1小时前 */
 
 position: absolute;
-left: 28.88%;
+left: 30.88%;
 /*right: 59.88%;*/
 top: 39.5%;
 bottom: 48.5%;
@@ -189,7 +153,7 @@ bottom: 8%;
 /* content/medium/11 */
 font-family: PingFang SC;
 font-size: 11px;
-line-height: 15px;
+line-height: 13px;
 display: flex;
 align-items: center;
 

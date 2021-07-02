@@ -68,7 +68,7 @@
 }
 .collection-body{
   width: 92%;
-  height: 200rpx;
+  /* height: 200rpx; */
   margin: 0 4%;
-  background-color: pink;
+  /* background-color: pink;  */
 }

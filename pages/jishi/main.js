@@ -5,9 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    topNum: 0,
-    showModalStatus:false,
-    animationData:{}
+    topNum: 0
    },
 
   /**
@@ -73,45 +71,5 @@ Page({
     this.setData({
      topNum: this.data.topNum = 0
     });
-   },
-
-   hideModal: function () {
-    var animation = wx.createAnimation({
-      duration: 200,
-      timingFunction: "linear",
-      delay: 0
-    })
-    //this.animation = animation
-    animation.translateY(-200).step()
-    this.setData({
-      animationData: animation.export(),
-    })
-    setTimeout(function () {
-      animation.translateY(0).step()
-      this.setData({
-        animationData: animation.export(),
-        showModalStatus: false
-      })
-    }.bind(this), 200)
-  },
-  showModal: function () {
-    // 背景遮罩层
-    var animation = wx.createAnimation({
-      duration: 200,
-      timingFunction: "linear",
-      delay: 0
-    })
-    //this.animation = animation
-    animation.translateY(-100).step()
-    this.setData({
-      animationData: animation.export(),
-      showModalStatus: true
-    })
-    setTimeout(function () {
-      animation.translateY(0).step()
-      this.setData({
-        animationData: animation.export()
-      })
-    }.bind(this), 200)
-  },
+   }
 })
