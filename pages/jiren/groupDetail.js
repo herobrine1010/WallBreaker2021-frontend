@@ -5,13 +5,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isFavourite:false,
     avatarList:[],
     currentUser:[],
     detail:{
       'title':'破·数学建模找队友，来来来！',
       'avatar':'https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02',
       'nickname':'小砂糖星',
-      'fromTime':'1天前',
+      'fromTime':'3天前',
       'dueTime':'3天后结束'
     },
     applierList:[

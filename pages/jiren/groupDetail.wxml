@@ -10,8 +10,8 @@
       <view class="detail-close-button">结束组队招募</view>
       <image class="detail-avatar" src="{{detail.avatar}}"></image>
       <view class="detail-username">{{detail.nickname}}</view>
-      <view class="detail-start">{{detail.fromTime}}</view>
-      <view class="detail-end">{{detail.dueTime}}</view>
+      <view class="detail-apply-time">{{detail.fromTime}}</view>
+      <view class="detail-due-time">{{detail.dueTime}}</view>
       <view class="detail-spread-botton" bindtap="seeDetail">查看全部</view>
     </view>
 
@@ -19,12 +19,20 @@
       <block wx:for="{{applierList}}">
         <view class='list-item'>
           <image src='{{item.avatar}}' class='list-item-avatar'></image>
+          <view class='list-item-username'>{{item.nickname}}</view>
+          <view class='list-item-apply-time'>{{item.applyTime}}</view>
+          <view class='see-answer'>查看回答</view>
+          <image class='tick' src='/static/icon/tick.png'></image>
+          <image class='cross' src='/static/icon/cross-purple.png'></image>
         </view>
       </block>
     </scroll-view>
     <view class="bottom-elements">
-      <!-- <view class="accept-all-button">一键接受</view>
-      <image src="" class="favourite"></image> -->
+      <view class="accept-all-button"></view>
+      <view class="favourite">
+        <image class="fav-icon" wx:if="{{isFavourite}}" src='/static/icon/collect-solid.png'></image>
+        <image class="fav-icon" wx:else src='/static/icon/collect.png'></image>
+      </view>
     </view>
   </view>
 </view>

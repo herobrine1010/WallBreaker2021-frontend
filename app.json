@@ -1,6 +1,5 @@
 {
   "tabBar": {
-   
     "list": [
       {
         "pagePath": "pages/jishi/main",
@@ -20,23 +19,21 @@
     ]
   },
   "pages": [
+     
     "pages/jiren/groupDetail",
+    "pages/jiren/myJoin",
     "pages/jiren/main",
     "pages/jishi/main",
-    
-        
     "pages/jiren/myPublish",
     "pages/index/index",
     "pages/logs/logs",
     "pages/testPage/testPage",
     "pages/login/login",
-
-    
     "pages/personal/main",
     "pages/collection/collection",
     "pages/feedback/feedback",
     "pages/introduction/introduction"
-  
+   
   ],
   "window": {
     "backgroundTextStyle": "dark",
