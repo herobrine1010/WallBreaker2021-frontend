@@ -120,10 +120,10 @@ line-height: 20px;
 }
 .peopleIcon{
   position: absolute;
-  top:77%;
+  top:77.5%;
   left:64%;
-  height: 4vw;
-  width: 4vw;
+  height: 18%;
+  width: 5%;
 }
 .peopleCount{
   color:#007399;

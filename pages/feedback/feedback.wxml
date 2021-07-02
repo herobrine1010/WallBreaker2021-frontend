@@ -1,7 +1,7 @@
 <!--pages/feedback/feedback.wxml-->
 <view class="main">
   <!-- nav 组件调用 -->
-  <mp-navigation-bar   ext-class="weui-navigation-bar__centers"  title="用户反馈"></mp-navigation-bar>
+  <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="用户反馈"></mp-navigation-bar>
   <!-- 以下是container，包含了除标题外的其余内容 -->
   <view class="feedback-container">
     <view class="feedback-title">

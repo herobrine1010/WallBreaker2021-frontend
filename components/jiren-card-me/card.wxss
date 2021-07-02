@@ -2,7 +2,7 @@
 .card{
   width: 94%;
   height: 92px;
-  position: absolute; 
+  position: absolute;
   left: 3%;
   right: 0.3%;
   top: 0%;

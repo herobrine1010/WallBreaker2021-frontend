@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showGoTopButton:false,
     timeIndex:'asc',
+    topNum:0,
     conditionIndex:'',
     conditionFilterOpen:false,
     conditions:['竞赛','学术科研','一起造梦','其他'],
@@ -14,6 +16,46 @@ Page({
       {
       'labelText':'未分类',
       'title':'示例标题示例标题示例标题…',
+      'dueTime':'截止时间: 2021年6月21日 14:00',
+      'description':'这是一段描述性文字，仅用于测试。这是一段……',
+      'initiator':'发起人: 示例用户',
+      'badgeType':'我发起的',
+      'peopleCount':'3/5',
+      'postingPic':''
+    },
+    {
+      'labelText':'未分类',
+      'title':'示例标题示例标题示例标题…',
+      'dueTime':'截止时间: 2021年6月21日 14:00',
+      'description':'这是一段描述性文字，仅用于测试。这是一段……',
+      'initiator':'发起人: 示例用户',
+      'badgeType':'我发起的',
+      'peopleCount':'3/5',
+      'postingPic':''
+    },
+    {
+      'labelText':'2ff类',
+      'title':'示例标题sfnvkjs例标题…',
+      'dueTime':'截止时间: 2021年6月21日 14:00',
+      'description':'这是一段描述性文字，仅用于测试。这是一段……',
+      'initiator':'发起人: 示例用户',
+      'badgeType':'我发起的',
+      'peopleCount':'3/5',
+      'postingPic':''
+    },
+    {
+      'labelText':'未分类',
+      'title':'示例标题示例标题示例标题…',
+      'dueTime':'截止时间: 2021年6月21日 14:00',
+      'description':'这是一段描述性文字，仅用于测试。这是一段……',
+      'initiator':'发起人: 示例用户',
+      'badgeType':'我发起的',
+      'peopleCount':'3/5',
+      'postingPic':''
+    },
+    {
+      'labelText':'2ff类',
+      'title':'示例标题sfnvkjs例标题…',
       'dueTime':'截止时间: 2021年6月21日 14:00',
       'description':'这是一段描述性文字，仅用于测试。这是一段……',
       'initiator':'发起人: 示例用户',
@@ -104,6 +146,18 @@ Page({
   onShareAppMessage: function () {
 
   },
+  onPageScroll:function(e){
+    console.log(e)
+    if (e.scrollTop > 0) {
+      this.setData({
+        showGoTopButton: true
+      });
+    } else {
+      this.setData({
+        showGoTopButton: false
+      });
+    }
+  },
   clickConditionFilter:function(){
     if(this.data.conditionFilterOpen==true){
       this.setData({'conditionFilterOpen':false})
@@ -156,7 +210,29 @@ Page({
     wx.navigateTo({
       url: '/pages/jiren/myPublish',
     })
-  }
+  },
+  goMyJoin:function(){
+    wx.navigateTo({
+      url: '/pages/jiren/myJoin',
+    })
+  },
+  returnTop: function () {
+    let that=this;
+    this.setData({
+     topNum:  0
+    });
+    setTimeout(function () {
+      that.setData({showGoTopButton:false})
+      console.log("test")
+     }, 100)
+ 
+  
+   },
+   onMyScroll:function(){
+     if(this.data.showGoTopButton==false){
+       this.setData({showGoTopButton:true})
+     }
+   }
 
 
 })

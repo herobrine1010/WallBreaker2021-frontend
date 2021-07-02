@@ -4,43 +4,12 @@
   <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="{{collectionTitle}}"></mp-navigation-bar>
   <!-- 以下是container，包含了除标题外的其余内容 -->
   <view class="collection-container">
-    <view class="collection-head"> 
+    <view class="collection-head">
       <view class="collection-btn {{btnColor1}}" bindtap="onLeftNoticeBtnTap">{{leftButtonTitle}}</view>
       <view class="collection-btn {{btnColor2}}" bindtap="onRightTeamBtnTap">{{rightButtonTitle}}</view>
     </view>
     <view class="collection-body">
-      <!-- <scroll-view class="listArea" scroll-y="true">
-      <view class="list-item"> -->
-      <!-- </view>
-    </scroll-view> -->
-      <!-- 状态量为0的时候，循环加载 帖子 卡片 -->
-      <block wx:if="{{isNoticeOrTeam===0}}" wx:for="{{jishiItemList}}">
-        <card-notice
-        labelText="{{item.labelText}}"
-        title="{{item.title}}"
-        rightTagText="{{item.rightTagText}}" 
-        userName="{{item.userName}}" 
-        publishTime="{{item.publishTime}}"
-        description="{{item.description}}"
-        postingPic="{{item.postingPic}}" 
-        ></card-notice>
-      </block>
-    <!-- 状态量为1的时候，循环加在 组队 卡片 -->
-      <block wx:if="{{isNoticeOrTeam}}" wx:for="{{jirenItemList}}">
-        <card-team
-        labelText="{{item.labelText}}"
-        title="{{item.title}}"
-        rightTagBackgroundClass="{{item.rightTagBackgroundClass}}"
-        rightTagText="{{item.rightTagText}}"  
-        dueTime="{{item.dueTime}}"
-        description="{{item.description}}"
-        initiator="{{item.initiator}}"
-        badgeType="{{item.badgeType}}"
-        peopleCount="{{item.peopleCount}}"
-        postingPic="{{item.postingPic}}" 
-        ></card-team>
-      </block>
-      
+
     </view>
   </view>
 </view>

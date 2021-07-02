@@ -1,5 +1,5 @@
 <!--pages/jishi/main.wxml-->
-<view class="jishi-background">
+<view class="main">
   <view>
     <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="济事广场"></mp-navigation-bar>
   </view>

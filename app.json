@@ -30,8 +30,8 @@
     "pages/personal/main",
     "pages/collection/collection",
     "pages/feedback/feedback",
-    "pages/introduction/introduction",
-    "pages/personalDetails/main"
+    "pages/introduction/introduction"
+
   ],
   "window": {
     "backgroundTextStyle": "dark",

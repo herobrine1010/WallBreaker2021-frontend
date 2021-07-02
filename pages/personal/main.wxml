@@ -22,7 +22,7 @@
       </view>
     </view>
     <!-- 以下是资料、组队管理、收藏、帮助、反馈、破壁简介等item -->
-    <navigator url="../personalDetails/main" class="per-items">
+    <navigator class="per-items">
       <image src="../../static/icon/personal-info.png" class="icon"></image>
       <view class="item-title">个人资料</view>
     </navigator>

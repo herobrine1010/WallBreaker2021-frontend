@@ -230,3 +230,17 @@ color: #FFFFFF;
   padding:0 0 0 0 ;
   height: 24px;
 }
+.backTopButton{
+  position: fixed;
+  height:9vw;
+  width:9vw;
+  right: 5.9%;
+  bottom: 21%;
+ }
+ .addButton{
+  position: fixed;
+  height:15vw;
+  width:15vw;
+  right: 3%;
+  bottom: 12%;
+ }

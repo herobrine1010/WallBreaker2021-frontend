@@ -16,12 +16,6 @@ Page({
         feedbackMessage : "该项未填写！"
       });
     }
-    else{
-      wx.showToast({
-        title: '感谢你的反馈！',
-        icon:'success'
-      })
-    }
   },
 
   /**

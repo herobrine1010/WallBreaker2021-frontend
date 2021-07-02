@@ -6,6 +6,6 @@
     "my-card":"/components/jiren-card/card",
     "my-card-me":"/components/jiren-card-me/card",
     "my-navi":"/components/jishiNavi/jishiNavi"
-  }, 
+  },
   "navigationStyle": "custom"
 }

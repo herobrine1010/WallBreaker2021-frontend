@@ -19,7 +19,7 @@
     <text class="description">{{description}}</text>
 </view>
 <view class="image">
-    <image ></image> 
+    <image ></image>
 </view>
 </view>
 
