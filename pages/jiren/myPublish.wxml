@@ -10,7 +10,6 @@
 <view class="list-item">
  <my-card-me ></my-card-me>
 </view>
-
 </scroll-view>
 </view>
 

@@ -40,7 +40,7 @@
     <scroll-view bindscroll="onMyScroll" class="listArea" scroll-y="true" with-animation='true' scroll-top='{{ topNum }}'>
     
       <block wx:for="{{jishiItemList}}">
-      <view  class="list-item">
+      <view  class="list-item" bindtap="jumpToDetail">
         <my-card  
         labelText="{{item.labelText}}"
         title="{{item.title}}"

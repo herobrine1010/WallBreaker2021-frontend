@@ -31,7 +31,7 @@
 
 .filterArea{
   position: relative;
-  top:-1%;
+  top:0%;
   height:3.5%;
   /* background-color: #00ff00; */
   left:0;
@@ -151,10 +151,6 @@ border-style: solid;
   background-color: #26C9FF;
   color:#ffffff;
 }
-
-
-
-
 .backTopButton{
   position: fixed;
   height:9vw;
@@ -169,3 +165,4 @@ border-style: solid;
   right: 3%;
   bottom: 12%;
  }
+
