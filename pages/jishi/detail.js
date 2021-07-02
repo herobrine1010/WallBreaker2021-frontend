@@ -7,12 +7,10 @@ Page({
   data: {
     like:false,
     title:'破壁者首次文艺汇演来啦！！',
-    userAvatar:'/static/icon/default-user-big.png',
+    userAvater:'/static/icon/default-user.png',
     userName:"破壁者1号",
     time:'2021年6月9日    21:40',
     description:"为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……",
-    signature:'这是一段个性签名',
-    identity:'建筑学院 风景园林 2018级 本科生',
     pictures:['','','','','','','',''],
     chooseSize:false,
     animationData:{}
