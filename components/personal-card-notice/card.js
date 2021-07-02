@@ -1,27 +1,47 @@
-// pages/feedback/feedback.js
-Page({
+// components/card/card.js.js
+Component({
 
+  properties:{
+    labelText:{ 
+      type:String,
+      value:'未分类'
+    },
+    title:{
+      type:String,
+      value:'示例标题'
+    },
+    rightTagText:{
+      type : String,
+      value : ''
+    },
+    userAvatar:{
+      type:String,
+      value:'/static/icon/default-user.png'
+    },
+    userName:{
+      type:String,
+      value:'示例用户'
+    },
+    publishTime:{
+      type:String,
+      value:'1天前'
+    },
+    postingPic:{
+      type:String,
+      value:''
+    },
+    description:{
+      type:String,
+      value:'这是一段描述性文字，仅用于测试。'
+    }
+
+
+  },
   /**
    * 页面的初始数据
    */
   data: {
-    feedbackMessage : ""
-  },
-  formSubmit: function(e){
-    let text = e.detail.value.feedbackText;
-    let str = text.trim();//去除收尾字符串
-    // 判断是否全是空格 空字符串
-    if(str == null || str == '' || str == undefined){
-      this.setData({
-        feedbackMessage : "该项未填写！"
-      });
-    }
-    else{
-      wx.showToast({
-        title: '感谢你的反馈！',
-        icon:'success'
-      })
-    }
+
   },
 
   /**

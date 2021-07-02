@@ -1,17 +1,13 @@
 /* components/card/card.js.wxss */
 .card{
-  width: 94%;
-  height: 92px;
-  position: absolute; 
-  left: 3%;
-  right: 0.3%;
-  top: 0%;
-  bottom: 0%;
+  position: relative;
+  width: 100%;
+  height: 184rpx;
+  margin-bottom: 24rpx;
   background: #F9F2FF;
-  border-radius: 8px;
+  border-radius: 16rpx;
 }
 .tag{
-
 position: absolute;
 left: 2.74%;
 right: 79.64%;
@@ -20,7 +16,7 @@ bottom: 70%;
 text-align: center;
 
 /* Purple3 */
-background: #8937DB;
+background:  #1D99C3;
 border-radius: 8px;
 
 font-family: Noto Sans SC;
@@ -78,16 +74,28 @@ position: absolute;
 left: 80.32%;
 right: -0.3%;
 top: 9.87%;
-height:17%;
 background: rgba(23, 178, 230, 0.8);
 border-radius: 20px 0px 0px 20px;
 font-family: PingFang SC;
-font-size: 2%;
-line-height: 13px;
-letter-spacing: 3em;
+font-size: 24rpx;
+line-height: 30rpx;
+/* letter-spacing: 3em; */
 align-items: center;
 text-align: center;
 color: #FFFFFF;
+}
+.rightTagColorMine{
+  background-color: rgba(140, 26, 255, 0.6);
+} 
+.rightTagColorClose{
+  background-color: #99989A;
+}
+.rightTagColorRefuse{
+  background-color: #99989A ;
+  font-size: 22rpx;
+}
+.rightTagColorApplying{
+  background-color: #701DC3;
 }
 
 /*font-size: 10px;*/
