@@ -1,6 +1,6 @@
 {
   "tabBar": {
-    "custom": true,
+   
     "list": [
       {
         "pagePath": "pages/jishi/main",
@@ -20,16 +20,14 @@
     ]
   },
   "pages": [
+    "pages/jishi/detail",
     "pages/jiren/main",
     "pages/jiren/myPublish",
-    
     "pages/index/index",
     "pages/logs/logs",
     "pages/testPage/testPage",
     "pages/login/login",
-
     "pages/jishi/main",
-
     "pages/personal/main",
     "pages/collection/collection",
     "pages/feedback/feedback",
