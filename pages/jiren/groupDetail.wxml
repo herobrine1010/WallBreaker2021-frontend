@@ -30,10 +30,12 @@
      
     </scroll-view>
     <view class="bottom-elements">
-      <view class="accept-all-button"></view>
+      <view class="accept-all-button">
+        一键接受
+      </view>
       <view class="favourite">
-        <image class="fav-icon" wx:if="{{isFavourite}}" src='/static/icon/collect-solid.png'></image>
-        <image class="fav-icon" wx:else src='/static/icon/collect-blue-solid.png'></image>
+        <image bindtap="tapFavourite" class="fav-icon" wx:if="{{isFavourite}}" src='/static/icon/collect-blue-solid.png'></image>
+        <image bindtap="tapFavourite" class="fav-icon" wx:else src='/static/icon/collect-blue.png'></image>
       </view>
     </view>
     <view class="blur-shadow"></view>

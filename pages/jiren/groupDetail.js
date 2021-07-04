@@ -134,6 +134,26 @@ Page({
 
   seeDetail:function(e){
     console.log("查看全部")
+  },
+  tapFavourite:function(){
+    if(this.data.isFavourite==false){
+
+      wx.showToast({
+        title: '已加入收藏',
+        icon: 'none',
+        duration: 1000
+      })
+      this.setData({isFavourite:true});
+    }
+    else{
+      wx.showToast({
+        title: '已取消收藏',
+        icon: 'success',
+        duration: 1000
+      })
+      this.setData({isFavourite:false});
+    }
+    this.onLoad();
   }
   
 
