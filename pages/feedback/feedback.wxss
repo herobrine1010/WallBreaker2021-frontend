@@ -1,0 +1,87 @@
+/* pages/feedback/feedback.wxss */
+.main{
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  background-image: linear-gradient(199.75deg, rgba(140, 26, 255, 0.18) 40.18%, rgba(140, 26, 255, 0) 90.9%), linear-gradient(195.29deg, #DCBCFB 2.51%, #A2E4FA 27.51%);
+  background-blend-mode: color-burn, normal;
+  overflow: hidden; 
+}
+.weui-navigation-bar__centers{
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36rpx;
+  line-height: 50rpx;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color:#fff;
+}
+/* 以下是intro-container组件的样式 */
+.feedback-container{
+  height: 100%;
+  background: rgba(242, 252, 255, 0.35);
+  mix-blend-mode: normal;
+  border-radius: 50rpx 50rpx 0 0;
+}
+.feedback-title{
+  width: 92%;
+  height: 80rpx;
+  padding: 26rpx 4% 26rpx 4%;
+
+  font-family: PingFang SC;
+  font-size: 28rpx;
+  line-height: 32rpx;
+  display: flex;
+  align-items: center;
+  color: #4A5559;
+}
+
+.feedback-body{
+  height: 400rpx;
+  width: 92%;
+  margin: 0 4% 30rpx 4%;
+  background: #F2FCFF;
+  border-radius: 12rpx;
+
+  font-family: PingFang SC;
+  font-size: 28rpx;
+  line-height: 34rpx;
+  color: #4A5559;
+}
+.feedback-body textarea{
+  height: 360rpx;
+  width: 96%;
+  padding: 20rpx 2%;
+}
+.feedback-btn{
+  width: 340rpx;
+  height: 70rpx;
+  background: #17B2E6;
+  border-radius: 5px;
+
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  text-align: center;
+  color: #FFFFFF;
+}
+.feedback-message{
+  height: 35rpx;
+  width: 100%;
+  margin: 0 0 20rpx 0;
+  text-align: center;
+
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24rpx;
+  line-height: 35rpx;
+  color: #007399;
+
+}

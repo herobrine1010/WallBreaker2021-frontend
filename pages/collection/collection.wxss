@@ -1,0 +1,74 @@
+/* pages/collection/collection.wxss */
+.main{
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193, 255, 0) 27.37%), linear-gradient(198.24deg, rgba(140, 26, 255, 0.25) 3.34%, rgba(185, 115, 255, 0) 90.78%), linear-gradient(195.29deg, #A3E5FA 2.51%, #DCBCFB 56.49%);
+  background-blend-mode: color-burn, normal;
+  overflow: hidden; 
+}
+.backgroundRight{
+  background-image: linear-gradient(199.75deg, rgba(140, 26, 255, 0.18) 40.18%, rgba(140, 26, 255, 0) 90.9%), linear-gradient(195.29deg, #DCBCFB 2.51%, #A2E4FA 27.51%);
+}
+.backgroundLeft{
+  background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193, 255, 0) 27.37%), linear-gradient(198.24deg, rgba(140, 26, 255, 0.25) 3.34%, rgba(185, 115, 255, 0) 90.78%), linear-gradient(195.29deg, #A3E5FA 2.51%, #DCBCFB 56.49%);
+}
+.weui-navigation-bar__centers{
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36rpx;
+  line-height: 50rpx;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color:#fff;
+}
+/* 以下是intro-container组件的样式 */
+.collection-container{
+  height: 100%;
+  background: rgba(242, 252, 255, 0.35);
+  mix-blend-mode: normal;
+  border-radius: 50rpx 50rpx 0 0;
+}
+.collection-head{
+  height: 112rpx;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.collection-btn{
+  display: flex;
+  height: 60rpx;
+  width: 268rpx;
+  margin: 0 24rpx;
+
+  border-radius: 24px;
+  align-items: center;
+  justify-content: center;
+  font-family: PingFang SC;
+  font-size: 30rpx;
+  line-height: 34rpx;
+  color: #FFFFFF;
+}
+.btnColorLeft{
+  background: rgba(140, 26, 255, 0.6);
+}
+.btnColorRight{
+  background: #17B2E6;
+}
+.btnColorUnselected{
+  opacity: 1.0;
+  border: 1.5px solid #FFFFFF;
+  box-sizing: border-box;
+}
+.collection-body{
+  width: 92%;
+  height: 200rpx;
+  margin: 0 4%;
+  background-color: pink;
+}

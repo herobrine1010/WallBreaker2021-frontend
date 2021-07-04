@@ -1,0 +1,5 @@
+<custom-component>
+  <button bindtap='jumpToJiren'>jiren</button>
+  <button bindtap='jumpToJishi'>jishi</button>
+  <button bindtap='jumpToPersonal'>personal</button>
+</custom-component>

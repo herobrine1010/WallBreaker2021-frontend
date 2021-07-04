@@ -1,0 +1,44 @@
+<view class="jiren-background">
+  <view>
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="组队详情"></mp-navigation-bar>
+  </view>
+  <view class="area2">
+    <view class="shade"></view>
+    <avatar-list class="avatar-list" bind:tapAvatar="tapAvatar" avatarList="{{avatarList}}"></avatar-list>
+    <view class="detail-board">
+      <view class="detail-title">{{detail.title}}</view>
+      <view class="detail-close-button">结束组队招募</view>
+      <image class="detail-avatar" src="{{detail.avatar}}"></image>
+      <view class="detail-username">{{detail.nickname}}</view>
+      <view class="detail-apply-time">{{detail.fromTime}}</view>
+      <view class="detail-due-time">{{detail.dueTime}}</view>
+      <view class="detail-spread-botton" bindtap="seeDetail">查看全部</view>
+    </view>
+
+    <scroll-view enhanced="true" show-scrollbar="false" class="user-list" enable-back-to-top="true" refresher-enabled="true" scroll-y="true" with-animation='true'>
+      <block wx:for="{{applierList}}">
+        <view class='list-item'>
+          <image src='{{item.avatar}}' class='list-item-avatar'></image>
+          <view class='list-item-username'>{{item.nickname}}</view>
+          <view class='list-item-apply-time'>{{item.applyTime}}</view>
+          <view class='see-answer'>查看回答</view>
+          <image class='tick' src='/static/icon/tick.png'></image>
+          <image class='cross' src='/static/icon/cross-purple.png'></image>
+        </view>
+      </block>
+      <view class="empty-block">　</view>
+     
+    </scroll-view>
+    <view class="bottom-elements">
+      <view class="accept-all-button"></view>
+      <view class="favourite">
+        <image class="fav-icon" wx:if="{{isFavourite}}" src='/static/icon/collect-solid.png'></image>
+        <image class="fav-icon" wx:else src='/static/icon/collect-blue-solid.png'></image>
+      </view>
+    </view>
+    <view class="blur-shadow"></view>
+  </view>
+
+ 
+  
+</view>

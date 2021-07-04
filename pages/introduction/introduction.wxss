@@ -1,0 +1,111 @@
+/* pages/introduction/introduction.wxss */
+.main{
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  background-image: linear-gradient(199.75deg, rgba(140, 26, 255, 0.18) 40.18%, rgba(140, 26, 255, 0) 90.9%), linear-gradient(195.29deg, #DCBCFB 2.51%, #A2E4FA 27.51%);
+  background-blend-mode: color-burn, normal;
+  overflow: hidden; 
+}
+.weui-navigation-bar__centers{
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36rpx;
+  line-height: 50rpx;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color:#fff;
+}
+/* 以下是intro-container组件的样式 */
+.intro-container{
+  height: 100%;
+  background-color: #F2FCFF;
+  /* opacity: 0.85; */
+  border-radius: 50rpx 50rpx 0 0;
+}
+
+/* 以下是介绍文本的样式 */
+.product-head{
+  width: 92%;
+  padding: 50rpx 4% 22rpx 4%;
+
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32rpx;
+  line-height: 36rpx;
+  display: flex;
+  align-items: center;
+  color: #4A5559;
+}
+.product-body{
+  width: 92%;
+  margin: 0 4% 66rpx 4%;
+
+  font-family: PingFang SC;
+  font-size: 26rpx;
+  line-height: 36rpx;
+  color: #4A5559;
+}
+
+.team-head{
+  width: 92%;
+  padding: 0 4% 22rpx 4%;
+
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32rpx;
+  line-height: 36rpx;
+  display: flex;
+  align-items: center;
+  color: #4A5559;
+}
+.team-body{
+  width: 92%;
+  margin: 0 4% 66rpx 4%;
+
+  font-family: PingFang SC;
+  font-size: 26rpx;
+  line-height: 36rpx;
+  color: #4A5559;
+}
+.officialAccount-head{
+  width: 92%;
+  padding: 0 4% 22rpx 4%;
+
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32rpx;
+  line-height: 36rpx;
+  display: flex;
+  align-items: center;
+  color: #4A5559;
+}
+.contactUs-head{
+  width: 92%;
+  padding: 0 4% 22rpx 4%;
+
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32rpx;
+  line-height: 36rpx;
+  display: flex;
+  align-items: center;
+  color: #4A5559;
+}
+.contactUs-body{
+  width: 92%;
+  margin: 0 4% 66rpx 4%;
+
+  font-family: PingFang SC;
+  font-size: 26rpx;
+  line-height: 36rpx;
+  color: #4A5559;
+}

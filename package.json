@@ -1,0 +1,26 @@
+{
+  "name": "WallBreaker2021-frontend",
+  "version": "1.0.0",
+  "description": "破壁（一期）",
+  "main": "app.js",
+  "dependencies": {
+    "kbone": "0.0.1",
+    "miniprogram-sm-crypto": "^0.3.0",
+    "weui-miniprogram": "^1.0.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/herobrine1010/WallBreaker2021-frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/herobrine1010/WallBreaker2021-frontend/issues"
+  },
+  "homepage": "https://github.com/herobrine1010/WallBreaker2021-frontend#readme"
+}

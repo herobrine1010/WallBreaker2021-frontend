@@ -1,0 +1,171 @@
+@import "/static/common.wxss";
+/* pages/jishi/main.wxss */
+.area2{
+  position:fixed;
+  top:17%;
+  width: 100%;
+  left:0;
+  height: 100%;
+}
+
+.list-item{
+  position: relative;
+  height: 27vw;
+}
+.listArea{
+  top:0vh;
+  position: relative;
+  height:100%;
+  margin-top: 10px;
+  z-index: 2;
+}
+.buttonArea{
+  position: relative;
+  top:0%;
+  height:1%;
+  /* background-color: #ff0000; */
+  left:0;
+  width:100%;
+  z-index:2;
+}
+
+.filterArea{
+  position: relative;
+  top:-1%;
+  height:3.5%;
+  /* background-color: #00ff00; */
+  left:0;
+  width:100%;
+  z-index:2;
+}
+.timeFilter,.conditionFilter{
+
+  position: relative;
+  top:10%;
+
+  height:100%;
+  border-radius: 5px;
+  color:#FFFFFF;
+  align-items: center;
+  font-size:4vw;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 1px;
+  float:left;
+  /* z-index:3; */
+  background-color: #F2FCFF;
+}
+.timeFilter{
+  left:3%;
+  width:25%;
+}
+.conditionFilter{
+  left:5%;
+  width:16%;
+}
+.timeText{
+  position: relative;
+  float:left;
+  left:-4%;
+  color: #17B2E5;
+  font-size: 3vw;
+  letter-spacing: 0.5px;
+}
+.conditionText,.conditionTextBlue{
+  position:relative;
+  float:left;
+  left:-8%;
+  font-size: 3vw;
+  letter-spacing: 1px;
+}
+.conditionText{
+  color:#768185;
+}
+.conditionTextBlue{
+  color:#17B2E5;
+}
+.timeIcon,.conditionIcon{
+  position:relative;
+  float: left;
+  height:3.2vw;
+  width: 3.2vw;
+}
+.filterExtended{
+  position: absolute;
+  top:5.5%;
+  height:100%;
+  left:0%;
+  width:100%;
+  z-index: 4;
+}
+
+.shade2{
+  position: absolute;
+  top:0%;
+  height:100%;
+  width:100%;
+  background-color: #000000;
+  opacity: 20%;
+  z-index:3;
+}
+.whiteBG{
+  position: relative;
+  margin-left:3vw;
+  margin-right: 3vw;
+  top:18%;
+  display: flex;flex-direction: row;justify-content: space-between;
+  height:100%;
+}
+.conditionArea{
+  position:relative;
+  
+  top:0%;
+  height:6%;
+  background-color: #F2FCFF;
+  border-radius: 0 0 20px 20px;
+  z-index: 4;
+  
+}
+
+.conditionsSelected,.conditionsNotSelected{
+  
+  top:5%;
+  height:60%;
+  width:18vw;
+  border-radius: 20px;
+  font-size:1.8vh;
+  letter-spacing: 1px;
+  z-index:5;
+  justify-content: center;
+  align-items: center;
+  display:flex;
+}
+.conditionsNotSelected{
+  background-color: #ffffff;
+border-color: #768185;
+color:#768185;
+border-width:1px;
+border-style: solid;
+}
+.conditionsSelected{
+  background-color: #26C9FF;
+  color:#ffffff;
+}
+
+
+
+
+.backTopButton{
+  position: fixed;
+  height:9vw;
+  width:9vw;
+  right: 5.9%;
+  bottom: 21%;
+ }
+ .addButton{
+  position: fixed;
+  height:15vw;
+  width:15vw;
+  right: 3%;
+  bottom: 12%;
+ }

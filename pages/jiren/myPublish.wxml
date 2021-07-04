@@ -1,0 +1,16 @@
+<!--pages/jishi/main.wxml-->
+<view class="main">
+  <view> 
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="我发起的组队"></mp-navigation-bar>
+  </view>
+<view class="searchBar">
+  <mp-searchbar  bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
+</view>
+<scroll-view class="list" scroll-y="true">
+<view class="list-item">
+ <my-card-me ></my-card-me>
+</view>
+
+</scroll-view>
+</view>
+

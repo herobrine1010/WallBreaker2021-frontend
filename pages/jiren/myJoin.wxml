@@ -1,0 +1,6 @@
+<view class="jiren-background">
+  <view>
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="组队详情"></mp-navigation-bar>
+  </view>
+  
+</view>

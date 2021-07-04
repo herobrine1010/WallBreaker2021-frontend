@@ -1,0 +1,47 @@
+{
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/jishi/main",
+        "iconPath": "static/icon/jishi.png",
+        "selectedIconPath": "static/icon/jishi-solid.png"
+      },
+      {
+        "pagePath": "pages/jiren/main",
+        "iconPath": "static/icon/jiren.png",
+        "selectedIconPath": "static/icon/jiren-solid.png"
+      },
+      {
+        "pagePath": "pages/personal/main",
+        "iconPath": "static/icon/personal.png",
+        "selectedIconPath": "static/icon/personal-solid.png"
+      }
+    ]
+  },
+  "pages": [
+    "pages/jiren/groupDetail",
+    "pages/jiren/main",
+    
+    "pages/jiren/myJoin",
+    "pages/jishi/main",
+    "pages/jiren/myPublish",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/testPage/testPage",
+    "pages/login/login",
+    "pages/personal/main",
+    "pages/collection/collection",
+    "pages/feedback/feedback",
+    "pages/introduction/introduction"
+   
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "济星云",
+    "navigationBarTextStyle": "black"
+  },
+  "useExtendedLib": {},
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
