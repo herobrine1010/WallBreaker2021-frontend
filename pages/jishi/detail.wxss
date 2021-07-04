@@ -197,3 +197,34 @@ align-items: center;
 /* gray4_P */
 color: #524A59;
 }
+.tagArea{
+  position: absolute;
+  left: 35%;
+  top: 48%;
+  display: flex;
+  flex-wrap: wrap;
+  margin:5px auto;
+}
+.tag{
+  position: relative;
+  width: 18vw;
+  height: 3vh;
+  background: #9B50E6;
+  border-radius: 10px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-left: 1vw;
+  margin-bottom: 1vw;
+  font-size:4vw;
+  display: flex;
+  letter-spacing: 1px;
+  float:left;
+  /* z-index:3; */
+
+}
+.tagText{
+  font-family: PingFang SC;
+  font-size: 1.5vh;
+  color: #FCFAFF;
+}

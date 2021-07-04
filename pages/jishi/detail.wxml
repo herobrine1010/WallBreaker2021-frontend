@@ -32,5 +32,12 @@
       <text class="userName1">{{userName}}</text>
       <text class="signature">{{signature}}</text>
       <text class="identity">{{identity}}</text>
+      <view class="tagArea">
+        <block wx:for="{{tags}}">
+          <view class="tag">
+          <text class="tagText">{{item}}</text>
+          </view>
+        </block>
+      </view>
   </view>
 </view>

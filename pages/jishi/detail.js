@@ -15,7 +15,8 @@ Page({
     chooseSize:false,
     animationData:{},
     signature:'这是一段个性签名',
-    identity:'建筑学院 风景园林 2018级 本科生'
+    identity:'建筑学院 风景园林 2018级 本科生',
+    tags: ['细节控','好学小白','996','口才','设计','文字']
   },
   Like:function(){
     this.setData({

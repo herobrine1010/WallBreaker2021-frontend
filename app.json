@@ -19,8 +19,8 @@
     ]
   },
   "pages": [
-    "pages/jishi/detail",
     "pages/jiren/main",
+    "pages/jishi/detail",
     "pages/jiren/groupDetail",
     "pages/jiren/myJoin",
     "pages/jishi/main",
