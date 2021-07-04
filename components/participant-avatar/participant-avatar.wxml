@@ -1,6 +1,6 @@
 <view class="external-box">
 <view style="width:94%;left:3%;position:relative">
-  <scroll-view show-scrollbar="false" enhanced="true" scroll-x="true">
+  <scroll-view show-scrollbar="true" enhanced="true" scroll-x="true">
         <view class="item-content" wx:for="{{avatarList}}" wx:for-item="item" bindtap="tapAvatar" data-user-id="{{item.id}}" data-user-avatar="{{item.avatar}}">
             <image wx:if="{{item.avatar==undefined}}" class="avatar" src="/static/icon/add-grey.png"></image>
             <image wx:else class="avatar" src="{{item.avatar}}"></image>

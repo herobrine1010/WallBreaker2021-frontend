@@ -19,10 +19,10 @@
     ]
   },
   "pages": [
-     
     "pages/jiren/groupDetail",
-    "pages/jiren/myJoin",
     "pages/jiren/main",
+    
+    "pages/jiren/myJoin",
     "pages/jishi/main",
     "pages/jiren/myPublish",
     "pages/index/index",

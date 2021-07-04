@@ -50,6 +50,11 @@ Page({
         'avatar':'http://tiebapic.baidu.com/forum/w%3D580%3B/sign=fa624952e31ea8d38a22740ca731324e/ac6eddc451da81cbf0437d241766d016082431b6.jpg',
         'nickname':'那我呢',
         'applyTime':'2天前'
+      },
+      {
+        'avatar':'http://tiebapic.baidu.com/forum/w%3D580%3B/sign=fa624952e31ea8d38a22740ca731324e/ac6eddc451da81cbf0437d241766d016082431b6.jpg',
+        'nickname':'那我呢',
+        'applyTime':'2天前'
       }
 
     ]
