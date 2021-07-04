@@ -1,0 +1,36 @@
+<view class="detail">
+  <view class="navi">
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title=" 帖子详情"></mp-navigation-bar>
+  </view>
+  <view>
+  <scroll-view class="card">
+    <view class="title">{{title}}</view>
+    <image class="like" wx:if="{{!like}}" src="/static/icon/collect.png" style="height:20px;width:20px;position:absolute;right:10%;top:5%" bindtap="Like"
+    ></image>
+    <image class="like" wx:if="{{like}}" src="/static/icon/collect-solid.png" style="height:20px;width:20px;position:absolute;right:10%;top:5%" bindtap="cancelLike" 
+    ></image>
+    <image src="{{userAvatar}}" style="height:30px;width:30px;position:relative;top:8%;left:5%"
+    bindtap='chooseSezi'></image>
+    <text class="userName">{{userName}}</text>
+    <text class="time">{{time}}</text>
+    <view class="content">
+    <text class="description">{{description}}</text>
+    <view class="pictures">
+    <block wx:for="{{pictures}}">
+      <view class="pictureBlock">
+      </view>
+     </block>
+     </view>
+  </view>
+  </scroll-view>
+  </view>
+  <view class="block" wx:if="{{chooseSize}}" bindtap='hideModal'></view>
+  <view class='choose' wx:if="{{chooseSize}}" animation='{{animationData}}'> 
+    <view class="userAvatar"> <image src="{{userAvatar}}"
+    style="height:30vw;width:30vw"></image>
+    </view>
+      <text class="userName1">{{userName}}</text>
+      <text class="signature">{{signature}}</text>
+      <text class="identity">{{identity}}</text>
+  </view>
+</view>
