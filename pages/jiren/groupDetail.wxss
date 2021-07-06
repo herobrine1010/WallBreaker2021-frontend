@@ -37,8 +37,8 @@
   border-radius: 2.5vw;
 }
 .user-list{
-  position: absolute;
-  top:28vh;
+  position: relative;
+  top:5vh;
   height:62vh;
   width:100vw;
   left:0vw;
@@ -202,16 +202,31 @@
   right:3vw;
 }
 .favourite,.accept-all-button{
-  position: relative;
-  float:right;
+  
+  
   height:100%;
 }
+
+.accept-all-button{
+  position: absolute;
+  align-items: center;
+  text-align:center;
+  float:left;
+  width:80vw;
+  line-height:6vh; 
+  color:#ffffff;
+  font-size:2.4vh;
+  letter-spacing: 0.2vh;
+}
+
 .favourite{
-  width:10vh;
+  position: relative;
+  width:20vw;
   background-color: #ffffff;
   align-items: center;
   text-align: center;
   display:inline-block;
+  float:right;
 }
 .fav-icon{
   position:relative;
