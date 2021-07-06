@@ -3,7 +3,7 @@
     <mp-navigation-bar ext-class="weui-navigation-bar__centers" title=" 帖子详情"></mp-navigation-bar>
   </view>
   <view>
-  <scroll-view class="card">
+  <view class="card">
     <view class="title">{{title}}</view>
     <image class="like" wx:if="{{!like}}" src="/static/icon/collect.png" style="height:20px;width:20px;position:absolute;right:10%;top:5%" bindtap="Like"
     ></image>
@@ -13,16 +13,16 @@
     bindtap='chooseSezi'></image>
     <text class="userName">{{userName}}</text>
     <text class="time">{{time}}</text>
-    <view class="content">
+    <scroll-view class="content">
     <text class="description">{{description}}</text>
     <view class="pictures">
     <block wx:for="{{pictures}}">
       <view class="pictureBlock">
       </view>
      </block>
-     </view>
-  </view>
+    </view>
   </scroll-view>
+  </view>
   </view>
   <view class="block" wx:if="{{chooseSize}}" bindtap='hideModal'></view>
   <view class='choose' wx:if="{{chooseSize}}" animation='{{animationData}}'> 
