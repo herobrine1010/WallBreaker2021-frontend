@@ -1,0 +1,35 @@
+<!--pages/jiren/anwserQuestion.wxml-->
+<view class="jiren-background"> 
+  <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="回答问题"></mp-navigation-bar>
+  <view class="area2">
+  <view class="shade"></view>
+
+  <view class="title">请回答发起人设置的下列问题:</view>
+  <scroll-view class="mainArea" scroll-y="true">
+  <view class="questionContainer">
+
+  <form bindsubmit="submitAnswer">
+      <block wx:for="{{questionItems}}">
+      <view  class="questionItem">
+        <view class="questionText">
+          {{item.index}} {{item.questionText}}
+        </view>
+        <view class="answerBox">
+          <textarea class="answerText" name="{{item.index}}" bindinput="isMaxlength" placeholder="请输入回答（不超过50字)" maxlength="50"></textarea>
+        </view>
+        <view class="maxlengthArea">
+          <text class="maxlengthMessage">{{maxlengthMessage}}</text>
+        </view>
+      </view>
+      </block>
+      <!--为了覆盖原生button组件，wxml里写style-->
+      <button form-type="submit" class="submitButton" style="width: 360px;border: 0; border-radius: 0">
+        <text class="buttonText">确认提交</text>
+      </button>
+  </form>
+  </view>
+  </scroll-view>
+
+  </view>
+
+</view>

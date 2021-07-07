@@ -32,8 +32,8 @@
     "pages/personal/main",
     "pages/collection/collection",
     "pages/feedback/feedback",
-    "pages/introduction/introduction"
-   
+    "pages/introduction/introduction",
+    "pages/jiren/answerQuestion"
   ],
   "window": {
     "backgroundTextStyle": "dark",
