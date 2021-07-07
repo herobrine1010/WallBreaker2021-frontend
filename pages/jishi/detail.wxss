@@ -62,9 +62,9 @@ color: #524A59;
 .userName{
   /* 破壁者1号 */
 
-position: absolute;
+position: relative;
 left: 16.67%;
-top: 13%;
+top: 3.8%;
 
 
 /* tag/medium/11 */
@@ -81,9 +81,9 @@ color: #8937DB;
 .time{
   /* 2021年6月9日 21:40 */
 
-position: absolute;
+position: relative;
 left: 34.72%;
-top: 13%;
+top: 2%;
 /* tag/medium/10 */
 font-family: PingFang SC;
 font-size: 10px;
@@ -98,14 +98,15 @@ color: #7E7685;
 
 }
 .content{
-  display: inline;
+  position: relative;
+  top:4%;
 }
 .description{
   /* 为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于…… 为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于…… 为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于…… */
 
-position: absolute;
-left: 5.83%;
-top: 18.91%;
+position: relative;
+left: 1%;
+top: 15.91%;
 /* content/medium/11 */
 font-family: PingFang SC;
 font-size: 3vw;
