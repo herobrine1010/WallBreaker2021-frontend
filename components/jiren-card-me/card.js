@@ -8,7 +8,7 @@ Component({
     },
     title:{
       type:String,
-      value:'示例标题示例标题示例标题...'
+      value:'示例标题示例标题示例标题'
     },
     dueTime:{
       type:String,

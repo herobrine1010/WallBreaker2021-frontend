@@ -7,7 +7,7 @@
   <view class="per-container">
     <!-- 以下是用户头像、昵称、学院、标签等简要信息 -->
     <view class="per-brief">
-      <image src="../../static/icon/default-user-99px.png" class="photo" mode="scaleToFill"></image>
+      <image src="../../static/icon/default-user-big.png" class="photo" mode="scaleToFill"></image>
       <view class="briefs">
         <view class="nickname">小花</view>
         <view class="school">建筑学院 风景园林 2018级 本科生</view>
@@ -22,7 +22,7 @@
       </view>
     </view>
     <!-- 以下是资料、组队管理、收藏、帮助、反馈、破壁简介等item -->
-    <navigator class="per-items">
+    <navigator url="../personalDetails/main" class="per-items">
       <image src="../../static/icon/personal-info.png" class="icon"></image>
       <view class="item-title">个人资料</view>
     </navigator>

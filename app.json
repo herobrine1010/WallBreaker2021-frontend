@@ -19,8 +19,9 @@
     ]
   },
   "pages": [
-    "pages/jishi/detail",
+    
     "pages/jiren/main",
+    "pages/jishi/detail",
     "pages/jiren/groupDetail",
     "pages/jiren/myJoin",
     "pages/jishi/main",
@@ -33,6 +34,7 @@
     "pages/collection/collection",
     "pages/feedback/feedback",
     "pages/introduction/introduction",
+    "pages/personalDetails/main",
     "pages/jiren/answerQuestion"
   ],
   "window": {
