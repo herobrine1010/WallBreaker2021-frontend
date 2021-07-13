@@ -1,0 +1,10 @@
+<!--components/dialog-box/dialog-box.wxml-->
+<block wx:if="{{isShow}}">
+  <view class="dialog-box-shade"></view>
+  <view class="dialog-box-white-bg">
+    <view class="dialog-box-content">{{content}}</view>
+    <view class="dialog-box-tip">{{tip}}</view>
+    <view class="dialog-box-cancel" bindtap="tapCancel">{{cancelText}}</view>
+    <view class="dialog-box-ok" bindtap="tapOk">{{okText}}</view>
+  </view>
+</block>

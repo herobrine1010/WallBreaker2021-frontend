@@ -1,0 +1,146 @@
+@import "/static/common.wxss";
+
+/* pages/jishi/main.wxss */
+.area2{
+  position:fixed;
+  top:10%;
+  width: 100%;
+  left:0;
+  height: 100%;
+}
+.shade{
+  position: absolute;
+  top:0%;
+  background-color: #F2FCFF;
+  opacity: 35%;
+  height:100%;
+  left:0%;
+  width:100%;
+  border-radius: 25px 25px 0 0;
+  z-index: 0;
+}
+.scroll-area{
+  top:1vh;
+  position: relative;
+  width:100%;
+  /* background-color: #FF0000; */
+  height:88vh;
+}
+.intro{
+  position: relative;
+  width:100%;
+  height:5vh;
+  font-size: 2.2vh;
+  font-weight: 500;
+  letter-spacing: 0.2vw;
+  left:3vw;
+  color:#4A5559;
+  top:0.5vh;
+}
+
+
+
+
+
+.question-text,.answer-area{
+  left:3vw;
+  width:94vw;
+}
+
+.question-text{
+  position: relative;
+  font-size: 1.9vh;
+  color:#4A5559;
+  white-space:normal;
+  word-wrap:break-word;
+  word-break:normal;
+  width:94vw;
+  margin-bottom: 0.3vh;
+  /* display: block; */
+}
+.answer-area{
+  position: relative;
+  background-color:#F2FCFF;
+  border-radius: 2vh;
+  height:10vh;
+  margin-left: 0.3vw;
+  margin-right: 0.3vw;
+  
+
+
+}
+.text-answer,.text-placeholder{
+  position: absolute;
+  height:100%;
+  width:100%;
+  padding-left:2%;
+  padding-right:2%;
+  box-sizing: border-box; 
+  font-size:2.2vh;
+
+}
+.text-placeholder{
+  color:#989A9A
+}
+
+.text-count{
+  z-index:3
+}
+
+.warning-area{
+  margin-top:0.5vh;
+  line-height: 2vh;
+  font-size: 2vh;
+  font-weight: 300;
+  text-align: center;
+  position: relative;
+  height:2vh
+}
+
+.warning{
+  color:#007399;
+}
+
+
+.empty-block{
+  position: relative;
+  width:100%;
+  height:5vh;
+  margin-bottom: 1vh; 
+}
+.blur-shadow{
+  position: fixed;
+  bottom:0vh;
+  height:6vh;
+  width:100vw;
+  left:0vw;
+  /* background-color: #17B2E5;
+  opacity: 80%; */
+  z-index: 2;
+  background:repeat;
+  backdrop-filter:blur(4px);
+}
+.bottom-elements{
+  position: fixed;
+  bottom:0vh;
+  height:6vh;
+  width:100vw;
+  left:0vw;
+  background-color: #17B2E5;
+  opacity: 0.8;
+  /* filter: blur(10px); */
+  z-index: 300;
+}
+
+.accept-all-button{
+  height:100%;
+  position: absolute;
+  align-items: center;
+  text-align:center;
+  float:left;
+  width:100%;
+  line-height:6vh; 
+  color:#ffffff;
+  font-size:2.4vh;
+  letter-spacing: 0.2vh;
+}

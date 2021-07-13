@@ -37,7 +37,7 @@ Page({
       // 动画持续时间
         duration:200,
         // 定义动画效果，当前是匀速
-        timingFunction:'linear'
+        timingFunction:'ease'
       })
       // 将该变量赋值给当前动画
     that.animation = animation

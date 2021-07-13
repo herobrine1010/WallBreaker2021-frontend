@@ -41,6 +41,18 @@
     <view class="blur-shadow"></view>
   </view>
 
- 
+
   
 </view>
+
+<personal-animation id="personalAnimation"></personal-animation>
+
+<dialog-box 
+content="{{dialogContent}}"
+tip="{{dialogTip}}"
+okText="{{dialogOkText}}"
+cancelText="{{dialogCancelText}}"
+isShow="{{isDialogShow}}"
+bind:tapOk="tapOk"
+>
+</dialog-box>

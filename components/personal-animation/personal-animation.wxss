@@ -1,0 +1,136 @@
+/* components/personal-animation/personal-animation.wxss */
+.pa-choose{
+  position: fixed;
+  height: 24vh;
+  width: 100%;
+  bottom: 0%;
+  /* white2_P */
+  background: #FCFAFF;
+  mix-blend-mode: normal;
+  border-radius: 25px 25px 0px 0px;
+}
+.pa-block{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: #000000;
+  opacity: 0.2;
+}
+.pa-avatar{
+  position: absolute;
+  left:2vw;
+  height:28vw;
+  width:28vw;
+  border-radius: 28vw;
+  top:0;
+  bottom:0;
+  margin:auto 0;
+}
+
+.pa-nickname-and-check-answer{
+  margin-top: 1vh;
+  margin-bottom:0.3vh;
+}
+.pa-nickname{
+  position:relative;
+  float:left;
+  color:#4A5559;
+  font-size:2.2vh;
+  line-height:3vh;
+  height:3vh;
+}
+.pa-check-answer{
+  position:relative;
+  float:right;
+  height:3vh;
+  line-height: 3vh;
+  font-size: 2vh;
+  width:18vw;
+  color:#17B2E5;
+  text-align: center;
+  border-color: #17B2E5;
+  border-width: 1rpx;
+  border-radius: 1vh;
+  border-style: solid;
+  margin-right:2vw;
+}
+
+.pa-text-area{
+  position:absolute;
+  left:32vw;
+  /* height: 24vh; */
+  transform: translateY(-50%);
+
+  width: 100%;
+  /* background-color: royalblue; */
+  top:50%;
+
+
+  margin:auto 0;
+  font-size: 2.1vh;
+  /* 注意！！inline-blcok块之间的不可见符号会被保留父层字体的1/3大小的空间 通过调整这里的font-size可以调整上下view之间的间隙
+  如1.5vh / 3= 0.5vh */
+}
+/* .pa-nickname-and-check-answer,.pa-wx-id,.pa-description,.pa-label-area{
+  
+} */
+
+
+
+.pa-description,.pa-wx-id{
+  height:2vh;
+  margin-right: 2vw;
+  font-size: 1.8vh;
+  line-height: 2vh;
+  text-align: left;
+  letter-spacing: 0.1vw;
+}
+.pa-wx-id{
+  color:#4A5559;
+}
+.pa-description{
+  color:#989A9A;
+}
+.pa-nickname-and-check-answer,
+.pa-description,.pa-wx-id,.pa-info-area{
+  position:relative;
+  display : inline-block;
+
+  vertical-align: top;
+
+  width:68vw;
+}
+.pa-school,.pa-major,.pa-grade,.pa-identity{
+  float:left;
+  height:2vh;
+  margin-right: 2vw;
+  font-size: 1.8vh;
+  line-height: 2vh;
+  text-align: center;
+  letter-spacing: 0.1vw;
+  color:#4A5559;
+}
+
+.pa-label-area{
+  position:relative;
+  display : inline-block;
+  width:68vw;
+}
+.pa-personal-label,.pa-interest-label{
+  float:left;
+  height:3.5vh;
+  width:18vw;
+  border-radius: 2vh;
+  margin-right: 2vw;
+  font-size: 1.8vh;
+  line-height: 3.5vh;
+  text-align: center;
+  letter-spacing: 0.2vw;
+  color:#FCFAFF;
+}
+.pa-personal-label{
+  background-color: #17B2E5;
+}
+.pa-interest-label{
+  background-color: #1D99C3;
+}

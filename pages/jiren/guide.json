@@ -6,9 +6,7 @@
     "my-card":"/components/jiren-card/card",
     "my-card-me":"/components/jiren-card-me/card",
     "my-navi":"/components/jishiNavi/jishiNavi",
-    "avatar-list":"/components/participant-avatar/participant-avatar",
-    "dialog-box":"/components/dialog-box/dialog-box",
-    "personal-animation":"/components/personal-animation/personal-animation"
+    "dialog-box":"/components/dialog-box/dialog-box"
   },
   "navigationStyle": "custom"
 }

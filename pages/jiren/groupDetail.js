@@ -5,6 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isDialogShow:false,
+    dialogContent:"爬爬爬爬爬爬爬爬",
+    dialogTip:"提示：爬",
+    dialogCancelText:"取消",
+    dialogOkText:"确认",
     isFavourite:false,
     avatarList:[],
     currentUser:[],
@@ -129,7 +134,9 @@ Page({
 
   tapAvatar:function(e){
     this.setData({"currentUser":e.detail});
-    console.log(this.data.currentUser)
+    console.log(this.data.currentUser);
+    this.selectComponent("#personalAnimation").showModal(this.data.currentUser.userAvatar);
+    
   },
 
   seeDetail:function(e){
@@ -154,6 +161,22 @@ Page({
       this.setData({isFavourite:false});
     }
     this.onLoad();
+  },
+
+  tapOk:function(e){
+    console.log("点击确认之后的业务");
+    wx.showToast({
+      title: '爬了',
+      icon: 'none',
+      duration: 1000
+    })
+    wx.navigateTo({
+      url: '/pages/jiren/answerQuestion',
+    })
+  },
+
+  showModel:function(){
+
   }
   
 

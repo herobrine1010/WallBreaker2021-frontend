@@ -1,0 +1,43 @@
+<!-- 本页面最终的写法参照这里： -->
+<!-- https://shimo.im/docs/mz7fDYczb9czEPbG/ -->
+<!-- 指南中的图片以iphone6/7/8下的实际页面截图为准 -->
+
+<view class="jiren-background">
+  <view>
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="组队指南"></mp-navigation-bar>
+  </view>
+  <view class="area2">
+    <view class="shade"></view>
+    <scroll-view class="content-area" scroll-y="true" scroll-with-animation="true">
+      <view class="common-text">{{introduction}}</view>
+
+      <view class="second-title">{{titlePublishTeam}}</view>
+      <view class="common-text">{{textPublishTeam}}</view>
+      <view class="common-image-box">
+        <image src="{{imagePublishTeam}}" class="common-image" mode="widthFix"></image>
+      </view>
+      <view class="common-text">{{textViewPublishedTeam}}</view>
+      <view class="common-image-box">
+        <image src="{{imageViewPublishedTeam}}" class="common-image" mode="widthFix"></image>
+      </view>
+      <view class="common-text">{{textManagePublishedTeam}}</view>
+      <view class="common-image-box">
+        <image src="{{imageManagePublishedTeam}}" class="common-image" mode="widthFix"></image>
+      </view>
+
+      <view class="second-title">{{titleJoinTeam}}</view>
+      <view class="common-text">{{textJoinTeam}}</view>
+      <view class="common-image-box">
+        <image src="{{imageJoinTeam}}" class="common-image" mode="widthFix"></image>
+      </view>
+      <view class="common-text">{{textViewJoinedTeam}}</view>
+      <view class="common-image-box">
+        <image src="{{imageViewJoinedTeam}}" class="common-image" mode="widthFix"></image>
+      </view>
+
+      <view class="common-text" style="font-style:italic">{{ending}}</view>
+
+    </scroll-view>
+  </view>
+
+</view>

@@ -1,0 +1,44 @@
+<view class="pa-block" wx:if="{{isPersonalInfoShow}}" bindtap='hideModal'></view>
+<view class='pa-choose' wx:if="{{isPersonalInfoShow}}" animation='{{animationData}}'>
+  <image class="pa-avatar" src="{{personalInfo.avatar}}"></image>
+  <view class="pa-text-area">
+    <view class="pa-nickname-and-check-answer">
+      <view class="pa-nickname">{{personalInfo.nickname}}</view>
+      <view wx:if="{{isCheckAnswerButtonShow}}" class="pa-check-answer">查看回答</view>
+    </view>
+    <view class="pa-wx-id" bindlongtap="copyWxId" wx:if="{{personalInfo.wxIdPublic}}">
+      微信号 {{personalInfo.wxId}}
+    </view>
+    <view  wx:if="{{personalInfo.description!=undefined}}" class="pa-description">{{personalInfo.description}}</view>
+    <view class="pa-info-area"
+    wx:if="{{personalInfo.schoolPublic || personalInfo.majorPublic || personalInfo.gradePublic || personalInfo.identityPublic}}">
+      <view class="pa-school" wx:if="{{personalInfo.schoolPublic}}">{{personalInfo.school}}</view>
+      <view class="pa-major" wx:if="{{personalInfo.majorPublic}}">{{personalInfo.major}}</view>
+      <view class="pa-grade" wx:if="{{personalInfo.gradePublic}}">{{personalInfo.grade}}</view>
+      <view class="pa-identity" wx:if="{{personalInfo.identityPublic}}">{{personalInfo.identity}}</view>
+    </view>
+    <view wx:if="{{personalInfo.personalLabel.length!=0}}" class="pa-label-area">
+      <block wx:for="{{personalInfo.personalLabel}}">
+        <view class="pa-personal-label">
+            {{item}}
+        </view>
+      </block>
+    </view>
+    <view wx:if="{{personalInfo.interestLabel.length!=0}}" class="pa-label-area">
+      <block wx:for="{{personalInfo.interestLabel}}">
+        <view class="pa-interest-label">{{item}}</view>
+      </block>
+    </view>
+  </view>
+  <!-- <text class="pa-nickname">{{personalInfo.userName}}</text>
+  <text class="pa-signature">{{personalInfo.signature}}</text>
+  <text class="pa-identity">{{personalInfo.identity}}</text>
+
+  <view class="pa-tagArea">
+    <block wx:for="{{tags}}">
+      <view class="pa-tag">
+        <text class="pa-tagText">{{item}}</text>
+      </view>
+    </block>
+  </view> -->
+</view>

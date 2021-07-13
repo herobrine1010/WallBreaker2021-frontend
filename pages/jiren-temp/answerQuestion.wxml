@@ -1,0 +1,49 @@
+<view class="jiren-background">
+  <view>
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="回答问题"></mp-navigation-bar>
+  </view>
+  <view class="area2">
+    <view class="shade"></view>
+
+    <scroll-view class="scroll-area" scroll-y="true" with-animation='true' >
+      <view class="intro">请回答发起人设置的下列问题：</view>
+
+      <block wx:for="{{questionList}}">
+        <view class="list-item">
+          <view class="question-text">{{item.question}}</view>
+          <view class="answer-area">
+            <textarea maxlength="50" class="text-answer" data-show-count="{{item.showCount}}"
+            data-show-warning="{{item.showWarning}}" 
+            data-index="{{index}}"
+            bindfocus="tapTextArea"
+              bindinput="checkLength" placeholder=" 请输入你的回答" model:value="{{item.answer}}" confirm-type="done"
+              placeholder-class="text-placeholder" />
+            <!-- <view class="text-count">{{item.textLength}}/200</view> -->
+          </view>
+          <view class="warning-area">
+          <view wx:if="{{item.showWarning}}" class="warning">字符数已达上限！</view>
+          </view>
+        </view>
+      </block>
+
+      <view class="empty-block"></view>
+
+    </scroll-view>
+  
+
+    <view class="bottom-elements">
+      <view class="accept-all-button" bindtap="tapSubmit">
+        确认提交
+      </view>
+      
+    </view>
+    <view class="blur-shadow"></view>
+  </view>
+
+
+
+</view>
+
+<dialog-box content="{{dialogContent}}" tip="{{dialogTip}}" okText="{{dialogOkText}}" cancelText="{{dialogCancelText}}"
+  isShow="{{isDialogShow}}" bind:tapOk="tapOk">
+</dialog-box>

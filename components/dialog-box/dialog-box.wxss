@@ -1,0 +1,72 @@
+/* components/dialog-box/dialog-box.wxss */
+.dialog-box-shade{
+  position:fixed;
+  background-color: rgba(0,0,0,0.2);
+  width:100%;
+  height:100%;
+  left:0;
+  top:0;
+  z-index: 1000;
+}
+.dialog-box-white-bg{
+  position:fixed;
+  width:72vw;
+  left:14vw;
+  top:40vh;
+  height:20vh;
+  border-radius: 4vh;
+  z-index: 1001;
+  background-color: #FAFEFF;
+  font-size: 2.5vh;
+}
+.dialog-box-content{
+  position: relative;
+  color:#4A5559;
+  text-align: center;
+  align-items: center;
+  font-weight: bolder;
+  margin:2vh 2vw 0.5vh 2vw;
+  white-space: pre-line;
+  height:8vh;
+  font-size:2.4vh;
+  display:flex;
+  justify-content:center;
+}
+.dialog-box-tip{
+  width:100%;
+  position: absolute;
+  top:10.7vh;
+
+  justify-content:center;
+  line-height: 1.6vh;
+  color:#4A5559;
+  text-align: center;
+  align-items: center;
+  font-weight: lighter;
+  font-size:1.6vh;
+}
+.dialog-box-cancel,.dialog-box-ok{
+  position: absolute;
+  border-style: solid;
+  border-width: 2rpx;
+  height:4vh;
+  line-height: 4vh;
+  top:14vh;
+  width: 20vw;
+  border-radius: 2vh;
+  font-size: 2vh;
+  align-items: center;
+  text-align: center;
+  font-weight: normal;
+  letter-spacing: 0.2vw;
+}
+.dialog-box-ok{ 
+  left:40vw;
+  color:#FAFEFF;
+  background-color: #17B2E5;
+}
+.dialog-box-cancel{
+  border-color: #17B2E5;
+  color:#17B2E5;
+  left:10vw;
+}
