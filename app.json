@@ -31,10 +31,10 @@
     "pages/testPage/testPage",
     "pages/login/login",
     "pages/personal/main",
-    "pages/collection/collection",
-    "pages/feedback/feedback",
-    "pages/introduction/introduction",
-    "pages/personalDetails/main",
+    "pages/personal/personalDetails",
+    "pages/personal/collection",
+    "pages/personal/feedback",
+    "pages/personal/aboutUs",
     "pages/jiren/answerQuestion"
   ],
   "window": {
