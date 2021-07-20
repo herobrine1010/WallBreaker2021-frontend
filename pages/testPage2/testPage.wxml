@@ -1,0 +1,9 @@
+<!--pages/testPage2/testPage.wxml-->
+<mylabels
+id="personal-label"
+labels = "{{personalLabels}}"
+></mylabels>
+<button bindtap="btnTap">测试数据获取</button>
+<personal-brief
+personBrief = "{{personBrief}}"
+></personal-brief> 

@@ -1,40 +1,18 @@
 /* pages/collection/collection.wxss */
-.main{
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
+@import "/static/common.wxss";
+.background{
   background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193, 255, 0) 27.37%), linear-gradient(198.24deg, rgba(140, 26, 255, 0.25) 3.34%, rgba(185, 115, 255, 0) 90.78%), linear-gradient(195.29deg, #A3E5FA 2.51%, #DCBCFB 56.49%);
-  background-blend-mode: color-burn, normal;
-  overflow: hidden; 
 }
 .backgroundRight{
   background-image: linear-gradient(199.75deg, rgba(140, 26, 255, 0.18) 40.18%, rgba(140, 26, 255, 0) 90.9%), linear-gradient(195.29deg, #DCBCFB 2.51%, #A2E4FA 27.51%);
 }
-.backgroundLeft{
+.backgroundLeft{ 
   background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193, 255, 0) 27.37%), linear-gradient(198.24deg, rgba(140, 26, 255, 0.25) 3.34%, rgba(185, 115, 255, 0) 90.78%), linear-gradient(195.29deg, #A3E5FA 2.51%, #DCBCFB 56.49%);
 }
-.weui-navigation-bar__centers{
-  font-family: PingFang SC;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 36rpx;
-  line-height: 50rpx;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color:#fff;
-}
-/* 以下是intro-container组件的样式 */
-.collection-container{
-  height: 100%;
-  background: rgba(242, 252, 255, 0.35);
-  mix-blend-mode: normal;
-  border-radius: 50rpx 50rpx 0 0;
-}
+
+
 .collection-head{
-  height: 112rpx;
+  height: 8%;
   width: 100%;
 
   display: flex;
@@ -67,6 +45,7 @@
   box-sizing: border-box;
 }
 .collection-body{
+  height: 92%;
   width: 92%;
   /* height: 200rpx; */
   margin: 0 4%;

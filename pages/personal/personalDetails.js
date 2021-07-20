@@ -9,131 +9,97 @@ Page({
       {
         id : '0',
         title : '点子王',
-        isLabelActive : 1
+        isLabelActive : true
       },{
         id : '1',
         title : '细节控',
-        isLabelActive : 0
+        isLabelActive : false
       },{
         id : '2',
         title : '996',
-        isLabelActive : 0
+        isLabelActive : false
       },{
         id : '3',
         title : '领导者',
-        isLabelActive : 0
+        isLabelActive : false
       },{
         id : '4',
         title : '颜王',
-        isLabelActive : 0
+        isLabelActive : false
       },{
         id : '5',
         title : '倾听者',
-        isLabelActive : 0
+        isLabelActive : false
       },{
         id : '6',
         title : '好学小白',
-        isLabelActive : 1
+        isLabelActive : false
       },{
         id : '7',
         title : '脾气好',
-        isLabelActive : 0
+        isLabelActive : false
       }
     ],
     interestLabel : [
       {
         id : '0',
         title : '编程',
-        isLabelActive : 1
+        isLabelActive : false
       },{
         id : '1',
         title : '设计',
-        isLabelActive : 0
+        isLabelActive : false
       },{
         id : '2',
         title : '文学',
-        isLabelActive : 0
+        isLabelActive : false
       },{
         id : '3',
         title : '摄影',
-        isLabelActive : 0
+        isLabelActive : false
       },{
         id : '4',
         title : '口才',
-        isLabelActive : 0
+        isLabelActive : false
       },{
         id : '5',
         title : 'PPT',
-        isLabelActive : 0
+        isLabelActive : false
       },{
         id : '6',
         title : '外语',
-        isLabelActive : 1
+        isLabelActive : true
       },{
         id : '7',
         title : '才艺',
-        isLabelActive : 0
+        isLabelActive : false
       }
     ],
-    personalLabelWarn : '',
-    interestLabelWarn : '',
-    tempFilePaths : '../../static/icon/default-user-big.png'
-  },
-  // 定义标签Label的点击事件，同时判断已经选择的
-  onPersonalLabelTap : function(e){
-    // console.log(e.currentTarget.dataset.index);
-    const index = e.currentTarget.dataset.index;
-    let labels = this.data.personalLabel;
-    //判断当前选中了几个标签
-    let sum = 0;
-    for(let i = 0;i<labels.length;i++){
-      sum += labels[i].isLabelActive;
-    }
-    if(sum<3){
-      labels[index].isLabelActive  = 1 -  labels[index].isLabelActive;
-      this.setData({
-        personalLabel : labels,
-        personalLabelWarn : ''
-      })
-    }else if(labels[index].isLabelActive === 1){//已选中3个标签后，只减不加
-      labels[index].isLabelActive  = 0;
-      this.setData({
-        personalLabel : labels,
-        personalLabelWarn : ''
-      })
-    }else{
-      this.setData({
-        personalLabelWarn : '*同类标签最多选择三个'
-      })
-    }
-    
-  },
-  onInterestLabelTap : function(e){
-    // console.log(e.currentTarget.dataset.index);
-    const index = e.currentTarget.dataset.index;
-    let labels = this.data.interestLabel;
-    //判断当前选中了几个标签
-    let sum = 0;
-    for(let i = 0;i<labels.length;i++){
-      sum += labels[i].isLabelActive;
-    }
-    if(sum<3){
-      labels[index].isLabelActive  = 1 -  labels[index].isLabelActive;
-      this.setData({
-        interestLabel : labels,
-        interestLabelWarn : ''
-      })
-    }else if(labels[index].isLabelActive === 1){//已选中3个标签后，只减不加
-      labels[index].isLabelActive  = 0;
-      this.setData({
-        interestLabel : labels,
-        interestLabelWarn : ''
-      })
-    }else{
-      this.setData({
-        interestLabelWarn : '*同类标签最多选择三个'
-      })
-    }
+    tempFilePaths : '../../static/icon/default-user-big.png',
+    userDetails: {
+      nickname: '默认昵称',
+      qualification:'本科',
+      isQualificationVisible: true,
+      grade: '20级',
+      isGradeVisible: false,
+      college: '土木工程学院',
+      isCollegeVisible: false,
+      major: '防灾减灾工程',
+      isMajorVisible: false,
+      wxId: 'wxid-25536748',
+      briefIntroduction: '理工科钢铁直男一枚~'
+    },
+    // nickname: '默认昵称',
+    // qualification:'本科',
+    // isQualificationVisible: true,
+    // grade: '20级',
+    // isGradeVisible: false,
+    // college: '土木工程学院',
+    // isCollegeVisible: false,
+    // major: '防灾减灾工程',
+    // isMajorVisible: false,
+    // wxId: 'wxid-25536748',
+    // briefIntroduction: '理工科钢铁直男一枚~'
   },
   //定义更换头像事件 changeImage
   changeImage : function(){
@@ -155,13 +121,17 @@ Page({
   },
   // 定义表单提交事件 formSubmit
   formSubmit : function(e){
-    console.log(e.detail.value);
     this.setData({
-      formData:e.detail.value
+      userDetails:e.detail.value
     })
+    console.log(this.data.userDetails);
   },
   btnTap:function(){
-
+    //从label-selector组件中拿到数据
+    const personalLabelData = this.selectComponent('#personalLabel').data;
+    console.log(personalLabelData);
+    const interestLabelData = this.selectComponent('#interestLabel').data;
+    console.log(interestLabelData);
     wx.showToast({
       title: '提交成功',
       icon:'success'

@@ -2,174 +2,124 @@
 .card{
   position: relative;
   width: 100%;
-  height: 184rpx;
-  margin-bottom: 20rpx;
+  height: 194rpx;
+  margin-bottom: 24rpx;
   background: #F9F2FF;
-  border-radius: 16rpx;
+  border-radius: 20rpx;
 }
+
 .tag{
+  position: absolute;
+  left: 18rpx;
+  top: 16rpx;
+  width: 116rpx;
+  height: 44rpx;
+  text-align: center;
+  /* Purple3 */
+  background: #8937DB;
+  border-radius: 18rpx;
 
-position: absolute;
-left: 2.74%;
-right: 79.64%;
-top: 8%;
-bottom: 70%;
-text-align: center;
-
-/* Purple3 */
-background: #8937DB;
-border-radius: 8px;
-
-font-family: Noto Sans SC;
-font-style: normal;
-font-weight: 500;
-font-size: 1.7vh;
-line-height: 17px;
-align-items: center;
-/* white */
-color: #FFFFFF;
-
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26rpx;
+  line-height: 44rpx;
+  /* white */
+  color: #FFFFFF;
 }
-.tagText{
-position: absolute;
-left: 8.26%;
-/* tag1/medium//12 */
 
-font-family: Noto Sans SC;
-font-style: normal;
-font-weight: 500;
-font-size: 1.7vh;
-line-height: 17px;
-display: flex;
-align-items: center;
-/* white */
-color: #FFFFFF;
-}
 .title{
-  /* 同济大学春季招聘会 */
-
-position: absolute;
-left: 23.1%;
-right: 19.15%;
-top: 11%;
-bottom: 73%;
-
-/* title/bold/14 */
-font-family: PingFang SC;
-font-style: normal;
-font-weight: bold;
-font-size: 14px;
-line-height: 20px;
-display: flex;
-align-items: center;
-
-/* gray4_P */
-color: #524A59;
+  /* 帖子标题、位置 */
+  position: absolute;
+  left: 152rpx;
+  top: 16rpx;
+  height: 42rpx;
+  /* 字体/bold/14 */
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  color: #524A59;
 }
 .rightTag{
   /* JiRen/Home/Card/右侧标签 */
-
-position: absolute;
-left: 80.32%;
-right: -0.3%;
-top: 9.87%;
-background: rgba(23, 178, 230, 0.8);
-border-radius: 20px 0px 0px 20px;
-font-family: PingFang SC;
-font-size: 24rpx;
-line-height: 26rpx;
-align-items: center;
-text-align: center;
-color: #FFFFFF;
+  /* 不设定高度，设置行高=36rpx；无内容时标签不显示 */
+  position: absolute;
+  right: -2rpx;
+  top: 21rpx;
+  width: 105rpx;
+  background: rgba(23, 178, 230, 0.8);
+  border-radius: 20px 0px 0px 20px;
+  /* 文字格式 */
+  font-family: PingFang SC;
+  font-size: 24rpx;
+  line-height: 34rpx;
+  text-align: center;
+  color: #FFFFFF;
 }
-
-/*font-size: 10px;*/
-
-
-
 
 .icon{
   /* Icon/User01 */
-height: 20px;
-width: 20px;
-position: absolute;
-left: 3.04%;
-right: 90.88%;
-top: 34.78%;
-bottom: 43.48%;
-
+  height: 40rpx;
+  width: 40rpx;
+  position: absolute;
+  left: 20rpx;
+  top: 68rpx;
 }
 .userName{
-  /* 破壁者1号 */
+  /* 用户昵称 不超过6个字符*/
+  position: absolute;
+  left: 70rpx;
+  top: 76rpx;
+  width: 156rpx;
+  height: 26rpx;
 
-position: absolute;
-left: 10.64%;
-right: 72.34%;
-top: 40%;
-bottom: 48%;
-
-/* tag/medium/11 */
-font-family: PingFang SC;
-font-size: 11px;
-line-height: 13px;
-display: flex;
-align-items: center;
-
-/* Purple3 */
-color: #8937DB;
-
-
+  /* tag/medium/11 */
+  font-family: PingFang SC;
+  font-size: 24rpx;
+  line-height: 26rpx;
+  /* Purple3 */
+  color: #8937DB;
 }
 .time{
-  /* 1小时前 */
-
-position: absolute;
-left: 30.88%;
-/*right: 59.88%;*/
-top: 39.5%;
-bottom: 48.5%;
-
-/* content/regular/10 */
-font-family: PingFang SC;
-font-style: normal;
-font-weight: normal;
-font-size: 10px;
-line-height: 14px;
-display: flex;
-align-items: center;
-
+  /* 用户昵称后的：发布时间 */
+  position: absolute;
+  left: 230rpx;
+  top: 76rpx;
+  /* content/regular/10 */
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20rpx;
+  line-height: 24rpx;
 /* gray3_P */
-color: #7E7685;
-
+  color: #7E7685;
 }
 .description{
-  
-position: absolute;
-left: 2.74%;
-right: 19.15%;
-top: 60%;
-bottom: 8%;
-
+  /* 公告简介：利用flex布局实现垂直居中 */
+  display: flex;
+  position: absolute;
+  width: 540rpx;
+  height: 60rpx;
+  left: 18rpx;
+  bottom: 20rpx;
 /* content/medium/11 */
-font-family: PingFang SC;
-font-size: 11px;
-line-height: 13px;
-display: flex;
-align-items: center;
-
+  font-family: PingFang SC;
+  font-size: 24rpx;
+  line-height: 26rpx;
+  align-items: center;
 /* gray2_P */
-color: #99989A;
-
+  color: #99989A;
 }
 .image{/* Rectangle 15 */
 
   position: absolute;
-  left: 81.16%;
-  right: 2.43%;
-  top: 34.78%;
-  bottom: 6.52%;
-  
+  width: 108rpx;
+  height: 108rpx;
+  bottom: 20rpx;
+  right: 18rpx;
   /* Gray1 */
   background: #E6E6E6;
-  border-radius: 8px;
+  border-radius: 16rpx;
   }

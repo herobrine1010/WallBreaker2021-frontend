@@ -1,44 +1,62 @@
-// pages/personal/main.js
+// pages/testPage2/testPage.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    personalLabels : [
+      {
+        id : '0',
+        title : '点子王',
+        isLabelActive : true
+      },{
+        id : '999',
+        title : '细节控',
+        isLabelActive : false
+      },{
+        id : '2',
+        title : '996',
+        isLabelActive : false
+      },{
+        id : '3',
+        title : '领导者',
+        isLabelActive : false
+      },{
+        id : '4',
+        title : '颜王',
+        isLabelActive : false
+      },{
+        id : '5',
+        title : '倾听者',
+        isLabelActive : false
+      },{
+        id : '6',
+        title : '好学小白',
+        isLabelActive : true
+      },{
+        id : '7',
+        title : '脾气好',
+        isLabelActive : false
+      }
+    ],
     personBrief : {
       nickname: '默认昵称',
       college: '土木工程',
       major: '防灾减灾',
       grade: '2020级',
       qualification: '研究生'
-    },
-    labels:[{
-      type : 'personal',
-      name : '细节控'
-    },{
-      type : 'personal',
-      name : '好学小白'
-    },{
-      type : 'interest',
-      name : '编程'
-    },{
-      type : 'interest',
-      name : '口才'
-    },{
-      type : 'interest',
-      name : '设计'
-    }]
-  },
-  // 以下两个事件，目的用户进入“管理帖子”页面，或者“收藏帖子”页面
-  changeToPersonalManagement:function(){
-    let app = getApp();
-    app.globalData.personalManagementOrCollection = 0;
-  },
-  changeToPersonalCollection:function(){
-    let app = getApp();
-    app.globalData.personalManagementOrCollection = 1;
+    }
+    
   },
 
+
+
+  // 测试从组件中获取数据
+  btnTap: function()  {
+    const childData = this.selectComponent('#personal-label').data;
+    console.log(childData);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -57,11 +75,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 2 //0,1,2 0-济事  1-济人  2-我的
-      })
-   }
+
   },
 
   /**

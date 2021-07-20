@@ -1,17 +1,21 @@
 <!--pages/collection/collection.wxml-->
-<view class="main {{background}}">
+<view class="background {{background}}">
   <!-- nav 组件调用 -->
   <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="{{collectionTitle}}"></mp-navigation-bar>
   <!-- 以下是container，包含了除标题外的其余内容 -->
-  <view class="collection-container">
+  <view class="per-container">
     <view class="collection-head"> 
       <view class="collection-btn {{btnColor1}}" bindtap="onLeftNoticeBtnTap">{{leftButtonTitle}}</view>
       <view class="collection-btn {{btnColor2}}" bindtap="onRightTeamBtnTap">{{rightButtonTitle}}</view>
     </view>
-    <view class="collection-body">
+    <scroll-view 
+    scroll-y="true"
+    refresher-enabled="true"
+    bindscrolltolower = "onScrollToLower"
+    class="collection-body">
       <!-- <scroll-view class="listArea" scroll-y="true">
       <view class="list-item"> -->
-      <!-- </view>
+      <!-- </view> 
     </scroll-view> -->
       <!-- 状态量为0的时候，循环加载 帖子 卡片 -->
       <!--  -->
@@ -31,7 +35,7 @@
         <card-team
         labelText="{{item.labelText}}"
         title="{{item.title}}"
-        rightTagBackgroundClass="{{item.rightTagBackgroundClass}}"
+        teamCondition="{{item.teamCondition}}"
         rightTagText="{{item.rightTagText}}"  
         dueTime="{{item.dueTime}}"
         description="{{item.description}}"
@@ -42,6 +46,6 @@
         ></card-team>
       </block>
       
-    </view>
+    </scroll-view>
   </view>
 </view>

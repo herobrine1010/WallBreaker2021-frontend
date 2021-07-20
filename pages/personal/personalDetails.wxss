@@ -1,37 +1,16 @@
 /* pages/personalDetails/main.wxss */  
-.main{
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
+/* 引入通用样式 */
+@import "/static/common.wxss";
+.background{
   background-image: linear-gradient(199.75deg, rgba(140, 26, 255, 0.18) 40.18%, rgba(140, 26, 255, 0) 90.9%), linear-gradient(195.29deg, #DCBCFB 2.51%, #A2E4FA 27.51%);
-  background-blend-mode: color-burn, normal;
-  overflow: hidden; 
-}
-.weui-navigation-bar__centers{
-  font-family: PingFang SC;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 36rpx;
-  line-height: 50rpx;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color:#fff;
-}
-/* 以下是intro-container组件的样式 */
-.detail-container{
-  height: 100%;
-  background: rgba(242, 252, 255, 0.35);
-  mix-blend-mode: normal;
-  border-radius: 50rpx 50rpx 0 0;
+  overflow: hidden;
 }
 .personal-image{
   display: flex;
   height: 160rpx;
   width: 100%;
-  padding-bottom: 16rpx;
+  padding: 1.2vh 0;
+  /* padding-bottom: 16rpx; */
   justify-content: center;
 }
 .personal-image image{
@@ -141,62 +120,17 @@
   padding: 0 20rpx;
 }
 
-.label-title{
-  display: flex;
-  height: 70rpx;
-  margin-left: 50rpx;
-
-  font-family: PingFang SC;
-  font-size: 30rpx;
-  line-height: 70rpx;
-  color: #4A5559;
-}
-.label-warn{
-  align-self: center;
-  height: 40rpx;
-  text-align: center;
-  font-family: PingFang SC;
-  font-style: normal;
-  font-weight: normal; 
-  font-size: 20rpx;
-  line-height: 40rpx;
-  color: #989A9A;
-}
-.label-body{
-  display: flex;
-  flex-wrap: wrap;
-  width: 650rpx;
-  margin: 0 50rpx;
-}
-.label-item{
-  display: flex;
-  width: 130rpx;
-  height: 40rpx;
-  margin-right: 32rpx;
-  margin-bottom: 16rpx;
-  background: #FFFFFF;
-  border-radius: 20rpx;
-
-  font-family: PingFang SC;
-  font-size: 22rpx;
-  line-height: 28rpx; 
-  justify-content: center;
-  align-items: center;
-  color: #4A5559;
-}
-.label-active{
-  background: #26C9FF;
-  color: #FFFFFF;
-}
 
 .detail-btn{
+  position: absolute;
+  top: 90%;
+  left: 190rpx;
   height: 70rpx;
   width: 340rpx;
-  margin-top: 30rpx;
 
   background: #17B2E6;
   border-radius: 40rpx;  
-
+ 
   font-family: PingFang SC;
   font-style: normal;
   font-weight: bold;
@@ -205,4 +139,20 @@
   align-items: center;
   text-align: center;
   color: #FFFFFF;
+}
+/* 为了解决全面屏的适配问题 */
+.block-2{
+  position: absolute;
+  left: 20rpx;
+  top: 16%;
+}
+.block-3{
+  position: absolute;
+  left: 50rpx;
+  top: 59%;
+}
+.block-4{
+  position: absolute;
+  left: 50rpx;
+  top: 73%;
 }

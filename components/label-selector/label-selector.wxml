@@ -1,0 +1,19 @@
+<!--components/label-selector/label-selector.wxml-->
+<view class="container">
+  <view class="label-title">
+    {{title}}
+    <view wx:if="{{isWarnVisiable}}" class="label-warn">*同类标签最多选3个</view> 
+  </view>
+  
+  <view class="label-body">
+    <view wx:for="{{labels}}" 
+    wx:key = "id"
+    class="label-item  {{item.isLabelActive?'label-active':''}}"
+    bindtap="onLabelTap"
+    data-index = "{{index}}"
+    >
+      {{item.title}}
+    </view>
+  </view>
+</view>
+ <!-- 以上是各种标签 end         ------ -->

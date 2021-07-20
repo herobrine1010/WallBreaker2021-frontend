@@ -41,17 +41,18 @@
     
       <block wx:for="{{jishiItemList}}">
         <view  class="list-item" bindtap="jumpToDetail">
-        <my-card  
+        <card-notice  
         labelText="{{item.labelText}}"
         title="{{item.title}}"
+        rightTagText="{{item.rightTagText}}"
         description="{{item.description}}"
-        createTime="{{item.publishTime}}"
+        publishTime="{{item.publishTime}}"
         postingPic="{{item.postingPic}}"
         userName="{{item.userName}}"
         userAvater="{{item.userAvater}}"
-        ></my-card>
+        ></card-notice>
         </view>
-        </block>
+        </block> 
       
     </scroll-view>
     

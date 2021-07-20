@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isDialogShow:false,
+    isDialogShow:true,
     dialogContent:"爬爬爬爬爬爬爬爬",
     dialogTip:"提示：爬",
     dialogCancelText:"取消",

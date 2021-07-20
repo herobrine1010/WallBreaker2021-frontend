@@ -18,36 +18,33 @@ Page({
       {
       'labelText':'未分类',
       'title':'示例标题示例标题示例标题…',
-      'rightTagBackgroundClass':'rightTagColorRefuse',
+      'teamCondition':'refuse',
       'rightTagText':'申请未通过',
       'dueTime':'截止时间: 2021年6月21日 14:00',
       'description':'这是一段描述性文字，仅用于测试。这是一段……',
       'initiator':'发起人: 示例用户',
-      'badgeType':'我发起的',
       'peopleCount':'3/5',
       'postingPic':''
     },
     {
       'labelText':'熬夜秃头',
       'title':'示例标题示例标题示例标题…',
-      'rightTagBackgroundClass':'rightTagColorMine',
+      'teamCondition':'pass',
       'rightTagText':'我已入队',
       'dueTime':'截止时间: 2021年6月21日 14:00',
       'description':'这是一段描述性文字，仅用于测试。这是一段……',
       'initiator':'发起人: 示例用户',
-      'badgeType':'我发起的',
       'peopleCount':'3/5',
       'postingPic':''
     },
     {
       'labelText':'熬夜秃头',
       'title':'示例标题示例标题示例标题…',
-      'rightTagBackgroundClass':'',
+      'teamCondition':'mine',
       'rightTagText':'',
       'dueTime':'截止时间: 2021年6月21日 14:00',
-      'description':'这是一段描述性文字，仅用于测试。这是一段……',
-      'initiator':'发起人: 示例用户',
-      'badgeType':'我发起的',
+      'description':'这是一段描述性文字，仅用于测试。这是一段测试组件是否可以正常换行的文字……',
+      'initiator':'',
       'peopleCount':'0/5',
       'postingPic':''
     }
@@ -60,7 +57,45 @@ Page({
         'userName':'新生院张老师',
         'publishTime':'2天前',
         
-        'description':'请大家登陆1.tongji.edu.cn，尽快完成评学评教！',
+        'description':'请大家登陆1.tongji.edu.cn，尽快完成评学评教！超过九月一号未完成的同学不能参加下学期的',
+        'postingPic':''
+      },
+      {
+        'labelText':'活动',
+        'title':'十大歌手领票',
+        'rightTagText':'我发布的',
+        'userName':'学生会小王',
+        'publishTime':'1天前',
+        'description':'这是一段描述性文字，仅用于测试。这是一段……',
+        'postingPic':''
+      },
+      {
+        'labelText':'教务',
+        'title':'学生评学评教通知',
+        'rightTagText':'',
+        'userName':'新生院张老师',
+        'publishTime':'2天前',
+        
+        'description':'请大家登陆1.tongji.edu.cn，尽快完成评学评教！超过九月一号未完成的同学不能参加下学期的',
+        'postingPic':''
+      },
+      {
+        'labelText':'活动',
+        'title':'十大歌手领票',
+        'rightTagText':'我发布的',
+        'userName':'学生会小王',
+        'publishTime':'1天前',
+        'description':'这是一段描述性文字，仅用于测试。这是一段……',
+        'postingPic':''
+      },
+      {
+        'labelText':'教务',
+        'title':'学生评学评教通知',
+        'rightTagText':'',
+        'userName':'新生院张老师',
+        'publishTime':'2天前',
+        
+        'description':'请大家登陆1.tongji.edu.cn，尽快完成评学评教！超过九月一号未完成的同学不能参加下学期的',
         'postingPic':''
       },
       {
@@ -92,6 +127,9 @@ Page({
       btnColor2 : "btnColorRight"
     })
   },
+  onScrollToLower:function(){
+    console.log("上拉触了滚动框的底");
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -108,7 +146,7 @@ Page({
     let app = getApp();
     if(app.globalData.personalManagementOrCollection === 0){
       this.setData({
-        collectionTitle : "帖子·组队管理",
+        collectionTitle : "帖子 组队管理",
         leftButtonTitle : "我的帖子",
         rightButtonTitle : "我的组队"
       })
@@ -155,7 +193,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    console.log("上拉触底");
   },
 
   /**

@@ -6,11 +6,11 @@
   width: 100%;
   left:0;
   height: 100%;
-}
+} 
 
 .list-item{
-  position: relative;
-  height: 27vw;
+  width: 94%;
+  margin: 0 auto;
 }
 .listArea{
   top:0vh;

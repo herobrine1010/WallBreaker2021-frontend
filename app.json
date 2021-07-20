@@ -1,28 +1,33 @@
 {
   "tabBar": {
+    "color": "#1D99C3",
+    "selectedColor": "#9B50E6",
     "list": [
       {
         "pagePath": "pages/jishi/main",
+        "text": "济事",
         "iconPath": "static/icon/jishi.png",
         "selectedIconPath": "static/icon/jishi-solid.png"
       },
       {
         "pagePath": "pages/jiren/main",
+        "text": "济人",
         "iconPath": "static/icon/jiren.png",
         "selectedIconPath": "static/icon/jiren-solid.png"
       },
       {
         "pagePath": "pages/personal/main",
+        "text": "我的",
         "iconPath": "static/icon/personal.png",
         "selectedIconPath": "static/icon/personal-solid.png"
       }
     ]
   },
   "pages": [
-    
+    "pages/jiren/groupDetail",
     "pages/jiren/main",
     "pages/jishi/detail",
-    "pages/jiren/groupDetail",
+    
     "pages/jiren/myJoin",
     "pages/jishi/main",
     "pages/jiren/myPublish",
@@ -35,7 +40,8 @@
     "pages/personal/collection",
     "pages/personal/feedback",
     "pages/personal/aboutUs",
-    "pages/jiren/answerQuestion"
+    "pages/jiren/answerQuestion",
+    "pages/testPage2/testPage"
   ],
   "window": {
     "backgroundTextStyle": "dark",
