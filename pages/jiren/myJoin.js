@@ -5,9 +5,84 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    amIAccepted:true,
+    acceptTeamList:[
+      {
+      'labelText':'未分类',
+      'title':'示例标题示例标题示例标题…',
+      'dueTime':'截止时间: 2021年6月21日 14:00',
+      'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有图片的时候该怎么拉伸……',
+      'initiator':'示例用户',
+      'peopleCount':'3/5',
+      'postingPic':'a'
+      },{
+        'labelText':'未分类',
+        'title':'示例标题示例标题示例标题…',
+        'dueTime':'截止时间: 2021年6月21日 14:00',
+        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
+        'initiator':'示例用户',
+        'peopleCount':'3/5',
+        'postingPic':'a'
+      },{
+        'labelText':'未分类',
+        'title':'示例标题示例标题示例标题…',
+        'dueTime':'截止时间: 2021年6月21日 14:00',
+        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
+        'initiator':'示例用户',
+        'peopleCount':'3/5',
+        'postingPic':'a'
+      },{
+        'labelText':'未分类',
+        'title':'示例标题示例标题示例标题…',
+        'dueTime':'截止时间: 2021年6月21日 14:00',
+        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
+        'initiator':'示例用户',
+        'peopleCount':'3/5',
+        'postingPic':'a'
+      },{
+        'labelText':'未分类',
+        'title':'示例标题示例标题示例标题…',
+        'dueTime':'截止时间: 2021年6月21日 14:00',
+        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
+        'initiator':'示例用户',
+        'peopleCount':'3/5',
+        'postingPic':'a'
+      }
+    ],
+    applyingTeamList:[
+      {
+      'labelText':'申请中',
+      'title':'示例标题示例标题示例标题…',
+      'dueTime':'截止时间: 2021年6月21日 14:00',
+      'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有图片的时候该怎么拉伸……',
+      'initiator':'示例用户',
+      'peopleCount':'3/5',
+      'postingPic':'a'
+      },{
+        'labelText':'申请中',
+        'title':'示例标题示例标题示例标题…',
+        'dueTime':'截止时间: 2021年6月21日 14:00',
+        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
+        'initiator':'示例用户',
+        'peopleCount':'3/5',
+        'postingPic':'a'
+      },{
+        'labelText':'申请中',
+        'title':'示例标题示例标题示例标题…',
+        'dueTime':'截止时间: 2021年6月21日 14:00',
+        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
+        'initiator':'示例用户',
+        'peopleCount':'3/5',
+        'postingPic':'a'
+      }
+    ]
   },
-
+  onBtnTap: function(){
+    let state = !this.data.amIAccepted;
+    this.setData({
+      amIAccepted:state
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

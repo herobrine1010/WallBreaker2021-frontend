@@ -12,7 +12,7 @@ Component({
     },
     teamCondition:{
       type:String,
-      value:''
+      value:'mine'
     },
     rightTagText:{
       type:String,

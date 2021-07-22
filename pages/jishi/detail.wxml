@@ -17,11 +17,12 @@
     <view class="content">
       <text class="description">{{description}}</text>
       <view class="pictures">
-        <block  wx:for="{{pictures}}">
+        <block  wx:for="{{pictures}}" wx:key="{{index}}">
           <view class="pictureBlock">
+            
           </view>
         </block>
-        <block wx:if="{{picturesNum==1}}">
+        <block wx:if="{{picturesNum==1}}" >
           <view class="pictureSingle">
           </view>
         </block> 

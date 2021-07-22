@@ -5,7 +5,59 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    myTeamList:[
+      {
+      'labelText':'未分类',
+      'title':'示例标题示例标题示例标题…',
+      'teamCondition':'processing',
+      'rightTagText':'待处理',
+      'dueTime':'截止时间: 2021年6月21日 14:00',
+      'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有图片的时候该怎么拉伸……',
+      'iconPosition':'middle',
+      'peopleCount':'3/5',
+      'postingPic':'a'
+      },{
+        'labelText':'未分类',
+        'title':'示例标题示例标题示例标题…',
+        'teamCondition':'processing',
+        'rightTagText':'待处理',
+        'dueTime':'截止时间: 2021年6月21日 14:00',
+        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
+        'iconPosition':'middle',
+        'peopleCount':'3/5',
+        'postingPic':'a'
+      },{
+        'labelText':'未分类',
+        'title':'示例标题示例标题示例标题…',
+        'teamCondition':'processing',
+        'rightTagText':'待处理',
+        'dueTime':'截止时间: 2021年6月21日 14:00',
+        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
+        'iconPosition':'middle',
+        'peopleCount':'3/5',
+        'postingPic':'a'
+      },{
+        'labelText':'未分类',
+        'title':'示例标题示例标题示例标题…',
+        'teamCondition':'processing',
+        'rightTagText':'',
+        'dueTime':'截止时间: 2021年6月21日 14:00',
+        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
+        'iconPosition':'middle',
+        'peopleCount':'3/5',
+        'postingPic':'a'
+      },{
+        'labelText':'未分类',
+        'title':'示例标题示例标题示例标题…',
+        'teamCondition':'processing',
+        'rightTagText':'',
+        'dueTime':'截止时间: 2021年6月21日 14:00',
+        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
+        'iconPosition':'middle',
+        'peopleCount':'3/5',
+        'postingPic':'a'
+      }
+    ]
   },
 
   /**
@@ -26,9 +78,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getTabBar().setData({
-      showBar: false
-    });
+    // this.getTabBar().setData({
+    //   showBar: false
+    // });
   },
 
   /**

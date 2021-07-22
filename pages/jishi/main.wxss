@@ -5,7 +5,9 @@
   top:17%;
   width: 100%;
   left:0;
-  height: 100%;
+  height: 78%;
+  border-radius: 50rpx 50rpx 0 0;
+  background: rgba(242, 252, 255, 0.35);
 } 
 
 .list-item{
@@ -13,7 +15,7 @@
   margin: 0 auto;
 }
 .listArea{
-  top:0vh;
+  top:2vh;
   position: relative;
   height:100%;
   margin-top: 10px;
@@ -31,8 +33,8 @@
 
 .filterArea{
   position: relative;
-  top:-1%;
-  height:3.5%;
+  top:2%;
+  height:50rpx;
   /* background-color: #00ff00; */
   left:0;
   width:100%;
@@ -92,7 +94,7 @@
 }
 .filterExtended{
   position: absolute;
-  top:5.5%;
+  top:8%;
   height:100%;
   left:0%;
   width:100%;

@@ -1,6 +1,40 @@
 <view class="jiren-background">
   <view>
-    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="组队详情"></mp-navigation-bar>
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="我参与的组队"></mp-navigation-bar>
   </view>
-  
+  <view class="jiren-container">
+    <view class="btn-box">
+      <button class="btn-left {{amIAccepted?'btn-selected':''}}" bindtap="onBtnTap">已入队</button>
+      <button class="btn-right {{amIAccepted?'':'btn-selected'}}" bindtap="onBtnTap">已申请</button>
+    </view>
+    
+    <scroll-view class="list" scroll-y="true">
+      <navigator url="groupDetail" wx:if="{{amIAccepted}}" wx:for="{{acceptTeamList}}" 
+       class="list-item">
+        <card-team
+        labelText="{{item.labelText}}"
+        title="{{item.title}}"
+        dueTime="{{item.dueTime}}"
+        peopleCount="{{item.peopleCount}}"
+        description ="{{item.description}}"
+        initiator="{{item.initiator}}"
+        postingPic="{{item.postingPic}}"
+        ></card-team>
+      </navigator>
+
+      <navigator url="groupDetail" wx:if="{{!amIAccepted}}" wx:for="{{applyingTeamList}}" 
+       class="list-item">
+        <card-team
+        labelText="{{item.labelText}}"
+        title="{{item.title}}"
+        dueTime="{{item.dueTime}}"
+        peopleCount="{{item.peopleCount}}"
+        description ="{{item.description}}"
+        initiator="{{item.initiator}}"
+        postingPic="{{item.postingPic}}"
+        ></card-team>
+      </navigator>
+
+    </scroll-view>
+  </view>
 </view>

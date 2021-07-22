@@ -2,40 +2,47 @@
 /* pages/jishi/main.wxss */
 .area2{
   position:fixed;
-  top:17%;
+  top:18%;
   width: 100%;
   left:0;
-  height: 100%;
+  height: 70%;
+  border-radius: 50rpx 50rpx 0 0;
+  background: rgba(242, 252, 255, 0.35);
 }
-.shade{
+
+/* ------------------- 以下是卡片list的样式- start  --------------------- */
+/* .shade{
   position: absolute;
   top:0%;
   background-color: #F2FCFF;
-  opacity: 35%;
+  opacity: 35%; 
   height:100%;
   left:0%;
   width:100%;
   border-radius: 25px 25px 0 0;
   z-index: 1;
-}
-.list-item{
-  position: relative;
+} */
+.team-item{
+  width: 94%;
+  margin: 0 3%;
 }
 .listArea{
-  top:2vh;
+  top:4vh;
   position: relative;
   height:100%;
-  margin-top: 10px;
-  z-index: 2;
+  /* margin-top: 10px; */
+  /* z-index: 2; */
 }
+/* ------------------- 以上是卡片list的样式- end  --------------------- */
+/* ------------------- 以下是两个按钮button 的样式- start  ----------------- */
 .buttonArea{
   position: relative;
   top:1%;
-  height:4%;
+  height:60rpx;
   /* background-color: #ff0000; */
   left:0;
   width:100%;
-  z-index:2;
+  /* z-index:2; */
 }
 .myPublishButton,.myJoinButton{
   position: relative;
@@ -59,10 +66,14 @@
   background-color: #8C1AFF;
   left:20%;
 }
+/* ------------------- 以上是两个按钮button 的样式- end  ----------------- */
+/* ------------------- 以下是排序和筛选 的样式- start  ----------------- */
+
+
 .filterArea{
   position: relative;
   top:2%;
-  height:3.5%;
+  height:50rpx;
   /* background-color: #00ff00; */
   left:0;
   width:100%;
@@ -122,7 +133,7 @@
 }
 .filterExtended{
   position: absolute;
-  top:10.5%;
+  top:16.5%;
   height:100%;
   left:0%;
   width:100%;
@@ -138,6 +149,9 @@
   opacity: 20%;
   z-index:3;
 }
+/* ------------------- 以上是排序和筛选 的样式- end  ----------------- */
+
+
 .whiteBG{
   position: relative;
   margin-left:3vw;
@@ -197,3 +211,4 @@ border-style: solid;
   right: 3%;
   bottom: 12%;
  }
+ /* ------------------- 以上是排序和筛选 的样式- end  ----------------- */

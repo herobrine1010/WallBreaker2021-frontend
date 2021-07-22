@@ -1,0 +1,175 @@
+/* components/teamDetail/initiator-teamDetail.wxss */
+.detail-board{
+  position:relative;
+  width:94%;
+  height: 200rpx;
+  margin: 0 auto;
+  background-color: #F2FCFF;
+  border-radius: 30rpx;
+}
+.detail-title{
+  position: absolute;
+  left:22rpx;
+  top:16rpx;
+  font-size: 36rpx;
+  font-weight:600;
+  letter-spacing: 0.25vw;
+  color:#4A5559;
+}
+.detail-close-button{
+  position:absolute;
+  width: 160rpx;
+  height: 40rpx;
+  right:22rpx;
+  top:20rpx;
+
+  font-size: 24rpx;
+  font-weight:400;
+  letter-spacing: 0.1vw;
+  background-color: #17B2E5;
+  text-align: center;
+  border-radius: 30rpx;
+  color:#ffffff;
+}
+.detail-close-button-close{
+  position:absolute;
+  width: 160rpx;
+  height: 40rpx;
+  right:22rpx;
+  top:20rpx;
+
+  font-size: 24rpx;
+  font-weight:400;
+  letter-spacing: 0.1vw;
+  background-color: #989A9A;
+  text-align: center;
+  border-radius: 30rpx;
+  color:#ffffff;
+}
+
+.detail-avatar{
+  position:absolute;
+  left:22rpx;
+  top:80rpx;
+  height:80rpx;
+  width:80rpx;
+  border-radius: 3vh;
+}
+.detail-username{
+  position:absolute;
+  left: 120rpx;
+  top: 85rpx;
+  font-size: 26rpx;
+  letter-spacing: 0.1vw;
+  color:#1D99C3;
+  font-weight: 500;
+}
+
+.detail-apply-time{
+  position:absolute;
+  left:120rpx;
+  top:115rpx;
+  font-size: 26rpx;
+  letter-spacing: 0.1vw;
+  color:#989A9A;
+  font-weight: 500;
+}
+.detail-due-time{
+  position:absolute;
+  right:22rpx;
+  top:80rpx;
+  font-size: 26rpx;
+  letter-spacing: 0.1vw;
+  color:#007399;
+  font-weight: bold;
+}
+.detail-spread-botton{
+  position:absolute;
+  right:40vw;
+  bottom: 10rpx;
+  font-size: 26rpx;
+  letter-spacing: 0.2vw;
+  color:#17B2E5;
+  font-weight: normal;
+}
+.shade{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+.bg-white{
+  position: fixed;
+  width: 690rpx;
+  height: 75%;
+  left: 30rpx;
+  top: 18%;
+  z-index: 110;
+  background: #FAFEFF;
+  mix-blend-mode: normal;
+  border-radius: 50rpx;
+}
+.box-title{
+  /* 申请人： */
+  width: 114rpx;
+  height: 40rpx;
+  margin: 30rpx;
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36rpx;
+  line-height: 40rpx;
+
+  color: #4A5559;
+}
+.box-content{
+  width: 630rpx;
+  padding: 0 30rpx;
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30rpx;
+  line-height: 40rpx;
+  align-items: center;
+  color: #4A5559;
+  /* word-wrap: break-word; */
+  /* word-break: break-all; */
+  white-space: pre-line;
+}
+.picture-box{
+  display: flex;
+  flex-wrap: wrap;
+  width: 660rpx;
+  margin: 0 15rpx;
+
+}
+.pictureItem{
+  width: 200rpx;
+  height: 200rpx;
+  margin: 15rpx 0 0 15rpx;
+  background-color:gray;
+}
+.pictureSingle{
+  width: 600rpx;
+  height: 600rpx;
+  margin: 30rpx;
+}
+.back-btn{
+  width: 180rpx;
+  height: 50rpx;
+  margin: 30rpx auto;
+  background: #17B2E6;
+  border: 1px solid #17B2E6;
+  box-sizing: border-box;
+  border-radius: 25rpx;
+
+  font-family: PingFang SC;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  text-align: center;
+
+  color: #FAFEFF;
+}

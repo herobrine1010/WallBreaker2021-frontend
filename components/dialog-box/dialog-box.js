@@ -23,6 +23,10 @@ Component({
     isShow:{
       type:Boolean,
       value:false
+    },
+    hasInputBox:{
+      type:Boolean,
+      value: false
     }
   },
 
@@ -41,10 +45,16 @@ Component({
       this.setData({isShow:false});
     },
     tapOk:function(e){
-      var t=e.currentTarget.dataset;
-      this.triggerEvent('tapOk',t);
+      // var t=e.currentTarget.dataset;
+      this.triggerEvent('tapOk',this.data.detail);
       this.setData({isShow:false});
+    },
+    finishInput:function(e){
+      this.setData({
+        detail:e.detail
+      })
     }
+    
 
   }
 })

@@ -3,10 +3,7 @@
   "usingComponents": {
     "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
     "mp-searchbar": "weui-miniprogram/searchbar/searchbar",
-    "my-card":"/components/jiren-card/card",
-    "my-card-me":"/components/jiren-card-me/card",
-    "my-navi":"/components/jishiNavi/jishiNavi",
-    "avatar-list":"/components/participant-avatar/participant-avatar"
+    "card-team":"/components/card-team/card"
   },
   "navigationStyle": "custom"
 }

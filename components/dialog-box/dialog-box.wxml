@@ -3,8 +3,11 @@
   <view class="dialog-box-shade"></view>
   <view class="dialog-box-white-bg">
     <view class="dialog-box-content">{{content}}</view>
+    <textarea wx:if="{{hasInputBox}}" name="closeReason" placeholder="请输入结束组队的原因" class="dialog-input" bindinput="finishInput"></textarea>
     <view class="dialog-box-tip">{{tip}}</view>
-    <view class="dialog-box-cancel" bindtap="tapCancel">{{cancelText}}</view>
-    <view class="dialog-box-ok" bindtap="tapOk">{{okText}}</view>
+    <view class="dialog-btn-box">
+      <view class="dialog-box-cancel" bindtap="tapCancel">{{cancelText}}</view>
+      <view class="dialog-box-ok" bindtap="tapOk">{{okText}}</view>
+    </view>
   </view>
 </block>

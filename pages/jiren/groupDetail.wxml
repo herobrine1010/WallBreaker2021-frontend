@@ -4,41 +4,61 @@
   </view>
   <view class="area2">
     <view class="shade"></view>
-    <avatar-list class="avatar-list" bind:tapAvatar="tapAvatar" avatarList="{{avatarList}}"></avatar-list>
-    <view class="detail-board">
-      <view class="detail-title">{{detail.title}}</view>
-      <view class="detail-close-button">结束组队招募</view>
-      <image class="detail-avatar" src="{{detail.avatar}}"></image>
-      <view class="detail-username">{{detail.nickname}}</view>
-      <view class="detail-apply-time">{{detail.fromTime}}</view>
-      <view class="detail-due-time">{{detail.dueTime}}</view>
-      <view class="detail-spread-botton" bindtap="seeDetail">查看全部</view>
+    <view class="avatar-list">
+      <avatar-list class="avatar-list" bind:tapAvatar="tapAvatar" avatarList="{{avatarList}}"></avatar-list>
     </view>
+<!-- 自定义组件：initiator-teamDetail    ---发起者才看得到------------ -->
+    <initiator-teamDetail
+    wx:if="{{amITeamInitiator}}"
+    class="initiator-teamDetail"
+    title= "{{teamDetail.title}}" isTeamClosed="{{teamDetail.isTeamClosed}}" avatar="{{teamDetail.avatar}}" nickname="{{teamDetail.nickname}}" fromTime="{{teamDetail.fromTime}}" dueTime="{{teamDetail.dueTime}}" content="{{teamDetail.content}}" picturesNum="{{teamDetail.picturesNum}}" pictures="{{teamDetail.pictures}}"
+    bindcloseTeam = "handleCloseTeam"
+    ></initiator-teamDetail>
 
-    <scroll-view enhanced="true" show-scrollbar="false" class="user-list" enable-back-to-top="true" refresher-enabled="true" scroll-y="true" with-animation='true'>
-      <block wx:for="{{applierList}}">
+    <!-- ------只有 发起者 && 组队未关闭 的时候，才显示申请人员信息--------------->
+    <scroll-view wx:if="{{amITeamInitiator && !teamDetail.isTeamClosed}}"
+    enhanced="true" show-scrollbar="false" class="user-list" enable-back-to-top="true" refresher-enabled="true" scroll-y="true" with-animation='true'>
+    
+      <block wx:for="{{applierList}}" >
         <view class='list-item'>
           <image src='{{item.avatar}}' class='list-item-avatar'></image>
           <view class='list-item-username'>{{item.nickname}}</view>
           <view class='list-item-apply-time'>{{item.applyTime}}</view>
-          <view class='see-answer'>查看回答</view>
-          <image class='tick' src='/static/icon/tick.png'></image>
-          <image class='cross' src='/static/icon/cross-purple.png'></image>
+          <view class='see-answer' data-applyerId="{{item.id}}" bindtap="showAnswers" >查看回答</view>
+          <image class='tick' src='/static/icon/tick.png' bindtap="acceptApplying" data-applyername="{{item.nickname}}" data-applyerid="{{item.id}}"></image>
+          <image class='cross' src='/static/icon/cross-purple.png' data-applyername="{{item.nickname}}" data-applyerId="{{item.id}}" bindtap="refuseApplying"></image>
         </view>
       </block>
       <view class="empty-block">　</view>
-     
     </scroll-view>
+
     <view class="bottom-elements">
-      <view class="accept-all-button">
-        一键接受
-      </view>
+    <!-- team 发起者 initiator 使用的 button ------------------------->
+      <block wx:if="{{amITeamInitiator}}">
+        <view wx:if="{{teamDetail.isTeamClosed}}" class="accept-all-button  accept-all-button-close">
+          一键接受
+        </view>
+        <view wx:else class="accept-all-button ">
+          一键接受
+        </view>
+      </block>
+      <!-- team 参与者 initiator 使用的 button ------------------------->
+      <block wx:if="{{amITeamInitiator}}">
+        <view wx:if="{{teamDetail.isTeamClosed}}" class="accept-all-button  accept-all-button-close">
+          一键接受
+        </view>
+        <view wx:else class="accept-all-button ">
+          一键接受
+        </view>
+      </block>
+
+   <!-------------- 通用的收藏按钮   button ------------------------->
       <view class="favourite">
         <image bindtap="tapFavourite" class="fav-icon" wx:if="{{isFavourite}}" src='/static/icon/collect-blue-solid.png'></image>
         <image bindtap="tapFavourite" class="fav-icon" wx:else src='/static/icon/collect-blue.png'></image>
       </view>
     </view>
-    <view class="blur-shadow"></view>
+    <!-- <view class="blur-shadow"></view> -->
   </view>
 
 
@@ -48,11 +68,12 @@
 <personal-animation id="personalAnimation"></personal-animation>
 
 <dialog-box 
-content="{{dialogContent}}"
-tip="{{dialogTip}}"
-okText="{{dialogOkText}}"
-cancelText="{{dialogCancelText}}"
-isShow="{{isDialogShow}}"
-bind:tapOk="tapOk"
+content="{{dialog.content}}"
+hasInputBox="{{dialog.hasInputBox}}"
+tip="{{dialog.tip}}"
+okText="{{dialog.okText}}"
+cancelText="{{dialog.cancelText}}"
+isShow="{{dialog.isDialogShow}}"
+bind:tapOk="{{dialog.tapOkEvent}}"
 >
 </dialog-box>

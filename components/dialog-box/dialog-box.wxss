@@ -6,67 +6,81 @@
   height:100%;
   left:0;
   top:0;
-  z-index: 1000;
+  z-index: 100;
 }
 .dialog-box-white-bg{
-  position:fixed;
-  width:72vw;
-  left:14vw;
-  top:40vh;
-  height:20vh;
-  border-radius: 4vh;
-  z-index: 1001;
+
+  position: absolute;
+  width: 550rpx;
+  left: 100rpx;
+  top: 500rpx;
+  border-radius: 50rpx;
+  z-index: 101;
   background-color: #FAFEFF;
-  font-size: 2.5vh;
 }
+
 .dialog-box-content{
-  position: relative;
-  color:#4A5559;
+  display: flex;
+  width: 400rpx;
+  margin: 30rpx 75rpx 10rpx;
+
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32rpx;
+  line-height: 40rpx;
   text-align: center;
-  align-items: center;
-  font-weight: bolder;
-  margin:2vh 2vw 0.5vh 2vw;
-  white-space: pre-line;
-  height:8vh;
-  font-size:2.4vh;
-  display:flex;
+  color:#4A5559;
   justify-content:center;
+  
+}
+.dialog-input{
+  height: 200rpx;
+  width: 400rpx;
+  margin: 0 75rpx;
+  border: 2rpx solid gray;
+  background-color: #fff;
+  font-size: 28rpx;
+  line-height: 40rpx;
 }
 .dialog-box-tip{
-  width:100%;
-  position: absolute;
-  top:10.7vh;
-
+  display: flex;
+  width: 400rpx;
+  margin: 10rpx 75rpx;
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24rpx;
+  line-height: 36rpx;
   justify-content:center;
-  line-height: 1.6vh;
-  color:#4A5559;
   text-align: center;
-  align-items: center;
-  font-weight: lighter;
-  font-size:1.6vh;
+  color: #4A5559;
 }
+.dialog-btn-box{
+  display: flex;
+  width: 400rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  justify-content: space-around;
+}
+
+
 .dialog-box-cancel,.dialog-box-ok{
-  position: absolute;
-  border-style: solid;
-  border-width: 2rpx;
-  height:4vh;
-  line-height: 4vh;
-  top:14vh;
-  width: 20vw;
-  border-radius: 2vh;
-  font-size: 2vh;
-  align-items: center;
+  height: 50rpx;
+  width: 180rpx;
+  border: 2rpx solid   #17B2E5;
+  border-radius: 40rpx;
+
+  line-height:50rpx;
+  font-size: 26rpx;
   text-align: center;
   font-weight: normal;
   letter-spacing: 0.2vw;
 }
 .dialog-box-ok{ 
-  left:40vw;
   color:#FAFEFF;
   background-color: #17B2E5;
 }
 .dialog-box-cancel{
-  border-color: #17B2E5;
   color:#17B2E5;
-  left:10vw;
 }

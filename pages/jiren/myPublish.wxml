@@ -1,16 +1,26 @@
 <!--pages/jishi/main.wxml-->
-<view class="main">
+<view class="jiren-background">
   <view> 
     <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="我发起的组队"></mp-navigation-bar>
   </view>
-<view class="searchBar">
-  <mp-searchbar  bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
-</view>
-<scroll-view class="list" scroll-y="true">
-<view class="list-item">
- <my-card-me ></my-card-me>
-</view>
+  <view class="jiren-container">
+    <scroll-view class="list" scroll-y="true">
+      <navigator url="groupDetail" wx:for="{{myTeamList}}" class="list-item">
+        <card-me
+        labelText="{{item.labelText}}"
+        title="{{item.title}}"
+        teamCondition="{{item.teamCondition}}"
+        rightTagText="{{item.rightTagText}}"
+        dueTime="{{item.dueTime}}"
+        iconPosition="{{item.iconPosition}}"
+        peopleCount="{{item.peopleCount}}"
+        description ="{{item.description}}"
+        initiator="{{item.initiator}}"
+        postingPic="{{item.postingPic}}"
+        ></card-me>
+      </navigator>
 
-</scroll-view>
+    </scroll-view>
+  </view>
 </view>
 
