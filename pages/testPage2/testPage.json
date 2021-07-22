@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mylabels":"/components/label-selector/label-selector",
+    "personal-brief":"/components/personal-brief/personal-brief"
+  }
+}

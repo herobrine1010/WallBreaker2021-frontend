@@ -1,6 +1,6 @@
 <view class="pa-block" wx:if="{{isPersonalInfoShow}}" bindtap='hideModal'></view>
 <view class='pa-choose' wx:if="{{isPersonalInfoShow}}" animation='{{animationData}}'>
-  <image class="pa-avatar" src="{{personalInfo.avatar}}"></image>
+  <image class="pa-avatar" src="{{personalInfo.avatar}}"></image> 
   <view class="pa-text-area">
     <view class="pa-nickname-and-check-answer">
       <view class="pa-nickname">{{personalInfo.nickname}}</view>

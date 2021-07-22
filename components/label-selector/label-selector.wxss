@@ -1,0 +1,50 @@
+/* components/label-selector/label-selector.wxss */
+.container{
+  width: 650rpx;
+  margin: 0 auto;
+} 
+.label-title{
+  display: flex;
+  height: 70rpx;
+
+  font-family: PingFang SC;
+  font-size: 30rpx;
+  line-height: 70rpx;
+  color: #4A5559;
+}
+.label-warn{
+  align-self: center;
+  height: 40rpx;
+  text-align: center;
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal; 
+  font-size: 20rpx;
+  line-height: 40rpx;
+  color: #989A9A;
+}
+.label-body{
+  display: flex;
+  flex-wrap: wrap;
+  width: 650rpx;
+}
+.label-item{
+  display: flex;
+  width: 130rpx;
+  height: 40rpx;
+  margin-right: 32rpx;
+  margin-bottom: 16rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+
+  font-family: PingFang SC;
+  font-size: 22rpx;
+  line-height: 28rpx; 
+  justify-content: center;
+  align-items: center;
+  color: #4A5559;
+}
+.label-active{
+  background: #26C9FF;
+  color: #FFFFFF;
+}

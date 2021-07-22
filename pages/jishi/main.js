@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showGoTopButton:false,
+    showGoTopButton:false, 
     timeIndex:'asc',
     topNum:0,
     conditionIndex:'',
@@ -17,7 +17,7 @@ Page({
       'labelText':'未分类',
       'title':'示例标题示例标题示例标题…',
       'description':'这是一段描述性文字，仅用于测试。这是一段……',
-      'badgeType':'我发起的',
+      'rightTagText':'我发起的',
       'userAvatar':'/static/icon/default-user.png',
       'userName':'示例用户',
       'publishTime':'1天前'
@@ -26,7 +26,7 @@ Page({
       'labelText':'未分类',
       'title':'示例标题示例标题示例标题…',
       'description':'这是一段描述性文字，仅用于测试。这是一段……',
-      'badgeType':'我发起的',
+      'rightTagText':'',
       'userAvatar':'/static/icon/default-user.png',
       'userName':'示例用户',
       'publishTime':'1天前'
@@ -35,7 +35,7 @@ Page({
       'labelText':'未分类',
       'title':'示例标题示例标题示例标题…',
       'description':'这是一段描述性文字，仅用于测试。这是一段……',
-      'badgeType':'我发起的',
+      'rightTagText':'',
       'userAvatar':'/static/icon/default-user.png',
       'userName':'示例用户',
       'publishTime':'1天前'
@@ -45,7 +45,7 @@ Page({
       'labelText':'未分类',
       'title':'示例标题示例标题示例标题…',
       'description':'这是一段描述性文字，仅用于测试。这是一段……',
-      'badgeType':'我发起的',
+      'rightTagText':'我发起的',
       'userAvatar':'/static/icon/default-user.png',
       'userName':'示例用户',
       'publishTime':'1天前'
@@ -54,7 +54,7 @@ Page({
       'labelText':'未分类',
       'title':'示例标题示例标题示例标题…',
       'description':'这是一段描述性文字，仅用于测试。这是一段……',
-      'badgeType':'我发起的',
+      'rightTagText':'',
       'userAvatar':'/static/icon/default-user.png',
       'userName':'示例用户',
       'publishTime':'1天前'
@@ -63,7 +63,7 @@ Page({
       'labelText':'未分类',
       'title':'示例标题示例标题示例标题…',
       'description':'这是一段描述性文字，仅用于测试。这是一段……',
-      'badgeType':'我发起的',
+      'rightTagText':'',
       'userAvatar':'/static/icon/default-user.png',
       'userName':'示例用户',
       'publishTime':'1天前'
@@ -72,7 +72,7 @@ Page({
       'labelText':'未分类',
       'title':'示例标题示例标题示例标题…',
       'description':'这是一段描述性文字，仅用于测试。这是一段……',
-      'badgeType':'我发起的',
+      'rightTagText':'',
       'userAvatar':'/static/icon/default-user.png',
       'userName':'示例用户',
       'publishTime':'1天前'

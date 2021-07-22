@@ -10,7 +10,7 @@ Component({
       type:String,
       value:'示例标题示例标题示例标题...'
     },
-    rightTagBackgroundClass:{
+    teamCondition:{
       type:String,
       value:''
     },
@@ -22,13 +22,17 @@ Component({
       type:String,
       value:'截止时间: 2021年6月21日 14:00'
     },
+    iconPosition:{
+      type:String,
+      value:'bottom'
+    },
     peopleCount:{
       type:String,
       value:'3/5'
     },
-    badgeType:{
+    initiator:{
       type:String,
-      value:'我发起的'
+      value:''
     },
     postingPic:{
       type:String,
@@ -36,15 +40,16 @@ Component({
     },
     description:{
       type:String,
-      value:'这是一段描述性文字，仅用于测试。这是一段描述性文字，仅用于测试。这是一段描述性文字，仅用于测试。'
+      value:''
     }
+    
 
 
   },
   /**
    * 页面的初始数据
    */
-  data: {
+  data:{
 
   },
 

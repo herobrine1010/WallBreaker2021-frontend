@@ -14,8 +14,7 @@
   <image src="{{userAvatar}}" class="icon" mode="scaleToFill"/>
 </view>
 <view>
-    <text class="userName">{{userName}}
-    </text>
+    <text class="userName">{{userName}}</text>
 </view> 
 <view>
     <text class="time">{{publishTime}}</text>
@@ -23,7 +22,7 @@
 <view>
     <text class="description">{{description}}</text>
 </view>
-<view class="image">
+<view wx:if="{{postingPic}}" class="image">
     <image src="{{postingPic}}"></image>
 </view>
 </view>

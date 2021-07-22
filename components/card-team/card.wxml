@@ -1,0 +1,28 @@
+<!--components/jiren-card/card.js.wxml-->
+<view class="card">
+<view class="tag" > 
+    {{labelText}}
+ </view>
+ <view class="title">{{title}}
+ </view> 
+
+
+ <view class="rightTag {{'rightTagColor-'+teamCondition}}">
+    {{rightTagText}}
+ </view>
+<view class="dueTime">
+{{dueTime}}
+</view>
+<image class="peopleIcon {{'iconposition-'+iconPosition}}" src="/static/icon/people-02.png"></image>
+<view class="peopleCount {{'countposition-'+iconPosition}}">{{peopleCount}}</view>
+<view>
+    <text class="description">{{description}}</text>
+</view>
+<view wx:if="{{initiator}}" class="initiator">发起人：{{initiator}}</view>
+<view wx:if="{{postingPic}}" class="image">
+    <image ></image> 
+</view>
+</view>
+
+
+

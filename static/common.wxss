@@ -17,25 +17,27 @@ background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193
 }
 .jiren-background{
   background: linear-gradient(199.75deg, rgba(140, 26, 255, 0.18) 40.18%, rgba(140, 26, 255, 0) 90.9%),linear-gradient(195.29deg, #DCBCFB 2.51%, #A2E4FA 27.51%);
-  
 }
 
-
-
-
-
-
+.background{
+  /* position */
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}
 /* 顶部导航栏相关（重载） */
 .weui-navigation-bar__centers{
   font-family: PingFang SC;
   font-style: normal;
   font-weight: bold;
-  font-size: 18px;
-  line-height: 25px;
+  font-size: 36rpx;
+  line-height: 50rpx;
   display: flex;
   align-items: center;
   text-align: center;
-  letter-spacing: 0.25vw;
+  letter-spacing: 4rpx;
   color: #FFFFFF;
   }
   .weui-search-bar {
@@ -55,8 +57,23 @@ background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193
     padding:0 0 0 0 ;
     height: 24px;
   }
-
-
-
-  /* 页面元素 */
-  
+/* 以下是 personal页面中 per-container的样式 */
+.per-container{
+  /* 定位采用 % 单位，为了全面屏兼容    */
+  position: absolute;
+  top: 12%;
+  height: 88%;
+  width: 100%;
+  background: rgba(242, 252, 255, 0.35);
+  border-radius: 50rpx 50rpx 0 0;
+}
+.jiren-container{
+  /* 定位采用 % 单位，为了全面屏兼容    */
+  position: absolute;
+  top: 12%;
+  height: 88%;
+  width: 100%;
+  background: rgba(242, 252, 255, 0.35);
+  border-radius: 50rpx 50rpx 0 0;
+}
+ 

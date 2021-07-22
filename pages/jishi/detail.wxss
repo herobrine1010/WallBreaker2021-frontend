@@ -1,231 +1,113 @@
-.weui-navigation-bar__centers{
-  /* title/bold/18 */
-  font-family: PingFang SC;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 25px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  /* white */
-  color: #FFFFFF;
-  }
-.detail{
-    /* GM/Background/JiShi */
-  
-  /* Background */
-  
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-  
+@import "/static/common.wxss";
+.background{
   /* JianBian_background2 */
   background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193, 255, 0) 27.37%), linear-gradient(198.24deg, rgba(140, 26, 255, 0.25) 3.34%, rgba(185, 115, 255, 0) 90.78%), linear-gradient(195.29deg, #A3E5FA 2.51%, #DCBCFB 56.49%);
   
 }
-.card{
-position: absolute;
-left: 0%;
-right: 0%;
-top: 12%;
-bottom: 0%;
-height: 100%;
-width: 100%;
-/* white1_P */
+.jiren-container{
 background: #F9F2FF;
-mix-blend-mode: normal;
-border-radius: 25px 25px 0px 0px;
+}
+.scroll-content{
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 .title{
-  
-position: relative;
-left: 6.94%;
-right: 40.28%;
-top: 5%;
-bottom: 82.5%;
-
+height: 40rpx;
+margin-top: 50rpx;
+margin-left: 50rpx;
 /* title1/bold/14 */
 font-family: Noto Sans SC;
 font-style: normal;
-font-weight: bold;
-font-size: 4vw;
-line-height: 20px;
-display: flex;
-align-items: center;
-
+font-weight: bold; 
+/* font-size: 4vw;  */
+font-size: 36rpx;
+line-height: 40rpx;
 /* gray4_P */
 color: #524A59;
 }
+.like{
+  position: absolute;
+  right: 53rpx;
+  top: 40rpx;
+  height: 40rpx;
+  width: 40rpx;
+}
+.userAvatar{
+  position: absolute;
+  left: 50rpx;
+  top: 110rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
 .userName{
-  /* 破壁者1号 */
-
-position: relative;
-left: 16.67%;
-top: 3.8%;
-
-
-/* tag/medium/11 */
-font-family: PingFang SC;
-font-size: 3vw;
-line-height: 13px;
-display: flex;
-align-items: center;
-
-/* Purple3 */
-color: #8937DB;
-
+  display: inline-block;
+  height: 40rpx;
+  margin: 30rpx  30rpx 30rpx 140rpx;
+  /* tag/medium/11 */
+  font-family: PingFang SC;
+  font-size: 30rpx;
+  line-height: 40rpx;
+  /* Purple3 */
+  color: #8937DB;
 }
 .time{
   /* 2021年6月9日 21:40 */
-
-position: relative;
-left: 34.72%;
-top: 2%;
+display: inline-block;
+height: 40rpx;
 /* tag/medium/10 */
 font-family: PingFang SC;
-font-size: 10px;
-line-height: 12px;
+font-size: 22rpx;
+line-height: 40rpx;
 /* identical to box height */
-display: flex;
-align-items: center;
-
 /* gray3_P */
 color: #7E7685;
 
 
 }
 .content{
-  position: relative;
-  top:4%;
+  width: 86%;
+  margin: 0 7%;
 }
 .description{
-  /* 为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于…… 为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于…… 为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于…… */
-
-position: relative;
-left: 1%;
-top: 15.91%;
-/* content/medium/11 */
+/* position: relative; */
+display: flex;
 font-family: PingFang SC;
-font-size: 3vw;
-line-height: 13px;
+font-size: 30rpx;
+line-height: 40rpx;
+text-align: justify;
 /* gray4_P */
 color: #524A59;
 }
 .pictures{
-  top: 20%;
-  position: relative;
   display: flex;
   flex-wrap: wrap;
-  margin:5px auto;
+  margin:10rpx 0;
 }
-.pictureBlock{
-  /* JiShi/帖子详情/picture */
+/* .pictureBlock{
 position: relative;
 width: 30vw;
 height: 30vw;
 left: 1%;
 margin-left: 2vw;
 margin-bottom: 2vw;
+background: #E6E6E6;
+border-radius: 8px;
+} */
+.pictureBlock{
+width: 200rpx;
+height: 200rpx;
+margin-right: 15rpx;
+margin-bottom: 15rpx;
 /* Rectangle 15 */
 /* Gray1 */
 background: #E6E6E6;
-border-radius: 8px;
+border-radius: 16rpx;
 }
-.choose{
-  position: absolute;
-  height: 20%;
-  width: 100%;
-  bottom: 0%;
-  /* white2_P */
-  background: #FCFAFF;
-  mix-blend-mode: normal;
-  border-radius: 25px 25px 0px 0px;
-}
-.block{
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  background-color: #000000;
-  opacity: 0.2;
-}
-.userAvatar{
-  position: relative;
-  top:5%;
-  left:5%;
-}
-.userName1{
-position: absolute;
-left: 38.39%;
-top: 20%;
-/* tag/medium/14 */
-font-family: PingFang SC;
-font-size: 4vw;
-line-height: 16px;
-display: flex;
-align-items: center;
-/* gray4_P */
-color: #524A59;
-}
-.signature{
-position: absolute;
-left: 38.39%;
-top: 32.04%;
-margin-bottom: 1vw;
-/* tag/medium/10 */
-font-family: PingFang SC;
-font-size:3vw;
-line-height: 12px;
-display: flex;
-align-items: center;
-/* gray2_P */
-color: #99989A;
-}
-.identity{
-position: absolute;
-left: 38.08%;
-top: 40.42%;
-/* content/regular/10 */
-font-family: PingFang SC;
-font-style: normal;
-font-weight: normal;
-font-size: 3vw;
-line-height: 14px;
-display: flex;
-align-items: center;
-/* gray4_P */
-color: #524A59;
-}
-.tagArea{
-  position: absolute;
-  left: 35%;
-  top: 48%;
-  display: flex;
-  flex-wrap: wrap;
-  margin:5px auto;
-}
-.tag{
-  position: relative;
-  width: 18vw;
-  height: 3vh;
-  background: #9B50E6;
-  border-radius: 10px;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  margin-left: 1vw;
-  margin-bottom: 1vw;
-  font-size:4vw;
-  display: flex;
-  letter-spacing: 1px;
-  float:left;
-  /* z-index:3; */
-
-}
-.tagText{
-  font-family: PingFang SC;
-  font-size: 1.5vh;
-  color: #FCFAFF;
+.pictureSingle{
+  width: 512rpx;
+  height: 288rpx;
+  margin: 0 auto;
+  background: #E6E6E6;
+  border-radius: 16rpx;
 }
