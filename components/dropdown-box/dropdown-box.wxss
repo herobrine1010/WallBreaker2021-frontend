@@ -1,0 +1,33 @@
+/* components/dropdown-box/dropdown-box.wxss */
+.dropdown-box {
+  position: relative;
+  width: 100%;
+  background: #F2FCFF;
+  border-radius: 6px;
+}
+.current-item {
+  height: 50rpx;
+}
+.current-item-text,
+.option-item-text {
+  width: 100%;
+
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 25px;
+
+
+  /* gray2 */
+  color: #989A9A;
+}
+
+.option-list {
+  position: absolute;
+  z-index: 10;
+
+  width: 100%;
+  background: #F2FCFF;
+  border-radius: 6px;
+}

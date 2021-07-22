@@ -1,0 +1,115 @@
+/* pages/jiren/initiateTeam.wxss */
+@import "/static/common.wxss";
+page {
+  height: 100%;
+}
+.area2{
+  position:fixed;
+  top:10%;
+  width: 100%;
+  left:0;
+  height: 100%;
+}
+.shade{
+  position: absolute;
+  top:0%;
+  background-color: #F2FCFF;
+  opacity: 35%;
+  height:100%;
+  left:0%;
+  width:100%;
+  border-radius: 25px 25px 0 0;
+}
+
+.main-area {
+  height: 100%;
+}
+.main-area-content {
+  /*居中对齐，余750rpx-75rpx=675rpx*/
+  padding: 35rpx;
+}
+.section2 {
+  display: flex;
+}
+
+.dropdown-box-wrap,
+.picker-wrap {
+  /*position: static;*/
+  width: 200rpx;
+  margin-right: 130rpx; 
+  margin-bottom: 10rpx;
+}
+
+/*设置输入框样式*/
+.picker-box,
+.teamInfo-content-wrap,
+.teamInfo-title,
+.question-content
+ {
+  background: #F2FCFF;
+  border-radius: 6px;
+}
+/*设置字体*/
+.selector-label,
+.teamInfo-label,
+.question-content-text
+{
+  font-family: PingFang SC;
+  font-size: 14px;
+  line-height: 16px;
+  color: #4A5559;
+  
+  margin: 6rpx;
+}
+.appendQuestion-label {
+  font-family: PingFang SC;
+  font-size: 14px;
+  line-height: 16px;
+  color: #4A5559;
+}
+
+
+.picker-box {
+  /*position: relative;*/
+  width: 100%;
+  padding-left: 10rpx;
+  background: #F2FCFF;
+  border-radius: 6px;
+}
+
+.teamInfo-title {
+  margin-bottom: 16rpx;
+  padding: 14rpx;
+}
+
+.teamInfo-content-wrap {
+  padding: 12rpx;
+  margin-bottom: 26rpx;
+}
+.teamInfo-scroll-view {
+  height: 360rpx;
+}
+
+
+.isNeedQuestion {
+  margin-bottom: 20rpx;
+}
+.question-wrap {
+  /*display: flex;*/
+  margin-bottom: 18rpx;
+}
+.question-content
+{
+  display: inline-block;
+  width: 600rpx;
+  padding-left: 10rpx;
+  margin-right: 10rpx;
+}
+.delete {
+  display: inline-block;
+
+
+}
+.appendQuestion {
+  width: 200rpx;
+}
