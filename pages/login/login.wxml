@@ -1,2 +1,17 @@
-<!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
+<!--index.wxml-->
+<view class="container" style="width: 100vw; height: 100vh; background-image: url('https://6361-capitaland-server-7euoknbbbffbec-1303991814.tcb.qcloud.la/Capitaland/login/%E6%AC%A2%E8%BF%8E%E9%A6%96%E9%A1%B5.png?sign=b7b2426500f46eb48216910d8055ddc8&t=1605022796'); background-size: 100% 100%;">
+  
+  <!-- <image style="position: absolute;height: 40%;width: 45%; top: 10%; right: 8%;"  src="https://6361-capitaland-server-7euoknbbbffbec-1303991814.tcb.qcloud.la/Capitaland/login/login-t.png?sign=8b8bc59408099c0a6f87ee46d7cd128f&t=1603367001" mode="aspectFit"></image> -->
+  <view class="userinfo">
+    <button style="position: absolute; left: 75%; top: 70%; width: 20%; height: 10%;background-image: url('https://6361-capitaland-server-7euoknbbbffbec-1303991814.tcb.qcloud.la/Capitaland/login/start-new.gif?sign=76ff0948608fb8f062803d0559149b72&t=1604734141'); background-size: 100% 100%; border: 0;"  plain='true' type='primary' wx:if="{{!needRegister}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> </button>
+    <block wx:else>
+      <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
+      
+      <button type="primary" style="position: absolute; right: 10%; top: 70%;"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">使用手机号注册</button>
+    </block>
+  </view>
+  <!-- <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view> -->
+</view>
