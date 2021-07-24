@@ -35,7 +35,7 @@
         <image src="{{imageViewJoinedTeam}}" class="common-image" mode="widthFix"></image>
       </view>
 
-      <view class="common-text" style="font-style:italic">{{ending}}</view>
+      <view class="last-text" style="font-style:italic">{{ending}}</view>
 
     </scroll-view>
   </view>

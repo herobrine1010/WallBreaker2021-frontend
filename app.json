@@ -27,7 +27,7 @@
     "pages/jiren/main",
     "pages/jiren/groupDetail",
     "pages/jishi/detail",
-    
+    "pages/jiren/guide",
     "pages/jiren/myJoin",
     "pages/jishi/main",
     "pages/jiren/myPublish",
@@ -41,7 +41,9 @@
     "pages/personal/feedback",
     "pages/personal/aboutUs",
     "pages/jiren/answerQuestion",
-    "pages/testPage2/testPage"
+    "pages/testPage2/testPage",
+    "pages/jiren-temp/answerQuestion",
+    "pages/jiren/initiateTeam"
   ],
   "window": {
     "backgroundTextStyle": "dark",

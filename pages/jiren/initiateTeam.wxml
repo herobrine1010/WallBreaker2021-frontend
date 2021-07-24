@@ -1,0 +1,76 @@
+<!--pages/jiren/initiateTeam.wxml-->
+<view class="jiren-background">
+  <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="济人广场"></mp-navigation-bar>
+  <view class="area2">
+    <view class="shade"></view>
+
+    <scroll-view class="main-area" scroll-y="true">
+    <view class="main-area-content">
+      <form>
+      
+        <view class="dropdown-box-wrap section1">
+          <view class="selector-label">组队主题:</view>
+          <!--bug:点击文字无法选择主题-->
+          <dropdown-box range="{{themeOptions}}"></dropdown-box>
+        </view>
+        <view class="section2">
+          <view class="picker-wrap">
+            <view class="selector-label">截止时间</view>
+            <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+              <view class="picker-box">{{date}}</view>
+            </picker>
+          </view>
+          <view class="picker-wrap">
+            <view class="selector-label">需求人数</view>
+            <picker bindchange="bindPickerChange" value="{{memberNumber}}" range="{{memberNumberOptions}}">
+              <view class="picker-box">{{memberNumber}}</view>
+            </picker>
+          </view>
+        </view>
+
+        <view class="section3 teamInfo">
+          <view class="teamInfo-label">组队信息</view>
+          <view class="teamInfo-title">
+            <input class="teamInfo-title-input" placeholder="请填写标题"/>
+          </view>
+          <view class="teamInfo-content-wrap">
+          <scroll-view class="teamInfo-scroll-view" scroll-y>
+            <view class="teamInfo-content">
+              <textarea class="teamInfo-content-textarea" placeholder="请填写您组队的主要信息，描述越准确就越能够寻找到越合适的队友">
+              </textarea>
+              <image-box></image-box>
+            </view>
+          </scroll-view>
+
+          </view>
+        </view>
+        <view class="section4 answerQuestion">
+          <view class="isNeedQuestion">
+            <switch type="checkbox" checked bindchange="switchQuestion">需要申请者回答的问题</switch>
+          </view>
+          <view class="switchArea" wx:if="{{isNeedQuestion}}">
+          <block wx:for="{{questionList}}" wx:key="{{item.id}}">
+            <view class="question-wrap">
+              <view class="question-content">
+                <input class="question-content-text" placeholder="请填写需要回答的问题" />
+              </view>
+              <view class="delete" wx:if="{{item.id==questionList.length}}"  bindtap="deleteLast">
+                <image src="/static/icon/delete.png" style="height: 50rpx;width:50rpx"></image>
+              </view>
+            </view>
+          </block>
+          <view class="appendQuestion" bindtap="append">
+            <image src="/static/icon/add-blue-small.png" style="height:36rpx; width:36rpx;"></image>
+            <text class="appendQuestion-label" style="height: 36rpx">新增问题</text>
+          </view>
+        </view>
+        </view>
+        
+
+      </form>
+    </view>
+    </scroll-view>
+
+  </view>
+
+</view>

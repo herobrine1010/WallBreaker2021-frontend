@@ -19,7 +19,7 @@
     </scroll-view> -->
       <!-- 状态量为0的时候，循环加载 帖子 卡片 -->
       <!--  -->
-      <block wx:if="{{isNoticeOrTeam===0}}" wx:for="{{jishiItemList}}">
+      <navigator url="../jishi/detail"  wx:if="{{isNoticeOrTeam===0}}" wx:for="{{jishiItemList}}">
         <card-notice 
         labelText="{{item.labelText}}"
         title="{{item.title}}"
@@ -29,9 +29,9 @@
         description="{{item.description}}"
         postingPic="{{item.postingPic}}" 
         ></card-notice>
-      </block>
+      </navigator>
     <!-- 状态量为1的时候，循环加在 组队 卡片 -->
-      <block wx:if="{{isNoticeOrTeam}}" wx:for="{{jirenItemList}}">
+      <navigator url="../jiren/groupDetail" wx:if="{{isNoticeOrTeam}}" wx:for="{{jirenItemList}}">
         <card-team
         labelText="{{item.labelText}}"
         title="{{item.title}}"
@@ -44,7 +44,7 @@
         peopleCount="{{item.peopleCount}}"
         postingPic="{{item.postingPic}}" 
         ></card-team>
-      </block>
+      </navigator>
       
     </scroll-view>
   </view>

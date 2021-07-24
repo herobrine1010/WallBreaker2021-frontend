@@ -172,6 +172,9 @@ Page({
       });
     }
   },
+
+  
+
   clickConditionFilter:function(){
     if(this.data.conditionFilterOpen==true){
       this.setData({'conditionFilterOpen':false})
@@ -241,12 +244,22 @@ Page({
      }, 100)
  
   
-   },
+  },
    onMyScroll:function(){
      if(this.data.showGoTopButton==false){
        this.setData({showGoTopButton:true})
      }
-   }
-
-
+   
+  },
+  navToGuide:function(){
+    wx.navigateTo({
+      url: './guide',
+    })
+  },
+  createNewTeam:function(){
+    wx.navigateTo({
+      url: './initiateTeam',
+    })
+  }
+  
 })

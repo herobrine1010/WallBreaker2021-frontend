@@ -44,8 +44,8 @@ background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193
     background: rgba(242, 252, 255, 0.35);
     mix-blend-mode: overlay;
     border-radius: 44px;
-    left:2vw;
-    width:96vw;
+    left:2%;
+    width:96%;
   }
   .weui-search-bar__form{
     height: 48rpx;
