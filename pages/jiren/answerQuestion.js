@@ -78,10 +78,18 @@ Page({
 
   submitAnswer: function(e) {
     var answerList = e.detail.value
-
-
-    //调试用
     console.log("form的submit的数据",answerList)
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.emit('getResult', {data: true});
+    //调试用
+    wx.navigateBack({
+      delta: 0,
+    });
+    wx.showToast({
+      title: '申请已提交',
+      icon:'success',
+      duration:2000
+    });
   },
   isMaxlength: function(e) {
     var textLength = e.detail.value.length

@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: { 
-    amITeamInitiator:true,
+    amITeamInitiator:false,
+    title:'破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！',
     dialog:{
       isDialogShow: false,
       content:"爬爬爬爬爬爬爬爬啊啊啊啊啊啊啊啊啊啊啊",
@@ -13,18 +14,18 @@ Page({
       tip:"提示：爬",
       cancelText:"取消",
       okText:"确认",
-      tapOkEvent:""
+      tapOkEvent:"",
     },
     teamDetail:{
-      title:'周末狼人杀',
+      title:'周末狼人杀大家来玩啊我只是为了凑够二十五个字好够了',
       isTeamClosed: false,
-      avatar:'',
+      avatar:'https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02',
       nickname: '龙龙',
       fromTime: '1天前',
       dueTime: '2天后结束',
-      content: '周末狼人杀局',
-      picturesNum:  0,
-      pictures: [],
+      content: '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n我不知道怎么找图片就拿头像来凑\n最多四百字是吗\n那最多多少行啊\n像这样强行分好多段允许吗像这样强行分好多段允许吗像这样强行分好多段允许吗',
+      picturesNum:  3,
+      pictures: ['https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02','https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02','https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02','https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02'],
     },
     isFavourite:false,
     avatarList:[],
@@ -86,9 +87,21 @@ Page({
         'applyTime':'2天前'
       }
 
-    ]
+    ],
+    haveJoinedIn:false,
+    haveSignedUp:false,
+    timeIsOver:false,
+    memberFull:false,
+    maxHeight:"auto",
+    result:"",
+    // reply:"随便写点啥\n看看边界在哪\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n",
+    reply:'',
+    haveQuestions:true,
+    beClosedInAdvance:false,
+    beRefused:false,
 
-    
+    dialogForBeingAccrept:false,
+    dialogForBeingCloseInAdvance:false
   },
 
   /**
@@ -105,6 +118,8 @@ Page({
       {"avatar":"http://tiebapic.baidu.com/forum/w%3D580%3B/sign=ef2e2225da11728b302d8c2af8c7c2ce/c995d143ad4bd1134dde1a864dafa40f4bfb0576.jpg"},
       {"avatar":"http://tiebapic.baidu.com/forum/w%3D580%3B/sign=fa624952e31ea8d38a22740ca731324e/ac6eddc451da81cbf0437d241766d016082431b6.jpg"},{},{},{},{}
     ]});
+    this.changeScrollHeight();
+    // console.log(this.data.timeIsOver);
   },
   
   /**
@@ -199,7 +214,12 @@ Page({
   dialogTapOkForAcceptApplying:function(){
     wx.showToast({
       title: '接受id为'+'的申请',
+    });
+    this.setData({
+      haveJoinedIn:true
     })
+    this.initializeResult();
+    // this.changeScrollHeight();
   },
   refuseApplying: function(e){
     let applyer = e.currentTarget.dataset;
@@ -219,11 +239,13 @@ Page({
   dialogTapOkForRefuseApplying:function(){
     wx.showToast({
       title: '拒绝id为'+'的申请',
-    })
+    });
+    this.setData({
+      beRefused:true
+    });
+    this.initializeResult();
+    this.changeScrollHeight();
   },
-
-
-  
 
 
   tapAvatar:function(e){
@@ -268,5 +290,142 @@ Page({
       url: '/pages/jiren/answerQuestion',
     })
   },
-  
+
+  // 以下是和 申请者 applicant 有关的操作事件
+  applicantClick:function(e){
+    console.log(e);
+  },
+  initializeResult:function(e){
+    let data=this.data;
+    if(data.timeIsOver){
+      this.setData({
+        result:"组队招募已经结束",
+        over:true
+      })
+    }else if(data.memberFull){
+      this.setData({
+        result:"队伍成员已满",
+        over:true,
+      })
+    }else if(data.beClosedInAdvance){
+      this.setData({
+        result:"组队招募已经关闭\n发起人关闭的原因如下：",
+        reply:"我就想提早结束，乂，我就是玩。",
+        over:true
+      })
+    }else if(data.haveJoinedIn){
+      this.setData({
+        result:"您已成功入队"
+      })
+    }else if(data.beRefused){
+      this.setData({
+        result:"您的申请被拒绝\n发起人拒绝的原因如下：",
+        reply:"我就是不要你，乂，我就是玩。",
+      })
+    }else if(data.haveSignedUp){
+      this.setData({
+        result:"您已报名该组队，申请正在处理中~"
+      })
+    }
+  },
+
+
+  changeScrollHeight:function(){
+    var that = this;
+    var windowHeight;
+    var height;
+    //设置scroll-view高度
+    wx.getSystemInfo({
+      success: function (res) {
+          windowHeight= res.windowHeight;
+      }
+    });
+    let query = wx.createSelectorQuery();
+    query.select('#scroll-1').boundingClientRect(rect=>{
+        let maxHeight = rect.height;
+        if(!that.data.result&&!that.data.reply){  
+          if(maxHeight>windowHeight*0.65){
+            that.setData({
+              maxHeight:"65vh"
+            });
+          }
+        }else if(that.data.result&&!that.data.reply){
+          if(maxHeight>windowHeight*0.60)  {
+            that.setData({
+              maxHeight:"60vh"
+            })
+          }
+        }else if(that.data.result&&that.data.reply){
+          if(maxHeight>windowHeight*0.5){
+            that.setData({
+              maxHeight:"50vh"
+            })
+          }
+        }
+      }).exec();
+      
+  },
+  applyButton:function(e){
+    var that=this;
+    if(!this.data.haveQuestions){
+      this.setData({
+        result:"您已报名该组队，申请正在处理中~",
+        haveSignedUp:true
+      });
+      wx.showToast({
+        title: '申请已提交',
+        icon:'success',
+        duration:2000
+      });
+    }else{
+      wx.navigateTo({
+        url: '/pages/jiren/answerQuestion',
+        events: {
+          // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+          getResult: function(data) {
+            if(data){
+              that.setData({
+                haveSignedUp:true,
+                result:"您已报名该组队，申请正在处理中~"
+              });
+              //以下这个函数没有发挥作用，解决办法并不容易。等和后端接口接上后问题自然就解决了，也不需要下面这个函数调用了。
+              that.changeScrollHeight();
+            }
+          }
+        }
+      })
+    };
+    console.log("over");
+  },
+  cancelButton: function(e){
+    let dialog = {
+      isDialogShow: true,
+      content:'确定取消申请？',
+      hasInputBox:false,
+      tip:"",
+      cancelText:"取消",
+      okText:"确认",
+      tapOkEvent:"dialogTapOkForCancelApplication"
+    };
+    this.setData({
+      dialog
+    })
+  },
+  dialogTapOkForCancelApplication:function(e){
+    this.setData({
+      haveSignedUp:false,
+      result:'',
+    });
+    console.log(this);
+    this.changeScrollHeight();
+  },
+  dialogTapOkForCloseTeam:function(){
+    this.setData({
+      beClosedInAdvance:true,
+      dialogForBeingCloseInAdvance:true,
+    });
+    this.initializeResult();
+    this.changeScrollHeight();
+  }
 })
+

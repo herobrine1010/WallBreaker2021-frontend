@@ -15,7 +15,7 @@
           {{item.index}} {{item.questionText}}
         </view>
         <view class="answerBox">
-          <textarea class="answerText" name="{{item.index}}" bindinput="isMaxlength" placeholder="请输入回答（不超过50字)" maxlength="50"></textarea>
+          <textarea class="answerText" name="{{item.index}}" bindinput="isMaxlength" placeholder="请输入回答（不超过50字）" maxlength="50"></textarea>
         </view>
         <view class="maxlengthArea">
           <text class="maxlengthMessage">{{maxlengthMessage}}</text>
@@ -33,3 +33,6 @@
   </view>
 
 </view>
+
+
+<view style="position:fixed;bottom:10vh">bug：每个问题绑定的是同一个事件函数，导致一个回答框字数达到上限所有的提示都会出现。提交按钮的样式也有点丑。改了之后我来改写表单提交按钮的绑定事件。——卫小星</view>

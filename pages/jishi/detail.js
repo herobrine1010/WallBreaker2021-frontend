@@ -6,7 +6,7 @@ Page({
    */
   data: {
     like:false,
-    title:'破壁者首次文艺汇演来啦！！',
+    title:'破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！',
     userAvatar:'/static/icon/default-user-big.png',
     userName:"破壁者1号",
     time:'2021年6月9日    21:40',
