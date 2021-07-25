@@ -1,0 +1,15 @@
+/* pages/welcome/welcome.wxss */
+.enter{
+  position:absolute;
+  height:10vh;
+  width: 40vw;
+  left:30vw;
+  top:40vh;
+  background-color: lightgreen;
+  border-radius: 3vw;
+  color:white;
+  text-align: center;
+  font-size: 4vh;
+  line-height: 8.6vh;
+
+}

@@ -43,7 +43,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    //下面这个请求是用来测试的，之后的版本要删掉。。
+    wx.request(
+      {
+        url: 'http://localhost:8080/userFavouritePosting/myFavouritePosting',
+        header: {
+          'content-type': 'application/json',
+          'cookie':wx.getStorageSync("token")
+        },
+        method:'GET',
+        success:function(res){
+            console.log(res)
+        }
+      })
   },
 
   /**

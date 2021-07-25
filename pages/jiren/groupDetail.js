@@ -5,16 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: { 
+    
     amITeamInitiator:true,
-    dialog:{
-      isDialogShow: false,
-      content:"爬爬爬爬爬爬爬爬啊啊啊啊啊啊啊啊啊啊啊",
-      hasInputBox:true,
-      tip:"提示：爬",
-      cancelText:"取消",
-      okText:"确认",
-      tapOkEvent:""
-    },
     teamDetail:{
       title:'周末狼人杀',
       isTeamClosed: false,
@@ -24,7 +16,7 @@ Page({
       dueTime: '2天后结束',
       content: '周末狼人杀局',
       picturesNum:  0,
-      pictures: [],
+      pictures: 'https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02,https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02',
     },
     isFavourite:false,
     avatarList:[],
@@ -95,6 +87,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var picList = this.data.teamDetail.pictures.split(',')
+    console.log(picList)
+    console.log(picList.length)
     //拼接 发起人 和 参与者列表
     // {"avatar":"...","me":false,"initiator":false,"id":1}
     this.setData({avatarList:[
@@ -235,6 +230,7 @@ Page({
 
   seeDetail:function(e){
     console.log("查看全部")
+    //@李雨龙
   },
   tapFavourite:function(){
     if(this.data.isFavourite==false){

@@ -1,0 +1,5 @@
+<view>
+  <button class="enter" bindtap="onEnter">
+    点击授权
+  </button>
+</view>

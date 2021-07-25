@@ -14,6 +14,26 @@ Page({
       {
         index: 2,
         questionText: '这里是问题，xxxxx？'
+      },
+      {
+        index: 2,
+        questionText: '这里是问题，xxxxx？'
+      },
+      {
+        index: 2,
+        questionText: '这里是问题，xxxxx？'
+      },
+      {
+        index: 2,
+        questionText: '这里是问题，xxxxx？'
+      },
+      {
+        index: 2,
+        questionText: '这里是问题，xxxxx？'
+      },
+      {
+        index: 2,
+        questionText: '这里是问题，xxxxx？'
       }
 
     ]
@@ -85,6 +105,7 @@ Page({
   },
   isMaxlength: function(e) {
     var textLength = e.detail.value.length
+    console.log(textLength)
     if (textLength==50)
     {
       this.setData({

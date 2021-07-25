@@ -15,7 +15,7 @@
           {{item.index}} {{item.questionText}}
         </view>
         <view class="answerBox">
-          <textarea class="answerText" name="{{item.index}}" bindinput="isMaxlength" placeholder="请输入回答（不超过50字)" maxlength="50"></textarea>
+          <textarea class="answerText" name="{{item.index}}" bindinput="isMaxlength" placeholder="请输入回答（不超过50字）" maxlength="50"></textarea>
         </view>
         <view class="maxlengthArea">
           <text class="maxlengthMessage">{{maxlengthMessage}}</text>

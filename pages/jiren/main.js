@@ -161,6 +161,7 @@ Page({
 
   },
   onPageScroll:function(e){
+    console.log("page scroll")
     console.log(e)
     if (e.scrollTop > 0) {
       this.setData({
@@ -243,9 +244,14 @@ Page({
   
    },
    onMyScroll:function(){
+     console.log("my scroll")
      if(this.data.showGoTopButton==false){
        this.setData({showGoTopButton:true})
      }
+   },
+   createNewTeam:function(){
+     console.log("realize create new team")
+     //@朱一飞
    }
 
 
