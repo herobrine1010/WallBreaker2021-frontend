@@ -3,9 +3,16 @@
   <view>
     <mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar__centers" title="济人广场"></mp-navigation-bar>
   </view>
-  <view class="searchBar">
-    <mp-searchbar bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
+  <view class="search-area">
+    <view class="searchBar">
+      <mp-searchbar bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
+    </view>
+    <view class="guide" bindtap="navToGuide">
+      <image src="../../static/icon/map.png" class="guide-pic" alt=""></image>
+      <text class="guide-text">组队指南</text>
+    </view>
   </view>
+  
   <view class="area2">
     <view class="shade"></view>
     <view class="buttonArea">

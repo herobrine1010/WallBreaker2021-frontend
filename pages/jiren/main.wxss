@@ -1,5 +1,33 @@
 @import "/static/common.wxss";
 /* pages/jishi/main.wxss */
+.search-area{
+
+  display: flex;
+  height: 84rpx;
+  width: 100%;
+}
+.searchBar{
+  margin:0 48rpx ;
+  flex: 1;
+}
+.guide{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 84rpx;
+  width: 92rpx;
+  margin-right: 48rpx;
+  font-family: PingFang SC;
+  font-size: 22rpx;
+  line-height: 26rpx;
+  color: #ffffff;
+}
+.guide-pic{
+  height: 36rpx;
+  width: 36rpx;
+  margin: 10rpx 0;
+}
+
 .area2{
   position:fixed;
   top:18%;

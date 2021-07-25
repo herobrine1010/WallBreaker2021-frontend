@@ -13,8 +13,10 @@
 }
 
 .avatar-list{
+  /* position:fixed; */
   width:100%;
   margin: 30rpx auto;
+  z-index: 2;
 }
 
 .initiator-teamDetail{
@@ -101,6 +103,7 @@
 /* --------------以上是申请者的scroll-view的样式----end------------------- */
 
 /* 这段没看懂有什么用，以后用得到再说 */
+/* 这是用来模糊底部按键下层的内容 */
 /* .blur-shadow{
   position: fixed;
   bottom:0vh;
@@ -110,7 +113,7 @@
   background-color: #17B2E5;
   opacity: 80%;
   z-index: 2;
-  background:repeat;
+  background:re`at;
   backdrop-filter:blur(4px);
 } */
 /* ---------以下是底部按钮 button 的样式 start---------- */
@@ -130,7 +133,7 @@
   height:100%;
 }
 
-.accept-all-button{
+.accept-all-button,.applicantButton{
   position: absolute;
   width: 600rpx;
   height: 100rpx;
@@ -144,7 +147,9 @@
 .accept-all-button-close{
   background-color: rgba(152, 154, 154, 0.8);
 }
-
+.grayButton{
+  background-color:gray;
+}
 .favourite{
   position: absolute;
   width:150rpx;
@@ -160,206 +165,104 @@
   height:50rpx;
 }
 
+/* 谁把main页面的样式都复制到这里来了，我都删了。这个页面样式太多了，因为申请者的页面内容没有写成组件。以下都是我写的申请者页面的样式，和大家的风格差异比较大。*/
 
-
-
-
-.listArea{
-  top:2vh;
-  position: relative;
-  height:100%;
-  margin-top: 10px;
-  z-index: 2;
-}
-.buttonArea{
-  position: relative;
-  top:1%;
-  height:4%;
-  /* background-color: #ff0000; */
-  left:0;
-  width:100%;
-  z-index:2;
-}
-.myPublishButton,.myJoinButton{
-  position: relative;
-  top:0%;
-  height:100%;
-  width:35%;
-  border-radius: 18px;
-  color:#FFFFFF;
-  align-items: center;
-  font-size:4vw;
-  display: flex;
-  justify-content: center;
-  letter-spacing: 1px;
-  float:left;
-}
-.myPublishButton{
-  background-color: #17B2E5;
-  left:10%;
-}
-.myJoinButton{
-  background-color: #8C1AFF;
-  left:20%;
-}
-.filterArea{
-  position: relative;
-  top:2%;
-  height:3.5%;
-  /* background-color: #00ff00; */
-  left:0;
-  width:100%;
-  z-index:2;
-}
-.timeFilter,.conditionFilter{
-
-  position: relative;
-  top:10%;
-
-  height:100%;
-  border-radius: 5px;
-  color:#FFFFFF;
-  align-items: center;
-  font-size:4vw;
-  display: flex;
-  justify-content: center;
-  letter-spacing: 1px;
-  float:left;
-  /* z-index:3; */
+.board{
+  /* position: absolute;
+  top:25vh; */
+  width: 94vw;
+  /* height: 50vh; */
+  margin:0  auto;
+  /* left: 3vw; */
+  /* right: 3vw; */
+  padding:24rpx 0;
   background-color: #F2FCFF;
+  border-radius: 30rpx;
+  /* z-index: 2; */
 }
-.timeFilter{
-  left:3%;
-  width:25%;
+.board-view{
+  margin:0 3vw;
 }
-.conditionFilter{
-  left:5%;
-  width:16%;
+
+.detail-title{
+  display: flex;
+  text-align: justify;
+  width: 50%-【;
+  /* margin: 24rpx 16rpx 12rpx; */
+  font-size:36rpx;
+  font-weight:600;
+  letter-spacing:0.25vw;
+  color:#4A5559;
+  white-space: pre-line;
+
 }
-.timeText{
+.detail-a-line{
   position: relative;
-  float:left;
-  left:-4%;
-  color: #17B2E5;
-  font-size: 3vw;
-  letter-spacing: 0.5px;
+  display: flex;
+  flex-direction: row;
+  height: 80rpx;
+  margin:12rpx 0;
+  letter-spacing: 0.1vw;
 }
-.conditionText,.conditionTextBlue{
-  position:relative;
-  float:left;
-  left:-8%;
-  font-size: 3vw;
-  letter-spacing: 1px;
+.detail-name-and-time{
+  margin-left:12rpx;
+  font-weight: 500;
 }
-.conditionText{
-  color:#768185;
+.detail-name-and-time view{
+  height: 40rpx;
+  line-height: 40rpx;
 }
-.conditionTextBlue{
-  color:#17B2E5;
+.detail-username{
+  font-size: 30rpx;
+  color:#1D99C3;
 }
-.timeIcon,.conditionIcon{
-  position:relative;
-  float: left;
-  height:3.2vw;
-  width: 3.2vw;
+.detail-apply-time{
+  font-size: 26rpx;
+  color:#989A9A;
 }
-.filterExtended{
+.detail-due-time{
   position: absolute;
-  top:10.5%;
-  height:100%;
-  left:0%;
-  width:100%;
-  z-index: 4;
+  font-size:28rpx;
+  right: 22rpx;
+  top: 10rpx;
+  color:#007399;
+  /* font-weight: 600; */
 }
-
-.shade2{
-  position: absolute;
-  top:0%;
-  height:100%;
-  width:100%;
-  background-color: #000000;
-  opacity: 20%;
-  z-index:3;
-}
-.whiteBG{
-  position: relative;
-  margin-left:3vw;
-  margin-right: 3vw;
-  top:18%;
-  display: flex;flex-direction: row;justify-content: space-between;
-  height:100%;
-}
-.conditionArea{
-  position:relative;
-  
-  top:0%;
-  height:6%;
-  background-color: #F2FCFF;
-  border-radius: 0 0 20px 20px;
-  z-index: 4;
-  
-}
-
-.conditionsSelected,.conditionsNotSelected{
-  
-  top:5%;
-  height:60%;
-  width:18vw;
-  border-radius: 20px;
-  font-size:1.8vh;
-  letter-spacing: 1px;
-  z-index:5;
-  justify-content: center;
-  align-items: center;
-  display:flex;
-}
-.conditionsNotSelected{
-  background-color: #ffffff;
-border-color: #768185;
-color:#768185;
-border-width:1px;
-border-style: solid;
-}
-.conditionsSelected{
-  background-color: #26C9FF;
-  color:#ffffff;
-}
-
-
-.backTopButton{
-  position: fixed;
-  height:9vw;
-  width:9vw;
-  right: 5.9%;
-  bottom: 21%;
- }
- .addButton{
-  position: fixed;
-  height:15vw;
-  width:15vw;
-  right: 3%;
-  bottom: 12%;
- }
- .padding{
-   position:relative;
-   top:0;
-   height:10vh;
-   width:100vw;
-   left:0;
-   background-color: #768185;
- }
-
- /* components/participant-avatar/participant-avatar.wxss */
-.external-box{
-  position:relative;
-  top:0;
-  height:10vh;
-  width:100vw;
-  left:0;
-  background-color: #00ff00;
-}
-
-
-/* ::-webkit-scrollbar {
-	display: none;
+/* .detail-content{
+  width: 1%;
 } */
+
+
+.detail-text{
+  /* display: flex; */
+  /* width: 10px; */
+  color:#989A9A;
+  letter-spacing: 0.1vw;
+  font-size: 30rpx;
+  line-height: 34rpx;
+  text-align: justify;
+  white-space: pre-line;
+
+}
+.detail-pictures{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 2vw;
+  /* justify-items:auto ; */
+  /* align-items: ; */
+
+}
+.detail-picture{
+  margin-right: 2vw;
+  margin-top: 2vw;
+}
+.result{
+  /* margin-left: 5vw;
+  margin-top: 20rpx; */
+  margin: 10rpx 5vw;
+  line-height: 40rpx;
+  font-size:30rpx;
+  font-weight: 500;
+}
+  

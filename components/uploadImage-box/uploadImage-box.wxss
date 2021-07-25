@@ -1,0 +1,35 @@
+/* components/uploadImage-box/uploadImage-box.wxss */
+.image-box {
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+.image-wrap {
+  position: relative;
+
+}
+.deleteTopRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.deleteTopRight-icon {
+  height: 20px;
+  width: 20px;
+}
+.userImage {
+  height: 180rpx;
+  width: 180rpx;
+  margin: 18rpx;
+  border-radius: 16rpx;
+}
+.addImage-icon {
+  height: 180rpx;
+  width: 180rpx;
+}
+.addImage {
+  height: 180rpx;
+  background: #EEEEEE;
+  border-radius: 16rpx;
+  margin: 18rpx;
+}
