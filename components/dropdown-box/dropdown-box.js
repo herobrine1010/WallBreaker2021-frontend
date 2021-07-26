@@ -1,5 +1,6 @@
 // components/dropdown-box/dropdown-box.js
 Component({
+  behaviors: ['wx://form-field'], //使自定义组件可以被表单识别
   /**
    * 组件的属性列表
    */
@@ -7,31 +8,21 @@ Component({
     range: {
       type: Array,
       value: []
+    },
+    current: {
+      type: Object,
+      value: {
+        id: 0,
+        name: '竞赛'
+      }
     }
-    
   },
-
   /**
    * 组件的初始数据
    */
   data: {
-    //控制下拉菜单的显示
     isShow: false,
-    //选择范围 
-    result: [{
-      id: 0,
-      name: 'test1'
-    },
-    {
-      id: 1,
-      name: 'test2'
-    }
-    ],
-    //当前选择项
-    current: {}
-
-
-
+    value: '竞赛' //表单的value
   },
 
   /**
@@ -50,9 +41,10 @@ Component({
       let selectedDataset = e.target.dataset
       this.setData({
         current: selectedDataset,
+        value: selectedDataset.name,
         isShow: false
       })
-      //this.triggerEvent("change", { ...selectedDataset })
+      this.triggerEvent("change", selectedDataset)
 
     },
     // 此方法供父组件调用
@@ -62,21 +54,5 @@ Component({
       })
     }
 
-  },
-  lifetimes: {
-    attached() {
-      let result = []
-      //初始化data的result
-      console.log('this.data',this.data)      
-      for (let item of this.data.range) {
-        console.log(item)
-        result.push(item)
-      }
-      console.log('result',result)
-      this.setData({
-        //current: Object.assign({}, this.data.defaultOption),
-        result: result
-      })
-    }
   }
 })

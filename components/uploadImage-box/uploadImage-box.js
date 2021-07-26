@@ -29,25 +29,25 @@ Component({
   methods: {
     uploadImage: function() {
       var that = this;
-      let imageList = that.data.imageList
+      let editList = that.data.imageList
       wx.chooseImage({
         count: 9,　　　　　　　　　　　　　　　　　　    // 最多可以选择的图片张数　　
         sizeType: ['original', 'compressed'],      // 选择图片的尺寸
         sourceType: ['album', 'camera'],           // 选择图片的来源
         success: function(res) {
-          imageList.push(res.tempFilePaths)   //向后追加
+          editList = editList.concat(res.tempFilePaths)   //向后追加，数组连接
           that.setData({
-            imageList: imageList
+            imageList: editList
           })
         },
       })
-      console.log(that.data)
+      
     },
     deleteImage: function(e) {
-      console.log(e.target.dataset.index)
-      let delIndex = e.target.dataset.index
+      //获取要删除的图片序号
+      let delIndex = e.currentTarget.dataset.index
       let editList = this.data.imageList
-      console.log(editList)
+      console.log('删除序号',delIndex)
       editList.splice(delIndex,1)
       this.setData({
         imageList: editList
