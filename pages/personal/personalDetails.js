@@ -1,4 +1,8 @@
 // pages/personalDetails/main.js
+// 首先引入封装成promise的 request
+import { request } from "../../request/request.js";
+
+
 Page({
 
   /**
@@ -75,31 +79,21 @@ Page({
         isLabelActive : false
       }
     ],
-    tempFilePaths : '../../static/icon/default-user-big.png',
+
+    avatarPath : '../../static/icon/default-user-big.png',
     userDetails: {
-      nickname: '默认昵称',
-      qualification:'本科',
-      isQualificationVisible: true,
+      nickName: '默认昵称',
+      identification:'本科',
+      isIdentificationVisible: true,
       grade: '20级',
       isGradeVisible: false,
-      college: '土木工程学院',
-      isCollegeVisible: false,
+      school: '土木工程学院',
+      isSchoolVisible: false,
       major: '防灾减灾工程',
       isMajorVisible: false,
       wxId: 'wxid-25536748',
-      briefIntroduction: '理工科钢铁直男一枚~'
+      description: '理工科钢铁直男一枚~'
     },
-    // nickname: '默认昵称',
-    // qualification:'本科',
-    // isQualificationVisible: true,
-    // grade: '20级',
-    // isGradeVisible: false,
-    // college: '土木工程学院',
-    // isCollegeVisible: false,
-    // major: '防灾减灾工程',
-    // isMajorVisible: false,
-    // wxId: 'wxid-25536748',
-    // briefIntroduction: '理工科钢铁直男一枚~'
   },
   //定义更换头像事件 changeImage
   changeImage : function(){
@@ -117,32 +111,154 @@ Page({
         })
       }
     })
-
   },
-  // 定义表单提交事件 formSubmit
+  // 定义表单提交事件 formSubmit，并且拿到表单的数据
   formSubmit : function(e){
     this.setData({
       userDetails:e.detail.value
     })
     console.log(this.data.userDetails);
   },
+  // 定义点击事件，拿到标签数据
   btnTap:function(){
     //从label-selector组件中拿到数据
-    const personalLabelData = this.selectComponent('#personalLabel').data;
-    console.log(personalLabelData);
-    const interestLabelData = this.selectComponent('#interestLabel').data;
-    console.log(interestLabelData);
+    const personalLabelData = this.selectComponent('#personalLabel').data.labels;
+    const interestLabelData = this.selectComponent('#interestLabel').data.labels;
+    let labels = personalLabelData.concat(interestLabelData);
+    this.setData({
+      labels
+    })
+    
+    //  弹出对话框让用户确定--------------------------
+    let dialog = {
+      isDialogShow: true,
+      content:"确认修改？",
+      hasInputBox:false,
+      tip:"",
+      cancelText:"取消",
+      okText:"确认",
+      tapOkEvent:"dialogTapOkForChangePersonalDetail"
+    };
+    this.setData({
+      dialog
+    })
+  },
+  // 用户在对话框中点击确定后，会出发以下事件，并向服务器发送请求
+  dialogTapOkForChangePersonalDetail:function(){
+    let that = this ;
+    // console.log(that.data.labels);
+    let labels = [].concat(that.data.labels);
+    request({
+      url : '/user/editMyInfo',
+      header: {
+        'content-type': 'application/json',
+        'cookie':wx.getStorageSync("token")
+      },
+      method : 'PUT',
+      data : that.data.userDetails
+    }).then( res=>{
+      console.log(res);
+      request({
+        url : '/userPublicInfo/editMyPublicInfo',
+        header: {
+          'content-type': 'x-www-form-urlencoded',
+          'cookie':wx.getStorageSync("token")
+        },
+        method : 'PUT',
+        data : {
+          gradePublic: true,
+          identificationPublic: true,
+          majorPublic: false,
+          schoolPublic: false
+        }
+      })
+
+    });
+
+    labels = labels.map(v => {
+      return{
+        id : v.id,
+        content : v.content,
+        selected : v.selected==null?false:v.selected
+      }
+    });
+    console.log(labels);
+    request({
+      url : '/userLabel/editMyLabel',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      },
+      method : 'POST',
+      data : {
+        'labels':labels
+      }
+    }).then(res=>{
+      console.log(res);
+    });
+
+
     wx.showToast({
       title: '提交成功',
       icon:'success'
     })
   },
 
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // -----------使用封装成promise 的request方法，注意添加本文件最上方的引入------------；
+    const that = this;
+    request({
+      url : "/user/myInfoWithLabel",
+      header: {
+        'content-type': 'x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      }
+    }).then( res => {
+      let result = res.data.data;
+      console.log(result);
+      // 提取用户的头像、昵称等个人信息--------
+      let userDetails = {
+        nickName: result.nickName ,
+        identification:result.identification ,
+        identificationPublic: result.identificationPublic ,
+        grade: result.grade ,
+        gradePublic: result.gradePublic ,
+        school: result.school ,
+        schoolPublic: result.schoolPublic ,
+        major: result.major ,
+        majorPublic: result.majorPublic ,
+        wxId: result.wxId ,
+        description: result.description 
+      };
+      // 提取用户的个人和兴趣标签--------
+      let personalLabel = result.personalLabel.map( v=> {
+        return {
+          id : v.id,
+          content : v.content,
+          selected : v.selected
+        }
+      });
+      let interestLabel = result.interestLabel.map( v=> {
+        return {
+          id : v.id,
+          content : v.content,
+          selected : v.selected
+        }
+      })
 
+      that.setData({
+        avatarPath : result.avatarUrl,
+        userDetails,
+        personalLabel,
+        interestLabel
+      })
+    }).catch( err => {
+      console.log(err);
+    })
   },
 
   /**

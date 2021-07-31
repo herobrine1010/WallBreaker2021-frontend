@@ -4,7 +4,7 @@
   <image src="{{avatarPath}}" class="photo" mode="scaleToFill"></image>
   <view class="briefs">
     <view class="nickname">{{personBrief.nickname}}</view>
-    <view class="school">{{personBrief.college +' '+ personBrief.major +' '+ personBrief.grade +' '+ personBrief.qualification}}</view>
+    <view class="school">{{personBrief.school +' '+ personBrief.major +' '+ personBrief.grade +' '+ personBrief.identification}}</view>
   </view> 
   <view class="labels-container">
     <view wx:for="{{labels}}" class="label {{'labelColor-'+item.type}}">{{item.name}}</view>

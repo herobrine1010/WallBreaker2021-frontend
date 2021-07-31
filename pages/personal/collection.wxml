@@ -5,7 +5,7 @@
   <!-- 以下是container，包含了除标题外的其余内容 -->
   <view class="per-container">
     <view class="collection-head"> 
-      <view class="collection-btn {{btnColor1}}" bindtap="onLeftNoticeBtnTap">{{leftButtonTitle}}</view>
+      <view class="collection-btn {{btnColor1}}" bindtap="onLeftNoticeBtnTap">{{leftButtonTitle}}</view> 
       <view class="collection-btn {{btnColor2}}" bindtap="onRightTeamBtnTap">{{rightButtonTitle}}</view>
     </view>
     <scroll-view 

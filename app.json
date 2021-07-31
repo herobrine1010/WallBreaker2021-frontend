@@ -24,6 +24,7 @@
     ]
   },
   "pages": [
+    "pages/welcome/welcome",
     "pages/jiren/main",
     "pages/jiren/groupDetail",
     "pages/jishi/detail",
@@ -51,7 +52,9 @@
     "navigationBarTitleText": "济星云",
     "navigationBarTextStyle": "black"
   },
-  "useExtendedLib": {},
+  "useExtendedLib": {
+    "weui": true
+  },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

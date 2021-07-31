@@ -36,17 +36,17 @@ Component({
       //判断当前选中了几个标签
       let sum = 0;
       for(let i = 0;i<labels.length;i++){
-        if(labels[i].isLabelActive){
+        if(labels[i].selected){
           sum +=1;
         }
       }
       if(sum<3){
-        labels[index].isLabelActive  = !labels[index].isLabelActive;
+        labels[index].selected  = !labels[index].selected;
         this.setData({
           labels,
         })
-      }else if(labels[index].isLabelActive){//已选中3个标签后，只减不加
-        labels[index].isLabelActive  = false;
+      }else if(labels[index].selected){//已选中3个标签后，只减不加
+        labels[index].selected  = false;
         this.setData({
           labels,
           isWarnVisiable : false

@@ -1,19 +1,59 @@
 // pages/feedback/feedback.js
+// 首先引入封装成promise的 request
+import { request } from "../../request/request.js";
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    feedbackMessage : ""
+    feedbackMessage : "",
+    lock: false
   },
   formSubmit: function(e){
-    let text = e.detail.value.feedbackText;
-    let str = text.trim();//去除收尾字符串
-    // 判断是否全是空格 空字符串
-    if(str == null || str == '' || str == undefined){
+//   防止重复点击提交，添加锁
+    if(this.data.lock == false){
+      this.data.lock == true;
+      let text = e.detail.value.feedbackText;
+      let str = text.trim();//去除收尾字符串
+      // 判断是否全是空格 空字符串
+      if(str == null || str == '' || str == undefined){
+        this.setData({
+          feedbackMessage : "该项未填写！"
+        });
+      }else{   
+        request({
+          url: '/feedback/feedBack',
+          method : 'POST',
+          header : {
+            'content-type' :  'application/x-www-form-urlencoded',
+            'cookie':wx.getStorageSync("token")
+          },
+          data : {
+            'content' : text
+          }
+        }).then(res =>{
+          wx.showToast({
+            title: '感谢您的反馈！',
+            icon: 'error'
+          });
+          this.data.lock = false;
+        }).catch(err=>{
+          wx.showToast({
+            title: '请求失败，请稍后再试',
+            icon: 'error'
+          })
+        })
+      }
+    }
+    
+
+  },
+  handleInput: function(e){
+    if(e.detail.cursor>=310){
       this.setData({
-        feedbackMessage : "该项未填写！"
+        feedbackMessage : "字符已达上限！"
       });
     }
   },
