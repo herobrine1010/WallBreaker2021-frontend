@@ -182,17 +182,15 @@ Page({
         selected : v.selected==null?false:v.selected
       }
     });
-    console.log(labels);
+    console.log(JSON.stringify(labels));
     request({
       url : '/userLabel/editMyLabel',
       header: {
-        'content-type': 'application/x-www-form-urlencoded',
+        'content-type': 'application/json',
         'cookie':wx.getStorageSync("token")
       },
       method : 'POST',
-      data : {
-        'labels':labels
-      }
+      data : labels
     }).then(res=>{
       console.log(res);
     });
