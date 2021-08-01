@@ -1,4 +1,7 @@
 // pages/collection/collection.js
+// 首先引入封装成promise的 request
+import { request } from "../../request/request.js";
+
 Page({
 
   /**
@@ -139,13 +142,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
     // 1.首先判断是 组队管理页面 还是 我的收藏页面
     let app = getApp();
     if(app.globalData.personalManagementOrCollection === 0){
@@ -154,14 +150,63 @@ Page({
         leftButtonTitle : "我的帖子",
         rightButtonTitle : "我的组队"
       })
+      request({
+        url : '/userTeam/teamAppliedByMe',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'cookie':wx.getStorageSync("token")
+        }
+      }).then(res =>{
+        console.log(res.data.data);
+      });
+      request({
+        url : '/userTeam/teamInitiatedByMe',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'cookie':wx.getStorageSync("token")
+        }
+      }).then(res =>{
+        console.log(res.data.data);
+      });
+
+
+
     }
     else if(app.globalData.personalManagementOrCollection === 1){
       this.setData({
         collectionTitle : "我的收藏",
         leftButtonTitle : "帖子收藏",
         rightButtonTitle : "组队收藏"
+      });
+      request({
+        url : '/userFavouritePosting/getMyFavouritePosting',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'cookie':wx.getStorageSync("token")
+        }
+      }).then(res =>{
+        console.log(res.data.data);
+      });
+      request({
+        url : '/userFavouriteTeam/getMyFavouriteTeam',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'cookie':wx.getStorageSync("token")
+        }
+      }).then(res =>{
+        console.log(res);
       })
+
+
+
     }
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    
 
   },
 

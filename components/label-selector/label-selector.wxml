@@ -8,11 +8,11 @@
   <view class="label-body">
     <view wx:for="{{labels}}" 
     wx:key = "id"
-    class="label-item  {{item.isLabelActive?'label-active':''}}"
+    class="label-item  {{item.selected?'label-active':''}}"
     bindtap="onLabelTap"
     data-index = "{{index}}"
     >
-      {{item.title}}
+      {{item.content}}
     </view>
   </view>
 </view>

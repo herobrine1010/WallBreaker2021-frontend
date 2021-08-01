@@ -28,6 +28,7 @@
         </block> 
       </view>
     </view>
+    <view class="bottom-block"></view>
   </scroll-view>
   </view>
 </view>

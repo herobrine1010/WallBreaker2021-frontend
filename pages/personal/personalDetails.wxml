@@ -6,7 +6,7 @@
   <!-- 以下是container，包含了除标题外的其余内容 -->
   <view class="per-container">
     <view class="personal-image">
-      <image  mode="aspectFill" src="{{tempFilePaths}}"  bindtap="changeImage">
+      <image  mode="aspectFill" src="{{avatarPath}}"  bindtap="changeImage">
       </image>
     </view>
     <form bindsubmit="formSubmit">
@@ -15,36 +15,36 @@
       <view class="detail-items">
         <view class="item-title">昵称：</view>
         <view class="item-body">
-          <input name="nickname" type="text" value="{{userDetails.nickname}}"></input>
+          <input name="nickName" type="text" value="{{userDetails.nickName}}"></input>
         </view>
       </view>
       <view class="detail-items">
         <view class="item-title">学历：</view>
         <view class="item-body">
-          <input name="qualification" type="text" value="{{userDetails.qualification}}"></input>
+          <input name="identification" type="text" value="{{userDetails.identification}}"></input>
         </view>
-        <switch name="isQualificationVisible" color="#A3E5FA" checked="{{userDetails.isQualificationVisible}}"></switch>
+        <switch name="identificationPublic" color="#A3E5FA" checked="{{userDetails.identificationPublic}}"></switch>
       </view>
       <view class="detail-items">
         <view class="item-title">年级：</view>
         <view class="item-body">
-          <input name="grade" type="text" value="{{userDetails.grade}}"></input>
+          <input name="grade" type="text" value="{{userDetails.grade}}" placeholder="请输入入学年份（纯数字）"></input>
         </view>
-        <switch name="isGradeVisible" color="#A3E5FA" checked="{{userDetails.isGradeVisible}}"></switch>
+        <switch name="gradePublic" color="#A3E5FA" checked="{{userDetails.gradePublic}}"></switch>
       </view>
       <view class="detail-items">
         <view class="item-title">学院：</view>
         <view class="item-body">
-          <input name="college" type="text" value="{{userDetails.college}}"></input>
+          <input name="school" type="text" value="{{userDetails.school}}"></input>
         </view>
-        <switch name="isCollegeVisible" color="#A3E5FA" checked="{{userDetails.isCollegeVisible}}"></switch>
+        <switch name="schoolPublic" color="#A3E5FA" checked="{{userDetails.schoolPublic}}"></switch>
       </view>
       <view class="detail-items">
         <view class="item-title">专业：</view>
         <view class="item-body">
           <input name="major" type="text" value="{{userDetails.major}}"></input>
         </view>
-        <switch name="isMajorVisible" color="#A3E5FA" checked="{{userDetails.isMajorVisible}}"></switch>
+        <switch name="majorPublic" color="#A3E5FA" checked="{{userDetails.majorPublic}}"></switch>
       </view>
       <view class="detail-items">
         <view class="item-title">微信号：</view>
@@ -59,7 +59,7 @@
       <view class="detail-items">
         <view class="intro-title">一句话简介：</view>
         <view class="intro-body">
-          <input name="briefIntroduction" type="text" value="{{userDetails.briefIntroduction}}"></input>
+          <input name="description" type="text" value="{{userDetails.description}}"></input>
         </view>
       </view>
     </view>
@@ -83,6 +83,17 @@
       <button class="detail-btn" form-type="submit" bindtap="btnTap"> 保存 </button>
     </form>
     
+    
+
   </view>
 </view>
- 
+<dialog-box 
+    content="{{dialog.content}}"
+    hasInputBox="{{dialog.hasInputBox}}"
+    tip="{{dialog.tip}}"
+    okText="{{dialog.okText}}"
+    cancelText="{{dialog.cancelText}}"
+    isShow="{{dialog.isDialogShow}}"
+    bind:tapOk="{{dialog.tapOkEvent}}"
+    >
+</dialog-box>

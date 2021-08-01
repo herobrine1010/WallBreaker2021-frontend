@@ -5,29 +5,39 @@
   background: #F2FCFF;
   border-radius: 6px;
 }
-.current-item {
-  height: 50rpx;
-}
 .current-item-text,
-.option-item-text {
-  width: 100%;
-
+.option-item {
   font-family: PingFang SC;
   font-style: normal;
   font-weight: normal;
   font-size: 13px;
   line-height: 25px;
+  display: flex;
+  align-items: center;
 
-
-  /* gray2 */
-  color: #989A9A;
+  color: #4A5559;
 }
-
-.option-list {
+.current-item {
+  padding: 0 10rpx 0 10rpx;
+}
+/*使用CSS实现向下箭头*/
+.current-item-text::after {
+  border: 10rpx solid transparent;
+  border-top-color: #4A5559;
+  width: 0;
+  height: 0;
   position: absolute;
-  z-index: 10;
-
+  right: 18rpx;
+  top: 20rpx;
+  content: '';
+}
+.option-list {
+  padding: 0 10rpx 0 10rpx;
+  position: absolute; /*确保下拉列表不会推开底下的元素*/
   width: 100%;
   background: #F2FCFF;
   border-radius: 6px;
+  z-index: 10;
+  box-sizing: border-box;/*解决选择框与下拉框宽度不一致*/
+  border: 2rpx groove #eafaff
 }

@@ -7,7 +7,7 @@
   <view class="per-container">
     <!-- 以下是用户头像、昵称、学院、标签等简要信息 -->
     <personal-brief
-    avataPath = ""
+    avatarPath = "{{personBrief.avatarPath}}"
     labels="{{labels}}"
     personBrief = "{{personBrief}}"
     ></personal-brief> 

@@ -1,7 +1,9 @@
 {
   "usingComponents": {
     "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
-    "label-selector": "/components/label-selector/label-selector"
+    "label-selector": "/components/label-selector/label-selector",
+    "dialog-box":"/components/dialog-box/dialog-box"
   },
   "navigationStyle":"custom"
+  
 } 

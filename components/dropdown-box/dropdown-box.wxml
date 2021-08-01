@@ -1,17 +1,17 @@
 <!--components/dropdown-box/dropdown-box.wxml-->
-
 <view class="dropdown-box">
+  <!--当前选择项-->
   <view class="current-item" catchtap="openClose">
     <text class="current-item-text">{{current.name}}</text>
   </view>
+  <!--下拉框列表-->
   <view class="option-list" wx:if="{{isShow}}" catchtap="optionTap">
     <view class="option-item"
-      wx:for="{{result}}"
-      wx:key="{{item.id}}"
+      wx:for="{{range}}"
+      wx:key="id"
       data-id="{{item.id}}"
       data-name="{{item.name}}">
-      <text class="option-item-text">{{item.name}}</text>
+      {{item.name}}
     </view>
-    
   </view>
 </view>

@@ -9,7 +9,7 @@
     </view>
     <form bindsubmit="formSubmit">
       <view class="feedback-body">
-      <textarea name="feedbackText"  maxlength="300" placeholder="请输入您的建议！(不超过300字)"></textarea>
+      <textarea name="feedbackText"  maxlength="310" placeholder="请输入您的建议！(不超过300字)" bindinput="handleInput"></textarea>
       </view>
       <view class="feedback-message">{{feedbackMessage}}</view>
       <button class="feedback-btn" form-type="submit">提交</button>

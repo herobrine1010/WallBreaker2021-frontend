@@ -1,0 +1,43 @@
+/* components/input-tip/input-tip.wxss */
+.container {
+  width: 100%;
+  position: relative;
+}
+.input-box {
+  width: 100%;
+  height: 50rpx;
+  background: #F2FCFF;
+  border-radius: 6px;
+
+  padding-left: 14rpx;
+}
+.input-placeholder {
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+
+  color: #989A9A;
+}
+.tip-wrap {
+  width: 100%;
+  margin-top: 12rpx;
+
+}
+.tip-text {
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 17px;
+
+  color: #007399;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}

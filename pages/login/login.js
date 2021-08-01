@@ -81,7 +81,7 @@ Page({
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
+      wx.getUserProfile({
         success: res => {
           app.globalData.userInfo = res.userInfo
           this.setData({
@@ -93,6 +93,19 @@ Page({
     }
   },
   getUserInfo: function(e) {
+
+    wx.getUserProfile({
+      desc: '用于完善会员资料', 
+      success: (res) => {
+        console.log(res.userInfo)
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    })
+
+
     if(this.data.loginLock)return
     this.setData({
       loginLock: true
@@ -111,25 +124,32 @@ Page({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log(res.code)
         wx.setStorage({
           data: res.code,
           key: 'code',
         })
         wx.request({
-          method: 'GET',
+          method: 'POST',
           data: {
-            code: res.code
+            "code": res.code,  
+            "iv": e.detail.iv,
+            "encryptedData": e.detail.encryptedData
           },
           url: 'http://localhost:8080/user/login',
+          header: {
+            'content-type': 'application/json'
+            },
           success: function(res2){
-            console.log(res2)
+            console.log(res2);
+            console.log("openid:"+res2.data.openid);
             if(typeof(res2.data) == 'string'){
               console.log(res2.cookies[0])
               wx.setStorageSync("token", res2.cookies[0])
-              wx.navigateTo({
-                // url: '/pages/character/character',
-                url:'/pages/loading/loading'
-              })
+              // wx.navigateTo({
+              //   // url: '/pages/character/character',
+              //   url:'/pages/loading/loading'
+              // })
             } else{
               self.setData({
                 sessionKey: res2.data.sessionKey,
