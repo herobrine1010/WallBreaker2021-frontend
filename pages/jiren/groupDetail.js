@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: { 
-    amITeamInitiator:false,
+    amITeamInitiator:true,
     title:'破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！',
     dialog:{
       isDialogShow: false,
@@ -16,6 +16,13 @@ Page({
       okText:"确认",
       tapOkEvent:"",
     },
+    dialog2:{
+      isDialogShow:false,
+      title:"title",
+      content:"随便写一点",
+      pictures:[],
+      botton:"返回"
+    },
     teamDetail:{
       title:'周末狼人杀大家来玩啊我只是为了凑够二十五个字好够了',
       isTeamClosed: false,
@@ -23,8 +30,8 @@ Page({
       nickname: '龙龙',
       fromTime: '1天前',
       dueTime: '2天后结束',
-      content: '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n我不知道怎么找图片就拿头像来凑\n最多四百字是吗\n那最多多少行啊\n像这样强行分好多段允许吗像这样强行分好多段允许吗像这样强行分好多段允许吗',
-      picturesNum:  3,
+      content: '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n我不知道怎么找图片就拿头像来凑\n最多四百字\n那最多多少行?',
+      picturesNum:  4,
       pictures: ['https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02','https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02','https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02','https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02'],
     },
     isFavourite:false,
@@ -101,7 +108,13 @@ Page({
     beRefused:false,
 
     dialogForBeingAccrept:false,
-    dialogForBeingCloseInAdvance:false
+    dialogForBeingCloseInAdvance:false,
+    tipBox:{
+      show:false,
+      text:"随便写点什么"
+    },
+  
+    initiatorScrollHeight:'auto'
   },
 
   /**
@@ -110,6 +123,8 @@ Page({
   onLoad: function (options) {
     //拼接 发起人 和 参与者列表
     // {"avatar":"...","me":false,"initiator":false,"id":1}
+    let app=getApp();
+    var that=this;
     this.setData({avatarList:[
       {"initiator":true,"avatar":'https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02',id:1},
       {"me":true,"avatar":"https://s3-alpha.figma.com/profile/06efcf65-977c-4154-b8a3-3db3f6a2f79f",id:2},
@@ -118,7 +133,54 @@ Page({
       {"avatar":"http://tiebapic.baidu.com/forum/w%3D580%3B/sign=ef2e2225da11728b302d8c2af8c7c2ce/c995d143ad4bd1134dde1a864dafa40f4bfb0576.jpg"},
       {"avatar":"http://tiebapic.baidu.com/forum/w%3D580%3B/sign=fa624952e31ea8d38a22740ca731324e/ac6eddc451da81cbf0437d241766d016082431b6.jpg"},{},{},{},{}
     ]});
+    var that=this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          windowHeight:res.windowHeight
+        })
+      }
+    });
+    this.initializeResult();
     this.changeScrollHeight();
+    if(this.data.amITeamInitiator){
+      this.changeSizeOfInitiatorPage();
+    }else{
+
+    };
+    wx.request({
+      url: app.globalData.url+'/team/getTeam/7',
+      // data:{
+      //   due_member
+      // },
+      success:function(res){
+        console.log(res);
+      }
+    })
+
+    let list=[];
+    wx.request({
+      url: app.globalData.url+'/userTeam/getApplierInfoByTeamId/7',
+      success:function(res){
+        console.log(res.data.data);
+        for(let i in res.data.data){
+          // console.log(user);
+          list.push({
+            'avatar':res.data.data[i].avatarUrl,
+          })
+        };
+        for(let i=0;i<3;i++){
+          list.push({})
+        }
+        that.setData({
+          avatarList:list,
+        })
+      }
+    })
+
+
+
+    // this.seeDetail();
     // console.log(this.data.timeIsOver);
   },
   
@@ -256,7 +318,20 @@ Page({
   },
 
   seeDetail:function(e){
-    console.log("查看全部")
+    console.log("查看全部");
+    let teamDetail=this.data.teamDetail;
+    let dialog2={
+      isDialogShow:true,
+      title:teamDetail.title,
+      content:teamDetail.content,
+      pictures:teamDetail.pictures,
+      button:"返回"
+    };
+    this.setData({
+      dialog2:dialog2
+    });
+    this.selectComponent('#dialog2').changeSize();
+    // this.changeScrollHeight2();
   },
   tapFavourite:function(){
     if(this.data.isFavourite==false){
@@ -288,6 +363,14 @@ Page({
     })
     wx.navigateTo({
       url: '/pages/jiren/answerQuestion',
+    })
+  },
+  acceptAllButton:function(e){
+    wx.request({
+      url: 'http://101.132.130.199:8080/team',
+      success:function(res){
+        console.log(res)
+      }
     })
   },
 
@@ -331,6 +414,7 @@ Page({
 
 
   changeScrollHeight:function(){
+    if(this.data.amITeamInitiator){return;}
     var that = this;
     var windowHeight;
     var height;
@@ -426,6 +510,50 @@ Page({
     });
     this.initializeResult();
     this.changeScrollHeight();
+  },
+
+
+  testButton:function(e){
+    let tipBox = {
+      show:true,
+      text:"该组队招募已结束，理由为：\n二十五个字二十五个字二十五个字二十五个字二十五个字"
+    };
+    this.setData({
+      tipBox:tipBox
+    })
+  },
+  tipBoxButton:function(e){
+    this.setData({
+      tipBox:{show:false}
+    })
+  },
+  changeScrollHeight2(){
+    var that=this;
+      var windowHeight=this.windowHeight
+      
+      // console.log(this);
+      let query = wx.createSelectorQuery();
+      query.select('#scroll').boundingClientRect(rect=>{
+        console.log(rect)
+          let maxHeight = rect.height;
+          if(maxHeight>windowHeight*0.7){
+            that.setData({
+              maxHeight:"70vh"
+            })
+          }
+        }).exec();
+  },
+  changeSizeOfInitiatorPage(){
+    // var that=this;
+    let query = wx.createSelectorQuery();
+    query.select('#initiator-scroll').boundingClientRect(rect=>{
+      console.log(rect)
+        let top = rect.top;
+        let height=this.data.windowHeight-top;
+        this.setData({
+          initiatorScrollHeight:height+'px',
+        });
+      }).exec();
   }
 })
 

@@ -1,0 +1,83 @@
+/* components/dialog-box/dialog2-box.wxss */
+/* components/teamDetail/initiator-teamDetail.wxss */
+
+/* .limit{
+  position: fixed;
+  height:70vh;
+  width: 690rpx;
+  left: 30rpx;
+  top: 15vh;
+  z-index: 110;
+} */
+.box{
+  position: fixed;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  z-index: 110;
+}
+.bg-white{
+  width: 690rpx;
+  height: 75%;
+  margin:auto;
+  padding:30rpx 0rpx;
+  background: #FAFEFF;
+  mix-blend-mode: normal;
+  border-radius: 50rpx;
+}
+.box-title{
+  /* 申请人： */
+  /* width: 114rpx; */
+  /* height: 40rpx; */
+  margin: 0rpx 30rpx 15rpx;
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36rpx;
+  line-height: 40rpx;
+  white-space: pre-line;
+  color: #4A5559;
+}
+.box-content{
+  width: 630rpx;
+  padding: 0 30rpx;
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30rpx;
+  line-height: 40rpx;
+  align-items: center;
+  color: #4A5559;
+  /* word-wrap: break-word; */
+  /* word-break: break-all; */
+  white-space: pre-line;
+}
+.picture-box{
+  display: flex;
+  flex-wrap: wrap;
+  width: 660rpx;
+  margin: 0 15rpx;
+
+}
+.pictureItem{
+  width: 200rpx;
+  height: 200rpx;
+  margin: 15rpx 0 0 15rpx;
+  background-color:gray;
+}
+.button{
+  width: 180rpx;
+  height: 50rpx;
+  margin: 30rpx auto;
+  background: #17B2E6;
+  border: 1px solid #17B2E6;
+  box-sizing: border-box;
+  border-radius: 25rpx;
+
+  font-family: PingFang SC;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  text-align: center;
+
+  color: #FAFEFF;
+}
