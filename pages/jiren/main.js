@@ -250,8 +250,10 @@ Page({
      }
    },
    createNewTeam:function(){
-     console.log("realize create new team")
-     //@朱一飞
+     //console.log("realize create new team")
+     wx.navigateTo({
+       url: '/pages/jiren/initiateTeam',
+     })
    }
 
 
