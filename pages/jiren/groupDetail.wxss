@@ -22,12 +22,49 @@
 .initiator-teamDetail{
   width:100%;
 }
+.detail-close-button{
+  /* position:absolute; */
+  width: 300rpx;
+  height: 44rpx;
+  margin-left:2vw ;
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  font-weight:400;
+  letter-spacing: 0.1vw;
+  background-color: #17B2E5;
+  text-align: center;
+  line-height: 44rpx;
+  border-radius: 30rpx;
+  color:#ffffff;
+}
+.detail-close-button-close{
+  width: 160rpx;
+  height: 44rpx;
+  margin-left: 2vw;
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  font-weight:400;
+  letter-spacing: 0.1vw;
+  background-color: #989A9A;
+  text-align: center;
+  line-height: 44rpx;
+  border-radius: 30rpx;
+  color:#ffffff;
+}
 
+.detail-spread-botton{
+  margin: 0 auto;
+  text-align: center;
+  font-size: 26rpx;
+  letter-spacing: 0.2vw;
+  color:#17B2E5;
+  font-weight: normal;
+}
 /* --------------以下是申请者的scroll-view的样式----start------------------- */
 .user-list{
-  height:62%;
+  height:57vh;
   width:100%;
-  margin-top: 40rpx ;
+  margin-top: 20rpx ;
 }
 
 .list-item{
@@ -39,10 +76,10 @@
   border-radius: 2.5vw; 
 }
 .empty-block{
-  position: relative;
+  /* position: relative; */
   width:100%;
-  height:120rpx;
-  margin-bottom: 30rpx;
+  height:8vh;
+  /* margin-bottom: 30; */
 }
 /* .list-item-avatar{
   position:absolute;
@@ -100,6 +137,10 @@
 .cross{
   right:20rpx;
 }
+/* #dialog2{
+  margin:auto;
+} */
+
 /* --------------以上是申请者的scroll-view的样式----end------------------- */
 
 /* 这段没看懂有什么用，以后用得到再说 */
@@ -175,7 +216,7 @@
   margin:0  auto;
   /* left: 3vw; */
   /* right: 3vw; */
-  padding:24rpx 0;
+  padding:12rpx 0;
   background-color: #F2FCFF;
   border-radius: 30rpx;
   /* z-index: 2; */
@@ -187,7 +228,7 @@
 .detail-title{
   display: flex;
   text-align: justify;
-  width: 50%-【;
+  /* width: 50%; */
   /* margin: 24rpx 16rpx 12rpx; */
   font-size:36rpx;
   font-weight:600;
@@ -200,8 +241,8 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  height: 80rpx;
-  margin:12rpx 0;
+  /* height: 80rpx; */
+  margin:0rpx 0;
   letter-spacing: 0.1vw;
 }
 .detail-name-and-time{
@@ -234,8 +275,6 @@
 
 
 .detail-text{
-  /* display: flex; */
-  /* width: 10px; */
   color:#989A9A;
   letter-spacing: 0.1vw;
   font-size: 30rpx;
@@ -265,4 +304,54 @@
   font-size:30rpx;
   font-weight: 500;
 }
-  
+
+
+.tip-box{
+  position:fixed;
+  width: 62vw;
+  left: 13vw;
+  top:550rpx;
+  padding:30rpx 6vw ;
+  border-radius: 50rpx;
+  background-color: #FAFEFF;
+  /* z-index: 101; */
+}
+
+.tip-shade{
+  position:fixed;
+  background-color: rgba(0,0,0,0.2);
+  width:100%;
+  height:100%;
+  left:0;
+  top:0; 
+  /* z-index: 100; */
+}
+.tip-text{
+  /* display: flex; */
+  /* width: 50vw; */
+  /* margin: 30rpx 75rpx 10rpx; */
+  margin:0 auto 30rpx;
+
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32rpx;
+  line-height: 40rpx;
+  text-align: center;
+  color:#4A5559;
+  justify-content:center;
+}
+.tip-button{
+  height: 50rpx;
+  width: 180rpx;
+  border: 2rpx solid   #17B2E5;
+  border-radius: 40rpx;
+  margin: 0 auto;
+  line-height:50rpx;
+  font-size: 26rpx;
+  text-align: center;
+  font-weight: normal;
+  letter-spacing: 0.2vw;
+  color:#FAFEFF;
+  background-color: #17B2E5;
+}

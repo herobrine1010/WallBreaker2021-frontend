@@ -1,4 +1,4 @@
-// components/teamDetail/initiator-teamDetail.js
+// components/dialog-box/dialog2-box.js
 Component({
   /**
    * 组件的属性列表
@@ -8,27 +8,7 @@ Component({
       type:String,
       value:'默认标题'
     },
-    isTeamClosed:{
-      type:Boolean,
-      value: false
-    },
-    avatar:{
-      type:String,
-      value:'https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02'
-    },
-    nickname:{
-      type:String,
-      value:'默认昵称'
-    },
-    fromTime:{
-      type:String,
-      value:'默认天数前'
-    },
-    dueTime:{
-      type:String,
-      value:'默认天数后结束'
-    },
-    isDetailShow:{
+    isDialogShow:{
       type:Boolean,
       value:false
     },
@@ -48,6 +28,10 @@ Component({
     picturesNum:{
       type:Number,
       value: 0
+    },
+    button:{
+      type:String,
+      value:"返回"
     }
   },
 
@@ -55,25 +39,36 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    maxHeight:"auto"
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    closeTeam:function(){
-      this.triggerEvent("closeTeam")
-    },
-    seeDetail:function(){
-      this.setData({
-        isDetailShow:true
-      })
-    },
     detailHide:function(){
       this.setData({
-        isDetailShow:false
+        isDialogShow:false
       })
+    },
+    changeSize:function(){
+      var that=this;
+      var windowHeight;
+      wx.getSystemInfo({
+        success: function (res) {
+            windowHeight= res.windowHeight;
+        }
+      });
+      let query = this.createSelectorQuery();
+      query.select('#scroll').boundingClientRect(rect=>{
+        console.log(rect)
+          let maxHeight = rect.height;
+          if(maxHeight>windowHeight*0.7){
+            that.setData({
+              maxHeight:"70vh"
+            })
+          }
+        }).exec();
     }
-  }
+  },
 })

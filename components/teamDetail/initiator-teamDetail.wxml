@@ -18,9 +18,9 @@
       <text>{{content}}</text>
     </view>
     <view class="picture-box">
-        <block wx:if="{{picturesNum>1}}" wx:for="{{pictures}}" wx:key="{{index}}">
+        <block wx:if="{{picturesNum>1}}" wx:for="{{pictures}}">
           <view class="pictureItem">
-            <image src="item[index]"></image>
+            <image src="{{item}}"></image>
           </view>
         </block>
         <block wx:if="{{picturesNum==1}}">

@@ -1,0 +1,17 @@
+
+<view wx:if="{{isDialogShow}}" class="box">
+  <scroll-view class="bg-white" id="scroll" scroll-y="true" style="height:{{maxHeight}}">
+    <view class="box-title">{{title}}</view>
+    <view class="box-content">
+      <text>{{content}}</text>
+    </view>
+    <view class="picture-box">
+        <block wx:if="{{pictures}}" wx:for="{{pictures}}">
+          <!-- <view class="pictureItem"> -->
+            <image src="{{item}}" class="pictureItem"></image>
+          <!-- </view> -->
+        </block>
+    </view>
+    <view class="button" bindtap="detailHide">{{button}}</view>
+  </scroll-view>
+</view>

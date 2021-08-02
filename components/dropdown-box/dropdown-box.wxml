@@ -2,7 +2,7 @@
 <view class="dropdown-box">
   <!--当前选择项-->
   <view class="current-item" catchtap="openClose">
-    <text class="current-item-text">{{current.name}}</text>
+    <text class="current-item-text">{{current.content}}</text>
   </view>
   <!--下拉框列表-->
   <view class="option-list" wx:if="{{isShow}}" catchtap="optionTap">
@@ -10,8 +10,8 @@
       wx:for="{{range}}"
       wx:key="id"
       data-id="{{item.id}}"
-      data-name="{{item.name}}">
-      {{item.name}}
+      data-content="{{item.content}}">
+      {{item.content}}
     </view>
   </view>
 </view>
