@@ -13,7 +13,7 @@ Component({
       type: Object,
       value: {
         id: 0,
-        name: '竞赛'
+        content: '竞赛'
       }
     }
   },
@@ -41,7 +41,7 @@ Component({
       let selectedDataset = e.target.dataset
       this.setData({
         current: selectedDataset,
-        value: selectedDataset.name,
+        value: selectedDataset.content,
         isShow: false
       })
       this.triggerEvent("change", selectedDataset)

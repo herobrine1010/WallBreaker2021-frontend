@@ -8,19 +8,21 @@ Component({
     extImageList: {
       type: Array,
       data: []
+    },
+    //存储用户上传的图片路径
+    imageList: {
+      type: Array,
+      data:[]
     }
-
   },
-
   /**
    * 组件的初始数据
    */
   data: {
-    //存储用户上传的图片路径
-    imageList:[
-      
-    ]
-    
+  },
+  behaviors: ['wx://component-export'],
+  export() {
+    return { image: this.data.imageList }
   },
 
   /**

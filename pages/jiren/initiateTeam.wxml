@@ -8,16 +8,10 @@
     <view class="main-area-content">
       <form bindsubmit="teamInfoSubmit">
       
-        <view class="dropdown-box-wrap section1">
-          <view class="selector-label">组队主题:</view>
-          <dropdown-box name="teamTheme" range="{{themeOptions}}" value="{{theme.name}}" bindchange="dropdownChange"></dropdown-box>
-        </view>
-        <view class="section2">
-          <view class="picker-wrap">
-            <view class="selector-label">截止时间</view>
-            <picker name="dueDate" mode="date" value="{{dueDate}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
-              <view class="picker-box">{{dueDate}}</view>
-            </picker>
+        <view class="section1">
+          <view class="dropdown-box-wrap">
+            <view class="selector-label">组队主题:</view>
+            <dropdown-box name="teamTheme" range="{{themeOptions}}" value="{{theme.content}}" bindchange="dropdownChange"></dropdown-box>
           </view>
           <view class="picker-wrap">
             <view class="selector-label">需求人数</view>
@@ -25,6 +19,19 @@
               <view class="picker-box">{{memberNumber}}</view>
             </picker>
           </view>
+          <view class="picker-wrap">
+            <view class="selector-label">截止日期</view>
+            <picker name="dueDate" mode="date" value="{{dueDate}}" start="2015-09-01" end="2025-09-01" bindchange="bindDateChange">
+              <view class="picker-box">{{dueDate}}</view>
+            </picker>
+          </view>
+          <view class="picker-wrap">
+            <view class="selector-label">截止时间</view>
+            <picker name="dueTime" mode="time" value="{{dueTime}}" bindchange="bindTimeChange">
+              <view class="picker-box">{{dueTime}}</view>
+            </picker>
+          </view>
+
         </view>
 
         <view class="section3 teamInfo">
@@ -39,7 +46,7 @@
               <textarea name="teamContent" value="{{teamContent}}" 
               class="teamInfo-content-textarea" placeholder-class="teamInfo-content-textarea-placeholder" placeholder="请填写您组队的主要信息，描述越准确就越能够寻找到越合适的队友" maxlength="500">
               </textarea>
-              <image-box></image-box>
+              <image-box id="image-box"></image-box>
             </view>
           </scroll-view>
 

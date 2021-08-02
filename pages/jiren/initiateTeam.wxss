@@ -28,8 +28,9 @@ page {
   /*居中对齐后，余750rpx-75rpx=675rpx*/
   padding: 35rpx;
 }
-.section2 {
+.section1 {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .dropdown-box-wrap,
@@ -121,10 +122,10 @@ page {
   margin-bottom: 26rpx;
 }
 .teamInfo-scroll-view {
-  height: 360rpx;
+  height: 500rpx;
 }
 .teamInfo-content-textarea {
-  height: 160rpx;
+  height: 300rpx;
   width: 95%;
 
   font-family: PingFang SC;
