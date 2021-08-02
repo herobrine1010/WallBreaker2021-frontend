@@ -1,0 +1,30 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/jiren/groupDetail",
+          "pathName": "pages/jiren/groupDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/jiren/groupDetail",
+          "pathName": "pages/jiren/groupDetail",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

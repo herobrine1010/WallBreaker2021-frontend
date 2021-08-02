@@ -12,15 +12,37 @@
 
     <view wx:if="{{amITeamInitiator}}">
   <!-- 自定义组件：initiator-teamDetail    ---发起者才看得到------------ -->
-      <initiator-teamDetail
+      <!-- <initiator-teamDetail
       wx:if="{{amITeamInitiator}}"
       class="initiator-teamDetail"
       title= "{{teamDetail.title}}" isTeamClosed="{{teamDetail.isTeamClosed}}" avatar="{{teamDetail.avatar}}" nickname="{{teamDetail.nickname}}" fromTime="{{teamDetail.fromTime}}" dueTime="{{teamDetail.dueTime}}" content="{{teamDetail.content}}" picturesNum="{{teamDetail.picturesNum}}" pictures="{{teamDetail.pictures}}"
       bindcloseTeam = "handleCloseTeam"
-      ></initiator-teamDetail>
+      ></initiator-teamDetail> -->
+      
+      <view class="board">
+       <view class="board-view">
+        <view class="detail-a-line">
+          <view class="detail-title">{{teamDetail.title}}</view> 
+          <view wx:if="{{!teamDetail.isTeamClosed}}" class="detail-close-button" bindtap="handleCloseTeam">结束组队招募</view>
+          <view wx:if="{{teamDetail.isTeamClosed}}" class="detail-close-button-close">已结束</view>
+        </view>
+          <view class="detail-a-line">
+            <view class="detail-avatar">
+              <image src="{{teamDetail.avatar}}" style="width:80rpx; height:80rpx; border-radius:50%"></image>
+            </view>
+            <view class="detail-name-and-time">
+              <view class="detail-nickname">{{teamDetail.nickname}}</view>
+              <view class="detail-apply-time">{{teamDetail.fromTime}}</view>
+            </view>
+            <view wx:if="{{!over}}" class="detail-due-time">{{teamDetail.dueTime}}</view>
+          </view>
+          <view class="detail-spread-botton" bindtap="seeDetail">查看全部</view>
+          </view>
+        </view>
+
 
       <!-- ------只有 发起者 && 组队未关闭 的时候，才显示申请人员信息--------------->
-      <scroll-view wx:if="{{amITeamInitiator && !teamDetail.isTeamClosed}}"
+      <scroll-view wx:if="{{amITeamInitiator && !teamDetail.isTeamClosed}}" id="initiator-scroll" style="height:{{initiatorScrollHeight}}"
       enhanced="true" show-scrollbar="false" class="user-list" enable-back-to-top="true" refresher-enabled="true" scroll-y="true" with-animation='true'>
       
         <block wx:for="{{applierList}}" >
@@ -43,7 +65,7 @@
           <view wx:if="{{teamDetail.isTeamClosed}}" class="accept-all-button  accept-all-button-close">
             一键接受
           </view>
-          <view wx:else class="accept-all-button ">
+          <view wx:else class="accept-all-button " bindtap="acceptAllButton">
             一键接受
           </view>
         </block>      
@@ -100,7 +122,7 @@
 
 
   <view class="bottom-elements" wx:if="{{!amITeamInitiator&&!haveJoinedIn&&!over}}" bindtap="applicantClick">
-    <view class="applicantButton" bindtap="testButton">
+    <view class="applicantButton">
       <view wx:if="{{!haveSignedUp && !timeIsOver && !memberFull}}" bindtap="applyButton">我要加入</view>
       <view wx:if="{{!haveSignedUp &&(timeIsOver||memberFull)}}" class="grayButton">我要加入</view>
       <view wx:if="{{haveSignedUp&&!timeIsOver}}" bindtap="cancelButton">取消申请</view>
@@ -111,8 +133,6 @@
     <image bindtap="tapFavourite" class="fav-icon" wx:else src='/static/icon/collect-blue.png'></image>
   </view>
   </view>
-  
-  
 </view>
 
 <personal-animation id="personalAnimation" hidden="{{true}}"></personal-animation>
@@ -128,7 +148,28 @@ bind:tapOk="{{dialog.tapOkEvent}}"
 >
 </dialog-box>
 
+<dialog2-box
+id="dialog2"
+content="{{dialog2.content}}"
+isDialogShow="{{dialog2.isDialogShow}}"
+title="{{dialog2.title}}"
+pictures="{{dialog2.pictures}}"
+button="{{dialog2.button}}">
+</dialog2-box>
 
-<image class='tick' src='/static/icon/tick.png' bindtap="acceptApplying" data-applyername="你自己" data-applyerid="0" style="position:fixed;top:88vh;right:18vw" hidden="{{!haveSignedUp}}"></image>
+
+<view class="tip-box" wx:if="{{tipBox.show}}">
+  <view class="tip-shade"></view>
+  <view class="tip-box">
+    <view class="tip-text">
+      <text>{{tipBox.text}}</text>
+    </view>
+    <view class="tip-button" bindtap="tipBoxButton">确定</view>
+  </view>
+</view>
+
+<!-- <image class='tick' src='/static/icon/tick.png' bindtap="acceptApplying" data-applyername="你自己" data-applyerid="0" style="position:fixed;top:88vh;right:18vw" hidden="{{!haveSignedUp}}"></image>
 <image class='cross' src='/static/icon/cross-purple.png' data-applyername="你自己" data-applyerId="0" bindtap="refuseApplying"  style="position:fixed;top:88vh;right:10vw" hidden="{{!haveSignedUp}}"></image>
 <view class="tick" bindtap="handleCloseTeam" style="position:fixed;top:88vh;right:2vw">E</view>
+
+<view class="tick" bindtap="testButton" style="position:fixed;top:88vh;right:26vw">T</view>65 -->

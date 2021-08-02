@@ -9,34 +9,9 @@ App({
 
     // 登录
     wx.login({
-      // success: res => {
-      //   // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      //   if(res.code){
-      //     wx.request({
-      //       method: "POST",
-      //       url: 'http://localhost:8080/user/login',
-      //       data:{
-      //         code:res.code
-      //       },
-      //       header:{
-      //         'content-type':'application/json'
-      //       },
-      //       success(res){
-      //         console.log("openid:"+res.data.openid);
-      //         if(res.data.openid!="" || res.data.openid!=null){
-      //           //success
-      //           wx.setStorageSync('openid',res.data.openid);
-      //           wx.setStorageSync('session_key',res.data.session_key);
-      //         }else{
-      //           console.log("failed");
-      //           return false;
-      //         }
-      //       }
-      //     })
-      //   }else{
-      //     console.log('get info failed'+res.errMsg)
-      //   }
-      // }
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+      }
     })
     console.log("onLaunchFinished")
   },
@@ -54,6 +29,5 @@ App({
     userInfo: null,
     personalManagementOrCollection:0,
     url:'http://101.132.130.199:8080'
-    // url:'http://localhost:8080'
   }
 })
