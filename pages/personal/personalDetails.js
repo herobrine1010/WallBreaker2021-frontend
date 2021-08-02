@@ -105,7 +105,6 @@ Page({
       success (res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths;
-        console.log(tempFilePaths);
         self.setData({
           tempFilePaths
         })
@@ -117,7 +116,6 @@ Page({
     this.setData({
       userDetails:e.detail.value
     })
-    console.log(this.data.userDetails);
   },
   // 定义点击事件，拿到标签数据
   btnTap:function(){
@@ -129,7 +127,7 @@ Page({
       labels
     })
     
-    //  弹出对话框让用户确定--------------------------
+    // ------------- 弹出对话框让用户确定--------------------------
     let dialog = {
       isDialogShow: true,
       content:"确认修改？",
@@ -143,11 +141,30 @@ Page({
       dialog
     })
   },
-  // 用户在对话框中点击确定后，会出发以下事件，并向服务器发送请求
+  // 用户在对话框中点击确定后，会触发以下事件，并向服务器发送请求
   dialogTapOkForChangePersonalDetail:function(){
     let that = this ;
-    // console.log(that.data.labels);
     let labels = [].concat(that.data.labels);
+    // -------首先应根据本地路径上传图片，拿到图片的url,之后将url和表单数据一起提交------
+    // http://101.132.130.199:8080/team/jirenUploadPhoto
+    console.log(this.data.tempFilePaths[0]);
+    wx.uploadFile({
+      filePath: this.data.tempFilePaths[0],
+      name: String(this.data.userId),
+      url: 'http://101.132.130.199:8080/team/jirenUploadPhoto',
+      header: {
+        "Content-Type": "multipart/form-data",
+        "token": wx.getStorageSync('token')
+      },
+      success: (res)=> {
+        console.log(res);
+      },
+      fail: (err)=>{
+        console.log(err);
+      }
+    });
+
+    // --------------以下是修改个人资料（包括头像，但不包括数据可见性）-----------
     request({
       url : '/user/editMyInfo',
       header: {
@@ -175,6 +192,8 @@ Page({
 
     });
 
+    // ----------以下是：--------更改个人和兴趣标签------------------------------------
+    // 1.请求参数为JSON 格式，不能有null；所以先将 selected = null 转为 false ; 再转为JSON格式------
     labels = labels.map(v => {
       return{
         id : v.id,
@@ -182,7 +201,8 @@ Page({
         selected : v.selected==null?false:v.selected
       }
     });
-    console.log(JSON.stringify(labels));
+    // 小程序会自动转JSON格式
+    // console.log(JSON.stringify(labels));
     request({
       url : '/userLabel/editMyLabel',
       header: {
@@ -249,6 +269,7 @@ Page({
       })
 
       that.setData({
+        userId : result.id,
         avatarPath : result.avatarUrl,
         userDetails,
         personalLabel,

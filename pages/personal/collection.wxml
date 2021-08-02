@@ -25,6 +25,7 @@
         title="{{item.title}}"
         rightTagText="{{item.rightTagText}}" 
         userName="{{item.userName}}" 
+        userAvatar = "{{userAvatar}}"
         publishTime="{{item.publishTime}}"
         description="{{item.description}}"
         postingPic="{{item.postingPic}}" 

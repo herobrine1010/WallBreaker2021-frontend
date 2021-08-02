@@ -47,44 +47,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const that = this;
-    // -----------使用封装成promise 的request方法，注意添加本文件最上方的引入；
-    request({
-      url : "/user/myInfo",
-      header: {
-        'content-type': 'x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
-      }
-    }).then( res => {
-      let perInfo = res.data.data;
-      console.log(perInfo);
-      // ---------------以下是对头像，昵称，专业等进行更改；
-      let personBrief = {
-        avatarPath : perInfo.avatarUrl,
-        nickname: perInfo.nickName,
-        school: perInfo.school || '学院' ,
-        major: perInfo.major || '专业' ,
-        grade: perInfo.grade || '年级',
-        identification: perInfo.identification || '学历'
-      };
-      that.setData({
-        personBrief
-      });
-
-      // -----------以下是对标签进行处理---------------------------------------
-      let tempLabels = perInfo.personalLabel.concat(perInfo.interestLabel);
-      let labels = tempLabels.map( v => {
-        return {
-          type : v.type,
-          name : v.content
-        }
-      });
-      that.setData({
-        labels
-      });
-    }).catch( err => {
-      console.log(err);
-    });
+    
   },
 
   /**
@@ -98,11 +61,46 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 2 //0,1,2 0-济事  1-济人  2-我的
-      })
-   }
+    
+
+    const that = this;
+    // -----------使用封装成promise 的request方法，注 意添加本文件最上方的引入；
+    request({
+      url : "/user/myInfo",
+      header: {
+        'content-type': 'x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      }
+    }).then( res => {
+      let perInfo = res.data.data;
+      console.log(perInfo);
+      // ---------------以下是对头像，昵称，专业等进行  更改；
+      let personBrief = {
+        avatarPath : perInfo.avatarUrl,
+        nickname: perInfo.nickName,
+        school: perInfo.school || '学院' ,
+        major: perInfo.major || '专业' ,
+        grade: perInfo.grade || '年级',
+        identification: perInfo.identification || '学 历'
+      };
+      that.setData({
+        personBrief
+      });
+
+      // -----------以下是对标签进行处理  ---------------------------------------
+      let tempLabels = perInfo.personalLabel.concat (perInfo.interestLabel);
+      let labels = tempLabels.map( v => {
+        return {
+          type : v.type,
+          name : v.content
+        }
+      });
+      that.setData({
+        labels
+      });
+    }).catch( err => {
+      console.log(err);
+    });
   },
 
   /**
