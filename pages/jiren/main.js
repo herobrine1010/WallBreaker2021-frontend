@@ -14,7 +14,7 @@ Page({
     conditionsSelected:[false,false,false,false],
     jirenItemList:[
       {
-        'teamID': '02',
+        'teamID': '9',
       'labelText':'未分类',
       'title':'示例标题示例标题示例标题…',
       'teamCondition':'mine',
@@ -26,7 +26,7 @@ Page({
       'postingPic':'a'
     },
     {
-      'teamID': '03',
+      'teamID': '31',
       'labelText':'未分类',
       'title':'示例标题示例标题示例标题…',
       'teamCondition':'',
@@ -38,7 +38,7 @@ Page({
       'postingPic':''
     },
     {
-      'teamID': '04',
+      'teamID': '11',
       'labelText':'2ff类',
       'title':'示例标题sfnvkjs例标题…',
       'teamCondition':'',

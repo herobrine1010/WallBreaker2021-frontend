@@ -23,11 +23,11 @@
   width:100%;
 }
 .detail-close-button{
-  /* position:absolute; */
-  width: 300rpx;
+  position:absolute;
+  width: 22vw;
   height: 44rpx;
-  margin-left:2vw ;
-  margin-top: 6rpx;
+  right: 0;
+  top: 6rpx;
   font-size: 24rpx;
   font-weight:400;
   letter-spacing: 0.1vw;
@@ -228,7 +228,7 @@
 .detail-title{
   display: flex;
   text-align: justify;
-  /* width: 50%; */
+  width: 64vw;
   /* margin: 24rpx 16rpx 12rpx; */
   font-size:36rpx;
   font-weight:600;
