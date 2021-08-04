@@ -98,7 +98,7 @@ Page({
       'teamCondition':'mine',
       'rightTagText':'我发起的',
       'dueTime':'截止时间: 2021年6月21日 14:00',
-      'content':'这是一段描述性文字，仅用于测试。这是一段……',
+      'content':'这是一段描述性文字，仅用于测试。这是一段用来测试省略号是否能正常显示的文字',
       'initiatorNickName':'发起人: 示例用户',
       'peopleCount':'3/5',
       'firstPicUrl':''

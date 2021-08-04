@@ -19,8 +19,9 @@
 <view>
     <text class="time">{{publishTime}}</text>
 </view>
-<view>
-    <text class="description">{{description}}</text>
+<view class="description-contain">
+    <!-- 没有图片时，显示的文字加长 -->
+    <text class="description {{postingPic?'description-short':'description-long'}}">{{description}}</text>
 </view>
 <view wx:if="{{postingPic}}" class="image">
     <image src="{{postingPic}}"></image>

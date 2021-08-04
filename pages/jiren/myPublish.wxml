@@ -13,6 +13,7 @@
         rightTagText="{{item.rightTagText}}"
         dueTime="{{item.dueTime}}"
         iconPosition="middle"
+        lineMode="double"
         peopleCount="{{item.peopleCount}}"
         description ="{{item.content}}"
         postingPic="{{item.firstPicUrl}}"

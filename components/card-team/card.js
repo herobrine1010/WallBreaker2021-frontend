@@ -26,6 +26,10 @@ Component({
       type:String,
       value:'bottom'
     },
+    lineMode : {
+      type:String,
+      value: 'normal'
+    },
     peopleCount:{
       type:String,
       value:'3/5'

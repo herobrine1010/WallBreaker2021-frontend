@@ -16,7 +16,7 @@ Page({
       {
       'labelText':'未分类',
       'title':'示例标题示例标题示例标题…',
-      'description':'这是一段描述性文字，仅用于测试。这是一段……',
+      'description':'这是一段描述性文字，仅用于测试。这是一段测试性文字，用来监测省略号是否能正常显示这是一段描述性文字，仅用于测试。这是一段测试性文字，用来监测省略号是否能正常显示',
       'rightTagText':'我发起的',
       'userAvatar':'/static/icon/default-user.png',
       'userName':'示例用户',
