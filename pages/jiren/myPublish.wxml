@@ -7,16 +7,15 @@
     <scroll-view class="list" scroll-y="true">
       <navigator url="groupDetail" wx:for="{{myTeamList}}" class="list-item">
         <card-me
-        labelText="{{item.labelText}}"
+        labelText="{{item.labelContent}}"
         title="{{item.title}}"
         teamCondition="{{item.teamCondition}}"
         rightTagText="{{item.rightTagText}}"
         dueTime="{{item.dueTime}}"
-        iconPosition="{{item.iconPosition}}"
+        iconPosition="middle"
         peopleCount="{{item.peopleCount}}"
-        description ="{{item.description}}"
-        initiator="{{item.initiator}}"
-        postingPic="{{item.postingPic}}"
+        description ="{{item.content}}"
+        postingPic="{{item.firstPicUrl}}"
         ></card-me>
       </navigator>
 

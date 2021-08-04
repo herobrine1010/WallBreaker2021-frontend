@@ -1,4 +1,7 @@
 // pages/jishi/main.js
+// 首先引入封装成promise的 request
+import { request } from "../../request/request.js";
+
 Page({
 
   /**
@@ -7,55 +10,14 @@ Page({
   data: {
     myTeamList:[
       {
-      'labelText':'未分类',
+      'labelContent':'未分类',
       'title':'示例标题示例标题示例标题…',
       'teamCondition':'processing',
       'rightTagText':'待处理',
       'dueTime':'截止时间: 2021年6月21日 14:00',
-      'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有图片的时候该怎么拉伸……',
-      'iconPosition':'middle',
+      'content':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有图片的时候该怎么拉伸……',
       'peopleCount':'3/5',
-      'postingPic':'a'
-      },{
-        'labelText':'未分类',
-        'title':'示例标题示例标题示例标题…',
-        'teamCondition':'processing',
-        'rightTagText':'待处理',
-        'dueTime':'截止时间: 2021年6月21日 14:00',
-        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
-        'iconPosition':'middle',
-        'peopleCount':'3/5',
-        'postingPic':'a'
-      },{
-        'labelText':'未分类',
-        'title':'示例标题示例标题示例标题…',
-        'teamCondition':'processing',
-        'rightTagText':'待处理',
-        'dueTime':'截止时间: 2021年6月21日 14:00',
-        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
-        'iconPosition':'middle',
-        'peopleCount':'3/5',
-        'postingPic':'a'
-      },{
-        'labelText':'未分类',
-        'title':'示例标题示例标题示例标题…',
-        'teamCondition':'processing',
-        'rightTagText':'',
-        'dueTime':'截止时间: 2021年6月21日 14:00',
-        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
-        'iconPosition':'middle',
-        'peopleCount':'3/5',
-        'postingPic':'a'
-      },{
-        'labelText':'未分类',
-        'title':'示例标题示例标题示例标题…',
-        'teamCondition':'processing',
-        'rightTagText':'',
-        'dueTime':'截止时间: 2021年6月21日 14:00',
-        'description':'这是一段描述性文字，仅用于测试。这是一段可以换行的文字，但是没有 图片的时候该怎么拉伸……',
-        'iconPosition':'middle',
-        'peopleCount':'3/5',
-        'postingPic':'a'
+      'firstPicUrl':'a'
       }
     ]
   },
@@ -64,7 +26,44 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    request({
+      url : '/userTeam/teamInitiatedByMe',
+      header: {
+        'content-type': 'x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      }
+      // data : setRequestData(keyword, labelId, timeIndex)
+    }).then(res => {
+      console.log(res);
+      if(res.statusCode >=200 && res.statusCode <=300){
+        // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
+        let myTeamList = res.data.data.map( v=>{
+          // status = 1  ;  表示：待处理的组队
+          v.teamCondition = 'processing';
+          if(v.status == 1){
+            v.rightTagText = '待处理';
+          };
+          let duetime = new Date(v.dueTime);
+          v.dueTime = '截止时间：'+ duetime.getFullYear() + '年' + duetime.getMonth() + '月'+ duetime.getDate() + '日 '+  duetime.getHours() + ':' + (duetime.getMinutes()<10?'0'+duetime.getMinutes():duetime.getMinutes());
+          v.peopleCount = v.participantNumber + '/' + v.dueMember ;
+          return v;
+        });
+        this.setData({
+          myTeamList
+        })
+      }else{
+        wx.showToast({
+          title: '失败',
+          icon: 'error'
+        })
+      } 
+    }).catch( err=> {
+      console.log(err);
+      wx.showToast({
+        title: '失败',
+        icon: 'error'
+      })
+    });
   },
 
   /**
