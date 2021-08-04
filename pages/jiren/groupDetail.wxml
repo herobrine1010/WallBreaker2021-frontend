@@ -12,13 +12,6 @@
 
     <view wx:if="{{amITeamInitiator}}">
   <!-- 自定义组件：initiator-teamDetail    ---发起者才看得到------------ -->
-      <!-- <initiator-teamDetail
-      wx:if="{{amITeamInitiator}}"
-      class="initiator-teamDetail"
-      title= "{{teamDetail.title}}" isTeamClosed="{{teamDetail.isTeamClosed}}" avatar="{{teamDetail.avatar}}" nickname="{{teamDetail.nickname}}" fromTime="{{teamDetail.fromTime}}" dueTime="{{teamDetail.dueTime}}" content="{{teamDetail.content}}" picturesNum="{{teamDetail.picturesNum}}" pictures="{{teamDetail.pictures}}"
-      bindcloseTeam = "handleCloseTeam"
-      ></initiator-teamDetail> -->
-      
       <view class="board">
        <view class="board-view">
         <view class="detail-a-line">
@@ -79,8 +72,6 @@
       <!-- <view class="blur-shadow"></view> -->
     </view>
 
-
-
     <view wx:if="{{!amITeamInitiator}}">
      <scroll-view scroll-y="true" style="width:100%;height:78vh">
     <!-- <view class="detail-board">      -->
@@ -98,7 +89,7 @@
             <view wx:if="{{!over}}" class="detail-due-time">{{teamDetail.dueTime}}</view>
           </view>
           <view class="detail-content">
-              <text class="detail-text">{{teamDetail.content}}</text>
+              <text class="detail-text" encode="{{true}}">{{teamDetail.content}}</text>
               <view class="detail-pictures" >
                 <view class="detail-picture" wx:for="{{teamDetail.pictures}}"><image src="{{item}}" style="width:26vw;height:26vw"></image></view>
               </view>
