@@ -5,7 +5,7 @@
   </view>
   <view class="jiren-container">
     <scroll-view class="list" scroll-y="true">
-      <navigator url="groupDetail" wx:for="{{myTeamList}}" class="list-item">
+      <navigator url="groupDetail?teamId=33" wx:for="{{myTeamList}}" class="list-item">
         <card-me
         labelText="{{item.labelContent}}"
         title="{{item.title}}"
