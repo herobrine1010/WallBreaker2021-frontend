@@ -96,22 +96,41 @@
 /* gray3_P */
   color: #7E7685;
 }
-.description{
-  /* 公告简介：利用flex布局实现垂直居中 */
+/* 以下是存放内容简介的container 样式=-------------------- */
+.description-contain{
   display: flex;
   position: absolute;
-  width: 540rpx;
+  /* width: 540rpx; */
+  /* width: 650rpx; */
   height: 60rpx;
   left: 18rpx;
   bottom: 20rpx;
-/* content/medium/11 */
+  align-items:center;
+
   font-family: PingFang SC;
   font-size: 24rpx;
-  line-height: 26rpx;
-  align-items: center;
+  line-height: 30rpx;
 /* gray2_P */
   color: #99989A;
 }
+.description-short{
+  width: 540rpx;
+}
+.description-long{
+  width: 650rpx;
+}
+.description{
+  /* 超出部分隐藏 */
+  overflow: hidden;     
+  /* 末尾加省略号 */
+  text-overflow:ellipsis;  
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  /* 行数，也可以设为1，用来做单行 */
+  -webkit-line-clamp:2;
+}
+
 .image{/* Rectangle 15 */
 
   position: absolute;

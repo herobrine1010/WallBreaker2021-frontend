@@ -33,6 +33,10 @@ Component({
     description:{
       type:String,
       value:'这是一段描述性文字，仅用于测试。'
+    },
+    lineMode : {
+      type:String,
+      value: 'normal'
     }
 
 

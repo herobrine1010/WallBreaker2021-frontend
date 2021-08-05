@@ -52,6 +52,8 @@
     "navigationBarTitleText": "济星云",
     "navigationBarTextStyle": "black"
   },
+  "useExtendedLib": {
+  },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

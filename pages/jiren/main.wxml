@@ -5,7 +5,7 @@
   </view>
   <view class="search-area">
     <view class="searchBar">
-      <mp-searchbar bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
+      <mp-searchbar bindblur="onSearch" ext-class="weui-search-bar_focusing"></mp-searchbar>
     </view>
     <view class="guide" bindtap="navToGuide">
       <image src="../../static/icon/map.png" class="guide-pic" alt=""></image>
@@ -26,7 +26,7 @@
         <image wx:if="{{timeIndex=='asc'}}" src="/static/icon/sort-up-blue.png" class="timeIcon"></image>
       </view>
       <view class="conditionFilter" bindtap="clickConditionFilter">
-        <block wx:if="{{conditionIndex==''}}">
+        <block wx:if="{{labelId==0}}">
           <view class="conditionText">筛选</view>
           <image class="conditionIcon" src="/static/icon/select.png"></image>
         </block>
@@ -39,9 +39,14 @@
     <view wx:if="{{conditionFilterOpen}}" class="filterExtended">
       <view class="conditionArea">
         <view class="whiteBG">
-        <block wx:for="{{conditions}}">
+        <!-- <block wx:for="{{conditions}}">
           <view bindtap="clickConditionBlue" wx:if="{{conditionsSelected[index]}}" class="conditionsSelected">{{item}}</view>
           <view data-condition='{{item}}'bindtap="clickConditionGray" wx:else class="conditionsNotSelected">{{item}}</view>
+        </block> -->
+        <block wx:for="{{teamLabels}}">
+          <view data-index="{{index}}" bindtap="clickLabel" class="{{item.selected?'conditionsSelected':'conditionsNotSelected'}}">
+            {{item.label}}
+          </view>
         </block>
       </view>
       </view>
@@ -55,18 +60,18 @@
     with-animation='true' 
     scroll-top='{{ topNum }}'
     class="listArea">
-      <block wx:for="{{jirenItemList}}" wx:key="teamId">
-        <navigator url="groupDetail?teamId={{item.teamID}}" class="team-item">
+      <block wx:for="{{jirenItemList}}" wx:key="{{index}}">
+        <navigator url="groupDetail?teamId={{item.id}}" class="team-item">
           <card-team 
-          labelText="{{item.labelText}}"
+          labelText="{{item.labelContent}}"
           title="{{item.title}}"
           teamCondition = "{{item.teamCondition}}"
           rightTagText = "{{item.rightTagText}}"
           dueTime="{{item.dueTime}}"
-          description="{{item.description}}"
-          initiator="{{item.initiator}}"
+          description="{{item.content}}"
+          initiator="{{item.initiatorNickName}}"
           peopleCount="{{item.peopleCount}}"
-          postingPic="{{item.postingPic}}"
+          postingPic="{{item.firstPicUrl}}"
           ></card-team>
         </navigator>
       </block>

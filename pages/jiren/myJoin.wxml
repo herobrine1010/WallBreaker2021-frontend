@@ -12,26 +12,26 @@
       <navigator url="groupDetail" wx:if="{{amIAccepted}}" wx:for="{{acceptTeamList}}" 
        class="list-item">
         <card-team
-        labelText="{{item.labelText}}"
+        labelText="{{item.labelContent}}"
         title="{{item.title}}"
         dueTime="{{item.dueTime}}"
         peopleCount="{{item.peopleCount}}"
-        description ="{{item.description}}"
-        initiator="{{item.initiator}}"
-        postingPic="{{item.postingPic}}"
+        description ="{{item.content}}"
+        initiator="{{item.initiatorNickName}}"
+        postingPic="{{item.firstPicUrl}}"
         ></card-team>
       </navigator>
 
-      <navigator url="groupDetail" wx:if="{{!amIAccepted}}" wx:for="{{applyingTeamList}}" 
+      <navigator  wx:if="{{!amIAccepted}}" wx:for="{{applyingTeamList}} " url="{{'groupDetail/teamId='+ item.id}}"
        class="list-item">
         <card-team
-        labelText="{{item.labelText}}"
+        labelText="{{item.labelContent}}"
         title="{{item.title}}"
         dueTime="{{item.dueTime}}"
         peopleCount="{{item.peopleCount}}"
-        description ="{{item.description}}"
-        initiator="{{item.initiator}}"
-        postingPic="{{item.postingPic}}"
+        description ="{{item.content}}"
+        initiator="{{item.initiatorNickName}}"
+        postingPic="{{item.firstPicUrl}}"
         ></card-team>
       </navigator>
 
