@@ -4,16 +4,25 @@
   </view>
   <view class="jiren-container">
   <scroll-view class="scroll-content" scroll-y="true">
-    <view class="title">{{title}}</view>
-    <image class="like" wx:if="{{!like}}" src="/static/icon/collect.png" bindtap="Like"
-    ></image> 
-    <image class="like" wx:if="{{like}}" src="/static/icon/collect-solid.png"  bindtap="cancelLike" 
-    ></image>
-    <image src="{{userAvatar}}"  class="userAvatar"
-    bindtap='showPersonDetail'></image>
-    <text class="userName"
-    bindtap="showPersonDetail">{{userName}}</text>
-    <text class="time">{{time}}</text>
+    <view class="a-line">
+      <view class="title">{{title}}</view>
+      <view class="like-view">
+        <image class="like" wx:if="{{!like}}" src="/static/icon/collect.png" bindtap="Like"
+        ></image> 
+        <image class="like" wx:if="{{like}}" src="/static/icon/collect-solid.png"  bindtap="cancelLike" 
+        ></image>
+      </view>
+    </view>
+    
+    <view class="a-line">
+      <image src="{{userAvatar}}"  class="userAvatar"
+      bindtap='showPersonDetail'></image>
+      <text class="userName"
+      bindtap="showPersonDetail">{{userName}}</text>
+      <text class="time">{{time}}</text>
+    </view>
+
+    
     <view class="content">
       <text class="description">{{description}}</text>
       <view class="pictures">
