@@ -10,6 +10,7 @@
     avatarPath = "{{personBrief.avatarPath}}"
     labels="{{labels}}"
     personBrief = "{{personBrief}}"
+    class="item-first"
     ></personal-brief> 
     <!-- 以下是资料、组队管理、收藏、帮助、反馈、破壁简介等item -->
     <navigator url="../personal/personalDetails" class="per-items">
@@ -39,5 +40,7 @@
       <image src="../../static/icon/smile.png" class="icon"></image>
       <view class="item-title">关于我们</view>
     </navigator>
+
+    <view class="item-last"></view>
   </view>
 </view>

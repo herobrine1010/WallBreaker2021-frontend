@@ -142,6 +142,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    function setDueTime(time){
+      if(time){
+        let dueTime = new Date(time);
+        return ('截止时间：' + dueTime.getFullYear() + '年' + dueTime.getMonth() + '月' + dueTime.getDay() + '日  ' + dueTime.getHours() + ':' + dueTime.getMinutes());
+      }else{
+        return '截止时间：暂无';
+      };
+    };
     // 1.首先判断是 组队管理页面 还是 我的收藏页面
     let app = getApp();
     // ----- --- ---------- ----判断为组队管理页面------ -------- ---- ----- ----- ---------
@@ -190,29 +198,24 @@ Page({
           'content-type': 'application/x-www-form-urlencoded',
           'cookie':wx.getStorageSync("token")
         }
-      })
+      });
       // 采用Promise.all 并行处理两个请求-------------------
       Promise.all([favouritePosting,favouriteTeam])
         .then(result => {
-          console.log(result);
+          console.log(result[0].data.data[0]);
           // 处理收藏组队的数据------------------
           let jirenItemList = result[1].data.data.map( v=> {
             let tempList = {
               labelText : v.labelContent,
               title : v.title,
+              dueTime: setDueTime(v.duetime),
               description : v.content,
               initiator : v.initiatorNickName,
-              peopleCount : '' + '/' + v.dueMember,
+              peopleCount : v.participantNumber + '/' + v.dueMember,
               postingPic : v.firstPicUrl
             };
-            // 有无截止日期时间：
-            if(v.dueTime == null){
-              tempList.dueTime = '截止时间：暂无';
-            }else{
-              tempList.dueTime = '截止时间：' + v.dueTime;
-            }
             // -------- 收藏组队的状态：1:我发起的 / 0:空 ---------
-            if(v.status){
+            if(v.initializedByMe){
               tempList.teamCondition = 'mine';
               tempList.rightTagText = '我发起的';
             }else{
@@ -259,17 +262,6 @@ Page({
         .catch(err => {
           console.log(err);
         })
-        // jishiItemList : [
-        //   {
-        //     'labelText':'教务',
-        //     'title':'学生评学评教通知',
-        //     'rightTagText':'',
-        //     'userName':'新生院张老师',
-        //     'publishTime':'2天前',
-            
-        //     'description':'请大家登陆1.tongji.edu.cn，尽快完成评学评教！超过九月一号未完成的同学不能参加下学期的',
-        //     'postingPic':''
-        //   }
     }
   },
 
@@ -313,7 +305,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log("上拉触底");
   },
 
   /**

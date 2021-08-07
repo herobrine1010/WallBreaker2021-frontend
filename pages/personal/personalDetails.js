@@ -1,7 +1,7 @@
 // pages/personalDetails/main.js
 // 首先引入封装成promise的 request
 import { request } from "../../request/request.js";
-
+const FormData = require('../../lib/wx-formdata-master/formData.js'); //实现文件上传
 
 Page({
 
@@ -9,77 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    personalLabel : [
-      {
-        id : '0',
-        title : '点子王',
-        isLabelActive : true
-      },{
-        id : '1',
-        title : '细节控',
-        isLabelActive : false
-      },{
-        id : '2',
-        title : '996',
-        isLabelActive : false
-      },{
-        id : '3',
-        title : '领导者',
-        isLabelActive : false
-      },{
-        id : '4',
-        title : '颜王',
-        isLabelActive : false
-      },{
-        id : '5',
-        title : '倾听者',
-        isLabelActive : false
-      },{
-        id : '6',
-        title : '好学小白',
-        isLabelActive : false
-      },{
-        id : '7',
-        title : '脾气好',
-        isLabelActive : false
-      }
-    ],
-    interestLabel : [
-      {
-        id : '0',
-        title : '编程',
-        isLabelActive : false
-      },{
-        id : '1',
-        title : '设计',
-        isLabelActive : false
-      },{
-        id : '2',
-        title : '文学',
-        isLabelActive : false
-      },{
-        id : '3',
-        title : '摄影',
-        isLabelActive : false
-      },{
-        id : '4',
-        title : '口才',
-        isLabelActive : false
-      },{
-        id : '5',
-        title : 'PPT',
-        isLabelActive : false
-      },{
-        id : '6',
-        title : '外语',
-        isLabelActive : true
-      },{
-        id : '7',
-        title : '才艺',
-        isLabelActive : false
-      }
-    ],
-
+   
     avatarPath : '../../static/icon/default-user-big.png',
     userDetails: {
       nickName: '默认昵称',
@@ -94,7 +24,11 @@ Page({
       wxId: 'wxid-25536748',
       description: '理工科钢铁直男一枚~'
     },
+    uploadImageLock : true,
+
   },
+
+  // ------------- ------- ----- below 以下是 自定义事件---- ------ -----
   //定义更换头像事件 changeImage
   changeImage : function(){
     var self = this;
@@ -106,7 +40,9 @@ Page({
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths;
         self.setData({
-          tempFilePaths
+          tempFilePaths,
+          avatarPath : tempFilePaths,
+          uploadImageLock : false
         })
       }
     })
@@ -115,7 +51,7 @@ Page({
   formSubmit : function(e){
     this.setData({
       userDetails:e.detail.value
-    })
+    });
   },
   // 定义点击事件，拿到标签数据
   btnTap:function(){
@@ -144,53 +80,67 @@ Page({
   // 用户在对话框中点击确定后，会触发以下事件，并向服务器发送请求
   dialogTapOkForChangePersonalDetail:function(){
     let that = this ;
-    let labels = [].concat(that.data.labels);
-    // -------首先应根据本地路径上传图片，拿到图片的url,之后将url和表单数据一起提交------
-    // http://101.132.130.199:8080/team/jirenUploadPhoto
-    console.log(this.data.tempFilePaths[0]);
-    wx.uploadFile({
-      filePath: this.data.tempFilePaths[0],
-      name: String(this.data.userId),
-      url: 'http://101.132.130.199:8080/team/jirenUploadPhoto',
-      header: {
-        "Content-Type": "multipart/form-data",
-        "token": wx.getStorageSync('token')
-      },
-      success: (res)=> {
+    let labels = that.data.labels;
+    let requestList = [];
+    // --- -- 用户更改头像之后，锁被打开 之后 --------- --------- ----- ----
+    // -------  首先应根据本地路径上传图片，拿到图片的url,之后将url和表单数据一起提交 ------
+    if(!that.data.uploadImageLock){
+      let imageData = new FormData();
+      imageData.appendFile("files",this.data.tempFilePaths[0]);
+      let data = imageData.getData();
+      let p1 =  request({
+        url:'/team/jirenUploadPhotos',
+        method : 'POST',
+        header: {
+          "content-type": data.contentType
+        },
+        data: data.buffer,
+      }).then(res => {
+        that.data.userDetails.avatarUrl = res.data.data;
+        return request({
+          url : '/user/editMyInfo',
+          header: {
+            'content-type': 'application/json',
+            'cookie':wx.getStorageSync("token")
+          },
+          method : 'PUT',
+          data :  that.data.userDetails
+        })
+      }).then( res => {
         console.log(res);
-      },
-      fail: (err)=>{
-        console.log(err);
-      }
-    });
+      });
+      requestList.push(p1);
+    //------ --- 如果头像没有更改，则 修改个人资料请求 不包括头像----- --------- -------
+    }else{
+      let p1 = request({
+        url : '/user/editMyInfo',
+        header: {
+          'content-type': 'application/json',
+          'cookie':wx.getStorageSync("token")
+        },
+        method : 'PUT',
+        data : that.data.userDetails
+      })
+      requestList.push(p1);
+    };
 
-    // --------------以下是修改个人资料（包括头像，但不包括数据可见性）-----------
-    request({
-      url : '/user/editMyInfo',
+    // -------------- 以下是修改个人资料:(数据可见性）  -----------
+    let publicData = that.data.userDetails;
+    let p2 = request({
+      url : '/userPublicInfo/editMyPublicInfo',
       header: {
         'content-type': 'application/json',
         'cookie':wx.getStorageSync("token")
       },
       method : 'PUT',
-      data : that.data.userDetails
-    }).then( res=>{
-      console.log(res);
-      request({
-        url : '/userPublicInfo/editMyPublicInfo',
-        header: {
-          'content-type': 'x-www-form-urlencoded',
-          'cookie':wx.getStorageSync("token")
-        },
-        method : 'PUT',
-        data : {
-          gradePublic: true,
-          identificationPublic: true,
-          majorPublic: false,
-          schoolPublic: false
-        }
-      })
-
+      data : {
+        gradePublic: publicData.gradePublic,
+        identificationPublic: publicData.identificationPublic,
+        majorPublic: publicData.majorPublic,
+        schoolPublic: publicData.schoolPublic
+      }
     });
+    requestList.push(p2);
 
     // ----------以下是：--------更改个人和兴趣标签------------------------------------
     // 1.请求参数为JSON 格式，不能有null；所以先将 selected = null 转为 false ; 再转为JSON格式------
@@ -203,7 +153,7 @@ Page({
     });
     // 小程序会自动转JSON格式
     // console.log(JSON.stringify(labels));
-    request({
+    let p3 = request({
       url : '/userLabel/editMyLabel',
       header: {
         'content-type': 'application/json',
@@ -211,14 +161,35 @@ Page({
       },
       method : 'POST',
       data : labels
-    }).then(res=>{
-      console.log(res);
-    });
+    })
+    requestList.push(p3);
 
-
-    wx.showToast({
-      title: '提交成功',
-      icon:'success'
+    let isRequestSuccess = true;
+    
+    Promise.all(requestList)
+    .then(res => {
+      // 遍历返回值，判断请求是否正确
+      for (let resData in res){
+        if(resData.statusCode>=300 || resData.statusCode<200){
+          isRequestSuccess = false;
+        }
+      };
+      if(!isRequestSuccess){
+        wx.showToast({
+          title: '网络错误',
+          icon: 'error'
+        })
+      }else{
+        wx.showToast({
+          title: '上传成功'
+        })
+      }
+    }).catch(err => {
+      console.log(err);
+      wx.showToast({
+        title: '请求失败',
+        icon : 'error'
+      })
     })
   },
 
@@ -237,7 +208,7 @@ Page({
       }
     }).then( res => {
       let result = res.data.data;
-      console.log(result);
+      // console.log(result);
       // 提取用户的头像、昵称等个人信息--------
       let userDetails = {
         nickName: result.nickName ,
@@ -277,6 +248,10 @@ Page({
       })
     }).catch( err => {
       console.log(err);
+      wx.showToast({
+        title: '页面加载错误',
+        icon: 'error'
+      })
     })
   },
 

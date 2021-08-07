@@ -62,6 +62,7 @@ background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193
   /* 定位采用 % 单位，为了全面屏兼容    */
   position: absolute;
   top: 12%;
+  /* display: flex; */
   height: 88%;
   width: 100%;
   background: rgba(242, 252, 255, 0.35);
