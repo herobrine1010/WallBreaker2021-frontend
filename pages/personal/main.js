@@ -83,6 +83,11 @@ Page({
         grade: perInfo.grade || '年级',
         identification: perInfo.identification || '学 历'
       };
+      if(perInfo.avatarUrl){
+        personBrief.avatarPath = perInfo.avatarUrl;
+      }else{
+        personBrief.avatarPath = '../../static/icon/default-user-big.png';
+      }
       that.setData({
         personBrief
       });

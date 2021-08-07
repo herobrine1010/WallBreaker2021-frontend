@@ -6,7 +6,7 @@
   <!-- 以下是container，包含了除标题外的其余内容 -->
   <view class="per-container">
     <view class="personal-image">
-      <image  mode="aspectFill" src="{{avatarPath}}"  bindtap="changeImage">
+      <image  mode="aspectFill" src="{{avatarPath?avatarPath:'../../static/icon/default-user-big.png'}}"  bindtap="changeImage">
       </image>
     </view>
     <form bindsubmit="formSubmit">

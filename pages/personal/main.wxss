@@ -6,32 +6,39 @@
   background-image: linear-gradient(199.75deg, rgba(140, 26, 255, 0.18) 40.18%, rgba(140, 26, 255, 0) 90.9%), linear-gradient(195.29deg, #DCBCFB 2.51%, #A2E4FA 27.51%);
 }
 
-
-
+.per-container{
+  display: flex;
+  flex-direction: column;
+}
+.item-last{
+  height: 350rpx;
+}
 
 /* 以下是用户各个item的样式 */
 .per-items{
-  height: 74rpx;
+  flex: 1;
+  display:flex;
+  text-align: center;
+  /* height: 74rpx; */
   /* height: 7vh; */
   width: 92%;
   /* 间距采用 % 单位，为了全面屏兼容    */
-  margin: 0 4%  2.5% 4%;
+  margin: 0 4%  3% 4%;
   background: #F2FCFF;
   border-radius: 10rpx;
 }
 .icon{
-  float: left;
   width: 48rpx;
   height: 48rpx;
   /* height: 4vh; */
-  margin:  16rpx 16rpx ;
+  margin: auto 20rpx;
 }
 .item-title{
-  height: 40rpx;
-  line-height: 40rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin: auto 10rpx;
   /* height: 4vh;
   line-height: 4vh; */
-  padding: 18rpx 0 16rpx 0;
   font-family: PingFang SC;
   font-size: 27rpx;
   /* font-size: 2.3vh; */
