@@ -20,14 +20,58 @@ Page({
     identity:'建筑学院 风景园林 2018级 本科生',
     tags: ['细节控','好学小白','996','口才','设计','文字']
   },
+  onLoad:function(options){
+    console.log(options);
+    if(!options.postingId){
+      var postingId=4;
+    }else{
+      var postingId=options.postingId
+    };
+
+    this.setData({postingId:postingId})
+
+  },
+
+
+  // changeDetail:function(){
+  //   wx.request({
+  //     url: 'url',
+  //   })
+
+
+  // }
+
+
   Like:function(){
-    this.setData({
-      like: true
+    let app=getApp();
+    let that=this;
+    wx.request({
+      url: app.globalData.url+'/userFavouritePosting/addToMyFavouritePosting/'+this.data.postingId,
+      method:"POST",
+      header:{'cookie':wx.getStorageSync('token')},
+      success:function(res){
+        if(res.statusCode==200){
+          that.setData({
+            like: true
+          })
+        }
+      }
     })
   },
   cancelLike:function(){
-    this.setData({
-      like: false
+    let app=getApp();
+    let that=this;
+    wx.request({
+      url: app.globalData.url+'/userFavouritePosting/RemoveFromMyFavouritePosting/'+this.data.postingId,
+      method:"DELETE",
+      header:{'cookie':wx.getStorageSync('token')},
+      success:function(res){
+        if(res.statusCode==200){
+          that.setData({
+            like: false
+          })
+        }
+      }
     })
   },
   showPersonDetail:function(e){
@@ -86,9 +130,9 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  // onLoad: function (options) {
 
-  },
+  // },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

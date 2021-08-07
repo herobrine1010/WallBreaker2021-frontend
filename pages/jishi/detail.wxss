@@ -13,38 +13,52 @@ background: #F9F2FF;
   width: 100%;
   top:3%;
 }
+.a-line{
+  display: flex;
+  flex-direction: row;
+  /* margin-top: 50rpx; */
+  margin: 20rpx 50rpx 10rpx;
+
+}
+
 .title{
-height: 40rpx;
-margin-top: 50rpx;
-margin-left: 50rpx;
-/* title1/bold/14 */
-font-family: Noto Sans SC;
-font-style: normal;
-font-weight: bold; 
-/* font-size: 4vw;  */
-font-size: 36rpx;
-line-height: 40rpx;
-/* gray4_P */
-color: #524A59;
+  width: 80vw;
+  /* margin-left: 50rpx; */
+  /* title1/bold/14 */
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-weight: bold; 
+  /* font-size: 4vw;  */
+  font-size: 36rpx;
+  line-height: 40rpx;
+  /* gray4_P */
+  color: #524A59;
+}
+.like-view{
+  position: absolute;
+  right: 53rpx;
 }
 .like{
-  position: absolute;
+  /* position: absolute; */
+  margin: auto 0;
   right: 53rpx;
   top: 40rpx;
   height: 40rpx;
   width: 40rpx;
 }
 .userAvatar{
-  position: absolute;
-  left: 50rpx;
-  top: 110rpx;
+  /* position: absolute; */
+  /* left: 50rpx;
+  top: 110rpx; */
+  /* margin-right: 30rpx; */
   width: 60rpx;
   height: 60rpx;
 }
 .userName{
   display: inline-block;
   height: 40rpx;
-  margin: 30rpx  30rpx 30rpx 140rpx;
+  /* margin: 30rpx  30rpx 30rpx 140rpx; */
+  margin: auto 30rpx;
   /* tag/medium/11 */
   font-family: PingFang SC;
   font-size: 30rpx;
@@ -53,16 +67,17 @@ color: #524A59;
   color: #8937DB;
 }
 .time{
-  /* 2021年6月9日 21:40 */
-display: inline-block;
-height: 40rpx;
-/* tag/medium/10 */
-font-family: PingFang SC;
-font-size: 22rpx;
-line-height: 40rpx;
-/* identical to box height */
-/* gray3_P */
-color: #7E7685;
+    /* 2021年6月9日 21:40 */
+  display: inline-block;
+  height: 40rpx;
+  margin: auto 0;
+  /* tag/medium/10 */
+  font-family: PingFang SC;
+  font-size: 22rpx;
+  line-height: 40rpx;
+  /* identical to box height */
+  /* gray3_P */
+  color: #7E7685;
 
 
 }
@@ -71,19 +86,20 @@ color: #7E7685;
   margin: 0 7%;
 }
 .description{
-/* position: relative; */
-display: flex;
-font-family: PingFang SC;
-font-size: 30rpx;
-line-height: 40rpx;
-text-align: justify;
-/* gray4_P */
-color: #524A59;
+  /* position: relative; */
+  display: flex;
+  font-family: PingFang SC;
+  font-size: 30rpx;
+  line-height: 40rpx;
+  text-align: justify;
+  /* gray4_P */
+  color: #524A59;
+  letter-spacing: 0.1vw;
 }
 .pictures{
   display: flex;
   flex-wrap: wrap;
-  margin:10rpx 0;
+  margin:20rpx 0;
 }
 /* .pictureBlock{
 position: relative;

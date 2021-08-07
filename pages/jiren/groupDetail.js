@@ -253,8 +253,8 @@ Page({
               nickname:initiatordata.nickName,
               fromTime: fromTime,
               dueTime: '2天后结束',
-              // content: teamdata.content,
-              content:'1&nbsp; 2',
+              content: teamdata.content,
+              // content:'1&nbsp; 2',
               picturesNum:  picList.length,
               pictures: picList,
             };    
@@ -325,6 +325,7 @@ Page({
     wx.request({
       url: app.globalData.url+'/userTeam/approveApplication',
       header:{
+        'content-type':'application/x-www-form-urlencoded',
         'cookie':wx.getStorageSync('token')
       },
       data:{
@@ -357,6 +358,7 @@ Page({
   },
   refuseApplying: function(e){
     let applyer = e.currentTarget.dataset;
+    this.setData({ targetId:applyer.applyerid,});
     // console.log(this.data.targetId);
     let dialog = {
       isDialogShow: true,
@@ -378,6 +380,7 @@ Page({
     wx.request({
       url: app.globalData.url+'/userTeam/rejectApplication',
       header:{
+        'content-type':'application/x-www-form-urlencoded',
         'cookie':wx.getStorageSync('token')
       },
       data:{
