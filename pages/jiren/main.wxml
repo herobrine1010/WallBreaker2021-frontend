@@ -5,7 +5,8 @@
   </view>
   <view class="search-area">
     <view class="searchBar">
-      <mp-searchbar bindblur="onSearch" ext-class="weui-search-bar_focusing"></mp-searchbar>
+      <mp-searchbar bindblur="onSearch" 
+      bindclear = "onCancleSearch" ext-class="weui-search-bar_focusing"></mp-searchbar>
     </view>
     <view class="guide" bindtap="navToGuide">
       <image src="../../static/icon/map.png" class="guide-pic" alt=""></image>
@@ -55,6 +56,8 @@
     <scroll-view 
     enable-back-to-top="true" 
     refresher-enabled="true" 
+    bindrefresherrefresh = "onRefresherRefresh"
+    refresher-triggered = "{{isRefresherOpen}}"
     bindscroll="onMyScroll" 
     scroll-y="true" 
     with-animation='true' 

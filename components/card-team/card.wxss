@@ -32,6 +32,14 @@
   left: 152rpx;
   top: 16rpx;
   height: 42rpx;
+  width: 400rpx;
+
+  /* 只显示一行，并在末尾加省略号 */
+  overflow: hidden;  
+  white-space: nowrap;    
+  /* 末尾加省略号 */
+  text-overflow:ellipsis;
+  
   /* 字体/bold/14 */
   font-family: PingFang SC;
   letter-spacing: 1rpx;
@@ -64,6 +72,9 @@
 } 
 .rightTagColor-processing{
   background-color: rgba(140, 26, 255, 0.6);
+}
+.rightTagColor-full{
+  background-color:  #701DC3;
 }
 .rightTagColor-close{
   background-color: #99989A;
@@ -175,6 +186,7 @@
   width: 650rpx;
 }
 .description-double{
+  height: 60rpx;
   /* 超出部分隐藏 */
   overflow: hidden;     
   /* 末尾加省略号 */
@@ -186,6 +198,7 @@
   -webkit-line-clamp:2;
 }
 .description-normal{
+  height: 30rpx;
   /* 只显示一行，并在末尾加省略号 */
   overflow: hidden;  
   white-space: nowrap;    
