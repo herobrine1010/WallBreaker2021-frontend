@@ -29,16 +29,7 @@ Page({
       botton:"返回"
     },
     teamDetail:{
-      // title:'周末狼人杀大家来玩啊我只是为了凑够二十五个字好够了',
-      // // title:'周末狼人杀',
-      // isTeamClosed: false,
-      // avatar:'https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02',
-      // nickname: '龙龙',
-      // fromTime: '1天前',
-      // dueTime: '2天后结束',
-      // content: '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n我不知道怎么找图片就拿头像来凑\n最多四百字\n那最多多少行?',
-      // picturesNum:  0,
-      // pictures: ['https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02','https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02','https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02','https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02'],
+
     },
     isFavourite:false,
     avatarList:[],
@@ -51,12 +42,7 @@ Page({
       'dueTime':'3天后结束'
     },
     applierList:[
-      // {
-      //   'id':'001',
-      //   'avatar':'https://s3-alpha.figma.com/profile/06efcf65-977c-4154-b8a3-3db3f6a2f79f',
-      //   'nickname':'herobrine',
-      //   'applyTime':'22分钟前'
-      // },
+      
     ],
     haveJoinedIn:false,
     haveSignedUp:false,
@@ -86,37 +72,17 @@ Page({
    */
   onLoad: function (options) {
     
-    // console.log(options)
+    console.log(options)
     if(!options.teamId){
-      this.setData({teamId:9})
+      this.setData({teamId:46})
     }else{
       console.log('updateTeamId');
       this.setData({teamId:options.teamId})
     }
     let app=getApp();
     var that=this;
-    // var picList = this.data.teamDetail.pictures.split(',')
-    // console.log(picList)
-    // console.log(picList.length)
-    //拼接 发起人 和 参与者列表
-    // {"avatar":"...","me":false,"initiator":false,"id":1}
-    this.setData({avatarList:[
-      {"initiator":true,"avatar":'https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02',id:1},
-      {"me":true,"avatar":"https://s3-alpha.figma.com/profile/06efcf65-977c-4154-b8a3-3db3f6a2f79f",id:2},
-      {"avatar":"https://s3-alpha.figma.com/profile/dda831f2-b8ec-4bb9-b165-1708bad4fb9e",id:3},
-      {"avatar":"https://tcs-devops.aliyuncs.com/thumbnail/1125d19274b242f1e0371f5aa532a3b0a998/w/200/h/200"},
-      {"avatar":"http://tiebapic.baidu.com/forum/w%3D580%3B/sign=ef2e2225da11728b302d8c2af8c7c2ce/c995d143ad4bd1134dde1a864dafa40f4bfb0576.jpg"},
-      {"avatar":"http://tiebapic.baidu.com/forum/w%3D580%3B/sign=fa624952e31ea8d38a22740ca731324e/ac6eddc451da81cbf0437d241766d016082431b6.jpg"},{},{},{},{}
-    ]});
-    wx.request({
-      url: app.globalData.url+'/team/getTeamAndCheckStatus/'+this.data.teamId,
-      header:{  'cookie':wx.getStorageSync('token')},
-      success:function(res){
-        console.log(res);
-      }
-    })
-
-
+    
+    
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -124,10 +90,13 @@ Page({
         })
       }
     });
-    this.initializeResult();
-    this.changeScrollHeight();
+    // this.initializeResult();
 
+    // this.initializeAvatarList();
     this.changeTeamDetail();
+    // this.initializeAvatarList();
+
+    // this.changeScrollHeight();
 
     // if(this.data.amITeamInitiator){
     //   this.changeSizeOfInitiatorPage();
@@ -191,6 +160,39 @@ Page({
 
   },
 
+  initializeAvatarList:function(){
+    let that=this;
+    wx.request({
+      url: app.globalData.url+'/userTeam/getAllMemberInfoByTeamId/'+that.data.teamId,
+      header:{'cookie':wx.getStorageSync('token')},
+      success:function(res){
+        if(res.statusCode==200){
+          console.log(res);
+          let list=[];
+          let data=res.data.data;
+          console.log(data);
+          for(let i=0;i<data.length;i++){
+            let info={
+              'initiator':data[i].initiator,
+              'me':data[i].me,
+              'avatar':data[i].avatarUrl,
+              'id':data[i].id
+            }
+            list.push(info);
+          }
+          for(let i=0;i<that.data.teamDetail.due_member-data.length;i++){
+            list.push({});
+          }
+          that.setData({avatarList:list});
+          console.log(that.data.avatarList)
+        }
+      }
+    })
+
+  },
+
+
+
 // 以下是和 发起者 initiator 有关的操作事件 ---------start---------------------
   handleCloseTeam: function(){
     let dialog = {
@@ -215,20 +217,32 @@ Page({
   showAnswers:function(){
 
   },
+  showTipBox:function(message){
+    let tipBox = {
+      show:true,
+      text:message
+    };
+    this.setData({
+      tipBox:tipBox
+    })
+  },
 
+  
   changeTeamDetail:function(){
     let that=this;
     wx.request({
-      url: app.globalData.url+'/team/getTeam/'+this.data.teamId,
+      url: app.globalData.url+'/team/getTeamAndCheckStatus/'+this.data.teamId,
       header:{
         'cookie':wx.getStorageSync('token'),
       },
       success:function(res){
-        // console.log(res);
         let teamdata=res.data.data;
-        console.log(teamdata);
+        // console.log(teamdata);
+        that.setData({
+          amITeamInitiator:teamdata.initializedByMe,
+          isFavourite:teamdata.myFavourite
+        })
         let initiatorid=teamdata.initiatorId;
-        // console.log(initiatorid);
         wx.request({
           url: app.globalData.url+'/user/userInfo',
           data:{userId:initiatorid},
@@ -238,30 +252,78 @@ Page({
           success:function(res){
             // console.log(res)
             let initiatordata=res.data.data;
-            if(teamdata.allPicUrl){
-              var picList = teamdata.allPicUrl.split(',');
-            }else{
-              var picList=[];
-            }
-            // console.log(picList)
-            // console.log(picList.length)
+            var picList=(teamdata.allPicUrl?teamdata.allPicUrl.split(','):[]);
             let fromTime=util.getDateDiff(teamdata.createTime);
             let teamDetail={
               title:teamdata.title,
-              isTeamClosed: false,
+              isTeamClosed: (teamdata.status>2?true:false),
               avatar:initiatordata.avatarUrl,
               nickname:initiatordata.nickName,
               fromTime: fromTime,
               dueTime: '2天后结束',
               content: teamdata.content,
-              // content:'1&nbsp; 2',
               picturesNum:  picList.length,
               pictures: picList,
+              due_member:teamdata.dueMember
             };    
             that.setData({teamDetail:teamDetail});
-            that.changeSizeOfInitiatorPage();
+            
+            that.initializeAvatarList();
+
+            if(that.data.amITeamInitiator){
+              if(teamdata.status==4){
+                that.showTipBox('超时关闭、第一次进入的提示消息。但是我不知道写什么。')
+              }
+              that.changeSizeOfInitiatorPage();
+            }else{
+              if(teamdata.status==2){
+                that.setData({memberFull:true})
+              }
+              switch(teamdata.applyStatus){
+                case 0:
+                  that.setData({haveSignedUp:true})
+                  break
+                case 1:
+                  that.setData({haveJoinedIn:true});
+                  that.showTipBox('恭喜您已成功入队~可点击发起人头像查看联系方式，快去与ta联系吧！')
+                  wx.request({
+                    url:app.globalData.url+ '/userTeam/checkApproved',
+                    method:"POST",
+                    data:{teamId:that.data.teamId}
+                  })
+                  break;
+                case 2:
+                  that.setData({haveJoinedIn:true});
+                  break;
+                case 3:
+                  that.setData({beRefused:true});
+                  that.showTipBox('被拒绝入队且第一次进入该页面。不知道要写什么。');
+                  wx.request({
+                    url:app.globalData.url+ 'userTeam/checkRejected',
+                    method:"POST",
+                    data:{teamId:that.data.teamId}
+                  });
+                  break;
+                case 4:
+                  that.setData({beRefused:true});
+                  break;
+                case 5:
+                  that.setData({});
+                  break;
+                case 6:
+                  that.setData({});
+                  break;
+    
+              }
+              that.initializeResult();
+              // that.changeScrollHeight();
+            }
           }
         })
+
+        
+        
+
       }
     })
   },
@@ -277,15 +339,6 @@ Page({
         let data=res.data.data
         console.log(data);
         for(let i in data){
-          // console.log(user);
-          // let now=new Date();
-          // let createtime=new Date(data[i].createTime);
-          // let hour=Math.floor((now-createtime)/1000/60/60);
-          // if(hour<24){
-          //   var applyTime=hour+'小时前';
-          // }else{
-          //   var applyTime=Math.floor(hour/24)+'天前';
-          // };
           list.push({
             avatar:data[i].avatarUrl,
             nickname:data[i].nickName,
@@ -347,6 +400,7 @@ Page({
         wx.showToast({
           title: '接受id为'+that.data.targetId+'的申请',
         });
+        that.initializeAvatarList();
       }
     })
 
@@ -413,9 +467,15 @@ Page({
 
 
   tapAvatar:function(e){
+    wx.request({
+      url: 'url',
+    })
+
+    console.log(e);
     this.setData({"currentUser":e.detail});
     console.log(this.data.currentUser);
     this.selectComponent("#personalAnimation").showModal(this.data.currentUser.userAvatar);
+    // this.selectComponent("#personalAnimation").showModal();
     
   },
 
@@ -510,7 +570,8 @@ Page({
         'cookie':wx.getStorageSync('token')
       },
       success:function(){
-        that.setData({applierList:[]})
+        that.setData({applierList:[]});
+        that.initializeAvatarList();
       }
     })
   },
@@ -518,6 +579,12 @@ Page({
 
 
   // 以下是和 申请者 applicant 有关的操作事件
+  applicantInitialize:function(){
+
+  },
+
+
+
   applicantClick:function(e){
     console.log(e);
   },
@@ -545,19 +612,23 @@ Page({
       })
     }else if(data.beRefused){
       this.setData({
-        result:"您的申请被拒绝\n发起人拒绝的原因如下：",
+        // result:"您的申请被拒绝\n发起人拒绝的原因如下：",
         reply:"我就是不要你，乂，我就是玩。",
+        result:'您的申请被拒绝'
       })
     }else if(data.haveSignedUp){
       this.setData({
         result:"您已报名该组队，申请正在处理中~"
       })
     }
+    console.log(this);
+    this.changeScrollHeight();
   },
 
 
   changeScrollHeight:function(){
     if(this.data.amITeamInitiator){return;}
+    console.log('work')
     var that = this;
     var windowHeight;
     var height;
@@ -570,6 +641,8 @@ Page({
     let query = wx.createSelectorQuery();
     query.select('#scroll-1').boundingClientRect(rect=>{
         let maxHeight = rect.height;
+        console.log(maxHeight)
+        console.log(windowHeight)
         if(!that.data.result&&!that.data.reply){  
           if(maxHeight>windowHeight*0.65){
             that.setData({

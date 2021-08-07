@@ -18,6 +18,58 @@
   margin: 30rpx auto;
   z-index: 2;
 }
+.external-box{
+  /* z-index: 2; */
+  position:relative;
+  top:0;
+  height:16vw;
+  width:100vw;
+  left:0;
+  /* background-color: #00ff00; */
+}
+
+scroll-view {
+  white-space: nowrap;
+}
+
+.item-content {
+  width: 20%;
+  display: inline-block;
+  text-align: center;
+  /* background-color: red; */
+  height:17.5vw;
+  width:17.5vw;
+  position: relative;
+  align-items: center;
+}
+
+.avatar{
+  position: relative;
+  height:14vw;
+  width:14vw;
+  border-radius: 7vw;
+  /* background-color: #00ff00; */
+}
+.me,.initiator{
+  position: absolute;
+  height:4vw;
+  width:12vw;
+  left:2.75vw;
+  top:11vw;
+  border-radius: 3vw;
+  /*background-color:#17B2E5;*/
+  /*!!opacity和Hex混用会导致文字透明*/
+  background-color: rgba(255,255,255,0.8);
+  font-size: 2.3vw;
+  letter-spacing: 0.2vw;
+  color:#17B2E5;
+  
+  line-height: 4vw;
+
+}
+
+
+
 
 .initiator-teamDetail{
   width:100%;
