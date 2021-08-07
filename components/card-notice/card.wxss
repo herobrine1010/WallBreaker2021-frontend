@@ -70,6 +70,7 @@
   /* Icon/User01 */
   height: 40rpx;
   width: 40rpx;
+  border-radius: 50%; /*使头像变成圆形*/
   position: absolute;
   left: 20rpx;
   top: 68rpx;
