@@ -4,7 +4,8 @@
     "dropdown-box": "/components/dropdown-box/dropdown-box",
     "image-box": "/components/uploadImage-box/uploadImage-box",
     "dialog-box": "/components/dialog-box/dialog-box",
-    "input-tip": "/components/input-tip/input-tip"
+    "input-tip": "/components/input-tip/input-tip",
+    "questionStack": "/components/questionStack/questionStack"
   },
   "navigationStyle": "custom"
 }
