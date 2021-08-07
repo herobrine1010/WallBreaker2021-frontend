@@ -34,6 +34,13 @@
   left: 152rpx;
   top: 16rpx;
   height: 42rpx;
+  width: 400rpx;
+
+    /* 只显示一行，并在末尾加省略号 */
+    overflow: hidden;  
+    white-space: nowrap;    
+    /* 末尾加省略号 */
+    text-overflow:ellipsis;
   /* 字体/bold/14 */
   font-family: PingFang SC;
   font-style: normal;
@@ -120,6 +127,7 @@
   width: 650rpx;
 }
 .description{
+  height: 60rpx;
   /* 超出部分隐藏 */
   overflow: hidden;     
   /* 末尾加省略号 */

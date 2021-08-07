@@ -39,10 +39,17 @@ Page({
         // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
         let myTeamList = res.data.data.map( v=>{
           // status = 1  ;  表示：待处理的组队
-          v.teamCondition = 'processing';
           if(v.status == 1){
             v.rightTagText = '待处理';
-          };
+            v.teamCondition = 'processing';
+          }else if(v.status == 2){
+            v.rightTagText = '已满员';
+            v.teamCondition = 'full';
+          }
+          else if(v.status == 3 || v.status == 4){
+            v.rightTagText = '已关闭';
+            v.teamCondition = 'close';
+          }
           let duetime = new Date(v.dueTime);
           v.dueTime = '截止时间：'+ duetime.getFullYear() + '年' + duetime.getMonth() + '月'+ duetime.getDate() + '日 '+  duetime.getHours() + ':' + (duetime.getMinutes()<10?'0'+duetime.getMinutes():duetime.getMinutes());
           v.peopleCount = v.participantNumber + '/' + v.dueMember ;

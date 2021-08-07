@@ -59,16 +59,19 @@ Page({
           v.peopleCount = v.participantNumber + '/' + v.dueMember ;
           return v;
         });
+        console.log(tempTeamList);
         let applyingTeamList = [];
         let acceptTeamList = [];
         for(let i = 0 ; i< tempTeamList.length; i++){
-          if(tempTeamList[i].status == 1 ||tempTeamList[i].status == 2){
+          if(tempTeamList[i].applyStatus == 1 ||tempTeamList[i].applyStatus == 2){
             // 申请已同意
             acceptTeamList.push(tempTeamList[i]);
-          }else if(acceptTeamList[i].status == 0){
+          }else if(tempTeamList[i].applyStatus == 0){
             applyingTeamList.push(tempTeamList[i]);
           }
         }
+        console.log(applyingTeamList);
+        console.log(acceptTeamList);
         this.setData({
           acceptTeamList,
           applyingTeamList

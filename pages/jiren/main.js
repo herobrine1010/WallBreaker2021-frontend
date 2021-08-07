@@ -32,7 +32,7 @@ function getTeamList(that,keyword,labelId,timeIndex){
       let jirenItemList = res.data.data.map( v=>{
         // status = 1  ;  表示：我发起的组队
         v.teamCondition = 'mine';
-        if(v.status == 1){
+        if(v.initializedByMe){
           v.rightTagText = '我发起的';
         };
         let duetime = new Date(v.dueTime);
@@ -42,7 +42,8 @@ function getTeamList(that,keyword,labelId,timeIndex){
       });
       // setData是page对象里才有的办法，所以在调用函数时，要把page对象传入进来；
       that.setData({
-        jirenItemList
+        jirenItemList,
+        isRefresherOpen: false
       })
     }else{
       wx.showToast({
@@ -65,6 +66,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isRefresherOpen : false,
     showGoTopButton:false,
     topNum:0,
     conditionFilterOpen:false, 
@@ -95,6 +97,7 @@ Page({
       'id': '10',
       'labelContent':'2ff类',
       'title':'示例标题sfnvkjs例标题…',
+      'initializedByMe':false,
       'teamCondition':'mine',
       'rightTagText':'我发起的',
       'dueTime':'截止时间: 2021年6月21日 14:00',
@@ -130,8 +133,9 @@ Page({
         selected: 1 //0,1,2 0-济事  1-济人  2-我的
       })
     };
+    console.log(this.data.labelId);
     // 数据加载：---------------------- -------- --- -----------
-    getTeamList(that,this.data.keyword,19,this.data.timeIndex);
+    getTeamList(that,this.data.keyword,this.data.labelId,this.data.timeIndex);
   },
 
   /**
@@ -169,20 +173,25 @@ Page({
 
   },
 
+// ------------------- 以下是自定义事件： ----- ------- -------------
 
-  onPageScroll:function(e){
-    console.log("page scroll")
-    console.log(e)
-    if (e.scrollTop > 0) {
-      this.setData({
-        showGoTopButton: true
-      });
-    } else {
-      this.setData({
-        showGoTopButton: false
-      });
-    }
+  // 绑定搜索事件： 光标离开触发：--- 点击叉号取消搜索 ----------------------
+  onSearch:function(e){
+    this.setData({
+      keyword : e.detail.value
+    })
+    let that = this;
+    getTeamList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
   },
+  onCancleSearch:function(){
+    this.setData({
+      keyword : ''
+    })
+    let that = this;
+    getTeamList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+  },
+
+//  --------------------筛选框的弹出、归位---- ------ -------- ----
   clickConditionFilter:function(){
     if(this.data.conditionFilterOpen==true){
       this.setData({'conditionFilterOpen':false})
@@ -198,7 +207,7 @@ Page({
     let teamLabels = this.data.teamLabels;
     //    若该项已被选中，则取消选中
     //    否则：其余为FALSE，第index 个为TRUE
-    //    将事件排序改回为desc
+    //    将事件排序改回为asc
     if(teamLabels[index].selected){
       teamLabels[index].selected = false;
       this.setData({
@@ -224,7 +233,7 @@ Page({
     getTeamList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
   },
 
-
+// -------------排序：----------------------------
   clickTimeIndex:function(){
     if(this.data.timeIndex=='asc'){
       this.setData({'timeIndex':'desc'})
@@ -259,7 +268,14 @@ Page({
       url: '/pages/jiren/myJoin',
     })
   },
-  
+
+  // 滚动框的 下拉刷新事件 pullDownRefresh------------- -------------- ----------
+  onRefresherRefresh:function(){
+    // 重新发送请求，包括此前筛选或者搜索数据：
+    let that = this;
+    getTeamList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+    
+  },
   // 滚动框的 滚动和回到最上事件：------------- -------------- ----------
   returnTop: function () {
     let that=this;
@@ -268,28 +284,21 @@ Page({
     });
     setTimeout(function () {
       that.setData({showGoTopButton:false})
-      console.log("test")
-     }, 100)
+    }, 100)
   },
-  onMyScroll:function(){
-    console.log("my scroll")
-    if(this.data.showGoTopButton==false){
+  onMyScroll:function(e){
+    if(e.detail.scrollTop>100){
       this.setData({showGoTopButton:true})
+    }else if(this.data.showGoTopButton){
+      this.setData({showGoTopButton:false})
     }
   },
+  // 跳转：发起组队事件：------------- --------- ------ ------- --
   createNewTeam:function(){
-    //console.log("realize create new team")
     wx.navigateTo({
       url: '/pages/jiren/initiateTeam',
     })
   },
-// 绑定搜索事件： 光标离开触发：-------------------------
-  onSearch:function(e){
-    this.setData({
-      keyword : e.detail.value
-    })
-    let that = this;
-    getTeamList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
-  }
+
   
 })
