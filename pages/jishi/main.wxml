@@ -7,13 +7,13 @@
     <mp-searchbar bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
   </view>
   <view class="area2">
-    <view class="buttonArea">
-    </view>
+    <!-- <view class="buttonArea">
+    </view> -->
     <view class="filterArea">
       <view class="timeFilter" bindtap="clickTimeIndex">
         <view class="timeText">按时间排序</view>
-        <image wx:if="{{timeIndex=='desc'}}" src="/static/icon/sort-down-blue.png" class="timeIcon"></image>
-        <image wx:if="{{timeIndex=='asc'}}" src="/static/icon/sort-up-blue.png" class="timeIcon"></image>
+        <image wx:if="{{timeIndex=='desc'}}" src="/static/icon/sort-down-purple.png" class="timeIcon"></image>
+        <image wx:if="{{timeIndex=='asc'}}" src="/static/icon/sort-up-purple.png" class="timeIcon"></image>
       </view>
       <view class="conditionFilter" bindtap="clickConditionFilter">
         <block wx:if="{{conditionIndex==''}}">
@@ -22,41 +22,46 @@
         </block>
         <block wx:else>
           <view class="conditionTextBlue">筛选</view>
-          <image class="conditionIcon" src="/static/icon/select-blue.png"></image>
+          <image class="conditionIcon" src="/static/icon/select-purple.png"></image>
         </block>
       </view>
     </view>
     <view wx:if="{{conditionFilterOpen}}" class="filterExtended">
       <view class="conditionArea">
         <view class="whiteBG">
-        <block wx:for="{{conditions}}">
+        <!-- <block wx:for="{{conditions}}">
           <view bindtap="clickConditionBlue" wx:if="{{conditionsSelected[index]}}" class="conditionsSelected">{{item}}</view>
-          <view data-condition='{{item}}'bindtap="clickConditionGray" wx:else class="conditionsNotSelected">{{item}}</view>
+          <view data-condition='{{item}}' bindtap="clickConditionGray" wx:else class="conditionsNotSelected">{{item}}</view>
+        </block> -->
+        <block wx:for="{{postingLabels}}">
+          <view data-index="{{index}}" bindtap="clickLabel" class="{{item.selected?'conditionsSelected':'conditionsNotSelected'}}">
+            {{item.content}}
+          </view>
         </block>
       </view>
       </view>
       <view class="shade2" bindtap="clickShade2"></view>
     </view>
-    <scroll-view bindscroll="onMyScroll" class="listArea" scroll-y="true" with-animation='true' scroll-top='{{ topNum }}'>
+    <scroll-view bindscroll="onMyScroll" class="listArea" scroll-y="true" with-animation='true' scroll-top='{{ topNum }}' refresher-enabled="true">
     
       <block wx:for="{{jishiItemList}}">
         <view  class="list-item" bindtap="jumpToDetail">
-        <card-notice  
-        labelText="{{item.labelText}}"
+        <card-notice 
+        labelId="{{item.labelId}}"
+        labelText="{{item.labelContent}}"
         title="{{item.title}}"
         rightTagText="{{item.rightTagText}}"
-        description="{{item.description}}"
-        publishTime="{{item.publishTime}}"
-        postingPic="{{item.postingPic}}"
-        userName="{{item.userName}}"
-        userAvater="{{item.userAvater}}"
+        description="{{item.content}}"
+        publishTime="{{item.createTime}}"
+        postingPic="{{item.firstPicUrl}}" 
+        userName="{{item.initiatorNickName}}"
+        userAvatar="{{item.initiatorAvatar}}"
         ></card-notice>
         </view>
-        </block> 
-      
+      </block>      
     </scroll-view>
     
   </view>
-  <image hidden="{{!showGoTopButton}}" class="backTopButton" bindtap="returnTop" src="/static/icon/back-to-top-blue-circle.png"></image>
-  <image class="addButton" bindtap="createNewTeam" src='/static/icon/add-blue-big.png'></image>
+  <image hidden="{{!showGoTopButton}}" class="backTopButton" bindtap="returnTop" src="/static/icon/back-to-top-purple-circle.png"></image>
+  <image class="addButton" bindtap="createNewTeam" src='/static/icon/add-purple-big.png'></image>
 </view>

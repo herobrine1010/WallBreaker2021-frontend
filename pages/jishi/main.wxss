@@ -2,12 +2,12 @@
 /* pages/jishi/main.wxss */
 .area2{
   position:fixed;
-  top:17%;
+  top:19%;
   width: 100%;
-  left:0;
-  height: 78%;
+  height: 75%;
+  /* margin-top: 20rpx;
   border-radius: 50rpx 50rpx 0 0;
-  background: rgba(242, 252, 255, 0.35);
+  background: rgba(242, 252, 255, 0.35); */
 } 
 
 .list-item{
@@ -15,7 +15,7 @@
   margin: 0 auto;
 }
 .listArea{
-  top:2vh;
+  top: 2vh;
   position: relative;
   height:100%;
   margin-top: 10px;
@@ -69,7 +69,7 @@
   position: relative;
   float:left;
   left:-4%;
-  color: #17B2E5;
+  color: #7E17E5;
   font-size: 3vw;
   letter-spacing: 0.5px;
 }
@@ -84,7 +84,7 @@
   color:#768185;
 }
 .conditionTextBlue{
-  color:#17B2E5;
+  color:#7E17E5;
 }
 .timeIcon,.conditionIcon{
   position:relative;
@@ -92,6 +92,7 @@
   height:3.2vw;
   width: 3.2vw;
 }
+/*点击“筛选”时的弹出部分的样式，包括阴影和选项*/
 .filterExtended{
   position: absolute;
   top:8%;
@@ -115,7 +116,7 @@
   margin-left:3vw;
   margin-right: 3vw;
   top:18%;
-  display: flex;flex-direction: row;justify-content: space-between;
+  display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wrap;
   height:100%;
 }
 .conditionArea{
@@ -124,9 +125,8 @@
   top:0%;
   height:6%;
   background-color: #F2FCFF;
-  border-radius: 0 0 20px 20px;
+  border-radius: 0 0 20rpx 20rpx;
   z-index: 4;
-  
 }
 
 .conditionsSelected,.conditionsNotSelected{
@@ -150,7 +150,7 @@ border-width:1px;
 border-style: solid;
 }
 .conditionsSelected{
-  background-color: #26C9FF;
+  background-color: rgba(140, 26, 255, 0.6);
   color:#ffffff;
 }
 
@@ -170,4 +170,5 @@ border-style: solid;
   width:15vw;
   right: 3%;
   bottom: 12%;
+  z-index: 10;
  }

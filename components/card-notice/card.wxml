@@ -23,8 +23,9 @@
     <!-- 没有图片时，显示的文字加长 -->
     <text class="description {{postingPic?'description-short':'description-long'}}">{{description}}</text>
 </view>
-<view wx:if="{{postingPic}}" class="image">
-    <image src="{{postingPic}}"></image>
+<view wx:if="{{postingPic}}" class="image-wrap">
+    <!-- 修改了图片的类，裁剪模式 -->
+    <image class="image" src="{{postingPic}}" mode="aspectFill"></image>
 </view>
 </view>
 
