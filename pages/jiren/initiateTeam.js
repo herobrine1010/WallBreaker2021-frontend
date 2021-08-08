@@ -2,8 +2,9 @@
 const app = getApp();
 const util = require('../../utils/util.js');
 const FormData = require('../../lib/wx-formdata-master/formData.js'); //实现文件上传
-const current = new Date(); //获取当前日期
-var currentDate = util.formatTime(current).split(' ')[0];
+// util提供的formatDate格式为2020/8/7 20:34:45 但小程序picker需要2020-8-7 以下使用正则表达式做格式转换
+const current = new Date(); //获取当前日期时间
+var currentDate = util.formatTime(current).split(' ')[0]; //截取日期2020/8/7
 
 Page({
 
@@ -18,7 +19,7 @@ Page({
     themeOptions: [],
     //主题下拉框的选中项
     theme: {},
-    //截止时间
+    //截止时间，使用正则表达式做格式转换2020/8/7转化为2020-8-7
     dueDate: currentDate.replace(/[/]/g,'-'),
     dueTime: '23:59',
     //需求人数
@@ -30,22 +31,8 @@ Page({
     //组队内容
     teamContent: '',
 
-    //图片上传oss后拿到的URL
-    imageURL: [],
-
-    //是否需要申请者回答问题
-    isNeedQuestion: true,
     //需要申请者回答的问题
-    questionList: [
-      {
-        id: 1,
-        content: ''
-      },
-      {
-        id: 2,
-        content: ''
-      }
-    ],
+    questionList: [],
     
     //确认提交弹窗
     isDialogShow:false,
@@ -64,7 +51,6 @@ Page({
         'type': 'jiren'
       },
       success: function(res) {
-        console.log(res.data.data);
         var thememList = res.data.data;
         that.setData({
           themeOptions: thememList,
@@ -72,15 +58,12 @@ Page({
         })
       }
     })
-    //this.setData({themeOptions: tempVaria})
-    console.log(this.data.themeOptions)
-    
   },
   dropdownChange: function (e) {
     this.setData({
       theme: e.detail
     })
-    console.log('选中主题',this.data.theme)
+    // /console.log('选中主题',this.data.theme)
   },
 
   bindDateChange: function (e) {
@@ -98,38 +81,25 @@ Page({
       memberNumber: this.data.memberNumberOptions[e.detail.value]
     })
   },
-  //是否需要申请者回答问题
-  switchQuestion: function () {
-    this.setData({
-      isNeedQuestion: !this.data.isNeedQuestion
-    })
-  },
-  //增添删除回答的逻辑
-  append: function () {
-    let newList = this.data.questionList
-    let length = newList.length
-    newList.push({id: length+1, content: ''})
-    this.setData({
-      questionList: newList
-    })
 
-  },
-  deleteLast: function () {
-    let newList = this.data.questionList
-    newList.pop()
-    this.setData({
-      questionList: newList
-    })
-  },
   //表单提交
   teamInfoSubmit:function(e){
+    var formData = e.detail.value;
+    console.log("表单数据", formData)
+    // ------调整表单数据格式------
+    for (let key in formData) {
+      if (key.match("question") != null && formData[key] != "") {
+        this.data.questionList.push({id:key, content: formData[key]});
+      }
+    }
+
     this.setData({
       isDialogShow:true,
-      //从微信的foem按钮中获得表单数据   
-      formData: e.detail.value
+      //从微信的form按钮中获得表单数据   
+      formData: formData,
+      questionList: this.data.questionList
     });
-    //console.log(e.detail.value)
- 
+    console.log("questionList", this.data.questionList)
   },
   //弹窗点按确认
   tapOk:function(e){
@@ -150,11 +120,8 @@ Page({
       data: data.buffer,
       success (res) {
         var imageURL = res.data.data;
-        var imageObj = new String(res.data.data); //创建字符串对象，提取首图URL
-        console.log('imageURL',imageObj.split(','));
 
         var formData = that.data.formData;
-        console.log("点击确认之后的业务",that.data.dueDate.replace(/-/g,'/'));
         wx.request({
           url: app.globalData.url + '/team/initializeTeam',
           method: 'POST',
@@ -169,10 +136,11 @@ Page({
             "title": formData.teamTitle,
             "content": formData.teamContent,
             "allPicUrl": imageURL,
-            "firstPicUrl": imageURL.split(','),     
+            "firstPicUrl": imageURL.split(',',1),
+            "question": JSON.stringify(that.data.questionList)
           },
           success: function(res) {
-            console.log('提交表单弹窗', res.data)
+            console.log('提交表单返回结果', res.data)
             if (res.data.success) {
               wx.showToast({
                 title: '成功提交！',
@@ -190,8 +158,5 @@ Page({
         })
       }
     });
-
-
-
   },
 })

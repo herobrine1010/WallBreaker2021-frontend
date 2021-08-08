@@ -10,8 +10,8 @@
 }
 .deleteTopRight {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 10rpx;
+  right: 10rpx;
 }
 .deleteTopRight-icon {
   height: 20px;
