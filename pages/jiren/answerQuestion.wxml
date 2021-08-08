@@ -1,35 +1,46 @@
-<!--pages/jiren/anwserQuestion.wxml-->
-<view class="jiren-background"> 
-  <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="回答问题"></mp-navigation-bar>
+<view class="jiren-background">
+  <view>
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="回答问题"></mp-navigation-bar>
+  </view>
   <view class="area2">
-  <view class="shade"></view>
+    <view class="shade"></view>
 
-  <view class="title">请回答发起人设置的下列问题:</view>
-  <scroll-view class="mainArea" scroll-y="true">
-  <view class="questionContainer">
+    <scroll-view class="scroll-area" scroll-y="true" with-animation='true' >
+      <view class="intro">请回答发起人设置的下列问题：</view>
 
-  <form bindsubmit="submitAnswer">
       <block wx:for="{{questionItems}}">
-      <view  class="questionItem">
-        <view class="questionText">
-          {{item.index}} {{item.questionText}}
+        <view class="list-item">
+          <view class="question-text">{{item.questionText}}</view>
+          <view class="answer-area">
+            <textarea maxlength="50" class="text-answer" 
+            data-index="{{index}}" bindinput="isMaxlength" placeholder=" 请输入你的回答（不超过50字）"  confirm-type="done"
+            placeholder-class="text-placeholder" ></textarea>
+            <!-- <view class="text-count">{{item.textLength}}/200</view> -->
+          </view>
+          <view class="warning-area">
+          <view class="warning">{{item.message}}</view>
+          </view>
         </view>
-        <view class="answerBox">
-          <textarea class="answerText" name="{{item.index}}" bindinput="isMaxlength" placeholder="请输入回答（不超过50字）" maxlength="50" data-number="{{index}}"></textarea>
-        </view>
-        <view class="maxlengthArea">
-          <text class="maxlengthMessage">{{item.message}}</text>
-        </view>
-      </view>
       </block>
-      <!--为了覆盖原生button组件，wxml里写style-->
-      <button form-type="submit" class="submitButton" style="width: 360px;border: 0; border-radius: 0">
-        <text class="buttonText">确认提交</text>
-      </button>
-  </form>
-  </view>
-  </scroll-view>
 
+      <view class="empty-block"></view>
+
+    </scroll-view>
+  
+
+    <view class="bottom-elements">
+      <view class="accept-all-button" bindtap="tapSubmit">
+        确认提交
+      </view>
+      
+    </view>
+    <view class="blur-shadow"></view>
   </view>
+
+
 
 </view>
+
+<dialog-box content="{{dialogContent}}" tip="{{dialogTip}}" okText="{{dialogOkText}}" cancelText="{{dialogCancelText}}"
+  isShow="{{isDialogShow}}" bind:tapOk="tapOk">
+</dialog-box>

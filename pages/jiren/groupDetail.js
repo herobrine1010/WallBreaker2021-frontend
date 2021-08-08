@@ -74,7 +74,7 @@ Page({
     
     console.log(options)
     if(!options.teamId){
-      this.setData({teamId:46})
+      this.setData({teamId:67})
     }else{
       console.log('updateTeamId');
       this.setData({teamId:options.teamId})
@@ -176,9 +176,27 @@ Page({
               'initiator':data[i].initiator,
               'me':data[i].me,
               'avatar':data[i].avatarUrl,
-              'id':data[i].id
+              'id':data[i].id,
+              'nickname':data[i].nickName,
+              'wxId':data[i].wxId,
+              'description':data[i].description,
+              'school':data[i].school,
+              'major':data[i].major,
+              'grade':data[i].grade,
+              'identity':data[i].identification,
+
+              'wxIdPublic':data[i].wxIdPublic,
+              'schoolPublic':data[i].schoolPublic,
+              'majorPublic':data[i].majorPublic,
+              'gradePublic':data[i].gradePublic,
+              'identityPublic':data[i].identityPublic,
+
+              'personalLabel':data[i].personalLabel.map(this.getContent),
+              'interestLabel':data[i].interestLabel.map(this.getContent),
+
             }
             list.push(info);
+            
           }
           for(let i=0;i<that.data.teamDetail.due_member-data.length;i++){
             list.push({});
@@ -191,7 +209,9 @@ Page({
 
   },
 
-
+  getContent:function(item){
+    return item.content
+  },
 
 // 以下是和 发起者 initiator 有关的操作事件 ---------start---------------------
   handleCloseTeam: function(){
@@ -236,8 +256,9 @@ Page({
         'cookie':wx.getStorageSync('token'),
       },
       success:function(res){
+        if(res.statusCode!=200){return}
         let teamdata=res.data.data;
-        // console.log(teamdata);
+        console.log(teamdata);
         that.setData({
           amITeamInitiator:teamdata.initializedByMe,
           isFavourite:teamdata.myFavourite
@@ -264,7 +285,9 @@ Page({
               content: teamdata.content,
               picturesNum:  picList.length,
               pictures: picList,
-              due_member:teamdata.dueMember
+              due_member:teamdata.dueMember,
+              question:teamdata.question,
+              reason:teamdata.reason
             };    
             that.setData({teamDetail:teamDetail});
             
@@ -272,7 +295,7 @@ Page({
 
             if(that.data.amITeamInitiator){
               if(teamdata.status==4){
-                that.showTipBox('超时关闭、第一次进入的提示消息。但是我不知道写什么。')
+                that.showTipBox('组队招募已结束')
               }
               that.changeSizeOfInitiatorPage();
             }else{
@@ -297,7 +320,7 @@ Page({
                   break;
                 case 3:
                   that.setData({beRefused:true});
-                  that.showTipBox('被拒绝入队且第一次进入该页面。不知道要写什么。');
+                  that.showTipBox('很遗憾，本次申请未能通过，但请不要灰心，下一次可能就会组队成功~');
                   wx.request({
                     url:app.globalData.url+ 'userTeam/checkRejected',
                     method:"POST",
@@ -308,10 +331,20 @@ Page({
                   that.setData({beRefused:true});
                   break;
                 case 5:
-                  that.setData({});
+                  if(teamdata.reaon){
+                    that.setData({beClosedInAdvance:true})
+                    that.showTipBox('该组队招募已结束，理由为：\n'+teamdata.reason)
+                  }else{
+                    that.setData({timeIsOver:true})
+                    that.showTipBox('该组队招募已截止')
+                  }
                   break;
                 case 6:
-                  that.setData({});
+                  if(teamdata.reaon){
+                    that.setData({beClosedInAdvance:true})
+                  }else{
+                    that.setData({timeIsOver:true})
+                  }
                   break;
     
               }
@@ -320,10 +353,6 @@ Page({
             }
           }
         })
-
-        
-        
-
       }
     })
   },
@@ -340,10 +369,28 @@ Page({
         console.log(data);
         for(let i in data){
           list.push({
-            avatar:data[i].avatarUrl,
-            nickname:data[i].nickName,
             applyTime:util.getDateDiff(data[i].createTime),
-            id:data[i].id,
+            'initiator':data[i].initiator,
+            'me':data[i].me,
+            'avatar':data[i].avatarUrl,
+            'id':data[i].id,
+            'nickname':data[i].nickName,
+            'wxId':data[i].wxId,
+            'description':data[i].description,
+            'school':data[i].school,
+            'major':data[i].major,
+            'grade':data[i].grade,
+            'identity':data[i].identification,
+
+            'wxIdPublic':data[i].wxIdPublic,
+            'schoolPublic':data[i].schoolPublic,
+            'majorPublic':data[i].majorPublic,
+            'gradePublic':data[i].gradePublic,
+            'identityPublic':data[i].identityPublic,
+
+            'personalLabel':data[i].personalLabel.map(this.getContent),
+            'interestLabel':data[i].interestLabel.map(this.getContent),
+
 
           })
         };
@@ -467,13 +514,21 @@ Page({
 
 
   tapAvatar:function(e){
-    wx.request({
-      url: 'url',
-    })
+    switch(e.dataset.container){
+      case 'avatar-list':
+        this.setData({personalInfo:this.data.avatarList[e.dataset.index]});
+        break;
+      case 'initiator':
+        this.setData({personalInfo:this.data.avatarList[0]});
+        break;
+      case 'applierList':
+        this.setData({personalInfo:this.data.applierList[e.dataset.index]});
+        break;    
+    }
 
     console.log(e);
-    this.setData({"currentUser":e.detail});
-    console.log(this.data.currentUser);
+    // this.setData({"currentUser":e.detail});
+    // console.log(this.data.currentUser);
     this.selectComponent("#personalAnimation").showModal(this.data.currentUser.userAvatar);
     // this.selectComponent("#personalAnimation").showModal();
     
@@ -603,7 +658,7 @@ Page({
     }else if(data.beClosedInAdvance){
       this.setData({
         result:"组队招募已经关闭\n发起人关闭的原因如下：",
-        reply:"我就想提早结束，乂，我就是玩。",
+        reply:this.data.teamDetail.reason,
         over:true
       })
     }else if(data.haveJoinedIn){
@@ -612,8 +667,6 @@ Page({
       })
     }else if(data.beRefused){
       this.setData({
-        // result:"您的申请被拒绝\n发起人拒绝的原因如下：",
-        reply:"我就是不要你，乂，我就是玩。",
         result:'您的申请被拒绝'
       })
     }else if(data.haveSignedUp){
@@ -667,7 +720,7 @@ Page({
   },
   applyButton:function(e){
     var that=this;
-    if(!this.data.haveQuestions){
+    if(!this.data.teamDetail.question){
       this.setData({
         result:"您已报名该组队，申请正在处理中~",
         haveSignedUp:true
@@ -702,7 +755,7 @@ Page({
       isDialogShow: true,
       content:'确定取消申请？',
       hasInputBox:false,
-      tip:"",
+      tip:"取消申请后无法再次申请",
       cancelText:"取消",
       okText:"确认",
       tapOkEvent:"dialogTapOkForCancelApplication"
@@ -712,12 +765,20 @@ Page({
     })
   },
   dialogTapOkForCancelApplication:function(e){
-    this.setData({
-      haveSignedUp:false,
-      result:'',
-    });
-    console.log(this);
-    this.changeScrollHeight();
+    wx.request({
+      url: app.globalData.url+'/userTeam/cancelApply',
+      header:{'cookie':wx.getStorageSync('token')},
+      success:function(res){
+        this.setData({
+          // haveSignedUp:false,
+          beRefused:true,
+          result:'已取消申请',
+        });
+        this.changeScrollHeight();
+      }
+    })
+
+    
   },
   dialogTapOkForCloseTeam:function(){
     this.setData({

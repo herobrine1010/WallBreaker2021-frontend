@@ -23,6 +23,36 @@
           "pathName": "pages/jiren/groupDetail",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/jiren/main",
+          "pathName": "pages/jiren/main",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/jishi/detail",
+          "pathName": "pages/jishi/detail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/jiren-temp/answerQuestion",
+          "pathName": "pages/jiren-temp/answerQuestion",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/jiren/answerQuestion",
+          "pathName": "pages/jiren/answerQuestion",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/jishi/detail",
+          "pathName": "pages/jishi/detail",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -11,7 +11,7 @@
         <scroll-view show-scrollbar="true" enhanced="true" scroll-x="true">
           <view class="item-content" wx:for="{{avatarList}}" >
             <image wx:if="{{item.avatar==undefined}}" class="avatar" src="/static/icon/add-grey.png"></image>
-            <image wx:else class="avatar" src="{{item.avatar}}" bindtap="tapAvatar" data-id="{{item.id}}"></image>
+            <image wx:else class="avatar" src="{{item.avatar}}" bindtap="tapAvatar" data-index="{{index}}" data-container="avatar-list"></image>
             <view wx:if="{{item.me}}" class="me">我</view>
             <view wx:elif="{{item.initiator}}"class="initiator">发起人</view>
             </view>
@@ -34,10 +34,10 @@
         </view>
           <view class="detail-a-line">
             <view class="detail-avatar">
-              <image src="{{teamDetail.avatar}}" style="width:80rpx; height:80rpx; border-radius:50%"></image>
+              <image src="{{teamDetail.avatar}}" style="width:80rpx; height:80rpx; border-radius:50%" bindtap="tapAvatar" data-container="initiator"></image>
             </view>
             <view class="detail-name-and-time">
-              <view class="detail-nickname">{{teamDetail.nickname}}</view>
+              <view class="detail-nickname" bindtap="tapAvatar" data-container="initiator">{{teamDetail.nickname}}</view>
               <view class="detail-apply-time">{{teamDetail.fromTime}}</view>
             </view>
             <view wx:if="{{!over}}" class="detail-due-time">{{teamDetail.dueTime}}</view>
@@ -53,8 +53,8 @@
       
         <block wx:for="{{applierList}}" >
           <view class='list-item'>
-            <image src='{{item.avatar}}' class='list-item-avatar'></image>
-            <view class='list-item-username'>{{item.nickname}}</view>
+            <image src='{{item.avatar}}' class='list-item-avatar' bindtap="tapAvatar" data-container="applierList" data-index="index"></image>
+            <view class='list-item-username' bindtap="tapAvatar" data-container="applierList" data-index="index">{{item.nickname}}</view>
             <view class='list-item-apply-time'>{{item.applyTime}}</view>
             <view class='see-answer' data-applyerId="{{item.id}}" bindtap="showAnswers" >查看回答</view>
             <image class='tick' src='/static/icon/tick.png' bindtap="acceptApplying" data-applyername="{{item.nickname}}" data-applyerid="{{item.id}}"></image>

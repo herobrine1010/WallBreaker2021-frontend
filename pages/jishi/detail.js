@@ -1,4 +1,6 @@
 // pages/jishi/detail.js
+var app=getApp();
+
 Page({
 
   /**
@@ -10,7 +12,7 @@ Page({
     userAvatar:'/static/icon/default-user-big.png',
     userName:"破壁者1号",
     time:'2021年6月9日    21:40',
-    description:"为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……",
+    description:"为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……",
     pictures:['','','','','','','',''],
 
 
@@ -30,20 +32,46 @@ Page({
 
     this.setData({postingId:postingId})
 
+    this.changeDetail();
   },
 
 
-  // changeDetail:function(){
-  //   wx.request({
-  //     url: 'url',
-  //   })
+  changeDetail:function(){
+    let that=this;
+    wx.request({
+      url: app.globalData.url+'/posting/getPosting/'+that.data.postingId,
+      header:{'cookie':wx.getStorageSync('token')},
+      success:function(res){
+        if(res.statusCode==200){
+          let postingdata=res.data.data;
+          console.log(postingdata);
+          wx.request({
+            url: app.globalData.url+'/user/userInfo',
+            data:{userId:postingdata.initiatorId},
+            success:function(res){
+            if(res.statusCode==200){
+              let userdata=res.data.data;
+              let pictures=(postingdata.allPicUrl?postingdata.allPicUrl.split(','):[])
+              that.setData({
+                title:postingdata.title,
+                userAvatar:userdata.avatar,
+                userName:userdata.nickName,
+                time:postingdata.create_time,
+                description:postingdata.content,
+                pictures:pictures,
+              })
+              }
+            }
+          })
+        }
+      }
+    })
 
 
-  // }
+  },
 
 
   Like:function(){
-    let app=getApp();
     let that=this;
     wx.request({
       url: app.globalData.url+'/userFavouritePosting/addToMyFavouritePosting/'+this.data.postingId,

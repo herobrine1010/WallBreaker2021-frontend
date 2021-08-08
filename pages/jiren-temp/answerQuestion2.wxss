@@ -1,0 +1,101 @@
+/* pages/jiren/anwserQuestion.wxss */
+@import "/static/common.wxss";
+.area2{
+  position:fixed;
+  top: 78px; /*这里用了px代替百分比*/
+  width: 100%;
+  left:0;
+  height: 100%;
+}
+.shade{
+  position: absolute;
+  top:0%;
+  background-color: #F2FCFF;
+  height:100%;
+  left:0%;
+  width:100%;
+  opacity: 35%;
+  border-radius: 25px 25px 0 0;
+  /*z-index: 1;设置了该属性后shade会盖在文字和组件上*/
+}
+.mainArea {
+  height: 100%;
+}
+.title {
+  margin-top: 19px;/*从百分比改成了px*/
+  margin-left: 15px;
+
+  font-family: PingFang SC;
+  font-size: 14px;
+  line-height: 16px;
+  align-items: center;
+  
+  color: #4A5559;
+}
+.questionContainer {
+  height: 1000px;/*scroll-view调试用*/
+}
+.questionItem {
+  width: 92%;
+  height: 110px;
+  margin: 5px 4% 5px 4%;
+}
+.questionText {
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height */
+  color: #4A5559;
+}
+.answerBox {
+  height: 50%; /*根据设计图推算高度*/
+  background: #F2FCFF;
+  border-radius: 6px;
+  padding: 4px 17px 5px 5px;
+}
+.answerText {
+  height: 100%;
+  width: 100%;
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  color: #989A9A;
+}
+
+.maxlengthArea {
+  text-align: center;
+}
+.maxlengthMessage {
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 17px;
+
+  color: #007399;
+}
+.submitButton {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 360px;
+  background: rgba(23, 178, 230);
+  opacity: 80%;
+}
+.buttonText {
+  top: 22.22%;
+  bottom: 22.22%;
+
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #FFFFFF;
+}

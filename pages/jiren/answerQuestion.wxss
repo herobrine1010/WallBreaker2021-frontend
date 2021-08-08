@@ -1,8 +1,9 @@
-/* pages/jiren/anwserQuestion.wxss */
 @import "/static/common.wxss";
+
+/* pages/jishi/main.wxss */
 .area2{
   position:fixed;
-  top: 78px; /*这里用了px代替百分比*/
+  top:10%;
   width: 100%;
   left:0;
   height: 100%;
@@ -11,91 +12,135 @@
   position: absolute;
   top:0%;
   background-color: #F2FCFF;
+  opacity: 35%;
   height:100%;
   left:0%;
   width:100%;
-  opacity: 35%;
   border-radius: 25px 25px 0 0;
-  /*z-index: 1;设置了该属性后shade会盖在文字和组件上*/
+  z-index: 0;
 }
-.mainArea {
-  height: 100%;
+.scroll-area{
+  top:1vh;
+  position: relative;
+  width:100%;
+  /* background-color: #FF0000; */
+  height:88vh;
 }
-.title {
-  margin-top: 19px;/*从百分比改成了px*/
-  margin-left: 15px;
+.intro{
+  position: relative;
+  width:100%;
+  height:5vh;
+  font-size: 2.2vh;
+  font-weight: 500;
+  letter-spacing: 0.2vw;
+  left:3vw;
+  color:#4A5559;
+  top:0.5vh;
+}
 
-  font-family: PingFang SC;
-  font-size: 14px;
-  line-height: 16px;
-  align-items: center;
+
+
+
+
+.question-text,.answer-area{
+  left:3vw;
+  width:94vw;
+}
+
+.question-text{
+  position: relative;
+  font-size: 1.9vh;
+  color:#4A5559;
+  white-space:normal;
+  word-wrap:break-word;
+  word-break:normal;
+  width:94vw;
+  margin-bottom: 0.3vh;
+  /* display: block; */
+}
+.answer-area{
+  position: relative;
+  background-color:#F2FCFF;
+  border-radius: 2vh;
+  height:10vh;
+  margin-left: 0.3vw;
+  margin-right: 0.3vw;
   
-  color: #4A5559;
+
+
 }
-.questionContainer {
-  height: 1000px;/*scroll-view调试用*/
+.text-answer,.text-placeholder{
+  position: absolute;
+  height:100%;
+  width:100%;
+  padding-left:2%;
+  padding-right:2%;
+  box-sizing: border-box; 
+  font-size:2.2vh;
+
 }
-.questionItem {
-  width: 92%;
-  height: 110px;
-  margin: 5px 4% 5px 4%;
-}
-.questionText {
-  font-family: PingFang SC;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 20px;
-  /* identical to box height */
-  color: #4A5559;
-}
-.answerBox {
-  height: 50%; /*根据设计图推算高度*/
-  background: #F2FCFF;
-  border-radius: 6px;
-  padding: 4px 17px 5px 5px;
-}
-.answerText {
-  height: 100%;
-  width: 100%;
-  font-family: PingFang SC;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 18px;
-  color: #989A9A;
+.text-placeholder{
+  color:#989A9A
 }
 
-.maxlengthArea {
+.text-count{
+  z-index:3
+}
+
+.warning-area{
+  margin-top:0.5vh;
+  line-height: 2vh;
+  font-size: 2vh;
+  font-weight: 300;
   text-align: center;
+  position: relative;
+  height:2vh
 }
-.maxlengthMessage {
-  font-family: PingFang SC;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 17px;
 
-  color: #007399;
+.warning{
+  color:#007399;
 }
-.submitButton {
+
+
+.empty-block{
+  position: relative;
+  width:100%;
+  height:5vh;
+  margin-bottom: 1vh; 
+}
+.blur-shadow{
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 360px;
-  background: rgba(23, 178, 230);
-  opacity: 80%;
+  bottom:0vh;
+  height:6vh;
+  width:100vw;
+  left:0vw;
+  /* background-color: #17B2E5;
+  opacity: 80%; */
+  z-index: 2;
+  background:repeat;
+  backdrop-filter:blur(4px);
 }
-.buttonText {
-  top: 22.22%;
-  bottom: 22.22%;
+.bottom-elements{
+  position: fixed;
+  bottom:0vh;
+  height:6vh;
+  width:100vw;
+  left:0vw;
+  background-color: #17B2E5;
+  opacity: 0.8;
+  /* filter: blur(10px); */
+  z-index: 300;
+}
 
-  font-family: PingFang SC;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 20px;
-
-  color: #FFFFFF;
+.accept-all-button{
+  height:100%;
+  position: absolute;
+  align-items: center;
+  text-align:center;
+  float:left;
+  width:100%;
+  line-height:6vh; 
+  color:#ffffff;
+  font-size:2.4vh;
+  letter-spacing: 0.2vh;
 }

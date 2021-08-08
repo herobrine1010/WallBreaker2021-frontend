@@ -116,7 +116,7 @@ Page({
     var textLength = e.detail.value.length
     console.log(textLength)
     let questions=this.data.questionItems;
-    let index=e.target.dataset.number;
+    let index=e.target.dataset.index;
     if (textLength==50)
     {
       questions[index].message='字符数已达上限！';
