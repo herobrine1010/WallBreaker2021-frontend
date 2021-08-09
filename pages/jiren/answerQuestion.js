@@ -1,4 +1,5 @@
 // pages/jiren/anwserQuestion.js
+var app=getApp();
 Page({
 
   /**
@@ -44,7 +45,37 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    let that=this;
+    if(options.teamId){
+      wx.request({
+        url: app.globalData.url+'/team/getTeam/'+options.teamId,
+        // data:{question},
+        header:{'cookie':wx.getStorageSync('token')},
+        success:function(res){
+          let question=JSON.parse(res.data.data.question);
+ 
+          let list=[];
+          for(let item in question){
+            list.push({
+              questionText:question[item],
+            })
+          }
+          that.setData({
+            teamId:options.teamId,
+            questionItems:list
+          })
+          console.log(question)
+        }
+      })
 
+    }
+
+    // this.setData({
+    //   teamId:options.teamId,
+    //   questionItems:options.questions
+    // })
+    console.log(this.data)
   },
 
   /**
@@ -98,18 +129,50 @@ Page({
 
   submitAnswer: function(e) {
     var answerList = e.detail.value
-    console.log("form的submit的数据",answerList)
-    const eventChannel = this.getOpenerEventChannel()
-    eventChannel.emit('getResult', {data: true});
-    //调试用
-    wx.navigateBack({
-      delta: 0,
-    });
-    wx.showToast({
-      title: '申请已提交',
-      icon:'success',
-      duration:2000
-    });
+    console.log(answerList)
+    this.setData({answerList:e.detail.value})
+    let dialog = {
+      isDialogShow: true,
+      content:"确定提交回答吗？",
+      hasInputBox:false,
+      tip:"",
+      cancelText:"取消",
+      okText:"确认",
+      tapOkEvent:"dialogTapOkForSubmitAnswer"
+    };
+    this.setData({
+      dialog
+    })
+  },
+  dialogTapOkForSubmitAnswer:function(){
+    let that=this;
+    console.log('424')
+    wx.request({
+      url: app.globalData.url+'/userTeam/apply',
+      method:"POST",
+      header:{'cookie':wx.getStorageSync('token')},
+      data:{
+        teamId:that.data.teamId,
+        answer:that.data.answerList
+      },
+      success:function(res){
+        console.log(res.statusCode)
+        if(res.statusCode==200){
+          const eventChannel = that.getOpenerEventChannel()
+          eventChannel.emit('getResult', {data: true});
+          //调试用
+          wx.navigateBack({
+            delta: 0,
+          });
+          wx.showToast({
+            title: '申请已提交',
+            icon:'success',
+            duration:2000
+          });
+        }
+
+      }
+    })
   },
   isMaxlength: function(e) {
     console.log(e);

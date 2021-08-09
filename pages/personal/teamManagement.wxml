@@ -1,0 +1,34 @@
+<!--pages/collection/collection.wxml-->
+<view class="background {{background}}">
+  <!-- nav 组件调用 -->
+  <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="组队管理"></mp-navigation-bar>
+  <!-- 以下是container，包含了除标题外的其余内容 -->
+  <view class="per-container">
+    <scroll-view 
+    scroll-y="true"
+    refresher-enabled="true"
+    bindscrolltolower = "onScrollToLower"
+    class="collection-body">
+      <!-- <scroll-view class="listArea" scroll-y="true">
+      <view class="list-item"> -->
+      <!-- </view> 
+    </scroll-view> -->
+    <view style="height:3vh"></view>
+      <navigator url="../jiren/groupDetail"  wx:for="{{jirenItemList}}">
+        <card-team
+        labelText="{{item.labelText}}"
+        title="{{item.title}}"
+        teamCondition="{{item.teamCondition}}"
+        rightTagText="{{item.rightTagText}}"  
+        dueTime="{{item.dueTime}}"
+        description="{{item.description}}"
+        initiator="{{item.initiator}}"
+        badgeType="{{item.badgeType}}"
+        peopleCount="{{item.peopleCount}}"
+        postingPic="{{item.postingPic}}" 
+        ></card-team>
+      </navigator>
+      
+    </scroll-view>
+  </view>
+</view>

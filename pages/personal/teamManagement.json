@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "mp-navigation-bar" : "weui-miniprogram/navigation-bar/navigation-bar",
+    "card-team":"../../components/card-team/card",
+    "card-notice":"../../components/card-notice/card"
+  },
+  "navigationStyle": "custom" 
+
+}

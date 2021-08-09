@@ -5,35 +5,41 @@
   <view class="area2">
     <view class="shade"></view>
 
-    <scroll-view class="scroll-area" scroll-y="true" with-animation='true' >
-      <view class="intro">请回答发起人设置的下列问题：</view>
-
-      <block wx:for="{{questionItems}}">
-        <view class="list-item">
-          <view class="question-text">{{item.questionText}}</view>
-          <view class="answer-area">
-            <textarea maxlength="50" class="text-answer" 
-            data-index="{{index}}" bindinput="isMaxlength" placeholder=" 请输入你的回答（不超过50字）"  confirm-type="done"
-            placeholder-class="text-placeholder" ></textarea>
-            <!-- <view class="text-count">{{item.textLength}}/200</view> -->
-          </view>
-          <view class="warning-area">
-          <view class="warning">{{item.message}}</view>
-          </view>
-        </view>
-      </block>
-
-      <view class="empty-block"></view>
-
-    </scroll-view>
-  
-
-    <view class="bottom-elements">
-      <view class="accept-all-button" bindtap="tapSubmit">
-        确认提交
-      </view>
+      <form bindsubmit="submitAnswer">
       
-    </view>
+        <scroll-view class="scroll-area" scroll-y="true" with-animation='true' >
+        <view class="intro">请回答发起人设置的下列问题：</view>
+
+
+        <block wx:for="{{questionItems}}">
+          <view class="list-item">
+            <view class="question-text">{{item.questionText}}</view>
+            <view class="answer-area">
+              <textarea maxlength="50" class="text-answer" 
+              data-index="{{index}}" bindinput="isMaxlength" placeholder=" 请输入你的回答（不超过50字）"  confirm-type="done" name="{{index}}"
+              placeholder-class="text-placeholder" ></textarea>
+              <!-- <view class="text-count">{{item.textLength}}/200</view> -->
+            </view>
+            <view class="warning-area">
+            <view class="warning">{{item.message}}</view>
+            </view>
+          </view>
+        </block>
+
+        <view class="empty-block"></view>
+
+      </scroll-view>
+    
+
+      <view class="bottom-elements">
+        <button class="accept-all-button" formType='submit' style="width: 100%;border: 0; border-radius: 0">
+          <text class="buttonText">确认提交</text>
+        </button>
+        
+      </view>
+
+    </form>
+
     <view class="blur-shadow"></view>
   </view>
 
@@ -41,6 +47,6 @@
 
 </view>
 
-<dialog-box content="{{dialogContent}}" tip="{{dialogTip}}" okText="{{dialogOkText}}" cancelText="{{dialogCancelText}}"
-  isShow="{{isDialogShow}}" bind:tapOk="tapOk">
+<dialog-box content="{{dialog.content}}" tip="{{dialog.tip}}" okText="{{dialog.okText}}" cancelText="{{dialog.cancelText}}"
+  isShow="{{dialog.isDialogShow}}" bind:tapOk="{{dialog.tapOkEvent}}">
 </dialog-box>

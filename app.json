@@ -38,6 +38,7 @@
     "pages/login/login",
     "pages/personal/main",
     "pages/personal/personalDetails",
+    "pages/personal/teamManagement",
     "pages/personal/collection",
     "pages/personal/feedback",
     "pages/personal/aboutUs",

@@ -56,7 +56,7 @@
             <image src='{{item.avatar}}' class='list-item-avatar' bindtap="tapAvatar" data-container="applierList" data-index="index"></image>
             <view class='list-item-username' bindtap="tapAvatar" data-container="applierList" data-index="index">{{item.nickname}}</view>
             <view class='list-item-apply-time'>{{item.applyTime}}</view>
-            <view class='see-answer' data-applyerId="{{item.id}}" bindtap="showAnswers" >查看回答</view>
+            <view wx:if="{{teamDetail.question}}" class='see-answer' data-applyerId="{{item.id}}" bindtap="showAnswers" >查看回答</view>
             <image class='tick' src='/static/icon/tick.png' bindtap="acceptApplying" data-applyername="{{item.nickname}}" data-applyerid="{{item.id}}"></image>
             <image class='cross' src='/static/icon/cross-purple.png' data-applyername="{{item.nickname}}" data-applyerId="{{item.id}}" bindtap="refuseApplying"></image>
           </view>
@@ -142,6 +142,7 @@
 <personal-animation id="personalAnimation" personalInfo="{{personalInfo}}" hidden="{{true}}"></personal-animation>
 
 <dialog-box 
+id="dialogBox"
 content="{{dialog.content}}"
 hasInputBox="{{dialog.hasInputBox}}"
 tip="{{dialog.tip}}"
@@ -149,6 +150,7 @@ okText="{{dialog.okText}}"
 cancelText="{{dialog.cancelText}}"
 isShow="{{dialog.isDialogShow}}"
 bind:tapOk="{{dialog.tapOkEvent}}"
+bind:finishInput="finishInput"
 >
 </dialog-box>
 
@@ -170,6 +172,19 @@ button="{{dialog2.button}}">
     </view>
     <view class="tip-button" bindtap="tipBoxButton">确定</view>
   </view>
+</view>
+
+<view wx:if="{{answer.show}}" class="answer_container">
+  <scroll-view class="answer-board" style="height:{{answer.height}}">
+    <view class="answer-a-line">
+      <view class="answer-name">申请人  {{answer.nickname}}</view>
+      <image class="answer-image" style="width:60rpx;height:60rpx" src="{{answer.avatarUrl}}"></image>
+    </view>
+    <view wx:for="{{answer.answerList}}">
+      <view class="answer-question">{{item.question}}</view>
+      <view class="answer-answer">{{item.answer}}</view>
+    </view>
+  </scroll-view>
 </view>
 
 <!-- <image class='tick' src='/static/icon/tick.png' bindtap="acceptApplying" data-applyername="你自己" data-applyerid="0" style="position:fixed;top:88vh;right:18vw" hidden="{{!haveSignedUp}}"></image>

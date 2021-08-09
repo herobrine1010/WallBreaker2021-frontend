@@ -20,11 +20,11 @@
     
     <!-- 界面相似，帖子·组队管理 和 我的收藏 共用一个页面
     通过personalManagementOrCollection这个全局的状态量，决定进入哪个页面 -->
-    <navigator url="../personal/collection" class="per-items" bindtap="changeToPersonalManagement">
+    <navigator url="../personal/teamManagement" class="per-items" >
       <image src="../../static/icon/people-01.png" class="icon"></image>
       <view class="item-title">帖子·组队管理</view>
     </navigator>
-    <navigator url="../personal/collection" class="per-items" bindtap="changeToPersonalCollection">
+    <navigator url="../personal/collection" class="per-items">
       <image src="../../static/icon/badge.png" class="icon"></image>
       <view class="item-title">我的收藏</view>
     </navigator>

@@ -65,6 +65,7 @@ Page({
   
     initiatorScrollHeight:'auto',
     targetId:null,
+    // over:true,
   },
 
   /**
@@ -74,7 +75,7 @@ Page({
     
     console.log(options)
     if(!options.teamId){
-      this.setData({teamId:67})
+      this.setData({teamId:72})
     }else{
       console.log('updateTeamId');
       this.setData({teamId:options.teamId})
@@ -92,9 +93,9 @@ Page({
     });
     // this.initializeResult();
 
-    // this.initializeAvatarList();
+    // this.changeAvatarList();
     this.changeTeamDetail();
-    // this.initializeAvatarList();
+    // this.changeAvatarList();
 
     // this.changeScrollHeight();
 
@@ -160,7 +161,7 @@ Page({
 
   },
 
-  initializeAvatarList:function(){
+  changeAvatarList:function(){
     let that=this;
     wx.request({
       url: app.globalData.url+'/userTeam/getAllMemberInfoByTeamId/'+that.data.teamId,
@@ -191,8 +192,8 @@ Page({
               'gradePublic':data[i].gradePublic,
               'identityPublic':data[i].identityPublic,
 
-              'personalLabel':data[i].personalLabel.map(this.getContent),
-              'interestLabel':data[i].interestLabel.map(this.getContent),
+              'personalLabel':(data[i].personalLabel?data[i].personalLabel.map(that.getContent):[]),
+              'interestLabel':(data[i].interestLabel?data[i].interestLabel.map(that.getContent):[]),
 
             }
             list.push(info);
@@ -217,9 +218,9 @@ Page({
   handleCloseTeam: function(){
     let dialog = {
       isDialogShow: true,
-      content:"请填写结束招募理由，理由将被队内成员看到",
+      content:"请填写结束招募理由，\n理由将被队内成员看到",
       hasInputBox:true,
-      tip:"提示：结束组队招募后，将无法查看队友联系方式",
+      tip:"提示：结束组队招募后，\n将无法查看队友联系方式",
       cancelText:"取消",
       okText:"确认",
       tapOkEvent:"dialogTapOkForCloseTeam"
@@ -228,11 +229,36 @@ Page({
       dialog
     })
   },
+  // finishInput:function(e){
+  //   console.log(e)
+  // },
+
   dialogTapOkForCloseTeam:function(e){
-    this.setData({
-      'teamDetail.isTeamClosed':true
-    })
-    console.log(e);
+    let that=this;
+    let reason=this.selectComponent("#dialogBox").data.reason;
+    if(!reason){
+      let dialog=this.data.dialog;
+      dialog.tip="请输入原因！\n ";
+      this.setData({dialog:dialog});
+      return true
+    }else{
+      wx.request({
+        url: app.globalData.url+'/team/terminateTeam',
+        method:'PUT',
+        data:{
+          teamId:that.data.teamId,
+          reason:reason
+        },
+        header:{'cookie':wx.getStorageSync('token')},
+        success:function(res){
+          if(res.statusCode==200){
+            that.setData({
+              'teamDetail.isTeamClosed':true
+            })
+          }
+        }   
+      })
+    }
   },
   showAnswers:function(){
 
@@ -275,13 +301,14 @@ Page({
             let initiatordata=res.data.data;
             var picList=(teamdata.allPicUrl?teamdata.allPicUrl.split(','):[]);
             let fromTime=util.getDateDiff(teamdata.createTime);
+            let dueTime=util.getDateDiff(teamdata.dueTime);
             let teamDetail={
               title:teamdata.title,
               isTeamClosed: (teamdata.status>2?true:false),
               avatar:initiatordata.avatarUrl,
               nickname:initiatordata.nickName,
               fromTime: fromTime,
-              dueTime: '2天后结束',
+              dueTime: dueTime,
               content: teamdata.content,
               picturesNum:  picList.length,
               pictures: picList,
@@ -291,7 +318,7 @@ Page({
             };    
             that.setData({teamDetail:teamDetail});
             
-            that.initializeAvatarList();
+            that.changeAvatarList();
 
             if(that.data.amITeamInitiator){
               if(teamdata.status==4){
@@ -302,6 +329,7 @@ Page({
               if(teamdata.status==2){
                 that.setData({memberFull:true})
               }
+              console.log(teamdata.applyStatus)
               switch(teamdata.applyStatus){
                 case 0:
                   that.setData({haveSignedUp:true})
@@ -388,8 +416,8 @@ Page({
             'gradePublic':data[i].gradePublic,
             'identityPublic':data[i].identityPublic,
 
-            'personalLabel':data[i].personalLabel.map(this.getContent),
-            'interestLabel':data[i].interestLabel.map(this.getContent),
+            'personalLabel':(data[i].personalLabel?data[i].personalLabel.map(that.getContent):[]),
+              'interestLabel':(data[i].interestLabel?data[i].interestLabel.map(that.getContent):[]),
 
 
           })
@@ -447,7 +475,8 @@ Page({
         wx.showToast({
           title: '接受id为'+that.data.targetId+'的申请',
         });
-        that.initializeAvatarList();
+        that.changeAvatarList();
+        that.changeInitiatorList();
       }
     })
 
@@ -514,15 +543,17 @@ Page({
 
 
   tapAvatar:function(e){
-    switch(e.dataset.container){
+    console.log(e)
+    let data=e.currentTarget.dataset;
+    switch(data.container){
       case 'avatar-list':
-        this.setData({personalInfo:this.data.avatarList[e.dataset.index]});
+        this.setData({personalInfo:this.data.avatarList[data.index]});
         break;
       case 'initiator':
         this.setData({personalInfo:this.data.avatarList[0]});
         break;
       case 'applierList':
-        this.setData({personalInfo:this.data.applierList[e.dataset.index]});
+        this.setData({personalInfo:this.data.applierList[data.index]});
         break;    
     }
 
@@ -626,7 +657,8 @@ Page({
       },
       success:function(){
         that.setData({applierList:[]});
-        that.initializeAvatarList();
+        that.changeAvatarList();
+        that.changeInitiatorList();
       }
     })
   },
@@ -674,7 +706,7 @@ Page({
         result:"您已报名该组队，申请正在处理中~"
       })
     }
-    console.log(this);
+    // console.log(this);
     this.changeScrollHeight();
   },
 
@@ -732,7 +764,7 @@ Page({
       });
     }else{
       wx.navigateTo({
-        url: '/pages/jiren/answerQuestion',
+        url: '/pages/jiren/answerQuestion?teamId='+that.data.teamId,
         events: {
           // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
           getResult: function(data) {
@@ -780,16 +812,6 @@ Page({
 
     
   },
-  dialogTapOkForCloseTeam:function(){
-    this.setData({
-      beClosedInAdvance:true,
-      dialogForBeingCloseInAdvance:true,
-    });
-    this.initializeResult();
-    this.changeScrollHeight();
-  },
-
-
   testButton:function(e){
     let tipBox = {
       show:true,

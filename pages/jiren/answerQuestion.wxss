@@ -48,13 +48,14 @@
 }
 
 .question-text{
+  left: 6vw;
   position: relative;
   font-size: 1.9vh;
   color:#4A5559;
   white-space:normal;
   word-wrap:break-word;
   word-break:normal;
-  width:94vw;
+  width:88vw;
   margin-bottom: 0.3vh;
   /* display: block; */
 }
@@ -134,6 +135,7 @@
 
 .accept-all-button{
   height:100%;
+  padding: 0;
   position: absolute;
   align-items: center;
   text-align:center;
@@ -141,6 +143,7 @@
   width:100%;
   line-height:6vh; 
   color:#ffffff;
+  background: rgba(23, 178, 230);
   font-size:2.4vh;
   letter-spacing: 0.2vh;
 }

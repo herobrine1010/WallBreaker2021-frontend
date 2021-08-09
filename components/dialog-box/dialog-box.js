@@ -47,14 +47,13 @@ Component({
     tapOk:function(e){
       // var t=e.currentTarget.dataset;
       this.triggerEvent('tapOk',this.data.detail);
+      if(this.data.hasInputBox&&!this.data.reason){return}
       this.setData({isShow:false});
     },
     finishInput:function(e){
-      this.setData({
-        detail:e.detail
-      })
-    }
-    
-
+      console.log(e)
+      this.setData({reason:e.detail.value})
+      
+    },
   }
 })
