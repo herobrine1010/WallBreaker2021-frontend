@@ -23,6 +23,7 @@ page {
 
 .main-area {
   height: 100%;
+  margin-top: 30rpx;
 }
 .main-area-content {
   /*居中对齐后，余750rpx-75rpx=675rpx*/

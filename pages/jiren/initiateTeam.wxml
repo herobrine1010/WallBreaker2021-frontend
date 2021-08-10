@@ -36,13 +36,14 @@
         <view class="section3 teamInfo">
           <view class="teamInfo-label">组队信息</view>
           <view class="teamInfo-title">
-            <input-tip name="teamTitle" value="{{teamTitle}}" 
+            <input-tip name="teamTitle" model:value="{{teamTitle}}" 
             class="teamInfo-title-input"  maxlength="25" placeholder="请填写标题"></input-tip>
           </view>
           <view class="teamInfo-content-wrap">
           <scroll-view class="teamInfo-scroll-view" scroll-y>
             <view class="teamInfo-content">
-              <textarea name="teamContent" value="{{teamContent}}" 
+              <!-- 双向绑定后不加bindinput，输入时控制台会持续报错，但不影响 -->
+              <textarea name="teamContent" model:value="{{teamContent}}" 
               class="teamInfo-content-textarea" placeholder-class="teamInfo-content-textarea-placeholder" placeholder="请填写您组队的主要信息，描述越准确就越能够寻找到越合适的队友" maxlength="500">
               </textarea>
               <image-box id="image-box"></image-box>
@@ -56,7 +57,7 @@
           <questionStack></questionStack>
         </view>
 
-        <button class="submitButton" form-type="submit" style="background: rgba(23, 178, 230, 0.8);position:fixed; bottom:0%; left:0%; height:90rpx; width:100%;z-index:10; border-radius: 0; border: 0; backdrop-filter: blur(2px);">确认提交</button>
+        <button class="submitButton" form-type="submit" disabled="{{teamContent=='' || teamTitle==''}}" style="background: rgba(23, 178, 230, 0.8);position:fixed; bottom:0%; left:0%; height:90rpx; width:100%;z-index:10; border-radius: 0; border: 0; backdrop-filter: blur(2px);">确认提交</button>
         
 
       </form>
@@ -68,6 +69,8 @@
   </view>
 
 </view>
+
+<!-- 弹出的用于确认的提示框 -->
 <dialog-box content="{{dialogContent}}" tip="{{dialogTip}}" okText="{{dialogOkText}}" cancelText="{{dialogCancelText}}"
   isShow="{{isDialogShow}}" bind:tapOk="tapOk">
 </dialog-box>

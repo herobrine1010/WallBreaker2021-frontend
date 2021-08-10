@@ -9,6 +9,10 @@ Component({
       type: String,
       value: '',
     },
+    value: {
+      type: String,
+      value: ''
+    },
     maxlength: {
       type: Number,
       value: 25
@@ -16,6 +20,11 @@ Component({
     placeholder: {
       type: String,
       value: ''
+    },
+    //用于与页面属性交互
+    isShowTip: {
+      type: Boolean,
+      value: true
     }
   },
 
@@ -23,7 +32,6 @@ Component({
    * 组件的初始数据
    */
   data: {
-    isShowTip: true,//暂时弃用，使用tip=''代替
     tip: '',
   },
 
@@ -47,8 +55,9 @@ Component({
       }
     },
     checkEmpty: function(e) {
-      let textLength = e.detail.value.length
-      if (textLength == 0)
+      let value = e.detail.value;
+      let textLength = value.trim();
+      if (textLength == "")
       {
         this.setData({
           tip: '该项未填写'

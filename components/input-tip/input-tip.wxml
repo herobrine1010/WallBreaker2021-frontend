@@ -3,7 +3,7 @@
 可以提示超出字符限制checkLength和所填项为空checkEmpty
 -->
 <view class="container">
-  <input name="{{name}}" class="input-box" placeholder-class="input-placeholder" maxlength="{{maxlength}}" placeholder="{{placeholder}}" bindinput="checkLength" bindblur="checkEmpty"/>
+  <input name="{{name}}" class="input-box" model:value="{{value}}" placeholder-class="input-placeholder" maxlength="{{maxlength}}" placeholder="{{placeholder}}" bindinput="checkLength" bindblur="checkEmpty"/>
   <view class="tip-wrap" wx:if="{{isShowTip}}">
     <text class="tip-text">{{tip}}</text>
   </view>
