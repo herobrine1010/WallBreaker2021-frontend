@@ -2,7 +2,6 @@
 const { formatTime } = require('../../utils/util.js');
 var util = require('../../utils/util.js');
 var app=getApp();
-var that=this;
 Page({
 
   /**
@@ -207,10 +206,6 @@ Page({
       dialog
     })
   },
-  // finishInput:function(e){
-  //   console.log(e)
-  // },
-
   dialogTapOkForCloseTeam:function(e){
     let that=this;
     let reason=this.selectComponent("#dialogBox").data.reason;
@@ -243,7 +238,7 @@ Page({
   },
   showAnswers:function(e){
     let id=e.detail;
-    
+
   },
   showTipBox:function(message){
     let tipBox = {
@@ -543,8 +538,6 @@ Page({
             'grade':data.grade,
             'identity':data.identification,
 
-            // 'wxIdPublic':data.wxIdPublic,
-            // 'wxIdPublic':true,
             'schoolPublic':data.schoolPublic,
             'majorPublic':data.majorPublic,
             'gradePublic':data.gradePublic,
@@ -564,19 +557,6 @@ Page({
         }
       })
     }
-
-    // switch(data.container){
-    //   case 'avatar-list':
-    //     this.setData({personalInfo:this.data.avatarList[data.index]});
-    //     break;
-    //   case 'initiator':
-    //     this.setData({personalInfo:this.data.avatarList[0]});
-    //     break;
-    //   case 'applierList':
-    //     this.setData({personalInfo:this.data.applierList[data.index]});
-    //     break;    
-    // }
-
     console.log(e);
     this.selectComponent("#personalAnimation").showModal(this.data.currentUser.userAvatar);
     // this.selectComponent("#personalAnimation").showModal();

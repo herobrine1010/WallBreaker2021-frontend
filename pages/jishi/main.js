@@ -157,7 +157,7 @@ Page({
    console.log(this.data.jishiItemList)
 
   },
-  jumpToDetail:function(){
+  jumpToDetail:function(e){
     wx.navigateTo({
       url: '/pages/jishi/detail?postingId='+e.currentTarget.dataset.postingid,
     })
