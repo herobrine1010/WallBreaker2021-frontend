@@ -4,7 +4,7 @@
   <view class="pa-text-area">
     <view class="pa-nickname-and-check-answer">
       <view class="pa-nickname">{{personalInfo.nickname}}</view>
-      <view wx:if="{{isCheckAnswerButtonShow}}" class="pa-check-answer">查看回答</view>
+      <view wx:if="{{personalInfo.isCheckAnswerButtonShow}}" class="pa-check-answer" bindtap="seeAnswer" data-id="{{personalInfo.id}}">查看回答</view>
     </view>
     <view class="pa-wx-id" bindlongtap="copyWxId" wx:if="{{personalInfo.wxIdPublic}}">
       微信号 {{personalInfo.wxId}}

@@ -45,7 +45,7 @@
     <scroll-view bindscroll="onMyScroll" class="listArea" scroll-y="true" with-animation='true' scroll-top='{{ topNum }}' refresher-enabled="true">
     
       <block wx:for="{{jishiItemList}}">
-        <view  class="list-item" bindtap="jumpToDetail">
+        <view  class="list-item" bindtap="jumpToDetail" data-postingId="{{item.id}}">
         <card-notice 
         labelId="{{item.labelId}}"
         labelText="{{item.labelContent}}"

@@ -43,7 +43,6 @@
 </view>
 
 <personal-animation
-isPersonalInfoShow = "{{isPersonalInfoShow}}"
-isCheckAnswerButtonShow = "false"
+personalInfo="{{personalInfo}}"
 id="personalAnimation1"
   ></personal-animation>

@@ -8,12 +8,12 @@ Page({
    */
   data: {
     like:false,
-    title:'破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！',
-    userAvatar:'/static/icon/default-user-big.png',
-    userName:"破壁者1号",
-    time:'2021年6月9日    21:40',
-    description:"为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……",
-    pictures:['','','','','','','',''],
+    // title:'破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！',
+    // userAvatar:'/static/icon/default-user-big.png',
+    // userName:"破壁者1号",
+    // time:'2021年6月9日    21:40',
+    // description:"为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……",
+    // pictures:['','','','','','','',''],
 
 
     isPersonalInfoShow : false,
@@ -25,7 +25,7 @@ Page({
   onLoad:function(options){
     console.log(options);
     if(!options.postingId){
-      var postingId=4;
+      var postingId=13;
     }else{
       var postingId=options.postingId
     };
@@ -33,6 +33,7 @@ Page({
     this.setData({postingId:postingId})
 
     this.changeDetail();
+    // this.setUserInfo();
   },
 
 
@@ -54,13 +55,46 @@ Page({
               let pictures=(postingdata.allPicUrl?postingdata.allPicUrl.split(','):[])
               that.setData({
                 title:postingdata.title,
-                userAvatar:userdata.avatar,
+                userAvatar:userdata.avatarUrl,
                 userName:userdata.nickName,
                 time:postingdata.create_time,
                 description:postingdata.content,
                 pictures:pictures,
+                like:postingdata.myFavourite
               })
               }
+            }
+          });
+          wx.request({
+            url: app.globalData.url+'/user/userInfo',
+            data:{
+              userId:postingdata.initiatorId
+            },
+            success:function(res){
+              let data=res.data.data;
+              let personalInfo={
+                'initiator':data.initiator,
+                'me':data.me,
+                'avatar':data.avatarUrl,
+                'id':data.id,
+                'nickname':data.nickName,
+                'wxId':data.wxId,
+                'description':data.description,
+                'school':data.school,
+                'major':data.major,
+                'grade':data.grade,
+                'identity':data.identification,
+
+                'wxIdPublic':data.wxIdPublic,
+                'schoolPublic':data.schoolPublic,
+                'majorPublic':data.majorPublic,
+                'gradePublic':data.gradePublic,
+                'identityPublic':data.identityPublic,
+
+                'personalLabel':(data.personalLabel?data.personalLabel.map(that.getContent):[]),
+                'interestLabel':(data.interestLabel?data.interestLabel.map(that.getContent):[]),
+              }
+              that.setData({personalInfo})
             }
           })
         }
@@ -68,6 +102,12 @@ Page({
     })
 
 
+  },
+  // setUserInfo:function(){
+    
+  // },
+  getContent:function(item){
+    return item.content
   },
 
 

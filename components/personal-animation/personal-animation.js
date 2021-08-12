@@ -34,14 +34,10 @@ Component({
         "identityPublic":true,
 
         "personalLabel":['细节控','好学小白','996'],
-        "interestLabel":['口才','设计','文字']
+        "interestLabel":['口才','设计','文字'],
+        "isCheckAnswerButtonShow":false,
       }
     },
-    isCheckAnswerButtonShow:{
-      type:Boolean,
-      value:true
-    },
-   
   },
 
   /**
@@ -105,5 +101,9 @@ Component({
         })
       }, 500)
     },
-  }
+    seeAnswer:function(e){
+      this.triggerEvent('seeAnswer',e.currentTarget.dataset.id);
+    },
+  },
+  
 })

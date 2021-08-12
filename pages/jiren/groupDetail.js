@@ -34,13 +34,6 @@ Page({
     isFavourite:false,
     avatarList:[],
     currentUser:[],
-    detail:{
-      'title':'破·数学建模找队友，来来来！',
-      'avatar':'https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02',
-      'nickname':'小砂糖星',
-      'fromTime':'3天前',
-      'dueTime':'3天后结束'
-    },
     applierList:[
       
     ],
@@ -65,6 +58,7 @@ Page({
   
     initiatorScrollHeight:'auto',
     targetId:null,
+    personalInfoList:{},
     // over:true,
   },
 
@@ -75,12 +69,11 @@ Page({
     
     console.log(options)
     if(!options.teamId){
-      this.setData({teamId:72})
+      this.setData({teamId:103})
     }else{
       console.log('updateTeamId');
       this.setData({teamId:options.teamId})
     }
-    let app=getApp();
     var that=this;
     
     
@@ -93,22 +86,13 @@ Page({
     });
     // this.initializeResult();
 
-    // this.changeAvatarList();
     this.changeTeamDetail();
-    // this.changeAvatarList();
 
     // this.changeScrollHeight();
 
-    // if(this.data.amITeamInitiator){
-    //   this.changeSizeOfInitiatorPage();
-    // }else{
-
-    // };
-    
     
     this.changeInitiatorList();
 
-    // this.seeDetail();
     // console.log(this.data.timeIsOver);
   },
   
@@ -171,6 +155,7 @@ Page({
           console.log(res);
           let list=[];
           let data=res.data.data;
+          let personalInfoList=that.data.personalInfoList;
           console.log(data);
           for(let i=0;i<data.length;i++){
             let info={
@@ -178,31 +163,24 @@ Page({
               'me':data[i].me,
               'avatar':data[i].avatarUrl,
               'id':data[i].id,
-              'nickname':data[i].nickName,
-              'wxId':data[i].wxId,
-              'description':data[i].description,
-              'school':data[i].school,
-              'major':data[i].major,
-              'grade':data[i].grade,
-              'identity':data[i].identification,
-
-              'wxIdPublic':data[i].wxIdPublic,
-              'schoolPublic':data[i].schoolPublic,
-              'majorPublic':data[i].majorPublic,
-              'gradePublic':data[i].gradePublic,
-              'identityPublic':data[i].identityPublic,
-
-              'personalLabel':(data[i].personalLabel?data[i].personalLabel.map(that.getContent):[]),
-              'interestLabel':(data[i].interestLabel?data[i].interestLabel.map(that.getContent):[]),
 
             }
             list.push(info);
-            
+            if(that.data.amITeamInitiator){
+              if(i>0&&data[i].answer){
+                personalInfoList[data[i].id].answer=data[i].answer;
+                personalInfoList[data[i].id].isCheckAnswerButtonShow=true;
+                personalInfoList[data[i].id].wxIdPublic=true;
+              }
+            }
           }
-          for(let i=0;i<that.data.teamDetail.due_member-data.length;i++){
+          for(let i=0;i<that.data.teamDetail.due_member-data.length+1;i++){
             list.push({});
           }
-          that.setData({avatarList:list});
+          that.setData({
+            avatarList:list,
+            personalInfoList,
+          });
           console.log(that.data.avatarList)
         }
       }
@@ -249,7 +227,10 @@ Page({
           teamId:that.data.teamId,
           reason:reason
         },
-        header:{'cookie':wx.getStorageSync('token')},
+        header:{
+          'content-type': 'application/x-www-form-urlencoded',
+          'cookie':wx.getStorageSync('token')
+        },
         success:function(res){
           if(res.statusCode==200){
             that.setData({
@@ -260,8 +241,9 @@ Page({
       })
     }
   },
-  showAnswers:function(){
-
+  showAnswers:function(e){
+    let id=e.detail;
+    
   },
   showTipBox:function(message){
     let tipBox = {
@@ -316,7 +298,11 @@ Page({
               question:teamdata.question,
               reason:teamdata.reason
             };    
-            that.setData({teamDetail:teamDetail});
+            that.setData({
+              teamDetail:teamDetail,
+              initiatorId:initiatorid,
+              timeIsOver:(teamdata.status>2?true:false)
+            });
             
             that.changeAvatarList();
 
@@ -335,31 +321,32 @@ Page({
                   that.setData({haveSignedUp:true})
                   break
                 case 1:
-                  that.setData({haveJoinedIn:true});
                   that.showTipBox('恭喜您已成功入队~可点击发起人头像查看联系方式，快去与ta联系吧！')
                   wx.request({
                     url:app.globalData.url+ '/userTeam/checkApproved',
                     method:"POST",
                     data:{teamId:that.data.teamId}
                   })
-                  break;
                 case 2:
-                  that.setData({haveJoinedIn:true});
+                  let personalInfoList=that.data.personalInfoList;
+                  personalInfoList[that.data.initiatorId].wxIdPublic=true;
+                  that.setData({
+                    haveJoinedIn:true,
+                    personalInfoList
+                  });
                   break;
                 case 3:
-                  that.setData({beRefused:true});
                   that.showTipBox('很遗憾，本次申请未能通过，但请不要灰心，下一次可能就会组队成功~');
                   wx.request({
                     url:app.globalData.url+ 'userTeam/checkRejected',
                     method:"POST",
                     data:{teamId:that.data.teamId}
                   });
-                  break;
                 case 4:
                   that.setData({beRefused:true});
                   break;
                 case 5:
-                  if(teamdata.reaon){
+                  if(!teamdata.reaon=='该组队招募已截止'){
                     that.setData({beClosedInAdvance:true})
                     that.showTipBox('该组队招募已结束，理由为：\n'+teamdata.reason)
                   }else{
@@ -389,41 +376,30 @@ Page({
   changeInitiatorList:function(){
     let app=getApp();
     let that=this;
-    let list=[];
     wx.request({
       url: app.globalData.url+'/userTeam/getApplierInfoByTeamId/'+this.data.teamId,
       success:function(res){
         let data=res.data.data
-        console.log(data);
+        let list=[];
+        let personalInfoList=that.data.personalInfoList;
         for(let i in data){
           list.push({
-            applyTime:util.getDateDiff(data[i].createTime),
-            'initiator':data[i].initiator,
-            'me':data[i].me,
+            'applyTime':util.getDateDiff(data[i].createTime),
             'avatar':data[i].avatarUrl,
             'id':data[i].id,
             'nickname':data[i].nickName,
-            'wxId':data[i].wxId,
-            'description':data[i].description,
-            'school':data[i].school,
-            'major':data[i].major,
-            'grade':data[i].grade,
-            'identity':data[i].identification,
-
-            'wxIdPublic':data[i].wxIdPublic,
-            'schoolPublic':data[i].schoolPublic,
-            'majorPublic':data[i].majorPublic,
-            'gradePublic':data[i].gradePublic,
-            'identityPublic':data[i].identityPublic,
-
-            'personalLabel':(data[i].personalLabel?data[i].personalLabel.map(that.getContent):[]),
-              'interestLabel':(data[i].interestLabel?data[i].interestLabel.map(that.getContent):[]),
-
-
-          })
+          });
+          if(that.data.amITeamInitiator){
+            if(data[i].answer){
+              personalInfoList[data[i].id].answer=data[i].answer;
+              personalInfoList[data[i].id].isCheckAnswerButtonShow=true;
+            }
+          }
+          
         };
         that.setData({
           applierList:list,
+          personalInfoList,
         })
       }
     })
@@ -544,22 +520,64 @@ Page({
 
   tapAvatar:function(e){
     console.log(e)
-    let data=e.currentTarget.dataset;
-    switch(data.container){
-      case 'avatar-list':
-        this.setData({personalInfo:this.data.avatarList[data.index]});
-        break;
-      case 'initiator':
-        this.setData({personalInfo:this.data.avatarList[0]});
-        break;
-      case 'applierList':
-        this.setData({personalInfo:this.data.applierList[data.index]});
-        break;    
+    let that=this;
+    let id=e.currentTarget.dataset.id;
+    console.log(this.data.personalInfoList)
+    if(this.data.personalInfoList[id]){
+      this.setData({personalInfo:this.data.personalInfoList[id]})
+    }else{
+      wx.request({
+        url: app.globalData.url+'/user/userInfo',
+        data:{userId:id},
+        success:function(res){
+          if(res.statusCode==200){
+          let data=res.data.data;
+          let info={
+            'avatar':data.avatarUrl,
+            'id':data.id,
+            'nickname':data.nickName,
+            'wxId':data.wxId,
+            'description':data.description,
+            'school':data.school,
+            'major':data.major,
+            'grade':data.grade,
+            'identity':data.identification,
+
+            // 'wxIdPublic':data.wxIdPublic,
+            // 'wxIdPublic':true,
+            'schoolPublic':data.schoolPublic,
+            'majorPublic':data.majorPublic,
+            'gradePublic':data.gradePublic,
+            'identityPublic':data.identityPublic,
+
+            'personalLabel':(data.personalLabel?data.personalLabel.map(that.getContent):[]),
+            'interestLabel':(data.interestLabel?data.interestLabel.map(that.getContent):[]),
+          };
+          console.log(info)
+          let personalInfoList=that.data.personalInfoList;
+          personalInfoList[id]=Object.assign(personalInfoList[id]||{},info);
+          that.setData({
+            personalInfoList,
+            personalInfo:info
+          })
+          }
+        }
+      })
     }
 
+    // switch(data.container){
+    //   case 'avatar-list':
+    //     this.setData({personalInfo:this.data.avatarList[data.index]});
+    //     break;
+    //   case 'initiator':
+    //     this.setData({personalInfo:this.data.avatarList[0]});
+    //     break;
+    //   case 'applierList':
+    //     this.setData({personalInfo:this.data.applierList[data.index]});
+    //     break;    
+    // }
+
     console.log(e);
-    // this.setData({"currentUser":e.detail});
-    // console.log(this.data.currentUser);
     this.selectComponent("#personalAnimation").showModal(this.data.currentUser.userAvatar);
     // this.selectComponent("#personalAnimation").showModal();
     
@@ -716,7 +734,6 @@ Page({
     console.log('work')
     var that = this;
     var windowHeight;
-    var height;
     //设置scroll-view高度
     wx.getSystemInfo({
       success: function (res) {
@@ -808,9 +825,7 @@ Page({
         });
         this.changeScrollHeight();
       }
-    })
-
-    
+    })    
   },
   testButton:function(e){
     let tipBox = {

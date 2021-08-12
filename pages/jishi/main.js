@@ -159,7 +159,7 @@ Page({
   },
   jumpToDetail:function(){
     wx.navigateTo({
-      url: '/pages/jishi/detail',
+      url: '/pages/jishi/detail?postingId='+e.currentTarget.dataset.postingid,
     })
   },
 

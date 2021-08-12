@@ -98,7 +98,7 @@
 
   vertical-align: top;
 
-  width:68vw;
+  width:65vw;
 }
 .pa-school,.pa-major,.pa-grade,.pa-identity{
   float:left;

@@ -53,6 +53,7 @@ background: #F9F2FF;
   /* margin-right: 30rpx; */
   width: 60rpx;
   height: 60rpx;
+  border-radius: 50%;
 }
 .userName{
   display: inline-block;
