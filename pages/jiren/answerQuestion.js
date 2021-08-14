@@ -146,14 +146,23 @@ Page({
   },
   dialogTapOkForSubmitAnswer:function(){
     let that=this;
-    console.log('424')
+    console.log('424');
+    let index=1;
+    let answerList={};
+    for (let key in that.data.answerList) {
+        answerList[index] = that.data.answerList[key];
+        index = index + 1;
+    };
+    console.log(JSON.stringify(answerList))
+    
     wx.request({
       url: app.globalData.url+'/userTeam/apply',
       method:"POST",
       header:{'cookie':wx.getStorageSync('token')},
       data:{
         teamId:that.data.teamId,
-        answer:that.data.answerList
+        // answer:that.data.answerList,
+        answer:JSON.stringify(answerList)
       },
       success:function(res){
         console.log(res.statusCode)

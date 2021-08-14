@@ -68,7 +68,7 @@ Page({
     
     console.log(options)
     if(!options.teamId){
-      this.setData({teamId:103})
+      this.setData({teamId:104})
     }else{
       console.log('updateTeamId');
       this.setData({teamId:options.teamId})

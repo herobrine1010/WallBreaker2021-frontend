@@ -93,10 +93,10 @@
           <view class="detail-title">{{teamDetail.title}}</view> 
           <view class="detail-a-line">
             <view class="detail-avatar">
-              <image src="{{teamDetail.avatar}}" style="width:80rpx; height:80rpx; border-radius:50%"></image>
+              <image src="{{teamDetail.avatar}}" style="width:80rpx; height:80rpx;border-radius:50%" bindtap="tapAvatar" data-id="{{initiatorId}}"></image>
             </view>
             <view class="detail-name-and-time">
-              <view class="detail-nickname">{{teamDetail.nickname}}</view>
+              <view class="detail-nickname" bindtap="tapAvatar" data-id="{{initiatorId}}">{{teamDetail.nickname}}</view>
               <view class="detail-apply-time">{{teamDetail.fromTime}}</view>
             </view>
             <view wx:if="{{!over}}" class="detail-due-time">{{teamDetail.dueTime}}</view>
