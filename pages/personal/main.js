@@ -141,5 +141,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onAvatorTap:function(){
+    wx.navigateTo({
+      url: '../personal/personalDetails',
+    })
   }
 })

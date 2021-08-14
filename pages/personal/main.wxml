@@ -11,6 +11,7 @@
     labels="{{labels}}"
     personBrief = "{{personBrief}}"
     class="item-first"
+    bindtap="onAvatorTap"
     ></personal-brief> 
     <!-- 以下是资料、组队管理、收藏、帮助、反馈、破壁简介等item -->
     <navigator url="../personal/personalDetails" class="per-items">

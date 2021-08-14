@@ -424,7 +424,7 @@ Page({
     wx.request({
       url: app.globalData.url+'/userTeam/approveApplication',
       header:{
-        'content-type':'application/x-www-form-urlencoded',
+        'content-type':'application/json',
         'cookie':wx.getStorageSync('token')
       },
       data:{
@@ -481,7 +481,7 @@ Page({
     wx.request({
       url: app.globalData.url+'/userTeam/rejectApplication',
       header:{
-        'content-type':'application/x-www-form-urlencoded',
+        'content-type':'application/json',
         'cookie':wx.getStorageSync('token')
       },
       data:{

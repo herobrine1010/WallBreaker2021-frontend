@@ -40,6 +40,7 @@ function getTeamList(that,keyword,labelId,timeIndex){
         v.peopleCount = v.participantNumber + '/' + v.dueMember ;
         return v;
       });
+      console.log(jirenItemList[2].firstPicUrl);
       // setData是page对象里才有的办法，所以在调用函数时，要把page对象传入进来；
       that.setData({
         jirenItemList,
@@ -113,7 +114,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let that = this;
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 1 //0,1,2 0-济事  1-济人  2-我的
+      })
+    };
+    console.log(this.data.labelId);
+    // 数据加载：---------------------- -------- --- -----------
+    getTeamList(that,this.data.keyword,this.data.labelId,this.data.timeIndex);
   },
 
   /**
@@ -127,15 +136,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let that = this;
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 1 //0,1,2 0-济事  1-济人  2-我的
-      })
-    };
-    console.log(this.data.labelId);
-    // 数据加载：---------------------- -------- --- -----------
-    getTeamList(that,this.data.keyword,this.data.labelId,this.data.timeIndex);
+
   },
 
   /**

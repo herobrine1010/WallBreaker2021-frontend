@@ -34,7 +34,6 @@ Page({
       }
       // data : setRequestData(keyword, labelId, timeIndex)
     }).then(res => {
-      console.log(res);
       if(res.statusCode >=200 && res.statusCode <=300){
         // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
         let myTeamList = res.data.data.map( v=>{
