@@ -27,7 +27,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    personalManagementOrCollection:0,
+    personalManagementOrCollection : 1,
     url:'http://101.132.130.199:8080'
   }
 })

@@ -126,32 +126,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // function setDueTime(time){
-    //   if(time){
-    //     let dueTime = new Date(time);
-    //     return ('截止时间：' + dueTime.getFullYear() + '年' + dueTime.getMonth() + '月' + dueTime.getDay() + '日  ' + dueTime.getHours() + ':' + dueTime.getMinutes());
-    //   }else{
-    //     return '截止时间：暂无';
-    //   };
-    // };
-    // 1.首先判断是 组队管理页面 还是 我的收藏页面
-    let app = getApp();
+    function setDueTime(time){
+      if(time){
+        let dueTime = new Date(time);
+        return ('截止时间：' + dueTime.getFullYear() + '年' + dueTime.getMonth() + '月' + dueTime.getDay() + '日  ' + dueTime.getHours() + ':' + dueTime.getMinutes());
+      }else{
+        return '截止时间：暂无';
+      };
+    };
     // ----- --- ---------- ----判断为组队管理页面------ -------- ---- ----- ----- ---------
     let that=this;
-      let teamAppliedByMe=request({
-        url : '/userTeam/teamAppliedByMe',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded',
-          'cookie':wx.getStorageSync("token")
-        }
-      })
-      let teamInitiatedByMe=request({
-        url : '/userTeam/teamInitiatedByMe',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded',
-          'cookie':wx.getStorageSync("token")
-        }
-      })
+    let teamAppliedByMe=request({
+      url : '/userTeam/teamAppliedByMe',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      }
+    })
+    let teamInitiatedByMe=request({
+      url : '/userTeam/teamInitiatedByMe',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      }
+    })
       Promise.all([teamAppliedByMe,teamInitiatedByMe])
       .then(result => {
         let dataAppliedByMe=result[0].data.data;
@@ -180,7 +178,9 @@ Page({
             }
           }
           if(turn=='applier'){
-            item=dataInitiatedByMe[j];
+            item=dataAppliedByMe[j];
+            item.dueTime = setDueTime(item.dueTime);
+            console.log(item.dueTime);
             switch(dataInitiatedByMe){
               case 0:
                 item.teamCondition='applying'
@@ -204,7 +204,10 @@ Page({
             }
             i++;
           }else if(turn=='initiator'){
-            item=dataAppliedByMe[j];
+            item=dataInitiatedByMe[j];
+
+            item.dueTime = setDueTime(item.dueTime);
+            console.log(item.dueTime);
             item.teamCondition='mine';
             item.rightTagText='我发起的';
             if(dataAppliedByMe.status>2){
@@ -214,96 +217,10 @@ Page({
             j++;
           }
           list.push(item);
+          console.log(item);
         }
         that.setData({jirenItemList:list})
       });
-
-    
-    // --- ------ --------- ----判断为帖子/组队收藏页面：-------------------------------------------
-    if(app.globalData.personalManagementOrCollection === 1){
-      this.setData({
-        collectionTitle : "我的收藏",
-        leftButtonTitle : "帖子收藏",
-        rightButtonTitle : "组队收藏"
-      });
-      let favouritePosting = request({
-        url : '/userFavouritePosting/getMyFavouritePosting',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded',
-          'cookie':wx.getStorageSync("token")
-        }
-      });
-      let favouriteTeam = request({
-        url : '/userFavouriteTeam/getMyFavouriteTeam',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded',
-          'cookie':wx.getStorageSync("token")
-        }
-      });
-      // 采用Promise.all 并行处理两个请求-------------------
-      Promise.all([favouritePosting,favouriteTeam])
-        .then(result => {
-          console.log(result[0].data.data[0]);
-          // 处理收藏组队的数据------------------
-          let jirenItemList = result[1].data.data.map( v=> {
-            let tempList = {
-              labelText : v.labelContent,
-              title : v.title,
-              dueTime: setDueTime(v.duetime),
-              description : v.content,
-              initiator : v.initiatorNickName,
-              peopleCount : v.participantNumber + '/' + v.dueMember,
-              postingPic : v.firstPicUrl
-            };
-            // -------- 收藏组队的状态：1:我发起的 / 0:空 ---------
-            if(v.initializedByMe){
-              tempList.teamCondition = 'mine';
-              tempList.rightTagText = '我发起的';
-            }else{
-              tempList.teamCondition = 'mine';
-              tempList.rightTagText = '';
-            }
-            return tempList;
-          });
-          // 处理收藏帖子的数据---------------------------------
-          let jishiItemList = result[0].data.data.map( v=> {
-            let tempList = {
-              labelText : v.labelId,
-              title : v.title,
-              description : v.content,
-              userName : v.initiator,
-              userAvatar : '',
-              postingPic : v.firstPicUrl
-            };
-            // 处理发布日期：-------------
-            // 不写参数表示当前日期
-            let now = new Date();
-            // 可以接受字符串的参数'2021-07-31 15:20:00'
-            let updateTime = new Date(v.updateTime)
-            // 毫秒单位转换
-            let hour = Math.floor((now-updateTime)/1000/60/60);
-            if(hour < 24){
-              tempList.publishTime = hour + '小时前';
-            }else{
-              tempList.publishTime = Math.floor(hour/24) + '天前';
-            };
-            // -------- 收藏帖子的状态：1:我发起的 / 0:空 ---------
-            if(v.status){
-              tempList.rightTagText = '我发起的';
-            }else{
-              tempList.rightTagText = '';
-            }
-            return tempList;
-          });
-          this.setData({
-            jirenItemList,
-            jishiItemList
-          });
-        })
-        .catch(err => {
-          console.log(err);
-        })
-    }
   },
 
   /**
