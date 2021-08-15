@@ -40,7 +40,7 @@ function getTeamList(that,keyword,labelId,timeIndex){
         v.peopleCount = v.participantNumber + '/' + v.dueMember ;
         return v;
       });
-      console.log(jirenItemList[2].firstPicUrl);
+      // console.log(jirenItemList[2].firstPicUrl);
       // setData是page对象里才有的办法，所以在调用函数时，要把page对象传入进来；
       that.setData({
         jirenItemList,
