@@ -20,8 +20,8 @@
     <text class=" {{lineMode=='normal'?'description-normal':'description-double'}} {{postingPic?'description-short':'description-long'}}">{{description}}</text>
 </view>
 <view wx:if="{{initiator}}" class="initiator">发起人：{{initiator}}</view>
-<view wx:if="{{postingPic}}" class="image">
-    <image ></image> 
+<view wx:if="{{postingPic}}" >
+    <image class="image" src="{{postingPic}}" mode="aspectFill"></image> 
 </view>
 </view>
 
