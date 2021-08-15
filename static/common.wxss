@@ -41,21 +41,24 @@ background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193
   color: #FFFFFF;
   }
   .weui-search-bar {
-    background: rgba(242, 252, 255, 0.35);
-    mix-blend-mode: overlay;
-    border-radius: 44px;
-    left:2%;
-    width:96%;
+    background: rgba(255, 255, 255, 0);
   }
   .weui-search-bar__form{
-    height: 48rpx;
+    height: 60rpx;
+    /* background: rgba(242, 252, 255, 0.35); */
+    background: rgba(242, 252, 255, 0.35); 
+    /* background:rgb(249,242,255,0.75); */
+    mix-blend-mode: overlay;
+    border-radius: 44rpx;
+    /* color: #99989A; */
   }
   .weui-search-bar__box{
-    height: 48rpx;
+    height: 60rpx;
   }
   .weui-search-bar__box .weui-search-bar__input{
+    color: #FFFFFF !important;
     padding:0 0 0 0 ;
-    height: 48rpx;
+    height: 80rpx;
   }
 /* 以下是 personal页面中 per-container的样式 */
 .per-container{
