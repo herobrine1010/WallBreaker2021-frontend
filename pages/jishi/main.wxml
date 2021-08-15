@@ -4,7 +4,8 @@
     <mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar__centers" title="济事广场"></mp-navigation-bar>
   </view>
   <view class="searchBar">
-    <mp-searchbar bindselectresult="selectResult" ext-class="weui-search-bar_focusing"></mp-searchbar>
+    <mp-searchbar bindblur="onSearch" 
+      bindclear = "onCancleSearch" ext-class="weui-search-bar_focusing"></mp-searchbar>
   </view>
   <view class="area2">
     <!-- <view class="buttonArea">
@@ -29,6 +30,7 @@
     <view wx:if="{{conditionFilterOpen}}" class="filterExtended">
       <view class="conditionArea">
         <view class="whiteBG">
+        <!-- 对应jiren中的“我发起的组队”和“我参与的组队”，jishi目前无此需求 -->
         <!-- <block wx:for="{{conditions}}">
           <view bindtap="clickConditionBlue" wx:if="{{conditionsSelected[index]}}" class="conditionsSelected">{{item}}</view>
           <view data-condition='{{item}}' bindtap="clickConditionGray" wx:else class="conditionsNotSelected">{{item}}</view>
@@ -42,7 +44,16 @@
       </view>
       <view class="shade2" bindtap="clickShade2"></view>
     </view>
-    <scroll-view bindscroll="onMyScroll" class="listArea" scroll-y="true" with-animation='true' scroll-top='{{ topNum }}' refresher-enabled="true">
+    <scroll-view 
+    enable-back-to-top="true" 
+    bindscroll="onMyScroll" 
+    class="listArea" 
+    scroll-y="true" 
+    with-animation='true' 
+    scroll-top='{{ topNum }}' 
+    refresher-enabled="true" 
+    bindrefresherrefresh = "onRefresherRefresh"
+    refresher-triggered = "{{isRefresherOpen}}">
     
       <block wx:for="{{jishiItemList}}">
         <view  class="list-item" bindtap="jumpToDetail" data-postingId="{{item.id}}">
@@ -63,5 +74,6 @@
     
   </view>
   <image hidden="{{!showGoTopButton}}" class="backTopButton" bindtap="returnTop" src="/static/icon/back-to-top-purple-circle.png"></image>
-  <image class="addButton" bindtap="createNewTeam" src='/static/icon/add-purple-big.png'></image>
+  <!-- 发帖的加号图标，jishi无此需求 -->
+  <!-- <image class="addButton" bindtap="createNewTeam" src='/static/icon/add-purple-big.png'></image> -->
 </view>

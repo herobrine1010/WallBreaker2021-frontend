@@ -87,6 +87,7 @@ Page({
   //获取并调整表单数据
   teamInfoSubmit:function(e){
     var form = e.detail.value;
+    //在这里做数据判空
     console.log("表单数据", form)
     // ------调整表单数据格式------
     //把问题聚合成一个对象{"1":"question","2":question}
@@ -147,7 +148,8 @@ Page({
       if(res.statusCode >=200 && res.statusCode <=300) {
         // 拿到上传后的图片ossURL
         let imageURL = res.data.data;
-        let firstImgURL = imageURL.split(',')[0];
+        // 分割字符串获得头图，如果firstImgURL包含多个http链接，济人首页图片无法正常加载
+        let firstImgURL = imageURL.split(',',1)[0];
         // 添加至payload，同时修改对象的属性名以对接接口命名
         that.data.payload.allPicUrl = imageURL;
         that.data.payload.firstPicUrl = firstImgURL;

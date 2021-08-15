@@ -51,19 +51,20 @@ function getPostingList(that,keyword,labelId,timeIndex){
         icon: 'error'
       })
     } 
-  })/* .catch( err=> {
+  }).catch( err=> {
     wx.showToast({
       title: '请求失败',
       icon: 'error'
     })
     console.log("err",err)
-  }); */
+  }); 
 };
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    isRefresherOpen : false,
     showGoTopButton:false, 
     timeIndex:'desc',
     keyword : '',
@@ -197,6 +198,23 @@ Page({
   onShareAppMessage: function () {
 
   },
+  
+  // 绑定搜索事件： 光标离开触发：--- 点击叉号取消搜索 ----------------------
+  onSearch:function(e){
+    this.setData({
+      keyword : e.detail.value
+    })
+    let that = this;
+    getPostingList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+  },
+  onCancleSearch:function(){
+    this.setData({
+      keyword : ''
+    })
+    let that = this;
+    getPostingList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+  },
+  // 页面滚动，显示返回顶部按钮
   onPageScroll:function(e){
     console.log(e)
     if (e.scrollTop > 0) {
@@ -304,6 +322,16 @@ Page({
       url: '/pages/jiren/myJoin',
     })
   }, */
+  
+  
+  // 滚动框的 下拉刷新事件 pullDownRefresh------------- -------------- ----------
+  onRefresherRefresh:function(){
+    // 重新发送请求，包括此前筛选或者搜索数据：
+    let that = this;
+    getPostingList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+    
+  },
+  //滚动框 返回最上方
   returnTop: function () {
     let that=this;
     this.setData({
