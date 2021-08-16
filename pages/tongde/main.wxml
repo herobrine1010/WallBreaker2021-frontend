@@ -1,0 +1,18 @@
+<!--pages/tongde/main.wxml 失物招领主页-->
+<view class="tab">
+  <view class="tab-item {{tab==0?'active':''}}" bindtap="changeItem" data-item="0">物品遗失</view>
+  <view class="tab-item {{tab==1?'active':''}}" bindtap="changeItem" data-item="1">失物寻主</view>
+</view>
+
+
+<view class="content">
+  <!-- indicator-dots用作调试，预计删除 -->
+  <swiper indicator-dots current="{{currentItem}}" bind:change="changeTab">
+    <swiper-item>
+      <text>这里是物品遗失内容</text>
+    </swiper-item>
+    <swiper-item>
+      <text>这里是失物寻主内容</text>
+    </swiper-item>
+  </swiper>
+</view>

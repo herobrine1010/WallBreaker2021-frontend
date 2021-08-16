@@ -45,7 +45,12 @@
     "pages/jiren/answerQuestion",
     "pages/testPage2/testPage",
     "pages/jiren-temp/answerQuestion",
-    "pages/jiren/initiateTeam"
+    "pages/jiren/initiateTeam",
+    "pages/tongde/main",
+    "pages/tongde/detail",
+    "pages/tongde/creatPost",
+    "pages/tongde/my",
+    "pages/tongde/myLost"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -53,8 +58,7 @@
     "navigationBarTitleText": "济星云",
     "navigationBarTextStyle": "black"
   },
-  "useExtendedLib": {
-  },
+  "useExtendedLib": {},
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }
