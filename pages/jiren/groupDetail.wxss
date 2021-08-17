@@ -407,3 +407,15 @@ scroll-view {
   color:#FAFEFF;
   background-color: #17B2E5;
 }
+.answer-container{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  z-index: 600;
+}
+.answer-board{
+  margin: auto;
+  background-color:#F2FCFF ;
+  padding: 10vw;
+}

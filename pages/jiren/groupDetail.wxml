@@ -174,15 +174,15 @@ button="{{dialog2.button}}">
   </view>
 </view>
 
-<view wx:if="{{answer.show}}" class="answer_container">
+<view wx:if="{{answer.show}}" class="answer-container">
   <scroll-view class="answer-board" style="height:{{answer.height}}">
-    <view class="answer-a-line">
-      <view class="answer-name">申请人  {{answer.nickname}}</view>
-      <image class="answer-image" style="width:60rpx;height:60rpx" src="{{answer.avatarUrl}}"></image>
+    <view class="detail-a-line">
+      <view class="deatil-username">申请人  {{answer.nickname}}</view>
+      <image class="answer-image" style="width:60rpx;height:60rpx" src="{{answer.avatar}}"></image>
     </view>
     <view wx:for="{{answer.answerList}}">
-      <view class="answer-question">{{item.question}}</view>
-      <view class="answer-answer">{{item.answer}}</view>
+      <view class="answer-question">{{item}}</view>
+      <view class="answer-answer">{{item}}</view>
     </view>
   </scroll-view>
 </view>

@@ -13,10 +13,8 @@ Page({
     rightButtonTitle : "",
     //默认初试选择左边 帖子按钮 
     isNoticeOrTeam : 0,
-    background : "backgroundLeft",
-    btnColor1 : "btnColorLeft",
-    btnColor2 : "btnColorUnselected",
 
+    height:'auto',
     jirenItemList:[
       {
       'labelText':'未分类',
@@ -29,88 +27,7 @@ Page({
       'peopleCount':'3/5',
       'postingPic':''
     },
-    {
-      'labelText':'熬夜秃头',
-      'title':'示例标题示例标题示例标题…',
-      'teamCondition':'pass',
-      'rightTagText':'我已入队',
-      'dueTime':'截止时间: 2021年6月21日 14:00',
-      'description':'这是一段描述性文字，仅用于测试。这是一段……',
-      'initiator':'发起人: 示例用户',
-      'peopleCount':'3/5',
-      'postingPic':''
-    },
-    {
-      'labelText':'熬夜秃头',
-      'title':'示例标题示例标题示例标题…',
-      'teamCondition':'mine',
-      'rightTagText':'',
-      'dueTime':'截止时间: 2021年6月21日 14:00',
-      'description':'这是一段描述性文字，仅用于测试。这是一段测试组件是否可以正常换行的文字……',
-      'initiator':'',
-      'peopleCount':'0/5',
-      'postingPic':''
-    }
     ],
-    jishiItemList : [
-      {
-        'labelText':'教务',
-        'title':'学生评学评教通知',
-        'rightTagText':'',
-        'userName':'新生院张老师',
-        'publishTime':'2天前',
-        
-        'description':'请大家登陆1.tongji.edu.cn，尽快完成评学评教！超过九月一号未完成的同学不能参加下学期的',
-        'postingPic':''
-      },
-      {
-        'labelText':'活动',
-        'title':'十大歌手领票',
-        'rightTagText':'我发布的',
-        'userName':'学生会小王',
-        'publishTime':'1天前',
-        'description':'这是一段描述性文字，仅用于测试。这是一段……',
-        'postingPic':''
-      },
-      {
-        'labelText':'教务',
-        'title':'学生评学评教通知',
-        'rightTagText':'',
-        'userName':'新生院张老师',
-        'publishTime':'2天前',
-        
-        'description':'请大家登陆1.tongji.edu.cn，尽快完成评学评教！超过九月一号未完成的同学不能参加下学期的',
-        'postingPic':''
-      },
-      {
-        'labelText':'活动',
-        'title':'十大歌手领票',
-        'rightTagText':'我发布的',
-        'userName':'学生会小王',
-        'publishTime':'1天前',
-        'description':'这是一段描述性文字，仅用于测试。这是一段……',
-        'postingPic':''
-      },
-      {
-        'labelText':'教务',
-        'title':'学生评学评教通知',
-        'rightTagText':'',
-        'userName':'新生院张老师',
-        'publishTime':'2天前',
-        
-        'description':'请大家登陆1.tongji.edu.cn，尽快完成评学评教！超过九月一号未完成的同学不能参加下学期的',
-        'postingPic':''
-      },
-      {
-        'labelText':'活动',
-        'title':'十大歌手领票',
-        'rightTagText':'我发布的',
-        'userName':'学生会小王',
-        'publishTime':'1天前',
-        'description':'这是一段描述性文字，仅用于测试。这是一段……',
-        'postingPic':''
-      }
-    ]
   },
 //以下两个事件为：点击帖子(收藏或管理)按钮，或者点击组队(收藏或管理)按钮.
 //切换按钮颜色、页面背景；
@@ -154,6 +71,7 @@ Page({
       .then(result => {
         let dataAppliedByMe=result[0].data.data;
         let dataInitiatedByMe=result[1].data.data;
+        console.log(dataAppliedByMe)
         let lengthApplied=dataAppliedByMe.length;
         let lengthInitiated=dataInitiatedByMe.length;
         let i=0;
@@ -164,23 +82,30 @@ Page({
         while(i<lengthApplied||j<lengthInitiated){
           // Date(dataAppliedByMe[i].dueTime).
 
-          if(i=lengthApplied){
+          if(i==lengthApplied){
+            console.log('initiator')
             turn='initiator'
-          }else if(j=lengthInitiated){
+          }else if(j==lengthInitiated){
+            console.log('applier')
             turn='applier'
           }else{
-            let date1=Date(dataAppliedByMe[i].updateTime).getTime();
-            let date2=Date(DeviceOrientationEvent[i].updateTime).getTime();
+            // console.log(Date().getTime)
+            // let date=Date();
+            // console.log(date.getTime)
+            let date1=new Date(dataAppliedByMe[i].updateTime).getTime();
+            console.log(date1)
+            let date2=new Date(dataInitiatedByMe[j].updateTime).getTime();
+            console.log(date2)
             if(date1<=date2){
-              turn='applier'
-            }else{
               turn='initiator'
+            }else{
+              turn='applier'
             }
           }
           if(turn=='applier'){
-            item=dataAppliedByMe[j];
+            item=dataAppliedByMe[i];
             item.dueTime = setDueTime(item.dueTime);
-            console.log(item.dueTime);
+            item.peopleCount=item.participantNumber+'/'+item.dueMember;
             switch(dataInitiatedByMe){
               case 0:
                 item.teamCondition='applying'
@@ -205,9 +130,8 @@ Page({
             i++;
           }else if(turn=='initiator'){
             item=dataInitiatedByMe[j];
-
             item.dueTime = setDueTime(item.dueTime);
-            console.log(item.dueTime);
+            item.peopleCount=item.participantNumber+'/'+item.dueMember;
             item.teamCondition='mine';
             item.rightTagText='我发起的';
             if(dataAppliedByMe.status>2){
@@ -217,10 +141,30 @@ Page({
             j++;
           }
           list.push(item);
-          console.log(item);
         }
         that.setData({jirenItemList:list})
       });
+
+      this.changeScrollHeight();
+  },
+  changeScrollHeight:function(){
+    let windowHeight;
+    //设置scroll-view高度
+    wx.getSystemInfo({
+      success: function (res) {
+          windowHeight= res.windowHeight;
+      }
+    });
+    let query = wx.createSelectorQuery();
+    query.select('#scroll').boundingClientRect(rect=>{
+      console.log(rect)
+        let top = rect.top;
+        let height=windowHeight-top;
+        this.setData({
+          height:height+'px',
+        });
+      }).exec();
+      
   },
 
   /**

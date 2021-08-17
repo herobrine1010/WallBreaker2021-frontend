@@ -5,16 +5,17 @@
   <!-- 以下是container，包含了除标题外的其余内容 -->
   <view class="per-container">
     <scroll-view 
-    scroll-y="true"
-    refresher-enabled="true"
+    scroll-y="true" style="height:{{height}}"
+    refresher-enabled="true" id="scroll"
     bindscrolltolower = "onScrollToLower"
     class="collection-body">
       <!-- <scroll-view class="listArea" scroll-y="true">
       <view class="list-item"> -->
       <!-- </view> 
     </scroll-view> -->
-    <view style="height:3vh"></view>
-      <navigator url="../jiren/groupDetail"  wx:for="{{jirenItemList}}">
+    <view class="inner-body">
+    <!-- <view style="height:3vh"></view> -->
+      <navigator url="../jiren/groupDetail?teamId={{item.id}}"  wx:for="{{jirenItemList}}">
         <card-team
         labelText="{{item.labelContent}}"
         title="{{item.title}}"
@@ -28,7 +29,9 @@
         postingPic="{{item.firstPicUrl}}" 
         ></card-team>
       </navigator>
-      
+    </view>  
     </scroll-view>
+    
+    
   </view>
 </view>

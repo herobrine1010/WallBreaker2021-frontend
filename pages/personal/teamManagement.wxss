@@ -46,8 +46,12 @@
 }
 .collection-body{
   height: 92%;
-  width: 92%;
+  /* width: 92%; */
   /* height: 200rpx; */
-  margin: 0 4%;
+  margin-top: 2vh;
   /* background-color: pink;  */
+}
+.inner-body{
+  width: 92%;
+  margin: 0 auto;
 }
