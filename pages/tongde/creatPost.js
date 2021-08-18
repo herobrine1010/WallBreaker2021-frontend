@@ -5,7 +5,47 @@ Page({
    * 页面的初始数据
    */
   data: {
+    tagboxShow:false,
+    tagList:[{
+      'name':'水杯',
+      'choosen':false
+    },{
+      'name':'雨伞',
+      'choosen':false
+    },{
+      'name':'证件',
+      'choosen':false
+    },{
+      'name':'耳机',
+      'choosen':false
+    },{
+      'name':'钥匙',
+      'choosen':false
+    },{
+      'name':'钱包',
+      'choosen':false
+    },{
+      'name':'数码',
+      'choosen':false
+    },{
+      'name':'衣物',
+      'choosen':false
+    },{
+      'name':'眼镜',
+      'choosen':false
+    },{
+      'name':'文具',
+      'choosen':false
+    },{
+      'name':'书籍',
+      'choosen':false
+    },{
+      'name':'其他',
+      'choosen':false
+    }],
 
+
+    height:'auto',
   },
 
   /**
@@ -13,6 +53,8 @@ Page({
    */
   onLoad: function (options) {
 
+
+    this.changeScrollHeight();
   },
 
   /**
@@ -62,5 +104,49 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  clickToChooseTag:function(){
+    this.setData({tagboxShow:true})
+  },
+  clickTag:function(e){
+    console.log(e)
+    let tagList=this.data.tagList;
+    tagList[e.currentTarget.dataset.index].choosen=!tagList[e.currentTarget.dataset.index].choosen;
+    this.setData({tagList})
+  },
+  clickYesOfTagBox:function(){
+    let list=[];
+    let tagList=this.data.tagList;
+    for(let key in tagList){
+      if( tagList[key].choosen){
+        list.push(tagList[key].name)
+      }
+    };
+    this.setData({
+      tagChoosenList:list,
+      tagboxShow:false
+    })
+  },
+  clickNoOfTagBox:function(){
+    this.setData({tagboxShow:false})
+  },
+  changeScrollHeight:function(){
+    let windowHeight;
+    //设置scroll-view高度
+    wx.getSystemInfo({
+      success: function (res) {
+          windowHeight= res.windowHeight;
+      }
+    });
+    let query = wx.createSelectorQuery();
+    query.select('#scroll').boundingClientRect(rect=>{
+      console.log(rect)
+        let top = rect.top;
+        let height=windowHeight-top;
+        this.setData({
+          height:height+'px',
+        });
+      }).exec();
+      
+  },
 })

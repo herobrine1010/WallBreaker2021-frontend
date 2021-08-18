@@ -1,2 +1,58 @@
 <!--pages/tongde/creatPost.wxml-->
-<text>pages/tongde/creatPost.wxml</text>
+<view class="background">
+  <view class="navi">
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title=" 发布失物招领信息"></mp-navigation-bar>
+  </view>
+  
+  <scroll-view class="outer-container" id="scroll" scroll-y="true" style="{{height}}">
+    <view class="inner-container">
+      <view class="title">招领类型</view>
+      <radio-group class="a-line">
+        <radio value="0">物品遗失</radio>
+        <radio value="1">失物寻主</radio>
+      </radio-group>
+      <view class="title">失物名称</view>
+      <view class="input-a-line-box">
+        <input class="input-a-line" placeholder="请输入失物名称"/>
+      </view>
+      <view class="title">情况说明</view>
+      <view class="text-box">
+        <textarea class="text-area">我可能在泰国新加坡印度尼西亚咖喱肉骨茶印尼九层塔弄丢了我的水杯，很昂贵，请好心人见到联系我下子，求求你们了。</textarea>
+      </view>
+      <view class="title">遗失/捡到地点</view>
+      <view class="input-a-line-box">
+        <input class="input-a-line" placeholder="失物寻主信息必填，物品遗失信息可选填选项"/>
+      </view>
+      <view class="title">联系方式</view>
+      <view class="a-line">
+        <view class="choose"></view>
+        <input class="input-half-line" placeholder="请输入您的联系方式"/>
+      </view>
+      <view class="tag-a-line">
+        <view class="tag-normal" wx:for="{{tagChoosenList}}" >#{{item}}</view>
+        <view class="tag-normal" bindtap="clickToChooseTag">#选择标签</view>
+      </view>
+      <view class="picture-area">
+      
+      </view>
+      <view class="tip">上传证件相关照片时请记得打码保护隐私哦~</view>
+
+      <view class="button">发布</view>
+    </view>
+  </scroll-view>
+
+  <view class="tag-position" wx:if="{{tagboxShow}}">
+    <view class="tag-box" >
+      <view class="tag-message">已选标签：
+        <text  wx:for="{{tagList}}" wx:if="{{item.choosen}}">#{{item.name}} </text>
+      </view>
+      <view class="tag-area">
+        <view class="{{item.choosen?'tag-choosen':'tag-normal'}}" wx:for="{{tagList}}" bindtap="clickTag" data-index="{{index}}">#{{item.name}}</view>
+      </view>
+      <view class="a-line">
+        <view class="tag-button" bindtap="clickNoOfTagBox">取消</view>
+        <view class="tag-button" bindtap="clickYesOfTagBox">确定</view>
+      </view>
+    </view>
+  </view>
+</view>
