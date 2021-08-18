@@ -31,9 +31,10 @@
 .area2{
   position:fixed;
   top:18%;
+  bottom: 0;
   width: 100%;
   left:0;
-  height: 70%;
+  /* height: 70%; */
   border-radius: 50rpx 50rpx 0 0;
   background: rgba(242, 252, 255, 0.35);
 }

@@ -497,7 +497,10 @@ Page({
   acceptApplying: function(e){
     console.log(e.currentTarget.dataset);
     let applyer = e.currentTarget.dataset;
-    this.setData({ targetId:applyer.applyerid,});
+    this.setData({ 
+      targetId:applyer.applyerid,
+      targetNickName:applyer.nickName,
+    });
     let dialog = {
       isDialogShow: true,
       content:'确定同意 ' + applyer.applyername  + ' 加入组队？',
@@ -538,9 +541,10 @@ Page({
         that.setData({
           applierList:newList
         });
-        wx.showToast({
-          title: '接受id为'+that.data.targetId+'的申请',
-        });
+        // wx.showToast({
+        //   title: '接受id为'+that.data.targetId+'的申请',
+        // });
+        that.showTipBox(that.data.targetNickName+'已成功入队！可点击头像查看微信号，快去与ta联系吧！')
         that.changeAvatarList();
         that.changeInitiatorList();
       }
