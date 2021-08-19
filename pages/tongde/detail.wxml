@@ -1,2 +1,70 @@
 <!--pages/tongde/detail.wxml 失物招领详情页-->
-<text>pages/tongde/detail.wxml</text>
+<view class="jishi-background">
+  <view class="navi">
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title=" 失物招领详情"></mp-navigation-bar>
+  </view>
+
+  <view class="jiren-container">
+  <scroll-view class="scroll-content" scroll-y="true">
+    <view class="header">
+      <view class="objectName">{{title}}</view>
+      <view class="condition">
+        {{condition}}
+      </view>
+    </view>
+    
+    <view class="avator-list">
+      <image src="{{userAvatar}}"  class="userAvatar" bindtap='showPersonDetail'></image>
+      <text class="userName" bindtap="showPersonDetail">{{userName}}</text>
+      <text class="time">{{time}}</text>
+    </view>
+
+    
+    <view class="content">
+      <view class="tag-area">
+        <block wx:for="{{tag}}">
+          <view class="tag">{{item}}</view>
+        </block>
+      </view>
+      <text class="description">{{description}}</text>
+      <view class="location">
+        <view class="title">遗失/捡到地点</view>
+        <view class="spot">{{location}}</view>
+      </view>
+      <view class="contact">
+        <view class="title">联系方式</view>
+        <view bindtap="contactDetail" class="contactBtn">请点击查看</view>
+      </view>
+
+
+      <view class="pictures">
+        <block  wx:for="{{pictures}}" wx:key="{{index}}">
+          <view class="pictureBlock">
+          </view>
+        </block>
+        <block wx:if="{{picturesNum==1}}" >
+          <view class="pictureSingle">
+          </view>
+        </block> 
+      </view>
+    </view>
+    <view class="bottom-block"></view>
+
+  </scroll-view>
+  </view>
+</view>
+
+<personal-animation id="personalAnimation1" personalInfo="{{personalInfo}}"></personal-animation>
+
+<dialog-box 
+  content="{{dialog.content}}"
+  hasInputBox="{{dialog.hasInputBox}}"
+  tip="{{dialog.tip}}"
+  okText="{{dialog.okText}}"
+  cancelText="{{dialog.cancelText}}"
+  isShow="{{dialog.isDialogShow}}"
+  isShowInfo="{{dialog.isShowInfo}}"
+  infoDetail="{{dialog.infoDetail}}"
+  bind:tapCopy="tapCopy"
+>
+</dialog-box>

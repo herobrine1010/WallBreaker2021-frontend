@@ -1,4 +1,8 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "失物招领"
+  "usingComponents": {
+    "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
+    "mp-searchbar": "weui-miniprogram/searchbar/searchbar",
+    "card-lost":"/components/card-lost/card"
+  },
+  "navigationStyle": "custom"
 }

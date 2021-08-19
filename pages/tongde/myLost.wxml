@@ -1,2 +1,39 @@
 <!--pages/tongde/myLost.wxml 我的失物招领-->
-<text>pages/tongde/myLost.wxml</text>
+<view class="jishi-background">
+  <view class="navi">
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="我的失物招领"></mp-navigation-bar>
+  </view>
+  <view class="jiren-container">
+    <scroll-view class="list" scroll-y="true">
+      <navigator url="/pages/tongde/detail.js" wx:for="{{myPostList}}" class="list-item">
+        <card-lost
+          cardMy="{{true}}"
+          isShowKind="{{true}}"
+          labelText="{{item.labelText}}"
+          title="{{item.title}}"
+          publishTime="{{item.publishTime}}"
+          description="{{item.description}}"
+          postingPic="{{item.postingPic}}"
+          isShowClose="{{isShowClose}}"
+          closed="{{item.closeCondition}}"
+          bind:tapClose="tapClose"
+          ></card-lost>
+      </navigator>
+    </scroll-view>
+  </view>
+
+</view>
+
+<dialog-box 
+  isDialogShow="{{dialog.isDialogShow}}"
+  content="{{dialog.content}}"
+  hasInputBox="{{dialog.hasInputBox}}"
+  tip="{{dialog.tip}}"
+  okText="{{dialog.okText}}"
+  cancelText="{{dialog.cancelText}}"
+  isShow="{{dialog.isDialogShow}}"
+  isShowInfo="{{dialog.isShowInfo}}"
+  bind:tapOk="tapOk"
+>
+</dialog-box>
+

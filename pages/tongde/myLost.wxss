@@ -1,1 +1,12 @@
 /* pages/tongde/myLost.wxss */
+@import "/static/common.wxss";
+.list{
+  height: 100%;
+  width: 92%;
+  margin: 20rpx auto;
+}
+
+.list-item{
+  margin-bottom: 30rpx;
+}
+
