@@ -27,6 +27,19 @@ Component({
     hasInputBox:{
       type:Boolean,
       value: false
+    },
+    isShowInfo:{
+      type:Boolean,
+      value:false
+    },
+    infoDetail:{
+      type:Object,
+      value:{
+        key:'微信',
+        value:'1289uasdj',
+        copyEnable:true,
+      }
+    
     }
   },
 
@@ -53,7 +66,10 @@ Component({
     finishInput:function(e){
       console.log(e)
       this.setData({reason:e.detail.value})
-      
+    },
+    tapCopy:function(e){
+      console.log(e)
+      this.triggerEvent('tapCopy',this.data.detail);
     },
   }
 })

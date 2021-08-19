@@ -91,3 +91,40 @@
 .dialog-box-cancel{
   color:#17B2E5;
 }
+
+/********** 信息区域的格式等到设计稿出来再详细改 ***********/
+.dialog-box-infoArea{
+  height:80rpx;
+  width: 250rpx;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  /* width: auto; */
+}
+.infoItem{
+  width:100%;
+  height:80rpx;
+  justify-content: center;
+  margin-left: 30rpx;
+}
+.infoKey{
+  /* width: 400rpx; */
+  width:60rpx;
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-size: 26rpx;
+  color:#4A5559;
+}
+.infoValue{
+  left:50rpx;
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-size: 26rpx;
+  line-height: 40rpx;
+  color:#4A5559;
+}
+.copyBtn{
+  height:30rpx;
+  width: 30rpx;
+  background-color: chocolate;
+}
