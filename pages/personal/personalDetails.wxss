@@ -59,18 +59,6 @@
   height: 40rpx;
   padding: 0 20rpx;
 }
-.wx-switch-input{
-  width: 78rpx !important;
-  height: 40rpx !important;
-}
-.wx-switch-input::before{
-  width: 78rpx !important;
-  height: 40rpx !important;
-}
-.wx-switch-input::after{
-  width: 44rpx !important;
-  height: 40rpx !important;
-}
 
 .warn{
   height: 40rpx;

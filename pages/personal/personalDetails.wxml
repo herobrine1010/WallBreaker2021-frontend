@@ -23,28 +23,28 @@
         <view class="item-body">
           <input name="identification" type="text" value="{{userDetails.identification}}"></input>
         </view>
-        <switch name="identificationPublic" color="#A3E5FA" checked="{{userDetails.identificationPublic}}"></switch>
+        <switch class="poby-switch" name="identificationPublic" color="#A3E5FA" checked="{{userDetails.identificationPublic}}"></switch>
       </view>
       <view class="detail-items">
         <view class="item-title">年级：</view>
         <view class="item-body">
           <input name="grade" type="text" value="{{userDetails.grade}}" placeholder="请输入入学年份（纯数字）"></input>
         </view>
-        <switch name="gradePublic" color="#A3E5FA" checked="{{userDetails.gradePublic}}"></switch>
+        <switch class="poby-switch" name="gradePublic" color="#A3E5FA" checked="{{userDetails.gradePublic}}"></switch>
       </view>
       <view class="detail-items">
         <view class="item-title">学院：</view>
         <view class="item-body">
           <input name="school" type="text" value="{{userDetails.school}}"></input>
         </view>
-        <switch name="schoolPublic" color="#A3E5FA" checked="{{userDetails.schoolPublic}}"></switch>
+        <switch class="poby-switch" name="schoolPublic" color="#A3E5FA" checked="{{userDetails.schoolPublic}}"></switch>
       </view>
       <view class="detail-items">
         <view class="item-title">专业：</view>
         <view class="item-body">
           <input name="major" type="text" value="{{userDetails.major}}"></input>
         </view>
-        <switch name="majorPublic" color="#A3E5FA" checked="{{userDetails.majorPublic}}"></switch>
+        <switch class="poby-switch" name="majorPublic" color="#A3E5FA" checked="{{userDetails.majorPublic}}"></switch>
       </view>
       <view class="detail-items">
         <view class="item-title">微信号：</view>

@@ -1,0 +1,366 @@
+/* ====== 针对button、switch、input等基础组件的样式更改==== （在app.wxss文件引入） =====*/
+
+
+
+
+/* ==================
+        switch  开关
+ ==================== */
+
+ .poby-switch{
+  position: relative;
+  top: -6rpx;
+}
+
+/* 以下两项为 switch 两侧字体图标的高度、图标（content）、颜色等 */
+/* 对其余的大小、颜色均无影响 */
+.poby-switch::after,
+.poby-switch::before {
+ position: absolute;
+ top: 0%;
+ left: 0rpx;
+ width: 50%;
+ bottom: 0;
+ height: 42rpx;
+ margin: auto;
+
+ font-size: 26rpx;
+ line-height: 52rpx;
+
+ text-align: center;
+ pointer-events: none;
+ transform: scale(0, 0);
+ transition: all 0.3s ease-in-out 0s;
+ z-index: 9;
+ color: #f2f2f2 !important;
+}
+.poby-switch::after{
+font-family: "cuIcon";
+/* content: "\e645"; */
+}
+.poby-switch::before {
+font-family: "cuIcon";
+ /* content: "\e646"; */
+ right: 0;
+ transform: scale(1, 1);
+ left: auto;
+}
+
+
+/* 前后图标动画的显示和消失 微动效 */
+.poby-switch[checked]::after,
+.poby-switch.checked::after {
+ transform: scale(1, 1);
+}
+/* switch[checked]::before,
+switch.checked::before {
+ transform: scale(0, 0);
+} */
+.poby-switch[checked]::before {
+ transform: scale(0, 0);
+}
+
+/* switch 选中时，外框更改 整体大小，有无边框, 的背景颜色!important*/
+.poby-switch .wx-switch-input {
+ /* border: none; */
+ padding: 0 ;
+ width: 80rpx;
+ height: 40rpx;
+ margin: 0;
+ border-radius: 20rpx;
+ /* background-color: purple !important; */
+}
+/* 内球大小、颜色 */
+.poby-switch .wx-switch-input::after {
+  margin: auto;
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 16rpx;
+  left: 2rpx;
+  top: 0rpx;
+  bottom: 0rpx;
+  position: absolute;
+  transform: scale(0.9, 0.9);
+  transition: all 0.1s ease-in-out 0s;
+  /* background-color: pink ; */
+}
+/* 内球移动位置更改 */
+.poby-switch .wx-switch-input.wx-switch-input-checked::after {
+/* position: absolute; */
+margin: auto;
+left: 44rpx;
+box-shadow: none;
+transform: scale(0.9, 0.9);
+}
+/* switch 未选中时，外框更改 整体大小，有无边框, 的背景颜色（如果调整大小，此处也要更改）*/
+.poby-switch .wx-switch-input::before {
+  /* display: none; */
+  /* position: absolute; */
+  /* right: 0; */
+  width: 80rpx;
+  height: 40rpx;
+  margin-left: -2rpx;
+  margin-top: -2rpx;
+  border-radius: 20rpx;
+  background-color: #f2f2f2;
+}
+
+/* 另一种设置 选中前后背景颜色的方式，不用考虑尺寸调整的影响 */
+/* 注意：
+使用前要将，遮罩 隐藏掉：即：
+.poby-switch .wx-switch-input::before {
+display: none;
+*/
+/* 但微信采用的是上一种，为了color属性能传递颜色，仍和微信保持同步 */
+
+/* .poby-switch .wx-switch-input:not([class*="bg-"]) {
+background-color: purple !important;
+}
+.poby-switch[checked] .wx-switch-input {
+border: pink;
+background-color: pink !important;
+} */
+
+/* large 大switch框的样式 */
+/* switch 选中时，外框更改 整体大小，有无边框, 的背景颜色!important*/
+.poby-switch.large .wx-switch-input {
+/* border: none; */
+padding: 0 ;
+width: 112rpx;
+height: 48rpx;
+margin: 0;
+border-radius: 24rpx;
+/* background-color: purple !important; */
+}
+/* 内球大小、颜色 */
+.poby-switch.large .wx-switch-input::after {
+ margin: auto;
+ width: 40rpx;
+ height: 40rpx;
+ border-radius: 20rpx;
+ left: 8rpx;
+ top: 0rpx;
+ bottom: 0rpx;
+ position: absolute;
+ transform: scale(0.9, 0.9);
+ transition: all 0.1s ease-in-out 0s;
+ /* background-color: pink ; */
+}
+/* 内球移动位置更改 */
+.poby-switch.large .wx-switch-input.wx-switch-input-checked::after {
+/* position: absolute; */
+margin: auto;
+left: 64rpx;
+box-shadow: none;
+transform: scale(0.9, 0.9);
+}
+/* switch 未选中时，外框更改 整体大小，有无边框, 的背景颜色（如果调整大小，此处也要更改）*/
+.poby-switch.large .wx-switch-input::before {
+ /* display: none; */
+ /* position: absolute; */
+ /* right: 0; */
+ width: 112rpx;
+ height: 48rpx;
+ border-radius: 24rpx;
+ margin-left: -2rpx;
+ margin-top: -2rpx;
+ background-color: #f2f2f2;
+}
+
+/* 5种 未选中时的背景色 */
+.poby-switch.gray-1 .wx-switch-input::before {
+/* display: none; */
+background-color: #DEDEDE;
+}
+.poby-switch.gray-2 .wx-switch-input::before {
+/* display: none; */
+background-color: #B9B9B9;
+}
+.poby-switch.gray-3 .wx-switch-input::before {
+/* display: none; */
+background-color: #868788;
+}
+.poby-switch.gray-4 .wx-switch-input::before {
+/* display: none; */
+background-color: #545454;
+}
+.poby-switch.gray-5 .wx-switch-input::before {
+/* display: none; */
+background-color: #333333;
+}
+
+
+
+/* ==================
+          按钮
+ ==================== */
+/* 默认大小 */
+ .poby-btn {
+	position: relative;
+	border: 0rpx;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	padding: 0 20rpx;
+	font-size: 20rpx;
+  height: 48rpx;
+  width: 160rpx !important;
+	line-height: 1;
+	text-align: center;
+	text-decoration: none;
+	overflow: visible;
+	margin-left: initial;
+	transform: translate(0rpx, 0rpx);
+	margin-right: initial;
+}
+.poby-btn::after {
+  display: none;
+}
+
+/* 按钮颜色 */
+.poby-btn{
+	background-color: #f0f0f0;
+}
+.poby-btn.bg-purple{
+	background-color: #BA75FF;
+	color: #F7F7F7;
+}
+.poby-btn.bg-blue{
+	background-color: #26C9FF;
+	color: #F7F7F7;
+}
+.poby-btn.bg-darkblue{
+	background-color: #17B2E5;
+	color: #F7F7F7;
+}
+.poby-btn.bg-white{
+	background-color: #fff;
+	color: #545454;
+}
+.poby-btn.bg-gray{
+	background-color: #B9B9B9;
+	color: #F7F7F7;
+}
+
+.poby-btn.line {
+	background-color: transparent;
+}
+.poby-btn.line.bg-purple{
+	color: #BA75FF;
+}
+.poby-btn.line.bg-blue{
+	color: #26C9FF;
+}
+.poby-btn.line.bg-darkblue{
+	color: #17B2E5;
+}
+.poby-btn.line.bg-white{
+	color: #fff;
+}
+.poby-btn.line.bg-gray{
+	color: #B9B9B9;
+}
+.poby-btn[class*="line"]::after {
+	content: " ";
+	display: block;
+	width: 200%;
+	height: 200%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: 2rpx solid currentColor;
+	transform: scale(0.5);
+	transform-origin: 0 0;
+	box-sizing: border-box;
+	border-radius: 12rpx;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.poby-btn.round{
+	border-radius: 1000rpx;
+}
+.poby-btn.round[class*="line"]::after {
+	border-radius: 1000rpx;
+}
+.poby-btn[class*="lines"]::after {
+	border: 6rpx solid currentColor;
+} 
+
+/* .poby-btn[class*="bg-"]::after {
+	display: none;
+}  */
+
+/* 按钮尺寸largest - smallest - tag  */
+.poby-btn[size = 'tag']{
+  padding: 0 ;
+	font-size: 20rpx;
+  height: 40rpx;
+  width: 80rpx !important;
+}
+.poby-btn[size = 'smallest'] 
+{
+    width: 112rpx !important;
+    height: 48rpx;
+    padding: 0;
+}
+.poby-btn[size = 'small']{
+	padding: 0 20rpx;
+	font-size: 20rpx;
+  height: 40rpx;
+  width: 128rpx !important;
+}
+.poby-btn[size = 'large']{
+	padding: 0 20rpx;
+	font-size: 28rpx;
+  height: 64rpx;
+  width: 282rpx !important;
+}
+.poby-btn[size = 'largest']{
+	padding: 0 20rpx;
+	font-size: 28rpx;
+  height: 80rpx;
+  width: 490rpx !important;
+}
+
+/* .poby-btn.icon.sm {
+	width: 48rpx;
+	height: 48rpx;
+}
+
+.poby-btn.icon {
+	width: 64rpx;
+	height: 64rpx;
+	border-radius: 500rpx;
+	padding: 0;
+}
+
+button.icon.lg {
+	width: 80rpx;
+	height: 80rpx;
+} */
+
+.poby-btn.shadow-blur::before {
+	top: 4rpx;
+	left: 4rpx;
+	filter: blur(6rpx);
+	opacity: 0.6;
+}
+
+.poby-btn.button-hover {
+	transform: translate(1rpx, 1rpx);
+}
+
+.block {
+	display: block;
+}
+
+.poby-btn.block {
+	display: flex;
+}
+
+.poby-btn[disabled] {
+	opacity: 0.6;
+	color: var(--white);
+}
