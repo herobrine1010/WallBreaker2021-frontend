@@ -55,7 +55,7 @@ Page({
         // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
         let tempTeamList = res.data.data.map( v=>{
           let duetime = new Date(v.dueTime);
-          v.dueTime = '截止时间：'+ duetime.getFullYear() + '年' + duetime.getMonth() + '月'+ duetime.getDate() + '日 '+  duetime.getHours() + ':' + (duetime.getMinutes()<10?'0'+duetime.getMinutes():duetime.getMinutes());
+          v.dueTime = '截止时间：'+ duetime.getFullYear() + '年' + (duetime.getMonth()+1) + '月'+ duetime.getDate() + '日 '+  duetime.getHours() + ':' + (duetime.getMinutes()<10?'0'+duetime.getMinutes():duetime.getMinutes());
           v.peopleCount = v.participantNumber + '/' + v.dueMember ;
           return v;
         });

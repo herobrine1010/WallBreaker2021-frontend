@@ -145,7 +145,7 @@ Page({
     function setDueTime(time){
       if(time){
         let dueTime = new Date(time);
-        return ('截止时间：' + dueTime.getFullYear() + '年' + dueTime.getMonth() + '月' + dueTime.getDay() + '日  ' + dueTime.getHours() + ':' + dueTime.getMinutes());
+        return ('截止时间：' + dueTime.getFullYear() + '年' + (dueTime.getMonth()+1) + '月' + dueTime.getDay() + '日  ' + dueTime.getHours() + ':' + dueTime.getMinutes());
       }else{
         return '截止时间：暂无';
       };

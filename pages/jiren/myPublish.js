@@ -50,7 +50,7 @@ Page({
             v.teamCondition = 'close';
           }
           let duetime = new Date(v.dueTime);
-          v.dueTime = '截止时间：'+ duetime.getFullYear() + '年' + duetime.getMonth() + '月'+ duetime.getDate() + '日 '+  duetime.getHours() + ':' + (duetime.getMinutes()<10?'0'+duetime.getMinutes():duetime.getMinutes());
+          v.dueTime = '截止时间：'+ duetime.getFullYear() + '年' + (duetime.getMonth()+1) + '月'+ duetime.getDate() + '日 '+  duetime.getHours() + ':' + (duetime.getMinutes()<10?'0'+duetime.getMinutes():duetime.getMinutes());
           v.peopleCount = v.participantNumber + '/' + v.dueMember ;
           return v;
         });
