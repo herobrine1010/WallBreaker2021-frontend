@@ -1,0 +1,21 @@
+<!--components/card-lost/card.wxml-->
+<view class="{{cardMy?'card-my':'card'}}">
+  <image class="{{cardMy?'image-my':'image'}}" src="{{postingPic}}" mode="aspectFill"></image> 
+  <view class="{{cardMy?'textArea-my':'textArea'}}">
+    <view class="{{cardMy?'LineA-my':'LineA'}}">
+      <view class="{{cardMy?'objectName-my':'objectName'}}">{{title}}</view> 
+      <view class="{{cardMy?'tag-my':'tag'}}">{{labelText}}</view>
+    </view>
+      <view class="{{cardMy?'description-my':'description'}}"> {{description}}</view>
+  </view>
+  <view class="timeArea">
+      <view class="{{cardMy?'time-my':'time'}}">{{publishTime}}</view>
+  </view>
+
+  <view wx:if="{{isShowClose}}" class="{{closed?'closedBtn':'unClosedBtn'}}" bindtap="tapClose">{{closed?'已关闭':'关闭'}}</view>
+  
+  <view wx:if="{{isShowKind}}" class="kindTag">{{kind}}</view>
+
+</view>
+
+

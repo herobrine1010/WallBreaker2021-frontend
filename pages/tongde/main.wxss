@@ -1,4 +1,48 @@
 /* pages/tongde/main.wxss */
+@import "/static/common.wxss";
+
+.search-area{
+  display: flex;
+  height: 84rpx;
+  width: 95%;
+  align-items: center;
+}
+.searchBar{
+  margin:0 auto;
+  flex: 1;
+}
+.conditionFilter{
+  position: relative;
+
+  height:60rpx;
+  width: 10%;
+  border-radius: 5px;
+  color:#FFFFFF;
+  align-items: center;
+  font-size:4vw;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 1px;
+  float:left;
+  /* z-index:3; */
+  background-color: #F2FCFF;
+}
+
+
+.conditionIcon{
+  position:relative;
+  float: left;
+  height:4vw;
+  width: 4vw;
+}
+
+
+
+
+
+
+
+/* 两个tab区域的样式 */
 page {
   /* 填满页面 */
   display: flex;
@@ -23,14 +67,50 @@ page {
   color: blue;
   border-bottom-color: blue;
 }
-
 /*中间 content*/
 .content {
   flex-grow: 1;
-  height: 100rpx;
+  height: 900rpx;
 }
 .content > swiper {
   /*子代选择器 content类的且swiper子元素*/
+  height:fit-content;
   height: 100%;
-  background-color: #eee;
+  background: rgba(238, 238, 238, 0) ;
+  margin-top: 24rpx;
 }
+.ListArea{
+  height: 100%;
+}
+.scroll{
+  height:fit-content;
+  height: 100%;
+  width:100%;
+}
+.item{
+  width: calc(100% / 2);
+  padding-right: 10rpx;
+  padding-left: 10rpx;
+  height: 520rpx;
+  position: relative;
+  float: left;
+  box-sizing: border-box;
+}
+.backTopButton{
+  position: fixed;
+  height:9vw;
+  width:9vw;
+  right: 5.9%;
+  bottom: 21%;
+ }
+ .addButton{
+  position: fixed;
+  height:15vw;
+  width:15vw;
+  right: 3%;
+  bottom: 12%;
+ }
+
+ /**/
+ 
+

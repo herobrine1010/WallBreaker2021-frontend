@@ -4,10 +4,64 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
-    currentItem: 0, // 当前swiper选中项目
-    tab: 0, //当前tab对应的项目
 
+  data: {
+    tabIndex: 0, // 当前swiper选中项目
+    tab: 0, //当前tab对应的项目
+    showGoTopButton:false,
+    topNum:0,
+    tongdeItemList:[
+      {
+        'labelText':'雨伞',
+        'title':'物品名称',
+        'publishTime':'1天前',
+        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
+        'postingPic':''
+      },
+      {
+        'labelText':'雨伞',
+        'title':'物品名称',
+        'publishTime':'1天前',
+        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
+        'postingPic':'a'
+      },
+      {
+        'labelText':'雨伞',
+        'title':'物品名称',
+        'publishTime':'1天前',
+        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
+        'postingPic':'a'
+      },
+      {
+        'labelText':'雨伞',
+        'title':'物品名称',
+        'publishTime':'1天前',
+        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
+        'postingPic':'a'
+      },
+      {
+        'labelText':'雨伞',
+        'title':'物品名称',
+        'publishTime':'1天前',
+        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
+        'postingPic':'a'
+      },
+      {
+        'labelText':'雨伞',
+        'title':'物品名称',
+        'publishTime':'1天前',
+        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
+        'postingPic':'a'
+      },
+      {
+        'labelText':'雨伞',
+        'title':'物品名称',
+        'publishTime':'1天前',
+        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
+        'postingPic':'a'
+      },
+    
+    ]
   },
 
   /**
@@ -21,7 +75,7 @@ Page({
   changeItem: function(e) {
 
     this.setData({
-      currentItem: e.currentTarget.dataset.item
+      tabIndex: e.currentTarget.dataset.item
     }
     )
 
@@ -35,5 +89,29 @@ Page({
       tab: e.detail.current
     })
 
-  }
+  },
+  // 滚动框的 滚动和回到最上事件：------------- -------------- ----------
+  returnTop: function () {
+    let that=this;
+    this.setData({
+     topNum:  0
+    });
+    setTimeout(function () {
+      that.setData({showGoTopButton:false})
+    }, 100)
+  },
+  onMyScroll:function(e){
+    if(e.detail.scrollTop>100){
+      this.setData({showGoTopButton:true})
+    }else if(this.data.showGoTopButton){
+      this.setData({showGoTopButton:false})
+    }
+  },
+  // 跳转：发起组队事件：------------- --------- ------ ------- --
+  createNewPost:function(){
+    wx.navigateTo({
+      url: '/pages/tongde/creatPost',
+    })
+  },
+  
 })
