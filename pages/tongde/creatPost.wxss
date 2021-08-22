@@ -1,4 +1,6 @@
 /* pages/tongde/creatPost.wxss */
+@import "/static/common.wxss";
+
 .inner-container{
   width: 94vw;
   margin: 10rpx 3vw;
@@ -22,6 +24,17 @@ radio-group>radio{
   border: 2rpx solid gray;
   margin: auto;
 }
+.input-half-line-box{
+  /* width: auto; */
+  /* height: 55rpx; */
+  position: absolute;
+  left: 35%;
+  right: 0;
+  padding: 10rpx 1vw;
+  /* margin-left: 3vw; */
+  border: 2rpx solid gray;
+  /* margin: auto; */
+}
 .text-box{
   width: 89vw;
   height: 300rpx;
@@ -35,6 +48,7 @@ radio-group>radio{
   letter-spacing: 1rpx;
 }
 .a-line{
+  position: relative;
   display: flex;
   flex-direction: row;
 }

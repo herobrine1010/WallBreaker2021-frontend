@@ -44,7 +44,10 @@ Page({
       'choosen':false
     }],
 
-
+    connactTypes:['QQ','微信','手机','邮箱','其他'].map(item=>{
+      return {content:item}
+    }),
+    connactType:{content:'QQ'},
     height:'auto',
   },
 
@@ -106,7 +109,24 @@ Page({
 
   },
   clickToChooseTag:function(){
-    this.setData({tagboxShow:true})
+    let tagList=this.data.tagList;
+    let tagChoosenList=this.data.tagChoosenList;
+    for(let key in tagList){
+      if(tagList[key].choosen){
+        tagList[key].choosen=false;
+        for(let key2 in tagChoosenList){
+          // console.log(tagChoosen)
+          if(tagList[key].name==tagChoosenList[key2]){
+            tagList[key].choosen=true;
+            break;
+          }
+        }
+      }
+    }
+    this.setData({
+      tagboxShow:true,
+      tagList
+    })
   },
   clickTag:function(e){
     console.log(e)
