@@ -1,0 +1,78 @@
+<!--miniprogram/pages/personal/help.wxml-->
+<view class="background">
+  <!-- nav 组件调用 -->
+  <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="新手帮助"></mp-navigation-bar>
+  <!-- 以下是container，包含了除标题外的其余内容 -->
+  <scroll-view scroll-y="{{true}}" class="per-container" >
+    <view class="first-line">初来济星云，你可能不知道要干什么，那就让我来为你提供些方向吧！</view>
+    <view class="title">
+      <text>济事（tag）</text>
+    </view>
+    <view class="body">
+      <text>点击“济事”进入济事广场，你可以浏览、搜索、发布各类校园信息，例如查看最新活动信息、最强校园攻略、就业求职分享、各类生活指南等。这里是各类校园信息的聚合分发平台，关注它，不再错过你想了解的校内重要信息。</text>
+    </view>
+    <view class="title">
+      <text>济人（tag）</text>
+    </view>
+    <view class="body">
+      <text>点击“济人”进入济人广场，你可以进行组队信息的发布或者加入组队。不论是各类校园竞赛找队友，还是想要找人一起搞事情。在这里，你可以找到志同道合的朋友一起做想做的事。</text>
+    </view>
+    <view class="title">
+      <text>我的（tag）</text>
+    </view>
+    <view class="body">
+      <text>点击“我的”进入个人详情页面，你可以管理自己的帖子和个人信息，也可以随时跟进组队动态。</text>
+    </view>
+    <!-- <view class="first-line">
+      <text>以下是各个页面的详细介绍：</text>
+    </view> -->
+    <view class="title">
+      <text>济事广场</text>
+    </view>
+    <view class="body">
+      <view>（1）点击“搜索”，输入关键词，查询想要查找的帖子内容；</view>
+      <view>（2）点击<image class="inline-icon-long"   mode="aspectFit" src="../../static/icon/help-select.png"></image>，可以切换标签，搜索不同主题的帖子内容。包括求职 信息、学习天地、校园活动、生活指南等；</view>
+
+      <view class="sub-con"><span class="sub-title">求职信息：</span><text class="sub-body">招聘会、就业分享等校内各类招聘求职信息，助力你拿到心仪的offer；</text></view>
+      <view class="sub-con"><span class="sub-title">学习天地：</span><text class="sub-body">学业讲座、选课指南、学习资料、知识互助等，让你学习不再头秃；</text></view>
+      <view class="sub-con"><span class="sub-title">校园活动：</span><text class="sub-body">各类校园活动、社团活动信息一应俱全，带你一起玩转同济；</text></view>
+      <view class="sub-con"><span class="sub-title">生活指南：</span><text class="sub-body">嘉定的班车、四平的食堂、羽毛球馆怎么预约、钥匙去哪里配，关于同济生活的方方面面都在这里；</text></view>
+      <view class="sub-con"><span class="sub-title">其他：</span><text class="sub-body">你能想到的，岂止如此？快来一起来交流吧！</text></view>
+
+      <view>（3）点击<image class="inline-icon-long" mode="aspectFit" src="../../static/icon/help-TimeOrder.png"></image>，可以更改帖子排列顺序（默认倒序排列，点击后为正序）；</view>
+      <view>（4）点击“帖子”<image class="inline-icon-long" mode="aspectFit" src="../../static/icon/help-jishicard.png"></image>进入帖子详情页面，可以查看发帖者的详细信息，也可以点击<image class="inline-icon-short" mode="aspectFit" src="../../static/icon/collect.png"></image>，mark住自己喜欢的帖子。</view>
+      <view>想了解更多功能？那就快打开济事广场<image class="inline-icon-short" mode="aspectFit" src="../../static/icon/jishi-solid.png" bindtap="navToJiShi"></image>(点击跳转)来体验吧~</view>
+    </view>
+
+    <view class="title">
+      <text>济人广场</text>
+    </view>
+    <view class="body">
+      <view>（1）点击“搜索”，输入关键词，查询自己想上的车车；</view>
+      <view>（2）点击“筛选”<image class="inline-icon-long"   mode="aspectFit" src="../../static/icon/help-select.png"></image>，根据“竞赛、学术科研、一起造梦”等不同标签，筛选组队帖，找到自己喜欢的车队；</view>
+
+      <view class="sub-con"><span class="sub-title">竞赛：</span><text class="sub-body">各类校园内外比赛信息。在这里你可以找到一起奋斗的队友，也可以查找想上车的比赛；</text></view>
+      <view class="sub-con"><span class="sub-title">学术科研：</span><text class="sub-body">想找医学院的同学学SPSS？想与人文学院的同学交流哲学？在这里你可以与跨学科的同学一起交流，有任何学术领域的问题或者想法都可以找人一起探讨，共同进步！</text></view>
+      <view class="sub-con"><span class="sub-title">一起造梦：</span><text class="sub-body">想创办一个自媒体？想组一个乐队？想成立一个剧团？你是否也曾有一个好点子，却苦于没人一起实现？在这个板块下，你可以找到志同道合的队友一起做一些“大事情”，我们鼓励任何有创造性有正能量的梦想在这里生根发芽。</text></view>
+      <view class="sub-con"><span class="sub-title">其他：</span><text class="sub-body">你能做到的，岂止如此？快来一起来交流吧！</text></view>
+
+      <view>（3）点击“按时间排序”<image class="inline-icon-long" mode="aspectFit" src="../../static/icon/help-TimeOrder.png"></image>，可以更改帖子排列顺序（默认倒序排列，点击后为正序，再次点击则为倒序）；</view>
+      <view>（4）点击<image class="inline-icon-short" mode="aspectFit" src="../../static/icon/add-blue-big.png"></image>即可发布组队信息；</view>
+      <view>（5）点击“我发起的组队<image class="inline-icon-long" mode="aspectFit" src="../../static/icon/help-myPublish.png"></image>、我参加的组队<image class="inline-icon-long" mode="aspectFit" src="../../static/icon/help-myjoin.png"></image>”即可跳转到相应的队伍列表页面；</view>
+      <view>（6）对组队还是一脸懵？点击“组队指南”<image class="inline-icon-short" mode="aspectFit" src="../../static/icon/help-teamguide.png"></image>立马get组队诀窍。</view>
+      
+      <view>想了解更多功能？那就快打开济人广场<image class="inline-icon-short" mode="aspectFit" src="../../static/icon/jiren-solid.png" bindtap="navToJiRen"></image>(点击跳转)来体验吧~</view>
+    </view>
+
+    <view class="title">
+      <text>个人页面</text>
+    </view>
+    <view class="body">
+      <view>（1）点击“个人资料”<image class="inline-icon-long"   mode="aspectFit" src="../../static/icon/help-personal-detail.png"></image>编辑自己的信息（提醒：济星云倡导真诚、友善、可信的氛围，你一定要诚实编辑个人信息嗷）；</view>
+      <view>（2）当自己的组队有了状态变更，“帖子/组队管理”<image class="inline-icon-long"   mode="aspectFit" src="../../static/icon/help-personal-manage.png"></image>将会出现小红点提醒查看，帮你不错过任何一条组队动态。同时也可以在“帖子/组队管理”查询自己的发帖历史；</view>
+      <view>（3）点击“我的收藏”<image class="inline-icon-long" mode="aspectFit" src="../../static/icon/help-personal-collection.png"></image>即可一键查看自己的收藏列表。</view>
+    </view>
+    <view class="last">
+    </view>
+  </scroll-view>
+</view>

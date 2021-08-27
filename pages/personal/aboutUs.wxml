@@ -14,6 +14,7 @@
       <text>{{teamBody}}</text>
     </view>
     <view class="officialAccount-head">{{officialAccountHead}}</view>
+    <view class="officialAccount-body">{{officialAccountBody}}</view>
     <view class="contactUs-head">{{contactUsHead}}</view>
     <view class="contactUs-body">
       <text decode="{{true}}" user-select="{{true}}">{{contactUsBody}}</text>
