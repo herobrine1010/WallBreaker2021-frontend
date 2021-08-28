@@ -103,8 +103,10 @@
             </view>
             <view class="detail-content">
                 <text class="detail-text" encode="{{true}}">{{teamDetail.content}}</text>
-                <view class="detail-pictures" >
-                  <view class="detail-picture" wx:for="{{teamDetail.pictures}}"><image src="{{item}}" style="width:26vw;height:26vw"></image></view>
+                <view class="detail-pictures">
+                  <view class="detail-picture" wx:for="{{teamDetail.pictures}}">
+                    <image src="{{item}}" style="width:26vw;height:26vw" data-pic-url="{{item}}" bindtap="zoomInDetailPicture"></image>
+                  </view>
                 </view>
               </view>
             </view>
