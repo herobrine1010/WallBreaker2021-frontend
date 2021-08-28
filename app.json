@@ -51,7 +51,9 @@
     "pages/tongde/detail",
     "pages/tongde/creatPost",
     "pages/tongde/my",
-    "pages/tongde/myLost"
+    "pages/tongde/myLost",
+    "pages/jishi/detail-new",
+    "pages/jishi/link"
   ],
   "window": {
     "backgroundTextStyle": "dark",

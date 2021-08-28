@@ -1,6 +1,89 @@
 /* ====== 针对button、switch、input等基础组件的样式更改==== （在app.wxss文件引入） =====*/
 
-
+/* =========== 文字 =================== =============== */
+.poby-text{
+	font-family: PingFang SC;
+}
+.poby-text.h1{
+	font-size: 48rpx;
+	line-height: 60rpx;
+}
+.poby-text.h2{
+	font-size: 44rpx;
+	line-height: 55rpx
+}
+.poby-text.h3{
+	font-size: 40rpx;
+	line-height: 50rpx
+}
+.poby-text.h4{
+	font-size: 36rpx;
+	line-height: 45rpx
+}
+.poby-text.h5{
+	font-size: 32rpx;
+	line-height: 40rpx
+}
+.poby-text.bd{
+	font-size: 28rpx;
+	line-height: 42rpx
+}
+.poby-text.bds{
+	font-size: 24rpx;
+	line-height: 36rpx
+}
+.poby-text.bdst{
+	font-size: 20rpx;
+	line-height: 30rpx
+}
+.poby-text.light{
+	font-weight:300;
+}
+.poby-text.regular{
+	font-weight:400;
+}
+.poby-text.medium{
+	font-weight:500;
+}
+.poby-text.blod{
+	font-weight:600;
+}
+.poby-text.color-pri{
+	color: #121212;
+}
+.poby-text.color-sec{
+	color: #545454;
+}
+.poby-text.color-dis{
+	color: #B2B2B2;
+}
+.poby-text.color-link{
+	color: #005E7D;
+}
+.poby-text.color-pri.mode-light{
+	color: #333333;
+}
+.poby-text.color-sec.mode-light{
+	color: #545454;
+}
+.poby-text.color-dis.mode-light{
+	color: #B2B2B2;
+}
+.poby-text.color-link.mode-light{
+	color: #005E7D;
+}
+.poby-text.color-pri.mode-dark{
+	color: #F7F7F7;
+}
+.poby-text.color-sec.mode-dark{
+	color: #B2B2B2;
+}
+.poby-text.color-dis.mode-dark{
+	color: #545454;
+}
+.poby-text.color-link.mode-dark{
+	color: #07C1F5;
+}
 
 
 /* ==================
