@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    messageNum:22,
     personBrief : {
       avatarPath : '',
       nickname: '默认昵称',
@@ -72,6 +73,7 @@ Page({
         'cookie':wx.getStorageSync("token")
       }
     }).then( res => {
+      console.log(res);
       let perInfo = res.data.data;
       console.log(perInfo);
       // ---------------以下是对头像，昵称，专业等进行  更改；

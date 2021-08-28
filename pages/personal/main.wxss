@@ -16,6 +16,7 @@
 
 /* 以下是用户各个item的样式 */
 .per-items{
+  position: relative;
   flex: 1;
   display:flex;
   text-align: center;
@@ -26,6 +27,17 @@
   margin: 0 4%  3% 4%;
   background: #F2FCFF;
   border-radius: 10rpx;
+}
+.red-message{
+  position: absolute;
+  height: 30rpx;
+  top: -10rpx;
+  right: -10rpx;
+  background-color: red;
+  border-radius: 20rpx;
+}
+.red-message-word{
+  margin: 0 10rpx;
 }
 .icon{
   width: 48rpx;
