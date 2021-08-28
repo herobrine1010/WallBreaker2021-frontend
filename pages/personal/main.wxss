@@ -37,7 +37,7 @@
   border-radius: 20rpx;
 }
 .red-message-word{
-  margin: 0 10rpx;
+  margin: auto 10rpx;
 }
 .icon{
   width: 48rpx;
