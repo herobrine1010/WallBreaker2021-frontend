@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
+    "personal-animation":"/components/personal-animation/personal-animation"
+  }, 
+  "navigationStyle": "custom"
+}

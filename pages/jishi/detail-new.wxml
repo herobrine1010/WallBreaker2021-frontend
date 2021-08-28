@@ -1,0 +1,27 @@
+<!--miniprogram/pages/jishi/detail-new.wxml-->
+<view class="background">
+</view>
+<view class="navi">
+  <mp-navigation-bar  ext-class="weui-navigation-bar__centers" title=" 帖子详情" background="{{navBackground}}"></mp-navigation-bar>
+</view>
+<view class="jiren-container">
+  <view class="title poby-text h4 blod color-sec">{{title}}</view>
+  <image class="icon-collect" wx:if="{{isPostingCollected}}" bindtap="cancelCollect" src="../../static/icon/collect-solid.png"></image>
+  <image class="icon-collect" wx:if="{{isPostingCollected==0}}" src="../../static/icon/collect.png" bindtap="collect"></image>
+  <view class="detail poby-text bd color-sec">
+    <text>{{name}}</text>
+    <text class="theme">{{theme}}</text>
+    <text class="date">{{date}}</text>
+  </view>
+  <view class="content">
+    <rich-text nodes="{{content}}"></rich-text>
+  </view>
+  <view class="position"></view>
+  <view class="nav-card" bindtap="attachNavgitor">
+    <image class="nav-img" src="{{navImage}}"></image>
+    <text class="nav-tip poby-text bd color-sec">点击跳转</text>
+    <text class="nav-title poby-text h5 color-pri">{{navTitle}}</text>
+    <image class="icon-nav" src="../../static/icon/move-on.jpg"></image>
+  </view>
+  <view class="position"></view>
+</view>
