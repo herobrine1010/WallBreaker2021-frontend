@@ -34,6 +34,10 @@ Page({
   onScrollToLower:function(){
     console.log("上拉触了滚动框的底");
   },
+  onRefresherRefresh:function(){
+    const self = this;
+    this.getListData(self);
+  },
 
 
 // 点击卡片之后的页面跳转
@@ -42,111 +46,107 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    function setDueTime(time){
-      if(time){
-        let dueTime = new Date(time);
-        return ('截止时间：' + dueTime.getFullYear() + '年' + (dueTime.getMonth()+1) + '月' + dueTime.getDay() + '日  ' + dueTime.getHours() + ':' + dueTime.getMinutes());
-      }else{
-        return '截止时间：暂无';
-      };
-    };
-    // ----- --- ---------- ----判断为组队管理页面------ -------- ---- ----- ----- ---------
-    let that=this;
+  onLoad: function () {
+    const self = this;
+    this.getListData(self);
+    this.changeScrollHeight();
+  },
+
+
+  //  将页面请求放到函数中，方便多次调用 
+  getListData:function(self){
     let teamAppliedByMe=request({
       url : '/userTeam/teamAppliedByMe',
       header: {
         'content-type': 'application/x-www-form-urlencoded',
         'cookie':wx.getStorageSync("token")
       }
-    })
+    });
     let teamInitiatedByMe=request({
       url : '/userTeam/teamInitiatedByMe',
       header: {
         'content-type': 'application/x-www-form-urlencoded',
         'cookie':wx.getStorageSync("token")
       }
-    })
-      Promise.all([teamAppliedByMe,teamInitiatedByMe])
-      .then(result => {
-        let dataAppliedByMe=result[0].data.data;
-        let dataInitiatedByMe=result[1].data.data;
-        console.log(dataAppliedByMe)
-        let lengthApplied=dataAppliedByMe.length;
-        let lengthInitiated=dataInitiatedByMe.length;
-        let i=0;
-        let j=0;
-        let turn='';
-        let item=null;
-        let list=[];
-        while(i<lengthApplied||j<lengthInitiated){
-          // Date(dataAppliedByMe[i].dueTime).
-
-          if(i==lengthApplied){
-            console.log('initiator')
-            turn='initiator'
-          }else if(j==lengthInitiated){
-            console.log('applier')
-            turn='applier'
-          }else{
-            // console.log(Date().getTime)
-            // let date=Date();
-            // console.log(date.getTime)
-            let date1=new Date(dataAppliedByMe[i].updateTime).getTime();
-            console.log(date1)
-            let date2=new Date(dataInitiatedByMe[j].updateTime).getTime();
-            console.log(date2)
-            if(date1<=date2){
-              turn='initiator'
-            }else{
-              turn='applier'
-            }
+    });
+    Promise.all([teamAppliedByMe,teamInitiatedByMe])
+    .then(result=>{
+      let dataAppliedByMe=result[0].data.data;
+      let dataInitiatedByMe=result[1].data.data;
+      result = null;
+      let myTeam = null;
+      for(myTeam of dataInitiatedByMe){
+        myTeam.initializedByMe = true;
+      };
+      console.log(dataAppliedByMe,dataInitiatedByMe);
+      let teamList = dataAppliedByMe.concat(dataInitiatedByMe);
+      dataAppliedByMe = null;
+      dataInitiatedByMe = null;
+      teamList.sort((a,b)=> new Date(b.updateTime)  - new Date(a.updateTime));
+      let team = null;
+      for(team of teamList){
+        team.dueTime = this.setDueTime(team.dueTime);
+        team.peopleCount=team.participantNumber+'/'+team.dueMember;
+        if(team.initializedByMe){
+          switch(team.status){
+            case 0:
+              team.teamCondition='mine'
+              team.rightTagText='我发起的'
+              break;
+            case 1:
+            case 2:
+              team.teamCondition='mine'
+              team.rightTagText='待处理'
+              break;
+            case 3:
+            case 4:
+            default:
+              team.teamCondition='close'
+              team.rightTagText='已关闭'
+              break;
           }
-          if(turn=='applier'){
-            item=dataAppliedByMe[i];
-            item.dueTime = setDueTime(item.dueTime);
-            item.peopleCount=item.participantNumber+'/'+item.dueMember;
-            switch(dataInitiatedByMe){
-              case 0:
-                item.teamCondition='applying'
-                item.rightTagText='我已申请'
-                break;
-              case 1:
-              case 2:
-                item.teamCondition='pass'
-                item.rightTagText='我已入队'
-                break;
-              case 3:
-              case 4:
-                item.teamCondition='refuse'
-                item.rightTagText='申请未通过'
-                break;
-              case 5:
-              case 6:
-                item.teamCondition='close'
-                item.rightTagText='已关闭'
-                break;
-            }
-            i++;
-          }else if(turn=='initiator'){
-            item=dataInitiatedByMe[j];
-            item.dueTime = setDueTime(item.dueTime);
-            item.peopleCount=item.participantNumber+'/'+item.dueMember;
-            item.teamCondition='mine';
-            item.rightTagText='我发起的';
-            if(dataAppliedByMe.status>2){
-              item.teamCondition='close';
-              item.rightTagText='已关闭';
-            }
-            j++;
+        }else{
+          switch(team.applyStatus){
+            case 0:
+              team.teamCondition='applying'
+              team.rightTagText='我已申请'
+              break;
+            case 1:
+            case 2:
+              team.teamCondition='pass'
+              team.rightTagText='我已入队'
+              break;
+            case 3:
+            case 4:
+              team.teamCondition='refuse'
+              team.rightTagText='申请未通过'
+              break;
+            case 5:
+            case 6:
+            default:
+              team.teamCondition='close'
+              team.rightTagText='已关闭'
+              break;
           }
-          list.push(item);
         }
-        that.setData({jirenItemList:list})
-      });
+      }
+      self.setData({
+        jirenItemList: teamList,
+        isRefresherOpen: false
+      })
 
-      this.changeScrollHeight();
+    })
   },
+  // 规范日期格式
+  setDueTime:function(time){
+    if(time){
+      let dueTime = new Date(time);
+      return ('截止时间：' + dueTime.getFullYear() + '年' + (dueTime.getMonth()+1) + '月' + dueTime.getDay() + '日  ' + dueTime.getHours() + ':' + dueTime.getMinutes());
+    }else{
+      return '截止时间：暂无';
+    };
+  },
+
   changeScrollHeight:function(){
     let windowHeight;
     //设置scroll-view高度
