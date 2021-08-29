@@ -151,7 +151,7 @@ Page({
     // 采用Promise.all 并行处理两个请求-------------------
     Promise.all([favouritePosting,favouriteTeam])
       .then(result => {
-        console.log(result[0].data.data[0]);
+        console.log(result[1].data.data[2].dueTime);
         // 处理收藏组队的数据------------------
         let jirenItemList = result[1].data.data.map( v=>{
           let tempList = {
@@ -160,15 +160,9 @@ Page({
             description : v.content,
             initiator : v.initiatorNickName,
             peopleCount : v.participantNumber + '/' + v.dueMember,
-            postingPic : v.firstPicUrl
+            postingPic : v.firstPicUrl,
+            dueTime : formatTime(v.dueTime)
           };
-          let dueTime = v.duetime;
-          if(dueTime){
-            duetime = new Date(dueTime);
-            tempList.dueTime = '截止时间：' + formatTime(duetime); 
-          }else{
-            tempList.dueTime = '截止时间：暂无';
-          }
           // -------- 收藏组队的状态：1:我发起的 / 0:空---------
           if(v.initializedByMe){
             tempList.teamCondition = 'mine';

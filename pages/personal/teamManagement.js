@@ -1,6 +1,7 @@
 // pages/collection/collection.js
 // 首先引入封装成promise的 request
 import { request } from "../../request/request.js";
+import {formatTime} from "../../utils/util.js";
 
 Page({
 
@@ -85,7 +86,7 @@ Page({
       teamList.sort((a,b)=> new Date(b.updateTime)  - new Date(a.updateTime));
       let team = null;
       for(team of teamList){
-        team.dueTime = this.setDueTime(team.dueTime);
+        team.dueTime = '截止时间：' + formatTime(team.dueTime)
         team.peopleCount=team.participantNumber+'/'+team.dueMember;
         if(team.initializedByMe){
           switch(team.status){
@@ -137,15 +138,15 @@ Page({
 
     })
   },
-  // 规范日期格式
-  setDueTime:function(time){
-    if(time){
-      let dueTime = new Date(time);
-      return ('截止时间：' + dueTime.getFullYear() + '年' + (dueTime.getMonth()+1) + '月' + dueTime.getDay() + '日  ' + dueTime.getHours() + ':' + dueTime.getMinutes());
-    }else{
-      return '截止时间：暂无';
-    };
-  },
+  // // 规范日期格式
+  // setDueTime:function(time){
+  //   if(time){
+  //     let dueTime = new Date(time);
+  //     return ('截止时间：' + dueTime.getFullYear() + '年' + (dueTime.getMonth()+1) + '月' + dueTime.getDay() + '日  ' + dueTime.getHours() + ':' + dueTime.getMinutes());
+  //   }else{
+  //     return '截止时间：暂无';
+  //   };
+  // },
 
   changeScrollHeight:function(){
     let windowHeight;

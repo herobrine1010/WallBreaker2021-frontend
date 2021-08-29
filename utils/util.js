@@ -1,4 +1,12 @@
-const formatTime = date => {
+// 接受“2021-06-06 19:20:20”格式的字符串，兼容ios，返回日期字符串
+// 也能接受日期对象
+const formatTime = dateStr => {
+  let date;
+  if(dateStr instanceof Date){
+    date = dateStr;
+  }else{
+    date = new Date(dateStr.replace(/-/g,'/'));
+  }
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()

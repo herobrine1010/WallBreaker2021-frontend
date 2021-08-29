@@ -73,7 +73,6 @@ Page({
         'cookie':wx.getStorageSync("token")
       }
     }).then( res => {
-      console.log(res);
       let perInfo = res.data.data;
       console.log(perInfo);
       // ---------------以下是对头像，昵称，专业等进行  更改；
@@ -90,8 +89,11 @@ Page({
       }else{
         personBrief.avatarPath = '../../static/icon/default-user-big.png';
       }
+
       that.setData({
-        personBrief
+        personBrief,
+        jirenMsgNum : perInfo.jirenMsgNum,
+        isJirenMsgExist:perInfo.jirenMsgExist
       });
 
       // -----------以下是对标签进行处理  ---------------------------------------

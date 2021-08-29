@@ -38,8 +38,7 @@ function getTeamList(that,keyword,labelId,timeIndex){
         };
 
         if(v.dueTime){
-          let duetime = v.dueTime.replace(/-/g,'/');
-          v.dueTime = '截止时间：' + formatTime( new Date(duetime));
+          v.dueTime = '截止时间：' + formatTime(v.dueTime);
         }else{
           v.dueTime = '截止时间：暂无'
         }  
