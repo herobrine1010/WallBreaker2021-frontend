@@ -3,12 +3,24 @@ const app = getApp();
 const util = require('../../utils/util.js');
 const FormData = require('../../lib/wx-formdata-master/formData.js'); //实现文件上传
 import { request } from "../../request/request.js";
-// util提供的formatDate格式为2020/8/7 20:34:45 但小程序picker需要2020-8-7 以下使用正则表达式做格式转换
-const current = new Date(); //获取当前日期时间
-var currentDate = util.formatTime(current).split(' ')[0]; //截取日期2020/8/7
+
+function getDateFromNow(days) {
+  /*
+  获取相对当前时间days天之后的日期，days为负表示过去
+  返回一个date对象
+  */
+  let date = new Date(); 
+  // date对象会自动进位，无需处理异常
+  let futureDate = date.getDate() + days;
+  date.setDate(futureDate);
+  return date;
+}
+
+// util提供的formatDate格式为"2020/8/7 20:34:45" 但小程序picker需要2020-8-7 以下使用字符串截取和正则表达式做格式转换，2020/8/7转化为2020-8-7
+const oneWeekLaterDate =  getDateFromNow(7);
+var oneWeekLaterString = util.formatTime(oneWeekLaterDate).split(' ')[0].replace(/[/]/g,'-'); //截取日期2020-8-7
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -24,8 +36,8 @@ Page({
     themeOptions: [],
     //主题下拉框的选中项，最终渲染到框中
     theme: {},
-    //截止时间，使用正则表达式做格式转换2020/8/7转化为2020-8-7
-    dueDate: currentDate.replace(/[/]/g,'-'),
+    //截止时间
+    dueDate: oneWeekLaterString,
     dueTime: '23:59',
     //需求人数
     memberNumberOptions: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
@@ -84,8 +96,8 @@ Page({
     })
   },
 
-  //获取并调整表单数据
-  teamInfoSubmit:function(e){
+  //获取、调整、校验表单数据
+  teamInfoSubmit:function(e) {
     var form = e.detail.value;
     //在这里做数据判空
     console.log("表单数据", form)

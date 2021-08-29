@@ -16,16 +16,16 @@
   align-items: center;
 }
 .question-content-text {
-    font-family: PingFang SC;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 18px;
-  
-    color: #4A5559;
-  
-    display: flex;
-    align-items: center;
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+
+  color: #4A5559;
+
+  display: flex;
+  align-items: center;
 }
 .question-content-text-placeholder {
   font-family: PingFang SC;
@@ -45,7 +45,7 @@
 {
   display: inline-block;
   width: 600rpx;
-  padding: 3rpx 0 3rpx 10rpx ;
+  padding: 3rpx 0 3rpx 10rpx;
   margin-right: 10rpx;
   background: #F2FCFF;
   border-radius: 6px;
@@ -53,8 +53,7 @@
 
 .delete {
   display: inline-block;
-  position: relative;
-  top: 15rpx;
+  vertical-align: top;
 }
 .appendQuestion {
   display: flex;

@@ -19,10 +19,6 @@ Component({
       {
         id: 1,
         content: '这是问题1'
-      },
-      {
-        id: 2,
-        content: '这是问题2'
       }
     ],
 

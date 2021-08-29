@@ -11,7 +11,7 @@ questionStack可以像栈一样动态地增添、删除最后一个问题，并�
     <view class="question-content">
       <input name="{{item.id}}" class="question-content-text" placeholder-class="question-content-text-placeholder" placeholder="请填写需要回答的问题" />
     </view>
-    <view class="delete" wx:if="{{item.id==questionList.length}}"  bindtap="deleteLast">
+    <view class="delete" wx:if="{{item.id==questionList.length && item.id!=1}}"  bindtap="deleteLast">
       <image src="/static/icon/delete.png" style="height: 50rpx;width:50rpx"></image>
     </view>
   </view>
