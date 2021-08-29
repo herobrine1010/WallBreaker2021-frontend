@@ -21,7 +21,7 @@
           </view>
           <view class="picker-wrap">
             <view class="selector-label">截止日期</view>
-            <picker name="dueDate" mode="date" value="{{dueDate}}" start="2015-09-01" end="2025-09-01" bindchange="bindDateChange">
+            <picker name="dueDate" mode="date" value="{{dueDate}}" start="{{dueDate}}" end="2025-09-01" bindchange="bindDateChange">
               <view class="picker-box">{{dueDate}}</view>
             </picker>
           </view>

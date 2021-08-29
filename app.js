@@ -28,6 +28,6 @@ App({
   globalData: {
     userInfo: null,
     personalManagementOrCollection : 1,
-    url:'http://101.132.130.199:8080'
+    url:'https://www.wallbreaker.top'
   }
 })

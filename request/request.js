@@ -1,7 +1,7 @@
 // http://101.132.130.199:8080
 // 说明：将 wx.request 封装成 promise ,并提取了公共路径；
 export const request = (params)=> {
-  const baseUrl = "http://101.132.130.199:8080";
+  const baseUrl = "https://www.wallbreaker.top";
   return new Promise((resolve,reject)=>{
     wx.request({
       ...params,

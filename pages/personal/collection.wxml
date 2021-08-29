@@ -11,6 +11,9 @@
     <scroll-view 
     scroll-y="true"
     refresher-enabled="true"
+    bindrefresherrefresh = "onRefresherRefresh"
+    refresher-triggered = "{{isRefresherOpen}}"
+    with-animation='true' 
     bindscrolltolower = "onScrollToLower"
     class="collection-body">
       <!-- <scroll-view class="listArea" scroll-y="true">

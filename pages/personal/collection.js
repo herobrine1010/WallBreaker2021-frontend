@@ -1,16 +1,18 @@
 // pages/collection/collection.js
 // 首先引入封装成promise的 request
 import { request } from "../../request/request.js";
+import {formatTime} from "../../utils/util.js";
 
 Page({
 
   /**
    * 页面的初始数据
    */
+
   data: {
-    collectionTitle : "",
-    leftButtonTitle : "",
-    rightButtonTitle : "",
+    collectionTitle : "我的收藏",
+    leftButtonTitle : "帖子收藏",
+    rightButtonTitle : "组队收藏",
     //默认初试选择左边 帖子按钮 
     isNoticeOrTeam : 0,
     background : "backgroundLeft",
@@ -130,32 +132,8 @@ Page({
       btnColor2 : "btnColorRight"
     })
   },
-  onScrollToLower:function(){
-    console.log("上拉触了滚动框的底");
-  },
-
-
-// 点击卡片之后的页面跳转
-
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    function setDueTime(time){
-      if(time){
-        let dueTime = new Date(time);
-        return ('截止时间：' + dueTime.getFullYear() + '年' + (dueTime.getMonth()+1) + '月' + dueTime.getDay() + '日  ' + dueTime.getHours() + ':' + dueTime.getMinutes());
-      }else{
-        return '截止时间：暂无';
-      };
-    };
-
-    this.setData({
-      collectionTitle : "我的收藏",
-      leftButtonTitle : "帖子收藏",
-      rightButtonTitle : "组队收藏"
-    });
+  // 以下为发起请求：
+  getList(self) {
     let favouritePosting = request({
       url : '/userFavouritePosting/getMyFavouritePosting',
       header: {
@@ -179,12 +157,18 @@ Page({
           let tempList = {
             labelText : v.labelContent,
             title : v.title,
-            dueTime: setDueTime(v.duetime),
             description : v.content,
             initiator : v.initiatorNickName,
             peopleCount : v.participantNumber + '/' + v.dueMember,
             postingPic : v.firstPicUrl
           };
+          let dueTime = v.duetime;
+          if(dueTime){
+            duetime = new Date(dueTime);
+            tempList.dueTime = '截止时间：' + formatTime(duetime); 
+          }else{
+            tempList.dueTime = '截止时间：暂无';
+          }
           // -------- 收藏组队的状态：1:我发起的 / 0:空---------
           if(v.initializedByMe){
             tempList.teamCondition = 'mine';
@@ -225,15 +209,38 @@ Page({
           }
           return tempList;
         });
-        this.setData({
+        self.setData({
           jirenItemList,
-          jishiItemList
+          jishiItemList,
+          isRefresherOpen :false
         });
       })
       .catch(err => {
         console.log(err);
       })
-    
+  },
+
+
+  // 以下为scroll-view的事件
+  onScrollToLower:function(){
+    console.log("上拉触了滚动框的底");
+  },
+  onRefresherRefresh(){
+    const self = this;
+    this.getList(self);
+  },
+
+  
+
+// 点击卡片之后的页面跳转
+
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function () {
+    const self = this;
+    this.getList(self);
   },
 
   /**

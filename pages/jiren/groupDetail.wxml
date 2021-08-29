@@ -6,7 +6,7 @@
  <!-- <view class="area2"> -->
   <view class="area2">
     <view class="avatar-list">
-        <view class="external-box">
+      <view class="external-box">
         <view style="width:94%;left:3%;position:relative">
           <scroll-view show-scrollbar="true" enhanced="true" scroll-x="true">
             <view class="item-content" wx:for="{{avatarList}}" >
@@ -14,7 +14,7 @@
               <image wx:else class="avatar" src="{{item.avatar}}" bindtap="tapAvatar" data-id="{{item.id}}" ></image>
               <view wx:if="{{item.me}}" class="me">我</view>
               <view wx:elif="{{item.initiator}}"class="initiator">发起人</view>
-              </view>
+            </view>
           </scroll-view>
         </view>
       </view>
@@ -22,8 +22,6 @@
 
 
       <view wx:if="{{amITeamInitiator}}">
-    
-
     <!-- 自定义组件：initiator-teamDetail    ---发起者才看得到------------ -->
         <view class="board">
         <view class="board-view">
@@ -103,8 +101,10 @@
             </view>
             <view class="detail-content">
                 <text class="detail-text" encode="{{true}}">{{teamDetail.content}}</text>
-                <view class="detail-pictures" >
-                  <view class="detail-picture" wx:for="{{teamDetail.pictures}}"><image src="{{item}}" style="width:26vw;height:26vw"></image></view>
+                <view class="detail-pictures">
+                  <view class="detail-picture" wx:for="{{teamDetail.pictures}}">
+                    <image src="{{item}}" style="width:26vw;height:26vw" data-pic-url="{{item}}" bindtap="zoomInDetailPicture"></image>
+                  </view>
                 </view>
               </view>
             </view>

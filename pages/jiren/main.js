@@ -1,6 +1,7 @@
 // pages/jishi/main.js
 // 首先引入封装成promise的 request
 import { request } from "../../request/request.js";
+import {formatTime} from "../../utils/util.js"
 
 // 定义函数编写请求参数：-----------------------------------------
 function setRequestData(keyword,labelId,timeIndex){
@@ -35,8 +36,14 @@ function getTeamList(that,keyword,labelId,timeIndex){
         if(v.initializedByMe){
           v.rightTagText = '我发起的';
         };
-        let duetime = new Date(v.dueTime);
-        v.dueTime = '截止时间：'+ duetime.getFullYear() + '年' + (duetime.getMonth()+1) + '月'+ duetime.getDate() + '日 '+  duetime.getHours() + ':' + (duetime.getMinutes()<10?'0'+duetime.getMinutes():duetime.getMinutes());
+
+        if(v.dueTime){
+          let duetime = v.dueTime.replace(/-/g,'/');
+          v.dueTime = '截止时间：' + formatTime( new Date(duetime));
+        }else{
+          v.dueTime = '截止时间：暂无'
+        }  
+        // v.dueTime = '截止时间：'+ duetime.getFullYear() + '年' + (duetime.getMonth()+1) + '月'+ duetime.getDate() + '日 '+  duetime.getHours() + ':' + (duetime.getMinutes()<10?'0'+duetime.getMinutes():duetime.getMinutes());
         v.peopleCount = v.participantNumber + '/' + v.dueMember ;
         return v;
       });
@@ -53,8 +60,9 @@ function getTeamList(that,keyword,labelId,timeIndex){
       })
     } 
   }).catch( err=> {
+    console.log(err);
     wx.showToast({
-      title: '请求失败',
+      title: '没有返回值',
       icon: 'error'
     })
   });
@@ -113,7 +121,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function () {
     let that = this;
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({

@@ -58,6 +58,7 @@
     refresher-enabled="true" 
     bindrefresherrefresh = "onRefresherRefresh"
     refresher-triggered = "{{isRefresherOpen}}"
+    with-animation='true' 
     bindscroll="onMyScroll" 
     scroll-y="true" 
     with-animation='true' 

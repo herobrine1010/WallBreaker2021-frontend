@@ -4,7 +4,8 @@
   width: 100%;
   height: 194rpx;
   margin-bottom: 24rpx;
-  background: #F9F2FF;
+  /* background: #F9F2FF; */
+  background: #F2FCFF;
   border-radius: 20rpx;
 }
 .tag{
