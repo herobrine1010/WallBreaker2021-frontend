@@ -36,9 +36,10 @@ function getTeamList(that,keyword,labelId,timeIndex){
         if(v.initializedByMe){
           v.rightTagText = '我发起的';
         };
-        let duetime = new Date(v.dueTime);
-        if(duetime){
-          v.dueTime = '截止时间：' + formatTime(duetime);
+
+        if(v.dueTime){
+          let duetime = v.dueTime.replace(/-/g,'/');
+          v.dueTime = '截止时间：' + formatTime( new Date(duetime));
         }else{
           v.dueTime = '截止时间：暂无'
         }  
@@ -120,7 +121,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function () {
     let that = this;
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({

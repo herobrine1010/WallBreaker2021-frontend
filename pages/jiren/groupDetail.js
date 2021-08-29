@@ -149,7 +149,6 @@ Page({
               'avatar':data[i].avatarUrl,
               'id':data[i].id,
               'nickname':data[i].nickName
-
             }
             list.push(info);
             if(that.data.amITeamInitiator){
