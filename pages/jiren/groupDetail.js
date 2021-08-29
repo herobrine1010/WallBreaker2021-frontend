@@ -156,7 +156,7 @@ Page({
                 let answerList=[];
                 let answer=JSON.parse(data[i].answer)
                 for(let key in answer){
-                  answerList.push(answre[key]);
+                  answerList.push(answer[key]);
                 };
                 personalInfoList[data[i].id].answer=answerList;
                 personalInfoList[data[i].id].isCheckAnswerButtonShow=true;
@@ -436,6 +436,13 @@ Page({
                     that.setData({timeIsOver:true})
                     that.showTipBox('该组队招募已截止')
                   }
+                  wx.request({
+                    url: app.globalData.url+'/userTeam/checkTerminated',
+                    data:{
+                      teamId:that.data.teamId
+                    },
+                    header:{cookie:wx.getStorageSync('token')}
+                  })
                   break;
                 case 6:
                   if(teamdata.reaon){
@@ -464,6 +471,7 @@ Page({
       success:function(res){
         let data=res.data.data
         console.log(data)
+        console.log('come')
         let list=[];
         let personalInfoList=that.data.personalInfoList;
         for(let i in data){
@@ -478,7 +486,7 @@ Page({
               let answerList=[];
                 let answer=JSON.parse(data[i].answer)
                 for(let key in answer){
-                  answerList.push(answre[key]);
+                  answerList.push(answer[key]);
                 };
                 personalInfoList[data[i].id].answer=answerList;
               personalInfoList[data[i].id].isCheckAnswerButtonShow=true;
@@ -852,15 +860,28 @@ Page({
   applyButton:function(e){
     var that=this;
     if(Object.keys(this.data.teamDetail.question).length==0){
-      this.setData({
-        result:"您已报名该组队，申请正在处理中~",
-        haveSignedUp:true
-      });
-      wx.showToast({
-        title: '申请已提交',
-        icon:'success',
-        duration:2000
-      });
+      wx.request({
+        url: app.globalData.url+'/userTeam/apply',
+        method:"POST",
+        header:{'cookie':wx.getStorageSync('token')},
+        data:{
+          teamId:that.data.teamId,
+        },
+        success:function(res){
+          console.log(res.statusCode)
+          if(res.statusCode==200){
+            wx.showToast({
+              title: '申请已提交',
+              icon:'success',
+              duration:2000
+            });
+          }
+          that.setData({
+            result:"您已报名该组队，申请正在处理中~",
+            haveSignedUp:true
+          });
+        }
+      })
     }else{
       wx.navigateTo({
         url: '/pages/jiren/answerQuestion?teamId='+that.data.teamId,
@@ -886,7 +907,6 @@ Page({
       isDialogShow: true,
       content:'确定取消申请？',
       hasInputBox:false,
-      tip:"取消申请后无法再次申请",
       cancelText:"取消",
       okText:"确认",
       tapOkEvent:"dialogTapOkForCancelApplication"
@@ -896,16 +916,21 @@ Page({
     })
   },
   dialogTapOkForCancelApplication:function(e){
+    let that=this;
     wx.request({
       url: app.globalData.url+'/userTeam/cancelApply',
+      data:{
+        teamId:that.data.teamId
+      },
+      method:'POST',
       header:{'cookie':wx.getStorageSync('token')},
       success:function(res){
-        this.setData({
+        that.setData({
           // haveSignedUp:false,
-          beRefused:true,
+          haveSignedUp:false,
           result:'已取消申请',
         });
-        this.changeScrollHeight();
+        that.changeScrollHeight();
       }
     })    
   },
