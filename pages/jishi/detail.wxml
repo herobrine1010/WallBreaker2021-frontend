@@ -27,7 +27,7 @@
       <text class="description">{{description}}</text>
       <view class="pictures">
         <block  wx:for="{{pictures}}">
-            <image src="{{item}}" class="pictureBlock"/>
+          <image src="{{item}}" class="pictureBlock"/>
         </block>
         <block wx:if="{{picturesNum==1}}" >
           <view class="pictureSingle">
