@@ -852,7 +852,7 @@ Page({
   },
   applyButton:function(e){
     var that=this;
-    if(!this.data.teamDetail.question){
+    if(Object.keys(this.data.teamDetail.question).length==0){
       this.setData({
         result:"您已报名该组队，申请正在处理中~",
         haveSignedUp:true
