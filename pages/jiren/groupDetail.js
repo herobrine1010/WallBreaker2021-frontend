@@ -952,5 +952,12 @@ Page({
           // initiatorScrollHeight:100+'px',
         });
       }).exec();
+  },
+  zoomInDetailPicture:function(e){
+    var imgUrl = this.data.teamDetail.pictures;
+    wx.previewImage({
+      urls: imgUrl,//注意这个urls,如果原来是数组就直接用,如果原来就一张图需要加中括号强制把他变成数组
+      current: e.currentTarget.dataset.picUrl,//不写值的话默认是上面那个数组的第一个元素,只有写了点击对应图片才能点哪张放大哪张
+    })
   }
 })
