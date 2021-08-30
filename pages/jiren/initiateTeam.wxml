@@ -4,10 +4,10 @@
   <view class="area2">
     <view class="shade"></view>
 
-    <scroll-view class="main-area" scroll-y="true">
+    <scroll-view class="main-area" scroll-y="true" scroll-into-view="{{firstTipId}}">
     <view class="main-area-content">
       <form bindsubmit="teamInfoSubmit">
-      
+      <!-- input、texarea中的name用于绑定表单数据，id用于formTips显示提示，两者保持一致 -->
         <view class="section1">
           <view class="dropdown-box-wrap">
             <view class="selector-label">组队主题:</view>
@@ -21,7 +21,7 @@
           </view>
           <view class="picker-wrap">
             <view class="selector-label">截止日期</view>
-            <picker name="dueDate" mode="date" value="{{dueDate}}" start="{{dueDate}}" end="2025-09-01" bindchange="bindDateChange">
+            <picker name="dueDate" mode="date" value="{{dueDate}}" start="{{startDate}}" end="2025-09-01" bindchange="bindDateChange">
               <view class="picker-box">{{dueDate}}</view>
             </picker>
           </view>
@@ -36,17 +36,17 @@
         <view class="section3 teamInfo">
           <view class="teamInfo-label">组队信息</view>
           <view class="teamInfo-title">
-            <input-tip name="teamTitle" model:value="{{teamTitle}}" 
-            class="teamInfo-title-input"  maxlength="25" placeholder="请填写标题"></input-tip>
+            <input name="teamTitle" model:value="{{teamTitle}}" 
+            class="teamInfo-title-input" id="teamTitle" maxlength="25" bind:input="checkLength" placeholder="请填写标题" placeholder-class="teamInfo-title-input-placeholder"></input>
+            <text class="tips">{{ formTips.teamTitle }}</text>
           </view>
           <view class="teamInfo-content-wrap">
-          <scroll-view class="teamInfo-scroll-view" scroll-y>
+          <scroll-view class="teamInfo-scroll-view" scroll-y scroll-top="{{toBottomImg}}">
             <view class="teamInfo-content">
-              <!-- 双向绑定后不加bindinput，输入时控制台会持续报错，但不影响 -->
-              <textarea name="teamContent" model:value="{{teamContent}}" 
-              class="teamInfo-content-textarea" placeholder-class="teamInfo-content-textarea-placeholder" placeholder="请填写您组队的主要信息，描述越准确就越能够寻找到越合适的队友" maxlength="500">
+              <textarea name="teamContent" id="teamContent" model:value="{{teamContent}}" class="teamInfo-content-textarea" bind:input="checkContentLength" placeholder-class="teamInfo-content-textarea-placeholder" placeholder="请填写您组队的主要信息，描述越准确就能够寻找到越合适的队友" maxlength="500">
               </textarea>
-              <image-box id="image-box"></image-box>
+              <text class="tips">{{formTips.teamContent}}</text>
+              <image-box id="image-box" bind:change="userImageChange"></image-box>
             </view>
           </scroll-view>
 
@@ -54,12 +54,33 @@
         </view>
         
         <view class="section4 answerQuestion">
-          <questionStack></questionStack>
+          <view class="isNeedQuestion">
+            <switch name="isNeedQuestion" class="isNeedQuestion-text" type="checkbox" checked bindchange="switchQuestion">
+              需要申请者回答的问题</switch>
+          </view>
+          <view class="switchArea" wx:if="{{isNeedQuestion}}">
+            <block wx:for="{{questionList}}" wx:for-item="item" wx:key="id">
+              <view class="question-wrap">
+                <view class="question-content">
+                  <input name="{{item.id}}" id="{{item.id}}" class="question-content-text" bind:input="checkLength"  maxlength="25" placeholder-class="question-content-text-placeholder" placeholder="请填写需要回答的问题"></input>
+                  <text class="tips">{{formTips[item.id]}}</text>
+                </view>
+                <view class="delete" wx:if="{{item.id==questionList.length && item.id!=1}}" bindtap="deleteLast">
+                  <image src="/static/icon/delete.png" style="height: 50rpx;width:50rpx"></image>
+                </view>
+              </view>
+              
+
+            </block>
+            <view class="appendQuestion" bindtap="append">
+              <image class="appendQuestion-icon" src="/static/icon/add-blue-small.png" style="height:36rpx; width:36rpx;"></image>
+              <text class="appendQuestion-label" style="height: 36rpx">新增问题</text>
+            </view>
+          </view>
+
         </view>
         <!-- 输入内容判空，若标题和内容为空，禁用提交按钮 -->
         <button class="submitButton" form-type="submit" disabled="{{teamContent=='' || teamTitle==''}}" style="background: rgba(23, 178, 230, 0.8);position:fixed; bottom:0%; left:0%; height:90rpx; width:100%;z-index:10; border-radius: 0; border: 0; backdrop-filter: blur(2px);">确认提交</button>
-        
-
       </form>
     </view>
     <!-- 用于填充scroll-view，防止最下端被button遮盖 -->

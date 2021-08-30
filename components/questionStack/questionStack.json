@@ -1,4 +1,6 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "input-tip": "/components/input-tip/input-tip"
+  }
 }

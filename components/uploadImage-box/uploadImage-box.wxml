@@ -1,11 +1,11 @@
 <!--components/uploadImage-box/uploadImage-box.wxml-->
 <view class="image-box">
   <block wx:for="{{imageList}}" wx:key="*this">
-    <view class="image-wrap">
+    <view class="image-wrap" >
       <view class="deleteTopRight" bindtap="deleteImage" data-index="{{index}}">
         <image class="deleteTopRight-icon" src="/static/icon/cross-blue.png"></image>
       </view>
-      <image class="userImage" src="{{item}}" mode="aspectFill"></image>
+      <image class="userImage" src="{{item}}" mode="aspectFill" data-pic-url="{{item}}" bind:tap="zoomInDetailPicture"></image>
     </view>
   </block>
   <view class="addImage" bindtap="uploadImage">

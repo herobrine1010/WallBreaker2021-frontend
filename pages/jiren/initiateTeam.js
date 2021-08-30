@@ -4,21 +4,20 @@ const util = require('../../utils/util.js');
 const FormData = require('../../lib/wx-formdata-master/formData.js'); //实现文件上传
 import { request } from "../../request/request.js";
 
-function getDateFromNow(days) {
+//获取日期字符串2021-4-23
+function getDateStringFromNow(days) {
   /*
-  获取相对当前时间days天之后的日期，days为负表示过去
-  返回一个date对象
+  获取相对当前时间days天之后的日期，days为负表示过去,days为0用作格式化日期
+  return: string '2022-3-5'
   */
   let date = new Date(); 
   // date对象会自动进位，无需处理异常
-  let futureDate = date.getDate() + days;
-  date.setDate(futureDate);
-  return date;
+  let futureDateNum = date.getDate() + days;
+  date.setDate(futureDateNum);
+  // util提供的formatDate格式为"2020/8/7 20:34:45" 但小程序picker需要2020-8-7 以下使用字符串截取和正则表达式做格式转换，2020/8/7转化为2020-8-7
+  let dateString = util.formatTime(date).split(' ')[0].replace(/[/]/g,'-')
+  return dateString;
 }
-
-// util提供的formatDate格式为"2020/8/7 20:34:45" 但小程序picker需要2020-8-7 以下使用字符串截取和正则表达式做格式转换，2020/8/7转化为2020-8-7
-const oneWeekLaterDate =  getDateFromNow(7);
-var oneWeekLaterString = util.formatTime(oneWeekLaterDate).split(' ')[0].replace(/[/]/g,'-'); //截取日期2020-8-7
 
 Page({
   /**
@@ -37,7 +36,8 @@ Page({
     //主题下拉框的选中项，最终渲染到框中
     theme: {},
     //截止时间
-    dueDate: oneWeekLaterString,
+    startDate: getDateStringFromNow(0),
+    dueDate: getDateStringFromNow(7), // 默认截止时间为一周后
     dueTime: '23:59',
     //需求人数
     memberNumberOptions: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
@@ -46,7 +46,18 @@ Page({
     teamTitle: '',
     //组队内容
     teamContent: '',
-
+    // 提示列表
+    formTips: {},
+    //是否需要申请者回答问题
+    isNeedQuestion: true,
+    //需要申请者回答的问题
+    questionList: [{
+      id: 1,
+      content: '这是问题1'
+    }],
+    // -----------用于调整scroll-view的数据----------
+    firstTipId: '',
+    toBottomImg: 0,
     //------------确认提交的弹窗，用于渲染------------
     isDialogShow:false,
     dialogContent:"确认发起组队吗？",
@@ -73,7 +84,7 @@ Page({
       }
     })
   },
-  //四个选择框的改变函数，用于初始化选择框选项、获得用户选择数据
+  //------四个选择框的改变函数，用于初始化选择框选项、获得用户选择数据------
   dropdownChange: function (e) {
     this.setData({
       theme: e.detail
@@ -96,11 +107,105 @@ Page({
     })
   },
 
+  // -----------操作问题列表的函数------
+  //是否需要申请者回答问题
+  switchQuestion: function () {
+    this.setData({
+      isNeedQuestion: !this.data.isNeedQuestion,
+      // 重置问题列表
+      questionList: [{
+        id: 1,
+        content: '这是问题1'
+      }],
+    })
+  },
+  //增添删除问题的逻辑
+  append: function () {
+    this.data.questionList.push({id: this.data.questionList.length+1, content: ''});
+    this.setData({
+      questionList: this.data.questionList
+    })
+  },
+  deleteLast: function () {
+    this.data.questionList.pop();
+    this.setData({
+      questionList: this.data.questionList
+    })
+  },
+  // ---------用户上传删除图片的处理函数---------------
+  userImageChange: function (e) {
+    let imgPath = e.detail;
+    let id = e.currentTarget.id;
+    // TODO 数据处理，替换selectComponent
+
+    // 跳转到加号点击处
+    // 注：貌似由于视图层更新的原因，直接setData调整滚动条位置失效，只能放在延时后
+    // setTimeout(()=>{this.setData({toBottomImg: 600});},100);
+  },
+  // ---------校验表单input数据的两个函数---------
+  // 校验input长度是否超过上限
+  checkLength: function (e) {
+    let textLength = e.detail.value.length;
+    let id = e.currentTarget.id;
+    // 三目表达式判断输入框字符数是否过长
+    this.data.formTips[id] = textLength==25 ? "字符数已达上限!" : '';
+    this.setData({
+      formTips: this.data.formTips
+    });
+  },
+  // 校验textarea长度是否超过上限
+  checkContentLength: function (e) {
+    console.log(e);
+    let textLength = e.detail.value.length;
+    let id = e.currentTarget.id;
+    // 三目表达式判断输入框字符数是否过长
+    this.data.formTips[id] = textLength==500 ? "字符数已达上限!" : '';
+    this.setData({
+      formTips: this.data.formTips
+    });
+  },
+  // 检查表单input、textarea、question是否有空项，目前是写死的函数，只针对此页面
+  checkForm: function (form) {
+    let formTips = {}; 
+    let flag = true;
+    if (form['teamTitle'].trim() == '') {
+      formTips['teamTitle'] =  "组队标题未填写！";
+      flag = false;
+    }
+    if (form['teamContent'].trim() == '') {
+      formTips['teamContent'] =  "组队内容未填写！";
+      flag = false;
+    }
+    let index = 1;
+    for (let key in form) {
+      // 问题的key都是数字
+      if (key.match(/\d+/) && form[key].trim()=="") {
+        formTips[key] =  "该项问题未填写！";
+        flag = false;
+        index = index + 1;
+      }
+    }
+    this.setData({
+      formTips
+    });
+    return flag;
+  },
+  
+  // -------有关数据提交的函数---------
   //获取、调整、校验表单数据
   teamInfoSubmit:function(e) {
     var form = e.detail.value;
     //在这里做数据判空
     console.log("表单数据", form)
+    // 校验表单
+    if (!this.checkForm(form)) {
+      // 转到表单未填写处
+      this.data.firstTipId = Object.keys(this.data.formTips)[0];
+      this.setData({
+        firstTipId: this.data.firstTipId
+      })
+      return;
+    }
     // ------调整表单数据格式------
     //把问题聚合成一个对象{"1":"question","2":question}
     var question = {};
@@ -122,7 +227,7 @@ Page({
       "allPicUrl": '',
       "firstPicUrl": '',
       "question": JSON.stringify(question)
-    }
+    };
     this.setData({
       isDialogShow:true,
       payload: payload,

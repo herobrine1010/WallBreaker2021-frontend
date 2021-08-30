@@ -1,7 +1,14 @@
 /* pages/jiren/initiateTeam.wxss */
 @import "/static/common.wxss";
+/*-------------------全局样式设置----------------*/
+/* 注：page的设置作用于全局，可以数量占大头的元素的通用样式，即使少数不同也没关系，可以在之后覆盖。这里设置了字体 */
 page {
   height: 100%;
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
 }
 .area2{
   position:fixed;
@@ -42,22 +49,32 @@ page {
   margin-bottom: 10rpx;
 }
 
-/*全局输入框样式设置*/
+/*全局输入框背景设置，浅蓝色圆角*/
 .picker-box,
-.teamInfo-content-wrap {
+.teamInfo-content-wrap,
+.teamInfo-title-input,
+.question-content-text {
   background: #F2FCFF;
   border-radius: 6px;
 }
-/*全局字体设置*/
 .selector-label,
 .teamInfo-label
 {
-  font-family: PingFang SC;
   font-size: 14px;
   line-height: 16px;
   color: #4A5559;
   
   margin: 6rpx;
+}
+.tips {
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 17px;
+
+  color: #007399;
+  /* 控制行内元素自身在父块级元素中对齐 */
+  display: flex;
+  justify-content: center;
 }
 
 .picker-box {
@@ -65,20 +82,11 @@ page {
   height: 50rpx;
   width: 100%;
   padding-left: 10rpx;
-  background: #F2FCFF;
-  border-radius: 6px;
-  /*字体设置*/
-  font-family: PingFang SC;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 18px;
 
   color: #4A5559;
 
   display: flex;
   align-items: center;
-
 }
 
 .teamInfo-title {
@@ -88,18 +96,12 @@ page {
 }
 .teamInfo-title-input
  {
-  font-family: PingFang SC;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 18px;
-
+  padding-left: 14rpx;
   color: #4A5559;
-
-  display: flex;
-  align-items: center;
 }
-
+.teamInfo-title-input-placeholder {
+  color: #989A9A;
+}
 .teamInfo-content-wrap {
   padding: 12rpx;
   margin-bottom: 26rpx;
@@ -111,22 +113,54 @@ page {
   height: 400rpx;
   width: 95%;
 
-  font-family: PingFang SC;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 18px;
-
   color: #4A5559;
 }
 .teamInfo-content-textarea-placeholder {
-  font-family: PingFang SC;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 18px;
-
   color: #989A9A;
+}
+
+/* ---------提问问题列表的布局-------- */
+/* components/questionStack/questionStack.wxss */
+.isNeedQuestion {
+  margin-bottom: 20rpx;
+}
+.isNeedQuestion-text
+ {
+  color: #4A5559;
+}
+.question-wrap {
+  display: block;
+  margin: 18rpx 0 18rpx 0;
+  min-height: 50rpx; 
+}
+.question-content
+{
+  display: inline-block;
+  width: 600rpx;
+  margin-right: 10rpx;
+}
+.question-content-text {
+  padding: 3rpx 0 3rpx 10rpx;
+  color: #4A5559;
+}
+.question-content-text-placeholder {
+  color: #989A9A;
+}
+.delete {
+  display: inline-block;
+  /* 对齐同行中的文字与图片 */
+  vertical-align: top;
+}
+.appendQuestion {
+  display: flex;
+  align-items: center;
+  width: 200rpx;
+  margin-top: 30rpx;
+}
+.appendQuestion-label {
+  font-size: 14px;
+  line-height: 16px;
+  color: #4A5559;
 }
 
 .empty-block{
@@ -135,11 +169,8 @@ page {
   height: 300rpx;
 }
 .submitButton {
-  font-family: PingFang SC;
-  font-style: normal;
   font-weight: bold;
   font-size: 14px;
   line-height: 20px;
-
   color: #FFFFFF;
 }

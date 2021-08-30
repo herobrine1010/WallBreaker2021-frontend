@@ -36,20 +36,17 @@ Component({
   },
   //增添删除问题的逻辑
   append: function () {
-    let newList = this.data.questionList
-    let length = newList.length
-    newList.push({id: length+1, content: ''})
+    this.data.questionList.push({id: this.data.questionList.length+1, content: ''});
     this.setData({
-      questionList: newList
+      questionList
     })
     
 
   },
   deleteLast: function () {
-    let newList = this.data.questionList
-    newList.pop()
+    this.data.questionList.pop();
     this.setData({
-      questionList: newList
+      questionList
     })
   },
 
