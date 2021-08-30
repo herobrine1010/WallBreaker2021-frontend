@@ -151,7 +151,7 @@ Page({
     // 采用Promise.all 并行处理两个请求-------------------
     Promise.all([favouritePosting,favouriteTeam])
       .then(result => {
-        console.log(result[1].data.data[2].dueTime);
+        console.log(result[0].data.data[0]);
         // 处理收藏组队的数据------------------
         let jirenItemList = result[1].data.data.map( v=>{
           let tempList = {
@@ -161,7 +161,8 @@ Page({
             initiator : v.initiatorNickName,
             peopleCount : v.participantNumber + '/' + v.dueMember,
             postingPic : v.firstPicUrl,
-            dueTime : formatTime(v.dueTime)
+            dueTime : formatTime(v.dueTime),
+            id : v.id
           };
           // -------- 收藏组队的状态：1:我发起的 / 0:空---------
           if(v.initializedByMe){
@@ -173,15 +174,16 @@ Page({
           }
           return tempList;
         });
-          // 处理收藏帖子的数据---------------------------------
+        // 处理收藏帖子的数据---------------------------------
         let jishiItemList = result[0].data.data.map( v=>{
           let tempList = {
-            labelText : v.labelId,
+            labelText : v.labelContent,
             title : v.title,
             description : v.content,
-            userName : v.initiator,
+            userName : v.initiatorNickName,
             userAvatar : '',
-            postingPic : v.firstPicUrl
+            postingPic : v.firstPicUrl,
+            id : v.id
           };
           // 处理发布日期：-------------
           // 不写参数表示当前日期
@@ -226,7 +228,7 @@ Page({
 
   
 
-// 点击卡片之后的页面跳转
+  // 点击卡片之后的页面跳转
 
 
   /**
