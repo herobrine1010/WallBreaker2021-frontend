@@ -214,19 +214,6 @@ Page({
     let that = this;
     getPostingList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
   },
-  // 页面滚动，显示返回顶部按钮
-  onPageScroll:function(e){
-    console.log(e)
-    if (e.scrollTop > 0) {
-      this.setData({
-        showGoTopButton: true
-      });
-    } else {
-      this.setData({
-        showGoTopButton: false
-      });
-    }
-  },
   //弹出条件筛选
   clickConditionFilter:function(){
     if(this.data.conditionFilterOpen==true){
@@ -337,17 +324,20 @@ Page({
     this.setData({
      topNum:  0
     });
+/*     在当前的绑定下，设置topNum后返回顶部按钮就会消失，不用单独设置
     setTimeout(function () {
       that.setData({showGoTopButton:false})
       console.log("test")
-     }, 100)
+     }, 100) */
  
   
    },
-   onMyScroll:function(){
-     if(this.data.showGoTopButton==false){
-       this.setData({showGoTopButton:true})
-     }
+   onMyScroll:function(e){
+    if(e.detail.scrollTop>100){
+      this.setData({showGoTopButton:true})
+    }else if(this.data.showGoTopButton){
+      this.setData({showGoTopButton:false})
+    }
    },
    createNewTeam: function(){
      wx.navigateTo({

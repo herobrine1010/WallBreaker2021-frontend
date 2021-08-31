@@ -17,7 +17,7 @@
         <image wx:if="{{timeIndex=='asc'}}" src="/static/icon/sort-up-purple.png" class="timeIcon"></image>
       </view>
       <view class="conditionFilter" bindtap="clickConditionFilter">
-        <block wx:if="{{conditionIndex==''}}">
+        <block wx:if="{{labelId==0}}">
           <view class="conditionText">筛选</view>
           <image class="conditionIcon" src="/static/icon/select.png"></image>
         </block>

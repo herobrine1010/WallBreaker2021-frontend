@@ -2,7 +2,7 @@
 /* pages/jishi/main.wxss */
 .area2{
   position:fixed;
-  top:19%;
+  top:17.5%;
   width: 100%;
   height: 75%;
   /* margin-top: 20rpx;
@@ -55,7 +55,7 @@
   letter-spacing: 1px;
   float:left;
   /* z-index:3; */
-  background-color: #F2FCFF;
+  background-color: #F9F2FF;
 }
 .timeFilter{
   left:3%;
@@ -107,8 +107,8 @@
   top:0%;
   height:100%;
   width:100%;
-  background-color: #000000;
-  opacity: 20%;
+  /* 使用opacity属性设置在电脑端可以正常显示，预览时没有透明度，参考dialog-box修改成rgba即可 */
+  background-color: rgba(0,0,0,0.2);
   z-index:3;
 }
 .whiteBG{
@@ -124,7 +124,7 @@
   
   top:0%;
   height:6%;
-  background-color: #F2FCFF;
+  background-color: #F9F2FF;
   border-radius: 0 0 20rpx 20rpx;
   z-index: 4;
 }
@@ -162,7 +162,7 @@ border-style: solid;
   height:9vw;
   width:9vw;
   right: 5.9%;
-  bottom: 21%;
+  bottom: 12%;
  }
  .addButton{
   position: fixed;
