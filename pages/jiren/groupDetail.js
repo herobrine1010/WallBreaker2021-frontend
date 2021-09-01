@@ -542,11 +542,13 @@ tapApplierAvatar(e){
     let that = this;
     let index=e.currentTarget.dataset.index;
     let applier = that.data.applierList[index]
-    console.log(applier);
+    console.log(applier.nickName);
+    console.log(that.data.applierList[index].answer);
+    console.log(that.data.teamDetail.question);
     let answer = {
-      answerList : that.data.applierList.answer,
+      answerList : that.data.applierList[index].answer,
       questionList : that.data.teamDetail.question,
-      nickName : applier.nickName,
+      nickName : applier.nickname,
       avatar : applier.avatar
     }
     this.setData({

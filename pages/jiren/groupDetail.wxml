@@ -197,8 +197,12 @@ button="{{dialog2.button}}">
     <view class="answer-name">{{answer.nickName}}</view>
     <image class="answer-image"  src="{{answer.avatar}}"></image>
     <view wx:for="{{answer.answerList}}">
-      <text class="answer-question">{{answer.questionList[index]}}</text>
-      <text class="answer-answer">{{item}}</text>
+      <view>
+        <text class="answer-question">{{answer.questionList[index]}}</text>
+      </view>
+      <view>
+        <text class="answer-answer">{{item}}</text>
+      </view>
     </view>
   </scroll-view>
 </view>
