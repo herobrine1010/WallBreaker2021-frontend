@@ -162,7 +162,8 @@
 }
 .filterExtended{
   position: absolute;
-  top:16.5%;
+  /* 该参数控制弹出的筛选框据顶部的高度，若无法准确对齐，可以调整百分比尝试 */
+  top:13%;
   height:100%;
   left:0%;
   width:100%;
@@ -174,8 +175,8 @@
   top:0%;
   height:100%;
   width:100%;
-  background-color: #000000;
-  opacity: 20%;
+  /* 使用opacity属性设置在电脑端可以正常显示，预览时没有透明度，参考dialog-box修改成rgba即可 */
+  background-color: rgba(0,0,0,0.2);
   z-index:3;
 }
 /* ------------------- 以上是排序和筛选 的样式- end  ----------------- */
