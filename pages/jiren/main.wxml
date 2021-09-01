@@ -1,5 +1,6 @@
 <!--pages/jishi/main.wxml-->
-<view class="jiren-background">
+<view class="jiren-background"></view>
+<view class="jiren-container">
   <view>
     <mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar__centers" title="济人广场"></mp-navigation-bar>
   </view>
@@ -14,7 +15,7 @@
     </view>
   </view>
   
-  <view class="area2">
+  <view class="area2" >
     <view class="shade"></view>
     <view class="buttonArea">
       <view class="myPublishButton" bindtap="goMyPublish">我发起的组队</view>
@@ -80,7 +81,7 @@
         </navigator>
       </block>
 
-      <view style="height:12vh"></view>
+      <view style="height:16vh"></view>
     </scroll-view>
     
   </view>

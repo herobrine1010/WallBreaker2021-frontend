@@ -24,7 +24,7 @@
 
         </block>
         <block wx:if="{{picturesNum==1}}">
-          <image class="pictureSingle" src="{{pictures[0]}}" data-pic-url="{{pictures[0]}}" bindtap="viewPic">
+          <image class="pictureSingle" mode="aspectFill" src="{{pictures[0]}}" data-pic-url="{{pictures[0]}}" bindtap="viewPic">
           </image>
         </block> 
     </view>

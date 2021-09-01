@@ -1,7 +1,8 @@
 @import "/static/common.wxss";
 /* pages/jishi/main.wxss */
-.search-area{
+/* 背景相关 */
 
+.search-area{
   display: flex;
   height: 84rpx;
   width: 100%;
@@ -29,14 +30,15 @@
 }
 
 .area2{
-  position:fixed;
-  top:18%;
+  position: relative;
+  top: 2vh;
   bottom: 0;
   width: 100%;
   left:0;
-  /* height: 70%; */
+  height: 83vh;
   border-radius: 50rpx 50rpx 0 0;
   background: rgba(242, 252, 255, 0.35);
+  overflow: hidden;
 }
 
 /* ------------------- 以下是卡片list的样式- start  --------------------- */

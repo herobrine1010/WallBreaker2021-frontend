@@ -151,11 +151,13 @@
   height: 200rpx;
   margin: 15rpx 0 0 15rpx;
   background-color:gray;
+  border-radius: 30rpx;
 }
 .pictureSingle{
   width: 600rpx;
   height: 600rpx;
   margin: 30rpx;
+  border-radius: 40rpx;
 }
 .back-btn{
   width: 180rpx;

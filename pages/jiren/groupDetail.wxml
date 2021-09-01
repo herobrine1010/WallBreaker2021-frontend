@@ -117,7 +117,7 @@
                 <text class="detail-text" encode="{{true}}">{{teamDetail.content}}</text>
                 <view class="detail-pictures">
                   <view class="detail-picture" wx:for="{{teamDetail.pictures}}">
-                    <image mode = "aspectFill" src="{{item}}" style="width:26vw;height:26vw" data-pic-url="{{item}}" bindtap="zoomInDetailPicture"></image>
+                    <image mode = "aspectFill" src="{{item}}" style="width:26vw;height:26vw;border-radius:2vw" data-pic-url="{{item}}" bindtap="zoomInDetailPicture"></image>
                   </view>
                 </view>
               </view>
