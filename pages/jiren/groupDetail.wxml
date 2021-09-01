@@ -9,9 +9,9 @@
       <view class="external-box">
         <view style="width:94%;left:3%;position:relative">
           <scroll-view show-scrollbar="true" enhanced="true" scroll-x="true">
-            <view class="item-content" wx:for="{{avatarList}}" >
-              <image wx:if="{{item.avatar==undefined}}" class="avatar" src="/static/icon/add-grey.png"></image>
-              <image wx:else class="avatar" src="{{item.avatar}}" bindtap="tapAvatar" data-id="{{item.id}}" ></image>
+            <view class="item-content" wx:for="{{teamMemberList}}" >
+              <image wx:if="{{item.avatar==undefined}}" class="avatar" src="/static/icon/add-grey.png" bindtap="applyButton"></image>
+              <image wx:else class="avatar" src="{{item.avatar}}" bindtap="tapAvatar" data-index="{{index}}" ></image>
               <view wx:if="{{item.me}}" class="me">我</view>
               <view wx:elif="{{item.initiator}}"class="initiator">发起人</view>
             </view>
@@ -21,14 +21,29 @@
     </view>
 
 
-      <view wx:if="{{amITeamInitiator}}">
+    <view wx:if="{{amITeamInitiator}}">
     <!-- 自定义组件：initiator-teamDetail    ---发起者才看得到------------ -->
-        <view class="board">
+      <initiator-teamDetail
+        title = "{{teamDetail.title}}"
+        isTeamClosed = "{{status>=3?true:false}}"
+        avatar = "{{teamDetail.avatar}}"
+        nickname = "{{teamDetail.nickname}}"
+        fromTime = "{{teamDetail.fromTime}}"
+        dueTime = "{{status<3?teamDetail.dueTime:''}}"
+        content = "{{teamDetail.content}}"
+        pictures = "{{teamDetail.pictures}}"
+        picturesNum = "{{teamDetail.pictures.length}}"
+        bind:tapAvatar = "tapInitiatorAvatar"
+        bind:closeTeam = "handleCloseTeam"
+        bind:viewPic="zoomInDetailPicture"
+      ></initiator-teamDetail>
+
+        <!-- <view class="board">
         <view class="board-view">
           <view class="detail-a-line">
             <view class="detail-title">{{teamDetail.title}}</view> 
-            <view wx:if="{{!teamDetail.isTeamClosed}}" class="detail-close-button" bindtap="handleCloseTeam">结束组队招募</view>
-            <view wx:if="{{teamDetail.isTeamClosed}}" class="detail-close-button-close">已结束</view>
+            <view wx:if="{{status<3}}" class="detail-close-button" bindtap="handleCloseTeam">结束组队招募</view>
+            <view wx:if="{{status>=3}}" class="detail-close-button-close">已结束</view>
           </view>
             <view class="detail-a-line">
               <view class="detail-avatar">
@@ -38,23 +53,22 @@
                 <view class="detail-nickname" bindtap="tapAvatar" data-id="{{initiatorId}}">{{teamDetail.nickname}}</view>
                 <view class="detail-apply-time">{{teamDetail.fromTime}}</view>
               </view>
-              <view wx:if="{{!over}}" class="detail-due-time">{{teamDetail.dueTime}}</view>
+              <view wx:if="{{status<3}}" class="detail-due-time">{{teamDetail.dueTime}}</view>
             </view>
             <view class="detail-spread-botton" bindtap="seeDetail">查看全部</view>
             </view>
-          </view>
-
+        </view> -->
 
         <!-- ------只有 发起者 && 组队未关闭 的时候，才显示申请人员信息--------------->
-        <scroll-view wx:if="{{amITeamInitiator && !teamDetail.isTeamClosed}}" id="initiator-scroll" style="height:{{initiatorScrollHeight}}"
+        <scroll-view wx:if="{{amITeamInitiator && status<3}}" id="initiator-scroll" style="height:{{initiatorScrollHeight}}"
         enhanced="true" show-scrollbar="false" class="user-list" enable-back-to-top="true" refresher-enabled="true" scroll-y="true" with-animation='true'>
         
           <block wx:for="{{applierList}}" >
             <view class='list-item'>
-              <image src='{{item.avatar}}' class='list-item-avatar' bindtap="tapAvatar" data-id="{{item.id}}"></image>
-              <view class='list-item-username' bindtap="tapAvatar" data-id="{{item.id}}">{{item.nickname}}</view>
+              <image src='{{item.avatar}}' class='list-item-avatar' bindtap="tapApplierAvatar" data-index="{{index}}"></image>
+              <view class='list-item-username' bindtap="tapApplierAvatar" data-index="{{index}}">{{item.nickname}}</view>
               <view class='list-item-apply-time'>{{item.applyTime}}</view>
-              <view wx:if="{{teamDetail.question}}" class='see-answer' data-applyerId="{{item.id}}" bindtap="showAnswers" >查看回答</view>
+              <view wx:if="{{item.answer.length>0}}" class='see-answer' data-index="{{index}}" bindtap="showAnswers" >查看回答</view>
               <image class='tick' src='/static/icon/tick.png' bindtap="acceptApplying" data-applyername="{{item.nickname}}" data-applyerid="{{item.id}}"></image>
               <image class='cross' src='/static/icon/cross-purple.png' data-applyername="{{item.nickname}}" data-applyerId="{{item.id}}" bindtap="refuseApplying"></image>
             </view>
@@ -66,7 +80,7 @@
         <view class="bottom-elements">
         <!-- team 发起者 initiator 使用的 button ------------------------->
           <block wx:if="{{amITeamInitiator}}">
-            <view wx:if="{{teamDetail.isTeamClosed}}" class="accept-all-button  accept-all-button-close">
+            <view wx:if="{{status >= 3}}" class="accept-all-button  accept-all-button-close">
               一键接受
             </view>
             <view wx:else class="accept-all-button " bindtap="acceptAllButton">
@@ -81,43 +95,43 @@
           </view>
         </view>
         <!-- <view class="blur-shadow"></view> -->
-      </view>
+    </view>
 
-      <view wx:if="{{!amITeamInitiator}}">
-      <scroll-view scroll-y="true" style="width:100%;height:78vh">
-      <!-- <view class="detail-board">      -->
-        <scroll-view id="scroll-1" class="board" scroll-y="true" style="height:{{maxHeight}}">
-        <view class="board-view">
+    <view wx:if="{{!amITeamInitiator}}">
+      <scroll-view scroll-y="true" style="width:100%;height:70vh">
+      <!-- <view class="detail-board">     style="height:{{maxHeight}}" -->
+        <scroll-view id="scroll-1" class="board" scroll-y="true" >
+          <view class="board-view">
             <view class="detail-title">{{teamDetail.title}}</view> 
             <view class="detail-a-line">
               <view class="detail-avatar">
-                <image src="{{teamDetail.avatar}}" style="width:80rpx; height:80rpx;border-radius:50%" bindtap="tapAvatar" data-id="{{initiatorId}}"></image>
+                <image src="{{teamDetail.avatar}}" style="width:80rpx; height:80rpx;border-radius:50%" bindtap="tapInitiatorAvatar" ></image>
               </view>
               <view class="detail-name-and-time">
-                <view class="detail-nickname" bindtap="tapAvatar" data-id="{{initiatorId}}">{{teamDetail.nickname}}</view>
+                <view class="detail-nickname" bindtap="tapInitiatorAvatar">{{teamDetail.nickname}}</view>
                 <view class="detail-apply-time">{{teamDetail.fromTime}}</view>
               </view>
-              <view wx:if="{{!over}}" class="detail-due-time">{{teamDetail.dueTime}}</view>
+              <view wx:if="{{status < 3}}" class="detail-due-time">{{teamDetail.dueTime}}</view>
             </view>
             <view class="detail-content">
                 <text class="detail-text" encode="{{true}}">{{teamDetail.content}}</text>
                 <view class="detail-pictures">
                   <view class="detail-picture" wx:for="{{teamDetail.pictures}}">
-                    <image src="{{item}}" style="width:26vw;height:26vw" data-pic-url="{{item}}" bindtap="zoomInDetailPicture"></image>
+                    <image mode = "aspectFill" src="{{item}}" style="width:26vw;height:26vw" data-pic-url="{{item}}" bindtap="zoomInDetailPicture"></image>
                   </view>
                 </view>
               </view>
-            </view>
-          </scroll-view>
+          </view>
+        </scroll-view>
       <!-- </view>  -->
       
         <view wx:if="{{result}}" class="result">
           <text>{{result}}</text>
         </view>
 
-        <scroll-view wx:if="{{reply}}" class="board" style="height:10vh" scroll-y="true">
+        <scroll-view wx:if="{{reason}}" class="board" style="height:10vh" scroll-y="true">
           <view class="board-view">
-            <text class="detail-text">{{reply}}</text>
+            <text class="detail-text">{{reason}}</text>
           </view>
         </scroll-view>
         <view style="height:6vh"></view>
@@ -125,22 +139,22 @@
     </view>
 
 
-    <view class="bottom-elements" wx:if="{{!amITeamInitiator&&!haveJoinedIn&&!over}}" bindtap="applicantClick">
+    <view class="bottom-elements" wx:if="{{!amITeamInitiator&&applyStatus!=1&&applyStatus!=2}}">
       <view class="applicantButton">
-        <view wx:if="{{!haveSignedUp && !timeIsOver && !memberFull}}" bindtap="applyButton">我要加入</view>
-        <view wx:if="{{!haveSignedUp &&(timeIsOver||memberFull)}}" class="grayButton">我要加入</view>
-        <view wx:if="{{haveSignedUp&&!timeIsOver}}" bindtap="cancelButton">取消申请</view>
-        <view wx:if="{{haveSignedUp&&timeIsOver}}" class="grayButton">取消申请</view>
+        <view wx:if="{{(applyStatus > 6 || applyStatus == 3 ||applyStatus == 4) && status<2}}" bindtap="applyButton">我要加入</view>
+        <view wx:if="{{(applyStatus > 6 || applyStatus == 3 ||applyStatus == 4) && status>=2}}" class="grayButton">我要加入</view>
+        <view wx:if="{{applyStatus == 0 && status<3}}" bindtap="cancelButton">取消申请</view>
+        <view wx:if="{{(applyStatus == 5 ||applyStatus == 6) && status>=3}}" class="grayButton">取消申请</view>
       </view>
       <view class="favourite">
       <image bindtap="tapFavourite" class="fav-icon" wx:if="{{isFavourite}}" src='/static/icon/collect-blue-solid.png'></image>
       <image bindtap="tapFavourite" class="fav-icon" wx:else src='/static/icon/collect-blue.png'></image>
-    </view>
+      </view>
     </view>
   </view>
   </view>
 
-<personal-animation id="personalAnimation" personalInfo="{{personalInfo}}" bind:seeAnswer="showAnswers" ></personal-animation>
+<personal-animation id="personalAnimation" isPersonalInfoShow="{{isPersonalInfoShow}}" personalInfo="{{avatar}}" bind:seeAnswer="showAnswers" ></personal-animation>
 
 <dialog-box 
 id="dialogBox"
@@ -174,16 +188,17 @@ button="{{dialog2.button}}">
     <view class="tip-button" bindtap="tipBoxButton">确定</view>
   </view>
 </view>
+<!--  wx:if="{{answer.show}}"  height:{{answer.height}}-->
 
-<view wx:if="{{answer.show}}" class="answer-container">
-  <scroll-view class="answer-board" style="height:{{answer.height}}">
-    <view class="detail-a-line">
-      <view class="deatil-username">申请人  {{answer.nickname}}</view>
-      <image class="answer-image" style="width:60rpx;height:60rpx" src="{{answer.avatar}}"></image>
-    </view>
+<view wx:if="{{isAnswerShow}}">
+  <view class="shade" bindtap="detailHide"></view>
+  <scroll-view class="answer-container">
+    <view class="answer">申请人:</view>
+    <view class="answer-name">{{answer.nickName}}</view>
+    <image class="answer-image"  src="{{answer.avatar}}"></image>
     <view wx:for="{{answer.answerList}}">
-      <view class="answer-question">{{item}}</view>
-      <view class="answer-answer">{{item}}</view>
+      <text class="answer-question">{{answer.questionList[index]}}</text>
+      <text class="answer-answer">{{item}}</text>
     </view>
   </scroll-view>
 </view>

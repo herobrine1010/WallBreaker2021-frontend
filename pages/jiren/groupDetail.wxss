@@ -407,15 +407,73 @@ scroll-view {
   color:#FAFEFF;
   background-color: #17B2E5;
 }
-.answer-container{
-  width: 100vw;
-  height: 100vh;
+
+.shade{
   position: fixed;
-  display: flex;
-  z-index: 600;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 10;
 }
-.answer-board{
+.answer-container{
+  position: relative;
+  height: 1000rpx;
+  width: 660rpx;
+  top: 200rpx;
   margin: auto;
-  background-color:#F2FCFF ;
-  padding: 10vw;
+  z-index: 110;
+  background: #FAFEFF;
+  mix-blend-mode: normal;
+  border-radius: 25px;
+}
+.answer{
+  margin: 50rpx 40rpx 15rpx 40rpx;
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32rpx;
+  line-height: 40rpx;
+  align-items: center;
+  color: #4A5559;
+}
+.answer-name{
+  margin: 0 40rpx 30rpx;
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30rpx;
+  line-height: 36rpx;
+  align-items: center;
+  color: #4A5559;
+}
+.answer-image{
+  position: absolute;
+  top: 50rpx;
+  right: 50rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+}
+.answer-question{
+  margin-left: 40rpx;
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: #4A5559;
+}
+
+.answer-answer{
+  margin-left: 40rpx;
+  margin-bottom: 40rpx;
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28rpx;
+  line-height: 40rpx;
+
+  color: #989A9A;
 }

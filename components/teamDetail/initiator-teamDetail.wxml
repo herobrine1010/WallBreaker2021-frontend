@@ -3,8 +3,8 @@
   <view class="detail-title">{{title}}</view>
   <view wx:if="{{!isTeamClosed}}" class="detail-close-button" bindtap="closeTeam">结束组队招募</view>
   <view wx:if="{{isTeamClosed}}" class="detail-close-button-close">已结束</view>
-  <image class="detail-avatar" src="{{avatar}}"></image>
-  <view class="detail-username">{{nickname}}</view>
+  <image class="detail-avatar" src="{{avatar}}" bindtap="tapAvatar"></image>
+  <view class="detail-username" bindtap="tapAvatar">{{nickname}}</view>
   <view class="detail-apply-time">{{fromTime}}</view>
   <view wx:if="{{!isTeamClosed}}" class="detail-due-time">{{dueTime}}</view>
   <view class="detail-spread-botton" bindtap="seeDetail">查看全部</view>
@@ -19,13 +19,13 @@
     </view>
     <view class="picture-box">
         <block wx:if="{{picturesNum>1}}" wx:for="{{pictures}}">
-          <view class="pictureItem">
-            <image src="{{item}}"></image>
-          </view>
+
+          <image class="pictureItem" mode="aspectFill" src="{{item}}" data-pic-url="{{item}}" bindtap="viewPic"></image>
+
         </block>
         <block wx:if="{{picturesNum==1}}">
-          <view class="pictureSingle">
-          </view>
+          <image class="pictureSingle" src="{{pictures[0]}}" data-pic-url="{{pictures[0]}}" bindtap="viewPic">
+          </image>
         </block> 
     </view>
     <view class="back-btn" bindtap="detailHide">返回</view>

@@ -62,6 +62,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    tapAvatar:function(){
+      this.triggerEvent("tapAvatar")
+    },
     closeTeam:function(){
       this.triggerEvent("closeTeam")
     },
@@ -74,6 +77,9 @@ Component({
       this.setData({
         isDetailShow:false
       })
+    },
+    viewPic(e){
+      this.triggerEvent("viewPic",e.currentTarget.dataset)
     }
   }
 })

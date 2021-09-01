@@ -1,6 +1,7 @@
 // pages/jiren/groupDetail.js
 const { formatTime } = require('../../utils/util.js');
 var util = require('../../utils/util.js');
+import {request} from "../../request/request.js"
 var app=getApp();
 Page({
 
@@ -36,15 +37,15 @@ Page({
     applierList:[
       
     ],
+
+
     haveJoinedIn:false,
     haveSignedUp:false,
     timeIsOver:false,
     memberFull:false,
-    maxHeight:"auto",
     result:"",
     // reply:"随便写点啥\n看看边界在哪\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n",
     reply:'',
-    haveQuestions:true,
     beClosedInAdvance:false,
     beRefused:false,
 
@@ -61,12 +62,8 @@ Page({
     // over:true,
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  // 生命周期函数： ------- ----------- -------- ：
   onLoad: function (options) {
-    
-    console.log(options)
     if(!options.teamId){
       this.setData({teamId:119})
     }else{
@@ -75,7 +72,6 @@ Page({
     }
     var that=this;
     
-    
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -83,16 +79,37 @@ Page({
         })
       }
     });
-    // this.initializeResult();
 
-    this.changeTeamDetail();
 
-    // this.changeScrollHeight();
+    let query = this.getTeamDetail(that.data.teamId);
+    query.then(result=>{
+      // 先处理组队数据，再发请求入队成员列表
+      console.log(result);
+      that.setData({
+        teamDetail: result,
+      })
+      that.checkStatus(result);
 
-    
-    this.changeInitiatorList();
-
-    // console.log(this.data.timeIsOver);
+      return that.getTeamMemberList(that.data.teamId, that.data.amITeamInitiator, result.dueMember);
+    })
+    .then(teamMemberList => {
+    // 先处理头像数据，再判断是否为发起者，再发请求获取申请者数据 
+      that.setData({
+        teamMemberList : teamMemberList
+      })
+      if(that.data.amITeamInitiator){
+        return that.getApplierList(that.data.teamId)
+        .then(applierList => {
+          console.log(applierList);
+          that.setData({
+            applierList
+          })
+        })
+      }
+    }).catch(
+      err=>{
+        console.log(err);
+    });
   },
   
   /**
@@ -130,99 +147,344 @@ Page({
 
   },
 
-  changeAvatarList:function(){
+  // ----- -------- 页面加载相关函数 ------ 如（组队内容、成员列表、申请人列表） ---- -------- -------- --------
+  // (1.1). 组队的内容：（包含发起人的数据）
+  getTeamDetail(teamId){
     let that=this;
-    wx.request({
-      url: app.globalData.url+'/userTeam/getAllMemberInfoByTeamId/'+that.data.teamId,
-      header:{'cookie':wx.getStorageSync('token')},
-      success:function(res){
-        if(res.statusCode==200){
-          console.log(res);
-          let list=[];
-          let data=res.data.data;
-          let personalInfoList=that.data.personalInfoList;
-          console.log(data);
-          for(let i=0;i<data.length;i++){
-            let info={
-              'initiator':data[i].initiator,
-              'me':data[i].me,
-              'avatar':data[i].avatarUrl,
-              'id':data[i].id,
-              'nickname':data[i].nickName
-            }
-            list.push(info);
-            if(that.data.amITeamInitiator){
-              if(i>0&&data[i].answer){
-                let answerList=[];
-                let answer=JSON.parse(data[i].answer)
-                for(let key in answer){
-                  answerList.push(answer[key]);
-                };
-                personalInfoList[data[i].id].answer=answerList;
-                personalInfoList[data[i].id].isCheckAnswerButtonShow=true;
-                personalInfoList[data[i].id].wxIdPublic=true;
-              }
-            }
-          }
-          for(let i=0;i<that.data.teamDetail.due_member-data.length+1;i++){
-            list.push({});
-          }
-          that.setData({
-            avatarList:list,
-            personalInfoList,
-          });
-          console.log(that.data.avatarList)
-        }
+    return request({
+      url: '/team/getTeamAndCheckStatus/'+teamId,
+      header:{
+        'cookie':wx.getStorageSync('token')
       }
     })
-
-  },
-
-  getContent:function(item){
-    return item.content
-  },
-  getPersonalInfo:function(id){
-    if(this.data.personalInfoList[id]){
-      return this.data.personalInfoList[id]
-    }else{
-      let that=this;
-      wx.request({
-        url: app.globalData.url+'/user/userInfo',
-        data:{userId:id},
-        success:function(res){
-          if(res.statusCode==200){
-          let data=res.data.data;
-          let info={
-            'avatar':data.avatarUrl,
-            'id':data.id,
-            'nickname':data.nickName,
-            'wxId':data.wxId,
-            'description':data.description,
-            'school':data.school,
-            'major':data.major,
-            'grade':data.grade,
-            'identity':data.identification,
-
-            'schoolPublic':data.schoolPublic,
-            'majorPublic':data.majorPublic,
-            'gradePublic':data.gradePublic,
-            'identityPublic':data.identityPublic,
-
-            'personalLabel':(data.personalLabel?data.personalLabel.map(that.getContent):[]),
-            'interestLabel':(data.interestLabel?data.interestLabel.map(that.getContent):[]),
-          };
-          console.log(info)
-          let personalInfoList=that.data.personalInfoList;
-          personalInfoList[id]=Object.assign(personalInfoList[id]||{},info);
-          that.setData({
-            personalInfoList,
-          });
-          return personalInfoList[id];
+    .then(res=>{
+      if(res.statusCode>=200&&res.statusCode<300){
+        let teamdata=res.data.data;
+          console.log(teamdata);
+          let {
+            applyStatus, title, content, allPicUrl, dueTime, createTime, dueMember, initializedByMe, initiatorId, myFavourite, status, question, reason
+          }=teamdata;
+          let picList = allPicUrl?allPicUrl.split(','):[];
+          let fromTime=util.getDateDiff(teamdata.createTime);
+          dueTime=util.getDateDiff(teamdata.dueTime);
+          let questionList = [];
+          if(typeof question == 'string' && question!='{}'){
+            question=JSON.parse(question);
+            for(let key in question){
+              questionList.push(question[key])
+            }
           }
+          let temp={
+            applyStatus,
+            status,
+            title,
+            initiatorId,
+            'isTeamClosed': status>2?true:false,
+            fromTime,
+            dueTime,
+            content,
+            picturesNum:  picList.length,
+            pictures: picList,
+            dueMember,
+            question:questionList,
+            reason
+          };
+          let result = '';
+          if(status >= 3){
+            if(reason){
+              console.log(reason);
+              result = '组队招募已经关闭\n发起人结束招募的原因如下：'
+            }else{
+              result = '组队招募已经关闭'
+            }
+          }else if(applyStatus == 0){
+            result = '你已经报名该组队，申请正在处理中~'
+          }
+          console.log(result);
+          that.setData({
+            amITeamInitiator:initializedByMe,
+            isFavourite:myFavourite,
+            applyStatus,
+            status,
+            reason,
+            result
+          })
+          return temp;
+      }else{
+        wx.showToast({
+          title: '网络错误，请重试',
+        })
+        return new Error('网络错误（！200~300）');
+      }
+    })
+    .then(temp => {
+      return request({
+        url: '/user/userInfo',
+        data:{userId:temp.initiatorId},
+        header:{
+          'cookie':wx.getStorageSync('token'),
         }
       })
+      .then(res =>{
+        let {
+          nickName, avatarUrl, description, grade, gradePublic, identification, identificationPublic, major, majorPublic, school, schoolPublic, wxId, wxIdPublic, interestLabel, personalLabel
+        } = res.data.data;
+        if(interestLabel){
+          interestLabel = interestLabel.map(v=>{
+            return v.content
+          })
+        }
+        if(personalLabel){
+          personalLabel = personalLabel.map(v=>{
+            return v.content
+          })
+        }
+        let teamDetail = {
+          'avatar':avatarUrl,
+          'nickname':nickName,
+          description,
+          'grade':gradePublic?grade:'',
+          gradePublic,
+          'identification':identificationPublic?identification:'',
+          identificationPublic,
+          'major':majorPublic?major:'',
+          majorPublic,
+          'school':schoolPublic?school:'',
+          schoolPublic,
+          'wxId':wxIdPublic?wxId:'',
+          wxIdPublic,
+          interestLabel,
+          personalLabel,
+          ...temp
+        };
+        return teamDetail;
+      })
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  },
+  // (1.2) 对组队返回的状态数据进行处理：
+  checkStatus(teamData){
+    let that = this;
+
+    let{
+      reason,
+      status,
+      applyStatus
+    }=teamData;
+    if(that.data.amITeamInitiator){
+      if(status==4){
+        that.showTipBox('组队招募已结束')
+      }
+    }else{
+      switch(applyStatus){
+        case 1:
+          that.showTipBox('恭喜您已成功入队~可点击发起人头像查看联系方式，快去与ta联系吧！')
+          wx.request({
+            url:app.globalData.url+ '/userTeam/checkApproved',
+            method:"POST",
+            data:{teamId:that.data.teamId}
+          })
+        case 3:
+          that.showTipBox('很遗憾，本次申请未能通过，但请不要灰心，下一次可能就会组队成功~');
+          wx.request({
+            url:app.globalData.url+ 'userTeam/checkRejected',
+            method:"POST",
+            data:{teamId:that.data.teamId}
+          });
+        case 5:
+          if(!reason=='该组队招募已截止'){
+            that.showTipBox('该组队招募已结束，理由为：\n'+reason)
+          }else{
+            that.showTipBox('该组队招募已截止')
+          }
+          wx.request({
+            url: app.globalData.url+'/userTeam/checkTerminated',
+            data:{
+              teamId:that.data.teamId
+            },
+            header:{cookie:wx.getStorageSync('token')}
+          })
+          break;
+      }
+      // that.initializeResult();
     }
   },
+
+  // (2). 成员列表(需要组队内容请求来的dueMember数据)
+  getTeamMemberList(teamId,amITeamInitiator,dueMember){
+    let self = this;
+    return request({
+      url: '/userTeam/getAllMemberInfoByTeamId/'+teamId,
+      header:{'cookie':wx.getStorageSync('token')}
+    })
+    .then(res=>{
+      if(res.statusCode>=200&&res.statusCode<300){
+        console.log(res);
+        let list=[];
+        let data=res.data.data;
+        for (let teamMember of data){
+          let {
+            initiator, me, id,  answer, nickName, avatarUrl, description, grade, gradePublic, identification, identificationPublic, major, majorPublic, school, schoolPublic, wxId, wxIdPublic, interestLabel, personalLabel
+          } = teamMember;
+          if(interestLabel){
+            interestLabel = interestLabel.map(v=>{
+              return v.content
+            })
+          }
+          if(personalLabel){
+            personalLabel = personalLabel.map(v=>{
+              return v.content
+            })
+          }
+          let temp = {
+            id,
+            initiator,
+            me,
+            'avatar':avatarUrl,
+            'nickname':nickName,
+            description,
+            'grade':gradePublic?grade:'',
+            gradePublic,
+            'identification':identificationPublic?identification:'',
+            identificationPublic,
+            'major':majorPublic?major:'',
+            majorPublic,
+            'school':schoolPublic?school:'',
+            schoolPublic,
+            'wxId':wxIdPublic?wxId:'',
+            wxIdPublic,
+            interestLabel,
+            personalLabel
+          };
+          if(amITeamInitiator){
+            // 排除：1 answer = null;2. answer ={}（空对象）
+            if(answer instanceof String && answer!="{}"){
+              // let answerList=[];
+              console.log(answer);
+              let answer=JSON.parse(answer)
+              let values = Object.values(answer);
+              temp.answer = values;
+              temp.isCheckAnswerButtonShow=true;
+              temp.wxIdPublic=true; 
+              temp.wxId = wxId;               
+            }
+          }
+          list.push(temp);
+        };
+        for(let i=0;i<dueMember - data.length+1;i++){
+          list.push({});
+        };
+        return Promise.resolve(list);
+      }else{
+        wx.showToast({
+          title: '请求网络错误，请重试',
+        })
+        throw new Error('请求网络错误，请重试')
+      }
+    })
+  },
+
+  // (3). 申请者列表（只有initiator可以发出这个请求）
+  getApplierList(teamId){
+    let that = this;
+    return request({
+      url:'/userTeam/getApplierInfoByTeamId/'+teamId,
+    })
+    .then(res=>{
+      let data=res.data.data
+      console.log(data);
+      if(data.length == 0){
+        return Promise.resolve([]);
+      }else{
+        let list=[];
+        for(let applier of data){
+          let {
+            id, answer, nickName, avatarUrl, description, grade, gradePublic, identification, identificationPublic, major, majorPublic, school, schoolPublic, wxId, wxIdPublic, interestLabel, personalLabel, createTime
+          } = applier;
+          if(interestLabel){
+            interestLabel = interestLabel.map(v=>{
+              return v.content
+            })
+          };
+          if(personalLabel){
+            personalLabel = personalLabel.map(v=>{
+              return v.content
+            })
+          };
+          let isCheckAnswerButtonShow = false;
+          if( typeof answer == 'string' && answer!='{}'){
+            let answerList=[];
+              answer=JSON.parse(answer)
+              for(let key in answer){
+                answerList.push(answer[key]);
+              };
+              answer = answerList;
+              isCheckAnswerButtonShow = true;
+          };
+          let temp = {
+            id,
+            answer,
+            isCheckAnswerButtonShow,
+            'applyTime':util.getDateDiff(createTime),
+            'avatar':avatarUrl,
+            'nickname':nickName,
+            description,
+            'grade':gradePublic?grade:'',
+            gradePublic,
+            'identification':identificationPublic?identification:'',
+            identificationPublic,
+            'major':majorPublic?major:'',
+            majorPublic,
+            'school':schoolPublic?school:'',
+            schoolPublic,
+            'wxId':wxIdPublic?wxId:'',
+            wxIdPublic,
+            interestLabel,
+            personalLabel
+          };
+          list.push(temp);
+        }
+        return list;
+      }
+    })
+  },
+
+
+// 以下是和 点击头像 展示个人资料卡片 有关的操作 ---------- --------------- -----
+tapAvatar(e){
+  const that = this;
+  let index=e.currentTarget.dataset.index;
+  console.log(index);
+  let avatar = this.data.teamMemberList[index];
+  console.log(avatar);
+  that.setData({
+    isPersonalInfoShow:true,
+    avatar
+  })
+},
+tapInitiatorAvatar(){
+  const that = this;
+  let teamDetail = that.data.teamDetail
+  console.log(teamDetail);
+  that.setData({
+    isPersonalInfoShow:true,
+    avatar:teamDetail
+  })
+},
+tapApplierAvatar(e){
+  const that = this;
+  let index=e.currentTarget.dataset.index;
+  console.log(index);
+  let avatar = this.data.applierList[index];
+  console.log(avatar);
+  that.setData({
+    isPersonalInfoShow:true,
+    avatar
+  })
+},
+
 
 // 以下是和 发起者 initiator 有关的操作事件 ---------start---------------------
   handleCloseTeam: function(){
@@ -248,79 +510,58 @@ Page({
       this.setData({dialog:dialog});
       return true
     }else{
-      wx.request({
-        url: app.globalData.url+'/team/terminateTeam',
+      let teamId = that.data.teamId;
+      request({
+        url: '/team/terminateTeam',
         method:'GET',
         data:{
-          teamId:that.data.teamId,
+          teamId:teamId,
           reason:reason
         },
         header:{
           'content-type': 'application/x-www-form-urlencoded',
           'cookie':wx.getStorageSync('token')
         },
-        success:function(res){
-          if(res.statusCode==200){
-            that.setData({
-              'teamDetail.isTeamClosed':true
-            })
-          }
-        }   
-      })
-    }
-  },
-  showAnswers:function(e){
-    console.log(e)
-    let id=e.currentTarget.dataset.applyerid;
-    // let answer=this.getPersonalInfo(id);
-    if(this.data.personalInfoList[id]){
-      let answer=this.data.personalInfoList[id]
-      answer.show=true;
-      answer.height='auto';
-      this.setData({answer})
-    }else{
-      let that=this;
-      wx.request({
-        url: app.globalData.url+'/user/userInfo',
-        data:{userId:id},
-        success:function(res){
-          if(res.statusCode==200){
-          let data=res.data.data;
-          let info={
-            'avatar':data.avatarUrl,
-            'id':data.id,
-            'nickname':data.nickName,
-            'wxId':data.wxId,
-            'description':data.description,
-            'school':data.school,
-            'major':data.major,
-            'grade':data.grade,
-            'identity':data.identification,
-
-            'schoolPublic':data.schoolPublic,
-            'majorPublic':data.majorPublic,
-            'gradePublic':data.gradePublic,
-            'identityPublic':data.identityPublic,
-
-            'personalLabel':(data.personalLabel?data.personalLabel.map(that.getContent):[]),
-            'interestLabel':(data.interestLabel?data.interestLabel.map(that.getContent):[]),
-
-            'detail':true
-          };
-          let personalInfoList=that.data.personalInfoList;
-          personalInfoList[id]=Object.assign(personalInfoList[id]||{},info);
-          let answer=that.data.personalInfoList[id]
-          answer.show=true;
-          answer.height='auto';
-          that.setData({
-            personalInfoList,
-            answer
-          });
-          }
+      }).then(res=>{
+        if(res.statusCode>=200&&res.statusCode<300){
+          wx.showModal({
+            title : '组队招募已结束！',
+          })
+          return that.getTeamDetail(teamId);
         }
+      }).then(result => {
+        that.setData({
+          teamDetail: result,
+        })
       })
+
     }
   },
+
+  showAnswers:function(e){// wxml页面上还存在点问题，待更改！！！！！！！！！！！！！！！！！！
+    let that = this;
+    let index=e.currentTarget.dataset.index;
+    let applier = that.data.applierList[index]
+    console.log(applier);
+    let answer = {
+      answerList : that.data.applierList.answer,
+      questionList : that.data.teamDetail.question,
+      nickName : applier.nickName,
+      avatar : applier.avatar
+    }
+    this.setData({
+      answer,
+      isAnswerShow: true
+    });
+
+  },
+  detailHide(){
+    this.setData({
+      answer : null,
+      isAnswerShow: false
+    });
+  },
+
   showTipBox:function(message){
     let tipBox = {
       show:true,
@@ -330,179 +571,8 @@ Page({
       tipBox:tipBox
     })
   },
-  changeTeamDetail:function(){
-    let that=this;
-    wx.request({
-      url: app.globalData.url+'/team/getTeamAndCheckStatus/'+this.data.teamId,
-      header:{
-        'cookie':wx.getStorageSync('token'),
-      },
-      success:function(res){
-        if(res.statusCode!=200){return}
-        let teamdata=res.data.data;
-        console.log(teamdata);
-        that.setData({
-          amITeamInitiator:teamdata.initializedByMe,
-          isFavourite:teamdata.myFavourite
-        })
-        let initiatorid=teamdata.initiatorId;
-        wx.request({
-          url: app.globalData.url+'/user/userInfo',
-          data:{userId:initiatorid},
-          header:{
-            'cookie':wx.getStorageSync('token'),
-          },
-          success:function(res){
-            // console.log(res)
-            let initiatordata=res.data.data;
-            var picList=(teamdata.allPicUrl?teamdata.allPicUrl.split(','):[]);
-            let fromTime=util.getDateDiff(teamdata.createTime);
-            let dueTime=util.getDateDiff(teamdata.dueTime);
-            let teamDetail={
-              title:teamdata.title,
-              isTeamClosed: (teamdata.status>2?true:false),
-              avatar:initiatordata.avatarUrl,
-              nickname:initiatordata.nickName,
-              fromTime: fromTime,
-              dueTime: dueTime,
-              content: teamdata.content,
-              picturesNum:  picList.length,
-              pictures: picList,
-              due_member:teamdata.dueMember,
-              question:JSON.parse(teamdata.question),
-              reason:teamdata.reason
-            };
-            let questionList=[];
-            if(teamdata.question){
-              for(let key in teamdata.question){
-                questionList.push({question:teamdata.question[key]})
-              }
-            }
-            that.setData({
-              teamDetail:teamDetail,
-              initiatorId:initiatorid,
-              timeIsOver:(teamdata.status>2?true:false),
-              questionAnswerList:questionList
-            });
-            
-            that.changeAvatarList();
-
-            if(that.data.amITeamInitiator){
-              if(teamdata.status==4){
-                that.showTipBox('组队招募已结束')
-              }
-              that.changeSizeOfInitiatorPage();
-            }else{
-              if(teamdata.status==2){
-                that.setData({memberFull:true})
-              }
-              console.log(teamdata.applyStatus)
-              switch(teamdata.applyStatus){
-                case 0:
-                  that.setData({haveSignedUp:true})
-                  break
-                case 1:
-                  that.showTipBox('恭喜您已成功入队~可点击发起人头像查看联系方式，快去与ta联系吧！')
-                  wx.request({
-                    url:app.globalData.url+ '/userTeam/checkApproved',
-                    method:"POST",
-                    data:{teamId:that.data.teamId}
-                  })
-                case 2:
-                  let personalInfoList=that.data.personalInfoList;
-                  if(personalInfoList[that.data.initiatorId]){
-                    personalInfoList[that.data.initiatorId].wxIdPublic=true;
-                  }
-                  that.setData({
-                    haveJoinedIn:true,
-                    personalInfoList
-                  });
-                  break;
-                case 3:
-                  that.showTipBox('很遗憾，本次申请未能通过，但请不要灰心，下一次可能就会组队成功~');
-                  wx.request({
-                    url:app.globalData.url+ 'userTeam/checkRejected',
-                    method:"POST",
-                    data:{teamId:that.data.teamId}
-                  });
-                case 4:
-                  that.setData({beRefused:true});
-                  break;
-                case 5:
-                  if(!teamdata.reaon=='该组队招募已截止'){
-                    that.setData({beClosedInAdvance:true})
-                    that.showTipBox('该组队招募已结束，理由为：\n'+teamdata.reason)
-                  }else{
-                    that.setData({timeIsOver:true})
-                    that.showTipBox('该组队招募已截止')
-                  }
-                  wx.request({
-                    url: app.globalData.url+'/userTeam/checkTerminated',
-                    data:{
-                      teamId:that.data.teamId
-                    },
-                    header:{cookie:wx.getStorageSync('token')}
-                  })
-                  break;
-                case 6:
-                  if(teamdata.reaon){
-                    that.setData({beClosedInAdvance:true})
-                  }else{
-                    that.setData({timeIsOver:true})
-                  }
-                  break;
-    
-              }
-              that.initializeResult();
-              // that.changeScrollHeight();
-            }
-          }
-        })
-      }
-    })
-  },
-
-
-  changeInitiatorList:function(){
-    let app=getApp();
-    let that=this;
-    wx.request({
-      url: app.globalData.url+'/userTeam/getApplierInfoByTeamId/'+this.data.teamId,
-      success:function(res){
-        let data=res.data.data
-        console.log(data)
-        console.log('come')
-        let list=[];
-        let personalInfoList=that.data.personalInfoList;
-        for(let i in data){
-          list.push({
-            'applyTime':util.getDateDiff(data[i].createTime),
-            'avatar':data[i].avatarUrl,
-            'id':data[i].id,
-            'nickname':data[i].nickName,
-          });
-          if(that.data.amITeamInitiator){
-            if(data[i].answer){
-              let answerList=[];
-                let answer=JSON.parse(data[i].answer)
-                for(let key in answer){
-                  answerList.push(answer[key]);
-                };
-                personalInfoList[data[i].id].answer=answerList;
-              personalInfoList[data[i].id].isCheckAnswerButtonShow=true;
-            }
-          }
-          
-        };
-        that.setData({
-          applierList:list,
-          personalInfoList,
-        })
-      }
-    })
-  },
+  
   acceptApplying: function(e){
-    console.log(e.currentTarget.dataset);
     let applyer = e.currentTarget.dataset;
     this.setData({ 
       targetId:applyer.applyerid,
@@ -521,13 +591,12 @@ Page({
       dialog,
     })
   },
-  dialogTapOkForAcceptApplying:function(e){
-    //  console.log(e);
+  dialogTapOkForAcceptApplying:function(){
     let app=getApp();
     let that=this;
     console.log(this.data.targetId);
-    wx.request({
-      url: app.globalData.url+'/userTeam/approveApplication',
+    request({
+      url: '/userTeam/approveApplication',
       header:{
         'content-type':'application/json',
         'cookie':wx.getStorageSync('token')
@@ -536,36 +605,35 @@ Page({
         userId:this.data.targetId,
         teamId:this.data.teamId
       },
-      method:'POST',
-      success:function(){
-        let list=that.data.applierList;
-        let newList=[];
-        for(let i in list){
-          if(list[i].id!=that.data.targetId){
-            newList.push(list[i]);
-          }
-        };
-        that.setData({
-          applierList:newList
-        });
-        // wx.showToast({
-        //   title: '接受id为'+that.data.targetId+'的申请',
-        // });
-        that.showTipBox(that.data.targetNickName+'已成功入队！可点击头像查看微信号，快去与ta联系吧！')
-        that.changeAvatarList();
-        that.changeInitiatorList();
-      }
+      method:'POST'
+    }).then(res => {
+      console.log(res);
+      that.showTipBox(that.data.targetNickName+'已成功入队！可点击头像查看微信号，快去与ta联系吧！');
+
+      // 重新请求获取 成员列表、申请者列表数据
+      let getTeamMemberList = that.getTeamMemberList(that.data.teamId, that.data.amITeamInitiator, that.data.teamDetail.dueMember);
+      let getApplierList = that.getApplierList(that.data.teamId);
+      return Promise.all([getTeamMemberList,getApplierList])
+    }).then(res => {
+      console.log(res);
+      that.setData({
+        teamMemberList : res[0],
+        applierList : res[1],
+        haveJoinedIn:true
+      })
+    }).catch( err=>{
+      console.log(err);
     })
 
-    this.setData({
-      haveJoinedIn:true
-    })
     this.initializeResult();
-    // this.changeScrollHeight();
   },
+
   refuseApplying: function(e){
     let applyer = e.currentTarget.dataset;
-    this.setData({ targetId:applyer.applyerid,});
+    this.setData({ 
+      targetId:applyer.applyerid,
+      targetName : applyer.applyername
+    });
     // console.log(this.data.targetId);
     let dialog = {
       isDialogShow: true,
@@ -580,100 +648,41 @@ Page({
       dialog,
     })
   },
-  dialogTapOkForRefuseApplying:function(){
+  dialogTapOkForRefuseApplying:function(){//待解决 ： initializeResult 和 changeScrollHeight 作用
     let app=getApp();
     let that=this;
     console.log(this.data.targetId);
-    wx.request({
-      url: app.globalData.url+'/userTeam/rejectApplication',
+    request({
+      url: '/userTeam/rejectApplication',
       header:{
         'content-type':'application/json',
         'cookie':wx.getStorageSync('token')
       },
       data:{
-        userId:this.data.targetId,
-        teamId:this.data.teamId
+        userId:that.data.targetId,
+        teamId:that.data.teamId
       },
       method:'POST',
-      success:function(){
-        let list=that.data.applierList;
-        let newList=[];
-        for(let i in list){
-          if(list[i].id!=that.data.targetId){
-            newList.push(list[i]);
-          }
-        };
-        that.setData({
-          applierList:newList
-        });
-        wx.showToast({
-          title: '拒绝id为'+that.data.targetId+'的申请',
-        });
-      }
-    });
-    this.setData({
-      beRefused:true
-    });
-    this.initializeResult();
-    this.changeScrollHeight();
+    }).then(res => {
+      wx.showToast({
+        title: '拒绝id为'+that.data.targetName+'的申请',
+      });
+
+      // 请求 申请者列表的数据
+      return that.getApplierList(that.data.teamId);
+    }).then(res=>{
+      that.setData({
+        applierList : res,
+        beRefused:true
+      });
+      // that.initializeResult();
+      // that.changeScrollHeight();
+    }).catch(err=>{
+      console.log(err);
+    })
   },
 
-
-  tapAvatar:function(e){
-    console.log(e)
-    let that=this;
-    let id=e.currentTarget.dataset.id;
-    // this.setData({personalInfo:this.getPersonalInfo(id)})
-    if(this.data.personalInfoList[id]){
-      console.log('type original')
-      this.setData({personalInfo:this.data.personalInfoList[id]})
-    }else{
-      console.log('type updated')
-      let that=this;
-      wx.request({
-        url: app.globalData.url+'/user/userInfo',
-        data:{userId:id},
-        success:function(res){
-          if(res.statusCode==200){
-          let data=res.data.data;
-          let info={
-            'avatar':data.avatarUrl,
-            'id':data.id,
-            'nickname':data.nickName,
-            'wxId':data.wxId,
-            'description':data.description,
-            'school':data.school,
-            'major':data.major,
-            'grade':data.grade,
-            'identity':data.identification,
-
-            'schoolPublic':data.schoolPublic,
-            'majorPublic':data.majorPublic,
-            'gradePublic':data.gradePublic,
-            'identityPublic':data.identityPublic,
-
-            'personalLabel':(data.personalLabel?data.personalLabel.map(that.getContent):[]),
-            'interestLabel':(data.interestLabel?data.interestLabel.map(that.getContent):[]),
-
-            'detail':true
-          };
-          console.log(info)
-          let personalInfoList=that.data.personalInfoList;
-          personalInfoList[id]=Object.assign(personalInfoList[id]||{},info);
-          that.setData({
-            personalInfoList,
-            personalInfo:personalInfoList[id]
-          });
-          }
-        }
-      })
-    }
-    console.log(e);
-    this.selectComponent("#personalAnimation").showModal(this.data.currentUser.userAvatar);
-    
-  },
-
-  seeDetail:function(e){
+  seeDetail:function(e){//样式 待调整
     console.log("查看全部");
     let teamDetail=this.data.teamDetail;
     let dialog2={
@@ -690,6 +699,49 @@ Page({
     // this.changeScrollHeight2();
     //@李雨龙
   },
+
+
+
+
+  acceptAllButton:function(e){
+    let dialog = {
+      isDialogShow: true,
+      content:'确定自动将最早申请的用户填满空位？',
+      hasInputBox:false,
+      tip:"",
+      cancelText:"取消",
+      okText:"确定",
+      tapOkEvent:"dialogTapOkForAcceptAllApplications"
+    };
+    this.setData({
+      dialog,
+    })
+  },
+  dialogTapOkForAcceptAllApplications(){
+    let that=this;
+    request({
+      url: '/userTeam/autoApproveByTeamId/'+this.data.teamId,
+      header:{
+        'cookie':wx.getStorageSync('token')
+      },
+    }).then(res=>{
+      // 重新请求获取 成员列表、申请者列表数据
+      let getTeamMemberList = that.getTeamMemberList(that.data.teamId, that.data. amITeamInitiator, that.data.teamDetail.dueMember);
+      let getApplierList = that.getApplierList(that.data.teamId);
+      return Promise.all([getTeamMemberList,getApplierList]);
+    }).then(res => {
+      that.showTipBox('入队申请已全部接受，可点击头像查看微信号，快去与ta联系吧！');
+      that.setData({
+        teamMemberList : res[0],
+        applierList : res[1],
+        haveJoinedIn:true
+      })
+    }).catch( err=>{
+      console.log(err);
+    });
+  },
+
+  //------- ------ ------- 以下是和 申请者 applicant 有关的操作事件 -------- --------- ---
   tapFavourite:function(){
     let app=getApp();
     let that=this;
@@ -729,179 +781,107 @@ Page({
     // this.onLoad();
   },
 
-  tapOk:function(e){
-    console.log("点击确认之后的业务");
-    wx.showToast({
-      title: '爬了',
-      icon: 'none',
-      duration: 1000
-    })
-    wx.navigateTo({
-      url: '/pages/jiren/answerQuestion',
-    })
-  },
-  
-  acceptAllButton:function(e){
-    let dialog = {
-      isDialogShow: true,
-      content:'确定自动将最早申请的用户填满空位？',
-      hasInputBox:false,
-      tip:"",
-      cancelText:"取消",
-      okText:"确定",
-      tapOkEvent:"dialogTapOkForAcceptAllApplications"
-    };
-    this.setData({
-      dialog,
-    })
-  },
 
-  dialogTapOkForAcceptAllApplications(){
-    let that=this;
-    wx.request({
-      url: app.globalData.url+'/userTeam/autoApproveByTeamId/'+this.data.teamId,
-      header:{
-        'cookie':wx.getStorageSync('token')
-      },
-      success:function(){
-        that.setData({applierList:[]});
-        that.changeAvatarList();
-        that.changeInitiatorList();
-      }
-    })
-  },
-
-
-
-  // 以下是和 申请者 applicant 有关的操作事件
-  applicantInitialize:function(){
-
-  },
-
-
-
-  applicantClick:function(e){
-    console.log(e);
-  },
-  initializeResult:function(e){
-    let data=this.data;
-    if(data.timeIsOver){
-      this.setData({
-        result:"组队招募已经结束",
-        over:true
-      })
-    }else if(data.memberFull){
-      this.setData({
-        result:"队伍成员已满",
-        over:true,
-      })
-    }else if(data.beClosedInAdvance){
-      this.setData({
-        result:"组队招募已经关闭\n发起人关闭的原因如下：",
-        reply:this.data.teamDetail.reason,
-        over:true
-      })
-    }else if(data.haveJoinedIn){
-      this.setData({
-        result:"您已成功入队"
-      })
-    }else if(data.beRefused){
-      this.setData({
-        result:'您的申请被拒绝'
-      })
-    }else if(data.haveSignedUp){
-      this.setData({
-        result:"您已报名该组队，申请正在处理中~"
-      })
-    }
-    // console.log(this);
-    this.changeScrollHeight();
-  },
-
-
-  changeScrollHeight:function(){
-    if(this.data.amITeamInitiator){return;}
-    console.log('work')
-    var that = this;
-    var windowHeight;
-    //设置scroll-view高度
-    wx.getSystemInfo({
-      success: function (res) {
-          windowHeight= res.windowHeight;
-      }
-    });
-    let query = wx.createSelectorQuery();
-    query.select('#scroll-1').boundingClientRect(rect=>{
-        let maxHeight = rect.height;
-        console.log(maxHeight)
-        console.log(windowHeight)
-        if(!that.data.result&&!that.data.reply){  
-          if(maxHeight>windowHeight*0.65){
-            that.setData({
-              maxHeight:"65vh"
-            });
-          }
-        }else if(that.data.result&&!that.data.reply){
-          if(maxHeight>windowHeight*0.60)  {
-            that.setData({
-              maxHeight:"60vh"
-            })
-          }
-        }else if(that.data.result&&that.data.reply){
-          if(maxHeight>windowHeight*0.5){
-            that.setData({
-              maxHeight:"50vh"
-            })
-          }
-        }
-      }).exec();
-      
-  },
+// 下方申请按钮  /   最上头像列表的加号
   applyButton:function(e){
-    var that=this;
-    if(Object.keys(this.data.teamDetail.question).length==0){
-      wx.request({
-        url: app.globalData.url+'/userTeam/apply',
-        method:"POST",
-        header:{'cookie':wx.getStorageSync('token')},
-        data:{
-          teamId:that.data.teamId,
-        },
-        success:function(res){
-          console.log(res.statusCode)
-          if(res.statusCode==200){
+    let that=this;
+    let applyStatus = that.data.teamDetail.applyStatus;
+    let status = that.data.status;
+    if(status>=3){
+      wx.showToast({
+        title: '组队已关闭',
+        icon : 'error'
+      })
+    }else if(that.data.amITeamInitiator){
+      wx.showToast({
+        title: '你已经在队伍中了',
+        icon : 'error'
+      })
+    }else if(status == 2){
+      wx.showToast({
+        title: '组队成员已满',
+        icon : 'error'
+      })
+    }else if(applyStatus == 0){
+      wx.showToast({
+        title: '你已经申请过了',
+        icon : 'error'
+      })
+    }else if(applyStatus == 1 || applyStatus == 2){
+      wx.showToast({
+        title: '你已经在队伍中了',
+        icon : 'error'
+      })
+    }else if(applyStatus == 5 || applyStatus == 6){
+      wx.showToast({
+        title: '队伍已关闭',
+        icon : 'error'
+      })
+    } else {
+      if(this.data.teamDetail.question.length==0){
+        request({
+          url:'/userTeam/apply',
+          method:"POST",
+          header:{'cookie':wx.getStorageSync('token')},
+          data:{
+            teamId:that.data.teamId,
+          },
+        }).then(res => {
+          if(res.statusCode>=200&&res.statusCode<300){
             wx.showToast({
               title: '申请已提交',
               icon:'success',
               duration:2000
             });
+            return that.getTeamDetail(that.data.teamId);
+          }else{
+            throw new Error('网络故障，请重试')
           }
+        }).then(result => {
+          console.log(result);
           that.setData({
-            result:"您已报名该组队，申请正在处理中~",
-            haveSignedUp:true
-          });
-        }
-      })
-    }else{
-      wx.navigateTo({
-        url: '/pages/jiren/answerQuestion?teamId='+that.data.teamId,
-        events: {
-          // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-          getResult: function(data) {
-            if(data){
-              that.setData({
-                haveSignedUp:true,
-                result:"您已报名该组队，申请正在处理中~"
-              });
-              //以下这个函数没有发挥作用，解决办法并不容易。等和后端接口接上后问题自然就解决了，也不需要下面这个函数调用了。
-              that.changeScrollHeight();
+            teamDetail: result,
+            timeIsOver:(result.status>2?true:false)
+          })
+          that.checkStatus(result);
+        }).catch(err => {
+          console.log(err);
+        })
+      }else{
+        wx.navigateTo({
+          url: '/pages/jiren/answerQuestion?teamId='+that.data.teamId,
+          events: {
+            // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+            getResult: function(data) {
+              if(data){
+                that.setData({
+                  haveSignedUp:true,
+                  result:"您已报名该组队，申请正在处理中~"
+                });
+                //以下这个函数没有发挥作用，解决办法并不容易。等和后端接口接上后问题自然就解决了，也不需要下面这个函数调用了。
+                // that.changeScrollHeight();
+              }
+              that.getTeamDetail(that.data.teamId)
+              .then(result=>{
+                console.log(result);
+                that.setData({
+                  teamDetail: result,
+                  timeIsOver:(result.status>2?true:false)
+                })
+                that.checkStatus(result);
+              }).catch(err => {
+                console.log(err);
+              })
+              
             }
           }
-        }
-      })
-    };
+        })
+      };
+    }
+    
     console.log("over");
   },
+
   cancelButton: function(e){
     let dialog = {
       isDialogShow: true,
@@ -917,23 +897,70 @@ Page({
   },
   dialogTapOkForCancelApplication:function(e){
     let that=this;
-    wx.request({
-      url: app.globalData.url+'/userTeam/cancelApply',
+    request({
+      url:'/userTeam/cancelApply',
       data:{
         teamId:that.data.teamId
       },
       method:'POST',
       header:{'cookie':wx.getStorageSync('token')},
-      success:function(res){
-        that.setData({
-          // haveSignedUp:false,
-          haveSignedUp:false,
-          result:'已取消申请',
-        });
-        that.changeScrollHeight();
+    }).then(res => {
+      if(res.statusCode>=200&&res.statusCode<300){
+        return that.getTeamDetail(that.data.teamId);
+      }else{
+        throw new Error('网络故障，请重试')
       }
-    })    
+    }).then(result=>{
+      console.log(result);
+      that.setData({
+        teamDetail: result,
+        timeIsOver:(result.status>2?true:false)
+      })
+      that.checkStatus(result);
+    }).catch(err => {
+      console.log(err);
+    }) 
   },
+
+
+
+  // initializeResult:function(e){
+  //   let data=this.data;
+  //   if(data.timeIsOver){
+  //     this.setData({
+  //       result:"组队招募已经结束",
+  //       over:true
+  //     })
+  //   }else if(data.memberFull){
+  //     this.setData({
+  //       result:"队伍成员已满",
+  //       over:true,
+  //     })
+  //   }else if(data.beClosedInAdvance){
+  //     this.setData({
+  //       result:"组队招募已经关闭\n发起人关闭的原因如下：",
+  //       reply:this.data.teamDetail.reason,
+  //       over:true
+  //     })
+  //   }else if(data.haveJoinedIn){
+  //     this.setData({
+  //       result:"您已成功入队"
+  //     })
+  //   }else if(data.beRefused){
+  //     this.setData({
+  //       result:'您的申请被拒绝'
+  //     })
+  //   }else if(data.haveSignedUp){
+  //     this.setData({
+  //       result:"您已报名该组队，申请正在处理中~"
+  //     })
+  //   }
+  // },
+
+
+
+
+
   testButton:function(e){
     let tipBox = {
       show:true,
@@ -943,11 +970,13 @@ Page({
       tipBox:tipBox
     })
   },
+
   tipBoxButton:function(e){
     this.setData({
       tipBox:{show:false}
     })
   },
+
   changeScrollHeight2(){
     var that=this;
     var windowHeight=this.windowHeight
@@ -977,11 +1006,14 @@ Page({
         });
       }).exec();
   },
+  // 点击图片 图片放大预览事件
   zoomInDetailPicture:function(e){
     var imgUrl = this.data.teamDetail.pictures;
     wx.previewImage({
       urls: imgUrl,//注意这个urls,如果原来是数组就直接用,如果原来就一张图需要加中括号强制把他变成数组
-      current: e.currentTarget.dataset.picUrl,//不写值的话默认是上面那个数组的第一个元素,只有写了点击对应图片才能点哪张放大哪张
+      current: e.currentTarget.dataset.picUrl||e.detail.picUrl,//不写值的话默认是上面那个数组的第一个元素,只有写了点击对应图片才能点哪张放大哪张   
+      // ||后面是发起者视角的自定义组件，传来的picUrl
     })
   }
+
 })
