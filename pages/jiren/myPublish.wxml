@@ -1,10 +1,21 @@
 <!--pages/jishi/main.wxml-->
-<view class="jiren-background">
+<view class="jiren-background"></view>
+<view class="jiren-container">
   <view> 
     <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="我发起的组队"></mp-navigation-bar>
   </view>
-  <view class="jiren-container">
-    <scroll-view class="list" scroll-y="true">
+  <view class="container-without-tab">
+    <scroll-view 
+    enable-back-to-top="true" 
+    refresher-enabled="true" 
+    bindrefresherrefresh = "onRefresherRefresh"
+    refresher-triggered = "{{isRefresherOpen}}"
+    with-animation='true' 
+    bindscroll="onMyScroll" 
+    scroll-y="true" 
+    with-animation='true' 
+    scroll-top='20rpx'
+    class="list">
       <navigator url="groupDetail?teamId={{item.id}}" wx:for="{{myTeamList}}" class="list-item">
         <card-me
         labelText="{{item.labelContent}}"
@@ -19,7 +30,7 @@
         postingPic="{{item.firstPicUrl}}"
         ></card-me>
       </navigator>
-
+      <view class="last"></view>
     </scroll-view>
   </view>
 </view>

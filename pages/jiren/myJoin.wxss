@@ -1,13 +1,29 @@
 @import "/static/common.wxss";
 
+.container-without-tab{
+  position: relative;
+  top: 1vh;
+  bottom: 0;
+  width: 100%;
+  left:0;
+  height: 89vh;
+  border-radius: 50rpx 50rpx 0 0;
+  background: rgba(242, 252, 255, 0.35);
+  overflow: hidden;
+}
 .list{
   height: 100%;
-  width: 92%;
-  margin: 0 auto;
+  width: 100%;
+  margin: 20rpx auto 0;
 }
 
 .list-item{
-  margin-bottom: 30rpx;
+  width: 92%;
+  margin: 0 auto 30rpx;
+}
+.last{
+  height: 6vh;
+  width: 2vh;
 }
 .btn-box{
   display: flex;

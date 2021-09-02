@@ -1,14 +1,24 @@
-<view class="jiren-background">
+<view class="jiren-background"></view>
+<view class="jiren-container">
   <view>
     <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="我参与的组队"></mp-navigation-bar>
   </view>
-  <view class="jiren-container">
+  <view class="container-without-tab">
     <view class="btn-box">
       <button class="btn-left {{amIAccepted?'btn-selected':''}}" bindtap="onBtnTap">已入队</button>
       <button class="btn-right {{amIAccepted?'':'btn-selected'}}" bindtap="onBtnTap">已申请</button>
     </view>
-    
-    <scroll-view class="list" scroll-y="true">
+    <scroll-view 
+    enable-back-to-top="true" 
+    refresher-enabled="true" 
+    bindrefresherrefresh = "onRefresherRefresh"
+    refresher-triggered = "{{isRefresherOpen}}"
+    with-animation='true' 
+    bindscroll="onMyScroll" 
+    scroll-y="true" 
+    with-animation='true' 
+    scroll-top='20rpx'
+    class="list">
       <navigator url="groupDetail" wx:if="{{amIAccepted}}" wx:for="{{acceptTeamList}}" url="groupDetail?teamId={{item.id}}"
        class="list-item">
         <card-team
@@ -34,7 +44,7 @@
         postingPic="{{item.firstPicUrl}}"
         ></card-team>
       </navigator>
-
+      <view class="last"></view>
     </scroll-view>
   </view>
 </view>

@@ -66,11 +66,11 @@
           <block wx:for="{{applierList}}" >
             <view class='list-item'>
               <image src='{{item.avatar}}' class='list-item-avatar' bindtap="tapApplierAvatar" data-index="{{index}}"></image>
-              <view class='list-item-username' bindtap="tapApplierAvatar" data-index="{{index}}">{{item.nickname}}</view>
+              <view class='list-item-username' bindtap="tapApplierAvatar" data-index="{{index}}">{{item.nickName}}</view>
               <view class='list-item-apply-time'>{{item.applyTime}}</view>
               <view wx:if="{{item.answer.length>0}}" class='see-answer' data-index="{{index}}" bindtap="showAnswers" >查看回答</view>
-              <image class='tick' src='/static/icon/tick.png' bindtap="acceptApplying" data-applyername="{{item.nickname}}" data-applyerid="{{item.id}}"></image>
-              <image class='cross' src='/static/icon/cross-purple.png' data-applyername="{{item.nickname}}" data-applyerId="{{item.id}}" bindtap="refuseApplying"></image>
+              <image class='tick' src='/static/icon/tick.png' bindtap="acceptApplying" data-applyer-name="{{item.nickName}}" data-applyer-id="{{item.id}}"></image>
+              <image class='cross' src='/static/icon/cross-purple.png' data-applyer-name="{{item.nickName}}" data-applyer-id="{{item.id}}" bindtap="refuseApplying"></image>
             </view>
           </block>
           <view class="empty-block">　</view>

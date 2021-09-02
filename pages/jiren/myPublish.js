@@ -26,50 +26,21 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    request({
-      url : '/userTeam/teamInitiatedByMe',
-      header: {
-        'content-type': 'x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
-      }
-      // data : setRequestData(keyword, labelId, timeIndex)
-    }).then(res => {
-      if(res.statusCode >=200 && res.statusCode <=300){
-        // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
-        let myTeamList = res.data.data.map( v=>{
-          // status = 1  ;  表示：待处理的组队
-          if(v.status == 1){
-            v.rightTagText = '待处理';
-            v.teamCondition = 'processing';
-          }else if(v.status == 2){
-            v.rightTagText = '已满员';
-            v.teamCondition = 'full';
-          }
-          else if(v.status == 3 || v.status == 4){
-            v.rightTagText = '已关闭';
-            v.teamCondition = 'close';
-          }
-          v.dueTime = '截止时间：'+formatTime(v.dueTime);
-          v.peopleCount = v.participantNumber + '/' + v.dueMember ;
-          return v;
-        });
-        this.setData({
-          myTeamList
-        })
-      }else{
-        wx.showToast({
-          title: '失败',
-          icon: 'error'
-        })
-      } 
-    }).catch( err=> {
+  onLoad: function () {
+    let that = this;
+    that.getTeamList()
+    .then(res => {
+      console.log(res);
+      that.setData({
+        myTeamList: res
+      })
+    }).catch(err => {
       console.log(err);
       wx.showToast({
-        title: '失败',
+        title: '网络错误，请重试',
         icon: 'error'
       })
-    });
+    })
   },
 
   /**
@@ -121,5 +92,63 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  // 请求：（异步）返回teamList数组
+  getTeamList(){
+    return request({
+      url : '/userTeam/teamInitiatedByMe',
+      header: {
+        'content-type': 'x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      }
+    }).then(res => {
+      if(res.statusCode >=200 && res.statusCode <300){
+        // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
+        let myTeamList = res.data.data.map( v=>{
+          // status = 1  ;  表示：待处理的组队
+          if(v.status == 1){
+            v.rightTagText = '待处理';
+            v.teamCondition = 'processing';
+          }else if(v.status == 2){
+            v.rightTagText = '已满员';
+            v.teamCondition = 'full';
+          }
+          else if(v.status == 3 || v.status == 4){
+            v.rightTagText = '已关闭';
+            v.teamCondition = 'close';
+          }
+          v.dueTime = '截止时间：'+formatTime(v.dueTime);
+          v.peopleCount = v.participantNumber + '/' + v.dueMember ;
+          return v;
+        });
+        return myTeamList;
+      }else{
+        wx.showToast({
+          title: '失败',
+          icon: 'error'
+        })
+        return Promise.reject(res);
+      } 
+    })
+  },
+
+  // scroll-view 下拉刷新事件
+  onRefresherRefresh(){
+    let that = this;
+    that.getTeamList()
+    .then(res => {
+      console.log(res);
+      that.setData({
+        myTeamList: res,
+        isRefresherOpen: false
+      })
+    }).catch(err => {
+      console.log(err);
+      wx.showToast({
+        title: '网络错误，请重试',
+        icon: 'error'
+      })
+    })
   }
 })

@@ -100,7 +100,6 @@ Page({
       if(that.data.amITeamInitiator){
         return that.getApplierList(that.data.teamId)
         .then(applierList => {
-          console.log(applierList);
           that.setData({
             applierList
           })
@@ -394,7 +393,6 @@ Page({
     })
     .then(res=>{
       let data=res.data.data
-      console.log(data);
       if(data.length == 0){
         return Promise.resolve([]);
       }else{
@@ -429,7 +427,7 @@ Page({
             isCheckAnswerButtonShow,
             'applyTime':util.getDateDiff(createTime),
             'avatar':avatarUrl,
-            'nickname':nickName,
+            'nickName':nickName,
             description,
             'grade':gradePublic?grade:'',
             gradePublic,
@@ -548,7 +546,7 @@ tapApplierAvatar(e){
     let answer = {
       answerList : that.data.applierList[index].answer,
       questionList : that.data.teamDetail.question,
-      nickName : applier.nickname,
+      nickName : applier.nickName,
       avatar : applier.avatar
     }
     this.setData({
@@ -576,13 +574,14 @@ tapApplierAvatar(e){
   
   acceptApplying: function(e){
     let applyer = e.currentTarget.dataset;
+    console.log(applyer);
     this.setData({ 
-      targetId:applyer.applyerid,
-      targetNickName:applyer.nickName,
+      targetId:applyer.applyerId,
+      targetName:applyer.applyerName,
     });
     let dialog = {
       isDialogShow: true,
-      content:'确定同意 ' + applyer.applyername  + ' 加入组队？',
+      content:'确定同意 ' + applyer.applyerName + ' 加入组队？',
       hasInputBox:false,
       tip:"",
       cancelText:"取消",
@@ -610,7 +609,7 @@ tapApplierAvatar(e){
       method:'POST'
     }).then(res => {
       console.log(res);
-      that.showTipBox(that.data.targetNickName+'已成功入队！可点击头像查看微信号，快去与ta联系吧！');
+      that.showTipBox(that.data.targetName+'已成功入队！可点击头像查看微信号，快去与ta联系吧！');
 
       // 重新请求获取 成员列表、申请者列表数据
       let getTeamMemberList = that.getTeamMemberList(that.data.teamId, that.data.amITeamInitiator, that.data.teamDetail.dueMember);
@@ -627,19 +626,20 @@ tapApplierAvatar(e){
       console.log(err);
     })
 
-    this.initializeResult();
+    // this.initializeResult();
   },
 
   refuseApplying: function(e){
     let applyer = e.currentTarget.dataset;
+    console.log(applyer);
     this.setData({ 
-      targetId:applyer.applyerid,
-      targetName : applyer.applyername
+      targetId:applyer.applyerId,
+      targetName : applyer.applyerName
     });
     // console.log(this.data.targetId);
     let dialog = {
       isDialogShow: true,
-      content:'确定拒绝 ' + applyer.applyername  + ' 加入组队？',
+      content:'确定拒绝 ' + applyer.applyerName  + ' 加入组队？',
       hasInputBox:false,
       tip:"",
       cancelText:"取消",
@@ -667,7 +667,8 @@ tapApplierAvatar(e){
       method:'POST',
     }).then(res => {
       wx.showToast({
-        title: '拒绝id为'+that.data.targetName+'的申请',
+        title: '已拒绝'+that.data.targetName+'的申请',
+        icon: 'success'
       });
 
       // 请求 申请者列表的数据
