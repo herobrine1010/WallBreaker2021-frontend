@@ -49,7 +49,7 @@
     bindscroll="onMyScroll" 
     class="listArea" 
     scroll-y="true" 
-    with-animation='true' 
+    scroll-with-animation='true' 
     scroll-top='{{ topNum }}' 
     refresher-enabled="true" 
     bindrefresherrefresh = "onRefresherRefresh"
