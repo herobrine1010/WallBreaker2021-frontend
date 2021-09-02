@@ -153,8 +153,8 @@
     </view>
   </view>
   </view>
-
-<personal-animation id="personalAnimation" isPersonalInfoShow="{{isPersonalInfoShow}}" personalInfo="{{avatar}}" bind:seeAnswer="showAnswers" ></personal-animation>
+<!--  -->
+<personal-animation id="personalAnimation"   personalInfo="{{avatar}}" isPersonalInfoShow="{{isPersonalInfoShow}}" bind:seeAnswer="showAnswersInPersonalAnimation" data-avatar = "{{avatar}}"></personal-animation>
 
 <dialog-box 
 id="dialogBox"

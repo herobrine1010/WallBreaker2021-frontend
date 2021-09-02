@@ -1,15 +1,17 @@
 <view class="pa-block" wx:if="{{isPersonalInfoShow}}" bindtap='hideModal'></view>
 <view class='pa-choose' wx:if="{{isPersonalInfoShow}}" animation='{{animationData}}'>
-  <image class="pa-avatar" src="{{personalInfo.avatar}}"></image> 
-  <view class="pa-text-area">
+  <view class="pa-avatar-area">
+    <image class="pa-avatar" src="{{personalInfo.avatar}}"></image> 
+  </view>
+  <view class="pa-text-area poby-text bd medium color-sec">
     <view class="pa-nickname-and-check-answer">
-      <view class="pa-nickname">{{personalInfo.nickname}}</view>
-      <view wx:if="{{personalInfo.isCheckAnswerButtonShow}}" class="pa-check-answer" bindtap="seeAnswer" data-id="{{personalInfo.id}}">查看回答</view>
+      <view class="pa-nickname poby-text h5 color-sec">{{personalInfo.nickName}}</view>
+      <view wx:if="{{personalInfo.isCheckAnswerButtonShow}}" class="pa-check-answer poby-text bd " bindtap="seeAnswer" data-id="{{personalInfo.id}}">查看回答</view>
     </view>
-    <view class="pa-wx-id" bindlongtap="copyWxId" wx:if="{{personalInfo.wxIdPublic}}">
+    <view class="pa-wx-id " bindlongtap="copyWxId" wx:if="{{personalInfo.wxIdPublic&&personalInfo.wxId}}">
       微信号 {{personalInfo.wxId}}
     </view>
-    <view  wx:if="{{personalInfo.description!=undefined}}" class="pa-description">{{personalInfo.description}}</view>
+    <view  wx:if="{{personalInfo.description!=undefined}}" class="pa-description poby-text bds medium color-dis">{{personalInfo.description}}</view>
     <view class="pa-info-area"
     wx:if="{{personalInfo.schoolPublic || personalInfo.majorPublic || personalInfo.gradePublic || personalInfo.identityPublic}}">
       <view class="pa-school" wx:if="{{personalInfo.schoolPublic}}">{{personalInfo.school}}</view>
@@ -17,18 +19,21 @@
       <view class="pa-grade" wx:if="{{personalInfo.gradePublic}}">{{personalInfo.grade}}</view>
       <view class="pa-identity" wx:if="{{personalInfo.identityPublic}}">{{personalInfo.identity}}</view>
     </view>
-    <view wx:if="{{personalInfo.personalLabel.length!=0}}" class="pa-label-area">
-      <block wx:for="{{personalInfo.personalLabel}}">
-        <view class="pa-personal-label">
+    <view class="pa-label-container">
+      <view wx:if="{{personalInfo.personalLabel.length!=0}}" class="pa-label-area">
+        <block wx:for="{{personalInfo.personalLabel}}">
+          <view class="pa-personal-label">
             {{item}}
-        </view>
-      </block>
+          </view>
+        </block>
+      </view>
+      <view wx:if="{{personalInfo.interestLabel.length!=0}}" class="pa-label-area">
+        <block wx:for="{{personalInfo.interestLabel}}">
+          <view class="pa-interest-label">{{item}}</view>
+        </block>
+      </view>
     </view>
-    <view wx:if="{{personalInfo.interestLabel.length!=0}}" class="pa-label-area">
-      <block wx:for="{{personalInfo.interestLabel}}">
-        <view class="pa-interest-label">{{item}}</view>
-      </block>
-    </view>
+    
   </view>
   <!-- <text class="pa-nickname">{{personalInfo.userName}}</text>
   <text class="pa-signature">{{personalInfo.signature}}</text>

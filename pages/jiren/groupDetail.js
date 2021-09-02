@@ -342,7 +342,7 @@ Page({
             initiator,
             me,
             'avatar':avatarUrl,
-            'nickname':nickName,
+            'nickName':nickName,
             description,
             'grade':gradePublic?grade:'',
             gradePublic,
@@ -359,16 +359,15 @@ Page({
           };
           if(amITeamInitiator){
             // 排除：1 answer = null;2. answer ={}（空对象）
-            if(answer instanceof String && answer!="{}"){
-              // let answerList=[];
+            if(answer && (typeof answer == 'string') && answer!="{}"){
               console.log(answer);
-              let answer=JSON.parse(answer)
+              answer=JSON.parse(answer)
               let values = Object.values(answer);
               temp.answer = values;
               temp.isCheckAnswerButtonShow=true;
+            }
               temp.wxIdPublic=true; 
               temp.wxId = wxId;               
-            }
           }
           list.push(temp);
         };
@@ -455,7 +454,7 @@ tapAvatar(e){
   const that = this;
   let index=e.currentTarget.dataset.index;
   console.log(index);
-  let avatar = this.data.teamMemberList[index];
+  let avatar = that.data.teamMemberList[index];
   console.log(avatar);
   that.setData({
     isPersonalInfoShow:true,
@@ -522,8 +521,9 @@ tapApplierAvatar(e){
         },
       }).then(res=>{
         if(res.statusCode>=200&&res.statusCode<300){
-          wx.showModal({
-            title : '组队招募已结束！',
+          wx.showToast({
+            title: '组队招募已结束！',
+            icon:'success'
           })
           return that.getTeamDetail(teamId);
         }
@@ -539,6 +539,7 @@ tapApplierAvatar(e){
   showAnswers:function(e){// wxml页面上还存在点问题，待更改！！！！！！！！！！！！！！！！！！
     let that = this;
     let index=e.currentTarget.dataset.index;
+    console.log(index);
     let applier = that.data.applierList[index]
     console.log(applier.nickName);
     console.log(that.data.applierList[index].answer);
@@ -560,6 +561,23 @@ tapApplierAvatar(e){
       answer : null,
       isAnswerShow: false
     });
+  },
+  // 在弹出的资料卡中点击查看回答
+  showAnswersInPersonalAnimation:function(e){// wxml页面上还存在点问题，待更改！！！！！！！！！！！！！！！！！！
+    let that = this;
+    let avatar=e.currentTarget.dataset.avatar ;
+    let answer = {
+      answerList : avatar.answer,
+      questionList : that.data.teamDetail.question,
+      nickName : avatar.nickName,
+      avatar : avatar.avatar
+    }
+    that.setData({
+      answer,
+      isAnswerShow: true,
+      // isPersonalInfoShow:false
+    });
+
   },
 
   showTipBox:function(message){

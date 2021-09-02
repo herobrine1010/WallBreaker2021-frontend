@@ -19,7 +19,7 @@ Component({
       type:Object,
       value:{
         "avatar":"https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02",
-        "nickname":"小砂糖星!",
+        "nickName":"小砂糖星!",
         "wxId":"abcdefg123456789",
         "description":"START:DASH!",
         "school":"建筑学院",
