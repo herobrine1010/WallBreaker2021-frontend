@@ -53,7 +53,8 @@
     "pages/tongde/my",
     "pages/tongde/myLost",
     "pages/jishi/detail-new",
-    "pages/jishi/link"
+    "pages/jishi/link",
+    "pages/testPage/testfilter"
   ],
   "window": {
     "backgroundTextStyle": "dark",
