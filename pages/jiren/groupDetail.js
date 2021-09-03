@@ -240,7 +240,7 @@ Page({
         }
         let teamDetail = {
           'avatar':avatarUrl,
-          'nickname':nickName,
+          'nickName':nickName,
           description,
           'grade':gradePublic?grade:'',
           gradePublic,
