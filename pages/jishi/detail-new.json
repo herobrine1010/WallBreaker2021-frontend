@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
-    "personal-animation":"/components/personal-animation/personal-animation"
+    "personal-animation":"/components/personal-animation/personal-animation",
+    "mp-html":"../../components/mp-html/index"
   }, 
   "navigationStyle": "custom"
 }

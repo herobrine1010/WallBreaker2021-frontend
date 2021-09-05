@@ -14,7 +14,7 @@
     <text class="date">{{date}}</text>
   </view>
   <view class="content">
-    <rich-text nodes="{{content}}"></rich-text>
+    <mp-html content="{{content}}"/>
   </view>
   <view class="position"></view>
   <view class="nav-card" bindtap="attachNavgitor">
