@@ -1,0 +1,8 @@
+<!--pages/testPage/testfilter.wxml-->
+<text>pages/testPage/testfilter.wxml</text>
+<view bind:tap="openClose">筛选 页面</view>
+<filter id="filter"
+labels="{{tongdeLabels}}" 
+bind:change="filterChange"
+model:isFilterOn="{{on}}"></filter>
+<view>页面上的其他组件</view>

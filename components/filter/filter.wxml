@@ -1,0 +1,20 @@
+<!--components/filter/filter.wxml-->
+<!-- 用于首页的筛选组件 -->
+<view class="filter" wx:if="{{isFilterShow}}">
+  <view class="filter-shade" bind:tap="tapShade"></view>
+  <view class="extent-area">
+    <view class="label-container">
+      <block wx:for="{{labelList}}" wx:for-item="label" wx:key="id" wx:for-index="index">
+        <text 
+        data-index="{{index}}"
+        class="{{label.selected ? 'textSelected':'textNotSelected'}}" 
+        bind:tap="tapLabel"
+        >{{ label.content }}</text>
+      </block>
+    </view>
+    <view class="button-area">
+      <text id="confirm" class="button-text" bind:tap="tapComfirm">确定</text>
+      <text id="cancel" class="button-text" bind:tap="tapCancel">取消</text>
+    </view>
+  </view>
+</view>

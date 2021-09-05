@@ -1,0 +1,42 @@
+/* components/filter/filter.wxss */
+.filter-shade {
+  position: fixed;
+  top: 0;
+  bottom: 100%;
+  width:100%;
+  height:100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 98;
+}
+.extent-area {
+  position: absolute;
+  width: 600rpx;
+  background-color: #F9F2FF;
+  z-index: 99;
+}
+.label-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /*换行*/
+  justify-content: space-around; /*第一个项目离主轴起点和最后一个项目离主轴终点距离为中间项目间间距的一半*/
+  align-items: center; /*项目在行中居中对齐*/
+}
+.textSelected,
+.textNotSelected {
+  height: 50rpx;
+  width: 120rpx;
+  margin: 6rpx;
+
+  border-radius: 20rpx;
+  text-align: center; /*水平居中*/
+}
+.textSelected {
+  background-color: aquamarine;
+}
+.textNotSelected {
+  background-color: white;
+}
+.button-area {
+  display: flex;
+  justify-content: space-around;
+}
