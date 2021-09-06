@@ -1,0 +1,22 @@
+<!--components/card-lost/card-my.wxml-->
+<view class="container">
+	<!-- 没有使用img标签，使用background-image: url();引入图片，css设置图片裁剪方式 -->
+	<view class="left-block" style="background-image: url({{postingPic}})">
+		<text wx:if="{{type==1}}" class="image-text-lost">物品遗失</text>
+		<text wx:elif="{{type==0}}" class="image-text-found">失物寻主</text>
+	</view>
+	<view class="right-block">
+		<view class="block1">
+			<text class="title">{{ title }}</text>
+			<text class="date">{{ postingDate }}</text>
+		</view>
+		<view class="block2">
+			<!-- 用wx:for布局多个标签 -->
+			<text class="label" wx:for="{{labelText}}"># {{ item }}</text>
+		</view>
+		<view class="block3">
+		<text class="description">{{ description }}</text>
+		</view>
+	</view>
+	<view class="{{closed ? 'button-off' : 'button-on'}}" bind:tap="tapClose">关闭</view>
+</view>

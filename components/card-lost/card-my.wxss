@@ -1,0 +1,169 @@
+/* components/card-lost/card-my.wxss */
+.container {
+	position: absolute;
+	width: 343px;
+	height: 104px;
+	
+	background: #FFFFFF;
+	border-radius: 8px;
+	
+/* 	全局字体设置 */
+	font-family: PingFang SC;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 10px;
+	line-height: 1.5;
+} 
+
+.left-block {
+	position: absolute;
+	left: 3.5%;
+	top: 12%;
+	
+	height: 83.2px;
+	width: 64px;
+
+	background-size: cover; 	/* 等价于AspectFill */
+  background-repeat: no-repeat;
+  
+  border-radius: 4px;
+}
+.image-text-lost, .image-text-found {
+	position: absolute;
+	bottom: 0;
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	text-align: center;
+	
+	border-radius: 4px;
+}
+.image-text-lost {
+	color: #F7F7F7;
+	background: #957D95;
+}
+.image-text-found {
+	background: #3A3042;
+	color: #F7F7F7;
+}
+
+.right-block {
+	position: absolute;
+	left: 24.49%;
+	right: 3.5%;
+	top: 17.96%;
+	bottom: 8.96%;
+	
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 0px;
+}
+
+/* 右侧三个block样式 */
+.block1, .block2, .block3 {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0px;
+	
+	flex: none;
+	flex-grow: 0;
+	margin: 0px 0px 8px 0px;
+}
+
+.block1 {
+	order: 0;
+}
+.block2 {
+	order: 1;
+}
+.block3 {
+	order: 2;
+}
+
+
+/* 第一行block1内的项目样式，包括物品名称与日期 */
+.title {
+	font-weight: bolder;
+
+	/* Text/gary1 */
+	color: #333333;
+	/* Inside Auto Layout */
+
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+	margin: 0px 8px;
+
+	width: 65px;
+	/* 只显示一行，并在末尾加省略号 */
+	overflow: hidden;  
+	white-space: nowrap;    
+	/* 末尾加省略号 */
+	text-overflow:ellipsis;
+}
+.date {
+	font-weight: lighter;
+
+	/* Text/gary2 */
+	color: #545454;
+	
+	/* Inside Auto Layout */
+
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	margin: 0px 8px;
+}
+
+/* 第二行block2设置，包括标签 */
+.label {
+	color: #7C3ECC;
+	background: #F9F2FF;
+	border-radius: 4px;
+
+	margin: 0px 8px 0px 0px;
+	padding: 0px 4px;
+}
+
+/* 第三行block3设置，是招领描述内容 */
+.description {
+	color: #868788;
+  /* 超出部分隐藏 */
+  overflow: hidden;     
+  /* 末尾加省略号 */
+  text-overflow: ellipsis;  
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  /* 行数，也可以设为1，用来做单行 */
+  -webkit-line-clamp:2;
+}
+
+/* 独立button按钮设置 */
+.button-on, .button-off {
+	position: absolute;
+	width: 68px;
+	height: 24px;
+	left: 263px;
+	top: 20px;
+
+	text-align: center;
+	border-radius: 12px;
+	/* 设置line-height等于height实现块级元素垂直居中 */
+	line-height: 24px; 
+}
+
+.button-on {
+	background-color: #3E92CC;
+	color: #F7F7F7;
+}
+
+.button-off {
+	background: #B9B9B9;
+	color: #868788;
+}

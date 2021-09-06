@@ -1,2 +1,6 @@
 <!--pages/tongde/my.wxml-->
-<text>pages/tongde/my.wxml</text>
+<text>my.wxml</text>
+<card-my></card-my>
+<scroll-view>
+  <card-my></card-my>
+</scroll-view>
