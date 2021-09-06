@@ -84,6 +84,7 @@ Page({
     conditionFilterOpen:false,
     conditions:['竞赛','学术科研','一起造梦','其他'],
     conditionsSelected:[false,false,false,false], */
+    conditionFilterOpen:false,
     jishiItemList:[
     //   {
     //   'labelText':'未分类',

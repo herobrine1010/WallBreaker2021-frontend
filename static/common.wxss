@@ -1,15 +1,20 @@
 /* 背景相关 */
-.jishi-background{
-/* position */
+/* .jishi-background{
+使用absolute时在滚动时会有bug，改为fixed
 position: absolute;
 left: 0%;
 right: 0%;
 top: 0%;
 bottom: 0%;
-}
+} */
 .jishi-background{
-/* gradient_background */
-background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193, 255, 0) 27.37%), linear-gradient(198.24deg, rgba(140, 26, 255, 0.25) 3.34%, rgba(185, 115, 255, 0) 90.78%), linear-gradient(195.29deg, #A3E5FA 2.51%, #DCBCFB 56.49%);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  /* gradient_background */
+  background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193, 255, 0) 27.37%), linear-gradient(198.24deg, rgba(140, 26, 255, 0.25) 3.34%, rgba(185, 115, 255, 0) 90.78%), linear-gradient(195.29deg, #A3E5FA 2.51%, #DCBCFB 56.49%);
 }
 .jiren-background{
   /* position */
@@ -42,6 +47,23 @@ background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193
   letter-spacing: 4rpx;
   color: #FFFFFF;
   }
+/* 失物招领同德的导航栏样式 */
+.weui-navigation-bar-tongde__centers{
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36rpx;
+  line-height: 50rpx;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  /* letter-spacing: 4rpx; */
+  color: #000000;
+
+  mix-blend-mode: normal;
+  opacity: 0.9;
+}
+
   .weui-search-bar {
     background: rgba(255, 255, 255, 0);
   }
