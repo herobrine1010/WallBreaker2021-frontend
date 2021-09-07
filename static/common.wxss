@@ -25,7 +25,16 @@ bottom: 0%;
   left: 0;
   background: linear-gradient(199.75deg, rgba(140, 26, 255, 0.18) 40.18%, rgba(140, 26, 255, 0) 90.9%),linear-gradient(195.29deg, #DCBCFB 2.51%, #A2E4FA 27.51%);
 }
-
+.tongde-background {
+  /* 渐变只有最上方的200px */
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(180deg, rgba(62,146,204,0.6) -720rpx, rgba(23, 178, 229, 0) 400rpx), #f9f9f9;
+  /* opacity: 0.6; 将不透明度写到rgba中*/
+}
 .background{
   /* position */
   position: absolute;
