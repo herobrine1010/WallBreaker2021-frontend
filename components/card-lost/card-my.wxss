@@ -1,6 +1,7 @@
 /* components/card-lost/card-my.wxss */
 .container {
-	position: absolute;
+	/* 使用relative使子代absolute元素可以定位 */
+	position: relative; 
 	width: 343px;
 	height: 104px;
 	

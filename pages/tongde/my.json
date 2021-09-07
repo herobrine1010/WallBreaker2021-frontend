@@ -1,5 +1,8 @@
 {
   "usingComponents": {
-    "card-my": "/components/card-lost/card-my"
-  }
+    "card-my": "/components/card-lost/card-my",
+    "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar"
+  },
+  "navigationStyle": "custom"
+
 }
