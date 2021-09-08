@@ -108,7 +108,7 @@
                 <image src="{{teamDetail.avatar}}" style="width:80rpx; height:80rpx;border-radius:50%" bindtap="tapInitiatorAvatar" ></image>
               </view>
               <view class="detail-name-and-time">
-                <view class="detail-nickname" bindtap="tapInitiatorAvatar">{{teamDetail.nickname}}</view>
+                <view class="detail-nickname" bindtap="tapInitiatorAvatar">{{teamDetail.nickName}}</view>
                 <view class="detail-apply-time">{{teamDetail.fromTime}}</view>
               </view>
               <view wx:if="{{status < 3}}" class="detail-due-time">{{teamDetail.dueTime}}</view>
