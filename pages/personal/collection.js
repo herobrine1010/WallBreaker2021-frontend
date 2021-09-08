@@ -161,7 +161,7 @@ Page({
             initiator : v.initiatorNickName,
             peopleCount : v.participantNumber + '/' + v.dueMember,
             postingPic : v.firstPicUrl,
-            dueTime : formatTime(v.dueTime),
+            dueTime : '截止时间：' + (v.dueTime==null?"暂无":formatTime(v.dueTime)),
             id : v.id
           };
           // -------- 收藏组队的状态：1:我发起的 / 0:空---------
