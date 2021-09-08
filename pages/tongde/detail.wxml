@@ -1,52 +1,41 @@
 <!--pages/tongde/detail.wxml 失物招领详情页-->
-<view class="jishi-background">
+<view class="tongde-background">
   <view class="navi">
-    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title=" 失物招领详情"></mp-navigation-bar>
+    <mp-navigation-bar ext-class="weui-navigation-bar__tongde" title="{{type==0?'物品遗失':'失物寻主'}}详情"></mp-navigation-bar>
   </view>
 
-  <view class="jiren-container">
+  <view class="tongde-container">
+  
   <scroll-view class="scroll-content" scroll-y="true">
-    <view class="header">
-      <view class="objectName">{{title}}</view>
-      <view class="condition">
-        {{condition}}
-      </view>
-    </view>
-    
     <view class="avator-list">
       <image src="{{userAvatar}}"  class="userAvatar" bindtap='showPersonDetail'></image>
       <text class="userName" bindtap="showPersonDetail">{{userName}}</text>
       <text class="time">{{time}}</text>
+      <view class="condition">{{condition}} <!-- 加入标记 关闭/寻物/寻主 --></view>
     </view>
 
-    
+<!-- 图片滚动显示swiper -->
+    <swiper indicator-dots class="pictureArea" >
+      <swiper-item wx:for="{{pictures}}">
+        <image src='{{item}}' class='img' />
+      </swiper-item>
+    </swiper>
+
     <view class="content">
-      <view class="tag-area">
-        <block wx:for="{{tag}}">
-          <view class="tag">{{item}}</view>
-        </block>
-      </view>
+      <view class="objectName">{{title}}</view>
       <text class="description">{{description}}</text>
+
       <view class="location">
-        <view class="title">遗失/捡到地点</view>
+        <view class="title">{{type==0?'遗失':'捡到'}}地点</view>
         <view class="spot">{{location}}</view>
       </view>
+      
       <view class="contact">
         <view class="title">联系方式</view>
         <view bindtap="contactDetail" class="contactBtn">请点击查看</view>
       </view>
 
-
-      <view class="pictures">
-        <block  wx:for="{{pictures}}" wx:key="{{index}}">
-          <view class="pictureBlock">
-          </view>
-        </block>
-        <block wx:if="{{picturesNum==1}}" >
-          <view class="pictureSingle">
-          </view>
-        </block> 
-      </view>
+<!-- 图片展示转换成用swiper -->
     </view>
     <view class="bottom-block"></view>
 

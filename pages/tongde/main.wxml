@@ -1,8 +1,8 @@
 <!--pages/tongde/main.wxml 失物招领主页-->
 
-<view class="jishi-background">
+<view class="tongde-background">
   <view>
-    <mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar__centers" title="失物招领"></mp-navigation-bar>
+    <mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar-tongde__centers" title="失物招领"></mp-navigation-bar>
   </view>
   
   <view class="search-area">
@@ -13,10 +13,10 @@
 
     <view class="conditionFilter" bindtap="clickConditionFilter">
         <block wx:if="{{conditionIndex==''}}">
-          <image class="conditionIcon" src="/static/icon/select.png"></image>
+          <image class="conditionIcon" src="/static/icon/select-tongde-blue.png"></image>
         </block>
         <block wx:else>
-          <image class="conditionIcon" src="/static/icon/select-purple.png"></image>
+          <image class="conditionIcon" src="/static/icon/select-tongde-blue.png"></image>
         </block>
     </view>
   
@@ -24,14 +24,15 @@
 
   
 <view class="tab">
-  <view class="tab-item {{tab==0?'active':''}}" bindtap="changeItem" data-item="0">物品遗失</view>
+  <view class="tab-item {{tab==0?'active':''}}" bindtap="changeItem" data-item="0">物品遗失
+  </view>
   <view class="tab-item {{tab==1?'active':''}}" bindtap="changeItem" data-item="1">失物寻主</view>
 </view>
 
 
 <view class="content">
-  <!-- indicator-dots用作调试，预计删除 -->
-  <swiper indicator-dots current="{{tabIndex}}" bind:change="changeTab" class = "swiperContent">
+
+  <swiper current="{{tabIndex}}" bind:change="changeTab" class = "swiperContent">
     <swiper-item class="ListArea">
       <scroll-view 
       enable-back-to-top="true" 
@@ -46,26 +47,43 @@
         <view wx:for="{{tongdeItemList}}" class="item">
         <navigator class="lostDetail" url='/pages/tongde/detail'>
           <card-lost
-          card="card"
-          image="image"
-          title="title"
-          tag="tag"
-          time="time"
-          isShowClose="{{false}}"
           labelText="{{item.labelText}}"
           title="{{item.title}}"
           publishTime="{{item.publishTime}}"
           description="{{item.description}}"
           postingPic="{{item.postingPic}}"
-
           ></card-lost>
         </navigator>
       </view>
-     
       </scroll-view>
     </swiper-item>
     <swiper-item>
-      <text>这里是失物寻主内容</text>
+
+    <!-- 应该是与物品遗失完全不一样的内容 -->
+    <scroll-view 
+      enable-back-to-top="true" 
+      refresher-enabled="true" 
+      bindrefresherrefresh = "onRefresherRefresh"
+      refresher-triggered = "{{isRefresherOpen}}"
+      bindscroll="onMyScroll" 
+      scroll-y="true" 
+      with-animation='true' 
+      scroll-top='{{ topNum }}'
+      class="scroll">
+        <view wx:for="{{tongdeItemList}}" class="item">
+        <navigator class="lostDetail" url='/pages/tongde/detail'>
+          <card-lost
+          labelText="{{item.labelText}}"
+          title="{{item.title}}"
+          publishTime="{{item.publishTime}}"
+          description="{{item.description}}"
+          postingPic="{{item.postingPic}}"
+          ></card-lost>
+        </navigator>
+      </view>
+      </scroll-view>
+
+
     </swiper-item>
   </swiper>
   <view>

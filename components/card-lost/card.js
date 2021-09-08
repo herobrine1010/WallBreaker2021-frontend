@@ -10,8 +10,8 @@ Component({
   properties:{
 
     labelText:{
-      type:String,
-      value:'雨伞'
+      type:Array,
+      value:['雨伞','口红']
     },
     title:{
       type:String,
@@ -57,7 +57,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    post_index:1,
   },
 
   /**
@@ -68,5 +68,6 @@ Component({
       console.log(e)
       this.triggerEvent('tapClose',this.data.detail);
     },
+    
   }
 })

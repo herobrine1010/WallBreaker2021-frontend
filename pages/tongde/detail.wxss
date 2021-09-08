@@ -1,155 +1,167 @@
 /* pages/tongde/detail.wxss */
 @import "/static/common.wxss";
-.jiren-container{
-  background: #F9F2FF;
-  }
-  .scroll-content{
-    position: relative;
-    height: 100%;
-    width: 100%;
-  }
-  .header{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 40rpx;
-    margin-top: 50rpx;
-  }
-  .objectName{
-      /* title1/bold/14 */
-      font-family: Noto Sans SC;
-      font-style: normal;
-      font-weight: bold; 
-      /* font-size: 4vw;  */
-      font-size: 36rpx;
-      line-height:40rpx;
-      /* gray4_P */
-      color: #524A59;
-    }
-    .condition{
-      width: 140rpx;
-      height: 44rpx;
-      text-align: center;
-      /* Purple3 */
-      background: #1D99C3;
-      border-radius: 10rpx;
-      font-family: Noto Sans SC;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 30rpx;
-      /* white */
-      color: #FFFFFF;
-    }
-    .userAvatar{
-      position: absolute;
-      left: 50rpx;
-      top: 110rpx;
-      width: 60rpx;
-      height: 60rpx;
-    }
-    .userName{
-      display: inline-block;
-      height: 40rpx;
-      margin: 30rpx  30rpx 30rpx 140rpx;
-      /* tag/medium/11 */
-      font-family: PingFang SC;
-      font-size: 30rpx;
-      line-height: 40rpx;
-      /* Purple3 */
-      color: #7E7685;
-    }
-    .time{
-      /* 2021年6月9日 21:40 */
-      display: inline-block;
-      height: 40rpx;
-      /* tag/medium/10 */
-      font-family: PingFang SC;
-      font-size: 22rpx;
-      line-height: 40rpx;
-      /* identical to box height */
-      /* gray3_P */
-      color: #7E7685;
-    
-    }
-    .content{
-      width: 86%;
-      margin: 0 7%;
-    }
-    .tag-area{
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;      
-      margin-bottom: 20rpx;
-    }
-    .tag{
-      width: 120rpx;
-      height: 40rpx;
-      margin-right: 10rpx;
-      text-align: center;
-      /* Purple3 */
-      background: #c0cfd4;
-      border-radius: 10rpx;
-      font-family: Noto Sans SC;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 26rpx;
-      /* white */
-      color: #FFFFFF;
-    }
-    .description,.location{
-      /* position: relative; */
-      font-family: PingFang SC;
-      font-size: 30rpx;
-      text-align: justify;
-      /* gray4_P */
-      color: #524A59;
-      }
-      .title{
-        /* title1/bold/14 */
-        font-family: Noto Sans SC;
-        font-style: normal;
-        font-weight: bold; 
-        /* font-size: 4vw;  */
-        font-size: 30rpx;
-        line-height:40rpx;
-        /* gray4_P */
-        color: #524A59;
-      }
 
-.contactBtn{
-  height: 40rpx;
-  width: 180rpx;
-  background: #17B2E6;
+.tongde-container{
   font-family: PingFang SC;
   font-style: normal;
-  font-weight: bold;
-  font-size: 26rpx;
-  border-radius: 15rpx;
-  text-align: center;
-  color: #FFFFFF;
+  line-height: 125%;
+  height: 100%;
 }
-.pictures{
+.scroll-content{
+  height: 90%;
+}
+.objectName{
+    width: 388rpx;
+    height: 40rpx;
+    /* Title/16bold */
+    font-weight: 600;
+    font-size: 32rpx;
+    /* Text/gary1 */
+    color: #333333;
+    /* Inside Auto Layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 4px 0px;
+}
+
+.avator-list{
   display: flex;
-  flex-wrap: wrap;
-  margin:10rpx 0;
+  justify-content: flex-start;
+  align-items: center;
+  height: 48rpx;
+  margin:0 32rpx;
 }
-.pictureBlock{
-  width: 200rpx;
-  height: 200rpx;
-  margin-right: 15rpx;
-  margin-bottom: 15rpx;
-  /* Rectangle 15 */
-  /* Gray1 */
-  background: #E6E6E6;
-  border-radius: 16rpx;
-  }
-  .pictureSingle{
-    width: 512rpx;
-    height: 288rpx;
-    margin: 0 auto;
-    background: #E6E6E6;
-    border-radius: 16rpx;
-  }
+.userAvatar{
+  width: 48rpx;
+  height: 48rpx;
+}
+.userName{
+   height: 30rpx;
+   /* Body/12medium */
+  font-weight: 500;
+  font-size: 20rpx;
+  line-height: 150%;
+  /* Text/gary1 */
+   color: #333333;
+  /* Inside Auto Layout */
+  margin:0 16rpx;
+}
+.time{ 
+  /* 2021年6月9日 21:40 */
+  height: 30rpx;
+  /* tag/medium/10 */
+  font-size: 20rpx;
+  line-height: 150%;
+  /* identical to box height */
+  /* gray3_P */
+  color: #545454;
+  margin-right: 78px;
+}
+.condition{
+  display: inline-block;
+  padding: 10rpx 48rpx 8rpx;
+  /* font */
+  font-weight: 500;
+  font-size: 20rpx;
+  line-height: 150%;
+  /* identical to box height, or 15px */
+  text-align: center;
+  /* Text/white1 */
+  color: #F7F7F7;
+  background: #3A3042;
+  border-radius: 24rpx;
+  /* Inside Auto Layout */
+  order: 0;
+  flex-grow: 0;
+}
+.content{
+  margin: 0 32rpx;
+}
+.description,.spot{
+  width: 696rpx;
+  height: 240rpx;
+
+  /* Body/10regular */
+  font-weight: normal;
+  font-size: 20rpx;
+  line-height: 150%;
+  /* or 15px */
+  /* 超出部分隐藏 */
+  overflow: hidden;     
+  /* 末尾加省略号 */
+  text-overflow: ellipsis;  
+  display: -webkit-box;
+  word-break: break-all;
+  /* Text/gary2 */
+  color: #545454;
+  
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 4px 0px;
+}
+.spot{
+  width: 240px;
+  height: 15px;
+}
+.title{
+  margin-top:12px;
+  width: 112rpx;
+  height: 42rpx;
+      /* Body/14medium */
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+      /* identical to box height, or 21px */
+  color: #000000;
+      /* Inside Auto Layout */
+}
+
+.contactBtn{
+  display: flex;
+flex-direction: row;
+align-items: flex-start;
+margin-top:4px;
+padding: 6px 48px 5px;
+
+width: 72px;
+height: 21px;
+
+/* Text/blue */
+color:#ffffff;
+text-align: center;
+background: #3E92CC;
+border-radius: 4px;
+font-size: 14px;
+line-height: 150%;
+/* Inside Auto Layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+margin: 0px 0px;
+}
+
+.pictureArea{
+  width: 343px;
+  height: 343px;
+  margin: 8px 16px;
+}
+/* TODO 图片自适应大小 */
+.img{
+  /*width: 343px;
+  height: 343px;*/
+  width: 343px;
+  height: 343px;
+  border-radius: 8px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-position: center 0;
+}
+
   .bottom-block{
     height:3vh;
   }

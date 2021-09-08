@@ -12,53 +12,49 @@ Page({
     topNum:0,
     tongdeItemList:[
       {
-        'labelText':'雨伞',
-        'title':'物品名称',
+        'labelText':['雨伞','口红'],
+        'title':'Gucci口红',
         'publishTime':'1天前',
-        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
-        'postingPic':''
+        'description':'在学校图书馆捡到一支Gucci的口红，没有用过多少，九成新，…',
+        'postingPic':'/static/icon/lost-test.png',
+        'type': 0,       // 物品遗失0 or 失物寻主1 
+        'closed': false
       },
       {
-        'labelText':'雨伞',
+        'labelText':['雨伞','口红','手机'],
         'title':'物品名称',
         'publishTime':'1天前',
         'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
-        'postingPic':'a'
+        'postingPic':'/static/icon/lost-test2.png'
+      },
+      
+      {
+        'labelText':['雨伞','口红'],
+        'title':'物品名称',
+        'publishTime':'1天前',
+        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
+        'postingPic':'/static/icon/lost-test.png'
       },
       {
-        'labelText':'雨伞',
+        'labelText':['雨伞','口红'],
         'title':'物品名称',
         'publishTime':'1天前',
         'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
-        'postingPic':'a'
+        'postingPic':'/static/icon/lost-test.png'
       },
       {
-        'labelText':'雨伞',
+        'labelText':['雨伞','口红'],
         'title':'物品名称',
         'publishTime':'1天前',
         'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
-        'postingPic':'a'
+        'postingPic':'/static/icon/lost-test.png'
       },
       {
-        'labelText':'雨伞',
+        'labelText':['雨伞','口红'],
         'title':'物品名称',
         'publishTime':'1天前',
         'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
-        'postingPic':'a'
-      },
-      {
-        'labelText':'雨伞',
-        'title':'物品名称',
-        'publishTime':'1天前',
-        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
-        'postingPic':'a'
-      },
-      {
-        'labelText':'雨伞',
-        'title':'物品名称',
-        'publishTime':'1天前',
-        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
-        'postingPic':'a'
+        'postingPic':'/static/icon/lost-test.png'
       },
     
     ]
