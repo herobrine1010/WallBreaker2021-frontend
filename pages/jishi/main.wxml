@@ -1,5 +1,5 @@
 <!--pages/jishi/main.wxml-->
-<view class="jishi-background">
+<view class="jishi-background"></view>
   <view>
     <mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar__centers" title="济事广场"></mp-navigation-bar>
   </view>
@@ -69,11 +69,10 @@
         userAvatar="{{item.initiatorAvatar}}"
         ></card-notice>
         </view>
-      </block>      
+      </block>
     </scroll-view>
     
   </view>
   <image hidden="{{!showGoTopButton}}" class="backTopButton" bindtap="returnTop" src="/static/icon/back-to-top-purple-circle.png"></image>
   <!-- 发帖的加号图标，jishi无此需求 -->
   <!-- <image class="addButton" bindtap="createNewTeam" src='/static/icon/add-purple-big.png'></image> -->
-</view>
