@@ -63,6 +63,12 @@
       padding:0 0 0 0 ;
       height: 80rpx;
     }
+    .weui-navigation-bar__inner .weui-navigation-bar__left .weui-navigation-bar__btn_goback{
+      padding: 20rpx 40rpx 20rpx 20rpx;
+      width: 36rpx;
+      height: 36rpx;
+      -webkit-mask-size : 30%;
+    }
   /* 以下是 personal页面中 per-container的样式 */
   .per-container{
     /* 定位采用 % 单位，为了全面屏兼容    */

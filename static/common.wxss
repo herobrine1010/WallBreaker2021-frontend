@@ -56,6 +56,13 @@ bottom: 0%;
   letter-spacing: 4rpx;
   color: #FFFFFF;
   }
+/* 导航栏返回按钮，增大原有的点击事件触发范围 */
+  .weui-navigation-bar__inner .weui-navigation-bar__left .weui-navigation-bar__btn_goback{
+    padding: 20rpx 40rpx 20rpx 20rpx;
+    width: 36rpx;
+    height: 36rpx;
+    -webkit-mask-size : 30%;
+  }
 /* 失物招领同德的导航栏样式 */
 .weui-navigation-bar-tongde__centers{
   font-family: PingFang SC;

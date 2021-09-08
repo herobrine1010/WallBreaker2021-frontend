@@ -1,6 +1,5 @@
 <!--miniprogram/pages/jishi/detail-new.wxml-->
-<view class="background">
-</view>
+<view class="background"></view>
 <view class="navi">
   <mp-navigation-bar  ext-class="weui-navigation-bar__centers" title=" 帖子详情" background="{{navBackground}}"></mp-navigation-bar>
 </view>
