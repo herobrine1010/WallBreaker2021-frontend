@@ -103,15 +103,15 @@ Page({
     jirenItemList:[
       {
       'id': '10',
-      'labelContent':'2ff类',
-      'title':'示例标题sfnvkjs例标题…',
+      'labelContent':'提示',
+      'title':'正在加载中…',
       'initializedByMe':false,
       'teamCondition':'mine',
-      'rightTagText':'我发起的',
-      'dueTime':'截止时间: 2021年6月21日 14:00',
-      'content':'这是一段描述性文字，仅用于测试。这是一段用来测试省略号是否能正常显示的文字',
-      'initiatorNickName':'发起人: 示例用户',
-      'peopleCount':'3/5',
+      'rightTagText':'',
+      'dueTime':'截止时间: 2021年11月4日 12:00',
+      'content':'数据正在获取，请耐心等候~',
+      'initiatorNickName':'发起人: 系统管理员',
+      'peopleCount':'0/0',
       'firstPicUrl':''
       }
     ]

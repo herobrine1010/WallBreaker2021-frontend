@@ -55,7 +55,7 @@
     bindrefresherrefresh = "onRefresherRefresh"
     refresher-triggered = "{{isRefresherOpen}}">
     
-      <block wx:for="{{jishiItemList}}">
+      <block wx:for="{{jishiItemList}}" wx:if="{{jishiItemList.length>0}}" >
         <view  class="list-item" bindtap="jumpToDetail" data-postingId="{{item.id}}">
         <card-notice 
         labelId="{{item.labelId}}"
@@ -69,7 +69,10 @@
         userAvatar="{{item.initiatorAvatar}}"
         ></card-notice>
         </view>
-      </block>      
+      </block>
+      <view wx:if="{{jishiItemList.length==0}}" class="noData">
+        暂无数据~
+      </view>      
     </scroll-view>
     
   </view>
