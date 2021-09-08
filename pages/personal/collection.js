@@ -181,7 +181,7 @@ Page({
             title : v.title,
             description : v.content,
             userName : v.initiatorNickName,
-            userAvatar : '',
+            userAvatar : v.initiatorAvatar,
             postingPic : v.firstPicUrl,
             id : v.id
           };
