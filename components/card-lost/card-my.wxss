@@ -148,10 +148,10 @@
 /* 独立button按钮设置 */
 .button-on, .button-off {
 	position: absolute;
-	width: 136px;
-	height: 48px;
-	left: 526px;
-	top: 40px;
+	width: 136rpx;
+	height: 48rpx;
+	left: 526rpx;
+	top: 40rpx;
 
 	text-align: center;
 	border-radius: 24rpx;
