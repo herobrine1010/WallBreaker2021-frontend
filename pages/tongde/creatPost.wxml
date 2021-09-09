@@ -1,28 +1,39 @@
 <!--pages/tongde/creatPost.wxml-->
-<view class="jishi-background">
+<view class="tongde-background"></view>
+
   <view class="navi">
-    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title=" 发布失物招领信息"></mp-navigation-bar>
+    <mp-navigation-bar ext-class="weui-navigation-bar-tongde__centers" title=" 发布失物招领信息"></mp-navigation-bar>
   </view>
   
-  <scroll-view class="outer-container" id="scroll" scroll-y="true" style="{{height}}">
+  <!-- 动态设置scroll-view的高度，在changeScrollHeight中 -->
+  <scroll-view class="outer-container" id="scroll" scroll-y="true" style="height:{{height}};">
     <view class="inner-container">
+    <view class="item-wrap">
       <view class="title">招领类型</view>
       <radio-group class="a-line">
         <radio value="0">物品遗失</radio>
         <radio value="1">失物寻主</radio>
       </radio-group>
+    </view>
+    <view class="item-wrap">
       <view class="title">失物名称</view>
       <view class="input-a-line-box">
         <input class="input-a-line" placeholder="请输入失物名称"/>
       </view>
+    </view>
+    <view class="description">
       <view class="title">情况说明</view>
       <view class="text-box">
-        <textarea class="text-area">我可能在泰国新加坡印度尼西亚咖喱肉骨茶印尼九层塔弄丢了我的水杯，很昂贵，请好心人见到联系我下子，求求你们了。</textarea>
+        <textarea class="text-area" placeholder="请描述一下丢失/捡到东西的情况"></textarea>
       </view>
+    </view>
+    <view class="item-wrap">
       <view class="title">遗失/捡到地点</view>
       <view class="input-a-line-box">
         <input class="input-a-line" placeholder="失物寻主信息必填，物品遗失信息可选填选项"/>
       </view>
+    </view>
+    <view class="item-wrap">
       <view class="title">联系方式</view>
       <view class="a-line">
         <dropdown-box name="teamTheme" range="{{connactTypes}}" current="{{connactType}}" bindchange="dropdownChange" style="width:30%"></dropdown-box>
@@ -30,12 +41,13 @@
           <input class="input-half-line" placeholder="请输入您的联系方式"/>        
         </view>
       </view>
+    </view>
       <view class="tag-a-line">
         <view class="tag-normal" wx:for="{{tagChoosenList}}" >#{{item}}</view>
         <view class="tag-normal" bindtap="clickToChooseTag">#选择标签</view>
       </view>
       <view class="picture-area">
-      
+        <image-box></image-box>
       </view>
       <view class="tip">上传证件相关照片时请记得打码保护隐私哦~</view>
 
@@ -57,4 +69,3 @@
       </view>
     </view>
   </view>
-</view>

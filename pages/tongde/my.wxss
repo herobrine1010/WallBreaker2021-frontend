@@ -1,8 +1,6 @@
 /* pages/tongde/my.wxss */
 @import "/static/common.wxss";
-/* .navigation-bar {
-  z-index: 10;
-} */
+
 .tongde-container {
   height: 100%;
 }
@@ -10,8 +8,9 @@
   margin: 20rpx;
 }
 .scroll-area {
-  position: relative;
-  height: 100%;
+  position: static;
+  /* 传入固定高度667px(iphone6) - 64px(导航栏）= 603px = 1206rpx */
+  height: 1806rpx;
   padding: 0 32rpx;
 }
 .card {

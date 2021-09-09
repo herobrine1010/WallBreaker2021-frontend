@@ -2,205 +2,88 @@
 
 /****************************网格状卡片样式********************************* */
 .card{
-  display: flex;
-  flex-direction: column;
-  height:500rpx;/* 待修改 */
-  background: #eee;
+  height:650rpx;
+  width: 332rpx;
+  border-radius: 20rpx;
+  /*全局字体*/
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20rpx;
+  line-height: 150%;
 }
 .image{/* Rectangle 15 */
   width: 100%;
-  height: 50%;
-  background-color: chocolate;/* 图片占位用 */
-  /* Gray1 */
+  height: 498rpx;
+  background-size: cover;
+  border-radius: 20rpx;
+  /*background-color: chocolate;图片占位用 */
 }
+
 .textArea{
-  display: flex;
-  flex-direction: column;
+  /*display: flex;
+  flex-direction: column;*/
+  border-radius: 24rpx;
+  background-color: #ffffff;
+  /*height:176rpx;*/
+  padding: 14rpx 16rpx 5rpx;
+  margin-top:-150rpx;
+  z-index: 1;
 }
-.LineA{
-  display: flex;
-  height: 30%;
-  justify-content: space-between;
+.timeArea{
+  width: 100%;
+  padding-top: 6rpx;
 }
-
-
 .time{
-  display: flex;
-  justify-content: flex-end;
-  
+  position: relative;
+  top:-30rpx;
+  left: 246rpx;
+  color:#989A9A;
+  font-weight: 300;
 }
 
 .objectName{
   overflow: hidden;
   top: 16rpx;
-  height: 42rpx;
-
-  /* 只显示一行，并在末尾加省略号 */
-  overflow: hidden;  
-  white-space: nowrap;    
-  /* 末尾加省略号 */
-  text-overflow:ellipsis;
-  
-  /* 字体/bold/14 */
-  font-family: PingFang SC;
-  letter-spacing: 1rpx;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 30rpx;
-  line-height: 42rpx;
-  color: #524A59;
-}
-.tag{
-  width: 116rpx;
-  height: 44rpx;
-  text-align: center;
-  /* Purple3 */
-  background: #1D99C3;
-  border-radius: 18rpx;
-  font-family: Noto Sans SC;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 26rpx;
-  line-height: 44rpx;
-  /* white */
-  color: #FFFFFF;
-}
-
-
-
-/**********************************************************************/
-
-/*     下面是card-lost的外部样式            */
-.card-my{
-  position: relative;
-  width: 100%;
-  height: 194rpx;
-  background: #F9F2FF;
-  border-radius: 20rpx;
-}
-
-.image-my{/* Rectangle 15 */
-  position: absolute;
-  width: 150rpx;
-  height: 150rpx;
-  bottom: 20rpx;
-  left: 18rpx;
-  /* Gray1 */
-  background: #1ce677;
-  border-radius: 16rpx;
-}
-
-.time-my{
-  position: absolute;
-  width:80rpx;
-  height:30rpx;
-  right:150rpx;
-  top:16rpx;
-  font-size: 20rpx;
-  color:#7e959c;
-}
-
-.tag-my{
-  position: absolute;
-  width: 116rpx;
-  height: 44rpx;
-  left:200rpx;
-  top:50rpx;
-  text-align: center;
-  /* Purple3 */
-  background: #1D99C3;
-  border-radius: 18rpx;
-  font-family: Noto Sans SC;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 26rpx;
-  line-height: 44rpx;
-  /* white */
-  color: #FFFFFF;
-}
-.objectName-my{
-  position: absolute;
-  left: 200rpx;
-  top: 10rpx;
-  height: 42rpx;
-  width: 400rpx;
-
-  /* 只显示一行，并在末尾加省略号 */
-  overflow: hidden;  
-  white-space: nowrap;    
-  /* 末尾加省略号 */
-  text-overflow:ellipsis;
-  
-  /* 字体/bold/14 */
-  font-family: PingFang SC;
-  letter-spacing: 1rpx;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 30rpx;
-  line-height: 42rpx;
-  color: #524A59;
-}
-.description-my{
-  position: absolute;
+  height: 30rpx;
   width: 300rpx;
-  height: 80rpx;
-  left:200rpx;
-  top:100rpx;
-
+  /* 只显示一行，并在末尾加省略号 */
   overflow: hidden;  
-  white-space: nowrap;
+  white-space: nowrap;    
+  /* 末尾加省略号 */
   text-overflow:ellipsis;
-  /* Purple3 */
-  background: #91c31d;
-  font-family: Noto Sans SC;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 26rpx;
-  line-height: 44rpx;
-  /* white */
-  color: #160e0e;
+  font-weight: 600;
+  color: #333333;
+  margin: 4px 0px;
 }
 
-.closedBtn{
-  position: absolute;
-  left: 520rpx;
-  bottom: 10rpx;
-  width: 120rpx;
+.description{
   height: 60rpx;
-  text-align: center;
-  background: #798e96;
-  color:#eee;
-  border-radius: 10rpx;
+  width: 300rpx;
+  color:#868788;
+  /* 超出部分隐藏 */
+  overflow: hidden;     
+  /* 末尾加省略号 */
+  text-overflow: ellipsis;  
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  /* 行数，也可以设为1，用来做单行 */
+  -webkit-line-clamp:2;
 }
-.unClosedBtn{
-  position: absolute;
-  left: 520rpx;
-  bottom: 10rpx;
-  width: 120rpx;
-  height: 60rpx;
-  text-align: center;
-  background: #1D99C3;
-  color:#eee;
-  border-radius: 10rpx;
- /* margin-top: -20rpx;
-  margin-bottom: 30rpx;
-  margin-right: -50rpx;*/
-}
-.kindTag{
-  position: absolute;
-  right:0rpx;
-  top:0rpx;
-  width:150rpx;
-  height: 50rpx;
 
-  text-align: center;
-  /* Purple3 */
-  background: blueviolet;
-  font-family: Noto Sans SC;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 26rpx;
-  line-height: 44rpx;
-  /* white */
-  color: #FFFFFF;
+.tag{
+  border-radius: 4rpx;
+	margin-right: 16rpx;
+	padding: 0 8rpx;
 }
+.tag.single {
+  color:#3E92CC;
+  background:#f2fcff;
+}
+.tag.double{
+  color: #7C3ECC;
+	background: #F9F2FF;
+}
+
+

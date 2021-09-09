@@ -156,12 +156,14 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
           windowHeight= res.windowHeight;
+          console.log("windows",windowHeight);
       }
     });
     let query = wx.createSelectorQuery();
     query.select('#scroll').boundingClientRect(rect=>{
       console.log(rect)
         let top = rect.top;
+        console.log(top);
         let height=windowHeight-top;
         this.setData({
           height:height+'px',

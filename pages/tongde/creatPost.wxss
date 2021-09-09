@@ -1,50 +1,66 @@
 /* pages/tongde/creatPost.wxss */
 @import "/static/common.wxss";
-
+Page {
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20rpx;
+  line-height: 1.5;
+}
+/* input为原生组件，要用height，min-height覆盖原有属性 */
+input {
+  height: 30rpx;
+  min-height: 30rpx;
+  line-height: 30rpx;
+}
 .inner-container{
   width: 94vw;
   margin: 10rpx 3vw;
+  height: 100%;
+}
+.item-wrap {
+  margin: 32rpx 0;
 }
 .title{
-  margin: 10rpx 0;
-  height: 60rpx;
-  font-size: 40rpx;
+  /* height: 60rpx; */
+  margin-bottom: 16rpx;
+  font-size: 14px;
   font-weight: bold;
-  line-height: 60rpx;
+  line-height: 150%;
   letter-spacing: 2rpx;
 }
 radio-group>radio{
-  margin-right: 30rpx;
+  margin-right: 40rpx;
   letter-spacing: 3rpx;
 }
 .input-a-line-box{
   width: 89vw;
-  /* height: 55rpx; */
-  padding: 10rpx 1vw;
-  border: 2rpx solid gray;
-  margin: auto;
+  height: 48rpx;
+  /* padding参考设计图24 = 5+15+4 px,PC端预览时placeholder会偏移，手机端正常 */
+  padding: 10rpx 1vw 8rpx 1vw;
+  border: 2rpx solid #989A9A;
+  border-radius: 8rpx;
+  /* 改变盒子模型，将border和padding加入高度计算 */
+  box-sizing: border-box;
 }
+
 .input-half-line-box{
-  /* width: auto; */
-  /* height: 55rpx; */
-  position: absolute;
-  left: 35%;
-  right: 0;
-  padding: 10rpx 1vw;
-  /* margin-left: 3vw; */
-  border: 2rpx solid gray;
-  /* margin: auto; */
+  height: 48rpx;
+  /* padding参考设计图24 = 5+15+4 px,PC端预览时placeholder会偏移，手机端正常 */
+  padding: 10rpx 1vw 8rpx 1vw;
+  border: 2rpx solid #989A9A;
+  border-radius: 8rpx;
+  /* 改变盒子模型，将border和padding加入高度计算 */
+  box-sizing: border-box;
 }
 .text-box{
   width: 89vw;
   height: 300rpx;
   padding: 10rpx 1vw;
-  border: 2rpx solid gray;
-  margin: auto;
+  border: 2rpx solid #989A9A;
+  border-radius: 8rpx;
 }
 .text-area{
-  width: auto;
-  height: auto;
   letter-spacing: 1rpx;
 }
 .a-line{
@@ -63,14 +79,17 @@ radio-group>radio{
 }
 
 .button{
-  width: 70vw;
-  height: 6vh;
+  box-sizing: border-box;
+  width: 686rpx;
+  height: 80rpx;
   margin: 30rpx auto 0;
-  line-height: 6vh;
+  padding: 20rpx 0 18rpx 0;
+  background: #3E92CC;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  line-height: 1.5;
+  color: #F7F7F7;
   text-align: center;
-  letter-spacing: 2rpx;
-  border: 2rpx solid gray;
-  border-radius: 20rpx;
 }
 
 

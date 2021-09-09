@@ -80,8 +80,13 @@
   position: absolute;
   left: 70rpx;
   top: 76rpx;
-  width: 156rpx;
+  width: 246rpx;
   height: 26rpx;
+  /* 只显示一行，并在末尾加省略号 */
+  overflow: hidden;  
+  white-space: nowrap;    
+  /* 末尾加省略号 */
+  text-overflow:ellipsis;
 
   /* tag/medium/11 */
   font-family: PingFang SC;
@@ -93,7 +98,7 @@
 .time{
   /* 用户昵称后的：发布时间 */
   position: absolute;
-  left: 230rpx;
+  left: 315rpx;
   top: 76rpx;
   /* content/regular/10 */
   font-family: PingFang SC;

@@ -32,10 +32,11 @@ Component({
   },
   lifetimes: {
     attached: function() {
+      let card = this.data.card;
       this.setData({
         title: card.title,
         postingDate: card.postingDate,
-        labelText: card.labelText,
+        labelText: card.labelContent,
         description: card.description,
         postingPic: card.postingPic,
         type:  card.type,
@@ -48,7 +49,13 @@ Component({
    */
   methods: {
     tapClose: function() {
-      this.setData({closed: true});
+      this.setData({closed:true});
+      // this.triggerEvent('tapClose',this.data.detail);
+    },
+    navigateToDetail: function() {
+      wx.navigateTo({
+        url: '/pages/tongde/detail',
+      })
     }
   }
 })

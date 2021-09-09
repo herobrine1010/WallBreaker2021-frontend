@@ -4,7 +4,7 @@
   position:fixed;
   top:17.5%;
   width: 100%;
-  height: 75%;
+  height: 78%; /*调整高度百分比解决筛选框弹出空白*/
   /* margin-top: 20rpx;
   border-radius: 50rpx 50rpx 0 0;
   background: rgba(242, 252, 255, 0.35); */

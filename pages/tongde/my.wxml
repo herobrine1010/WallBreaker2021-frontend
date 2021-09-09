@@ -1,4 +1,4 @@
-<!--pages/tongde/my.wxml-->
+<!--pages/tongde/my.wxml 我的失物招领-vector-->
 <view class="tongde-background"></view>
 <view class="tongde-container">
   <view class="navigation-bar">
@@ -7,7 +7,21 @@
   <scroll-view class="scroll-area" scroll-y>
     <!-- card组件外包一层view，用于页面布局 -->
     <view class="card" wx:for="{{myLostFoundItemList}}" wx:for-item="item">    
-      <card-my card="item"></card-my>
+      <card-my card="{{item}}" bind:tapClose="tapClose"></card-my>
     </view>
   </scroll-view>
 </view>
+
+<dialog-box 
+  isDialogShow="{{dialog.isDialogShow}}"
+  content="{{dialog.content}}"
+  hasInputBox="{{dialog.hasInputBox}}"
+  tip="{{dialog.tip}}"
+  okText="{{dialog.okText}}"
+  cancelText="{{dialog.cancelText}}"
+  isShow="{{dialog.isDialogShow}}"
+  isShowInfo="{{dialog.isShowInfo}}"
+  bind:tapOk="tapOk"
+>
+</dialog-box>
+
