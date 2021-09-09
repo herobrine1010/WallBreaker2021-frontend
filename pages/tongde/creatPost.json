@@ -1,7 +1,9 @@
 {
   "usingComponents": {
     "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
-    "dropdown-box": "/components/dropdown-box/dropdown-box"
+    "dropdown-box": "/components/dropdown-box/dropdown-box",
+    "image-box": "/components/uploadImage-box/uploadImage-box"
   },
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "disableScroll": true
 }
