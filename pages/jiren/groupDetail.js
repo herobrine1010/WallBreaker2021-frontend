@@ -66,6 +66,7 @@ Page({
   onLoad: function (options) {
     if(!options.teamId){
       this.setData({teamId:119})
+      // todo 这里改成别的错误接收方法
     }else{
       console.log('updateTeamId');
       this.setData({teamId:options.teamId})
@@ -149,6 +150,8 @@ Page({
   // ----- -------- 页面加载相关函数 ------ 如（组队内容、成员列表、申请人列表） ---- -------- -------- --------
   // (1.1). 组队的内容：（包含发起人的数据）
   getTeamDetail(teamId){
+    console.log("(1.1). 组队的内容：（包含发起人的数据）")
+    console.log(teamId)
     let that=this;
     return request({
       url: '/team/getTeamAndCheckStatus/'+teamId,
@@ -161,7 +164,7 @@ Page({
         let teamdata=res.data.data;
           console.log(teamdata);
           let {
-            applyStatus, title, content, allPicUrl, dueTime, createTime, dueMember, initializedByMe, initiatorId, myFavourite, status, question, reason
+            applyStatus, title, content, allPicUrl, dueTime, createTime, dueMember, initializedByMe, initiatorId, myFavourite, status, question, reason,applyClosed,applyNotice
           }=teamdata;
           let picList = allPicUrl?allPicUrl.split(','):[];
           let fromTime=util.getDateDiff(teamdata.createTime);
@@ -186,10 +189,12 @@ Page({
             pictures: picList,
             dueMember,
             question:questionList,
-            reason
+            reason,
+            applyClosed,
+            applyNotice
           };
           let result = '';
-          if(status >= 3){
+          if(status >= 3){ //如果组队已关闭
             if(reason){
               console.log(reason);
               result = '组队招募已经关闭\n发起人结束招募的原因如下：'
@@ -206,7 +211,9 @@ Page({
             applyStatus,
             status,
             reason,
-            result
+            result,
+            applyClosed,
+            applyNotice
           })
           return temp;
       }else{
@@ -270,45 +277,42 @@ Page({
     let{
       reason,
       status,
-      applyStatus
+      applyStatus,
+      applyClosed,
+      applyNotice
     }=teamData;
     if(that.data.amITeamInitiator){
-      if(status==4){
-        that.showTipBox('组队招募已结束')
+      if(status==4){ //超过截止日期
+        that.showTipBox('组队招募已结束') 
       }
     }else{
-      switch(applyStatus){
-        case 1:
-          that.showTipBox('恭喜您已成功入队~可点击发起人头像查看联系方式，快去与ta联系吧！')
-          wx.request({
-            url:app.globalData.url+ '/userTeam/checkApproved',
-            method:"POST",
-            data:{teamId:that.data.teamId}
-          })
-        case 3:
-          that.showTipBox('很遗憾，本次申请未能通过，但请不要灰心，下一次可能就会组队成功~');
-          wx.request({
-            url:app.globalData.url+ 'userTeam/checkRejected',
-            method:"POST",
-            data:{teamId:that.data.teamId}
-          });
-        case 5:
+      if(applyNotice){ //如果有消息
+        //先发阅读消息的请求
+        wx.request({
+          url:app.globalData.url+ '/userTeam/applicantCheckNotice',
+          method:"POST",
+          data:{teamId:that.data.teamId},
+          header:{cookie:wx.getStorageSync('token')}
+        })
+        //再弹窗提示对应消息
+        if(applyClosed){ //优先处理close
           if(!reason=='该组队招募已截止'){
             that.showTipBox('该组队招募已结束，理由为：\n'+reason)
           }else{
             that.showTipBox('该组队招募已截止')
           }
-          wx.request({
-            url: app.globalData.url+'/userTeam/checkTerminated',
-            data:{
-              teamId:that.data.teamId
-            },
-            header:{cookie:wx.getStorageSync('token')}
-          })
-          break;
+        }else{
+          if(applyStatus==1){
+            that.showTipBox('恭喜您已成功入队~可点击发起人头像查看联系方式，快去与ta联系吧！')
+          }
+          else if(applyStatus==2){
+            that.showTipBox('很遗憾，本次申请未能通过，但请不要灰心，下一次可能就会组队成功~');
+          }
+        }
       }
-      // that.initializeResult();
     }
+    // that.initializeResult();
+    
   },
 
   // (2). 成员列表(需要组队内容请求来的dueMember数据)
@@ -496,7 +500,7 @@ tapApplierAvatar(e){
     };
     this.setData({
       dialog
-    })
+    });
   },
   dialogTapOkForCloseTeam:function(e){
     let that=this;
@@ -525,7 +529,11 @@ tapApplierAvatar(e){
             title: '组队招募已结束！',
             icon:'success'
           })
-          return that.getTeamDetail(teamId);
+
+          console.log("刷新");
+          that.onLoad({"teamId":teamId});
+          
+          //return that.getTeamDetail(teamId);
         }
       }).then(result => {
         that.setData({
@@ -807,6 +815,8 @@ tapApplierAvatar(e){
   applyButton:function(e){
     let that=this;
     let applyStatus = that.data.teamDetail.applyStatus;
+    let applyNotice = that.data.teamDetail.applyNotice;
+    let applyClosed = that.data.teamDetail.applyClosed;
     let status = that.data.status;
     if(status>=3){
       wx.showToast({
@@ -828,12 +838,21 @@ tapApplierAvatar(e){
         title: '你已经申请过了',
         icon : 'error'
       })
-    }else if(applyStatus == 1 || applyStatus == 2){
+    }else if(applyStatus == 1){
       wx.showToast({
         title: '你已经在队伍中了',
         icon : 'error'
       })
-    }else if(applyStatus == 5 || applyStatus == 6){
+    }
+    
+    else if(applyStatus == 2){
+      wx.showToast({
+        title: '你的申请已被拒绝，去看看别的组队吧~',
+        icon : 'error'
+      })
+    }
+
+    else if(applyClosed){
       wx.showToast({
         title: '队伍已关闭',
         icon : 'error'

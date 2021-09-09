@@ -154,7 +154,7 @@ Page({
         console.log(result[0].data.data[0]);
         // 处理收藏组队的数据------------------
         let jirenItemList = result[1].data.data.map( v=>{
-          let tempList = {
+          let team = {
             labelText : v.labelContent,
             title : v.title,
             description : v.content,
@@ -165,14 +165,56 @@ Page({
             id : v.id
           };
           // -------- 收藏组队的状态：1:我发起的 / 0:空---------
+          // if(v.initializedByMe){
+          //   tempList.teamCondition = 'mine';
+          //   tempList.rightTagText = '我发起的';
+          // }else{
+          //   tempList.teamCondition = 'mine';
+          //   tempList.rightTagText = '';
+          // }
+
           if(v.initializedByMe){
-            tempList.teamCondition = 'mine';
-            tempList.rightTagText = '我发起的';
+            switch(v.status){
+              case 0:
+                team.teamCondition='mine'
+                team.rightTagText='我发起的'
+                break;
+              case 1:
+              case 2:
+                team.teamCondition='mine'
+                team.rightTagText='待处理'
+                break;
+              case 3:
+              case 4:
+              default:
+                team.teamCondition='close'
+                team.rightTagText='已关闭'
+                break;
+            }
           }else{
-            tempList.teamCondition = 'mine';
-            tempList.rightTagText = '';
+            if(v.applyClosed){
+                team.teamCondition='close'
+                team.rightTagText='已关闭'
+            }else{
+              switch(v.applyStatus){
+                case 0:
+                  team.teamCondition='applying'
+                  team.rightTagText='我已申请'
+                  break;
+                case 1:
+                  team.teamCondition='pass'
+                  team.rightTagText='我已入队'
+                  break;
+                case 2:
+                  team.teamCondition='refuse'
+                  team.rightTagText='申请未通过'
+                  break;
+            }
+  
+            }
           }
-          return tempList;
+
+          return team;
         });
         // 处理收藏帖子的数据---------------------------------
         let jishiItemList = result[0].data.data.map( v=>{
@@ -251,7 +293,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.onLoad();
   },
 
   /**

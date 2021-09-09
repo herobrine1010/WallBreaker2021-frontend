@@ -130,7 +130,7 @@ Page({
         let applyingTeamList = [];
         let acceptTeamList = [];
         for(let i = 0 ; i< tempTeamList.length; i++){
-          if(tempTeamList[i].applyStatus == 1 ||tempTeamList[i].applyStatus == 2){
+          if(tempTeamList[i].applyStatus == 1){
             // 申请已同意
             acceptTeamList.push(tempTeamList[i]);
           }else if(tempTeamList[i].applyStatus == 0){

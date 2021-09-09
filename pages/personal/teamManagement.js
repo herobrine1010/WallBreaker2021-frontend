@@ -107,27 +107,25 @@ Page({
               break;
           }
         }else{
-          switch(team.applyStatus){
-            case 0:
-              team.teamCondition='applying'
-              team.rightTagText='我已申请'
-              break;
-            case 1:
-            case 2:
-              team.teamCondition='pass'
-              team.rightTagText='我已入队'
-              break;
-            case 3:
-            case 4:
-              team.teamCondition='refuse'
-              team.rightTagText='申请未通过'
-              break;
-            case 5:
-            case 6:
-            default:
+          if(team.applyClosed){
               team.teamCondition='close'
               team.rightTagText='已关闭'
-              break;
+          }else{
+            switch(team.applyStatus){
+              case 0:
+                team.teamCondition='applying'
+                team.rightTagText='我已申请'
+                break;
+              case 1:
+                team.teamCondition='pass'
+                team.rightTagText='我已入队'
+                break;
+              case 2:
+                team.teamCondition='refuse'
+                team.rightTagText='申请未通过'
+                break;
+          }
+
           }
         }
       }
@@ -180,7 +178,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.onLoad();
   },
 
   /**
