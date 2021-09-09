@@ -2,17 +2,17 @@
 .container {
 	/* 使用relative使子代absolute元素可以定位 */
 	position: relative; 
-	width: 343px;
-	height: 104px;
+	width: 686rpx;
+	height: 208rpx;
 	
 	background: #FFFFFF;
-	border-radius: 8px;
+	border-radius: 16rpx;
 	
 /* 	全局字体设置 */
 	font-family: PingFang SC;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 10px;
+	font-size: 20rpx;
 	line-height: 1.5;
 } 
 
@@ -21,13 +21,13 @@
 	left: 3.5%;
 	top: 12%;
 	
-	height: 83.2px;
-	width: 64px;
+	height: 166rpx;
+	width: 128rpx;
 
 	background-size: cover; 	/* 等价于AspectFill */
   background-repeat: no-repeat;
   
-  border-radius: 4px;
+  border-radius: 8rpx;
 }
 .image-text-lost, .image-text-found {
 	position: absolute;
@@ -40,7 +40,7 @@
 	width: 100%;
 	text-align: center;
 	
-	border-radius: 4px;
+	border-radius: 8rpx;
 }
 .image-text-lost {
 	color: #F7F7F7;
@@ -61,7 +61,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding: 0px;
+	padding: 0;
 }
 
 /* 右侧三个block样式 */
@@ -73,7 +73,7 @@
 	
 	flex: none;
 	flex-grow: 0;
-	margin: 0px 0px 8px 0px;
+	margin: 0 0 16rpx 0;
 }
 
 .block1 {
@@ -118,17 +118,17 @@
 	flex: none;
 	order: 1;
 	flex-grow: 0;
-	margin: 0px 8px;
+	margin: 0px 16rpx;
 }
 
 /* 第二行block2设置，包括标签 */
 .label {
 	color: #7C3ECC;
 	background: #F9F2FF;
-	border-radius: 4px;
+	border-radius: 8rpx;
 
-	margin: 0px 8px 0px 0px;
-	padding: 0px 4px;
+	margin: 0px 16rpx 0px 0px;
+	padding: 0px 8rpx;
 }
 
 /* 第三行block3设置，是招领描述内容 */
@@ -148,15 +148,15 @@
 /* 独立button按钮设置 */
 .button-on, .button-off {
 	position: absolute;
-	width: 68px;
-	height: 24px;
-	left: 263px;
-	top: 20px;
+	width: 136px;
+	height: 48px;
+	left: 526px;
+	top: 40px;
 
 	text-align: center;
-	border-radius: 12px;
+	border-radius: 24rpx;
 	/* 设置line-height等于height实现块级元素垂直居中 */
-	line-height: 24px; 
+	line-height: 48rpx; 
 }
 
 .button-on {

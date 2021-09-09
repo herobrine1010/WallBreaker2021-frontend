@@ -1,5 +1,5 @@
 <!--components/card-lost/card-my.wxml-->
-<view class="container">
+<view class="container" catch:tap="navigateToDetail">
 	<!-- 没有使用img标签，使用background-image: url();引入图片，css设置图片裁剪方式 -->
 	<view class="left-block" style="background-image: url({{postingPic}})">
 		<text wx:if="{{type==1}}" class="image-text-lost">物品遗失</text>
@@ -18,5 +18,5 @@
 		<text class="description">{{ description }}</text>
 		</view>
 	</view>
-	<view class="{{closed ? 'button-off' : 'button-on'}}" bind:tap="tapClose">关闭</view>
+	<view class="{{closed ? 'button-off' : 'button-on'}}" catch:tap="tapClose">关闭</view>
 </view>
