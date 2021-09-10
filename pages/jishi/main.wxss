@@ -179,4 +179,7 @@ border-style: solid;
   justify-content: center;
   align-items: center;
   display:flex;
+  color:white;
+  
+  word-wrap: break-word;
  }

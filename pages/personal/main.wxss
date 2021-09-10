@@ -38,6 +38,8 @@
 }
 .red-message-word{
   margin: auto 10rpx;
+  color:#F2FCFF;
+  
 }
 .icon{
   width: 48rpx;

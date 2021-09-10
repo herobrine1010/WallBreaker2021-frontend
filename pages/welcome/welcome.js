@@ -81,13 +81,21 @@ Page({
             console.log(res2);
             if(res2.data.data.code=="login"){
               wx.setStorageSync("token", res2.cookies[0])
+              if(res2.data.data.jirenMsgNum>0){
+                app.globalData.noticeNum = res2.data.data.jirenMsgNum
+              }
               wx.switchTab({
                 url: '/pages/jishi/main',
               })
-            }else if(res2.data.data.code="needInfo"){
+            }
+            else if(res2.data.data.code=="blocked"){
+              console.log("已被封号");
+              wx.redirectTo({
+                url: '/pages/welcome/blocked',
+              })
+            }
+            else if(res2.data.data.code="needInfo"){
               console.log("提示用户允许获取个人信息")
-            
-
             }
           }
         })

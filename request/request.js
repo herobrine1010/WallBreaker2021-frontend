@@ -2,6 +2,7 @@
 // 说明：将 wx.request 封装成 promise ,并提取了公共路径；
 export const request = (params)=> {
   const baseUrl = "https://www.wallbreaker.top";
+  //const baseUrl  = 'http://localhost:8080';
   return new Promise((resolve,reject)=>{
     wx.request({
       ...params,

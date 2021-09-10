@@ -11,15 +11,13 @@
     bindrefresherrefresh = "onRefresherRefresh"
     refresher-triggered = "{{isRefresherOpen}}"
     class="collection-body">
-      <!-- <scroll-view class="listArea" scroll-y="true">
-      <view class="list-item"> -->
-      <!-- </view> 
-    </scroll-view> -->
-    <view class="inner-body">
+      
+    <view class="inner-body" >
     <!-- <view style="height:3vh"></view> -->
       <navigator url="../jiren/groupDetail?teamId={{item.id}}"  wx:for="{{jirenItemList}}">
         <card-team
         labelText="{{item.labelContent}}"
+        haveNotice="{{item.haveNotice}}"
         title="{{item.title}}"
         teamCondition="{{item.teamCondition}}"
         rightTagText="{{item.rightTagText}}"  
@@ -31,9 +29,13 @@
         postingPic="{{item.firstPicUrl}}" 
         ></card-team>
       </navigator>
-    </view>  
-    </scroll-view>
+
+    </view>
+
     
+
+    </scroll-view>
+     
     
   </view>
 </view>

@@ -17,17 +17,17 @@ Page({
 
     height:'auto',
     jirenItemList:[
-      {
-      'labelText':'未分类',
-      'title':'示例标题示例标题示例标题…',
-      'teamCondition':'refuse',
-      'rightTagText':'申请未通过',
-      'dueTime':'截止时间: 2021年6月21日 14:00',
-      'description':'这是一段描述性文字，仅用于测试。这是一段……',
-      'initiator':'发起人: 示例用户',
-      'peopleCount':'3/5',
-      'postingPic':''
-    },
+    //   {
+    //   'labelText':'未分类',
+    //   'title':'示例标题示例标题示例标题…',
+    //   'teamCondition':'refuse',
+    //   'rightTagText':'申请未通过',
+    //   'dueTime':'截止时间: 2021年6月21日 14:00',
+    //   'description':'这是一段描述性文字，仅用于测试。这是一段……',
+    //   'initiator':'发起人: 示例用户',
+    //   'peopleCount':'3/5',
+    //   'postingPic':''
+    // },
     ],
   },
 //以下两个事件为：点击帖子(收藏或管理)按钮，或者点击组队(收藏或管理)按钮.
@@ -89,6 +89,7 @@ Page({
         team.dueTime = '截止时间：' + formatTime(team.dueTime)
         team.peopleCount=team.participantNumber+'/'+team.dueMember;
         if(team.initializedByMe){
+          team.haveNotice = team.notice;
           switch(team.status){
             case 0:
               team.teamCondition='mine'
@@ -107,6 +108,7 @@ Page({
               break;
           }
         }else{
+          team.haveNotice = team.applyNotice
           if(team.applyClosed){
               team.teamCondition='close'
               team.rightTagText='已关闭'

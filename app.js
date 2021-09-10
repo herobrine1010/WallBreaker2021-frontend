@@ -29,5 +29,6 @@ App({
     userInfo: null,
     personalManagementOrCollection : 1,
     url:'https://www.wallbreaker.top'
+    //url:'http://localhost:8080'
   }
 })

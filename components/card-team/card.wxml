@@ -1,5 +1,6 @@
 <!--components/jiren-card/card.js.wxml-->
 <view class="card">
+<view class="red-point" wx:if="{{haveNotice}}" ></view>
 <view class="tag" > 
     {{labelText}}
  </view>

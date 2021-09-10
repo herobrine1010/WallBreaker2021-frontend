@@ -2,6 +2,10 @@
 Component({
 
   properties:{
+    haveNotice:{
+      type:Boolean,
+      value:false
+    },
     labelText:{
       type:String,
       value:'未分类'

@@ -1,3 +1,4 @@
+var app = getApp();
 // 接受“2021-06-06 19:20:20”格式的字符串，兼容ios，返回日期字符串
 // 也能接受日期对象
 const formatTime = dateStr => {
@@ -20,6 +21,24 @@ const formatTime = dateStr => {
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : `0${n}`
+}
+
+const getNotice = param => {
+  wx.request({
+    url:app.globalData.url+ '/user/redPointRelated',
+    method:"GET",
+    header:{cookie:wx.getStorageSync('token')},
+    success:function(res){
+      if(res.statusCode==200){
+        if(res.data.data.noticeNum>0){
+          wx.showTabBarRedDot({index:3})
+        }else{
+          wx.hideTabBarRedDot({index:3})
+        }
+        return(res.data.data);
+      }
+    }
+  })
 }
 
 function getDateDiff(dateTime){
@@ -92,5 +111,6 @@ function getDateDiff(dateTime){
 
 module.exports = {
   formatTime:formatTime,
-  getDateDiff:getDateDiff
+  getDateDiff:getDateDiff,
+  getNotice:getNotice
 }

@@ -1,6 +1,7 @@
 // pages/personal/main.js
 // 首先引入封装成promise的 request
 import { request } from "../../request/request.js";
+import util from "../../utils/util.js";
 
 Page({
 
@@ -63,7 +64,8 @@ Page({
    */
   onShow: function () {
     
-
+    util.getNotice();
+    
     const that = this;
     // -----------使用封装成promise 的request方法，注 意添加本文件最上方的引入；
     request({

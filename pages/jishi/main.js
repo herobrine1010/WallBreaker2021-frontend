@@ -1,7 +1,7 @@
 // pages/jishi/main.js
 import { request } from "../../request/request.js";
 const util = require('../../utils/util.js');
-
+var app  = getApp();
 // 定义函数编写请求参数：-----------------------------------------
 function setRequestData(keyword,labelId,timeIndex){
   let data = {
@@ -149,6 +149,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if(app.globalData.noticeNum>0){
+      wx.showTabBarRedDot({index:3})
+    }
+
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
         selected: 1 //0,1,2 0-济事  1-济人  2-我的

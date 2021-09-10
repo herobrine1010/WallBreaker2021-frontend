@@ -65,8 +65,9 @@ Page({
   // 生命周期函数： ------- ----------- -------- ：
   onLoad: function (options) {
     if(!options.teamId){
-      this.setData({teamId:119})
-      // todo 这里改成别的错误接收方法
+      // this.setData({teamId:119})
+      // 这里改成别的错误接收方法
+      console.log("未传入包含teamId的有效对象")
     }else{
       console.log('updateTeamId');
       this.setData({teamId:options.teamId})
@@ -164,7 +165,7 @@ Page({
         let teamdata=res.data.data;
           console.log(teamdata);
           let {
-            applyStatus, title, content, allPicUrl, dueTime, createTime, dueMember, initializedByMe, initiatorId, myFavourite, status, question, reason,applyClosed,applyNotice
+            applyStatus, title, content, allPicUrl, dueTime, createTime, dueMember, initializedByMe, initiatorId, myFavourite, status, question, reason,applyClosed,applyNotice,notice
           }=teamdata;
           let picList = allPicUrl?allPicUrl.split(','):[];
           let fromTime=util.getDateDiff(teamdata.createTime);
@@ -191,7 +192,8 @@ Page({
             question:questionList,
             reason,
             applyClosed,
-            applyNotice
+            applyNotice,
+            notice
           };
           let result = '';
           if(status >= 3){ //如果组队已关闭
@@ -213,7 +215,8 @@ Page({
             reason,
             result,
             applyClosed,
-            applyNotice
+            applyNotice,
+            notice
           })
           return temp;
       }else{
@@ -273,18 +276,28 @@ Page({
   // (1.2) 对组队返回的状态数据进行处理：
   checkStatus(teamData){
     let that = this;
-
+    console.log("calling checkStatus")
+    console.log(teamData)
     let{
       reason,
       status,
       applyStatus,
       applyClosed,
-      applyNotice
+      applyNotice,
+      notice
     }=teamData;
     if(that.data.amITeamInitiator){
-      if(status==4){ //超过截止日期
-        that.showTipBox('组队招募已结束') 
+      if(notice){
+        if(status==3||status==4){ //超过截止日期
+          that.showTipBox('组队招募已结束') 
+        }
+        //如果有新申请待处理且有红点提醒
+        //产品：暂时不做弹窗逻辑
+        // else if(status==1){
+        //   that.showTipBox('有新的申请')
+        // }
       }
+      
     }else{
       if(applyNotice){ //如果有消息
         //先发阅读消息的请求
@@ -814,6 +827,7 @@ tapApplierAvatar(e){
 // 下方申请按钮  /   最上头像列表的加号
   applyButton:function(e){
     let that=this;
+    let notice = that.data.teamDetail.notice;
     let applyStatus = that.data.teamDetail.applyStatus;
     let applyNotice = that.data.teamDetail.applyNotice;
     let applyClosed = that.data.teamDetail.applyClosed;

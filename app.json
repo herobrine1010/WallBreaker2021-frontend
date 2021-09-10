@@ -25,7 +25,8 @@
         "pagePath": "pages/personal/main",
         "text": "我的",
         "iconPath": "static/icon/personal.png",
-        "selectedIconPath": "static/icon/personal-solid.png"
+        "selectedIconPath": "static/icon/personal-solid.png",
+        "index":3
       }
     ]
   },
@@ -60,7 +61,8 @@
     "pages/tongde/myLost",
     "pages/jishi/detail-new",
     "pages/jishi/link",
-    "pages/testPage/testfilter"
+    "pages/testPage/testfilter",
+    "pages/welcome/blocked"
   ],
   "window": {
     "backgroundTextStyle": "dark",
