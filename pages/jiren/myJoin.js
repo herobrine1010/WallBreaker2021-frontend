@@ -123,7 +123,8 @@ Page({
         // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
         let tempTeamList = res.data.data.map( v=>{
           v.dueTime = '截止时间：' + formatTime(v.dueTime);
-          v.peopleCount = v.participantNumber + '/' + v.dueMember ;
+          v.peopleCount = (v.participantNumber + 1) + '/' + (v.dueMember + 1) ;
+          
           return v;
         });
         console.log(tempTeamList);

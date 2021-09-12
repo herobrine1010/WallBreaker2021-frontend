@@ -43,7 +43,7 @@ function getTeamList(that,keyword,labelId,timeIndex){
           v.dueTime = '截止时间：暂无'
         }  
         // v.dueTime = '截止时间：'+ duetime.getFullYear() + '年' + (duetime.getMonth()+1) + '月'+ duetime.getDate() + '日 '+  duetime.getHours() + ':' + (duetime.getMinutes()<10?'0'+duetime.getMinutes():duetime.getMinutes());
-        v.peopleCount = v.participantNumber + '/' + v.dueMember ;
+        v.peopleCount = (v.participantNumber + 1) + '/' + (v.dueMember + 1) ;
         return v;
       });
       // console.log(jirenItemList[2].firstPicUrl);

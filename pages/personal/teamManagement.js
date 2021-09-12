@@ -87,7 +87,7 @@ Page({
       let team = null;
       for(team of teamList){
         team.dueTime = '截止时间：' + formatTime(team.dueTime)
-        team.peopleCount=team.participantNumber+'/'+team.dueMember;
+        team.peopleCount=(team.participantNumber + 1)+'/'+(team.dueMember + 1);
         if(team.initializedByMe){
           team.haveNotice = team.notice;
           switch(team.status){

@@ -9,7 +9,8 @@
       <view wx:if="{{personalInfo.isCheckAnswerButtonShow}}" class="pa-check-answer poby-text bd " bindtap="seeAnswer" data-id="{{personalInfo.id}}">查看回答</view>
     </view>
     <view class="pa-wx-id " bindlongtap="copyWxId" wx:if="{{personalInfo.wxIdPublic&&personalInfo.wxId}}">
-      微信号 {{personalInfo.wxId}}
+    <text selectable="true">微信号 {{personalInfo.wxId}}</text>
+      
     </view>
     <view  wx:if="{{personalInfo.description!=undefined}}" class="pa-description poby-text bds medium color-dis">{{personalInfo.description}}</view>
     <view class="pa-info-area"

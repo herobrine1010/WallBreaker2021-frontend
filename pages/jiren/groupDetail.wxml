@@ -27,7 +27,7 @@
         title = "{{teamDetail.title}}"
         isTeamClosed = "{{status>=3?true:false}}"
         avatar = "{{teamDetail.avatar}}"
-        nickname = "{{teamDetail.nickname}}"
+        nickname = "{{teamDetail.nickName}}"
         fromTime = "{{teamDetail.fromTime}}"
         dueTime = "{{status<3?teamDetail.dueTime:''}}"
         content = "{{teamDetail.content}}"

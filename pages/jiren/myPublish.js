@@ -119,7 +119,8 @@ Page({
             v.teamCondition = 'close';
           }
           v.dueTime = '截止时间：'+formatTime(v.dueTime);
-          v.peopleCount = v.participantNumber + '/' + v.dueMember ;
+          v.peopleCount = (v.participantNumber + 1) + '/' + (v.dueMember + 1) ;
+          
           return v;
         });
         return myTeamList;
