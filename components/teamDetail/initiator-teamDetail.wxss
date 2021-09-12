@@ -102,11 +102,11 @@
   z-index: 10;
 }
 .bg-white{
-  position: fixed;
+  position: absolute;
   width: 690rpx;
-  height: 75%;
+  /* height: 75%; */
   left: 30rpx;
-  top: 18%;
+  top: 16%;
   z-index: 110;
   background: #FAFEFF;
   mix-blend-mode: normal;

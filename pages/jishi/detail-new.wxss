@@ -153,3 +153,24 @@
     height: 200rpx;
     width: 1rpx;
   }
+
+  .ani-shake-right{
+    animation: shake-right 0.7s linear 0.2s;
+  }
+  /* 以下是各种动画  需要在class中加入animation属性使用*/
+  @-webkit-keyframes shake-right{
+    0%,100% {-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-transform-origin:100% 50%;transform-origin:100% 50%}
+    10%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}
+    20%,40%,60%{-webkit-transform:rotate(-4deg);transform:rotate(-4deg)}
+    30%,50%,70%{-webkit-transform:rotate(4deg);transform:rotate(4deg)}
+    80%{-webkit-transform:rotate(-2deg);transform:rotate(-2deg)}
+    90%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}
+  }
+  @keyframes shake-right{
+    0%,100% {-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-transform-origin:100% 50%;transform-origin:100% 50%}
+    10%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}
+    20%,40%,60%{-webkit-transform:rotate(-4deg);transform:rotate(-4deg)}
+    30%,50%,70%{-webkit-transform:rotate(4deg);transform:rotate(4deg)}
+    80%{-webkit-transform:rotate(-2deg);transform:rotate(-2deg)}
+    90%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}
+  }
