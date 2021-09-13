@@ -5,6 +5,14 @@
  * 联系方式是只
  * 
  */
+import { request } from "../../request/request.js";
+function formatDateString(str) {
+  // 将接口返回的日期字符串'2021-7-13 21:34:31'转换成'2021年7月13日 21:34:31'
+  let dateStr = str.split(' ');
+  let date = dateStr[0].split('-');
+  return date[0] + '年' + date[1] + '月' + date[2] + '日' + ' ' +dateStr[1];
+}
+
 Page({
 
   /**
@@ -53,6 +61,7 @@ Page({
       cancelText:"取消",
       okText:"确认",
       isShowInfo:true,
+      // 加载页面时先把数据更新到contact上,点击弹出对话框事件后再更新到infoDetail
       infoDetail:{
         key:"微信",
         value:"124kjkajsd",
@@ -81,15 +90,47 @@ Page({
   contactDetail:function(e){
     //需要获得发布者的联系信息
     var that = this;
+    let str = 
     that.setData({
-      'dialog.isDialogShow':true
+      'dialog.isDialogShow':true,
+      'dialog.infoDetail.value': this.data.contact
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    request({
+      url: '/lostfound/getLostFound/1', // TODO:根据主页点击情况跳转
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      },
+      method : 'GET',
+    }).then(res => {
+      let data = res.data.data;
+      console.log('获取失物招领列表返回数据', data)
+      this.setData({
+        condition: data.typeText, // 目前接口该项为null 应为 寻物中 寻主中
+        title: data.name,
+        userAvatar:'/static/icon/default-user-big.png',
+        userName:"破壁者1号",
+        time: formatDateString(data.lostFoundTime), // 自定义函数转换日期格式
+        tag: data.labelText,
+        description: data.content,
+        location:data.location,
+        contact: data.contact,
+        type: data.type,//物品遗失0失物寻主1
+        closed: data.closed,
+        pictures: data.allPicUrl.split(','), //字符串拆成列表
+      });
+    }).catch(err => {
+      console.log(err);
+      wx.showToast({
+        title: '请求失败',
+        icon : 'error'
+      })
+    })
   },
 
   /**
