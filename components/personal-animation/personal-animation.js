@@ -104,6 +104,9 @@ Component({
     seeAnswer:function(e){
       this.triggerEvent('seeAnswer',e.currentTarget.dataset.id);
     },
+    copyWxId(){
+      this.triggerEvent('copyWxId');
+    }
   },
   
 })

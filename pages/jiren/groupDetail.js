@@ -507,7 +507,13 @@ tapApplierAvatar(e){
     avatar
   })
 },
-
+//   复制资料卡片的wxid:
+copyWxId(){
+  let wxId = this.data.avatar.wxId;
+  wx.setClipboardData({
+    data: wxId,
+  })
+},
 
 // 以下是和 发起者 initiator 有关的操作事件 ---------start---------------------
   handleCloseTeam: function(){

@@ -93,7 +93,7 @@
   }
 
   .title{
-    width: 100%;
+    width: 680rpx;
     text-align: center;
     margin-top: 40rpx;
     margin-bottom: 30rpx;
