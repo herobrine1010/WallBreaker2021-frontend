@@ -71,7 +71,7 @@
       scroll-top='{{ topNum }}'
       class="scroll">
         <view wx:for="{{tongdeItemList}}" class="item">
-        <!-- <navigator class="lostDetail" url='/pages/tongde/detail'> -->
+        <navigator class="lostDetail" url='/pages/tongde/detail'>
           <card-lost
           labelText="{{item.labelText}}"
           title="{{item.title}}"
@@ -79,7 +79,7 @@
           description="{{item.description}}"
           postingPic="{{item.postingPic}}"
           ></card-lost>
-        <!-- </navigator> -->
+        </navigator>
       </view>
       </scroll-view>
 
