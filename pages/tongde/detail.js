@@ -20,7 +20,7 @@ Page({
    */
   data: {
     condition:'寻物中',/* 别的状态(?) */
-    title:'物品名称物品名称物品名称',
+    title:'物品名称物品名称',
     userAvatar:'/static/icon/default-user-big.png',
     userName:"破壁者1号",
     time:'2021年6月9日 21:40',
@@ -100,37 +100,37 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    request({
-      url: '/lostfound/getLostFound/1', // TODO:根据主页点击情况跳转
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
-      },
-      method : 'GET',
-    }).then(res => {
-      let data = res.data.data;
-      console.log('获取失物招领列表返回数据', data)
-      this.setData({
-        condition: data.typeText, // 目前接口该项为null 应为 寻物中 寻主中
-        title: data.name,
-        userAvatar:'/static/icon/default-user-big.png',
-        userName:"破壁者1号",
-        time: formatDateString(data.lostFoundTime), // 自定义函数转换日期格式
-        tag: data.labelText,
-        description: data.content,
-        location:data.location,
-        contact: data.contact,
-        type: data.type,//物品遗失0失物寻主1
-        closed: data.closed,
-        pictures: data.allPicUrl.split(','), //字符串拆成列表
-      });
-    }).catch(err => {
-      console.log(err);
-      wx.showToast({
-        title: '请求失败',
-        icon : 'error'
-      })
-    })
+    // request({
+    //   url: '/lostfound/getLostFound/3', // TODO:根据主页点击情况跳转
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded',
+    //     'cookie':wx.getStorageSync("token")
+    //   },
+    //   method : 'GET',
+    // }).then(res => {
+    //   let data = res.data.data;
+    //   console.log('获取失物招领列表返回数据', data)
+    //   this.setData({
+    //     condition: data.typeText, // 目前接口该项为null 应为 寻物中 寻主中
+    //     title: data.name,
+    //     userAvatar:'/static/icon/default-user-big.png',
+    //     userName:"破壁者1号",
+    //     time: formatDateString(data.lostFoundTime), // 自定义函数转换日期格式
+    //     tag: data.labelText,
+    //     description: data.content,
+    //     location:data.location,
+    //     contact: data.contact,
+    //     type: data.type,//物品遗失0失物寻主1
+    //     closed: data.closed,
+    //     pictures: data.allPicUrl.split(','), //字符串拆成列表
+    //   });
+    // }).catch(err => {
+    //   console.log(err);
+    //   wx.showToast({
+    //     title: '请求失败',
+    //     icon : 'error'
+    //   })
+    // })
   },
 
   /**

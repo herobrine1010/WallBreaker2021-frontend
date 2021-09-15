@@ -56,7 +56,7 @@
   /* identical to box height */
   /* gray3_P */
   color: #545454;
-  margin-right: 78px;
+  margin-right: 156rpx;
 }
 .condition{
   display: inline-block;
@@ -99,19 +99,19 @@
   flex: none;
   order: 1;
   flex-grow: 0;
-  margin: 4px 0px;
+  margin: 8rpx 0;
 }
 .spot{
-  width: 240px;
-  height: 15px;
+  width: 480rpx;
+  height: 30rpx;
 }
 .title{
-  margin-top:12px;
+  margin-top:24rpx;
   width: 112rpx;
   height: 42rpx;
       /* Body/14medium */
   font-weight: 500;
-  font-size: 14px;
+  font-size: 28rpx;
   line-height: 150%;
       /* identical to box height, or 21px */
   color: #000000;
@@ -122,39 +122,39 @@
   display: flex;
 flex-direction: row;
 align-items: flex-start;
-margin-top:4px;
-padding: 6px 48px 5px;
+margin-top:8rpx;
+padding: 12rpx 96rpx 10rpx;
 
-width: 72px;
-height: 21px;
+width: 144rpx;
+height: 42rpx;
 
 /* Text/blue */
 color:#ffffff;
 text-align: center;
 background: #3E92CC;
-border-radius: 4px;
-font-size: 14px;
+border-radius: 8px;
+font-size: 28rpx;
 line-height: 150%;
 /* Inside Auto Layout */
 
 flex: none;
 order: 0;
 flex-grow: 0;
-margin: 0px 0px;
+margin: 0 0;
 }
 
 .pictureArea{
-  width: 343px;
-  height: 343px;
-  margin: 8px 16px;
+  width: 686rpx;
+  height: 686rpx;
+  margin: 16rpx 32rpx;
 }
 /* TODO 图片自适应大小 */
 .img{
   /*width: 343px;
   height: 343px;*/
-  width: 343px;
-  height: 343px;
-  border-radius: 8px;
+  width: 686rpx;
+  height: 686rpx;
+  border-radius: 16rpx;
   background-repeat: no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
