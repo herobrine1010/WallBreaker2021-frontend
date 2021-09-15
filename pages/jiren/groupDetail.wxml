@@ -154,7 +154,7 @@
   </view>
   </view>
 <!--  -->
-<personal-animation id="personalAnimation"   personalInfo="{{avatar}}" isPersonalInfoShow="{{isPersonalInfoShow}}" bind:seeAnswer="showAnswersInPersonalAnimation" data-avatar = "{{avatar}}"></personal-animation>
+<personal-animation id="personalAnimation"   personalInfo="{{avatar}}" isPersonalInfoShow="{{isPersonalInfoShow}}" bind:seeAnswer="showAnswersInPersonalAnimation" bind:copyWxId="copyWxId" data-avatar = "{{avatar}}"></personal-animation>
 
 <dialog-box 
 id="dialogBox"

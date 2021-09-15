@@ -9,8 +9,8 @@
       <view wx:if="{{personalInfo.isCheckAnswerButtonShow}}" class="pa-check-answer poby-text bd " bindtap="seeAnswer" data-id="{{personalInfo.id}}">查看回答</view>
     </view>
     <view class="pa-wx-id " bindlongtap="copyWxId" wx:if="{{personalInfo.wxIdPublic&&personalInfo.wxId}}">
-    <text selectable="true">微信号 {{personalInfo.wxId}}</text>
-      
+      <text selectable="true">微信号 {{personalInfo.wxId}}</text>
+      <image style="height:45rpx; width : 45rpx ; padding:25rpx" src="../../static/icon/copy.png" bindtap="copyWxId"></image>
     </view>
     <view  wx:if="{{personalInfo.description!=undefined}}" class="pa-description poby-text bds medium color-dis">{{personalInfo.description}}</view>
     <view class="pa-info-area"

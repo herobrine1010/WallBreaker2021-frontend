@@ -16,12 +16,14 @@
   <view class="content">
     <mp-html content="{{content}}"/>
   </view>
-  <view class="position"></view>
-  <view class="nav-card {{animationClass}}" bindtap="attachNavgitor">
-    <image class="nav-img" src="{{navImage}}"></image>
-    <text class="nav-tip poby-text bd color-sec">点击跳转</text>
-    <text class="nav-title poby-text h5 color-pri">{{navTitle}}</text>
-    <image class="icon-nav" src="../../static/icon/move-on.jpg"></image>
-  </view>
+  <block wx:if="{{hasLink}}">
+    <view class="position"></view>
+    <view class="nav-card {{animationClass}}" bindtap="addAnimation">
+      <image class="nav-img" src="{{navImage}}"></image>
+      <text class="nav-tip poby-text bd color-sec">点击跳转</text>
+      <text class="nav-title poby-text h5 color-pri">{{navTitle}}</text>
+      <image class="icon-nav" src="../../static/icon/move-on.jpg"></image>
+    </view>
+  </block>
   <view class="position"></view>
 </view>

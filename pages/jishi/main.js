@@ -164,8 +164,11 @@ Page({
 
   },
   jumpToDetail:function(e){
+    // wx.navigateTo({
+    //   url: '/pages/jishi/detail?postingId='+e.currentTarget.dataset.postingid,
+    // })
     wx.navigateTo({
-      url: '/pages/jishi/detail?postingId='+e.currentTarget.dataset.postingid,
+      url: '/pages/jishi/detail-new?index='+e.currentTarget.dataset.index,
     })
   },
 
