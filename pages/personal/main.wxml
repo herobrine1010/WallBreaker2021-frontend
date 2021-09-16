@@ -32,6 +32,10 @@
       <image src="../../static/icon/badge.png" class="icon"></image>
       <view class="item-title">我的收藏</view>
     </navigator>
+    <navigator url="/pages/tongde/my" class="per-items">
+      <image src="../../static/icon/tongde-solid.png" class="icon"></image>
+      <view class="item-title">我的失物招领</view>
+    </navigator>
     <navigator url="../personal/help" class="per-items">
       <image src="../../static/icon/help.png" class="icon"></image>
       <view class="item-title">新手帮助</view>
