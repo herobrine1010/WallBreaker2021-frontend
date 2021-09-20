@@ -1,7 +1,7 @@
 /* pages/tongde/detail.wxss */
 @import "/static/common.wxss";
 
-.tongde-container{
+.card-container{
   font-family: PingFang SC;
   font-style: normal;
   line-height: 125%;
@@ -56,10 +56,12 @@
   /* identical to box height */
   /* gray3_P */
   color: #545454;
-  margin-right: 156rpx;
+  margin-right: 170rpx;
 }
 .condition{
   display: inline-block;
+  position: fixed;
+  right: 32rpx;
   padding: 10rpx 48rpx 8rpx;
   /* font */
   font-weight: 500;
@@ -80,12 +82,12 @@
 }
 .description,.spot{
   width: 696rpx;
-  height: 240rpx;
+  /* height: 240rpx; */
 
   /* Body/10regular */
   font-weight: normal;
   font-size: 20rpx;
-  line-height: 150%;
+  line-height:150%;
   /* or 15px */
   /* 超出部分隐藏 */
   overflow: hidden;     
@@ -116,6 +118,7 @@
       /* identical to box height, or 21px */
   color: #000000;
       /* Inside Auto Layout */
+
 }
 
 .contactBtn{

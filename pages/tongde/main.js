@@ -13,50 +13,46 @@ Page({
     topNum:0,
     tongdeItemList:[
       {
-        'labelText':['雨伞','口红'],
-        'title':'Gucci口红',
+        'labelText':['雨伞'],
+        'title':'雨伞',
         'publishTime':'1天前',
-        'description':'在学校图书馆捡到一支Gucci的口红，没有用过多少，九成新，…',
-        'postingPic':'https://assets.burberry.com/is/image/Burberryltd/109A4FC5-0F33-4E5B-8488-11626C39FB3F.jpg?$BBY_V2_B_3x4$&wid=1278&hei=1700',
+        'description':'9.10在嘉定A108门口捡到一把雨伞',
+        'postingPic':'https://img-blog.csdnimg.cn/20210920143006670.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYWFhc2h1b3c=,size_20,color_FFFFFF,t_70,g_se,x_16',
         'type': 0,       // 物品遗失0 or 失物寻主1 
         'closed': false
       },
       {
-        'labelText':['雨伞','口红','手机'],
-        'title':'物品名称',
-        'publishTime':'1天前',
-        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
-        'postingPic':'https://assets.burberry.com/is/image/Burberryltd/109A4FC5-0F33-4E5B-8488-11626C39FB3F.jpg?$BBY_V2_B_3x4$&wid=1278&hei=1700'
+        'labelText':['耳机'],
+        'title':'黑色耳机',
+        'publishTime':'2天前',
+        'description':'9.9闭馆时在嘉定图书馆九楼饮水机旁捡到一个黑色插线耳机',
+        'postingPic':'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic3.58cdn.com.cn%2Fzhuanzh%2Fn_v2e55f7bb2c83d45979b5f82ab1aa8e80e.jpg%3Fw%3D750%26h%3D0&refer=http%3A%2F%2Fpic3.58cdn.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1634710111&t=75304e2c48d2587a3aaafc933811f57e'
       },
       
       {
-        'labelText':['雨伞','口红'],
-        'title':'物品名称',
+        'labelText':['书籍'],
+        'title':'机器学习算法书',
         'publishTime':'1天前',
-        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
-        'postingPic':'https://assets.burberry.com/is/image/Burberryltd/109A4FC5-0F33-4E5B-8488-11626C39FB3F.jpg?$BBY_V2_B_3x4$&wid=1278&hei=1700'
+        'description':'9.9晚上在嘉定博楼217捡到一本西瓜书',
+        'postingPic':'https://img-blog.csdnimg.cn/2021092014302085.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYWFhc2h1b3c=,size_20,color_FFFFFF,t_70,g_se,x_16'
       },
       {
-        'labelText':['雨伞','口红'],
-        'title':'物品名称',
+        'labelText':['文具'],
+        'title':'笔记本',
         'publishTime':'1天前',
-        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
-        'postingPic':'https://assets.burberry.com/is/image/Burberryltd/109A4FC5-0F33-4E5B-8488-11626C39FB3F.jpg?$BBY_V2_B_3x4$&wid=1278&hei=1700'
+        'description':'9.10下午5点左右在嘉定B楼301教室前排捡到一本笔记本',
+        'postingPic':'https://img-blog.csdnimg.cn/20210920143025753.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYWFhc2h1b3c=,size_20,color_FFFFFF,t_70,g_se,x_16',
+        'type': 0,       // 物品遗失0 or 失物寻主1 
+        'closed': false
       },
       {
-        'labelText':['雨伞','口红'],
-        'title':'物品名称',
+        'labelText':['证件'],
+        'title':'一卡通',
         'publishTime':'1天前',
-        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
-        'postingPic':'https://assets.burberry.com/is/image/Burberryltd/109A4FC5-0F33-4E5B-8488-11626C39FB3F.jpg?$BBY_V2_B_3x4$&wid=1278&hei=1700'
+        'description':'9.9中午在嘉定小食堂二楼捡到一个卡套，有一卡通和钥匙',
+        'postingPic':'https://img-blog.csdnimg.cn/20210920143013638.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYWFhc2h1b3c=,size_20,color_FFFFFF,t_70,g_se,x_16'
       },
-      {
-        'labelText':['雨伞','口红'],
-        'title':'物品名称',
-        'publishTime':'1天前',
-        'description':'简要描述简要描述简要描述捡到东西的地方是哪里…',
-        'postingPic':'https://assets.burberry.com/is/image/Burberryltd/109A4FC5-0F33-4E5B-8488-11626C39FB3F.jpg?$BBY_V2_B_3x4$&wid=1278&hei=1700'
-      },
+
     
     ]
   },

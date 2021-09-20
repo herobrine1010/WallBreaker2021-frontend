@@ -1,5 +1,5 @@
 <!--pages/tongde/main.wxml 失物招领主页-->
-
+<view class='tongde-shade'></view>
 <view class="tongde-background">
   <view>
     <mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar-tongde__centers" title="失物招领"></mp-navigation-bar>
@@ -13,12 +13,12 @@
 
     <view class="conditionFilter" bindtap="clickConditionFilter">
         <block wx:if="{{conditionIndex==''}}">
-          <image class="conditionIcon" src="/static/icon/select-tongde-blue.png"></image>
+          <image class="conditionIcon" src="/static/icon/select-tongde.png"></image>
         </block>
         <block wx:else>
-          <image class="conditionIcon" src="/static/icon/select-tongde-blue.png"></image>
+          <image class="conditionIcon" src="/static/icon/select-tongde.png"></image>
         </block>
-    </view>
+    </view>  <!-- 好像没有因为状态不同而改变icon的需求  -->
   
   </view>
 
@@ -95,4 +95,6 @@
 
 
 </view>
+
+
 

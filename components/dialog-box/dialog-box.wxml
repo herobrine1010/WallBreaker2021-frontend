@@ -6,9 +6,9 @@
     <textarea wx:if="{{hasInputBox}}" name="closeReason" id="closeReason" placeholder="请输入结束组队的原因" class="dialog-input" bindinput="finishInput"></textarea>
 
     <view wx:if="{{isShowInfo}}" class="dialog-box-infoArea">
-        <text class="infoKey">{{infoDetail.key}}</text>
-        <view class="infoValue">{{infoDetail.value}}</view>
-        <image wx:if="{{infoDetail.copyEnable}}" src="/static/icon/map.png" class="copyBtn" bindtap="tapCopy"></image><!-- 图标待改 -->
+        <text class="infoKey">{{infoDetail.Key}}</text>
+        <view class="infoValue">{{infoDetail.Value}}</view>
+        <image wx:if="{{infoDetail.copyEnable}}" src="/static/icon/copy-tongde.png" class="copyBtn" bindtap="tapCopy"></image><!-- 图标待改 -->
     </view>
     
     <text class="dialog-box-tip">{{tip}}</text>
