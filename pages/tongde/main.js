@@ -1,5 +1,32 @@
 // pages/tongde/main.js
 import {request} from "../../request/request.js";
+// 定义函数编写请求参数：-----------------------------------------
+function setRequestData(keyword,labelId,type){
+  let data = {
+    type : type
+  };
+  // 当keyword=''时,发送的请求不应该包括keyword字段,否则会无返回结果
+  if(keyword){
+    data.keyword = keyword;
+  }
+  if(labelId){
+    data.labelId = labelId;
+  }
+  return data;
+};
+function getLostFoundList(that, type=0, labelId='', keyword='') {
+  request({
+    url: '/lostfound/tongdeGetLostFound',
+    header: {
+      'content-type': 'application/x-www-form-urlencoded',
+      'cookie':wx.getStorageSync("token")
+    },
+    method : 'GET',
+    data: setRequestData(keyword, labelId, type)
+  }).then(res => {
+    console.log(res.data.data);
+  });
+}
 Page({
 
   /**
@@ -65,21 +92,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    request({
+    // getLostFoundList(this, '0', undefined, undefined);
+    var requestPromise = request({
       url: '/lostfound/tongdeGetLostFound',
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-        // 'cookie':wx.getStorageSync("token")
+        'cookie':wx.getStorageSync("token")
       },
       method : 'GET',
       data: {
-        'type': '1',
-        // 'labelId': '30',
-        // 'keyword': ''
+        labelId: 30,
+        type: 0
       }
-    }).then(res => {
-      console.log(res.data.data);
     });
+    console.log(requestPromise);
+    requestPromise.then(res => console.log(res));
+
   },
 
   // 绑定在点击tab上函数，通过点击切换swiper
@@ -87,7 +115,8 @@ Page({
 
     this.setData({
       tabIndex: e.currentTarget.dataset.item
-    }
+    },
+    getLostFoundList(this, '', '', this.data.tabIndex)
     )
 
   },
