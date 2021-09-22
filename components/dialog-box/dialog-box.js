@@ -35,8 +35,8 @@ Component({
     infoDetail:{
       type:Object,
       value:{
-        key:'微信',
-        value:'1289uasdj',
+        Key:'微信',
+        Value:'1289uasdj',
         copyEnable:true,
       }
     

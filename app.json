@@ -1,7 +1,7 @@
 {
   "tabBar": {
-    "color": "#1D99C3",
-    "selectedColor": "#9B50E6",
+    "color": "#989A9A",
+    "selectedColor": "#3E92CC",
     "list": [
       {
         "pagePath": "pages/jishi/main",

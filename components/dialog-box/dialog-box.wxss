@@ -107,24 +107,24 @@
   justify-content: center;
   margin-left: 30rpx;
 }
+.dialog-box-infoArea{
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28rpx;
+  line-height: 150%;
+  /* identical to box height, or 21px */
+  text-align: center;
+  color: #333333;
+  width: 100%;
+}
 .infoKey{
-  /* width: 400rpx; */
-  width:60rpx;
-  font-family: Noto Sans SC;
-  font-style: normal;
-  font-size: 26rpx;
-  color:#4A5559;
+  /* Body/14regular */
+  margin-left: 200rpx;
 }
-.infoValue{
-  left:50rpx;
-  font-family: Noto Sans SC;
-  font-style: normal;
-  font-size: 26rpx;
-  line-height: 40rpx;
-  color:#4A5559;
-}
+
 .copyBtn{
-  height:30rpx;
+  margin-left: 2rpx;
+  height:36rpx;
   width: 30rpx;
-  background-color: chocolate;
 }
