@@ -29,7 +29,7 @@
           <image class="icon"></image>
           <text class="title">选择标签</text>
         </view>
-        <view class="tag-normal" wx:for="{{tagChoosenList}}" wx:key="*this">#{{item}}</view>
+        <view><text class="label-show" wx:for="{{selectedLabelList}}" wx:key="*this">#{{item.content}}</text></view>
       </view>
       <view class="item-wrap type-container">
         <view class="icon-with-title">
@@ -50,13 +50,13 @@
           <input name="location" class="input-location" placeholder="失物寻主信息必填，物品遗失信息可选填选项" placeholder-class="input-placeholder" />
         </view>
       </view>
-      <view class="item-wrap">
+      <view class=" item-wrap item-wrap-last">
         <view class="icon-with-title">
           <image class="icon"></image>
           <text class="title">联系方式</text>
         </view>
         <view class="a-line">
-          <dropdown-box name="contactType" range="{{connactTypes}}" current="{{connactType}}" bindchange="dropdownChange" style="width:30%"></dropdown-box>
+          <dropdown-box name="contactType" range="{{contactTypes}}" key="id" text="content" defaultOption="{{defaultObject}}"></dropdown-box>
           <view class="input-contact-box">
             <input name="contact" class="input-half-line" placeholder="请输入您的联系方式"/>        
           </view>

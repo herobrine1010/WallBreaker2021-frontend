@@ -49,9 +49,23 @@ function createPostRequest(formValue) {
   });
   return promise;
 };
-function addLabelRequest(lostFoundId, labelId) {
+function addLabelRequest(lostFoundId, labels) {
   /* 给帖子添加标签的请求封装
-  参数: lostFoundId-失物招领主键id  labelId-标签id
+  参数: lostFoundId-失物招领主键id  labels-标签列表, 形如:
+  [
+    {
+      "content": "",
+      "createTime": "",
+      "deleted": true,
+      "id": 0,
+      "selected": true,
+      "type": "",
+      "updateTime": ""
+    },
+    {
+
+    }
+  ]
   返回: 添加标签请求的promise对象
   */
   var promise = request({
@@ -60,9 +74,7 @@ function addLabelRequest(lostFoundId, labelId) {
     header: {
       'content-type': 'application/json'
     },
-    data: {
-      "id": labelId,
-    }
+    data: labels
   });
   return promise;
 };
@@ -188,10 +200,45 @@ Page({
     ],
     // 选中标签列表
     selectedLabelList: [],
-    connactTypes:['QQ','微信','手机','邮箱','其他'].map(item=>{
-      return {content:item}
-    }),
-    connactType:{content:'QQ'},
+    contactTypes:[
+      {
+        "id": 38,
+        "createTime": "2021-08-20 00:17:52",
+        "updateTime": "2021-09-17 18:54:10",
+        "content": "QQ",
+        "type": "contactType",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 40,
+        "createTime": "2021-08-20 00:17:52",
+        "updateTime": "2021-09-17 18:54:10",
+        "content": "手机号",
+        "type": "contactType",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 41,
+        "createTime": "2021-08-20 00:17:52",
+        "updateTime": "2021-09-17 18:54:10",
+        "content": "邮箱",
+        "type": "contacttype",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 42,
+        "createTime": "2021-08-20 00:17:52",
+        "updateTime": "2021-09-17 18:54:10",
+        "content": "其他",
+        "type": "contactType",
+        "deleted": false,
+        "selected": null
+      }
+    ],
+    defaultObject: {id:0,name:'请选择联系渠道'},
     height:'auto',
   },
 
@@ -234,7 +281,7 @@ Page({
 
   submitForm: function(e) {
     let formValue = e.detail.value; // 用户填写的表单数据
-
+    let selectedLabels = this.data.selectedLabelList;
     // 上传本地图片,拿到oss图片url
     let imagePromise= mergePathThenUploadImage(formValue.allPicPaths);
     wx.showLoading({
@@ -256,9 +303,9 @@ Page({
       }
     }).then(res => {
       let data = res.data.data;
-      // let lostFoundId = data.id; // 获取失物招领主键id, 之后添加标签
+      let lostFoundId = data.id; // 获取失物招领主键id, 之后添加标签
       console.log("发布失物招领响应数据", data);
-      return addLabelRequest(lostFoundId, labelId)
+      return addLabelRequest(lostFoundId, selectedLabels)
     }).then(res => {
       let data = res.data.data;
       console.log("添加标签的响应数据", data);
@@ -273,30 +320,8 @@ Page({
   labelChanged: function(e) {
     console.log(e);
     let selectedLabelList = e.detail;
-    this.setData({selectedLabelList})
+    this.setData({selectedLabelList});
   },
-/*   clickTag:function(e){
-    console.log(e)
-    let tagList=this.data.tagList;
-    tagList[e.currentTarget.dataset.index].choosen=!tagList[e.currentTarget.dataset.index].choosen;
-    this.setData({tagList})
-  },
-  clickYesOfTagBox:function(){
-    let list=[];
-    let tagList=this.data.tagList;
-    for(let key in tagList){
-      if( tagList[key].choosen){
-        list.push(tagList[key].name)
-      }
-    };
-    this.setData({
-      tagChoosenList:list,
-      tagboxShow:false
-    })
-  },
-  clickNoOfTagBox:function(){
-    this.setData({tagboxShow:false})
-  }, */
   changeScrollHeight:function(){
     let windowHeight;
     //设置scroll-view高度
