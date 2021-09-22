@@ -1,0 +1,95 @@
+/* components/label-selector/dialog-label-selector.wxss */
+.tag-position{
+  position: fixed;
+  display: flex;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20rpx;
+  line-height: 1.5;
+  z-index: 4;
+}
+.tag-box{
+  /* height: auto; */
+  width: 670rpx;
+  margin: auto;
+  padding: 30rpx 20rpx 20rpx;
+  background-color: white;
+  border-radius: 16rpx;
+}
+.tag-message{
+  font-size: 28rpx;
+  color: #333333;
+  margin: 32rpx;
+}
+.tag-show {
+  width: 26px;
+  height: 15px;
+  padding: 0 8rpx;
+  margin: 0 16rpx 0 0;
+
+  background: #F2FCFF;
+  border-radius: 4px;
+  color: #3E92CC;
+
+  font-size: 10px;
+}
+.tag-area{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.tag-choosen,.tag-normal{
+  /* display: inline; */
+  box-sizing: border-box;
+  width: 186rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  margin: 8rpx 0;
+  background: #F2FCFF;
+  color: #3E92CC;
+  border-radius: 25rpx;
+}
+.tag-choosen{
+  border: 2rpx solid #3E92CC;
+}
+.icon {
+  height: 24rpx;
+  width: 24rpx;
+  margin: 0 8rpx;
+  vertical-align: middle;
+}
+.label-warn {
+  margin-left: 32rpx;
+  color: #FA5151;
+}
+.button-line{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  
+  margin-top: 32rpx;
+}
+.tag-button{
+  width: 288rpx;
+  height: 56rpx;
+  margin: 0 auto 20rpx ;
+  line-height: 60rpx;
+  text-align: center;
+  border-radius: 24rpx;
+}
+.button-cancel {
+  background: #F7F7F7;
+  border: 1px solid #3E92CC;
+}
+.button-confirm {
+  color: #F9F9F9;
+
+  background: #3E92CC;
+}
