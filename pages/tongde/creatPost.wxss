@@ -4,65 +4,103 @@ Page {
   font-family: PingFang SC;
   font-style: normal;
   font-weight: normal;
-  font-size: 20rpx;
+  font-size: 24rpx;
   line-height: 1.5;
+
+  color: #545454;
 }
 /* input为原生组件，要用height，min-height覆盖原有属性 */
 input {
   height: 30rpx;
-  min-height: 30rpx;
+  min-height: 0rpx;
   line-height: 30rpx;
 }
+.input-placeholder {
+  /* font-size: 24rpx; */
+  color: #989a9a;
+}
+/* 设置整体样式 */
 .inner-container{
-  width: 94vw;
-  margin: 10rpx 3vw;
+  width: 686rpx;
+  margin: 10rpx 32rpx;
   height: 100%;
 }
 .item-wrap {
-  margin: 32rpx 0;
+  width: auto; /*子元素（包括content+padding+border+margin）撑满整个父元素的content区域。*/
+  padding: 24rpx 0 16rpx 0;
+  border-bottom: 1rpx solid #DEDEDE;
 }
+/* 设置标题及图标 */
 .title{
   /* height: 60rpx; */
-  margin-bottom: 16rpx;
-  font-size: 14px;
+  font-size: 24rpx;
   font-weight: bold;
-  line-height: 150%;
-  letter-spacing: 2rpx;
+  line-height: 1.5;
 }
-radio-group>radio{
-  margin-right: 40rpx;
-  letter-spacing: 3rpx;
+.icon-with-title {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  margin-bottom: 16rpx;
 }
-.input-a-line-box{
-  width: 89vw;
-  height: 48rpx;
-  /* padding参考设计图24 = 5+15+4 px,PC端预览时placeholder会偏移，手机端正常 */
-  padding: 10rpx 1vw 8rpx 1vw;
-  border: 2rpx solid #989A9A;
-  border-radius: 8rpx;
-  /* 改变盒子模型，将border和padding加入高度计算 */
+.icon {
+  height: 24rpx;
+  width: 24rpx;
+}
+/* -----------总体公用样式设置结束------------ */
+
+.input-lost-name-box,
+.text-box {
+  display: flex;
+}
+.input-lost-name {
+  height: 40rpx;
+  font-size: 32rpx;
+  line-height: 1.25;
+  color: #333333;
+}
+.text-box {
+  height: 200rpx;
+}
+.text-area {
+  height: 200rpx;
+}
+.type-container {
+  width: 686rpx;
+  height: 80rpx;
+  padding: 26rpx 0 24rpx 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   box-sizing: border-box;
+}
+radio-group > radio {
+  font-size: 20rpx;
+  line-height: 30rpx;
+  height: 30rpx;
+  min-height: 30rpx;
+}
+#lost {
+  margin-right: 40rpx;
 }
 
-.input-half-line-box{
+.input-location-box {
+  padding: 0px 0px 0px 32rpx;
+}
+.input-location {
+  font-size: 20rpx;
+}
+
+.input-contact-box{
   height: 48rpx;
   /* padding参考设计图24 = 5+15+4 px,PC端预览时placeholder会偏移，手机端正常 */
   padding: 10rpx 1vw 8rpx 1vw;
-  border: 2rpx solid #989A9A;
-  border-radius: 8rpx;
-  /* 改变盒子模型，将border和padding加入高度计算 */
-  box-sizing: border-box;
+  border-bottom: 1rpx solid #DEDEDE;
 }
-.text-box{
-  width: 89vw;
-  height: 300rpx;
-  padding: 10rpx 1vw;
-  border: 2rpx solid #989A9A;
-  border-radius: 8rpx;
-}
-.text-area{
-  letter-spacing: 1rpx;
-}
+
 .a-line{
   position: relative;
   display: flex;

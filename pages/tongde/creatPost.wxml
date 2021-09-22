@@ -8,64 +8,65 @@
   <!-- 动态设置scroll-view的高度，在changeScrollHeight中 -->
   <scroll-view class="outer-container" id="scroll" scroll-y="true" style="height:{{height}};">
     <view class="inner-container">
-    <view class="item-wrap">
-      <view class="title">招领类型</view>
-      <radio-group class="a-line">
-        <radio value="0">物品遗失</radio>
-        <radio value="1">失物寻主</radio>
-      </radio-group>
-    </view>
-    <view class="item-wrap">
-      <view class="title">失物名称</view>
-      <view class="input-a-line-box">
-        <input class="input-a-line" placeholder="请输入失物名称"/>
+    <form bindsubmit="submitForm">
+      <view class="picture-area">
+        <image-box name="allPicPaths"></image-box>
+        <view class="tip">上传证件相关照片时请记得打码保护隐私哦~</view>
       </view>
-    </view>
-    <view class="description">
-      <view class="title">情况说明</view>
-      <view class="text-box">
-        <textarea class="text-area" placeholder="请描述一下丢失/捡到东西的情况"></textarea>
-      </view>
-    </view>
-    <view class="item-wrap">
-      <view class="title">遗失/捡到地点</view>
-      <view class="input-a-line-box">
-        <input class="input-a-line" placeholder="失物寻主信息必填，物品遗失信息可选填选项"/>
-      </view>
-    </view>
-    <view class="item-wrap">
-      <view class="title">联系方式</view>
-      <view class="a-line">
-        <dropdown-box name="teamTheme" range="{{connactTypes}}" current="{{connactType}}" bindchange="dropdownChange" style="width:30%"></dropdown-box>
-        <view class="input-half-line-box">
-          <input class="input-half-line" placeholder="请输入您的联系方式"/>        
+      <view class="item-wrap">
+        <view class="input-lost-name-box">
+          <input name="name" class="input-lost-name" placeholder="请输入失物名称" placeholder-class="input-placeholder" />
+
         </view>
       </view>
-    </view>
-      <view class="tag-a-line">
-        <view class="tag-normal" wx:for="{{tagChoosenList}}" >#{{item}}</view>
-        <view class="tag-normal" bindtap="clickToChooseTag">#选择标签</view>
+      <view class="item-wrap description">
+        <view class="text-box">
+          <textarea name="content" class="text-area" placeholder="请输入情况说明" placeholder-class="input-placeholder"></textarea>
+        </view>
       </view>
-      <view class="picture-area">
-        <image-box></image-box>
+      <view class="item-wrap" bindtap="clickToChooseTag">
+        <view class="icon-with-title">
+          <image class="icon"></image>
+          <text class="title">选择标签</text>
+        </view>
+        <view class="tag-normal" wx:for="{{tagChoosenList}}" wx:key="*this">#{{item}}</view>
       </view>
-      <view class="tip">上传证件相关照片时请记得打码保护隐私哦~</view>
+      <view class="item-wrap type-container">
+        <view class="icon-with-title">
+          <image class="icon"></image>
+          <text class="title">招领类型</text>
+        </view>
+        <radio-group name="type" class="a-line">
+          <radio value="0" id="lost">物品遗失</radio>
+          <radio value="1" id="found">失物寻主</radio>
+        </radio-group>
+      </view>
+      <view class="item-wrap">
+        <view class="icon-with-title">
+          <image class="icon"></image>
+          <text class="title">遗失/捡到地点</text>
+        </view>
+        <view class="input-location-box">
+          <input name="location" class="input-location" placeholder="失物寻主信息必填，物品遗失信息可选填选项" placeholder-class="input-placeholder" />
+        </view>
+      </view>
+      <view class="item-wrap">
+        <view class="icon-with-title">
+          <image class="icon"></image>
+          <text class="title">联系方式</text>
+        </view>
+        <view class="a-line">
+          <dropdown-box name="contactType" range="{{connactTypes}}" current="{{connactType}}" bindchange="dropdownChange" style="width:30%"></dropdown-box>
+          <view class="input-contact-box">
+            <input name="contact" class="input-half-line" placeholder="请输入您的联系方式"/>        
+          </view>
+        </view>
+      </view>
 
-      <view class="button">发布</view>
+      <button form-type="submit" class="button" size="default">发布</button>
+    </form>
     </view>
   </scroll-view>
 
-  <view class="tag-position" wx:if="{{tagboxShow}}">
-    <view class="tag-box" >
-      <view class="tag-message">已选标签：
-        <text  wx:for="{{tagList}}" wx:if="{{item.choosen}}">#{{item.name}} </text>
-      </view>
-      <view class="tag-area">
-        <view class="{{item.choosen?'tag-choosen':'tag-normal'}}" wx:for="{{tagList}}" bindtap="clickTag" data-index="{{index}}">#{{item.name}}</view>
-      </view>
-      <view class="a-line">
-        <view class="tag-button" bindtap="clickNoOfTagBox">取消</view>
-        <view class="tag-button" bindtap="clickYesOfTagBox">确定</view>
-      </view>
-    </view>
-  </view>
+<dialog-label id="dialog-label-selector" labels="{{labelList}}" bind:change="labelChanged"></dialog-label>
+
