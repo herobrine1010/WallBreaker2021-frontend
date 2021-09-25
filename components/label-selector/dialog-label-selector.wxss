@@ -12,9 +12,11 @@
   font-size: 20rpx;
   line-height: 1.5;
   z-index: 4;
+  background-color: rgba(0,0,0,0.2);
 }
 .tag-box{
   /* height: auto; */
+  
   width: 670rpx;
   margin: auto;
   padding: 30rpx 20rpx 20rpx;

@@ -26,14 +26,14 @@
       </view>
       <view class="item-wrap" bindtap="clickToChooseTag">
         <view class="icon-with-title">
-          <image class="icon"></image>
+          <image class="icon" src="../../static/icon/label.png"></image>
           <text class="title">选择标签</text>
         </view>
         <view><text class="label-show" wx:for="{{selectedLabelList}}" wx:key="*this">#{{item.content}}</text></view>
       </view>
       <view class="item-wrap type-container">
         <view class="icon-with-title">
-          <image class="icon"></image>
+          <image class="icon" src="../../static/icon/lostType.png"></image>
           <text class="title">招领类型</text>
         </view>
         <radio-group name="type" class="a-line">
@@ -43,7 +43,7 @@
       </view>
       <view class="item-wrap">
         <view class="icon-with-title">
-          <image class="icon"></image>
+          <image class="icon" src="../../static/icon/location.png"></image>
           <text class="title">遗失/捡到地点</text>
         </view>
         <view class="input-location-box">
@@ -52,7 +52,7 @@
       </view>
       <view class=" item-wrap item-wrap-last">
         <view class="icon-with-title">
-          <image class="icon"></image>
+          <image class="icon" src="../../static/icon/contact.png"></image>
           <text class="title">联系方式</text>
         </view>
         <view class="a-line">

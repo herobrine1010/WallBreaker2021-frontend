@@ -28,7 +28,7 @@ input {
 .item-wrap {
   width: auto; /*子元素（包括content+padding+border+margin）撑满整个父元素的content区域。*/
   padding: 24rpx 0 16rpx 0;
-  border-bottom: 1rpx solid #DEDEDE;
+  border-bottom: 1px solid #DEDEDE;
 }
 .item-wrap-last {
   border-bottom: none;
@@ -47,10 +47,13 @@ input {
   align-items: flex-start;
 
   margin-bottom: 16rpx;
+  align-items: center;
 }
 .icon {
   height: 24rpx;
   width: 24rpx;
+
+  margin-right: 8rpx;
 }
 /* -----------总体公用样式设置结束------------ */
 
@@ -118,7 +121,7 @@ radio-group > radio {
   width: auto;
   padding: 0 1vw 16rpx 1vw;
   margin-left: 16rpx;
-  border-bottom: 1rpx solid #DEDEDE;
+  border-bottom: 1px solid #DEDEDE;
 }
 dropdown-box {
   height: 36rpx;
@@ -127,7 +130,7 @@ dropdown-box {
   line-height: 1.5;
   color: #545454;
   padding: 0 0 16rpx 32rpx;
-  border-bottom: 1rpx solid #DEDEDE;
+  border-bottom: 1px solid #DEDEDE;
 }
 .a-line{
   position: relative;
