@@ -1,53 +1,244 @@
 // pages/tongde/creatPost.js
+import {request} from "../../request/request.js";
+const FormData = require('../../lib/wx-formdata-master/formData.js'); //实现文件上传
+function mergePathThenUploadImage(imagePath) {
+  /* 上传图片的请求封装
+  根据图片的本地路径获取的二进制数据,打包为formData形式,之后上传多张图片
+  参数：imagePath: 传入图片路径,数组
+  返回：promise对象
+  */
+  var imageData = new FormData();
+  for (let i in imagePath) {
+    imageData.appendFile("files",imagePath[i])
+  }
+  var data = imageData.getData();
+  var promise = request({
+    url : '/team/jirenUploadPhotos',
+    method: 'POST',
+    header: {
+      'content-type': data.contentType,
+      'cookie':wx.getStorageSync("token")
+    },
+    data : data.buffer
+  });
+  return promise;
+};
+function createPostRequest(formValue) {
+  /*  发布失物招领的请求封装
+  参数：失物招领所需表单数据,对象{'key':'value'}
+    data: {
+      "allPicUrl": "https://oss.url/pic1.png,https://oss.url/pic2.jpg",
+      "firstPicUrl": "https://oss.url/pic1.png",
+      "contactType": 36,
+      "contact": "783592285@qq.com",
+      "content": "失物招领描述",
+      "location": "测试地点",
+      "name": "测试物品名称",
+      "type": 0
+      }
+  返回： 发布失物招领的Promise对象 
+  */
+  var promise = request({
+    url: '/lostfound/initializeLostFound', 
+    header: {
+      'content-type': 'application/json',
+      'cookie':wx.getStorageSync("token")
+    },
+    method : 'POST',
+    data: formValue
+  });
+  return promise;
+};
+function addLabelRequest(lostFoundId, labels) {
+  /* 给帖子添加标签的请求封装
+  参数: lostFoundId-失物招领主键id  labels-标签列表, 形如:
+  [
+    {
+      "content": "",
+      "createTime": "",
+      "deleted": true,
+      "id": 0,
+      "selected": true,
+      "type": "",
+      "updateTime": ""
+    },
+    {
+
+    }
+  ]
+  返回: 添加标签请求的promise对象
+  */
+  var promise = request({
+    url: '/lostfound/editMyLostFoundLabel/' + lostFoundId,
+    method: 'POST',
+    header: {
+      'content-type': 'application/json'
+    },
+    data: labels
+  });
+  return promise;
+};
+function initContactTypes() {
+  // 初始化联系方式种类，QQ，微信，手机号，从数据库获取数据，修改页面数据
+}
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    tagboxShow:false,
-    tagList:[{
-      'name':'水杯',
-      'choosen':false
-    },{
-      'name':'雨伞',
-      'choosen':false
-    },{
-      'name':'证件',
-      'choosen':false
-    },{
-      'name':'耳机',
-      'choosen':false
-    },{
-      'name':'钥匙',
-      'choosen':false
-    },{
-      'name':'钱包',
-      'choosen':false
-    },{
-      'name':'数码',
-      'choosen':false
-    },{
-      'name':'衣物',
-      'choosen':false
-    },{
-      'name':'眼镜',
-      'choosen':false
-    },{
-      'name':'文具',
-      'choosen':false
-    },{
-      'name':'书籍',
-      'choosen':false
-    },{
-      'name':'其他',
-      'choosen':false
-    }],
-
-    connactTypes:['QQ','微信','手机','邮箱','其他'].map(item=>{
-      return {content:item}
-    }),
-    connactType:{content:'QQ'},
+    // 所有类型标签列表
+    labelList: [
+      {
+        "id": 26,
+        "createTime": "2021-08-20 00:13:57",
+        "updateTime": "2021-08-20 00:13:57",
+        "content": "水杯",
+        "type": "tongde",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 27,
+        "createTime": "2021-08-20 00:16:04",
+        "updateTime": "2021-08-20 00:16:04",
+        "content": "雨伞",
+        "type": "tongde",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 28,
+        "createTime": "2021-08-20 00:16:04",
+        "updateTime": "2021-08-20 00:16:04",
+        "content": "证件",
+        "type": "tongde",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 29,
+        "createTime": "2021-08-20 00:16:05",
+        "updateTime": "2021-08-20 00:16:05",
+        "content": "耳机",
+        "type": "tongde",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 30,
+        "createTime": "2021-08-20 00:16:05",
+        "updateTime": "2021-08-20 00:16:05",
+        "content": "钥匙",
+        "type": "tongde",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 31,
+        "createTime": "2021-08-20 00:16:05",
+        "updateTime": "2021-08-20 00:16:05",
+        "content": "钱包",
+        "type": "tongde",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 32,
+        "createTime": "2021-08-20 00:16:05",
+        "updateTime": "2021-08-20 00:16:05",
+        "content": "数码",
+        "type": "tongde",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 33,
+        "createTime": "2021-08-20 00:16:05",
+        "updateTime": "2021-08-20 00:16:05",
+        "content": "衣服",
+        "type": "tongde",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 34,
+        "createTime": "2021-08-20 00:16:05",
+        "updateTime": "2021-08-20 00:16:05",
+        "content": "眼镜",
+        "type": "tongde",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 35,
+        "createTime": "2021-08-20 00:16:05",
+        "updateTime": "2021-08-20 00:16:05",
+        "content": "文具",
+        "type": "tongde",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 36,
+        "createTime": "2021-08-20 00:16:05",
+        "updateTime": "2021-08-20 00:16:05",
+        "content": "书籍",
+        "type": "tongde",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 37,
+        "createTime": "2021-08-20 00:16:05",
+        "updateTime": "2021-08-20 00:16:05",
+        "content": "其他",
+        "type": "tongde",
+        "deleted": false,
+        "selected": null
+      }
+    ],
+    // 选中标签列表
+    selectedLabelList: [],
+    contactTypes:[
+      {
+        "id": 38,
+        "createTime": "2021-08-20 00:17:52",
+        "updateTime": "2021-09-17 18:54:10",
+        "content": "QQ",
+        "type": "contactType",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 40,
+        "createTime": "2021-08-20 00:17:52",
+        "updateTime": "2021-09-17 18:54:10",
+        "content": "手机号",
+        "type": "contactType",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 41,
+        "createTime": "2021-08-20 00:17:52",
+        "updateTime": "2021-09-17 18:54:10",
+        "content": "邮箱",
+        "type": "contacttype",
+        "deleted": false,
+        "selected": null
+      },
+      {
+        "id": 42,
+        "createTime": "2021-08-20 00:17:52",
+        "updateTime": "2021-09-17 18:54:10",
+        "content": "其他",
+        "type": "contactType",
+        "deleted": false,
+        "selected": null
+      }
+    ],
+    defaultObject: {id:0,name:'请选择联系渠道'},
     height:'auto',
   },
 
@@ -56,7 +247,7 @@ Page({
    */
   onLoad: function (options) {
 
-
+    
     this.changeScrollHeight();
   },
 
@@ -88,67 +279,48 @@ Page({
 
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  submitForm: function(e) {
+    let formValue = e.detail.value; // 用户填写的表单数据
+    let selectedLabels = this.data.selectedLabelList;
+    // 上传本地图片,拿到oss图片url
+    let imagePromise= mergePathThenUploadImage(formValue.allPicPaths);
+    wx.showLoading({
+      title: '图片上传中',
+      mask: true
+    });
+    imagePromise.then(res => { //上传图片成功的回调
+      wx.hideLoading(); //图片上传成功后隐藏加载框z
+      if(res.statusCode >=200 && res.statusCode <=300) {
+        // 拿到上传后的图片ossURL
+        let imageURL = res.data.data;
+        // 分割字符串获得头图，如果firstImgURL包含多个http链接，济人首页图片无法正常加载
+        let firstImgURL = imageURL.split(',',1)[0];
+        console.log("图片路径",imageURL, firstImgURL);
+        // 添加至payload，同时修改对象的属性名以对接接口命名
+        formValue.allPicUrl = imageURL;
+        formValue.firstPicUrl = firstImgURL;
+        return createPostRequest(formValue);
+      }
+    }).then(res => {
+      let data = res.data.data;
+      let lostFoundId = data.id; // 获取失物招领主键id, 之后添加标签
+      console.log("发布失物招领响应数据", data);
+      return addLabelRequest(lostFoundId, selectedLabels)
+    }).then(res => {
+      let data = res.data.data;
+      console.log("添加标签的响应数据", data);
+    });
+    console.log("form的数据", formValue);
   },
   clickToChooseTag:function(){
-    let tagList=this.data.tagList;
-    let tagChoosenList=this.data.tagChoosenList;
-    for(let key in tagList){
-      if(tagList[key].choosen){
-        tagList[key].choosen=false;
-        for(let key2 in tagChoosenList){
-          // console.log(tagChoosen)
-          if(tagList[key].name==tagChoosenList[key2]){
-            tagList[key].choosen=true;
-            break;
-          }
-        }
-      }
-    }
-    this.setData({
-      tagboxShow:true,
-      tagList
-    })
+    let selector = this.selectComponent('#dialog-label-selector');
+    selector.openClose(); //不用全局变量,即可弹出关闭dailog筛选标签
+    selector.setLabelsSelected();
   },
-  clickTag:function(e){
-    console.log(e)
-    let tagList=this.data.tagList;
-    tagList[e.currentTarget.dataset.index].choosen=!tagList[e.currentTarget.dataset.index].choosen;
-    this.setData({tagList})
-  },
-  clickYesOfTagBox:function(){
-    let list=[];
-    let tagList=this.data.tagList;
-    for(let key in tagList){
-      if( tagList[key].choosen){
-        list.push(tagList[key].name)
-      }
-    };
-    this.setData({
-      tagChoosenList:list,
-      tagboxShow:false
-    })
-  },
-  clickNoOfTagBox:function(){
-    this.setData({tagboxShow:false})
+  labelChanged: function(e) {
+    console.log(e);
+    let selectedLabelList = e.detail;
+    this.setData({selectedLabelList});
   },
   changeScrollHeight:function(){
     let windowHeight;
