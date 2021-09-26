@@ -65,6 +65,10 @@
 .pa-description,.pa-wx-id,.pa-info-area{
   margin-bottom: 4rpx;
 }
+.pa-wx-id{
+  display: flex;
+  align-items: center;
+}
 .pa-info-area{
   display: flex;
 }

@@ -24,8 +24,9 @@ Page({
       wxId: 'wxid-25536748',
       description: '理工科钢铁直男一枚~'
     },
+    identificationList : ['本科生','硕士研究生','博士研究生','博士后'],
+    schoolList : ['同心学堂','同德学堂','同舟学堂','同和学堂','济人学堂','济世学堂','济美学堂','济勤学堂','国豪学堂','建筑与城市规划学院','土木工程学院','机械与能源工程学院','经济与管理学院','环境科学与工程学院','材料科学与工程学院','电子与信息工程学院','外国语学院','航空航天与力学学院','数学科学学院','物理科学与工程学院','化学科学与工程学院','医学院','口腔医学院','交通运输工程学院','中德学院','铁道与城市轨道交通研究院','职业技术教育学院','生命科学与技术学院','软件学院','汽车学院','海洋与地球科学学院','艺术与传媒学院','人文学院','体育教学部','法学院','政治与国际关系学院','马克思主义学院','设计创意学院','测绘与地理信息学院','上海国际知识产权学院','国际足球学院'],
     uploadImageLock : true,
-
   },
 
   // ------------- ------- ----- below 以下是 自定义事件---- ------ -----
@@ -47,8 +48,37 @@ Page({
       }
     })
   },
+
+  //  picker组件的更改事件：
+  onIdentificationChange(e){
+    let index = e.detail.value;
+    let identification = this.data.identificationList[index];
+    this.setData({
+      'userDetails.identification' : identification
+    })
+  },
+  onGradeChange(e){
+    let index = e.detail.value;
+    let reg = /(\d+)/g;
+    let grade = this.data.gradeList[index].match(reg)[0];
+    this.setData({
+      'userDetails.grade' : grade
+    })
+  },
+  onSchoolChange(e){
+    let index = e.detail.value;
+    let school = this.data.schoolList[index];
+    this.setData({
+      'userDetails.school' : school
+    })
+  },
+
+
+
   // 定义表单提交事件 formSubmit，并且拿到表单的数据
   formSubmit : function(e){
+    console.log(e.detail.value);
+    let detail = e.detail.value;
     this.setData({
       userDetails:e.detail.value
     });
@@ -182,7 +212,12 @@ Page({
       }else{
         wx.showToast({
           title: '上传成功'
-        })
+        });
+        setTimeout(() => {
+          wx.reLaunch({
+            url: './main',
+          })
+        }, 1000);
       }
     }).catch(err => {
       console.log(err);
@@ -198,6 +233,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    // 获取当前的年份，用于picker选择器的数据列表
+    let endYear = new Date().getFullYear();
+    let startYear = 2010;
+    let gradeList = [];
+    for(let i = endYear; i>= startYear; i--){
+      gradeList.push(i+'级');
+    };
+    this.setData({
+      gradeList
+    });
+
     // -----------使用封装成promise 的request方法，注意添加本文件最上方的引入------------；
     const that = this;
     request({
@@ -208,7 +255,7 @@ Page({
       }
     }).then( res => {
       let result = res.data.data;
-      // console.log(result);
+      console.log(result);
       // 提取用户的头像、昵称等个人信息--------
       let userDetails = {
         nickName: result.nickName ,

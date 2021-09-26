@@ -159,7 +159,7 @@ Page({
             title : v.title,
             description : v.content,
             initiator : v.initiatorNickName,
-            peopleCount : v.participantNumber + '/' + v.dueMember,
+            peopleCount : (v.participantNumber + 1) + '/' + (v.dueMember + 1) ,
             postingPic : v.firstPicUrl,
             dueTime : '截止时间：' + (v.dueTime==null?"暂无":formatTime(v.dueTime)),
             id : v.id

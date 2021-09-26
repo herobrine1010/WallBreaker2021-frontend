@@ -4,85 +4,146 @@ Page {
   font-family: PingFang SC;
   font-style: normal;
   font-weight: normal;
-  font-size: 20rpx;
+  font-size: 24rpx;
   line-height: 1.5;
+
+  color: #545454;
 }
 /* input为原生组件，要用height，min-height覆盖原有属性 */
 input {
   height: 30rpx;
-  min-height: 30rpx;
+  min-height: 0rpx;
   line-height: 30rpx;
 }
+.input-placeholder {
+  /* font-size: 24rpx; */
+  color: #989a9a;
+}
+/* 设置整体样式 */
 .inner-container{
-  width: 94vw;
-  margin: 10rpx 3vw;
+  width: 686rpx;
+  margin: 10rpx 32rpx;
   height: 100%;
 }
 .item-wrap {
-  margin: 32rpx 0;
+  width: auto; /*子元素（包括content+padding+border+margin）撑满整个父元素的content区域。*/
+  padding: 24rpx 0 16rpx 0;
+  border-bottom: 1px solid #DEDEDE;
 }
-.title{
-  /* height: 60rpx; */
-  margin-bottom: 16rpx;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 150%;
-  letter-spacing: 2rpx;
-}
-radio-group>radio{
-  margin-right: 40rpx;
-  letter-spacing: 3rpx;
-}
-.input-a-line-box{
-  width: 89vw;
-  height: 48rpx;
-  /* padding参考设计图24 = 5+15+4 px,PC端预览时placeholder会偏移，手机端正常 */
-  padding: 10rpx 1vw 8rpx 1vw;
-  border: 2rpx solid #989A9A;
-  border-radius: 8rpx;
-  /* 改变盒子模型，将border和padding加入高度计算 */
-  box-sizing: border-box;
+.item-wrap-last {
+  border-bottom: none;
 }
 
-.input-half-line-box{
-  height: 48rpx;
-  /* padding参考设计图24 = 5+15+4 px,PC端预览时placeholder会偏移，手机端正常 */
-  padding: 10rpx 1vw 8rpx 1vw;
-  border: 2rpx solid #989A9A;
-  border-radius: 8rpx;
-  /* 改变盒子模型，将border和padding加入高度计算 */
+/* 设置标题及图标 */
+.title{
+  /* height: 60rpx; */
+  font-size: 24rpx;
+  font-weight: bold;
+  line-height: 1.5;
+}
+.icon-with-title {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  margin-bottom: 16rpx;
+  align-items: center;
+}
+.icon {
+  height: 24rpx;
+  width: 24rpx;
+
+  margin-right: 8rpx;
+}
+/* -----------总体公用样式设置结束------------ */
+
+.input-lost-name-box,
+.text-box {
+  display: flex;
+}
+.input-lost-name {
+  height: 40rpx;
+  font-size: 32rpx;
+  line-height: 1.25;
+  color: #333333;
+}
+.text-box {
+  height: 200rpx;
+}
+.text-area {
+  height: 200rpx;
+}
+.type-container {
+  width: 686rpx;
+  height: 80rpx;
+  padding: 26rpx 0 24rpx 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   box-sizing: border-box;
 }
-.text-box{
-  width: 89vw;
-  height: 300rpx;
-  padding: 10rpx 1vw;
-  border: 2rpx solid #989A9A;
-  border-radius: 8rpx;
+.label-show {
+  width: 26px;
+  height: 15px;
+  padding: 0 8rpx;
+  margin: 0 16rpx 0 0;
+
+  background: #F2FCFF;
+  border-radius: 4px;
+  color: #3E92CC;
+
+  font-size: 10px;
 }
-.text-area{
-  letter-spacing: 1rpx;
+.label-show:first-child {
+  margin-left: 36rpx;
+}
+radio-group > radio {
+  font-size: 20rpx;
+  line-height: 30rpx;
+  height: 30rpx;
+  min-height: 30rpx;
+}
+#lost {
+  margin-right: 40rpx;
+}
+
+.input-location-box {
+  padding: 0px 0px 0px 32rpx;
+}
+.input-location {
+  font-size: 20rpx;
+}
+
+.input-contact-box{
+  height: 36rpx;
+  width: auto;
+  padding: 0 1vw 16rpx 1vw;
+  margin-left: 16rpx;
+  border-bottom: 1px solid #DEDEDE;
+}
+dropdown-box {
+  height: 36rpx;
+  width: 232rpx;
+  font-size: 24rpx;
+  line-height: 1.5;
+  color: #545454;
+  padding: 0 0 16rpx 32rpx;
+  border-bottom: 1px solid #DEDEDE;
 }
 .a-line{
   position: relative;
   display: flex;
   flex-direction: row;
 }
-.tag-a-line{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: 15rpx auto;
-}
-.tag-a-line>view{
-  margin: 0 20rpx 20rpx;
-}
+
 
 .button{
   box-sizing: border-box;
-  width: 686rpx;
+  width: 686rpx !important;
   height: 80rpx;
-  margin: 30rpx auto 0;
+  margin: 250rpx auto 0;
   padding: 20rpx 0 18rpx 0;
   background: #3E92CC;
   border-radius: 8rpx;
@@ -90,59 +151,4 @@ radio-group>radio{
   line-height: 1.5;
   color: #F7F7F7;
   text-align: center;
-}
-
-
-.tag-position{
-  position: fixed;
-  display: flex;
-  top: 0;
-  width: 100%;
-  height: 100%;
-
-  z-index: 4;
-}
-.tag-box{
-  /* height: auto; */
-  width: 80vw;
-  margin: auto;
-  padding: 30rpx 20rpx 20rpx;
-  background-color: white;
-  border: 2rpx solid black;
-  border-radius: 20rpx;
-}
-/* .tag-message{
-
-  letter-spacing: 1rpx;
-} */
-.tag-area{
-  margin-bottom: 25rpx;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-.tag-choosen,.tag-normal{
-  /* display: inline; */
-  width: 22vw;
-  height: 50rpx;
-  line-height: 50rpx;
-  text-align: center;
-  margin-top: 10rpx;
-  margin-bottom: 10rpx;
-  /* margin: 10rpx auto; */
-  border: 2rpx solid black;
-  border-radius: 25rpx;
-}
-.tag-choosen{
-  border: 3rpx solid rgb(235, 0, 235);
-}
-.tag-button{
-  width: 30vw;
-  height: 60rpx;
-  margin: 0 auto 20rpx ;
-  line-height: 60rpx;
-  text-align: center;
-  border: 2rpx solid black;
-  border-radius: 10rpx;
 }

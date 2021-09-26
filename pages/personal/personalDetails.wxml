@@ -21,21 +21,31 @@
       <view class="detail-items">
         <view class="item-title">学历：</view>
         <view class="item-body">
-          <input name="identification" type="text" value="{{userDetails.identification}}"></input>
+          <picker  bindchange="onIdentificationChange" range="{{identificationList}}">
+            <view>{{userDetails.identification?userDetails.identification:'请选择你的学历'}}</view>
+            <input name="identification" type="text" style="display : none" value="{{userDetails.identification}}"></input>
+          </picker>
         </view>
         <switch class="poby-switch" name="identificationPublic" color="#A3E5FA" checked="{{userDetails.identificationPublic}}"></switch>
       </view>
       <view class="detail-items">
         <view class="item-title">年级：</view>
         <view class="item-body">
-          <input name="grade" type="text" value="{{userDetails.grade}}" placeholder="请输入入学年份（纯数字）"></input>
+          <picker bindchange="onGradeChange" range="{{gradeList}}">
+            <view>{{userDetails.grade?userDetails.grade:'请选择你的年级'}}</view>
+            <input name="grade" type="text" style="display : none" value="{{userDetails.grade}}"></input>
+          </picker>
         </view>
         <switch class="poby-switch" name="gradePublic" color="#A3E5FA" checked="{{userDetails.gradePublic}}"></switch>
       </view>
       <view class="detail-items">
         <view class="item-title">学院：</view>
         <view class="item-body">
-          <input name="school" type="text" value="{{userDetails.school}}"></input>
+          <picker bindchange="onSchoolChange" range="{{schoolList}}">
+            <view>{{userDetails.school?userDetails.school:'请选择你的学院'}}</view>
+            <input name="school" type="text" style="display : none" value="{{userDetails.school}}"></input>
+          </picker>
+
         </view>
         <switch class="poby-switch" name="schoolPublic" color="#A3E5FA" checked="{{userDetails.schoolPublic}}"></switch>
       </view>

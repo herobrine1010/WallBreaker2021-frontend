@@ -1,10 +1,11 @@
 <!--pages/tongde/detail.wxml 失物招领详情页-->
-<view class="tongde-background">
+<view class="tongde-shade"></view>
+<view class='tongde-background'>
   <view class="navi">
     <mp-navigation-bar ext-class="weui-navigation-bar__tongde" title="{{type==0?'物品遗失':'失物寻主'}}详情"></mp-navigation-bar>
   </view>
 
-  <view class="tongde-container">
+  <view class="card-container">
   
   <scroll-view class="scroll-content" scroll-y="true">
     <view class="avator-list">
@@ -42,7 +43,6 @@
   </scroll-view>
   </view>
 </view>
-
 <personal-animation id="personalAnimation1" personalInfo="{{personalInfo}}"></personal-animation>
 
 <dialog-box 

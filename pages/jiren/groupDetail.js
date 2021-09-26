@@ -260,7 +260,7 @@ Page({
           majorPublic,
           'school':schoolPublic?school:'',
           schoolPublic,
-          'wxId':wxIdPublic?wxId:'',
+          wxId,
           wxIdPublic,
           interestLabel,
           personalLabel,
@@ -369,7 +369,7 @@ Page({
             majorPublic,
             'school':schoolPublic?school:'',
             schoolPublic,
-            'wxId':wxIdPublic?wxId:'',
+            wxId,
             wxIdPublic,
             interestLabel,
             personalLabel
@@ -467,11 +467,16 @@ Page({
 
 
 // 以下是和 点击头像 展示个人资料卡片 有关的操作 ---------- --------------- -----
+// 认为发起者是第0个，已入队成员可以查看其wxId
 tapAvatar(e){
   const that = this;
   let index=e.currentTarget.dataset.index;
   console.log(index);
   let avatar = that.data.teamMemberList[index];
+  let applyStatus = that.data.teamDetail.applyStatus;
+  if(index == 0 && (applyStatus==1||applyStatus==2)){
+    avatar.wxIdPublic = true;
+  };
   console.log(avatar);
   that.setData({
     isPersonalInfoShow:true,
@@ -480,8 +485,12 @@ tapAvatar(e){
 },
 tapInitiatorAvatar(){
   const that = this;
-  let teamDetail = that.data.teamDetail
-  console.log(teamDetail);
+  let teamDetail = that.data.teamDetail;
+  let applyStatus = teamDetail.applyStatus;
+  // console.log(teamDetail);
+  if(applyStatus==1||applyStatus==2){
+    teamDetail.wxIdPublic = true;
+  }
   that.setData({
     isPersonalInfoShow:true,
     avatar:teamDetail
@@ -498,7 +507,13 @@ tapApplierAvatar(e){
     avatar
   })
 },
-
+//   复制资料卡片的wxid:
+copyWxId(){
+  let wxId = this.data.avatar.wxId;
+  wx.setClipboardData({
+    data: wxId,
+  })
+},
 
 // 以下是和 发起者 initiator 有关的操作事件 ---------start---------------------
   handleCloseTeam: function(){

@@ -29,5 +29,6 @@
         </block> 
     </view>
     <view class="back-btn" bindtap="detailHide">返回</view>
+  
   </scroll-view>
 </block>

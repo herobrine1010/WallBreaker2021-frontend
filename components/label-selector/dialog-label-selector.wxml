@@ -1,0 +1,19 @@
+<!--components/label-selector/dialog-label-selector.wxml-->
+<view class="tag-position" wx:if="{{isFilterShow}}">
+    <view class="tag-box" >
+      <view class="tag-message">已选标签：
+        <text class="tag-show" wx:for="{{labelList}}" wx:if="{{item.selected}}" wx:key="id" wx:for-index="index">#{{item.content}} </text>
+      </view>
+      <view class="tag-area">
+        <view class="{{item.selected?'tag-choosen':'tag-normal'}}" wx:for="{{labelList}}" wx:key="id" wx:for-index="index" bindtap="tapLabel" data-index="{{index}}">#{{item.content}}</view>
+      </view>
+      <view wx:if="{{isWarnVisiable}}" class="label-warn">
+      <image src="/static/icon/Alert-warning.png" class="icon"></image>
+      <text class="warn-text">标签选择已达上限</text>
+      </view> 
+      <view class="button-line">
+        <view class="tag-button button-cancel" bindtap="tapCancel">取消</view>
+        <view class="tag-button button-confirm" bindtap="tapConfirm">确定</view>
+      </view>
+    </view>
+</view>

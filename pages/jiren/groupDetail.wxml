@@ -27,7 +27,7 @@
         title = "{{teamDetail.title}}"
         isTeamClosed = "{{status>=3?true:false}}"
         avatar = "{{teamDetail.avatar}}"
-        nickname = "{{teamDetail.nickname}}"
+        nickname = "{{teamDetail.nickName}}"
         fromTime = "{{teamDetail.fromTime}}"
         dueTime = "{{status<3?teamDetail.dueTime:''}}"
         content = "{{teamDetail.content}}"
@@ -154,7 +154,7 @@
   </view>
   </view>
 <!--  -->
-<personal-animation id="personalAnimation"   personalInfo="{{avatar}}" isPersonalInfoShow="{{isPersonalInfoShow}}" bind:seeAnswer="showAnswersInPersonalAnimation" data-avatar = "{{avatar}}"></personal-animation>
+<personal-animation id="personalAnimation"   personalInfo="{{avatar}}" isPersonalInfoShow="{{isPersonalInfoShow}}" bind:seeAnswer="showAnswersInPersonalAnimation" bind:copyWxId="copyWxId" data-avatar = "{{avatar}}"></personal-animation>
 
 <dialog-box 
 id="dialogBox"

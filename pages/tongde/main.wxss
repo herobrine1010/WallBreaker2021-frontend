@@ -8,9 +8,10 @@
   align-items: center;
 }
 .searchBar{
-  margin:0 auto;
+  margin:0 16rpx;
   flex: 1;
 }
+
 
 .conditionFilter{
   position: relative;

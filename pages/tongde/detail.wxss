@@ -1,7 +1,7 @@
 /* pages/tongde/detail.wxss */
 @import "/static/common.wxss";
 
-.tongde-container{
+.card-container{
   font-family: PingFang SC;
   font-style: normal;
   line-height: 125%;
@@ -56,10 +56,12 @@
   /* identical to box height */
   /* gray3_P */
   color: #545454;
-  margin-right: 78px;
+  margin-right: 170rpx;
 }
 .condition{
   display: inline-block;
+  position: fixed;
+  right: 32rpx;
   padding: 10rpx 48rpx 8rpx;
   /* font */
   font-weight: 500;
@@ -80,12 +82,12 @@
 }
 .description,.spot{
   width: 696rpx;
-  height: 240rpx;
+  /* height: 240rpx; */
 
   /* Body/10regular */
   font-weight: normal;
   font-size: 20rpx;
-  line-height: 150%;
+  line-height:150%;
   /* or 15px */
   /* 超出部分隐藏 */
   overflow: hidden;     
@@ -99,62 +101,63 @@
   flex: none;
   order: 1;
   flex-grow: 0;
-  margin: 4px 0px;
+  margin: 8rpx 0;
 }
 .spot{
-  width: 240px;
-  height: 15px;
+  width: 480rpx;
+  height: 30rpx;
 }
 .title{
-  margin-top:12px;
+  margin-top:24rpx;
   width: 112rpx;
   height: 42rpx;
       /* Body/14medium */
   font-weight: 500;
-  font-size: 14px;
+  font-size: 28rpx;
   line-height: 150%;
       /* identical to box height, or 21px */
   color: #000000;
       /* Inside Auto Layout */
+
 }
 
 .contactBtn{
   display: flex;
 flex-direction: row;
 align-items: flex-start;
-margin-top:4px;
-padding: 6px 48px 5px;
+margin-top:8rpx;
+padding: 12rpx 96rpx 10rpx;
 
-width: 72px;
-height: 21px;
+width: 144rpx;
+height: 42rpx;
 
 /* Text/blue */
 color:#ffffff;
 text-align: center;
 background: #3E92CC;
-border-radius: 4px;
-font-size: 14px;
+border-radius: 8px;
+font-size: 28rpx;
 line-height: 150%;
 /* Inside Auto Layout */
 
 flex: none;
 order: 0;
 flex-grow: 0;
-margin: 0px 0px;
+margin: 0 0;
 }
 
 .pictureArea{
-  width: 343px;
-  height: 343px;
-  margin: 8px 16px;
+  width: 686rpx;
+  height: 686rpx;
+  margin: 16rpx 32rpx;
 }
 /* TODO 图片自适应大小 */
 .img{
   /*width: 343px;
   height: 343px;*/
-  width: 343px;
-  height: 343px;
-  border-radius: 8px;
+  width: 686rpx;
+  height: 686rpx;
+  border-radius: 16rpx;
   background-repeat: no-repeat;
   background-size: cover;
   -webkit-background-size: cover;

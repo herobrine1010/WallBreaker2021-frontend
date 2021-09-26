@@ -2,11 +2,14 @@
 <!-- 以下是用户头像、昵称、学院、等简要信息 -->
 <view class="per-brief">
   <image src="{{avatarPath}}" class="photo" mode="scaleToFill"></image>
-  <view class="briefs">
-    <view class="nickname">{{personBrief.nickname}}</view>
-    <view class="school">{{personBrief.school +' '+ personBrief.major +' '+ personBrief.grade +' '+ personBrief.identification}}</view>
-  </view> 
-  <view class="labels-container">
-    <view wx:for="{{labels}}" class="label {{'labelColor-'+item.type}}">{{item.name}}</view>
+  <view class="container">
+    <view class="briefs">
+      <view class="nickname">{{personBrief.nickname}}</view>
+      <view class="school">{{personBrief.school +' '+ personBrief.major +' '+ personBrief.grade +' '+ personBrief.identification}}</view>
+    </view> 
+    <view class="labels-container">
+      <view wx:for="{{labels}}" class="label {{'labelColor-'+item.type}}">{{item.name}}</view>
+    </view>
   </view>
+
 </view>

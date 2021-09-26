@@ -13,11 +13,13 @@
   width: 200rpx;
   border-radius: 100rpx;
 }
-.briefs{
+.container{
   position: absolute;
   left: 240rpx;
-  bottom: 140rpx;
-  height: 80rpx;
+  top: 30rpx;
+}
+.briefs{
+  
   font-family: PingFang SC;
   color: #fff;
 }
@@ -27,17 +29,14 @@
   line-height: 48rpx;
 }
 .school{
-  height: 24rpx;
+  /* height: 24rpx; */
   font-size: 26rpx;
-  line-height: 24rpx;
+  line-height: 36rpx;
 }
 .labels-container{
   display: flex;
   flex-wrap: wrap;
-  position: absolute;
-  left: 230rpx;
-  top: 110rpx;
-  width: 65%;
+  width: 420rpx;
   font-family: PingFang SC;
 }
 .label{
@@ -46,7 +45,7 @@
   align-items: center;
   height: 40rpx;
   width: 120rpx;
-  margin: 10rpx;
+  margin: 5rpx 10rpx;
   border-radius: 20rpx;
   background: rgba(23, 178, 230, 0.8);
   font-family: PingFang SC;
