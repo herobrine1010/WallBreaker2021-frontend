@@ -48,10 +48,11 @@ page {
 
 /*上部 tab*/
 .tab {
-  width: 100%;
-  height: 74rpx;
+  width: 686rpx;
+  margin:22rpx 32rpx;
+  height: 72rpx;
   display: flex;
-  justify-content: space-around;
+  justify-content:space-around;
   overflow: hidden;
 }
 .tab-item{
@@ -75,37 +76,30 @@ page {
 /*中间 content*/
 .content {
   flex-grow: 1;
-  height: 78%;
+  height: 80%;
 }
 .content > swiper {
   /*子代选择器 content类的且swiper子元素*/
   height:fit-content;
   height: 100%;
   background: rgba(238, 238, 238, 0) ;
-  margin-top: 4rpx;
-  margin-right: 4rpx;
-  padding-left: 20rpx;
 }
-.ListArea{
-  height: 100%;
-  
-}
+
 .scroll{
   height:fit-content;
   height: 99%;
   width:100%;
-  /*padding-right: 12rpx;
-  padding-left: 8rpx;*/
+  margin-left:12rpx;
 }
 .item{
-  width: calc(100% / 2);
-
-  height: 560rpx;
-  position: relative;
+  width: 332rpx;
   float: left;
   box-sizing: border-box;
-  
+  overflow: hidden;
+  margin-bottom: 24rpx;
+  margin-left:22rpx;
 }
+
 .backTopButton{
   position: fixed;
   height:9vw;

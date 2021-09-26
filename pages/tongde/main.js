@@ -16,7 +16,7 @@ Page({
         'labelText':['雨伞'],
         'title':'雨伞',
         'publishTime':'1天前',
-        'description':'9.10在嘉定A108门口捡到一把雨伞',
+        'description':'9.10在嘉定A108门口捡到雨伞',
         'postingPic':'https://img-blog.csdnimg.cn/20210920143006670.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYWFhc2h1b3c=,size_20,color_FFFFFF,t_70,g_se,x_16',
         'type': 0,       // 物品遗失0 or 失物寻主1 
         'closed': false
