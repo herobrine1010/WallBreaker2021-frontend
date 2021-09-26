@@ -1,0 +1,22 @@
+<scroll-view 
+  enable-back-to-top="true" 
+  refresher-enabled="true" 
+  bindrefresherrefresh = "onRefresherRefresh"
+  refresher-triggered = "{{isRefresherOpen}}"
+  bindscroll="onMyScroll" 
+  scroll-y="true" 
+  with-animation='true' 
+  scroll-top='{{ topNum }}'
+  class="scroll">
+    <view wx:for="{{tongdeItemList}}" class="item">
+    <navigator class="lostDetail" url='/pages/tongde/detail?lostfoundId={{item.id}}'>
+      <card-lost
+      labelText="{{item.labelList}}"
+      title="{{item.name}}"
+      publishTime="{{item.createTime}}"
+      description="{{item.content}}"
+      postingPic="{{item.firstPicUrl}}"
+      ></card-lost>
+    </navigator>
+  </view>
+</scroll-view>

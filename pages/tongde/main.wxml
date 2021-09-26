@@ -34,7 +34,7 @@
 
   <swiper current="{{tabIndex}}" bind:change="changeTab" class = "swiperContent">
     <swiper-item class="ListArea">
-      <scroll-view 
+      <!-- <scroll-view 
       enable-back-to-top="true" 
       refresher-enabled="true" 
       bindrefresherrefresh = "onRefresherRefresh"
@@ -45,22 +45,23 @@
       scroll-top='{{ topNum }}'
       class="scroll">
         <view wx:for="{{tongdeItemList}}" class="item">
-        <navigator class="lostDetail" url='/pages/tongde/detail'>
+        <navigator class="lostDetail" url='/pages/tongde/detail?lostfoundId={{item.id}}'>
           <card-lost
-          labelText="{{item.labelText}}"
-          title="{{item.title}}"
-          publishTime="{{item.publishTime}}"
-          description="{{item.description}}"
-          postingPic="{{item.postingPic}}"
+          labelText="{{item.labelList}}"
+          title="{{item.name}}"
+          publishTime="{{item.createTime}}"
+          description="{{item.content}}"
+          postingPic="{{item.firstPicUrl}}"
           ></card-lost>
         </navigator>
       </view>
-      </scroll-view>
+      </scroll-view> -->
+      <include src="./main-scrollview.wxml"></include>
     </swiper-item>
     <swiper-item>
 
-    <!-- 应该是与物品遗失完全不一样的内容 -->
-    <scroll-view 
+    <!-- 页面wxml完全一致，所以放在了另一个页面引用，只需要切换tongdeItemList即可展示不同的数据 -->
+ <!--    <scroll-view 
       enable-back-to-top="true" 
       refresher-enabled="true" 
       bindrefresherrefresh = "onRefresherRefresh"
@@ -81,8 +82,8 @@
           ></card-lost>
         </navigator>
       </view>
-      </scroll-view>
-
+      </scroll-view> -->
+      <include src="./main-scrollview.wxml"></include>
 
     </swiper-item>
   </swiper>

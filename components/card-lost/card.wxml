@@ -7,7 +7,8 @@
       <view class="description"> {{description}}</view>
       <view class="timeArea">
       <view class="block2">
-        <text wx:for="{{labelText}}" class="tag {{index%2==0?'double':'single'}}">#{{ item }}</text>
+        <!-- <text wx:for="{{labelText}}" class="tag {{index%2==0?'double':'single'}}">#{{ item }}</text> -->
+        <text wx:for="{{labelText}}" class="tag single">#{{ item }}</text>
       </view>
       <view class="time">{{publishTime}}</view>
        </view>
