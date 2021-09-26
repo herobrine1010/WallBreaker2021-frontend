@@ -149,9 +149,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if(app.globalData.noticeNum>0){
-      wx.showTabBarRedDot({index:3})
-    }
+    util.getNotice();
 
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({

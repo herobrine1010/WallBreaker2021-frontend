@@ -2,6 +2,8 @@
 // 首先引入封装成promise的 request
 import { request } from "../../request/request.js";
 import {formatTime} from "../../utils/util.js"
+import util from "../../utils/util.js";
+
 
 // 定义函数编写请求参数：-----------------------------------------
 function setRequestData(keyword,labelId,timeIndex){
@@ -143,6 +145,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    util.getNotice();
     this.onLoad();
   },
 
