@@ -56,13 +56,13 @@
     refresher-triggered = "{{isRefresherOpen}}">
     
       <block wx:for="{{jishiItemList}}" wx:if="{{jishiItemList.length>0}}" >
-        <view  class="list-item" bindtap="jumpToDetail" data-postingId="{{item.id}}" data-index="{{index}}">
+        <view  class="list-item" bindtap="jumpToDetail" data-postingid="{{item.id}}" data-index="{{index}}">
         <card-notice 
         labelId="{{item.labelId}}"
         labelText="{{item.labelContent}}"
         title="{{item.title}}"
         rightTagText="{{item.rightTagText}}"
-        description="{{item.content}}"
+        description="{{item.brief}}"
         publishTime="{{item.createTime}}"
         postingPic="{{item.firstPicUrl}}" 
         userName="{{item.initiatorNickName}}"

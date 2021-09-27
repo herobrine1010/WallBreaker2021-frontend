@@ -166,7 +166,7 @@ Page({
     //   url: '/pages/jishi/detail?postingId='+e.currentTarget.dataset.postingid,
     // })
     wx.navigateTo({
-      url: '/pages/jishi/detail-new?index='+e.currentTarget.dataset.index,
+      url: '/pages/jishi/detail-new?postingId='+e.currentTarget.dataset.postingid + '&index=' + e.currentTarget.dataset.index,
     })
   },
 

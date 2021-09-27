@@ -1,4 +1,7 @@
 // miniprogram/pages/jishi/detail-new.js
+import { request } from "../../request/request.js";
+const util = require('../../utils/util.js');
+
 Page({
 
   /**
@@ -24,7 +27,7 @@ Page({
       title : '图书馆关于2021年中秋节放假安排的通知',
       isPostingCollected:1,
       name : '同济大学图书馆',
-      theme : '传统文化',
+      theme : '通知公告',
       date : '2021年9月12日',
       content : '<img src = "https://wallbreaker-tongji.oss-cn-shanghai.aliyuncs.com/static-img/jishi/xue1.jpg">',
     },{
@@ -61,25 +64,54 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let index = options.index;
-    let {
-      title,
-      isPostingCollected,
-      name ,
-      theme ,
-      date ,
-      content 
-    } = this.data.postList[index];
-    this.setData({
-      title,
-      isPostingCollected,
-      name ,
-      theme ,
-      date ,
-      content,
-      hasLink : false 
-    });
-    console.log(options.index);
+
+    // let index = options.index;
+    // if(index < 5){
+    //   let {
+    //     title,
+    //     isPostingCollected,
+    //     name,
+    //     theme,
+    //     date,
+    //     content
+    //   } =  this.data.postList[index];
+    //   this.setData({
+    //     title,
+    //     isPostingCollected,
+    //     name,
+    //     theme,
+    //     date,
+    //     content
+    //   })
+    // }
+
+
+    console.log(options);
+    let postingId = options.postingId;
+    request({
+      url : '/posting/getPosting/' + postingId,
+      header: {
+        // 'content-type': 'x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      },
+    }).then(res => {
+      console.log("posting request",res);
+      if(res.statusCode >=200 && res.statusCode <=300){
+        // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
+        console.log(res);
+      }else{
+        wx.showToast({
+          title: '请求失败',
+          icon: 'error'
+        })
+      } 
+    }).catch( err=> {
+      wx.showToast({
+        title: '请求失败',
+        icon: 'error'
+      })
+      console.log("err",err)
+    }); 
   },
 
   /**
