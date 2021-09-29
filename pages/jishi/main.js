@@ -35,7 +35,7 @@ function getPostingList(that,keyword,labelId,timeIndex){
         if(v.initializedByMe){
           v.rightTagText = '我发起的';
         }; */
-        console.log("duetime",v.createTime)
+        //console.log("duetime",v.createTime)
         v.createTime = util.getDateDiff(v.createTime);
         return v;
       });

@@ -103,7 +103,7 @@ function getDateDiff(dateTime){
   }
   }
   
-  console.log(result)
+  //console.log(result)
   return result;
 };
 
