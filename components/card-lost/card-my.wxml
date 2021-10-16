@@ -20,3 +20,16 @@
 	</view>
 	<view class="{{closed ? 'button-off' : 'button-on'}}" catch:tap="tapClose">关闭</view>
 </view>
+
+<dialog-box 
+  isDialogShow="{{dialog.isDialogShow}}"
+  content="{{dialog.content}}"
+  hasInputBox="{{dialog.hasInputBox}}"
+  tip="{{dialog.tip}}"
+  okText="{{dialog.okText}}"
+  cancelText="{{dialog.cancelText}}"
+  isShow="{{dialog.isDialogShow}}"
+  isShowInfo="{{dialog.isShowInfo}}"
+  bind:tapOk="tapOk"
+>
+</dialog-box>
