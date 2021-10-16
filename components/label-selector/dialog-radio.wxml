@@ -1,0 +1,4 @@
+<!--components/label-selector/dialog-radio.wxml
+这个组件依赖dialog-label-selector, 只做微小的修改
+-->
+<include src="./dialog-label-selector.wxml"></include>
