@@ -32,7 +32,7 @@
 
 <view class="content">
 
-  <swiper current="{{tabIndex}}" bind:change="changeTab" class = "swiperContent">
+  <swiper current="{{tabIndex}}" bind:change="changeTab" class = "swiperContent" duration="0">
     <swiper-item class="ListArea">
       <!-- <scroll-view 
       enable-back-to-top="true" 

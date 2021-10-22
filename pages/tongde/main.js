@@ -5,7 +5,12 @@
 request是包装了一层promise的wx.request
 */
 import {request} from "../../request/request.js";
-import {formatTime, getDateDiff} from "../../utils/util.js"
+import {formatTime, getDateDiff} from "../../utils/util.js";
+
+// 引入各类behaviors
+const behaviorsPath = "../../behaviors/"
+const scrollBehavior = require(behaviorsPath + "ScrollView.js");
+const searchBehavior = require(behaviorsPath + "Search.js");
 // 定义函数编写请求参数：-----------------------------------------
 function setRequestData(keyword,labelId,type){
   /* 设置request的参数, type必选, labelId, keyword可选 */
@@ -20,7 +25,7 @@ function setRequestData(keyword,labelId,type){
     data.labelId = labelId;
   }
   return data;
-};
+}
 function getLostFoundList(that, type=0, labelId='', keyword='') {
   /* jiren jishi通过Page外的函数发起请求 setData, 需要传入that参数, 这个页面把它写在Page内.  */
   // that.setData({isRefresherOpen: true});
@@ -37,7 +42,7 @@ function getLostFoundList(that, type=0, labelId='', keyword='') {
     console.log("获取列表请求", res);
     let itemList = res.data.data.map(v => {
       v.createTime = getDateDiff(v.createTime);
-      return v;
+      return v;                                 
     })
 
     that.setData({
@@ -46,18 +51,15 @@ function getLostFoundList(that, type=0, labelId='', keyword='') {
     })
   });
 }
-Page({
-
+Component({
+  behaviors: [scrollBehavior, searchBehavior],
   /**
    * 页面的初始数据
    */
-
   data: {
     tabIndex: 0, // 当前swiper选中项目
     tab: 0, //当前tab对应的项目
-    showGoTopButton:false,
-    isRefresherOpen: false,
-    topNum:0,
+    keyword: undefined,
     tongdeItemList:[
       {
         'labelList':['雨伞'],
@@ -213,9 +215,20 @@ Page({
         "selected": null
       }
     ],
+    // 用筛选框选中的标签列表， 目前为单选
     selectedLabelList: []
   },
-
+  /* 
+  数据监听器
+  通过监听this.data中数据变化, 执行函数, 发送请求
+   */
+  observers: {
+    "tab, selectedLabelList[0].id, keyword": function(tab, id, keyword) {
+      console.log("数据监听器",tab,id, keyword);
+      getLostFoundList(this, tab, id, keyword);
+    }
+  },
+  methods: {
   /**
    * 生命周期函数--监听页面加载
    */
@@ -241,8 +254,6 @@ Page({
     this.setData({
       tabIndex: e.currentTarget.dataset.item
     });
-    getLostFoundList(this, this.data.tab, '', '');
-
   },
   // 绑定在swiper上的函数，用来改变tab
   changeTab: function(e) {
@@ -250,30 +261,12 @@ Page({
     this.setData({
       tab: e.detail.current
     });
-    getLostFoundList(this, this.data.tab, '', '');
   },
-  // 滚动框的 滚动和回到最上事件：------------- -------------- ----------
-  returnTop: function () {
-    let that=this;
-    this.setData({
-     topNum:  0
-    });
-    setTimeout(function () {
-      that.setData({showGoTopButton:false})
-    }, 100)
-  },
-  onMyScroll:function(e){
-    if(e.detail.scrollTop>100){
-      this.setData({showGoTopButton:true})
-    }else if(this.data.showGoTopButton){
-      this.setData({showGoTopButton:false})
-    }
-  },  
   // 滚动框的 下拉刷新事件 pullDownRefresh------------- -------------- ----------
   onRefresherRefresh:function(){
-    // 重新发送请求，包括此前筛选或者搜索数据：
-    getLostFoundList(this, this.data.tab);
-    
+    // 刷新页面，包括此前筛选或者搜索数据：
+    // 只要调用setData, 即使不改变数据也能触发数据监听器observer, 实现刷新
+    this.setData({tab: this.data.tab});
   },
   // 跳转：发起组队事件：------------- --------- ------ ------- --
   createNewPost:function(){
@@ -281,5 +274,5 @@ Page({
       url: '/pages/tongde/creatPost',
     })
   },
-  
+  }
 })
