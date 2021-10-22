@@ -7,10 +7,15 @@ Component({
      */
     methods: {
         tapLabel: function(e) {
-            this.reset();
-            let labels = this.data.labelList;
             let index = e.currentTarget.dataset.index;
-            labels[index].selected  = !labels[index].selected;
+            let labels = this.data.labelList;
+            if (labels[index].selected) {
+                labels[index].selected = false; 
+            } else {
+                this.reset();
+                labels[index].selected  = true;
+            }
+
             this.setData({
               labelList: labels,
             });
