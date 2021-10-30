@@ -11,7 +11,12 @@
   margin:0 16rpx;
   flex: 1;
 }
-
+/* 搜索栏输入框字体颜色 */
+.weui-search-bar__box .weui-search-bar__input{
+  color: #000000 !important;
+  padding:0 0 0 0 ;
+  height: 80rpx;
+}
 
 .conditionFilter{
   position: relative;

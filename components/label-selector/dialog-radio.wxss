@@ -1,0 +1,2 @@
+/* components/label-selector/dialog-radio.wxss */
+@import "./dialog-label-selector.wxss";

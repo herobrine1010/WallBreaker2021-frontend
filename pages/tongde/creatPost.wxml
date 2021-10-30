@@ -37,8 +37,8 @@
           <text class="title">招领类型</text>
         </view>
         <radio-group name="type" class="a-line">
-          <radio value="0" id="lost">物品遗失</radio>
-          <radio value="1" id="found">失物寻主</radio>
+          <radio value="0" id="lost" color="#fff">物品遗失</radio>
+          <radio value="1" id="found" color="#fff">失物寻主</radio>
         </radio-group>
       </view>
       <view class="item-wrap">

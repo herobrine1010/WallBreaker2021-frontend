@@ -5,7 +5,7 @@
   refresher-triggered = "{{isRefresherOpen}}"
   bindscroll="onMyScroll" 
   scroll-y="true" 
-  with-animation='true' 
+  scroll-with-animation='true' 
   scroll-top='{{ topNum }}'
   class="scroll">
     <view wx:for="{{tongdeItemList}}" class="item">

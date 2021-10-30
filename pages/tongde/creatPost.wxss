@@ -152,3 +152,21 @@ dropdown-box {
   color: #F7F7F7;
   text-align: center;
 }
+
+radio .wx-radio-input-checked::before{
+  font-size: 0 !important; /* 对勾大小 去掉 */
+  border-radius: 50%;
+  width: 10rpx; 
+  height: 10rpx;
+  text-align: center;
+  background-color: #fff; 
+  border: 12rpx solid #3E92CC;
+}
+
+radio .wx-radio-input{
+  width: 16rpx;
+  height: 16rpx;
+  min-height: 0; 
+  border-radius: 50%;
+  border: 4rpx solid #989A9A;/* 替换边框（隐藏原有边框） */
+}
