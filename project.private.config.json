@@ -53,6 +53,12 @@
           "pathName": "pages/jishi/detail-new",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "新版登录页面",
+          "pathName": "pages/welcome/welcome-new",
+          "query": "",
+          "scene": null
         }
       ]
     }
