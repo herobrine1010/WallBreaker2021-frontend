@@ -65,53 +65,53 @@ Page({
    */
   onLoad: function (options) {
 
-    // let index = options.index;
-    // if(index < 5){
-    //   let {
-    //     title,
-    //     isPostingCollected,
-    //     name,
-    //     theme,
-    //     date,
-    //     content
-    //   } =  this.data.postList[index];
-    //   this.setData({
-    //     title,
-    //     isPostingCollected,
-    //     name,
-    //     theme,
-    //     date,
-    //     content
-    //   })
-    // }
-
-
-    console.log(options);
-    let postingId = options.postingId;
-    request({
-      url : '/posting/getPosting/' + postingId,
-      header: {
-        // 'content-type': 'x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
-      },
-    }).then(res => {
-      console.log("posting request",res);
-      if(res.statusCode >=200 && res.statusCode <=300){
-        // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
-        console.log(res);
-      }else{
-        wx.showToast({
-          title: '请求失败',
-          icon: 'error'
-        })
-      } 
-    }).catch( err=> {
-      wx.showToast({
-        title: '请求失败',
-        icon: 'error'
+    let index = options.index;
+    if(index < 5){
+      let {
+        title,
+        isPostingCollected,
+        name,
+        theme,
+        date,
+        content
+      } =  this.data.postList[index];
+      this.setData({
+        title,
+        isPostingCollected,
+        name,
+        theme,
+        date,
+        content
       })
-      console.log("err",err)
-    }); 
+    }
+
+
+    // console.log(options);
+    // let postingId = options.postingId;
+    // request({
+    //   url : '/posting/getPosting/' + postingId,
+    //   header: {
+    //     // 'content-type': 'x-www-form-urlencoded',
+    //     'cookie':wx.getStorageSync("token")
+    //   },
+    // }).then(res => {
+    //   console.log("posting request",res);
+    //   if(res.statusCode >=200 && res.statusCode <=300){
+    //     // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
+    //     console.log(res);
+    //   }else{
+    //     wx.showToast({
+    //       title: '请求失败',
+    //       icon: 'error'
+    //     })
+    //   } 
+    // }).catch( err=> {
+    //   wx.showToast({
+    //     title: '请求失败',
+    //     icon: 'error'
+    //   })
+    //   console.log("err",err)
+    // }); 
   },
 
   /**

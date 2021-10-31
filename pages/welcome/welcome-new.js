@@ -1,4 +1,6 @@
 // pages/welcome/welcome-new.js
+import {request} from "../../request/request.js";
+const app = getApp();
 Page({
 
   /**
@@ -15,7 +17,43 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+        //先发一个login确认有没有注册过
+        wx.login({
+          success:res=>{
+            console.log(res.code)
+            wx.request({
+              data:{
+                "code":res.code,
+              },
+              url: app.globalData.url+'/user/login',
+              method:'POST',
+              header:{
+                'content-type':'application/json'
+              },
+              success:function(res2){
+                console.log(res2);
+                if(res2.data.data.code=="login"){
+                  wx.setStorageSync("token", res2.cookies[0])
+                  if(res2.data.data.jirenMsgNum>0){
+                    app.globalData.noticeNum = res2.data.data.jirenMsgNum
+                  }
+                  wx.switchTab({
+                    url: '/pages/jishi/main',
+                  })
+                }
+                else if(res2.data.data.code=="blocked"){
+                  console.log("已被封号");
+                  wx.redirectTo({
+                    url: '/pages/welcome/blocked',
+                  })
+                }
+                else if(res2.data.data.code="needInfo"){
+                  console.log("提示用户允许获取个人信息")
+                }
+              }
+            })
+          }
+        })
   },
 
   /**
@@ -71,7 +109,9 @@ Page({
     let mailStr = e.detail.value;
     if(mailStr.length > 0){
       this.setData({
-        hasMail : true
+        hasMail : true ,
+        isMailWarnShow : false,
+        mail : mailStr
       })
     }else{
       this.setData({
@@ -79,6 +119,12 @@ Page({
       })
     }
   },
+  onInputVertify(){
+    this.setData({
+      isVertifyWarnShow : false
+    })
+  },
+
 
 // 递归设置定时器
   countDown(time,interval = 1,callback){
@@ -101,16 +147,31 @@ Page({
   },
 
   getVertifyNum(){
+    // 发送验证码
     let self = this;
+    
+
     if(this.data.hasMail && (!this.data.isVertifyBolck)){
       // 
+      let mail = this.data.mail + '@tongji.edu.cn';
+      console.log(mail);
+      request({
+        url : `/verificationCode/send/${mail}`,
+        method : 'GET',
+        header: {
+          "content-type": 'application/x-www-form-urlencoded'
+        },
+      }).then(res => {
+        console.log(res);
+      })
+      
       wx.showToast({
         title: '已发送',
       });
       this.setData({
         isVertifyBolck : true
       })
-      this.countDown(60,1,function(){
+      this.countDown(10,1,function(){
         self.setData({
           isVertifyBolck : false
         })
@@ -119,10 +180,80 @@ Page({
   },
 
   onSubmit(e){
-    console.log(e.detail.value);
+
+    wx.getUserProfile({
+      desc: '获取用户信息的文案 待修改', 
+      success: (res) => {
+        var myInfo =res.userInfo
+        console.log(myInfo)
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        });
+        wx.login({
+          success:res=>{
+            console.log(res.code)
+            wx.request({
+              data:{
+                "code":res.code,
+                "nickName":myInfo.nickName,
+                "gender":myInfo.gender,
+                "wxAvatarUrl":myInfo.avatarUrl,
+                "avatarUrl":myInfo.avatarUrl
+              },
+              url: app.globalData.url+'/user/login',
+              method:'POST',
+              header:{
+                'content-type':'application/json'
+              },
+              success:function(res2){
+                console.log(res2);
+                if(res2.data.data.code=="register"){
+                  wx.setStorageSync("token", res2.cookies[0])
+                  wx.showToast({
+                    title: '注册成功！',
+                    icon:'success'
+                  })
+                  wx.switchTab({
+                    url: '/pages/jishi/main',
+                  })
+                }else{
+                  console.log("看下哪有问题")
+                  console.log(res2)
+                }
+              }
+            })
+          }
+        })
+    
+
+      }
+    })
+    // 1.完成邮箱认证；2.获取用户头像、昵称信息
     // {mail: "222", vertifyNum: "456"}
-    // 进行邮箱验证；
-    // 判断手机号是否授权
-    // 返回相应的错误信息
+    let mail = e.detail.value.mail;
+    let mailLength = mail.length;
+    let vertifyNum = e.detail.value.vertifyNum;
+    let vertifyLength = vertifyNum.length;
+    if(mailLength>0 && vertifyLength>0){
+      // 进行邮箱验证；
+      // 判断手机号是否授权
+      // 返回相应的错误信息
+
+
+    }else{
+      if(mailLength <= 0){
+        this.setData({
+          isMailWarnShow : true
+        })
+      }
+      if(vertifyLength <= 0){
+        this.setData({
+          isVertifyWarnShow : true
+        })
+      }
+    } 
+    
+
   }
 })
