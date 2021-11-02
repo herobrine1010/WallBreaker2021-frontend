@@ -1,0 +1,177 @@
+/* pages/welcome/welcome-new.wxss */
+@import"../../static/poby.wxss";
+/* .background{
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  box-shadow: 20rpx 20rpx 40rpx 4rpx rgba(160, 164, 166, 0.2);
+} */
+.background{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 400rpx;
+
+  background: linear-gradient(180deg, #3E92CC -180.91%, rgba(23, 178, 229, 0)   100%);
+  opacity: 0.6;
+}
+.phone{
+  margin: 220rpx 32rpx 0;
+  width: 686rpx;
+}
+.phone-btn{
+  position: relative;
+  display: inline-flex;
+
+  padding: 0 20rpx;
+	font-size: 28rpx;
+  height: 64rpx;
+  width: 100% !important;
+  margin: 0 initial;
+  border: 2rpx solid #3E92CC;
+
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	text-align: center;
+  background-color: #fff;
+  transform: translate(0rpx, 0rpx);
+  
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28rpx;
+  line-height: 150%;
+
+  color: #3E92CC;
+
+}
+/* .poby-btn::after {
+
+	transform: scale(0.5);
+	transform-origin: 0 0;
+	pointer-events: none;
+}
+.poby-btn.button-hover {
+	transform: translate(10rpx, 10rpx);
+} */
+
+.title{
+  height: 40rpx;
+
+}
+.description{
+  height: 30rpx;
+  margin-top: 8rpx;
+}
+
+.mail{
+  margin: 48rpx 32rpx 0;
+  width: 686rpx;
+}
+.mail-name{
+  display: flex;
+  width: 100%;
+  height: 64rpx;
+  margin: 16rpx 0 0rpx;
+}
+.mail-name-url{
+font-family: PingFang SC;
+font-style: normal;
+font-weight: 500;
+font-size: 28rpx;
+line-height: 150%;
+
+display: flex;
+align-items: center;
+
+color: #333333;
+
+}
+.mail-vertify{
+  display: flex;
+  
+  width: 100%;
+  height: 64rpx;
+  margin: 16rpx 0 0;
+}
+.mail-vertify-word{
+font-family: PingFang SC;
+font-style: normal;
+font-weight: 500;
+font-size: 28rpx;
+line-height: 150%;
+
+display: flex;
+align-items: center;
+text-align: center;
+color: #989A9A;
+
+margin-left: 40rpx;
+}
+.mail-vertify-active{
+  color: #3E92CC;
+}
+.mail input{
+  width: 450rpx;
+  height: 64rpx;
+  margin-right: 30rpx;
+  border-bottom: 1rpx solid #aaa;
+
+
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28rpx;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #333333;
+
+}
+.placeholder{
+font-family: PingFang SC;
+font-style: normal;
+font-weight: normal;
+font-size: 24rpx;
+line-height: 150%;
+display: flex;
+align-items: center;
+
+color: #989A9A;
+
+}
+.warn{
+  position: relative;
+  top: 4rpx;
+  width: 24rpx;
+  height: 24rpx;
+}
+.mail-warn , .vertify-warn{
+font-family: PingFang SC;
+font-style: normal;
+font-weight: normal;
+font-size: 24rpx;
+line-height: 150%;
+
+color: #FA5151;
+}
+
+.finish{
+  width: 690rpx   !important;
+  height: 80rpx;
+  margin-top: 56rpx;
+
+  background: #3E92CC;
+  border-radius: 8rpx;
+
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+
+  text-align: center;
+  color: #F7F7F7;
+}
