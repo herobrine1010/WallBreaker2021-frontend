@@ -59,6 +59,12 @@
           "pathName": "pages/welcome/welcome-new",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "注册检验",
+          "pathName": "pages/welcome/check",
+          "query": "",
+          "scene": null
         }
       ]
     }

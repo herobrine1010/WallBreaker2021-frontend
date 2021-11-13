@@ -1,0 +1,5 @@
+/* pages/welcome/check.wxss */
+.container{
+  display: flex;
+  padding: 350rpx 0;
+}
