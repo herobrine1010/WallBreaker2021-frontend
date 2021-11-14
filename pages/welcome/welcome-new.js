@@ -17,43 +17,43 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-        //先发一个login确认有没有注册过
-        wx.login({
-          success:res=>{
-            console.log(res.code)
-            wx.request({
-              data:{
-                "code":res.code,
-              },
-              url: app.globalData.url+'/user/login',
-              method:'POST',
-              header:{
-                'content-type':'application/json'
-              },
-              success:function(res2){
-                console.log(res2);
-                if(res2.data.data.code=="login"){
-                  wx.setStorageSync("token", res2.cookies[0])
-                  if(res2.data.data.jirenMsgNum>0){
-                    app.globalData.noticeNum = res2.data.data.jirenMsgNum
-                  }
-                  wx.switchTab({
-                    url: '/pages/jishi/main',
-                  })
-                }
-                else if(res2.data.data.code=="blocked"){
-                  console.log("已被封号");
-                  wx.redirectTo({
-                    url: '/pages/welcome/blocked',
-                  })
-                }
-                else if(res2.data.data.code="needInfo"){
-                  console.log("提示用户允许获取个人信息")
-                }
-              }
-            })
-          }
-        })
+        // //先发一个login确认有没有注册过
+        // wx.login({
+        //   success:res=>{
+        //     console.log(res.code)
+        //     wx.request({
+        //       data:{
+        //         "code":res.code,
+        //       },
+        //       url: app.globalData.url+'/user/login',
+        //       method:'POST',
+        //       header:{
+        //         'content-type':'application/json'
+        //       },
+        //       success:function(res2){
+        //         console.log(res2);
+        //         if(res2.data.data.code=="login"){
+        //           wx.setStorageSync("token", res2.cookies[0])
+        //           if(res2.data.data.jirenMsgNum>0){
+        //             app.globalData.noticeNum = res2.data.data.jirenMsgNum
+        //           }
+        //           wx.switchTab({
+        //             url: '/pages/jishi/main',
+        //           })
+        //         }
+        //         else if(res2.data.data.code=="blocked"){
+        //           console.log("已被封号");
+        //           wx.redirectTo({
+        //             url: '/pages/welcome/blocked',
+        //           })
+        //         }
+        //         else if(res2.data.data.code="needInfo"){
+        //           console.log("提示用户允许获取个人信息")
+        //         }
+        //       }
+        //     })
+        //   }
+        // })
   },
 
   /**
@@ -149,18 +149,20 @@ Page({
   getVertifyNum(){
     // 发送验证码
     let self = this;
-    
-
     if(this.data.hasMail && (!this.data.isVertifyBolck)){
       // 
       let mail = this.data.mail + '@tongji.edu.cn';
       console.log(mail);
+      // 调用验证码发送接口
       request({
-        url : `/verificationCode/send/${mail}`,
+        url : `/verificationCode/send/`,
         method : 'GET',
         header: {
           "content-type": 'application/x-www-form-urlencoded'
         },
+        data:{
+          mail
+        }
       }).then(res => {
         console.log(res);
       })
@@ -181,61 +183,27 @@ Page({
 
   onSubmit(e){
 
-    wx.getUserProfile({
-      desc: '获取用户信息的文案 待修改', 
-      success: (res) => {
-        var myInfo =res.userInfo
-        console.log(myInfo)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        });
-        wx.login({
-          success:res=>{
-            console.log(res.code)
-            wx.request({
-              data:{
-                "code":res.code,
-                "nickName":myInfo.nickName,
-                "gender":myInfo.gender,
-                "wxAvatarUrl":myInfo.avatarUrl,
-                "avatarUrl":myInfo.avatarUrl
-              },
-              url: app.globalData.url+'/user/login',
-              method:'POST',
-              header:{
-                'content-type':'application/json'
-              },
-              success:function(res2){
-                console.log(res2);
-                if(res2.data.data.code=="register"){
-                  wx.setStorageSync("token", res2.cookies[0])
-                  wx.showToast({
-                    title: '注册成功！',
-                    icon:'success'
-                  })
-                  wx.switchTab({
-                    url: '/pages/jishi/main',
-                  })
-                }else{
-                  console.log("看下哪有问题")
-                  console.log(res2)
-                }
-              }
-            })
-          }
-        })
-    
-
-      }
-    })
     // 1.完成邮箱认证；2.获取用户头像、昵称信息
     // {mail: "222", vertifyNum: "456"}
-    let mail = e.detail.value.mail;
+    let mail = e.detail.value.mail ;
     let mailLength = mail.length;
+    mail +=  '@tongji.edu.cn';
     let vertifyNum = e.detail.value.vertifyNum;
     let vertifyLength = vertifyNum.length;
     if(mailLength>0 && vertifyLength>0){
+      request({
+        url : '/verificationCode/check',
+        method : 'GET',
+        header: {
+          "content-type": 'application/x-www-form-urlencoded'
+        },
+        data:{
+          mail ,
+          code : vertifyNum 
+        }
+      }).then(res => {
+        console.log(res);
+      })
       // 进行邮箱验证；
       // 判断手机号是否授权
       // 返回相应的错误信息
