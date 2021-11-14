@@ -1,4 +1,11 @@
 // components/uploadImage-box/uploadImage-box.js
+/** 
+这个组件只负责选择图片，不能上传图片。
+有三种方式通信，获取组件数据value
+  1. export(), 通过selectComponent获取
+  2. trigger事件, 通过bind:change监听事件
+  3. behavior 在<form />中绑定name使用
+ **/
 Component({
   /**
    * 组件的属性列表
@@ -9,8 +16,8 @@ Component({
       type: Array,
       data: []
     },
-    //存储用户上传的图片路径
-    imageList: {
+    //存储用户上传的图片路径，写在data里出错
+    value: {
       type: Array,
       data:[]
     }
@@ -20,10 +27,10 @@ Component({
    */
   data: {
   },
-  behaviors: ['wx://component-export'],
+  behaviors: ['wx://component-export', 'wx://form-field'],
   // 用于selectComponent调用时的返回值
   export() {
-    return { image: this.data.imageList }
+    return { image: this.data.value }
   },
 
   /**
@@ -32,7 +39,7 @@ Component({
   methods: {
     uploadImage: function() {
       var that = this;
-      let editList = that.data.imageList
+      let editList = this.data.value
       wx.chooseImage({
         count: 9,　　　　　　　　　　　　　　　　　　    // 最多可以选择的图片张数
         sizeType: ['original', 'compressed'],      // 选择图片的尺寸
@@ -40,7 +47,7 @@ Component({
         success: function(res) {
           editList = editList.concat(res.tempFilePaths)   //向后追加，数组连接
           that.setData({
-            imageList: editList
+            value: editList
           })
         },
       })
@@ -50,13 +57,13 @@ Component({
       //获取要删除的图片序号
       let delIndex = e.currentTarget.dataset.index
       console.log('删除序号',delIndex)
-      this.data.imageList.splice(delIndex,1)
+      this.data.value.splice(delIndex,1)
       this.setData({
-        imageList: this.data.imageList
+        value: this.data.value
       })
     },
     zoomInDetailPicture:function(e){
-      var imgUrl = this.data.imageList;
+      var imgUrl = this.data.value;
       wx.previewImage({
         urls: imgUrl,//注意这个urls,如果原来是数组就直接用,如果原来就一张图需要加中括号强制把他变成数组
         current: e.currentTarget.dataset.picUrl,//不写值的话默认是上面那个数组的第一个元素,只有写了点击对应图片才能点哪张放大哪张
@@ -64,23 +71,9 @@ Component({
     }
   },
   observers: {
-    'imageList': function(imageList) {
-      this.triggerEvent('change',imageList)
+    'value': function(value) {
+      this.triggerEvent('change',value)
     } 
   },
-  /*
-  lifetimes: {
-    attached() {
-      this.setData({
-        imageList: srcList
-
-
-      })
-
-
-    }
-  }
-    */
-  
 
 })

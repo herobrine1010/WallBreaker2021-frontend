@@ -1,5 +1,6 @@
 // pages/tongde/creatPost.js
 import {request} from "../../request/request.js";
+import WxValidate from "../../utils/WxValidate"; // 表单验证
 const FormData = require('../../lib/wx-formdata-master/formData.js'); //实现文件上传
 function mergePathThenUploadImage(imagePath) {
   /* 上传图片的请求封装
@@ -78,9 +79,7 @@ function addLabelRequest(lostFoundId, labels) {
   });
   return promise;
 };
-function initContactTypes() {
-  // 初始化联系方式种类，QQ，微信，手机号，从数据库获取数据，修改页面数据
-}
+
 Page({
 
   /**
@@ -238,8 +237,14 @@ Page({
         "selected": null
       }
     ],
-    defaultObject: {id:0,name:'请选择联系渠道'},
+    defaultObject: {id:0,name:'联系渠道'},
     height:'auto',
+    //------------确认提交的弹窗，用于渲染------------
+    isDialogShow:false,
+    dialogContent:"确认发布失物招领吗？",
+    dialogTip:"",
+    dialogCancelText:"取消",
+    dialogOkText:"确认",
   },
 
   /**
@@ -247,8 +252,9 @@ Page({
    */
   onLoad: function (options) {
 
-    
+    this.initValidate();
     this.changeScrollHeight();
+    this.initContactType();
   },
 
   /**
@@ -278,9 +284,84 @@ Page({
   onUnload: function () {
 
   },
+  initContactType: function() {
+      // 初始化联系方式种类，QQ，微信，手机号，从数据库获取数据，修改页面数据
+      let that = this;
+      request({
+        url : "/label",
+        header: {
+          'content-type': 'x-www-form-urlencoded',
+        },
+        data: {
+          type: "contactType"
+        }
+      }).then(res => {
+        let data = res.data.data;
+        that.setData({contactType: data});
+      })
+  },
+  initValidate:  function() {
+    const rules = {
+      name: {
+        required: true,
+        maxlength:24 // input组件设置了maxlength=25, 这里-1才能触发条件
+      },
+      content: {
+        required: true,
+        maxlength: 499
+      },
+      type: {
+        required: true,
+      },
+      location: {
+        required: true,
+        maxlength:24 
+      },
+      contactType: {
+        required: true,
+      },
+      contact: {
+        required: true,
+      },
+    }
 
+    const messages = {
+      name: {
+        required: '该项未填写',
+        maxlength:'字符数已达上限!'
+      },
+      content: {
+        required: '该项未填写',
+        maxlength:'字符数已达上限!'
+      },
+      type: {
+        required: '该项未填写',
+        minlength:'请输入正确的名称'
+      },
+      location: {
+        required: '该项未填写',
+        maxlength:'字符数已达上限!'
+      },
+      contactType: {
+        required: '该项未填写',
+      },
+      contact: {
+        required: '该项未填写',
+      },
+    }
+    this.WxValidate = new WxValidate(rules, messages)
+  },
   submitForm: function(e) {
+    // 这个函数只是用来传递表单数据, 具体的事情在弹窗函数tapOk完成
+    this.setData({
+      e,
+      isDialogShow: true
+    });
+  },
+  tapOk: function() {
+    let e = this.data.e;
     let formValue = e.detail.value; // 用户填写的表单数据
+    if(this.WxValidate.checkForm(formValue)) {
     let selectedLabels = this.data.selectedLabelList;
     // 上传本地图片,拿到oss图片url
     let imagePromise= mergePathThenUploadImage(formValue.allPicPaths);
@@ -310,7 +391,18 @@ Page({
       let data = res.data.data;
       console.log("添加标签的响应数据", data);
     });
+    wx.navigateTo({
+      url: '/pages/tongde/main.wxml',
+    })
     console.log("form的数据", formValue);
+  } else {
+    let errors = {};
+    for (e of this.WxValidate.errorList) {
+      errors[e.param] = e.msg
+    }
+    console.log(errors)
+    this.setData({errors});
+  }
   },
   clickToChooseTag:function(){
     let selector = this.selectComponent('#dialog-label-selector');

@@ -57,8 +57,9 @@ input {
 }
 /* -----------总体公用样式设置结束------------ */
 
-.input-lost-name-box,
-.text-box {
+
+.text-box,
+.input-box {
   display: flex;
 }
 .input-lost-name {
@@ -114,6 +115,7 @@ radio-group > radio {
 }
 .input-location {
   font-size: 20rpx;
+  width: 300rpx;
 }
 
 .input-contact-box{
@@ -169,4 +171,16 @@ radio .wx-radio-input{
   min-height: 0; 
   border-radius: 50%;
   border: 4rpx solid #989A9A;/* 替换边框（隐藏原有边框） */
+}
+
+/* 表单校验的错误的信息和提示 */
+.icon {
+  height: 24rpx;
+  width: 24rpx;
+  margin: 0 8rpx;
+  vertical-align: middle;
+}
+.error-wrap {
+  margin-left: 32rpx;
+  color: #FA5151;
 }

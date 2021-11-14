@@ -14,15 +14,22 @@
         <view class="tip">上传证件相关照片时请记得打码保护隐私哦~</view>
       </view>
       <view class="item-wrap">
-        <view class="input-lost-name-box">
-          <input name="name" class="input-lost-name" placeholder="请输入失物名称" placeholder-class="input-placeholder" />
-
+        <view class="input-lost-name-box input-box">
+          <input name="name" class="input-lost-name" maxlength="25" placeholder="请输入失物名称" placeholder-class="input-placeholder" />
+          <view class="error-wrap"  wx:if="{{ errors.name }}">
+          <image src="/static/icon/Alert-warning.png" class="icon"></image>
+          <text class="error-tip">{{ errors.name }}</text>
+          </view> 
         </view>
       </view>
       <view class="item-wrap description">
         <view class="text-box">
-          <textarea name="content" class="text-area" placeholder="请输入情况说明" placeholder-class="input-placeholder"></textarea>
+          <textarea name="content" class="text-area" maxlength="500" placeholder="请输入情况说明" placeholder-class="input-placeholder"></textarea>
         </view>
+        <view class="error-wrap"  wx:if="{{ errors.content }}">
+          <image src="/static/icon/Alert-warning.png" class="icon"></image>
+          <text class="error-tip">{{ errors.content }}</text>
+        </view> 
       </view>
       <view class="item-wrap" bindtap="clickToChooseTag">
         <view class="icon-with-title">
@@ -36,6 +43,10 @@
           <image class="icon" src="../../static/icon/lostType.png"></image>
           <text class="title">招领类型</text>
         </view>
+        <view class="error-wrap"  wx:if="{{ errors.type }}">
+          <image src="/static/icon/Alert-warning.png" class="icon"></image>
+          <text class="error-tip">{{ errors.type }}</text>
+        </view>
         <radio-group name="type" class="a-line">
           <radio value="0" id="lost" color="#fff">物品遗失</radio>
           <radio value="1" id="found" color="#fff">失物寻主</radio>
@@ -46,8 +57,12 @@
           <image class="icon" src="../../static/icon/location.png"></image>
           <text class="title">遗失/捡到地点</text>
         </view>
-        <view class="input-location-box">
-          <input name="location" class="input-location" placeholder="失物寻主信息必填，物品遗失信息可选填选项" placeholder-class="input-placeholder" />
+        <view class="input-location-box input-box">
+          <input name="location" class="input-location" maxlength="25" placeholder="失物寻主信息必填，物品遗失信息可选填选项" placeholder-class="input-placeholder" />
+          <view class="error-wrap"  wx:if="{{ errors.location }}">
+            <image src="/static/icon/Alert-warning.png" class="icon"></image>
+            <text class="error-tip">{{ errors.location }}</text>
+          </view> 
         </view>
       </view>
       <view class=" item-wrap item-wrap-last">
@@ -56,9 +71,13 @@
           <text class="title">联系方式</text>
         </view>
         <view class="a-line">
-          <dropdown-box name="contactType" range="{{contactTypes}}" key="id" text="content" defaultOption="{{defaultObject}}"></dropdown-box>
-          <view class="input-contact-box">
-            <input name="contact" class="input-half-line" placeholder="请输入您的联系方式"/>        
+          <dropdown-box name="contactType" range="{{contactTypes}}" key="id" text="content" defaultOption="{{defaultObject}}" style="width: 200rpx;"></dropdown-box>
+          <view class="input-contact-box input-box">
+            <input name="contact" class="input-half-line" style="width: 200rpx;" placeholder="请输入联系方式" maxlength="25"/>
+            <view class="error-wrap"  wx:if="{{ errors.contact }}">
+              <image src="/static/icon/Alert-warning.png" class="icon"></image>
+              <text class="error-tip">{{ errors.contact }}</text>
+            </view> 
           </view>
         </view>
       </view>
@@ -70,3 +89,6 @@
 
 <dialog-label id="dialog-label-selector" labels="{{labelList}}" bind:change="labelChanged"></dialog-label>
 
+<dialog-box class="dialog-box" content="{{dialogContent}}" tip="{{dialogTip}}" okText="{{dialogOkText}}" cancelText="{{dialogCancelText}}"
+  isShow="{{isDialogShow}}" bind:tapOk="tapOk">
+</dialog-box>

@@ -1,0 +1,6 @@
+<!--pages/welcome/check.wxml-->
+<view class="container">
+  <icon type="waiting" size="60" color="#555"></icon>
+  <text>登录信息校核中，请等待....</text>
+</view>
+

@@ -63,7 +63,8 @@
     "pages/jishi/link",
     "pages/testPage/testfilter",
     "pages/welcome/blocked",
-    "pages/welcome/welcome-new"
+    "pages/welcome/welcome-new",
+    "pages/welcome/check"
   ],
   "window": {
     "backgroundTextStyle": "dark",
