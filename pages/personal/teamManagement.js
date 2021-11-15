@@ -56,6 +56,48 @@ Page({
 
   //  将页面请求放到函数中，方便多次调用 
   getListData:function(self){
+
+    // ---- -----  调试分页接口 ------------------
+    request({
+      url : '/userTeam/teamAppliedByMeWithPage',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      },
+      data : {
+        pageNo : 1
+      }
+    }).then(res => {
+      console.log(res);
+    })
+    
+    request({
+      url : '/userLostFound/getMyLostFoundWithPage',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      },
+      data : {
+        pageNo : 1
+      }
+    }).then(res => {
+      console.log(res);
+    })
+
+    request({
+      url : '/userTeam/teamInitiatedByMeWithPage',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      },
+      data : {
+        pageNo : 1
+      }
+    }).then(res => {
+      console.log(res);
+    })
+    // ---- -----  调试分页接口   结束 ------------------
+
     let teamAppliedByMe=request({
       url : '/userTeam/teamAppliedByMe',
       header: {

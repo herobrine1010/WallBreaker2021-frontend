@@ -60,7 +60,8 @@
     bindrefresherrefresh = "onRefresherRefresh"
     refresher-triggered = "{{isRefresherOpen}}"
     scroll-with-animation='true' 
-    bindscroll="onMyScroll" 
+    bindscroll="onMyScroll"
+    bindscrolltolower="getNextPage"
     scroll-y="true" 
     with-animation='true' 
     scroll-top='{{ topNum }}'

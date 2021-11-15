@@ -233,7 +233,24 @@ Component({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     getLostFoundList(this);
+
+    // --------- ----- 调试同德分页接口 ------ --------
+    request({
+      url: '/lostfound/tongdeGetLostFoundWithPage',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      },
+      method : 'GET',
+      data: {
+        pageNo : 1,
+        pageSize : 10
+      }
+    }).then(res => {
+      console.log(res);
+    })
 
   },
   // ------------筛选框相关的函数-----------------

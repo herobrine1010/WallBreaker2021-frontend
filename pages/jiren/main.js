@@ -16,6 +16,7 @@ function setRequestData(keyword,labelId,timeIndex){
   if(labelId){
     data.labelId = labelId;
   }
+
   return data;
 };
 
@@ -119,6 +120,20 @@ Page({
     };
     console.log(this.data.labelId);
     // 数据加载：---------------------- -------- --- -----------
+
+    request({
+      url : '/team/jirenGetTeamWithPage',
+      header: {
+        'content-type': 'x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      },
+      data : {
+        pageNo : 1
+      }
+    }).then(res => {
+      console.log(res);
+    }),
+
     getTeamList(that,this.data.keyword,this.data.labelId,this.data.timeIndex);
     // 标签加载：---------------------------------------------------------
     request({
@@ -286,7 +301,10 @@ Page({
       url: '/pages/jiren/myJoin',
     })
   },
-
+  // 滚动框 上拉触底事件 加载下一页数据------- ---- --------- ------ ------- ------
+  getNextPage: function(){
+    console.log('111');
+  },
   // 滚动框的 下拉刷新事件 pullDownRefresh------------- -------------- ----------
   onRefresherRefresh:function(){
     // 重新发送请求，包括此前筛选或者搜索数据：

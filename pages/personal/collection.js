@@ -132,8 +132,37 @@ Page({
       btnColor2 : "btnColorRight"
     })
   },
-  // 以下为发起请求：
+  // 以下为发起请求： ------------- -------------------- -----------
   getList(self) {
+    // ----------- ---- 调试分页接口 ----------- -----------
+    request({
+      url : '/userFavouritePosting/getMyFavouritePostingByPage',
+      header: {
+        'content-type': 'applicationx-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      },
+      data : {
+        pageNo : 1,
+        pageSize : 10
+      }
+    }).then(res => {
+      console.log(res);
+    })
+
+    request({
+      url : '/userFavouriteTeam/getMyFavouriteTeamWithPage',
+      header: {
+        'content-type': 'applicationx-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      },
+      data : {
+        pageNo : 1,
+        pageSize : 10
+      }
+    }).then(res => {
+      console.log(res);
+    })
+    // ----------- ---- 调试分页接口 结束 ----------- -----------
     let favouritePosting = request({
       url : '/userFavouritePosting/getMyFavouritePosting',
       header: {

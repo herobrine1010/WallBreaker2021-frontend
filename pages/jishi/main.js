@@ -116,6 +116,20 @@ Page({
    */
   onLoad: function (options) {
     const that = this;
+    //分页获取帖子列表
+    request({
+      url : '/posting/jishiGetPostingWithPage',
+      header: {
+        'content-type': 'x-www-form-urlencoded',
+        'cookie':wx.getStorageSync("token")
+      },
+      data : {
+        pageNo : 1
+      }
+    }).then(res => {
+      console.log(res);
+    }),
+
     // 获取帖子标签列表
     request({
       url : "/label",
