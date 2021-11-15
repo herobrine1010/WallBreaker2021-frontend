@@ -112,28 +112,25 @@
   z-index:3;
 }
 .whiteBG{
-  position: relative;
-  margin-left:3vw;
-  margin-right: 3vw;
-  top:18%;
-  display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wrap;
+  display: flex;flex-direction: row;
+  flex-wrap: wrap;
   height:100%;
+  padding: 16rpx 15rpx 0;
 }
 .conditionArea{
   position:relative;
   
   top:0%;
-  height:6%;
-  background-color: #F9F2FF;
-  border-radius: 0 0 20rpx 20rpx;
+  background-color: #F2FCFF;
+  border-radius: 0 0 20px 20px;
   z-index: 4;
 }
 
 .conditionsSelected,.conditionsNotSelected{
   
-  top:5%;
-  height:60%;
-  width:18vw;
+  height:48rpx;
+  width:135rpx;
+  margin: 0 20rpx 16rpx;
   border-radius: 20px;
   font-size:1.8vh;
   letter-spacing: 1px;
@@ -151,6 +148,7 @@ border-style: solid;
 }
 .conditionsSelected{
   background-color: rgba(140, 26, 255, 0.6);
+  border: 1px solid rgba(140, 26, 255, 0.6);
   color:#ffffff;
 }
 

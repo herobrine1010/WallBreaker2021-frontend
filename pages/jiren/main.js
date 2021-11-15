@@ -84,19 +84,7 @@ Page({
     conditionsSelected:[false,false,false,false],
     teamLabels:[{
       labelId : 17,
-      label : '竞赛',
-      selected : false
-    },{
-      labelId : 18,
-      label : '学术科研',
-      selected : false
-    },{
-      labelId : 19,
-      label : '一起造梦',
-      selected : false
-    },{
-      labelId : 20,
-      label : '其他',
+      label : '竞赛组队',
       selected : false
     }],
     timeIndex:'desc',
@@ -132,6 +120,25 @@ Page({
     console.log(this.data.labelId);
     // 数据加载：---------------------- -------- --- -----------
     getTeamList(that,this.data.keyword,this.data.labelId,this.data.timeIndex);
+    // 标签加载：---------------------------------------------------------
+    request({
+      url:'/label',
+      data:{
+        type : 'jiren'
+      }
+    }).then(res => {
+      let teamLabels = res.data.data.map( v => {
+        let {id,content} = v;
+        return {
+          labelId : id,
+          label : content,
+          selected : false
+        }
+      })
+      this.setData({
+        teamLabels
+      })
+    })
   },
 
   /**
