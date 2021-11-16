@@ -210,6 +210,15 @@ Page({
         "selected": null
       },
       {
+        "id": 39,
+        "createTime": "2021-08-20 00:17:52",
+        "updateTime": "2021-09-17 18:54:10",
+        "content": "微信",
+        "type": "contactType",
+        "deleted": false,
+        "selected": null
+      },
+      {
         "id": 40,
         "createTime": "2021-08-20 00:17:52",
         "updateTime": "2021-09-17 18:54:10",
@@ -235,7 +244,7 @@ Page({
         "type": "contactType",
         "deleted": false,
         "selected": null
-      }
+      },
     ],
     defaultObject: {id:0,name:'联系渠道'},
     height:'auto',

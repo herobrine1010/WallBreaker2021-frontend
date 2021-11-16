@@ -61,7 +61,7 @@ Page({
       cancelText:"取消",
       okText:"确认",
       isShowInfo:true,
-      // 加载页面时先把数据更新到contact上,点击弹出对话框事件后再更新到infoDetail
+      // 直接更新数据
       infoDetail:{
         Key:"微信：",
         copyEnable:true,
@@ -90,10 +90,9 @@ Page({
   contactDetail:function(e){
     //需要获得发布者的联系信息
     var that = this;
-    let str = 
     that.setData({
       'dialog.isDialogShow':true,
-      'dialog.infoDetail.value': this.data.contact
+      // 'dialog.infoDetail.value': this.data.contact
     })
   },
   /**
@@ -110,8 +109,55 @@ Page({
       method : 'GET',
     }).then(res => {
       let data = res.data.data;
-      console.log('获取失物招领列表返回数据', data)
+      console.log('获取失物招领详情返回数据', data)
       const typeText = ["寻物中","寻主中"];
+      const contactTypeText = [
+        {
+          "id": 38,
+          "createTime": "2021-08-20 00:17:52",
+          "updateTime": "2021-09-17 18:54:10",
+          "content": "QQ",
+          "type": "contactType",
+          "deleted": false,
+          "selected": null
+        },
+        {
+          "id": 39,
+          "createTime": "2021-08-20 00:17:52",
+          "updateTime": "2021-09-17 18:54:10",
+          "content": "微信",
+          "type": "contactType",
+          "deleted": false,
+          "selected": null
+        },
+        {
+          "id": 40,
+          "createTime": "2021-08-20 00:17:52",
+          "updateTime": "2021-09-17 18:54:10",
+          "content": "手机号",
+          "type": "contactType",
+          "deleted": false,
+          "selected": null
+        },
+        {
+          "id": 41,
+          "createTime": "2021-08-20 00:17:52",
+          "updateTime": "2021-09-17 18:54:10",
+          "content": "邮箱",
+          "type": "contacttype",
+          "deleted": false,
+          "selected": null
+        },
+        {
+          "id": 42,
+          "createTime": "2021-08-20 00:17:52",
+          "updateTime": "2021-09-17 18:54:10",
+          "content": "其他",
+          "type": "contactType",
+          "deleted": false,
+          "selected": null
+        },
+      ]
       this.setData({
         condition: typeText[data.type], // 使用type判断
         title: data.name,
@@ -125,6 +171,8 @@ Page({
         type: data.type,//物品遗失0失物寻主1
         closed: data.closed,
         pictures: data.allPicUrl.split(','), //字符串拆成列表
+        'dialog.infoDetail.Value': data.contact,
+        'dialog.infoDetail.Key': contactTypeText.filter(item => item.id==data.contactType)[0].content + ": "
       });
     }).catch(err => {
       console.log(err);
