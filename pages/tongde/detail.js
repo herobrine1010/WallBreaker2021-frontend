@@ -111,11 +111,12 @@ Page({
     }).then(res => {
       let data = res.data.data;
       console.log('获取失物招领列表返回数据', data)
+      const typeText = ["寻物中","寻主中"];
       this.setData({
-        condition: data.typeText, // 目前接口该项为null 应为 寻物中 寻主中
+        condition: typeText[data.type], // 使用type判断
         title: data.name,
-        userAvatar:'/static/icon/default-user-big.png',
-        userName:"破壁者1号",
+        userAvatar: data.initiatorAvatar,
+        userName: data.initiatorNickName,
         time: formatDateString(data.createTime), // 自定义函数转换日期格式
         tag: data.labelList,
         description: data.content,
