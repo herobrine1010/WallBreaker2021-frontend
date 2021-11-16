@@ -38,8 +38,8 @@
 .conditionIcon{
   position:relative;
   float: left;
-  height:4vw;
-  width: 4vw;
+  height:64rpx;
+  width: 64rpx;
 }
 
 

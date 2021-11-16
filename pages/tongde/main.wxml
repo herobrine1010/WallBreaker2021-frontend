@@ -12,13 +12,13 @@
     </view>
 
     <view class="conditionFilter" bindtap="clickConditionFilter">
-        <block wx:if="{{conditionIndex==''}}">
-          <image class="conditionIcon" src="/static/icon/select-tongde.png"></image>
+        <block wx:if="{{selectedLabelList.length==0}}">
+          <image class="conditionIcon" src="/static/icon/select-tongde-false.png"></image>
         </block>
         <block wx:else>
-          <image class="conditionIcon" src="/static/icon/select-tongde.png"></image>
+          <image class="conditionIcon" src="/static/icon/select-tongde-true.png"></image>
         </block>
-    </view>  <!-- 好像没有因为状态不同而改变icon的需求  -->
+    </view>  <!-- 加上了状态不同而改变icon的需求  -->
   
   </view>
 
