@@ -2,9 +2,12 @@
 import { request } from "../../request/request.js";
 const util = require('../../utils/util.js');
 var app  = getApp();
+
+
 // 定义函数编写请求参数：-----------------------------------------
-function setRequestData(keyword,labelId,timeIndex){
+function setRequestData(pageNo, keyword,labelId,timeIndex){
   let data = {
+    pageNo : pageNo,
     order : timeIndex
   };
   if(keyword){
@@ -15,50 +18,98 @@ function setRequestData(keyword,labelId,timeIndex){
   }
   return data;
 };
-
-// 封装请求：参考jiren主界面的请求，封装获取帖子列表的请求-----------------
-function getPostingList(that,keyword,labelId,timeIndex){
-  request({
-    url : '/posting/jishiGetPosting',
+// 分页获取帖子列表
+    // 获得结果后执行两个操作：
+    // 1.将第1页的数据渲染；
+    // 2.请求第2页的数据，存在页面
+        // 如果没有后一页的数据，“已经到底了~”
+async function getPostingWithPage(pageNo, keyword,labelId,timeIndex) {
+  let p1 = request({
+    url : '/posting/jishiGetPostingWithPage',
     header: {
       'content-type': 'x-www-form-urlencoded',
       'cookie':wx.getStorageSync("token")
     },
-    data : setRequestData(keyword, labelId, timeIndex)
-  }).then(res => {
-    console.log("posting request",res);
-    if(res.statusCode >=200 && res.statusCode <=300){
-      // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
-      let jishiItemList = res.data.data.map( v=>{
-/*      status = 1  ;  表示：我发起的组队
-        v.teamCondition = 'mine';
-        if(v.initializedByMe){
-          v.rightTagText = '我发起的';
-        }; */
-        //console.log("duetime",v.createTime)
-        v.createTime = util.getDateDiff(v.createTime);
-        return v;
-      });
-      console.log("jishiItemList",jishiItemList)
-      // setData是page对象里才有的办法，所以在调用函数时，要把page对象传入进来；
-      that.setData({
-        jishiItemList,
-        isRefresherOpen: false
-      })
-    }else{
-      wx.showToast({
-        title: '请求失败',
-        icon: 'error'
-      })
-    } 
-  }).catch( err=> {
+    data : setRequestData(pageNo, keyword,labelId,timeIndex)
+  });
+
+  let p2 = new Promise((resolve,reject) => {
+    setTimeout( _ => {
+      reject("网络好像出错了");
+    },2000)
+  });
+  return Promise.race([p1,p2]);
+};
+function dealWithPostingAndError(res) {
+  if(res.statusCode >=200 && res.statusCode <=300){
+    console.log(res.data.data);
+    let { current , pages , records } = res.data.data;
+    let isLastPage = false;
+    let jishiItemList = records.map( v=>{
+      v.createTime = util.getDateDiff(v.createTime);
+      return v;
+    });
+    console.log("jishiItemList",jishiItemList)
+    if(current == pages || pages == 0){
+      isLastPage = true; // 判断是否是最后一页
+    }
+    return {
+      isLastPage,
+      current,
+      pages,
+      jishiItemList
+    }
+    // obj[new] = JSON.parse(JSON.stringify(obj[jishiItemList]));
+  }else{
     wx.showToast({
       title: '请求失败',
       icon: 'error'
     })
-    console.log("err",err)
-  }); 
+  } 
+}
+async function setPositingDataInFirstPage(that , pageNo = 1, keyword, labelId, timeIndex) {
+// 1.处理接口返回数据：渲染页面 / 超时提示
+// 2.判断、请求、处理下一页数据
+  try {
+    let res = await getPostingWithPage(pageNo, keyword,labelId,timeIndex);
+    let firstPageData = dealWithPostingAndError(res);
+    firstPageData['isRefresherOpen'] = false;
+    // setData是page对象里才有的办法，所以在调用函数时，要把page对象传入进来；
+    that.setData(firstPageData);
+    getNextPostingPage(that , keyword, labelId, timeIndex); //获取并处理下一页；
+  } catch (error) {
+    // 超时提示
+    wx.showToast({
+      title: error,
+      icon: 'error'
+    })
+  }
+}
+  // 1.处理接口返回数据：渲染页面 / 超时提示
+  // 2.判断、请求、处理下一页数据
+async function getNextPostingPage(that , keyword, labelId, timeIndex) {
+  let {current,
+    pages,
+    isLastPage} = that.data;
+  if(!isLastPage){ //没到最后一页，再发送请求
+    try {
+      let res = await getPostingWithPage(current + 1, keyword, labelId,timeIndex);
+      let nextPageData = dealWithPostingAndError(res);
+      // setData是page对象里才有的办法，所以在调用函数时，要把page对象传入进来；
+      that.setData({nextPageData});
+    } catch (error) {
+      // 超时提示
+      wx.showToast({
+        title: error,
+        icon: 'error'
+      })
+    }
+  }else{
+    that.setData({'nextPageData' : {}});// 筛选的时候，清空之前的nextPageData
+  }
 };
+
+
 Page({
   /**
    * 页面的初始数据
@@ -116,20 +167,6 @@ Page({
    */
   onLoad: function (options) {
     const that = this;
-    //分页获取帖子列表
-    request({
-      url : '/posting/jishiGetPostingWithPage',
-      header: {
-        'content-type': 'x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
-      },
-      data : {
-        pageNo : 1
-      }
-    }).then(res => {
-      console.log(res);
-    }),
-
     // 获取帖子标签列表
     request({
       url : "/label",
@@ -169,9 +206,13 @@ Page({
       this.getTabBar().setData({
         selected: 1 //0,1,2 0-济事  1-济人  2-我的
       })
-   }
-   //获取帖子列表，posting表
-   getPostingList(this, this.data.keyword, this.data.labelId, this.data.timeIndex);
+   };
+    //  分页获取帖子列表
+    let {keyword, labelId, timeIndex} = this.data;
+    setPositingDataInFirstPage(this, 1, keyword, labelId, timeIndex);
+    //获取帖子列表，posting表
+    //  getPostingList(this, this.data.keyword, this.data.labelId, this.data.timeIndex);
+
    console.log(this.data.jishiItemList)
 
   },
@@ -225,14 +266,20 @@ Page({
       keyword : e.detail.value
     })
     let that = this;
-    getPostingList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+    //  分页获取帖子列表
+    let {keyword, labelId, timeIndex} = this.data;
+    setPositingDataInFirstPage(this, 1, keyword, labelId, timeIndex);
+    // getPostingList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
   },
   onCancleSearch:function(){
     this.setData({
       keyword : ''
     })
     let that = this;
-    getPostingList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+    //  分页获取帖子列表
+    let {keyword, labelId, timeIndex} = this.data;
+    setPositingDataInFirstPage(this, 1, keyword, labelId, timeIndex);
+    // getPostingList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
   },
   //弹出条件筛选
   clickConditionFilter:function(){
@@ -301,7 +348,9 @@ Page({
       })
     };
     // 2.其次，发送请求，获得筛选数据：
-    getPostingList(this, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+    //  分页获取帖子列表
+    let {keyword, labelId, timeIndex} = this.data;
+    setPositingDataInFirstPage(this, 1, keyword, labelId, timeIndex);
   },
   clickTimeIndex:function(){
     if(this.data.timeIndex=='asc'){
@@ -311,7 +360,9 @@ Page({
       this.setData({'timeIndex':'asc'})
     }
     // 重新发送请求，包括此前筛选或者搜索的数据：
-    getPostingList(this, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+    //  分页获取帖子列表
+    let {keyword, labelId, timeIndex} = this.data;
+    setPositingDataInFirstPage(this, 1, keyword, labelId, timeIndex);
   },
   clickShade2:function(){
     if(this.data.conditionFilterOpen){
@@ -330,12 +381,20 @@ Page({
     })
   }, */
   
+  createNewTeam: function(){
+    wx.navigateTo({
+      url: '/pages/jiren/initiateTeam',
+    })
+
+  },
   
   // 滚动框的 下拉刷新事件 pullDownRefresh------------- -------------- ----------
   onRefresherRefresh:function(){
     // 重新发送请求，包括此前筛选或者搜索数据：
     let that = this;
-    getPostingList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+    //  分页获取帖子列表
+    let {keyword, labelId, timeIndex} = this.data;
+    setPositingDataInFirstPage(this, 1, keyword, labelId, timeIndex);
     
   },
   //滚动框 返回最上方
@@ -349,8 +408,6 @@ Page({
       that.setData({showGoTopButton:false})
       console.log("test")
      }, 100) */
- 
-  
    },
    onMyScroll:function(e){
     if(e.detail.scrollTop>100){
@@ -359,10 +416,27 @@ Page({
       this.setData({showGoTopButton:false})
     }
    },
-   createNewTeam: function(){
-     wx.navigateTo({
-       url: '/pages/jiren/initiateTeam',
-     })
+  //  --------- 滚动框：获取下一页 ------------
+  getNextPage(){
+    let that = this;
+    let isLastPage = that.data.isLastPage;
+    if(!isLastPage){ //没到最后一页
+      let {isLastPage, current, pages,  jishiItemList : nextlist} = that.data.nextPageData;
+      console.log('nextlist:',nextlist);
+      let jishiItemList = that.data.jishiItemList;
+      jishiItemList = jishiItemList.concat(nextlist);
+      console.log('jishiItemList：',jishiItemList);
+      that.setData({
+        isLastPage, 
+        current, 
+        pages,  
+        jishiItemList, 
+        'nextPageData' : {}
+      });
+      //  分页获取帖子列表
+      let {keyword, labelId, timeIndex} = this.data;
+      getNextPostingPage(that, keyword, labelId, timeIndex);
+    }
 
-   }
+  }
 })

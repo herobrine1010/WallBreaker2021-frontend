@@ -51,6 +51,7 @@
     scroll-y="true" 
     scroll-with-animation='true' 
     scroll-top='{{ topNum }}' 
+    bindscrolltolower="getNextPage"
     refresher-enabled="true" 
     bindrefresherrefresh = "onRefresherRefresh"
     refresher-triggered = "{{isRefresherOpen}}">
@@ -72,7 +73,10 @@
       </block>
       <view wx:if="{{jishiItemList.length==0}}" class="noData">
         暂无数据~
-      </view>      
+      </view>    
+      <view wx:if="{{isLastPage}}" class="noData">
+        已经到底啦~
+      </view>   
     </scroll-view>
     
   </view>
