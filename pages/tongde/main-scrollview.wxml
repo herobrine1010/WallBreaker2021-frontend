@@ -15,7 +15,7 @@
       title="{{item.name}}"
       publishTime="{{item.createTime}}"
       description="{{item.content}}"
-      postingPic="{{item.firstPicUrl}}"
+      postingPic="{{item.firstPicUrl=='' ? '/static/icon/tongde-default-image.png' : item.firstPicUrl}} "
       ></card-lost>
     </navigator>
   </view>
