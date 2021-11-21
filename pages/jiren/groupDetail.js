@@ -842,10 +842,12 @@ copyWxId(){
 // 下方申请按钮  /   最上头像列表的加号
   applyButton:function(e){
     let that=this;
-    let notice = that.data.teamDetail.notice;
-    let applyStatus = that.data.teamDetail.applyStatus;
-    let applyNotice = that.data.teamDetail.applyNotice;
-    let applyClosed = that.data.teamDetail.applyClosed;
+    let {
+      notice,
+      applyStatus,
+      applyNotice,
+      applyClosed,
+    } = that.data.teamDetail;
     let status = that.data.status;
     if(status>=3){
       wx.showToast({
@@ -896,23 +898,43 @@ copyWxId(){
             teamId:that.data.teamId,
           },
         }).then(res => {
-          if(res.statusCode>=200&&res.statusCode<300){
+          console.log(res);
+          if(res.statusCode>=200&&res.statusCode<300 && res.data.success){
             wx.showToast({
               title: '申请已提交',
               icon:'success',
               duration:2000
             });
             return that.getTeamDetail(that.data.teamId);
+          }else if(res.data.msg == "noWxId"){
+            let dialog = {
+              hasInputBox:false,
+              content:"请完善微信号~",
+              tip:"填写微信号可以更好地使用组队功能，保证微信号只有队伍成员可见！",
+              cancelText:"返回",
+              okText:"去填写",
+              tapOkEvent:"tapOkForAddWxId",
+              tapCancelEvent:"tapCancelForAddWxId",
+              isDialogShow:true,
+            }
+            that.setData({
+              dialog
+            });
           }else{
-            throw new Error('网络故障，请重试')
+            wx.showToast({
+              title: '网络异常，请重试 :(',
+              icon: 'none',
+              duration: 1000
+            });
           }
         }).then(result => {
-          console.log(result);
-          that.setData({
-            teamDetail: result,
-            timeIsOver:(result.status>2?true:false)
-          })
-          that.checkStatus(result);
+          if(result){
+            that.setData({
+              teamDetail: result,
+              timeIsOver:(result.status>2?true:false)
+            })
+            that.checkStatus(result);
+          }
         }).catch(err => {
           console.log(err);
         })
@@ -950,7 +972,17 @@ copyWxId(){
     
     console.log("over");
   },
+  // 完善微信号的两个事件
+  tapOkForAddWxId(){
+    wx.navigateTo({
+      url: '../personal/personalDetails',
+    })
+  },
+  tapCancelForAddWxId(){
+    wx.navigateBack();
+  },
 
+// 取消申请事件
   cancelButton: function(e){
     let dialog = {
       isDialogShow: true,

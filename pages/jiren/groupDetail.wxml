@@ -165,6 +165,7 @@ tip="{{dialog.tip}}"
 okText="{{dialog.okText}}"
 cancelText="{{dialog.cancelText}}"
 isShow="{{dialog.isDialogShow}}"
+bind:tapCancel="{{dialog.tapCancelEvent}}"
 bind:tapOk="{{dialog.tapOkEvent}}"
 bind:finishInput="finishInput"
 >

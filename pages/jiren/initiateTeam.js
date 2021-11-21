@@ -341,7 +341,6 @@ Page({
     })
   },
   tapCancelForAddWxId(){
-    console.log('111');
     wx.navigateBack();
   }
   

@@ -55,8 +55,9 @@ Component({
    */
   methods: {
     tapCancel:function(e){
-      this.setData({isShow:false});
+
       this.triggerEvent('tapCancel',this.data.detail);
+      this.setData({isShow:false});
       // if(this.data.hasInputBox&&!this.data.reason){return}
     },
     tapOk:function(e){
