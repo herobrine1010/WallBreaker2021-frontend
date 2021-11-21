@@ -1,7 +1,7 @@
 <!--components/card-lost/card.wxml-->
 <view class="card">
-  <view class="image" style="background-image: url({{postingPic}})"></view> 
-  
+  <!-- <view class="image" style="background-image: url({{postingPic}})"></view>  -->
+  <image class="image" src="{{postingPic}}" mode="aspectFill"></image>
   <view class="textArea">
       <view class="objectName">{{title}}</view> 
       <view class="description"> {{description}}</view>

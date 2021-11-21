@@ -2,8 +2,9 @@
 
 /****************************网格状卡片样式********************************* */
 .card{
-  /* height:248px;
-  width: 166px; */
+  height:496rpx;
+  width: 332rpx;
+  position:relative;
 
   /*全局字体*/
   font-family: PingFang SC;
@@ -13,24 +14,27 @@
   line-height: 150%;
 }
 .image{/* Rectangle 15 */
-  height:496rpx;
+  height:354rpx;
   width: 332rpx;
   border-radius: 24rpx;
   background-size: cover;
   background-color: #F2FCFF;
+  z-index: 0;
 }
 
 .textArea{
   /*display: flex;
   flex-direction: column;*/
+  /* 底部信息栏从下往上布局 */
+  position: absolute;
+  bottom: 0;
   border-radius: 24rpx;
   background-color: #ffffff;
   width: 304rpx;
   height: 142rpx;/* 高度复刻问题 */
   /* min-height:112rpx; */
   padding: 14rpx 16rpx 24rpx;
-  margin-top:-176rpx;
-  z-index: 1;
+  z-index: 10;
 }
 .timeArea{
   width: 100%;
