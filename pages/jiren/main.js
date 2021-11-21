@@ -6,8 +6,9 @@ import util from "../../utils/util.js";
 
 
 // 定义函数编写请求参数：-----------------------------------------
-function setRequestData(keyword,labelId,timeIndex){
+function setRequestData(pageNo, keyword,labelId,timeIndex){
   let data = {
+    pageNo : pageNo,
     order : timeIndex
   };
   if(keyword){
@@ -16,8 +17,106 @@ function setRequestData(keyword,labelId,timeIndex){
   if(labelId){
     data.labelId = labelId;
   }
-
   return data;
+};
+
+// 分页获取帖子列表
+async function getTeamWithPage(pageNo, keyword,labelId,timeIndex) {
+  let p1 = request({
+    url : '/team/jirenGetTeamWithPage',
+    header: {
+      'content-type': 'x-www-form-urlencoded',
+      'cookie':wx.getStorageSync("token")
+    },
+    data : setRequestData(pageNo, keyword,labelId,timeIndex)
+  });
+
+  let p2 = new Promise((resolve,reject) => {
+    setTimeout( _ => {
+      reject("网络好像出错了");
+    },2000)
+  });
+  return Promise.race([p1,p2]);
+};
+function dealWithTeamAndError(res) {// ---- ------ 处理请求返回字段和错误 ------- ----------- ------------
+  if(res.statusCode >=200 && res.statusCode <=300){
+    console.log(res.data.data);
+    let { current , pages , records } = res.data.data;
+    let isLastPage = false;
+    let jirenItemList = records.map( v=>{
+      // status = 1  ;  表示：我发起的组队
+      v.teamCondition = 'mine';
+      if(v.initializedByMe){
+        v.rightTagText = '我发起的';
+      };
+
+      if(v.dueTime){
+        v.dueTime = '截止时间：' + formatTime(v.dueTime);
+      }else{
+        v.dueTime = '截止时间：暂无'
+      }  
+      // v.dueTime = '截止时间：'+ duetime.getFullYear() + '年' + (duetime.getMonth()+1) + '月'+ duetime.getDate() + '日 '+  duetime.getHours() + ':' + (duetime.getMinutes()<10?'0'+duetime.getMinutes():duetime.getMinutes());
+      v.peopleCount = (v.participantNumber + 1) + '/' + (v.dueMember + 1) ;
+      return v;
+    });
+    console.log("teamList",jirenItemList)
+    if(current == pages || pages == 0){
+      isLastPage = true; // 判断是否是最后一页
+    }
+    return {
+      isLastPage,
+      current,
+      pages,
+      jirenItemList
+    }
+    // obj[new] = JSON.parse(JSON.stringify(obj[jishiItemList]));
+  }else{
+    wx.showToast({
+      title: '请求失败',
+      icon: 'error'
+    })
+  } 
+}
+async function setTeamDataInFirstPage(that , pageNo = 1, keyword, labelId, timeIndex) {
+// 1.处理接口返回数据：渲染页面 / 超时提示
+// 2.判断、请求、处理下一页数据
+  try {
+    let res = await getTeamWithPage(pageNo, keyword,labelId,timeIndex);
+    let firstPageData = dealWithTeamAndError(res);
+    firstPageData['isRefresherOpen'] = false;
+    // setData是page对象里才有的办法，所以在调用函数时，要把page对象传入进来；
+    that.setData(firstPageData);
+    getNextPostingPage(that , keyword, labelId, timeIndex); //获取并处理下一页；
+  } catch (error) {
+    // 超时提示
+    wx.showToast({
+      title: error,
+      icon: 'error'
+    })
+  }
+}
+  // 1.处理接口返回数据：渲染页面 / 超时提示
+  // 2.判断、请求、处理下一页数据
+async function getNextTeamPage(that , keyword, labelId, timeIndex) {
+  let {current,
+    pages,
+    isLastPage} = that.data;
+  if(!isLastPage){ //没到最后一页，再发送请求
+    try {
+      let res = await getTeamWithPage(current + 1, keyword, labelId,timeIndex);
+      let nextPageData = dealWithTeamAndError(res);
+      // setData是page对象里才有的办法，所以在调用函数时，要把page对象传入进来；
+      that.setData({nextPageData});
+    } catch (error) {
+      // 超时提示
+      wx.showToast({
+        title: error,
+        icon: 'error'
+      })
+    }
+  }else{
+    that.setData({'nextPageData' : {}});// 筛选的时候，清空之前的nextPageData
+  }
 };
 
 // 封装请求：本页面多次发送获取组队列表的请求，因此将其封装：-----------------
@@ -121,20 +220,10 @@ Page({
     console.log(this.data.labelId);
     // 数据加载：---------------------- -------- --- -----------
 
-    request({
-      url : '/team/jirenGetTeamWithPage',
-      header: {
-        'content-type': 'x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
-      },
-      data : {
-        pageNo : 1
-      }
-    }).then(res => {
-      console.log(res);
-    }),
 
-    getTeamList(that,this.data.keyword,this.data.labelId,this.data.timeIndex);
+    // 分页获取 组队数据 -------- ---------- -------------------
+    let {keyword, labelId, timeIndex} = that.data;
+    setTeamDataInFirstPage(that, 1, keyword, labelId, timeIndex);
     // 标签加载：---------------------------------------------------------
     request({
       url:'/label',
@@ -214,14 +303,18 @@ Page({
       keyword : e.detail.value
     })
     let that = this;
-    getTeamList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+    // 分页获取 组队数据 -------- ----------------------------
+    let {keyword, labelId, timeIndex} = that.data;
+    setTeamDataInFirstPage(that, 1, keyword, labelId, timeIndex);
   },
   onCancleSearch:function(){
     this.setData({
       keyword : ''
     })
     let that = this;
-    getTeamList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+    // 分页获取 组队数据 -------- ---------- -------------------
+    let {keyword, labelId, timeIndex} = that.data;
+    setTeamDataInFirstPage(that, 1, keyword, labelId, timeIndex);
   },
 
 //  --------------------筛选框的弹出、归位---- ------ -------- ----
@@ -261,9 +354,10 @@ Page({
         timeIndex:'desc'
       })
     };
-    // 2.其次，发送请求，获得筛选数据：
+    // 2.其次，发送请求，获得筛选数据：分页获取 组队数据 -------- ---------- -------------------
     let that = this;
-    getTeamList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+    let {keyword, labelId, timeIndex} = that.data;
+    setTeamDataInFirstPage(that, 1, keyword, labelId, timeIndex);
   },
 
 // -------------排序：----------------------------
@@ -276,7 +370,8 @@ Page({
     }
     // 重新发送请求，包括此前筛选或者搜索的数据：
     let that = this;
-    getTeamList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+    let {keyword, labelId, timeIndex} = that.data;
+    setTeamDataInFirstPage(that, 1, keyword, labelId, timeIndex);
 
   },
   clickShade2:function(){
@@ -305,11 +400,37 @@ Page({
   getNextPage: function(){
     console.log('111');
   },
+  //  --------- 滚动框：获取下一页 ------------
+  getNextPage(){
+    let that = this;
+    let isLastPage = that.data.isLastPage;
+    if(!isLastPage){ //没到最后一页
+      let {isLastPage, current, pages,  jirenItemList : nextlist} = that.data.nextPageData;
+      console.log('nextlist:',nextlist);
+      let jirenItemList = that.data.jirenItemList;
+      jirenItemList = jirenItemList.concat(nextlist);
+      console.log('jirenItemList：',jirenItemList);
+      that.setData({  
+        isLastPage, 
+        current, 
+        pages,  
+        jirenItemList, 
+        'nextPageData' : {}
+      });
+      //  分页获取帖子列表
+      let {keyword, labelId, timeIndex} = this.data;
+      getNextTeamPage(that, keyword, labelId, timeIndex);
+    }else{
+      console.log('已经到底了');
+    }
+  
+  },
   // 滚动框的 下拉刷新事件 pullDownRefresh------------- -------------- ----------
   onRefresherRefresh:function(){
     // 重新发送请求，包括此前筛选或者搜索数据：
     let that = this;
-    getTeamList(that, this.data.keyword, this.data.labelId ,this.data.timeIndex);
+    let {keyword, labelId, timeIndex} = that.data;
+    setTeamDataInFirstPage(that, 1, keyword, labelId, timeIndex);
     
   },
   // 滚动框的 滚动和回到最上事件：------------- -------------- ----------

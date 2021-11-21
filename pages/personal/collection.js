@@ -1,7 +1,7 @@
 // pages/collection/collection.js
 // 首先引入封装成promise的 request
 import { request } from "../../request/request.js";
-import {formatTime} from "../../utils/util.js";
+import {formatTime , getDateDiff} from "../../utils/util.js";
 
 Page({
 
@@ -135,33 +135,7 @@ Page({
   // 以下为发起请求： ------------- -------------------- -----------
   getList(self) {
     // ----------- ---- 调试分页接口 ----------- -----------
-    request({
-      url : '/userFavouritePosting/getMyFavouritePostingByPage',
-      header: {
-        'content-type': 'applicationx-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
-      },
-      data : {
-        pageNo : 1,
-        pageSize : 10
-      }
-    }).then(res => {
-      console.log(res);
-    })
-
-    request({
-      url : '/userFavouriteTeam/getMyFavouriteTeamWithPage',
-      header: {
-        'content-type': 'applicationx-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
-      },
-      data : {
-        pageNo : 1,
-        pageSize : 10
-      }
-    }).then(res => {
-      console.log(res);
-    })
+    
     // ----------- ---- 调试分页接口 结束 ----------- -----------
     let favouritePosting = request({
       url : '/userFavouritePosting/getMyFavouritePosting',
@@ -293,10 +267,62 @@ Page({
     console.log("上拉触了滚动框的底");
   },
   onRefresherRefresh(){
-    const self = this;
-    this.getList(self);
+    const that = this;
+    getFirstPageData(that, 10);
   },
+  // ------- ----- 事件： 将下一页数据加载到页面上，并继续请求 ----
+  onPostingReachBottom(){
+    console.log('posting123');
+    const that = this;
+    let jishiIsLastPage = that.data.jishiIsLastPage;
+    if(!jishiIsLastPage){
+      let {      
+        jishiIsLastPage,
+        jishiCurrent,
+        jishiPages,
+        jishiItemList
+      } = that.data.postingNextPage;
+      let before = that.data.jishiItemList;
+      jishiItemList = before.concat(jishiItemList);
+      that.setData({
+        jishiIsLastPage,
+        jishiCurrent,
+        jishiPages,
+        jishiItemList,
+        'postingNextPage' : {}
+      });
+      getNextPostingPage(that);
 
+
+    }
+
+ 
+  },
+  onTeamReachBottom(){
+    console.log('team111');
+    const that = this;
+    let jirenIsLastPage = that.data.jirenIsLastPage;
+    if(!jirenIsLastPage){
+      let {      
+        jirenIsLastPage,
+        jirenCurrent,
+        jirenPages,
+        jirenItemList
+      } = that.data.teamNextPage;
+      let before = that.data.jirenItemList;
+      jirenItemList = before.concat(jirenItemList);
+      that.setData({
+        jirenIsLastPage,
+        jirenCurrent,
+        jirenPages,
+        jirenItemList,
+        'teamNextPage' : {}
+      });
+      getNextTeamPage(that);
+
+
+    }
+  },
   
 
   // 点击卡片之后的页面跳转
@@ -306,8 +332,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    const self = this;
-    this.getList(self);
+    const that = this;
+    getFirstPageData(that, 10);
   },
 
   /**
@@ -322,7 +348,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.onLoad();
+
+    
   },
 
   /**
@@ -359,3 +386,231 @@ Page({
 
   }
 })
+
+// ------------ functions for request data （接口有关函数）---- ----------- ---------
+// 1. 分页获取数据
+async function getPostingData(pageNo, pageSize = 10) {
+  return request({
+    url : '/userFavouritePosting/getMyFavouritePostingByPage',
+    header: {
+      'content-type': 'applicationx-www-form-urlencoded',
+      'cookie':wx.getStorageSync("token")
+    },
+    data : {
+      pageNo,
+      pageSize
+    }
+  })
+};
+async function getTeamData(pageNo, pageSize = 10) {
+  return request({
+    url : '/userFavouriteTeam/getMyFavouriteTeamWithPage',
+    header: {
+      'content-type': 'applicationx-www-form-urlencoded',
+      'cookie':wx.getStorageSync("token")
+    },
+    data : {
+      pageNo,
+      pageSize
+    }
+  })
+}
+//  2. 分别处理帖子和组队数据
+function dealWithPosting(res) {
+  if(res.statusCode >=200 && res.statusCode <=300){
+    console.log(res.data.data);
+
+    let { current : jishiCurrent , pages : jishiPages , records } = res.data.data;
+    let jishiIsLastPage = false;
+    let jishiItemList = records.map( v=>{
+      let tempList = {
+        labelText : v.labelContent,
+        title : v.title,
+        description : v.content,
+        userName : v.initiatorNickName,
+        userAvatar : v.initiatorAvatar,
+        postingPic : v.firstPicUrl,
+        id : v.id,
+        publishTime : getDateDiff(v.updateTime)
+      };
+      // -------- 收藏帖子的状态：1:我发起的 / 0:空 ---------
+      if(v.status){
+        tempList.rightTagText = '我发起的';
+      }else{
+        tempList.rightTagText = '';
+      }
+      return tempList;
+    });
+
+    console.log("postingList",jishiItemList)
+    if(jishiCurrent == jishiPages || jishiPages == 0){
+      jishiIsLastPage = true; // 判断是否是最后一页
+    }
+    return {
+      jishiIsLastPage,
+      jishiCurrent,
+      jishiPages,
+      jishiItemList
+    };
+  }else{
+    wx.showToast({
+      title: '请求失败',
+      icon: 'error'
+    })
+  } 
+}
+function dealWithTeam(res) {
+  if(res.statusCode >=200 && res.statusCode <=300){
+    console.log(res.data.data);
+
+    let { current : jirenCurrent , pages : jirenPages , records } = res.data.data;
+    let jirenIsLastPage = false;
+    let jirenItemList = records.map( v=>{
+      let team = {
+        labelText : v.labelContent,
+        title : v.title,
+        description : v.content,
+        initiator : v.initiatorNickName,
+        peopleCount : (v.participantNumber + 1) + '/' + (v.dueMember + 1) ,
+        postingPic : v.firstPicUrl,
+        dueTime : '截止时间：' + (v.dueTime==null?"暂无":formatTime(v.dueTime)),
+        id : v.id
+      };
+      // -------- 收藏组队的状态：1:我发起的 / 0:空---------
+      // if(v.initializedByMe){
+      //   tempList.teamCondition = 'mine';
+      //   tempList.rightTagText = '我发起的';
+      // }else{
+      //   tempList.teamCondition = 'mine';
+      //   tempList.rightTagText = '';
+      // }
+      if(v.initializedByMe){
+        switch(v.status){
+          case 0:
+            team.teamCondition='mine'
+            team.rightTagText='我发起的'
+            break;
+          case 1:
+          case 2:
+            team.teamCondition='mine'
+            team.rightTagText='待处理'
+            break;
+          case 3:
+          case 4:
+          default:
+            team.teamCondition='close'
+            team.rightTagText='已关闭'
+            break;
+        }
+      }else{
+        if(v.applyClosed){
+            team.teamCondition='close'
+            team.rightTagText='已关闭'
+        }else{
+          switch(v.applyStatus){
+            case 0:
+              team.teamCondition='applying'
+              team.rightTagText='我已申请'
+              break;
+            case 1:
+              team.teamCondition='pass'
+              team.rightTagText='我已入队'
+              break;
+            case 2:
+              team.teamCondition='refuse'
+              team.rightTagText='申请未通过'
+              break;
+        }
+        }
+      }
+      return team;
+    });
+
+    console.log("teamList",jirenItemList)
+    if(jirenCurrent == jirenPages || jirenPages == 0){
+      jirenIsLastPage = true; // 判断是否是最后一页
+    }
+    return {
+      jirenIsLastPage,
+      jirenCurrent,
+      jirenPages,
+      jirenItemList
+    };
+  }else{
+    wx.showToast({
+      title: '请求失败',
+      icon: 'error'
+    })
+  } 
+}
+// 3. 获取第一页, 用于onLoad/refresh刷新
+async function getFirstPageData(that, pageSize){
+  let p1 = getPostingData(1, pageSize);
+  let p2 = getTeamData(1, pageSize);
+  
+  Promise.all([p1,p2])
+  .then(result => {
+    let posting = result[0],
+        teams = result[1];
+    let jishiData =  dealWithPosting(posting);
+    let jirenData = dealWithTeam(teams);
+    that.setData({...jishiData, ...jirenData, 'isRefresherOpen' : false})
+    return Promise.resolve();
+  }).then(_ => {
+    getNextPostingPage(that);
+    getNextTeamPage(that);
+  }).catch(err => {
+    console.log(err);
+    wx.showToast({
+      title: '请求失败，请重试',
+      icon: 'error'
+    })
+  })
+  // 加载下一页的数据
+};
+//  ---------- --------- 发送请求 获取下一页 帖子 或 组队
+async function getNextPostingPage(that){
+  let {
+    jishiIsLastPage,
+    jishiCurrent,
+    jishiPages
+  } = that.data;
+  if(!jishiIsLastPage){
+    try {
+      let res = await getPostingData(jishiCurrent + 1);
+      let postingData = dealWithPosting(res);
+      that.setData({
+        'postingNextPage' : postingData
+      });
+    } catch (error) {
+      wx.showToast({
+        title: error,
+        icon: 'error'
+      })
+    }
+  }
+};
+async function getNextTeamPage(that){
+  let {
+    jirenIsLastPage,
+    jirenCurrent,
+    jirenPages
+  } = that.data;
+  if(!jirenIsLastPage){
+    try {
+      let res = await getTeamData(jirenCurrent + 1);
+      let teamData = dealWithTeam(res);
+      that.setData({
+        'teamNextPage' : teamData
+      });
+    } catch (error) {
+      wx.showToast({
+        title: error,
+        icon: 'error'
+      })
+    }
+  }
+}
+
+
+

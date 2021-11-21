@@ -56,6 +56,8 @@ Component({
   methods: {
     tapCancel:function(e){
       this.setData({isShow:false});
+      this.triggerEvent('tapCancel',this.data.detail);
+      // if(this.data.hasInputBox&&!this.data.reason){return}
     },
     tapOk:function(e){
       // var t=e.currentTarget.dataset;

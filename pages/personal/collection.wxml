@@ -14,7 +14,7 @@
     bindrefresherrefresh = "onRefresherRefresh"
     refresher-triggered = "{{isRefresherOpen}}"
     with-animation='true' 
-    bindscrolltolower = "onScrollToLower"
+    bindscrolltolower = "{{isNoticeOrTeam?onPostingReachBottom:onTeamReachBottom}}"
     class="collection-body">
       <!-- <scroll-view class="listArea" scroll-y="true">
       <view class="list-item"> -->

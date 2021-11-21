@@ -67,7 +67,7 @@
     scroll-top='{{ topNum }}'
     class="listArea">
       <block wx:for="{{jirenItemList}}" wx:key="{{index}}">
-        <navigator url="groupDetail?teamId={{item.id}}" class="team-item">
+        <navigator open-type="navigateTo" url="groupDetail?teamId={{item.id}}" class="team-item">
           <card-team 
           labelText="{{item.labelContent}}"
           title="{{item.title}}"

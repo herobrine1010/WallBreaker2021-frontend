@@ -138,6 +138,7 @@
       </scroll-view>
     </view>
 
+    <navigator open-type="navigateTo" url="../personal/personalDetails" style="height:100rpx; width : 100rpx; background-color: pink"></navigator>
 
     <view class="bottom-elements" wx:if="{{!amITeamInitiator&&applyStatus!=1&&applyStatus!=2}}">
       <view class="applicantButton">
@@ -205,4 +206,7 @@ button="{{dialog2.button}}">
       </view>
     </view>
   </scroll-view>
+
+
 </view>
+

@@ -8,7 +8,7 @@
   width: 100%;
 }
 .searchBar{
-  margin:0 48rpx ;
+  margin:0 10rpx ;
   flex: 1;
 }
 .guide{

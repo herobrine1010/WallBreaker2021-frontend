@@ -26,7 +26,7 @@
 <view class="tab">
   <view class="tab-item {{tab==0?'active':''}}" bindtap="changeItem" data-item="0">物品遗失
   </view>
-  <view class="tab-item {{tab==1?'active':''}}" bindtap="changeItem" data-item="1">失物寻主</view>
+  <view class="tab-item {{tab==1?'active':''}}" bindtap="changeItem" data-item="1">寻找失主</view>
 </view>
 
 
