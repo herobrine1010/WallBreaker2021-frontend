@@ -28,7 +28,7 @@ Page({
     description:"9.9晚上在嘉定博楼217捡到一本机器学习算法书",
     location:'在嘉定博楼217靠窗第一排座位捡到',
     number:'15615333420',
-    type:0,//物品遗失0 失物寻主1
+    type:0,//物品遗失0 寻找失主1
     closed:false,
     pictures:['https://img-blog.csdnimg.cn/2021092014302085.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYWFhc2h1b3c=,size_20,color_FFFFFF,t_70,g_se,x_16','','','','','','',''],
 
@@ -168,7 +168,7 @@ Page({
         description: data.content,
         location:data.location,
         contact: data.contact,
-        type: data.type,//物品遗失0失物寻主1
+        type: data.type,//物品遗失0寻找失主1
         closed: data.closed,
         pictures: data.allPicUrl.split(','), //字符串拆成列表
         'dialog.infoDetail.Value': data.contact,
