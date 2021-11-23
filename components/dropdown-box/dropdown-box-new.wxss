@@ -34,6 +34,16 @@
   overflow: hidden;
 }
 
+.tap-mask {
+  /* 点击遮罩  */
+  position:fixed;
+  display: flex;
+  width:100%;
+  height:100%;
+  left:0;
+  top:0;
+  z-index: 98;
+}
 .option-list {
   position: absolute;
   left: 0;
