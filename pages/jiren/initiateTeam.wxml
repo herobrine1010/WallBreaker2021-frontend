@@ -80,7 +80,6 @@
 
         </view>
 
-        <navigator open-type="navigateTo" url="../personal/personalDetails" style="height:100rpx; width : 100rpx; background-color: pink"></navigator>
         <!-- 输入内容判空，若标题和内容为空，禁用提交按钮 -->
         <button class="submitButton" form-type="submit" disabled="{{teamContent=='' || teamTitle==''}}" style="background: rgba(23, 178, 230, 0.8);position:fixed; bottom:0%; left:0%; height:90rpx; width:100%;z-index:10; border-radius: 0; border: 0; backdrop-filter: blur(2px);">确认提交</button>
       </form>

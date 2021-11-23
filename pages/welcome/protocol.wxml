@@ -1,0 +1,8 @@
+<!--miniprogram/pages/welcome/protocol.wxml-->
+
+<view class="navi">
+  <mp-navigation-bar  title="{{contentTitle}}" background="#fff"></mp-navigation-bar>
+</view>
+<view class="content">
+    <mp-html selectable="force" content="{{contentBody}}"/>
+</view>

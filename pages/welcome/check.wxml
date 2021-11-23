@@ -20,9 +20,9 @@
       <checkbox value="checkbox"></checkbox>
       <view >
         <text>我已知晓并同意</text>
-        <navigator class="agree-url" url="../jiren/answerQuestion">《济星云小程序许可及服务协议》</navigator>
+        <navigator class="agree-url" url="./protocol?type=0">《济星云小程序许可及服务协议》</navigator>
         <text>和</text>
-        <navigator class="agree-url" url="../jiren/answerQuestion">《济星云社区管理规范》</navigator>
+        <navigator class="agree-url" url="./protocol?type=1">《济星云社区管理规范》</navigator>
       </view>
       
     </checkbox-group>

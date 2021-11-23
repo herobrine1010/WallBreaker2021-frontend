@@ -92,7 +92,7 @@ Page({
       })
       that.checkStatus(result);
 
-      return that.getTeamMemberList(that.data.teamId, that.data.amITeamInitiator, result.dueMember);
+      return that.getTeamMemberList(that.data.teamId, that.data.amITeamInitiator, result.dueMember, that.data.applyStatus);
     })
     .then(teamMemberList => {
     // 先处理头像数据，再判断是否为发起者，再发请求获取申请者数据 
@@ -163,7 +163,7 @@ Page({
     .then(res=>{
       if(res.statusCode>=200&&res.statusCode<300){
         let teamdata=res.data.data;
-          console.log(teamdata);
+          console.log('队伍信息？状态码',teamdata);
           let {
             applyStatus, title, content, allPicUrl, dueTime, createTime, dueMember, initializedByMe, initiatorId, myFavourite, status, question, reason,applyClosed,applyNotice,notice
           }=teamdata;
@@ -329,7 +329,7 @@ Page({
   },
 
   // (2). 成员列表(需要组队内容请求来的dueMember数据)
-  getTeamMemberList(teamId,amITeamInitiator,dueMember){
+  getTeamMemberList(teamId,amITeamInitiator,dueMember, applyStatus){
     let self = this;
     return request({
       url: '/userTeam/getAllMemberInfoByTeamId/'+teamId,
@@ -337,7 +337,7 @@ Page({
     })
     .then(res=>{
       if(res.statusCode>=200&&res.statusCode<300){
-        console.log(res);
+        console.log('接口返回的组队成员信息',res);
         let list=[];
         let data=res.data.data;
         for (let teamMember of data){
@@ -353,6 +353,17 @@ Page({
             personalLabel = personalLabel.map(v=>{
               return v.content
             })
+          }
+          if(!amITeamInitiator){
+            if(applyStatus == 1 || applyStatus == 2){ //申请者被同意入队，能看发起者信息
+              if(!initiator && !me){
+                wxId = '';
+                wxIdPublic = false;
+              }
+            }else{// 尚未入队
+              wxId = '';
+              wxIdPublic = false;
+            }
           }
           let temp = {
             id,
@@ -473,6 +484,10 @@ tapAvatar(e){
   let index=e.currentTarget.dataset.index;
   console.log(index);
   let avatar = that.data.teamMemberList[index];
+  console.log(avatar);
+  if(!avatar.description){
+    avatar.description = '这位同济er暂时没有话想说～';
+  }
   let applyStatus = that.data.teamDetail.applyStatus;
   if(index == 0 && (applyStatus==1||applyStatus==2)){
     avatar.wxIdPublic = true;
@@ -490,6 +505,9 @@ tapInitiatorAvatar(){
   // console.log(teamDetail);
   if(applyStatus==1||applyStatus==2){
     teamDetail.wxIdPublic = true;
+  }else{
+    teamDetail.wxIdPublic = false;
+    teamDetail.wxId = '';
   }
   that.setData({
     isPersonalInfoShow:true,

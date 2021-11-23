@@ -21,8 +21,7 @@
 }
 .pa-avatar-area{
   display: flex;
-  height:400rpx;
-  width:250rpx;
+  width:200rpx;
   justify-content: center;
   align-items: center;
 }
@@ -33,6 +32,8 @@
 }
 
 .pa-text-area{
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 450rpx;
   margin: 0 40rpx 0 10rpx;
@@ -40,7 +41,7 @@
 }
 .pa-nickname-and-check-answer{
   position: relative;
-  margin: 30rpx 0 20rpx;  
+  margin-top: 30rpx;  
 }
 .pa-check-answer{
   position: absolute;
@@ -66,14 +67,17 @@
   margin-bottom: 4rpx;
 }
 .pa-wx-id{
+  position: relative;
   display: flex;
   align-items: center;
 }
 .pa-info-area{
   display: flex;
+  flex-wrap: wrap;
+  width: 500rpx;
 }
 .pa-school,.pa-major,.pa-grade,.pa-identity{
-  margin-right: 10rpx;
+  margin-right: 20rpx;
 }
 
 .pa-label-container{
