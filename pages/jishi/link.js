@@ -5,14 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    linkUrl:'mp.weixin.com'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let linkUrl = options.linkUrl;
+    this.setData({
+      linkUrl
+    })
   },
 
   /**

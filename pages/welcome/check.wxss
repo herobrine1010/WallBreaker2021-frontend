@@ -31,6 +31,13 @@
   top: -180rpx;
   left: 40rpx;
 }
+.flower{
+  position: absolute;
+  width: 514rpx;
+  height: 188rpx;
+  top: -250rpx;
+  left: 170rpx;
+}
 .login{
   position: relative;
   width: 686rpx;

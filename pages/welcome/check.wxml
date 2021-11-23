@@ -5,6 +5,7 @@
 
 <view class="container-check">
   <image class="miao" src="../../static/icon/miaoji.png"></image>
+  <image class="flower" src="../../static/icon/check-background.png"></image>
   <view class="login">
     <text class="title">身份认证登录</text>
 
@@ -12,7 +13,7 @@
     <text class="declare">济星云将严格保密您的信息</text>
 
     <view class="btn">
-      <button class="poby-btn {{isUserAgree?'bg-darkblue':'bg-gray'}}" size="full">统一身份认证登录</button>
+      <button bindtap="onLogin" class="poby-btn {{isUserAgree?'bg-darkblue':'bg-gray'}}" size="full">统一身份认证登录</button>
     </view>
 
     <checkbox-group class="checkbox" bindchange="onCheckboxChange">
