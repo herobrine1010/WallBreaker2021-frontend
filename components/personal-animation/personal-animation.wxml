@@ -5,20 +5,23 @@
   </view>
   <view class="pa-text-area poby-text bd medium color-sec">
     <view class="pa-nickname-and-check-answer">
-      <view class="pa-nickname poby-text h5 color-sec">{{personalInfo.nickName}}</view>
+      <view class="pa-nickname poby-text h4 color-sec">{{personalInfo.nickName}}</view>
       <view wx:if="{{personalInfo.isCheckAnswerButtonShow}}" class="pa-check-answer poby-text bd " bindtap="seeAnswer" data-id="{{personalInfo.id}}">查看回答</view>
     </view>
-    <view class="pa-wx-id " bindlongtap="copyWxId" wx:if="{{personalInfo.wxIdPublic&&personalInfo.wxId}}">
+    <view class="pa-wx-id" wx:if="{{personalInfo.wxId}}" bindlongtap="copyWxId">
       <text selectable="true">微信号 {{personalInfo.wxId}}</text>
-      <image style="height:45rpx; width : 45rpx ; padding:25rpx" src="../../static/icon/copy.png" bindtap="copyWxId"></image>
+      <image style="height:45rpx; width : 45rpx ; padding : 0 30rpx ;" src="../../static/icon/copy.png" bindtap="copyWxId"></image>
     </view>
-    <view  wx:if="{{personalInfo.description!=undefined}}" class="pa-description poby-text bds medium color-dis">{{personalInfo.description}}</view>
-    <view class="pa-info-area"
-    wx:if="{{personalInfo.schoolPublic || personalInfo.majorPublic || personalInfo.gradePublic || personalInfo.identityPublic}}">
-      <view class="pa-school" wx:if="{{personalInfo.schoolPublic}}">{{personalInfo.school}}</view>
-      <view class="pa-major" wx:if="{{personalInfo.majorPublic}}">{{personalInfo.major}}</view>
-      <view class="pa-grade" wx:if="{{personalInfo.gradePublic}}">{{personalInfo.grade}}</view>
-      <view class="pa-identity" wx:if="{{personalInfo.identityPublic}}">{{personalInfo.identity}}</view>
+    <view  wx:if="{{personalInfo.description!=undefined}}" class="pa-description poby-text bds medium color-dis">{{personalInfo.description?personalInfo.description:'这位同济er暂时没有话想说～'}}</view>
+    <view class="pa-info-area">
+      <text class="pa-school">{{personalInfo.schoolPublic?personalInfo.school:'保密'}}</text>
+      <text class="pa-major">{{personalInfo.majorPublic?personalInfo.major:'保密'}}</text>
+      <text class="pa-grade">{{personalInfo.gradePublic?personalInfo.grade:'保密'}}</text>
+      <text class="pa-identity">{{personalInfo.identityPublic?personalInfo.identity:'保密'}}</text>
+      <!-- <view class="pa-school">{{personalInfo.schoolPublic?personalInfo.school:'保密'}}</view>
+      <view class="pa-major">{{personalInfo.majorPublic?personalInfo.major:'保密'}}</view>
+      <view class="pa-grade">{{personalInfo.gradePublic?personalInfo.grade:'保密'}}</view>
+      <view class="pa-identity">{{personalInfo.identityPublic?personalInfo.identity:'保密'}}</view> -->
     </view>
     <view class="pa-label-container">
       <view wx:if="{{personalInfo.personalLabel.length!=0}}" class="pa-label-area">

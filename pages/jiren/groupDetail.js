@@ -92,7 +92,7 @@ Page({
       })
       that.checkStatus(result);
 
-      return that.getTeamMemberList(that.data.teamId, that.data.amITeamInitiator, result.dueMember);
+      return that.getTeamMemberList(that.data.teamId, that.data.amITeamInitiator, result.dueMember, that.data.applyStatus);
     })
     .then(teamMemberList => {
     // 先处理头像数据，再判断是否为发起者，再发请求获取申请者数据 
@@ -163,7 +163,7 @@ Page({
     .then(res=>{
       if(res.statusCode>=200&&res.statusCode<300){
         let teamdata=res.data.data;
-          console.log(teamdata);
+          console.log('队伍信息？状态码',teamdata);
           let {
             applyStatus, title, content, allPicUrl, dueTime, createTime, dueMember, initializedByMe, initiatorId, myFavourite, status, question, reason,applyClosed,applyNotice,notice
           }=teamdata;
@@ -329,7 +329,7 @@ Page({
   },
 
   // (2). 成员列表(需要组队内容请求来的dueMember数据)
-  getTeamMemberList(teamId,amITeamInitiator,dueMember){
+  getTeamMemberList(teamId,amITeamInitiator,dueMember, applyStatus){
     let self = this;
     return request({
       url: '/userTeam/getAllMemberInfoByTeamId/'+teamId,
@@ -337,7 +337,7 @@ Page({
     })
     .then(res=>{
       if(res.statusCode>=200&&res.statusCode<300){
-        console.log(res);
+        console.log('接口返回的组队成员信息',res);
         let list=[];
         let data=res.data.data;
         for (let teamMember of data){
@@ -353,6 +353,17 @@ Page({
             personalLabel = personalLabel.map(v=>{
               return v.content
             })
+          }
+          if(!amITeamInitiator){
+            if(applyStatus == 1 || applyStatus == 2){ //申请者被同意入队，能看发起者信息
+              if(!initiator && !me){
+                wxId = '';
+                wxIdPublic = false;
+              }
+            }else{// 尚未入队
+              wxId = '';
+              wxIdPublic = false;
+            }
           }
           let temp = {
             id,
@@ -473,6 +484,10 @@ tapAvatar(e){
   let index=e.currentTarget.dataset.index;
   console.log(index);
   let avatar = that.data.teamMemberList[index];
+  console.log(avatar);
+  if(!avatar.description){
+    avatar.description = '这位同济er暂时没有话想说～';
+  }
   let applyStatus = that.data.teamDetail.applyStatus;
   if(index == 0 && (applyStatus==1||applyStatus==2)){
     avatar.wxIdPublic = true;
@@ -490,6 +505,9 @@ tapInitiatorAvatar(){
   // console.log(teamDetail);
   if(applyStatus==1||applyStatus==2){
     teamDetail.wxIdPublic = true;
+  }else{
+    teamDetail.wxIdPublic = false;
+    teamDetail.wxId = '';
   }
   that.setData({
     isPersonalInfoShow:true,
@@ -842,10 +860,12 @@ copyWxId(){
 // 下方申请按钮  /   最上头像列表的加号
   applyButton:function(e){
     let that=this;
-    let notice = that.data.teamDetail.notice;
-    let applyStatus = that.data.teamDetail.applyStatus;
-    let applyNotice = that.data.teamDetail.applyNotice;
-    let applyClosed = that.data.teamDetail.applyClosed;
+    let {
+      notice,
+      applyStatus,
+      applyNotice,
+      applyClosed,
+    } = that.data.teamDetail;
     let status = that.data.status;
     if(status>=3){
       wx.showToast({
@@ -896,23 +916,43 @@ copyWxId(){
             teamId:that.data.teamId,
           },
         }).then(res => {
-          if(res.statusCode>=200&&res.statusCode<300){
+          console.log(res);
+          if(res.statusCode>=200&&res.statusCode<300 && res.data.success){
             wx.showToast({
               title: '申请已提交',
               icon:'success',
               duration:2000
             });
             return that.getTeamDetail(that.data.teamId);
+          }else if(res.data.msg == "noWxId"){
+            let dialog = {
+              hasInputBox:false,
+              content:"请完善微信号~",
+              tip:"填写微信号可以更好地使用组队功能，保证微信号只有队伍成员可见！",
+              cancelText:"返回",
+              okText:"去填写",
+              tapOkEvent:"tapOkForAddWxId",
+              tapCancelEvent:"tapCancelForAddWxId",
+              isDialogShow:true,
+            }
+            that.setData({
+              dialog
+            });
           }else{
-            throw new Error('网络故障，请重试')
+            wx.showToast({
+              title: '网络异常，请重试 :(',
+              icon: 'none',
+              duration: 1000
+            });
           }
         }).then(result => {
-          console.log(result);
-          that.setData({
-            teamDetail: result,
-            timeIsOver:(result.status>2?true:false)
-          })
-          that.checkStatus(result);
+          if(result){
+            that.setData({
+              teamDetail: result,
+              timeIsOver:(result.status>2?true:false)
+            })
+            that.checkStatus(result);
+          }
         }).catch(err => {
           console.log(err);
         })
@@ -950,7 +990,17 @@ copyWxId(){
     
     console.log("over");
   },
+  // 完善微信号的两个事件
+  tapOkForAddWxId(){
+    wx.navigateTo({
+      url: '../personal/personalDetails',
+    })
+  },
+  tapCancelForAddWxId(){
+    wx.navigateBack();
+  },
 
+// 取消申请事件
   cancelButton: function(e){
     let dialog = {
       isDialogShow: true,

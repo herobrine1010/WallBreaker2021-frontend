@@ -56,7 +56,7 @@
         <view class="section4 answerQuestion">
           <view class="isNeedQuestion">
             <switch name="isNeedQuestion" class="isNeedQuestion-text" type="checkbox" checked bindchange="switchQuestion">
-              需要申请者回答的问题</switch>
+              需要申请者回答问题</switch>
           </view>
           <view class="switchArea" wx:if="{{isNeedQuestion}}">
             <block wx:for="{{questionList}}" wx:for-item="item" wx:key="id">
@@ -79,10 +79,12 @@
           </view>
 
         </view>
+
         <!-- 输入内容判空，若标题和内容为空，禁用提交按钮 -->
         <button class="submitButton" form-type="submit" disabled="{{teamContent=='' || teamTitle==''}}" style="background: rgba(23, 178, 230, 0.8);position:fixed; bottom:0%; left:0%; height:90rpx; width:100%;z-index:10; border-radius: 0; border: 0; backdrop-filter: blur(2px);">确认提交</button>
       </form>
     </view>
+
     <!-- 用于填充scroll-view，防止最下端被button遮盖 -->
     <view class="empty-block"></view>
     </scroll-view>
@@ -93,5 +95,5 @@
 
 <!-- 弹出的用于确认的提示框，电脑端模拟器、预览均没问题，但真机调试无法正确覆盖 -->
 <dialog-box class="dialog-box" content="{{dialogContent}}" tip="{{dialogTip}}" okText="{{dialogOkText}}" cancelText="{{dialogCancelText}}"
-  isShow="{{isDialogShow}}" bind:tapOk="tapOk">
+  isShow="{{isDialogShow}}" bind:tapOk="{{tapOkEvent}}" bind:tapCancel="{{tapCancelEvent}}">
 </dialog-box>

@@ -64,6 +64,7 @@ Page({
     dialogTip:"",
     dialogCancelText:"取消",
     dialogOkText:"确认",
+    tapOkEvent:"tapOkForTeamSubmit"
 
   },
   onLoad() {
@@ -229,13 +230,18 @@ Page({
       "question": JSON.stringify(question)
     };
     this.setData({
+      dialogContent:"确认发起组队吗？",
+      dialogTip:"",
+      dialogCancelText:"取消",
+      dialogOkText:"确认",
+      tapOkEvent:"tapOkForTeamSubmit",
       isDialogShow:true,
       payload: payload,
     });
   },
 
   //弹窗点按确认，完成图片上传、表单提交(用Promise实现先后顺序)
-  tapOk:function(e){
+  tapOkForTeamSubmit:function(e){
     var that = this;
     // 获取本地图片数据，调用库打包成data
     var imageData = new FormData();
@@ -285,7 +291,7 @@ Page({
           data: that.data.payload,
         }).then( res => {
             //console.log('提交表单返回结果', res.data);
-            if (res.data.success && res.statusCode==200) {
+            if (res.data.success && res.statusCode==200) { // 有微信号，可以发起组队
               wx.showToast({
                 title: '组队招募\n已发布成功',
                 icon: 'none',
@@ -294,12 +300,22 @@ Page({
               wx.navigateBack(); //组队成功后返回上一页
 
             }
-            else {
+            else if(res.data.msg == 'noWxId'){  // 无微信号，跳转填写个人资料
+              that.setData({
+                dialogContent:"请完善微信号~",
+                dialogTip:"填写微信号可以更好地使用组队功能，保证微信号只有队伍成员可见！",
+                dialogCancelText:"取消组队",
+                dialogOkText:"填写微信号",
+                tapOkEvent:"tapOkForAddWxId",
+                tapCancelEvent:"tapCancelForAddWxId",
+                isDialogShow:true,
+              });
+            }else{  // 其余接口错误（网络不好）
               wx.showToast({
-                title: '组队招募提交失败，请重试 :(',
+                title: '网络异常，请重试 :(',
                 icon: 'none',
                 duration: 1000
-              })
+              });
             }
           })
         }
@@ -308,7 +324,8 @@ Page({
         wx.showToast({
           title: '图片上传失败',
           icon: 'error'
-        })
+        });
+        console.log(res);
       } 
     }).catch( err=> {
       wx.showToast({
@@ -318,4 +335,13 @@ Page({
       console.log("err",err);
     });
   },
+  tapOkForAddWxId(){
+    wx.navigateTo({
+      url: '../personal/personalDetails',
+    })
+  },
+  tapCancelForAddWxId(){
+    wx.navigateBack();
+  }
+  
 })

@@ -18,6 +18,21 @@ const formatTime = dateStr => {
   return `${[year, month, day].map(formatNumber).join('/')} ${[hour, minute, second].map(formatNumber).join(':')}`
 }
 
+// 只显示年月日
+const formatTimeOnDay = dateStr => {
+  let date;
+  if(dateStr instanceof Date){
+    date = dateStr;
+  }else{
+    date = new Date(dateStr.replace(/-/g,'/'));
+  }
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+
+  return `${year}年${month}月${day}日`;
+}
+
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : `0${n}`
@@ -111,6 +126,7 @@ function getDateDiff(dateTime){
 
 module.exports = {
   formatTime:formatTime,
+  formatTimeOnDay:formatTimeOnDay,
   getDateDiff:getDateDiff,
   getNotice:getNotice
 }

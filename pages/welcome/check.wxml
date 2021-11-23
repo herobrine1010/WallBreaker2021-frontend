@@ -1,6 +1,47 @@
 <!--pages/welcome/check.wxml-->
-<view class="container">
-  <icon type="waiting" size="60" color="#555"></icon>
-  <text>登录信息校核中，请等待....</text>
+<view class="background-welcome">
+</view>
+<mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar-tongde__centers" title="同济校园验证"></mp-navigation-bar>
+
+<view class="container-check">
+  <image class="miao" src="../../static/icon/miaoji.png"></image>
+  <image class="flower" src="../../static/icon/check-background.png"></image>
+  <view class="login">
+    <text class="title">身份认证登录</text>
+
+    <text class="declare">本程序仅服务于同济师生</text>
+    <text class="declare">济星云将严格保密您的信息</text>
+
+    <view class="btn">
+      <button bindtap="onLogin" class="poby-btn {{isUserAgree?'bg-darkblue':'bg-gray'}}" size="full">统一身份认证登录</button>
+    </view>
+
+    <checkbox-group class="checkbox" bindchange="onCheckboxChange">
+      <checkbox value="checkbox"></checkbox>
+      <view >
+        <text>我已知晓并同意</text>
+        <navigator class="agree-url" url="./protocol?type=0">《济星云小程序许可及服务协议》</navigator>
+        <text>和</text>
+        <navigator class="agree-url" url="./protocol?type=1">《济星云社区管理规范》</navigator>
+      </view>
+      
+    </checkbox-group>
+  </view>
+
+  <view class="division">
+    <view class="divi-line"></view>
+    <view class="divi-text">济星云</view>
+    <view class="divi-line"></view>
+  </view>
+
+  <view class="organizations">
+    <view class="org-icons">
+      <image src="../../static/icon/logo_tongji.png" mode="aspectFill"></image>
+      <image src="../../static/icon/logo_jixingyun.png" mode="aspectFill"></image>
+    </view>
+    <view class="org-names">
+      <text>同济大学信息办 × 破壁工作室</text>
+    </view>
+  </view>
 </view>
 

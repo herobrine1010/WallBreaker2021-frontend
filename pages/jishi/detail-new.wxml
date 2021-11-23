@@ -4,25 +4,33 @@
 <view class="navi">
   <mp-navigation-bar  ext-class="weui-navigation-bar__centers" title=" 帖子详情" background="{{navBackground}}"></mp-navigation-bar>
 </view>
-<view class="jiren-container">
-  <view class="title poby-text h4 blod color-sec">{{title}}</view>
-  <image class="icon-collect" wx:if="{{isPostingCollected}}" bindtap="cancelCollect" src="../../static/icon/collect-solid.png"></image>
-  <image class="icon-collect" wx:if="{{isPostingCollected==0}}" src="../../static/icon/collect.png" bindtap="collect"></image>
+
+<view class="posting-container">
+  <view class="title-area">
+    <view class="title poby-text h4 blod color-sec">{{title}}</view>
+    <image class="icon-collect" wx:if="{{isPostingCollected}}" bindtap="cancelCollect" src="../../static/icon/collect-solid.png"></image>
+    <image class="icon-collect" wx:if="{{isPostingCollected==0}}" src="../../static/icon/collect.png" bindtap="collect"></image>
+  </view>
+
   <view class="detail poby-text bd color-sec">
-    <text>{{name}}</text>
-    <text class="theme">{{theme}}</text>
+    <image  wx:if="{{initiatorAvatar}}" mode="aspectFill" class="avatar" src="{{initiatorAvatar}}"></image>
+    <text class="name">{{name}}</text>
+    <text wx:if="{{theme}}" class="theme">{{theme}}</text>
     <text class="date">{{date}}</text>
   </view>
+
   <view class="content">
     <mp-html content="{{content}}"/>
   </view>
-  <block wx:if="{{hasLink}}">
-    <view class="position"></view>
-    <view class="nav-card {{animationClass}}" bindtap="addAnimation">
-      <image class="nav-img" src="{{navImage}}"></image>
-      <text class="nav-tip poby-text bd color-sec">点击跳转</text>
-      <text class="nav-title poby-text h5 color-pri">{{navTitle}}</text>
-      <image class="icon-nav" src="../../static/icon/move-on.jpg"></image>
+
+  <block wx:if="{{linkUrl}}">
+    <view class="nav-card {{animationClass}}" bindtap="attachNavgitor" data-link="{{linkUrl}}">
+      <image mode="aspectFill" class="nav-img" src="{{linkPicUrl}}"></image>
+      <view class="nav-con">
+        <text class="nav-title">{{linkTitle}}</text>
+        <text class="nav-name">{{name}}</text>
+      </view>
+      <text class="nav-tip poby-text bd color-sec">点击跳转 ></text>
     </view>
   </block>
   <view class="position"></view>

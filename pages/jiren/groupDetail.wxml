@@ -108,7 +108,7 @@
                 <image src="{{teamDetail.avatar}}" style="width:80rpx; height:80rpx;border-radius:50%" bindtap="tapInitiatorAvatar" ></image>
               </view>
               <view class="detail-name-and-time">
-                <view class="detail-nickname" bindtap="tapInitiatorAvatar">{{teamDetail.nickName}}</view>
+                <view class="detail-username" bindtap="tapInitiatorAvatar">{{teamDetail.nickName}}</view>
                 <view class="detail-apply-time">{{teamDetail.fromTime}}</view>
               </view>
               <view wx:if="{{status < 3}}" class="detail-due-time">{{teamDetail.dueTime}}</view>
@@ -138,7 +138,6 @@
       </scroll-view>
     </view>
 
-
     <view class="bottom-elements" wx:if="{{!amITeamInitiator&&applyStatus!=1&&applyStatus!=2}}">
       <view class="applicantButton">
         <view wx:if="{{(applyStatus > 6 || applyStatus == 3 ||applyStatus == 4) && status<2}}" bindtap="applyButton">我要加入</view>
@@ -164,6 +163,7 @@ tip="{{dialog.tip}}"
 okText="{{dialog.okText}}"
 cancelText="{{dialog.cancelText}}"
 isShow="{{dialog.isDialogShow}}"
+bind:tapCancel="{{dialog.tapCancelEvent}}"
 bind:tapOk="{{dialog.tapOkEvent}}"
 bind:finishInput="finishInput"
 >
@@ -205,4 +205,7 @@ button="{{dialog2.button}}">
       </view>
     </view>
   </scroll-view>
+
+
 </view>
+

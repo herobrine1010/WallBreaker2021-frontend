@@ -265,7 +265,7 @@ scroll-view {
   top:25vh; */
   width: 94vw;
   /* height: 50vh; */
-  margin:0  auto;
+  margin:20rpx  auto;
   /* left: 3vw; */
   /* right: 3vw; */
   padding:12rpx 0;
@@ -306,6 +306,8 @@ scroll-view {
   line-height: 40rpx;
 }
 .detail-username{
+  position: relative;
+  top: 6rpx;
   font-size: 30rpx;
   color:#1D99C3;
 }

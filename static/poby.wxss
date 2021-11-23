@@ -406,6 +406,12 @@ background-color: #333333;
   height: 80rpx;
   width: 490rpx !important;
 }
+.poby-btn[size = 'full']{
+	padding: 0 20rpx;
+	font-size: 28rpx;
+  height: 80rpx;
+  width: 100% !important;
+}
 
 /* .poby-btn.icon.sm {
 	width: 48rpx;

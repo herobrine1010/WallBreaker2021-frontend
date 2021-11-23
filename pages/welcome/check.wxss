@@ -1,5 +1,150 @@
 /* pages/welcome/check.wxss */
-.container{
+@import"../../static/common.wxss";
+@import"../../static/poby.wxss";
+
+/* --------- 以下是 */
+.background-welcome{
+  position: absolute;
+  width: 750rpx;
+  height: 600rpx;
+  left: 0px;
+  top: 0px;
+  background: linear-gradient(180deg, #3E92CC -180.91%, rgba(23, 178, 229, 0) 100%);
+  opacity: 0.6;
+}
+.container-check{
+  position: relative;
+  width: 750rpx;
+  height: 1186rpx;
+  margin-top: 268rpx;
+  
+  /* Button/white */
+  
+  background: #FFFFFF;
+  border-radius: 80rpx 80rpx 0px 0px;
+}
+
+.miao{
+  position: absolute;
+  width: 300rpx;
+  height: 300rpx;
+  top: -180rpx;
+  left: 40rpx;
+}
+.flower{
+  position: absolute;
+  width: 514rpx;
+  height: 188rpx;
+  top: -250rpx;
+  left: 170rpx;
+}
+.login{
+  position: relative;
+  width: 686rpx;
+  height: 420rpx;
+  margin: 0 auto;
+  padding-top: 64rpx;
+
   display: flex;
-  padding: 350rpx 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ----- -------- 字体 ------------------ -------------- */
+@font-face {
+  font-family: "ZCOOLKuaiLe-Regular";
+  
+  src: url(data:application/x-font-ttf;charset=utf-8;base64,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) format("truetype");/* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
+  font-style: normal;
+  font-weight: normal;
+}
+.title{
+  height: 70rpx;
+
+  font-family: ZCOOLKuaiLe-Regular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 56rpx;
+  line-height: 125%;
+  letter-spacing: 0.1em;
+  color: #333333;
+
+  margin-bottom: 16rpx;
+}
+.declare{
+  height: 42rpx;
+
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28rpx;
+  line-height: 150%;
+
+  color: #545454;
+  margin-top: 16rpx;
+}
+
+.btn{
+  height: 100rpx;
+  width: 100%;
+  margin: 32rpx auto;
+}
+.checkbox{
+  display: flex;
+  flex-direction: row;
+
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24rpx;
+  line-height: 150%;
+  color: #545454;
+
+
+}
+.agree-url{
+  display: inline;
+  color: #17B2E5;
+}
+
+.division{
+  height: 36rpx;
+  width: 686rpx;
+  margin: 300rpx auto 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.divi-line{
+  height: 26rpx;
+  width: 250rpx;
+  border-bottom: 1rpx solid #aaa;
+}
+.organizations{
+  height: 200rpx;
+  width: 686rpx;
+  margin: 32rpx auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.org-icons{
+  display: flex;
+  flex-direction: row;
+
+}
+.org-icons image{
+  width: 120rpx;
+  height: 120rpx;
+  margin: 0 10rpx 0 32rpx;
+
+}
+.org-names{
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24rpx;
+  line-height: 150%;
+
+  color: #545454;
 }

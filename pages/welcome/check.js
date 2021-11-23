@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    isUserAgree : false,
+    
   },
 
   /**
@@ -60,6 +61,31 @@ Page({
         })
       }
     })
+  },
+  onLogin(){
+    let isUserAgree = this.data.isUserAgree;
+    if(isUserAgree){
+      console.log('跳转统一身份认证登录');
+    }else{
+      wx.showToast({
+        title: '请勾选同意许可~',
+        icon:'error'
+      })
+    }
+
+  },
+
+  onCheckboxChange(e){
+    let result = e.detail.value;
+    if(result.length > 0){
+      this.setData({
+        'isUserAgree' : true
+      })
+    }else{
+      this.setData({
+        'isUserAgree' : false
+      })
+    }
   }
 
 })

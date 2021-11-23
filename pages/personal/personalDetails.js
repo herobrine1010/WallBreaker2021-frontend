@@ -214,8 +214,8 @@ Page({
           title: '上传成功'
         });
         setTimeout(() => {
-          wx.reLaunch({
-            url: './main',
+          wx.navigateBack({
+            delta : 1
           })
         }, 1000);
       }

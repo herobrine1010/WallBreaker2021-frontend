@@ -1,0 +1,6 @@
+/* miniprogram/pages/welcome/protocol.wxss */
+@import"../../static/common.wxss";
+.content{
+  width: 90%;
+  margin: 0 auto;
+}
