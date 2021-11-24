@@ -13,7 +13,7 @@ Component({
         labelText: ['口红', 'Gucci'],
         description: '在学校图书馆门口捡到一只Gucci的口红，看起来还没有用过多少，九成新。文字长度超过两行需要自动截取，只保留两行文字',
         postingPic: 'https://assets.burberry.com/is/image/Burberryltd/109A4FC5-0F33-4E5B-8488-11626C39FB3F.jpg?$BBY_V2_B_3x4$&wid=1278&hei=1700',
-        type: 0,       // 物品遗失0 or 失物寻主1
+        type: 0,       // 物品遗失0 or 寻找失主1
         closed: false,
         id: 0
       }

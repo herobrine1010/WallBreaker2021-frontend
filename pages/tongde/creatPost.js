@@ -400,9 +400,7 @@ Page({
       let data = res.data.data;
       console.log("添加标签的响应数据", data);
     });
-    wx.navigateTo({
-      url: '/pages/tongde/main.wxml',
-    })
+    wx.navigateBack();
     console.log("form的数据", formValue);
   } else {
     let errors = {};

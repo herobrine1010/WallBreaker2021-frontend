@@ -3,7 +3,7 @@
 	<!-- 没有使用img标签，使用background-image: url();引入图片，css设置图片裁剪方式 -->
 	<view class="left-block" style="background-image: url({{postingPic}})">
 		<text wx:if="{{type==1}}" class="image-text-lost">物品遗失</text>
-		<text wx:elif="{{type==0}}" class="image-text-found">失物寻主</text>
+		<text wx:elif="{{type==0}}" class="image-text-found">寻找失主</text>
 	</view>
 	<view class="right-block">
 		<view class="block1">

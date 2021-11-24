@@ -1,10 +1,17 @@
+function matchPropName(list) {
+
+  return changedList;
+}
 Component({
   behaviors: ['wx://form-field'],
   properties: {
     //承接父组件传值
     range: {
       type: Array,
-      value: []
+      value: [{
+        id:  0,
+        name: 'test'
+      }]
     },
     //默认显示
     defaultOption: {
@@ -25,7 +32,6 @@ Component({
     }
   },
   data: {
-    result: [],
     isShow: false,
     current: {},
     value: 0,
@@ -33,6 +39,19 @@ Component({
   observers: {
     "current": function(current) {
       this.setData({value: current.id});
+    },
+    "range": function(range) {
+      // 属性名称转换, 如果不是 { id: '', name:'' } 格式，则转为 { id: '', name:'' } 格式
+      let result = []
+      if (this.data.key !== 'id' || this.data.text !== 'name') {       
+        for (let item of this.data.range) {
+          let { [this.data.key]: id, [this.data.text]: name } = item
+          result.push({ id, name })
+        }
+      }
+      this.setData({
+        result
+      })
     }
   },
   methods: {
@@ -65,16 +84,14 @@ Component({
       let result = []
       if (this.data.key !== 'id' || this.data.text !== 'name') {       
         for (let item of this.data.range) {
-          console.log(item)
           let { [this.data.key]: id, [this.data.text]: name } = item
           result.push({ id, name })
         }
       }
-      console.log(result)
       this.setData({
         // 初始化后未选择，current显示defaultOption
         current: Object.assign({}, this.data.defaultOption), 
-        result: result
+        result
       })
     }
   }
