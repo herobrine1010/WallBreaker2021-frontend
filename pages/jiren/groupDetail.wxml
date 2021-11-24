@@ -6,6 +6,7 @@
  <!-- <view class="area2"> -->
   <view class="area2">
     <view class="avatar-list">
+    <image wx:if="{{isPopNoticeShow}}" mode="aspectFill" src="../../static/icon/team-Popover.png" style="width : 266rpx; height : 86rpx; position : absolute; top: 140rpx; left : 70rpx; z-index : 100;"></image>
       <view class="external-box">
         <view style="width:94%;left:3%;position:relative">
           <scroll-view show-scrollbar="true" enhanced="true" scroll-x="true">

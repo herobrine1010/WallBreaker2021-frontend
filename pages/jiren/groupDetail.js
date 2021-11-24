@@ -60,6 +60,7 @@ Page({
     targetId:null,
     personalInfoList:{},
     // over:true,
+    isPopNoticeShow : true
   },
 
   // 生命周期函数： ------- ----------- -------- ：
@@ -111,6 +112,15 @@ Page({
       err=>{
         console.log(err);
     });
+
+
+
+    // ------ --------- 提示点击头像气泡, 2.3s后消失
+    setTimeout( _ => {
+      this.setData({
+        isPopNoticeShow : false
+      })
+    },2300)
   },
   
   /**
