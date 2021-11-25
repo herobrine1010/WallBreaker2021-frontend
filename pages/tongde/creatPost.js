@@ -285,6 +285,9 @@ Page({
       contact: {
         required: true,
       },
+      selectedLabels: {
+        required: true
+      }
     }
 
     const messages = {
@@ -310,9 +313,11 @@ Page({
       contact: {
         required: '该项未填写',
       },
+      selectedLabels: {
+        required: '请选择标签'
+      }
     }
-    this.WxValidate = new WxValidate(rules, messages);
-    // this.WxValidate.addMethod(label, (value))
+    this.WxValidate = new WxValidate(rules, messages)
   },
   submitForm: function(e) {
     // 这个函数只是用来传递表单数据, 具体的事情在弹窗函数tapOk完成
@@ -325,8 +330,9 @@ Page({
     this.initValidate(this.data.e.detail.value.type==1); // 初始化表单校验 当type==0（物品遗失）时地点可选，当type==1寻找失主时 地点必填
     let e = this.data.e;
     let formValue = e.detail.value; // 用户填写的表单数据
-    if(this.WxValidate.checkForm(formValue)) {
     let selectedLabels = this.data.selectedLabelList;
+
+    if(this.WxValidate.checkForm({...formValue, selectedLabels})) {
     // 上传本地图片,拿到oss图片url
     let imagePromise= mergePathThenUploadImage(formValue.allPicPaths);
     wx.showLoading({
