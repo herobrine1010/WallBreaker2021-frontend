@@ -355,20 +355,31 @@ Page({
     }).then(res => {
       let data = res.data.data;
       let lostFoundId = data.id; // 获取失物招领主键id, 之后添加标签
-      console.log("发布失物招领响应数据", data);
+      // console.log("发布失物招领响应数据", data);
       return addLabelRequest(lostFoundId, selectedLabels)
     }).then(res => {
       let data = res.data.data;
-      console.log("添加标签的响应数据", data);
-    });
-    wx.navigateBack();
-    console.log("form的数据", formValue);
+      wx.showToast({
+        title: '发布成功',
+        icon: 'success',
+        duration: 2000,
+        success: wx.navigateBack({})
+      });
+      // console.log("添加标签的响应数据", data);
+    }).catch(() => {
+      wx.showToast({
+        title: '请求错误',
+        icon: 'error',
+        duration: 2000
+      })
+    })
+
+    // console.log("form的数据", formValue);
   } else {
     let errors = {};
     for (e of this.WxValidate.errorList) {
       errors[e.param] = e.msg
     }
-    console.log(errors)
     this.setData({errors});
   }
   },
