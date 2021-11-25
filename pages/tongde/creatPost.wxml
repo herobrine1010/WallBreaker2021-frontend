@@ -36,7 +36,7 @@
           <image class="icon" src="../../static/icon/label.png"></image>
           <text class="title">选择标签</text>
         </view>
-        <view><text class="label-show" wx:for="{{selectedLabelList}}" wx:key="*this">#{{item.content}}</text></view>
+        <view><text name="test" class="label-show" wx:for="{{selectedLabelList}}" wx:key="*this">#{{item.content}}</text></view>
       </view>
       <view class="item-wrap type-container">
         <view class="icon-with-title">
@@ -49,16 +49,16 @@
         </view>
         <radio-group name="type" class="a-line">
           <radio value="0" id="lost" color="#fff">物品遗失</radio>
-          <radio value="1" id="found" color="#fff">失物寻主</radio>
+          <radio value="1" id="found" color="#fff">寻找失主</radio>
         </radio-group>
       </view>
       <view class="item-wrap">
         <view class="icon-with-title">
           <image class="icon" src="../../static/icon/location.png"></image>
-          <text class="title">遗失/捡到地点</text>
+          <text class="title">{{"遗失/捡到地点"}}</text>
         </view>
         <view class="input-location-box input-box">
-          <input name="location" class="input-location" maxlength="25" placeholder="失物寻主信息必填，物品遗失信息可选填选项" placeholder-class="input-placeholder" />
+          <input name="location" class="input-location" maxlength="25" placeholder="寻找失主信息必填，物品遗失信息可选填选项" placeholder-class="input-placeholder" />
           <view class="error-wrap"  wx:if="{{ errors.location }}">
             <image src="/static/icon/Alert-warning.png" class="icon"></image>
             <text class="error-tip">{{ errors.location }}</text>
@@ -71,7 +71,7 @@
           <text class="title">联系方式</text>
         </view>
         <view class="a-line">
-          <dropdown-box name="contactType" range="{{contactTypes}}" key="id" text="content" defaultOption="{{defaultObject}}" style="width: 200rpx;"></dropdown-box>
+          <dropdown-box name="contactType" range="{{contactType}}" key="id" text="content" defaultOption="{{defaultObject}}" style="width: 200rpx;"></dropdown-box>
           <view class="input-contact-box input-box">
             <input name="contact" class="input-half-line" style="width: 200rpx;" placeholder="请输入联系方式" maxlength="25"/>
             <view class="error-wrap"  wx:if="{{ errors.contact }}">
