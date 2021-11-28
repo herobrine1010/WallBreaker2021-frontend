@@ -86,6 +86,10 @@
             </view> 
           </view>
         </view>
+        <view style="margin:16rpx 20rpx; font-size: 10px; line-height: 150%;">
+        <view>提示：联系方式可能被其他用户查看，请选择相对安全的联系渠道</view>
+        <view>*本产品用户均通过同济大学官方统一身份验证</view>
+        </view>
       </view>
 
       <button form-type="submit" class="button" size="default">发布</button>
