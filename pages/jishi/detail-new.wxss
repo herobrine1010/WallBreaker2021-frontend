@@ -171,6 +171,14 @@
     width: 1rpx;
   }
 
+  .block{
+    position: fixed;
+    width: 750rpx;
+    height: 100%;
+    background-color: pink;
+    z-index: 111111;
+  }
+
   .ani-shake-right{
     animation: shake-right 0.7s linear 0.2s;
   }

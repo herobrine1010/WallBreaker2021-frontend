@@ -1,9 +1,16 @@
 <!--miniprogram/pages/jishi/detail-new.wxml-->
+
 <view class="background">
 </view>
+
+<personal-animation id="personalAnimation"   personalInfo="{{orgenizationInfomation}}" isPersonalInfoShow="{{isPersonalInfoShow}}" bind:seeAnswer="showAnswersInPersonalAnimation" bind:copyWxId="copyWxId" data-avatar = "{{avatar}}"></personal-animation>
+
+
 <view class="navi">
   <mp-navigation-bar  ext-class="weui-navigation-bar__centers" title=" 帖子详情" background="{{navBackground}}"></mp-navigation-bar>
 </view>
+
+
 
 <view class="posting-container">
   <view class="title-area">
@@ -13,8 +20,8 @@
   </view>
 
   <view class="detail poby-text bd color-sec">
-    <image  wx:if="{{initiatorAvatar}}" mode="aspectFill" class="avatar" src="{{initiatorAvatar}}"></image>
-    <text class="name">{{name}}</text>
+    <image  wx:if="{{initiatorAvatar}}" mode="aspectFill" class="avatar" src="{{initiatorAvatar}}" bindtap="tapAvatar"></image>
+    <text class="name" bindtap="tapAvatar">{{name}}</text>
     <text wx:if="{{theme}}" class="theme">{{theme}}</text>
     <text class="date">{{date}}</text>
   </view>
@@ -33,5 +40,11 @@
       <text class="nav-tip poby-text bd color-sec">点击跳转 ></text>
     </view>
   </block>
+
+
+
   <view class="position"></view>
 </view>
+
+
+<!--  -->

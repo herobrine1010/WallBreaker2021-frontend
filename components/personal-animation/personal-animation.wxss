@@ -11,13 +11,15 @@
   mix-blend-mode: normal;
   border-radius: 50rpx 50rpx 0px 0px;
   align-items: center;
+  z-index: 11;
 }
 .pa-block{
   height: 100%;
   width: 100%;
-  position: absolute;
+  position: fixed;
   background-color: #000000;
   opacity: 0.2;
+  z-index: 10;
 }
 .pa-avatar-area{
   display: flex;

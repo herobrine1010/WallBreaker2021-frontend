@@ -62,6 +62,8 @@ Page({
       }
     })
   },
+
+  
   onLogin(){
     let isUserAgree = this.data.isUserAgree;
     if(isUserAgree){

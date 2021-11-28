@@ -48,7 +48,8 @@ Page({
           title,
           myFavourite: isPostingCollected,
           initiatorNickName: name,
-          initiatorAvatar : avatar,
+          initiatorAvatar,
+          initiatorDescription,
           theme,
           updateTime : date,
           content,
@@ -57,17 +58,24 @@ Page({
           linkPicUrl
         } =  res.data.data;
         date = util.formatTimeOnDay(date);
+        let orgenizationInfomation = {
+          nickName : name,
+          avatar : initiatorAvatar,
+          description : initiatorDescription,
+        }
         this.setData({
           title,
           isPostingCollected,
           name,
-          avatar,
+          initiatorAvatar,
+          initiatorDescription,
           theme,
           date,
           content,
           linkUrl,
           linkTitle,
-          linkPicUrl
+          linkPicUrl,
+          orgenizationInfomation
         });
       }else{
         wx.showToast({
@@ -84,7 +92,12 @@ Page({
     }); 
   },
 
-
+  // 点击头像 展示恒兴号信息：
+  tapAvatar(){
+    this.setData({
+      isPersonalInfoShow : true
+    })
+  },
 
   // 页面拖动事件，改变顶部导航栏的背景：
   onPageScroll: function(e){
