@@ -199,53 +199,6 @@ Page({
     ],
     // 选中标签列表
     selectedLabelList: [],
-    contactTypes:[
-      {
-        "id": 38,
-        "createTime": "2021-08-20 00:17:52",
-        "updateTime": "2021-09-17 18:54:10",
-        "content": "QQ",
-        "type": "contactType",
-        "deleted": false,
-        "selected": null
-      },
-      {
-        "id": 39,
-        "createTime": "2021-08-20 00:17:52",
-        "updateTime": "2021-09-17 18:54:10",
-        "content": "微信",
-        "type": "contactType",
-        "deleted": false,
-        "selected": null
-      },
-      {
-        "id": 40,
-        "createTime": "2021-08-20 00:17:52",
-        "updateTime": "2021-09-17 18:54:10",
-        "content": "手机号",
-        "type": "contactType",
-        "deleted": false,
-        "selected": null
-      },
-      {
-        "id": 41,
-        "createTime": "2021-08-20 00:17:52",
-        "updateTime": "2021-09-17 18:54:10",
-        "content": "邮箱",
-        "type": "contacttype",
-        "deleted": false,
-        "selected": null
-      },
-      {
-        "id": 42,
-        "createTime": "2021-08-20 00:17:52",
-        "updateTime": "2021-09-17 18:54:10",
-        "content": "其他",
-        "type": "contactType",
-        "deleted": false,
-        "selected": null
-      },
-    ],
     defaultObject: {id:0,name:'联系渠道'},
     height:'auto',
     //------------确认提交的弹窗，用于渲染------------
@@ -261,7 +214,7 @@ Page({
    */
   onLoad: function (options) {
 
-    this.initValidate();
+
     this.changeScrollHeight();
     this.initContactType();
   },
@@ -309,7 +262,7 @@ Page({
         that.setData({contactType: data});
       })
   },
-  initValidate:  function() {
+  initValidate:  function(isLocationRequired) {
     const rules = {
       name: {
         required: true,
@@ -323,7 +276,7 @@ Page({
         required: true,
       },
       location: {
-        required: true,
+        required: isLocationRequired,
         maxlength:24 
       },
       contactType: {
@@ -332,6 +285,9 @@ Page({
       contact: {
         required: true,
       },
+      selectedLabels: {
+        required: true
+      }
     }
 
     const messages = {
@@ -357,6 +313,9 @@ Page({
       contact: {
         required: '该项未填写',
       },
+      selectedLabels: {
+        required: '请选择标签'
+      }
     }
     this.WxValidate = new WxValidate(rules, messages)
   },
@@ -368,10 +327,12 @@ Page({
     });
   },
   tapOk: function() {
+    this.initValidate(this.data.e.detail.value.type==1); // 初始化表单校验 当type==0（物品遗失）时地点可选，当type==1寻找失主时 地点必填
     let e = this.data.e;
     let formValue = e.detail.value; // 用户填写的表单数据
-    if(this.WxValidate.checkForm(formValue)) {
     let selectedLabels = this.data.selectedLabelList;
+
+    if(this.WxValidate.checkForm({...formValue, selectedLabels})) {
     // 上传本地图片,拿到oss图片url
     let imagePromise= mergePathThenUploadImage(formValue.allPicPaths);
     wx.showLoading({
@@ -394,20 +355,31 @@ Page({
     }).then(res => {
       let data = res.data.data;
       let lostFoundId = data.id; // 获取失物招领主键id, 之后添加标签
-      console.log("发布失物招领响应数据", data);
+      // console.log("发布失物招领响应数据", data);
       return addLabelRequest(lostFoundId, selectedLabels)
     }).then(res => {
       let data = res.data.data;
-      console.log("添加标签的响应数据", data);
-    });
-    wx.navigateBack();
-    console.log("form的数据", formValue);
+      wx.showToast({
+        title: '发布成功',
+        icon: 'success',
+        duration: 2000,
+        success: wx.navigateBack({})
+      });
+      // console.log("添加标签的响应数据", data);
+    }).catch(() => {
+      wx.showToast({
+        title: '请求错误',
+        icon: 'error',
+        duration: 2000
+      })
+    })
+
+    // console.log("form的数据", formValue);
   } else {
     let errors = {};
     for (e of this.WxValidate.errorList) {
       errors[e.param] = e.msg
     }
-    console.log(errors)
     this.setData({errors});
   }
   },

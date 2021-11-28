@@ -115,7 +115,7 @@ radio-group > radio {
 }
 .input-location {
   font-size: 20rpx;
-  width: 300rpx;
+  width: 360rpx;
 }
 
 .input-contact-box{
