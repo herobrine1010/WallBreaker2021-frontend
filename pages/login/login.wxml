@@ -8,7 +8,7 @@
       <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
       
-      <button type="primary" style="position: absolute; right: 10%; top: 70%;"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">使用手机号注册</button>
+      <button type="primary" style="position: absolute; right: 10%; top: 70%;" >使用手机号注册</button>
     </block>
   </view>
   <!-- <view class="usermotto">

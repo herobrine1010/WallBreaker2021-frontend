@@ -17,7 +17,6 @@ Page({
     //先发一个login确认有没有注册过
     wx.login({
       success:res=>{
-        console.log(res.code);
         wx.request({
           data:{
             "code":res.code,
@@ -48,11 +47,6 @@ Page({
                 url: '/pages/welcome/blocked',
               })
             }
-            else if(res2.data.data.code="needInfo"){
-              wx.redirectTo({
-                url: '/pages/welcome/welcome-new',
-              })
-            }
           },
           fail(err){
             console.log(err);
@@ -67,7 +61,54 @@ Page({
   onLogin(){
     let isUserAgree = this.data.isUserAgree;
     if(isUserAgree){
-      console.log('跳转统一身份认证登录');
+      wx.getUserProfile({
+        desc: '获取您的昵称、头像信息，用于注册账号~', 
+        success: (res) => {
+          var myInfo =res.userInfo
+          console.log(myInfo)
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          });
+          wx.login({
+            success:res=>{
+              console.log('跳转统一身份认证登录');
+              console.log(res.code)
+              wx.request({
+                data:{
+                  "code":res.code,
+                  "nickName":myInfo.nickName,
+                  "gender":myInfo.gender,
+                  "wxAvatarUrl":myInfo.avatarUrl,
+                  "avatarUrl":myInfo.avatarUrl
+                },
+                url: app.globalData.url+'/user/login',
+                method:'POST',
+                header:{
+                  'content-type':'application/json'
+                },
+                success:function(res2){
+                  console.log(res2);
+                  if(res2.data.data.code=="register"){
+                    wx.setStorageSync("token", res2.cookies[0])
+                    wx.showToast({
+                      title: '注册成功！',
+                      icon:'success'
+                    })
+                    wx.switchTab({
+                      url: '/pages/jishi/main',
+                    })
+                  }else{
+                    console.log("看下哪有问题")
+                  }
+                }
+              })
+            }
+          })
+    
+        }
+      })
+
     }else{
       wx.showToast({
         title: '请勾选同意许可~',

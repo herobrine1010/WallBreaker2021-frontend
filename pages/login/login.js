@@ -17,52 +17,52 @@ Page({
       url: '../logs/logs'
     })
   },
-  getPhoneNumber (e) {
-    console.log(e)
-    console.log(e.detail)
-    var self = this
-    wx.request({
-      method: 'POST',
-      data: {
-        "sessionKey": this.data.sessionKey,
-        "iv": e.detail.iv,
-        "encryptedData": e.detail.encryptedData
-      },
-      url: 'http://localhost:8080/user/login',
-      success: function(res2){
-        console.log(res2)
-        wx.request({
-          method: "POST",
-          url: 'http://localhost:8080/user/login',
-          data: {
-              "phone": res2.data.phoneNumber,
-              "username": app.globalData.userInfo.nickName,
-              "openid": self.data.openid,
-              "appid":app.globalData.appId,
-              "avatar":app.globalData.userInfo.avatarUrl,
-          },
-          success: function(res3){
-            console.log(res3)
-            self.setData({
-              needRegister: false
-            })
-            wx.navigateTo({
-              // url: '/pages/character/character',
-              url:'/pages/loading/loading'
-            })
-          },
-          fail: function(err){
-            console.log(err)
-          }
+  // getPhoneNumber (e) {
+  //   console.log(e)
+  //   console.log(e.detail)
+  //   var self = this
+  //   wx.request({
+  //     method: 'POST',
+  //     data: {
+  //       "sessionKey": this.data.sessionKey,
+  //       "iv": e.detail.iv,
+  //       "encryptedData": e.detail.encryptedData
+  //     },
+  //     url: 'http://localhost:8080/user/login',
+  //     success: function(res2){
+  //       console.log(res2)
+  //       wx.request({
+  //         method: "POST",
+  //         url: 'http://localhost:8080/user/login',
+  //         data: {
+  //             "phone": res2.data.phoneNumber,
+  //             "username": app.globalData.userInfo.nickName,
+  //             "openid": self.data.openid,
+  //             "appid":app.globalData.appId,
+  //             "avatar":app.globalData.userInfo.avatarUrl,
+  //         },
+  //         success: function(res3){
+  //           console.log(res3)
+  //           self.setData({
+  //             needRegister: false
+  //           })
+  //           wx.navigateTo({
+  //             // url: '/pages/character/character',
+  //             url:'/pages/loading/loading'
+  //           })
+  //         },
+  //         fail: function(err){
+  //           console.log(err)
+  //         }
           
-        })
-      },
-      fail: function(e){
-        console.log(e)
-      }
+  //       })
+  //     },
+  //     fail: function(e){
+  //       console.log(e)
+  //     }
       
-    })
-  },
+  //   })
+  // },
 
   onLoad: function () {
     if (app.globalData.userInfo) {
