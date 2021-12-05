@@ -45,7 +45,8 @@ const getNotice = param => {
     header:{cookie:wx.getStorageSync('token')},
     success:function(res){
       if(res.statusCode==200){
-        if(res.data.data.noticeNum>0){
+        console.log('消息总数',res.data.data);
+        if(res.data.data.jirenMsgExist){
           wx.showTabBarRedDot({index:3})
         }else{
           wx.hideTabBarRedDot({index:3})

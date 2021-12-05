@@ -267,7 +267,7 @@ Page({
       data : data.buffer
     }).then(res => { //上传图片成功的回调
       wx.hideLoading(); //图片上传成功后隐藏加载框
-      //console.log("上传图片的回调res",res);
+      console.log("上传图片的回调res",res);
       if(res.statusCode >=200 && res.statusCode <=300) {
         // 拿到上传后的图片ossURL
         let imageURL = res.data.data;
@@ -290,7 +290,7 @@ Page({
           },
           data: that.data.payload,
         }).then( res => {
-            //console.log('提交表单返回结果', res.data);
+            console.log('提交表单返回结果', res.data);
             if (res.data.success && res.statusCode==200) { // 有微信号，可以发起组队
               wx.showToast({
                 title: '组队招募\n已发布成功',

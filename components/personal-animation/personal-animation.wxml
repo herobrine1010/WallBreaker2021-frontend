@@ -13,11 +13,11 @@
       <image style="height:45rpx; width : 45rpx ; padding : 0 30rpx ;" src="../../static/icon/copy.png" bindtap="copyWxId"></image>
     </view>
     <view  wx:if="{{personalInfo.description!=undefined}}" class="pa-description poby-text bds medium color-dis">{{personalInfo.description?personalInfo.description:'这位同济er暂时没有话想说～'}}</view>
-    <view class="pa-info-area">
-      <text class="pa-school">{{personalInfo.schoolPublic?personalInfo.school:'保密'}}</text>
-      <text class="pa-major">{{personalInfo.majorPublic?personalInfo.major:'保密'}}</text>
-      <text class="pa-grade">{{personalInfo.gradePublic?personalInfo.grade:'保密'}}</text>
-      <text class="pa-identity">{{personalInfo.identityPublic?personalInfo.identity:'保密'}}</text>
+    <view class="pa-info-area" wx:if="{{personalInfo.school}}">
+      <text class="pa-school">{{personalInfo.school}}</text>
+      <text class="pa-major">{{personalInfo.major}}</text>
+      <text class="pa-grade">{{personalInfo.grade}}</text>
+      <text class="pa-identity">{{personalInfo.identification}}</text>
       <!-- <view class="pa-school">{{personalInfo.schoolPublic?personalInfo.school:'保密'}}</view>
       <view class="pa-major">{{personalInfo.majorPublic?personalInfo.major:'保密'}}</view>
       <view class="pa-grade">{{personalInfo.gradePublic?personalInfo.grade:'保密'}}</view>
@@ -35,6 +35,8 @@
         <block wx:for="{{personalInfo.interestLabel}}">
           <view class="pa-interest-label">{{item}}</view>
         </block>
+      </view>
+      <view class="position" style="height: 45rpx; width:20rpx;">
       </view>
     </view>
     

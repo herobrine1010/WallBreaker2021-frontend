@@ -60,7 +60,7 @@ Page({
     targetId:null,
     personalInfoList:{},
     // over:true,
-    isPopNoticeShow : true
+    isPopNoticeShow : false
   },
 
   // 生命周期函数： ------- ----------- -------- ：
@@ -88,6 +88,7 @@ Page({
     query.then(result=>{
       // 先处理组队数据，再发请求入队成员列表
       console.log(result);
+
       that.setData({
         teamDetail: result,
       })
@@ -97,6 +98,7 @@ Page({
     })
     .then(teamMemberList => {
     // 先处理头像数据，再判断是否为发起者，再发请求获取申请者数据 
+    console.log('组队成员信息',teamMemberList);
       that.setData({
         teamMemberList : teamMemberList
       })
@@ -115,12 +117,7 @@ Page({
 
 
 
-    // ------ --------- 提示点击头像气泡, 2.3s后消失
-    setTimeout( _ => {
-      this.setData({
-        isPopNoticeShow : false
-      })
-    },2300)
+
   },
   
   /**
@@ -296,6 +293,23 @@ Page({
       applyNotice,
       notice
     }=teamData;
+    let amITeamInitiator = that.data.amITeamInitiator;
+    //  ----- --------- -入队显示提示气泡：--- strat ------
+    if(applyStatus == 1 ||amITeamInitiator){
+      console.log(111);
+      that.setData({
+        isPopNoticeShow : true
+      });
+      // ------ --------- 提示点击头像气泡, 2.3s后消失
+      setTimeout( _ => {
+        that.setData({
+          isPopNoticeShow : false
+        })
+      },3000)
+    }
+    // ------ ------- -入队显示提示气泡 -- -end-  -- -----
+
+
     if(that.data.amITeamInitiator){
       if(notice){
         if(status==3||status==4){ //超过截止日期
@@ -347,9 +361,10 @@ Page({
     })
     .then(res=>{
       if(res.statusCode>=200&&res.statusCode<300){
-        console.log('接口返回的组队成员信息',res);
+
         let list=[];
         let data=res.data.data;
+        console.log('接口返回的组队成员信息',data);
         for (let teamMember of data){
           let {
             initiator, me, id,  answer, nickName, avatarUrl, description, grade, gradePublic, identification, identificationPublic, major, majorPublic, school, schoolPublic, wxId, wxIdPublic, interestLabel, personalLabel
@@ -382,19 +397,20 @@ Page({
             'avatar':avatarUrl,
             'nickName':nickName,
             description,
-            'grade':gradePublic?grade:'',
+            'grade':(gradePublic && grade)?grade:'保密',
             gradePublic,
-            'identification':identificationPublic?identification:'',
+            'identification':(identificationPublic && identification)?identification:'保密',
             identificationPublic,
-            'major':majorPublic?major:'',
+            'major':(majorPublic && major)?major:'保密',
             majorPublic,
-            'school':schoolPublic?school:'',
+            'school':(schoolPublic && school)?school:'保密',
             schoolPublic,
             wxId,
             wxIdPublic,
             interestLabel,
             personalLabel
           };
+          console.log('处理完的单个队伍成员信息', temp);
           if(amITeamInitiator){
             // 排除：1 answer = null;2. answer ={}（空对象）
             if(answer && (typeof answer == 'string') && answer!="{}"){
