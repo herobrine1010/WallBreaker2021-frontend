@@ -46,7 +46,7 @@ function requestWithPage(that, type=0, labelId='', keyword='',pageNo) {
   })
 }
 function getThenUpdateLostFoundList(that, type=0, labelId='', keyword='',pageNo) {
-  requestWithPage(that, type=0, labelId='', keyword='',pageNo).then(res => {
+  requestWithPage(that, type, labelId, keyword,pageNo).then(res => {
     let itemList = res.data.data.records.map(v => {
       v.createTime = getDateDiff(v.createTime);
       return v;                                 
@@ -249,7 +249,7 @@ Component({
    */
   observers: {
     "tab, selectedLabelList[0].id, keyword": function(tab, id, keyword) {
-      // console.log("数据监听器",tab,id, keyword);
+      console.log("数据监听器",tab,id, keyword);
       this.setData({
         id,
         current: 1
