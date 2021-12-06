@@ -26,7 +26,6 @@ Page({
           wx.login({
             success:res=>{
               console.log('跳转统一身份认证登录');
-              console.log(res.code)
               wx.request({
                 data:{
                   "code":res.code,
@@ -38,7 +37,8 @@ Page({
                 url: app.globalData.url+'/user/login',
                 method:'POST',
                 header:{
-                  'content-type':'application/json'
+                  'content-type':'application/json',
+                  'cookie' : wx.getStorageSync('token')
                 },
                 success: res => {
                   let openid = res.data.data.openId;

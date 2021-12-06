@@ -31,13 +31,13 @@ Page({
 
             let {
               openId,
-              registered
+              registered,
+              code : status
             } = res2.data.data;
             wx.setStorageSync( 'openid' , openId);
-            wx.setStorageSync('registered', registered)
-            let status = res2.data.data.code;
+            wx.setStorageSync('registered', registered);
+            wx.setStorageSync("token", res2.cookies[0]);
             if(status == 'registered'){// 完成了统一身份认证
-              wx.setStorageSync("token", res2.cookies[0])
               if(res2.data.data.jirenMsgNum>0){
                 app.globalData.noticeNum = res2.data.data.jirenMsgNum
               }
