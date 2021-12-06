@@ -1,5 +1,4 @@
 <view>
-  <button class="enter" bindtap="onEnter">
-    点击授权
-  </button>
+  <text>登录页，以后添加动态gif图片</text>
+  <image src="../../static/icon/开屏页.gif" ></image>
 </view>

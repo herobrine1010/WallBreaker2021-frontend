@@ -13,7 +13,7 @@
     <text class="declare">济星云将严格保密您的信息</text>
 
     <view class="btn">
-      <button bindtap="onLogin" class="poby-btn {{isUserAgree?'bg-darkblue':'bg-gray'}}" size="full">统一身份认证登录</button>
+      <button open-type="getUserInfo" bindtap="onLogin"   class="poby-btn {{isUserAgree?'bg-darkblue':'bg-gray'}}" size="full">统一身份认证登录</button>
     </view>
 
     <checkbox-group class="checkbox" bindchange="onCheckboxChange">

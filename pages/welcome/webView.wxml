@@ -1,0 +1,2 @@
+<!--miniprogram/pages/welcome/webView.wxml-->
+<web-view src="{{tongjiUrl}}"></web-view>

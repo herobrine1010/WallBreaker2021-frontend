@@ -48,8 +48,20 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    
+  onLoad: function () {
+    let registered = wx.getStorageSync('registered');
+    if(!registered){
+      let openid = wx.getStorageSync('openid');
+      request({
+        url : `/user/setUserRegisteredTrueByOpenId/${openid}`,
+        header: {
+          'content-type': 'x-www-form-urlencoded',
+          'cookie':wx.getStorageSync("token")
+        }
+      }).then(res => {
+        console.log('更改请求状态接口',res);
+      })
+    }
   },
 
   /**

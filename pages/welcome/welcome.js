@@ -9,57 +9,6 @@ Page({
 
   },
 
-  onEnter:function(e){
-    wx.getUserProfile({
-      desc: '获取用户信息的文案 待修改', 
-      success: (res) => {
-        var myInfo =res.userInfo
-        console.log(myInfo)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        });
-        wx.login({
-          success:res=>{
-            console.log(res.code)
-            wx.request({
-              data:{
-                "code":res.code,
-                "nickName":myInfo.nickName,
-                "gender":myInfo.gender,
-                "wxAvatarUrl":myInfo.avatarUrl,
-                "avatarUrl":myInfo.avatarUrl
-              },
-              url: app.globalData.url+'/user/login',
-              method:'POST',
-              header:{
-                'content-type':'application/json'
-              },
-              success:function(res2){
-                console.log(res2);
-                if(res2.data.data.code=="register"){
-                  wx.setStorageSync("token", res2.cookies[0])
-                  wx.showToast({
-                    title: '注册成功！',
-                    icon:'success'
-                  })
-                  wx.switchTab({
-                    url: '/pages/jishi/main',
-                  })
-                }else{
-                  console.log("看下哪有问题")
-                  console.log(res2)
-                }
-              }
-            })
-          }
-        })
-    
-
-      }
-    })
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -67,7 +16,6 @@ Page({
     //先发一个login确认有没有注册过
     wx.login({
       success:res=>{
-        console.log(res.code)
         wx.request({
           data:{
             "code":res.code,
@@ -78,8 +26,17 @@ Page({
             'content-type':'application/json'
           },
           success:function(res2){
-            console.log(res2);
-            if(res2.data.data.code=="login"){
+            console.log('第一遍登陆有无获取openId???',res2.data.data);
+            console.log('用户token',res2);
+
+            let {
+              openId,
+              registered
+            } = res2.data.data;
+            wx.setStorageSync( 'openid' , openId);
+            wx.setStorageSync('registered', registered)
+            let status = res2.data.data.code;
+            if(status == 'registered'){// 完成了统一身份认证
               wx.setStorageSync("token", res2.cookies[0])
               if(res2.data.data.jirenMsgNum>0){
                 app.globalData.noticeNum = res2.data.data.jirenMsgNum
@@ -87,69 +44,19 @@ Page({
               wx.switchTab({
                 url: '/pages/jishi/main',
               })
-            }
-            else if(res2.data.data.code=="blocked"){
-              console.log("已被封号");
+            }else if(status == 'blocked'){ // 用户被禁言
               wx.redirectTo({
                 url: '/pages/welcome/blocked',
               })
-            }
-            else if(res2.data.data.code="needInfo"){
-              console.log("提示用户允许获取个人信息")
+            }else if(status == 'notRegistered'){ // 跳转同一身份登陆
+              wx.navigateTo({
+                url: './check',
+              })
             }
           }
         })
       }
     })
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   }
 })

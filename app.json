@@ -31,9 +31,8 @@
     ]
   },
   "pages": [
-    
-    "pages/welcome/check",
     "pages/welcome/welcome",
+    "pages/welcome/check",
     "pages/jiren/main",
     "pages/jiren/groupDetail",
     "pages/jishi/detail",
@@ -67,7 +66,8 @@
     "pages/welcome/blocked",
     "pages/welcome/welcome-new",
     "pages/welcome/protocol",
-    "pages/login/webview"
+    "pages/login/webview",
+    "pages/welcome/webView"
   ],
   "window": {
     "backgroundTextStyle": "dark",
