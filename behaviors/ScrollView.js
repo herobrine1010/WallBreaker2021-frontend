@@ -26,6 +26,9 @@ module.exports = Behavior({
           // 空方法 具体页面处重写
           setTimeout(this.setData({isRefresherOpen: false}), 2000);
         },
+
+        // 与分页接口相关的代码
+        
     }
   
 })

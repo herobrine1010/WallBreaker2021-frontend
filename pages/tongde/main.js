@@ -11,11 +11,13 @@ import {formatTime, getDateDiff} from "../../utils/util.js";
 const behaviorsPath = "../../behaviors/"
 const scrollBehavior = require(behaviorsPath + "ScrollView.js");
 const searchBehavior = require(behaviorsPath + "Search.js");
+const swiperbehavior = require(behaviorsPath + "Swiper.js");
 // 定义函数编写请求参数：-----------------------------------------
-function setRequestData(keyword,labelId,type){
+function setRequestData(keyword,labelId,type,pageNo){
   /* 设置request的参数, type必选, labelId, keyword可选 */
   let data = {
-    type : type
+    type : type,
+    pageNo: pageNo
   };
   // 当keyword=''时,发送的请求不应该包括keyword字段,否则会无返回结果
   if(keyword){
@@ -26,48 +28,69 @@ function setRequestData(keyword,labelId,type){
   }
   return data;
 }
-function getLostFoundList(that, type=0, labelId='', keyword='') {
+function requestWithPage(that, type=0, labelId='', keyword='',pageNo) {
   /* jiren jishi通过Page外的函数发起请求 setData, 需要传入that参数, 这个页面把它写在Page内.  */
   // that.setData({isRefresherOpen: true});
   // that.setData({tongdeItemList: []})
-  request({
-    url: '/lostfound/tongdeGetLostFound',
+  if(pageNo==null || pageNo==NaN) {
+    pageNo = 1;
+  }
+  return request({
+    url: '/lostfound/tongdeGetLostFoundWithPage',
     header: {
       'content-type': 'application/x-www-form-urlencoded',
       'cookie':wx.getStorageSync("token")
     },
     method : 'GET',
-    data: setRequestData(keyword, labelId, type)
-  }).then(res => {
-    console.log("获取列表请求", res);
-    let itemList = res.data.data.map(v => {
+    data: {...setRequestData(keyword, labelId, type, pageNo), pageSize: 6}
+  })
+}
+function getThenUpdateLostFoundList(that, type=0, labelId='', keyword='',pageNo) {
+  requestWithPage(that, type=0, labelId='', keyword='',pageNo).then(res => {
+    let itemList = res.data.data.records.map(v => {
       v.createTime = getDateDiff(v.createTime);
       return v;                                 
     })
 
     that.setData({
       tongdeItemList: itemList,
-      isRefresherOpen: false
+      isRefresherOpen: false,
+      current: res.data.data.current,
+      pages: res.data.data.pages
     })
   });
 }
+
+function updateCache(that, type=0, labelId='', keyword='',pageNo) {
+  requestWithPage(that, type=0, labelId='', keyword='',pageNo).then(res => {
+    let itemList = res.data.data.records.map(v => {
+      v.createTime = getDateDiff(v.createTime);
+      return v;                                 
+    })
+    that.setData({
+      cachedItemList:itemList,
+      isRefresherOpen: false,
+      current: res.data.data.current
+    })
+  })
+}
 Component({
-  behaviors: [scrollBehavior, searchBehavior],
+  behaviors: [scrollBehavior, searchBehavior, swiperbehavior],
   /**
    * 页面的初始数据
    */
   data: {
-    tabIndex: 0, // 当前swiper选中项目
-    tab: 0, //当前tab对应的项目
+
     keyword: undefined,
+    cachedItemList: [], // 缓存的列表数据, 用于下滚时更新
     tongdeItemList:[
-      {
+/*       {
         'labelList':['雨伞'],
         'name':'雨伞',
         'createTime':'1天前',
         'content':'9.10在嘉定A108门口捡到一把雨伞',
         'firstPicUrl':'https://img-blog.csdnimg.cn/20210920143006670.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYWFhc2h1b3c=,size_20,color_FFFFFF,t_70,g_se,x_16',
-        'type': 0,       // 物品遗失0 or 失物寻主1 
+        'type': 0,       // 物品遗失0 or 寻找失主1 
         'closed': false
       },
       {
@@ -91,7 +114,7 @@ Component({
         'createTime':'1天前',
         'content':'9.10下午5点左右在嘉定B楼301教室前排捡到一本笔记本',
         'firstPicUrl':'https://img-blog.csdnimg.cn/20210920143025753.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYWFhc2h1b3c=,size_20,color_FFFFFF,t_70,g_se,x_16',
-        'type': 0,       // 物品遗失0 or 失物寻主1 
+        'type': 0,       // 物品遗失0 or 寻找失主1 
         'closed': false
       },
       {
@@ -100,7 +123,7 @@ Component({
         'createTime':'1天前',
         'content':'9.9中午在嘉定小食堂二楼捡到一个卡套，有一卡通和钥匙',
         'firstPicUrl':'https://img-blog.csdnimg.cn/20210920143013638.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYWFhc2h1b3c=,size_20,color_FFFFFF,t_70,g_se,x_16'
-      },
+      }, */
 
     
     ],
@@ -216,7 +239,9 @@ Component({
       }
     ],
     // 用筛选框选中的标签列表， 目前为单选
-    selectedLabelList: []
+    selectedLabelList: [],
+    id: null, // selected labels id
+    current: 1
   },
   /* 
   数据监听器
@@ -224,8 +249,13 @@ Component({
    */
   observers: {
     "tab, selectedLabelList[0].id, keyword": function(tab, id, keyword) {
-      console.log("数据监听器",tab,id, keyword);
-      getLostFoundList(this, tab, id, keyword);
+      // console.log("数据监听器",tab,id, keyword);
+      this.setData({
+        id,
+        current: 1
+      })
+      getThenUpdateLostFoundList(this, tab, id, keyword,1);
+      updateCache(this,tab,id,keyword,2);
     }
   },
   methods: {
@@ -233,8 +263,6 @@ Component({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-    getLostFoundList(this);
 
     // --------- ----- 调试同德分页接口 ------ --------
     request({
@@ -245,14 +273,20 @@ Component({
       },
       method : 'GET',
       data: {
-        pageNo : 1,
-        pageSize : 10
+        pageNo : 2,
+        pageSize : 4
       }
     }).then(res => {
       console.log(res);
     })
 
   },
+  onShow: function(options) {
+    console.log("in tongde main page", options);
+    getThenUpdateLostFoundList(this,0,null,null,1);
+    updateCache(this,0,null,null,2);
+  },
+
   // ------------筛选框相关的函数-----------------
   clickConditionFilter: function(e) {
     // 弹出筛选框
@@ -266,24 +300,25 @@ Component({
     this.setData({selectedLabelList})
   },
   // -----------筛选框函数结束--------------
-  // 绑定在点击tab上函数，通过点击切换swiper
-  changeItem: function(e) {
-    this.setData({
-      tabIndex: e.currentTarget.dataset.item
-    });
-  },
-  // 绑定在swiper上的函数，用来改变tab
-  changeTab: function(e) {
-    var current = e.detail.current;
-    this.setData({
-      tab: e.detail.current
-    });
-  },
+
   // 滚动框的 下拉刷新事件 pullDownRefresh------------- -------------- ----------
   onRefresherRefresh:function(){
     // 刷新页面，包括此前筛选或者搜索数据：
     // 只要调用setData, 即使不改变数据也能触发数据监听器observer, 实现刷新
     this.setData({tab: this.data.tab});
+  },
+  //  --------- 滚动框：获取下一页 ------------
+  getNextPage(){
+    if(this.data.cachedItemList!=null) {
+      this.setData({
+        tongdeItemList: this.data.tongdeItemList.concat(this.data.cachedItemList)
+      });
+    }
+    if(this.data.current<=this.data.pages) {
+    updateCache(this, this.data.tab, this.data.id, this.data.keyword, this.data.current+1);
+    }
+    console.log("reachBottom",this.data.current)
+
   },
   // 跳转：发起组队事件：------------- --------- ------ ------- --
   createNewPost:function(){

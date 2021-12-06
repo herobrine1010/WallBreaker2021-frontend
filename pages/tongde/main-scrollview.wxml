@@ -4,6 +4,8 @@
   bindrefresherrefresh = "onRefresherRefresh"
   refresher-triggered = "{{isRefresherOpen}}"
   bindscroll="onMyScroll" 
+  bindscrolltolower="getNextPage" 
+  upper-threshold="200"
   scroll-y="true" 
   scroll-with-animation='true' 
   scroll-top='{{ topNum }}'
@@ -19,4 +21,5 @@
       ></card-lost>
     </navigator>
   </view>
+  <!-- <view class="bottomTip" wx:if="isEnd" style="display:block; margin: 40px 40px;">已经到底了</view> -->
 </scroll-view>
