@@ -176,7 +176,7 @@ Page({
           }=teamdata;
           let picList = allPicUrl?allPicUrl.split(','):[];
           let fromTime=util.getDateDiff(teamdata.createTime);
-          dueTime=util.getDateDiff(teamdata.dueTime);
+          dueTime=util.getDateDiff(teamdata.dueTime) + '截止';
           let questionList = [];
           if(typeof question == 'string' && question!='{}'){
             question=JSON.parse(question);
