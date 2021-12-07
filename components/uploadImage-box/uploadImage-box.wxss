@@ -2,7 +2,8 @@
 .image-box {
   display: flex;
   flex-wrap: wrap;
-  
+  margin: 0 -13rpx;
+
 }
 .image-wrap {
   position: relative;
@@ -10,26 +11,21 @@
 }
 .deleteTopRight {
   position: absolute;
-  top: 10rpx;
-  right: 10rpx;
+  top: 0rpx;
+  right: 0rpx;
 }
 .deleteTopRight-icon {
   height: 20px;
   width: 20px;
 }
-.userImage {
-  height: 180rpx;
-  width: 180rpx;
-  margin: 18rpx;
+.userImage, .addImage {
+  height: 152rpx;
+  width: 152rpx;
+  margin: 13rpx;
   border-radius: 16rpx;
 }
 .addImage-icon {
-  height: 180rpx;
-  width: 180rpx;
-}
-.addImage {
-  height: 180rpx;
-  background: #EEEEEE;
+  height: 152rpx;
+  width: 152rpx;
   border-radius: 16rpx;
-  margin: 18rpx;
 }

@@ -32,9 +32,10 @@
         </view> 
       </view>
       <view class="item-wrap" bindtap="clickToChooseTag">
-        <view class="icon-with-title">
+        <view class="icon-with-title" style="margin-bottom:0;position: relative;">
           <image class="icon" src="../../static/icon/label.png"></image>
           <text class="title">选择标签</text>
+          <image class="icon" src="/static/icon/right-arrow.svg" style="position: absolute; right:0;"/>
           <view class="error-wrap"  wx:if="{{ errors.selectedLabels }}">
             <image src="/static/icon/Alert-warning.png" class="icon"></image>
             <text class="error-tip">{{ errors.selectedLabels }}</text>
@@ -44,8 +45,8 @@
           <text name="test" class="label-show" wx:for="{{selectedLabelList}}" wx:key="*this">#{{item.content}}</text>
         </view>
       </view>
-      <view class="item-wrap type-container">
-        <view class="icon-with-title">
+      <view class="item-wrap type-container" style="padding:24rpx 0;">
+        <view class="icon-with-title" style="margin-bottom:0;">
           <image class="icon" src="../../static/icon/lostType.png"></image>
           <text class="title">招领类型</text>
         </view>
@@ -79,14 +80,14 @@
         <view class="a-line">
           <dropdown-box name="contactType" range="{{contactType}}" key="id" text="content" defaultOption="{{defaultObject}}" style="width: 200rpx;"></dropdown-box>
           <view class="input-contact-box input-box">
-            <input name="contact" class="input-half-line" style="width: 200rpx;" placeholder="请输入联系方式" maxlength="25"/>
+            <input name="contact" class="input-half-line" style="width: 250rpx;" placeholder="请输入联系方式" maxlength="25"/>
             <view class="error-wrap"  wx:if="{{ errors.contact }}">
               <image src="/static/icon/Alert-warning.png" class="icon"></image>
               <text class="error-tip">{{ errors.contact }}</text>
             </view> 
           </view>
         </view>
-        <view style="margin:16rpx 20rpx; font-size: 10px; line-height: 150%;">
+        <view class="tip" style="margin:16rpx 20rpx; font-size: 10px; line-height: 150%;">
         <view>提示：联系方式可能被其他用户查看，请选择相对安全的联系渠道</view>
         <view>*本产品用户均通过同济大学官方统一身份验证</view>
         </view>
