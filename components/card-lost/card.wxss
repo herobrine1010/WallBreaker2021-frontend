@@ -41,9 +41,9 @@
   padding-top: 6rpx;
 }
 .time{
-  position: relative;
-  top:-30rpx;
-  left: 252rpx;
+  position: absolute;
+  bottom: 24rpx; /*==.textArea padding-bottom */
+  right: 16rpx;
   color:#989A9A;
   font-weight: 300;
 }
