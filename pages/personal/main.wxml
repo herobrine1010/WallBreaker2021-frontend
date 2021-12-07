@@ -15,37 +15,37 @@
     ></personal-brief> 
     <!-- 以下是资料、组队管理、收藏、帮助、反馈、破壁简介等item -->
     <navigator url="../personal/personalDetails" class="per-items">
-      <image src="../../static/icon/personal-info.png" class="icon"></image>
+      <image src="../../static/icon/self-profile.svg" class="icon"></image>
       <view class="item-title">个人资料</view>
     </navigator>
     
     <!-- 界面相似，帖子·组队管理 和 我的收藏 共用一个页面
     通过personalManagementOrCollection这个全局的状态量，决定进入哪个页面 -->
     <navigator url="../personal/teamManagement" class="per-items" >
-      <image src="../../static/icon/people-01.png" class="icon"></image>
+      <image src="../../static/icon/team-arrangement.svg" class="icon"></image>
       <view class="item-title">组队管理</view>
       <view wx:if="{{isJirenMsgExist}}" class="red-message poby-text bds">
         <text class="red-message-word">{{jirenMsgNum}}</text>
       </view>
     </navigator>
     <navigator url="../personal/collection" class="per-items">
-      <image src="../../static/icon/badge.png" class="icon"></image>
+      <image src="../../static/icon/favourite.svg" class="icon"></image>
       <view class="item-title">我的收藏</view>
     </navigator>
     <navigator url="/pages/tongde/my" class="per-items">
-      <image src="../../static/icon/tongde-solid.png" class="icon"></image>
+      <image src="../../static/icon/my-lost.svg" class="icon"></image>
       <view class="item-title">我的失物招领</view>
     </navigator>
     <navigator url="../personal/help" class="per-items">
-      <image src="../../static/icon/help.png" class="icon"></image>
+      <image src="../../static/icon/help.svg" class="icon"></image>
       <view class="item-title">新手帮助</view>
     </navigator>
     <navigator url="../personal/feedback" class="per-items">
-      <image src="../../static/icon/feedback.png" class="icon"></image>
+      <image src="../../static/icon/suggestions.svg" class="icon"></image>
       <view class="item-title">用户反馈</view>
     </navigator>
     <navigator url="../personal/aboutUs" class="per-items">
-      <image src="../../static/icon/smile.png" class="icon"></image>
+      <image src="../../static/icon/about-us.svg" class="icon"></image>
       <view class="item-title">关于我们</view>
     </navigator>
 
