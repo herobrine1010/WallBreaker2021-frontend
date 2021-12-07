@@ -82,6 +82,9 @@
         </navigator>
       </block>
 
+      <view wx:if="{{isLastPage}}" class="noData">
+        已经到底啦~
+      </view>   
       <view style="height:16vh"></view>
     </scroll-view>
     

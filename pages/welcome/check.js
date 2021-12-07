@@ -22,10 +22,9 @@ Page({
         success: (res) => {
           console.log('微信获取用户信息',res.data);
           var myInfo =res.userInfo
-          console.log(myInfo)
+          // console.log(myInfo)
           wx.login({
             success:res=>{
-              console.log('跳转统一身份认证登录');
               wx.request({
                 data:{
                   "code":res.code,
@@ -68,7 +67,7 @@ Page({
                 },
                 success: res => {
                   let openid = res.data.data.openId;
-                  wx.navigateTo({
+                  wx.redirectTo({
                     url: `./webView?openid=${openid}`,
                   })
                 }

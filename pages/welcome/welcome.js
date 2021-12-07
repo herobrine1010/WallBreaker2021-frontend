@@ -26,8 +26,6 @@ Page({
             'content-type':'application/json'
           },
           success:function(res2){
-            console.log('第一遍登陆有无获取openId???',res2.data.data);
-            console.log('用户token',res2);
 
             let {
               openId,
@@ -49,7 +47,7 @@ Page({
                 url: '/pages/welcome/blocked',
               })
             }else if(status == 'notRegistered'){ // 跳转同一身份登陆
-              wx.navigateTo({
+              wx.redirectTo({
                 url: './check',
               })
             }

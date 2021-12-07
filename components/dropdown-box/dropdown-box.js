@@ -37,7 +37,6 @@ Component({
     },
     //选择下拉框的元素展示
     optionTap: function (e) {
-      console.log(e.target.dataset)
       let selectedDataset = e.target.dataset
       this.setData({
         current: selectedDataset,

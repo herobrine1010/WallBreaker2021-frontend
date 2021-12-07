@@ -1,15 +1,88 @@
 /* pages/welcome/welcome.wxss */
-.enter{
-  position:absolute;
-  height:10vh;
-  width: 40vw;
-  left:30vw;
-  top:40vh;
-  background-color: lightgreen;
-  border-radius: 3vw;
-  color:white;
-  text-align: center;
-  font-size: 4vh;
-  line-height: 8.6vh;
+@import"../../static/font.wxss";
+.bg-img{
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111 url(https://wallbreaker-tongji.oss-cn-shanghai.aliyuncs.com/static-img/loginTJ/WechatIMG268%202%20%281%29.png) no-repeat -370rpx -30rpx;
+}
 
+.bg-color{
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(180deg, #000000 -180.91%, #000000 -180.88%, rgba(137, 137, 137, 0.82) 100%);
+  opacity: 0.6;
+}
+
+.title{
+  position:absolute;
+  z-index: 11;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 450rpx;
+  height: 192rpx;
+  top: 400rpx;
+  left: 170rpx;
+  color: #f7f7f7;
+}
+.title-head{
+  font-family: ZCOOLKuaiLe-Regular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 80rpx;
+  line-height: 125%;
+  letter-spacing: 0.35em;
+  margin-bottom: 24rpx;
+}
+.title-body{
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32rpx;
+  line-height: 150%;
+  letter-spacing: 2rpx;
+  color: #FFFFFF;
+}
+
+.logo{
+  position:absolute;
+  z-index: 11;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 164rpx;
+  bottom: 140rpx;
+  color: #f7f7f7;
+}
+
+.divi{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  width: 686rpx;
+  height: 36rpx;
+
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24rpx;
+  line-height: 150%;
+
+  color: #FFFFFF;
+}
+.divi .line{
+  height: 18rpx;
+  width: 290rpx;
+  border-bottom: 1px #f7f7f7 solid ;
+}
+
+.logo-tj{
+  width: 432rpx;
+  height: 96rpx;
+  margin-top: 32rpx;
 }

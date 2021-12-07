@@ -166,7 +166,7 @@ Page({
       },
       success:function(res){
         console.log(res.statusCode)
-        if(res.statusCode==200){
+        if(res.statusCode==200 && res.data.success){
           const eventChannel = that.getOpenerEventChannel()
           eventChannel.emit('getResult', {data: true});
           //调试用
@@ -178,11 +178,43 @@ Page({
             icon:'success',
             duration:2000
           });
+        }else if(res.data.msg == "noWxId"){
+          let dialog = {
+            hasInputBox:false,
+            content:"请完善微信号~",
+            tip:"填写微信号可以更好地使用组队功能，保证微信号只有队伍成员可见！",
+            cancelText:"返回",
+            okText:"去填写",
+            tapOkEvent:"tapOkForAddWxId",
+            tapCancelEvent:"tapCancelForAddWxId",
+            isDialogShow:true,
+          }
+          that.setData({
+            dialog
+          });
+        }else{
+          wx.showToast({
+            title: '网络异常，请重试 :(',
+            icon: 'none',
+            duration: 1000
+          });
         }
-
       }
     })
   },
+
+  // 完善微信号的两个事件
+  tapOkForAddWxId(){
+    wx.navigateTo({
+      url: '../personal/personalDetails?source=needWxId',
+    })
+  },
+  tapCancelForAddWxId(){
+    this.setData({
+      isDialogShow:false
+    })
+  },
+  
   isMaxlength: function(e) {
     console.log(e);
     var textLength = e.detail.value.length

@@ -1,4 +1,16 @@
-<view>
-  <text>登录页，以后添加动态gif图片</text>
-  <image src="../../static/icon/开屏页.gif" ></image>
+<view class="bg-img"></view>
+<view class="bg-color"></view>
+<view class="title">
+  <view class="title-head">济星云</view>
+  <view class="title-body">专为同济师生打造的协作平台</view>
+</view>
+
+<view class="logo">
+  <view class="divi">
+    <view class="line"></view>
+    <text>济星云</text>
+    <view class="line"></view>
+  </view>
+
+  <image class="logo-tj" src="../../static/icon/logo-tj3.png"></image>
 </view>

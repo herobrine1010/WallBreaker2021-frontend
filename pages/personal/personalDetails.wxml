@@ -58,13 +58,15 @@
       </view>
       <view class="detail-items">
         <view class="item-title">微信号：</view>
-        <view class="item-body">
+        <view class="item-body" bindtap="hidePopover">
           <input name="wxId" type="text" value="{{userDetails.wxId}}"></input>
         </view>
+        <image wx:if="{{isWxidPopoverShow}}" class="wxid-popover" src="../../static/icon/wxid-popover.png"></image>
       </view>
       <!-- 以上是表单中的各个输入文本框 detail-items -->
       <view class="warn">
-        *您所填写的微信号仅在组队成功后与发起人互相可见，其他任何人均不可见
+      <text>*您所填写的微信号仅在组队成功后与发起人互相可见，其他任何人均不可见</text>
+        
       </view> 
       <view class="detail-items">
         <view class="intro-title">一句话简介：</view>

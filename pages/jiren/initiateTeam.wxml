@@ -11,11 +11,12 @@
         <view class="section1">
           <view class="dropdown-box-wrap">
             <view class="selector-label">组队主题:</view>
-            <dropdown-box name="teamTheme" range="{{themeOptions}}" value="{{theme.content}}" bindchange="dropdownChange"></dropdown-box>
+            <!-- <dropdown-box name="teamTheme" range="{{themeOptions}}" value="{{theme.content}}" bindchange="dropdownChange"></dropdown-box> -->
+            <dropdown-box name="teamTheme" range="{{themeOptions}}" current="{{theme}}" bindchange="dropdownChange"></dropdown-box>
           </view>
           <view class="picker-wrap">
             <view class="selector-label">需求人数</view>
-            <picker name="memberNumber" bindchange="bindPickerChange" value="{{memberNumber}}" range="{{memberNumberOptions}}">
+            <picker name="memberNumber" mode="selector" bindchange="bindPickerChange" value="{{memberNumber}}" range="{{memberNumberOptions}}">
               <view class="picker-box">{{memberNumber}}</view>
             </picker>
           </view>
@@ -52,10 +53,10 @@
 
           </view>
         </view>
-        
+        <!-- checked -->
         <view class="section4 answerQuestion">
           <view class="isNeedQuestion">
-            <switch name="isNeedQuestion" class="isNeedQuestion-text" type="checkbox" checked bindchange="switchQuestion">
+            <switch name="isNeedQuestion" class="isNeedQuestion-text" type="checkbox"  bindchange="switchQuestion">
               需要申请者回答问题</switch>
           </view>
           <view class="switchArea" wx:if="{{isNeedQuestion}}">
@@ -81,7 +82,7 @@
         </view>
 
         <!-- 输入内容判空，若标题和内容为空，禁用提交按钮 -->
-        <button class="submitButton" form-type="submit" disabled="{{teamContent=='' || teamTitle==''}}" style="background: rgba(23, 178, 230, 0.8);position:fixed; bottom:0%; left:0%; height:90rpx; width:100%;z-index:10; border-radius: 0; border: 0; backdrop-filter: blur(2px);">确认提交</button>
+        <button class="submitButton" form-type="submit" disabled="{{teamContent=='' || teamTitle==''}}" style="display:flex; align-items:center ; justify-content: center; background: rgba(23, 178, 230, 0.8);position:fixed; bottom:0%; left:0%; height:112rpx; width:100%;z-index:10; border-radius: 0; border: 0; backdrop-filter: blur(2px);">确认提交</button>
       </form>
     </view>
 

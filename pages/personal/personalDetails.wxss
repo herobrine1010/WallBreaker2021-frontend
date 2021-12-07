@@ -59,6 +59,13 @@
   width: 360rpx;
   height: 40rpx;
 }
+.wxid-popover{
+  position: relative;
+  width: 242rpx;
+  height: 86rpx;
+  top: 35rpx;
+  left: -460rpx;
+}
 
 .warn{
   height: 40rpx;

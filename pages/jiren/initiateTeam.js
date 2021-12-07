@@ -41,7 +41,7 @@ Page({
     dueTime: '23:59',
     //需求人数
     memberNumberOptions: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
-    memberNumber: 1,
+    memberNumber: '5',
     //组队标题
     teamTitle: '',
     //组队内容
@@ -49,7 +49,7 @@ Page({
     // 提示列表
     formTips: {},
     //是否需要申请者回答问题
-    isNeedQuestion: true,
+    isNeedQuestion: false,
     //需要申请者回答的问题
     questionList: [{
       id: 1,
@@ -78,6 +78,7 @@ Page({
       },
       success: function(res) {
         var thememList = res.data.data;
+        console.log(thememList);
         that.setData({
           themeOptions: thememList,
           theme: thememList[0]
@@ -290,8 +291,14 @@ Page({
           },
           data: that.data.payload,
         }).then( res => {
-            console.log('提交表单返回结果', res.data);
-            if (res.data.success && res.statusCode==200) { // 有微信号，可以发起组队
+            console.log('提交表单返回结果', res);
+            if(res.data.msg == 'sensitive'){ // 敏感词
+              wx.showToast({
+                title: '内容包含敏感词',
+                icon: 'error',
+                duration: 1000
+              })
+            }else if (res.data.success && res.statusCode==200) { // 有微信号，可以发起组队
               wx.showToast({
                 title: '组队招募\n已发布成功',
                 icon: 'none',
@@ -337,11 +344,13 @@ Page({
   },
   tapOkForAddWxId(){
     wx.navigateTo({
-      url: '../personal/personalDetails',
+      url: '../personal/personalDetails?source=needWxId',
     })
   },
   tapCancelForAddWxId(){
-    wx.navigateBack();
+    this.setData({
+      isDialogShow:false,
+    })
   }
   
 })

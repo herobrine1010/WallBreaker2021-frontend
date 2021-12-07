@@ -1019,11 +1019,13 @@ copyWxId(){
   // 完善微信号的两个事件
   tapOkForAddWxId(){
     wx.navigateTo({
-      url: '../personal/personalDetails',
+      url: '../personal/personalDetails?source=needWxId',
     })
   },
   tapCancelForAddWxId(){
-    wx.navigateBack();
+    this.setData({
+      isDialogShow:false
+    })
   },
 
 // 取消申请事件

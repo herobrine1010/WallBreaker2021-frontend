@@ -9,8 +9,7 @@
   <view class="login">
     <text class="title">身份认证登录</text>
 
-    <text class="declare">本程序仅服务于同济师生</text>
-    <text class="declare">济星云将严格保密您的信息</text>
+    <text class="declare">专为同济师生打造的学习生活圈</text>
 
     <view class="btn">
       <button open-type="getUserInfo" bindtap="onLogin"   class="poby-btn {{isUserAgree?'bg-darkblue':'bg-gray'}}" size="full">统一身份认证登录</button>
@@ -37,7 +36,7 @@
   <view class="organizations">
     <view class="org-icons">
       <image src="../../static/icon/logo_tongji.png" mode="aspectFill"></image>
-      <image src="../../static/icon/logo_jixingyun.png" mode="aspectFill"></image>
+      <image src="../../static/icon/logo_poby.png" mode="aspectFill"></image>
     </view>
     <view class="org-names">
       <text>同济大学信息办 × 破壁工作室</text>

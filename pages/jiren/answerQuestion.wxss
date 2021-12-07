@@ -124,7 +124,7 @@
 .bottom-elements{
   position: fixed;
   bottom:0vh;
-  height:6vh;
+  height:112rpx;
   width:100vw;
   left:0vw;
   background-color: #17B2E5;
@@ -141,7 +141,7 @@
   text-align:center;
   float:left;
   width:100%;
-  line-height:6vh; 
+  line-height:112rpx; 
   color:#ffffff;
   background: rgba(23, 178, 230);
   font-size:2.4vh;

@@ -36,9 +36,15 @@ Page({
         }).then(res =>{
           wx.showToast({
             title: '感谢您的反馈！',
-            icon: 'error'
+            icon: 'success'
           });
           this.data.lock = false;
+          setTimeout(_ => {
+            wx.navigateBack({
+              delta: 1,
+            })
+          },1000)
+
         }).catch(err=>{
           wx.showToast({
             title: '请求失败，请稍后再试',
