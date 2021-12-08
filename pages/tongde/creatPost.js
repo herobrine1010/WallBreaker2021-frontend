@@ -359,6 +359,11 @@ Page({
       return addLabelRequest(lostFoundId, selectedLabels)
     }).then(res => {
       let data = res.data.data;
+      // 获取并刷新首页
+      let pages = getCurrentPages();
+      let prePage = pages[pages.length - 2];
+      prePage.onLoad();
+
       wx.showToast({
         title: '发布成功',
         icon: 'success',
@@ -366,13 +371,13 @@ Page({
         success: wx.navigateBack({})
       });
       // console.log("添加标签的响应数据", data);
-    }).catch(() => {
+    })/* .catch(() => {
       wx.showToast({
         title: '请求错误',
         icon: 'error',
         duration: 2000
       })
-    })
+    }) */
 
     // console.log("form的数据", formValue);
   } else {
