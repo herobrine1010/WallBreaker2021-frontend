@@ -6,6 +6,7 @@
  * 
  */
 import { request } from "../../request/request.js";
+const app = getApp();
 function formatDateString(str) {
   // 将接口返回的日期字符串'2021-7-13 21:34:31'转换成'2021年7月13日 21:34:31'
   let dateStr = str.split(' ');
@@ -31,7 +32,7 @@ Page({
     type:0,//物品遗失0 寻找失主1
     closed:false,
     pictures:['https://img-blog.csdnimg.cn/2021092014302085.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYWFhc2h1b3c=,size_20,color_FFFFFF,t_70,g_se,x_16','','','','','','',''],
-
+    userId: 10,
     personalInfo:{
         "avatar":"https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02",
         "nickname":"小砂糖星!",
@@ -72,6 +73,40 @@ Page({
     },
   },
   showPersonDetail:function(e){
+    let that = this;
+    // 获取头像信息
+    wx.request({
+      url: app.globalData.url+'/user/userInfo',
+      data:{
+        userId: this.data.userId
+      },
+      success:function(res){
+        let data=res.data.data;
+        let personalInfo={
+          'initiator':data.initiator,
+          'me':data.me,
+          'avatar':data.avatarUrl,
+          'id':data.id,
+          'nickname':data.nickName,
+          'wxId':data.wxId,
+          'description':data.description,
+          'school':data.school,
+          'major':data.major,
+          'grade':data.grade,
+          'identity':data.identification,
+
+          'wxIdPublic':data.wxIdPublic,
+          'schoolPublic':data.schoolPublic,
+          'majorPublic':data.majorPublic,
+          'gradePublic':data.gradePublic,
+          'identityPublic':data.identityPublic,
+
+          'personalLabel':(data.personalLabel?data.personalLabel.map(it => it.content):[]),
+          'interestLabel':(data.interestLabel?data.interestLabel.map(it => it.content):[]),
+        }
+        that.setData({personalInfo})
+      }
+    })
     this.selectComponent("#personalAnimation1").showModal();
   },
   tapCopy:function(e){
@@ -161,6 +196,7 @@ Page({
       this.setData({
         condition: typeText[data.type], // 使用type判断
         title: data.name,
+        userId:  data.userId,
         userAvatar: data.initiatorAvatar,
         userName: data.initiatorNickName,
         time: formatDateString(data.createTime), // 自定义函数转换日期格式
@@ -182,7 +218,13 @@ Page({
       })
     })
   },
-
+  //   复制资料卡片的wxid:
+  copyWxId(){
+    let wxId = this.data.personalInfo.wxId;
+    wx.setClipboardData({
+      data: wxId,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

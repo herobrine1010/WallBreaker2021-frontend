@@ -11,7 +11,7 @@
   height: 90%;
 }
 .objectName{
-    width: 388rpx;
+    width: 776rpx;
     height: 40rpx;
     /* Title/16bold */
     font-weight: 600;
