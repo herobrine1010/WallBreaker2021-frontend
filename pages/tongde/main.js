@@ -263,7 +263,8 @@ Component({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    getThenUpdateLostFoundList(this,0,null,null,1);
+    updateCache(this,0,null,null,2);
     // --------- ----- 调试同德分页接口 ------ --------
     request({
       url: '/lostfound/tongdeGetLostFoundWithPage',
@@ -283,8 +284,8 @@ Component({
   },
   onShow: function(options) {
     console.log("in tongde main page", options);
-    getThenUpdateLostFoundList(this,0,null,null,1);
-    updateCache(this,0,null,null,2);
+    // getThenUpdateLostFoundList(this,this.data.tab,null,null,1);
+    // updateCache(this,this.data.tab,null,null,2);
   },
 
   // ------------筛选框相关的函数-----------------

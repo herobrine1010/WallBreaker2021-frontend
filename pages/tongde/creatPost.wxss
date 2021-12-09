@@ -55,6 +55,12 @@ input {
 
   margin-right: 8rpx;
 }
+.tip {
+  font-size: 10px;
+  line-height: 150%;
+
+  color: #868788;
+}
 /* -----------总体公用样式设置结束------------ */
 
 
@@ -111,16 +117,17 @@ radio-group > radio {
 }
 
 .input-location-box {
-  padding: 0px 0px 0px 32rpx;
+  /* padding: 0px 0px 0px 40rpx; padding似乎对于input输入的文字不起作用*/
 }
 .input-location {
+  margin-left: 44rpx; /*这里使用margin*/
   font-size: 20rpx;
   width: 360rpx;
 }
 
 .input-contact-box{
   height: 36rpx;
-  width: auto;
+  width: 500rpx;
   padding: 0 1vw 16rpx 1vw;
   margin-left: 16rpx;
   border-bottom: 1px solid #DEDEDE;
