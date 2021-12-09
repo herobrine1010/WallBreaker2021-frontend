@@ -13,7 +13,7 @@ page {
 .scroll-area {
   position: static;
   /* 传入固定高度667px(iphone6) - 64px(导航栏）= 603px = 1206rpx */
-  height: 1806rpx;
+  /* height: 1806rpx; */
   padding: 0 32rpx;
 }
 .card {

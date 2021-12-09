@@ -1,8 +1,9 @@
 // pages/tongde/my.js
 import {request} from "../../request/request.js";
-import {formatTime, getDateDiff} from "../../utils/util.js"
-Page({
-
+import {formatTime, getDateDiff} from "../../utils/util.js";
+const setHeight = require("../../behaviors/SetHeight.js")
+Component({
+  behaviors: [setHeight],
   /**
    * 页面的初始数据
    */
@@ -24,8 +25,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  methods: {
   onLoad: function (options) {
-    const that = this;
     request({
       url: "/userLostFound/getMYLostFound",
       header: {
@@ -53,9 +54,11 @@ Page({
           'closed': v.status // 帖子是否关闭 0--未关闭 1--关闭
         }
       });
-      that.setData({
+      myLostFoundItemList.reverse();
+      this.setData({
         myLostFoundItemList,
       });
     })
   },
+  }
 })

@@ -11,8 +11,7 @@
   height: 90%;
 }
 .objectName{
-    width: 776rpx;
-    height: 40rpx;
+    width: 686rpx; /*不要设置height, 否则字数过多后会溢出*/
     /* Title/16bold */
     font-weight: 600;
     font-size: 32rpx;
@@ -151,7 +150,7 @@ margin: 0 0;
 .pictureArea{
   width: 686rpx;
   height: 686rpx;
-  margin: 16rpx 32rpx;
+  margin: 24rpx 32rpx 20rpx 32rpx;
 }
 /* TODO 图片自适应大小 */
 .img{
