@@ -1,0 +1,15 @@
+@import "/static/common.wxss";
+
+.background{
+  /* position */
+  position: fixed;
+  width: 750rpx;
+  height: 140rpx;
+  background: #fff;
+  z-index: 1111;
+
+}
+
+.weui-navigation-bar__centers{
+  color: #333;
+}

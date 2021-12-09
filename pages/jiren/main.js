@@ -384,7 +384,7 @@ Page({
   // 组队指南 以及另外两个跳转按钮：------------  -------------------------
   navToGuide : function(){
     wx.navigateTo({
-      url: '/pages/jiren/guide',
+      url: '/pages/jiren/guide-new',
     })
   },
   goMyPublish:function(){

@@ -5,7 +5,11 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #111 url(https://wallbreaker-tongji.oss-cn-shanghai.aliyuncs.com/static-img/loginTJ/WechatIMG268%202%20%281%29.png) no-repeat -370rpx -30rpx;
+  background: #111 url(https://wallbreaker-tongji.oss-cn-shanghai.aliyuncs.com/static-img/loginTJ/3haowu-tj.png) no-repeat;
+  animation: animatedBackground 1.7s linear 0.5s;
+
+  background-position: -231rpx -101rpx; 
+  background-size: 1338rpx 1760rpx;
 }
 
 .bg-color{
@@ -82,7 +86,24 @@
 }
 
 .logo-tj{
-  width: 432rpx;
-  height: 96rpx;
+  width: 276rpx;
+  height: 100rpx;
   margin-top: 32rpx;
+}
+
+
+/* ---------- ----------------------- 背景动画 ----------- ------------------------ */
+@keyframes animatedBackground {
+  0% { 
+    background-position: -231rpx -101rpx; 
+    background-size: 1338rpx 1760rpx;
+  }
+  55% { 
+      background-position: -325rpx -77rpx; 
+      background-size: 1380rpx 1841rpx;
+  }
+  100% {
+    background-position: -362rpx -81rpx; 
+    background-size: 1380rpx 1841rpx;
+  }
 }

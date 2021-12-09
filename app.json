@@ -67,7 +67,9 @@
     "pages/welcome/welcome-new",
     "pages/welcome/protocol",
     "pages/login/webview",
-    "pages/welcome/webView"
+    "pages/welcome/webView",
+    "pages/jiren/guide-new",
+    "pages/personal/help-new"
   ],
   "window": {
     "backgroundTextStyle": "dark",
