@@ -50,5 +50,11 @@
     </navigator>
 
     <view class="item-last"></view>
+
+
   </view>
 </view>
+
+<!-- 弹出的用于确认的提示框，电脑端模拟器、预览均没问题，但真机调试无法正确覆盖 -->
+<dialog-box style="height : 400rpx; width : 400rpx;" class="dialog-box" content="{{dialogContent}}" tip="{{dialogTip}}" okText="{{dialogOkText}}" cancelText="{{dialogCancelText}}" isShow="{{isDialogShow}}" bind:tapOk="{{tapOkEvent}}" bind:tapCancel="{{tapCancelEvent}}">
+</dialog-box>

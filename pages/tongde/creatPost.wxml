@@ -101,5 +101,5 @@
 <dialog-label id="dialog-label-selector" labels="{{labelList}}" bind:change="labelChanged"></dialog-label>
 
 <dialog-box class="dialog-box" content="{{dialogContent}}" tip="{{dialogTip}}" okText="{{dialogOkText}}" cancelText="{{dialogCancelText}}"
-  isShow="{{isDialogShow}}" bind:tapOk="tapOk">
+  isShow="{{isDialogShow}}" bind:tapOk="{{tapOkEvent}}" bind:tapCancel = "{{tapCancelEvent}}">
 </dialog-box>

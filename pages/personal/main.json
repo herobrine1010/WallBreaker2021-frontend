@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
-    "personal-brief": "/components/personal-brief/personal-brief"
+    "personal-brief": "/components/personal-brief/personal-brief",
+    "dialog-box": "/components/dialog-box/dialog-box"
   },
   "navigationStyle": "custom"
 }

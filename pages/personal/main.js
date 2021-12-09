@@ -50,7 +50,7 @@ Page({
    */
   onLoad: function () {
     let registered = wx.getStorageSync('registered');
-    if(!registered){
+    if(!registered){ // 注册完成后首次进入
       let openid = wx.getStorageSync('openid');
       request({
         url : `/user/setUserRegisteredTrueByOpenId/${openid}`,
@@ -60,8 +60,32 @@ Page({
         }
       }).then(res => {
         console.log('更改请求状态接口',res);
+        this.setData({
+            dialogContent:"请完善个人信息",
+            dialogTip:"为了更好地使用组队功能，请完善个人信息",
+            dialogCancelText:"取消",
+            dialogOkText:"去填写",
+            tapOkEvent:"tapOkForAddPersonalInfo",
+            tapCancelEvent:"tapCancelForAddPersonalInfo",
+            isDialogShow:true,
+        })
       })
     }
+
+  },
+
+  tapOkForAddPersonalInfo(){
+    this.setData({
+      isDialogShow:false,
+    })
+    wx.navigateTo({
+      url: './personalDetails',
+    })
+  },
+  tapCancelForAddPersonalInfo(){
+    this.setData({
+      isDialogShow:false,
+    })
   },
 
   /**

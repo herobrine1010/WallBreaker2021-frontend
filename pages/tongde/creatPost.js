@@ -323,7 +323,8 @@ Page({
     // 这个函数只是用来传递表单数据, 具体的事情在弹窗函数tapOk完成
     this.setData({
       e,
-      isDialogShow: true
+      isDialogShow: true,
+      tapOkEvent : 'tapOk'
     });
   },
   tapOk: function() {
@@ -353,10 +354,17 @@ Page({
         return createPostRequest(formValue);
       }
     }).then(res => {
-      let data = res.data.data;
-      let lostFoundId = data.id; // 获取失物招领主键id, 之后添加标签
+      console.log(res);
+      if(res.statusCode >=200 && res.statusCode <=300 && res.data.success){
+        let data = res.data.data;
+        let lostFoundId = data.id; // 获取失物招领主键id, 之后添加标签
       // console.log("发布失物招领响应数据", data);
-      return addLabelRequest(lostFoundId, selectedLabels)
+        return addLabelRequest(lostFoundId, selectedLabels)
+      }else if(res.data.msg == "当前用户已被禁言"){
+
+        return Promise.reject("blocked")
+      }
+
     }).then(res => {
       let data = res.data.data;
       // 获取并刷新首页
@@ -371,13 +379,26 @@ Page({
         success: wx.navigateBack({})
       });
       // console.log("添加标签的响应数据", data);
-    })/* .catch(() => {
-      wx.showToast({
-        title: '请求错误',
-        icon: 'error',
-        duration: 2000
-      })
-    }) */
+    }).catch(err => {
+      if(err == 'blocked'){
+        this.setData({
+            dialogContent:"您已被禁言！",
+            dialogTip:"您因违规行为暂被禁言，如需申诉请联系 TongjiPoby@163.com",
+            dialogCancelText:"取消",
+            dialogOkText:"确定",
+            tapOkEvent:"hideDialog",
+            tapCancelEvent:"hideDialog",
+            isDialogShow:true,
+        })
+      }else{
+        wx.showToast({
+          title: '网络错误',
+          icon: 'error',
+          duration: 2000
+        })
+      }
+
+    }) 
 
     // console.log("form的数据", formValue);
   } else {
@@ -419,4 +440,9 @@ Page({
       }).exec();
       
   },
+  hideDialog(){
+    this.setData({
+      isDialogShow:false,
+    })
+  }
 })
