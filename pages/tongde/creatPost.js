@@ -347,14 +347,14 @@ Page({
         let imageURL = res.data.data;
         // 分割字符串获得头图，如果firstImgURL包含多个http链接，济人首页图片无法正常加载
         let firstImgURL = imageURL.split(',',1)[0];
-        console.log("图片路径",imageURL, firstImgURL);
+        // console.log("图片路径",imageURL, firstImgURL);
         // 添加至payload，同时修改对象的属性名以对接接口命名
         formValue.allPicUrl = imageURL;
         formValue.firstPicUrl = firstImgURL;
         return createPostRequest(formValue);
       }
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       if(res.statusCode >=200 && res.statusCode <=300 && res.data.success){
         let data = res.data.data;
         let lostFoundId = data.id; // 获取失物招领主键id, 之后添加标签
@@ -415,7 +415,7 @@ Page({
     selector.setLabelsSelected();
   },
   labelChanged: function(e) {
-    console.log(e);
+    // console.log(e);
     let selectedLabelList = e.detail;
     this.setData({selectedLabelList});
   },
@@ -425,14 +425,14 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
           windowHeight= res.windowHeight;
-          console.log("windows",windowHeight);
+          // console.log("windows",windowHeight);
       }
     });
     let query = wx.createSelectorQuery();
     query.select('#scroll').boundingClientRect(rect=>{
-      console.log(rect)
+      // console.log(rect)
         let top = rect.top;
-        console.log(top);
+        // console.log(top);
         let height=windowHeight-top;
         this.setData({
           height:height+'px',
