@@ -62,7 +62,7 @@ Page({
         console.log('更改请求状态接口',res);
         this.setData({
             dialogContent:"请完善个人信息",
-            dialogTip:"为了更好地使用组队功能，请完善个人信息",
+            dialogTip:"为了更好地使用功能，请完善个人信息",
             dialogCancelText:"取消",
             dialogOkText:"去填写",
             tapOkEvent:"tapOkForAddPersonalInfo",
