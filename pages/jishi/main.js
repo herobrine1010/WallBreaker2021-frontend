@@ -36,7 +36,7 @@ async function getPostingWithPage(pageNo, keyword,labelId,timeIndex) {
   let p2 = new Promise((resolve,reject) => {
     setTimeout( _ => {
       reject("网络好像出错了");
-    },2000)
+    },3000)
   });
   return Promise.race([p1,p2]);
 };

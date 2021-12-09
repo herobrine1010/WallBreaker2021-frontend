@@ -65,6 +65,10 @@ Page({
 
   // 生命周期函数： ------- ----------- -------- ：
   onLoad: function (options) {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
     if(!options.teamId){
       // this.setData({teamId:119})
       // 这里改成别的错误接收方法

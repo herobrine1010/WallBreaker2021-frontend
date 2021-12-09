@@ -22,96 +22,26 @@ Page({
     jirenItemList:[
       {
       'labelText':'未分类',
-      'title':'示例标题示例标题示例标题…',
+      'title':'暂无数据',
       'teamCondition':'refuse',
       'rightTagText':'申请未通过',
       'dueTime':'截止时间: 2021年6月21日 14:00',
-      'description':'这是一段描述性文字，仅用于测试。这是一段……',
+      'description':'数据加载中',
       'initiator':'发起人: 示例用户',
       'peopleCount':'3/5',
       'postingPic':''
-    },
-    {
-      'labelText':'熬夜秃头',
-      'title':'示例标题示例标题示例标题…',
-      'teamCondition':'pass',
-      'rightTagText':'我已入队',
-      'dueTime':'截止时间: 2021年6月21日 14:00',
-      'description':'这是一段描述性文字，仅用于测试。这是一段……',
-      'initiator':'发起人: 示例用户',
-      'peopleCount':'3/5',
-      'postingPic':''
-    },
-    {
-      'labelText':'熬夜秃头',
-      'title':'示例标题示例标题示例标题…',
-      'teamCondition':'mine',
-      'rightTagText':'',
-      'dueTime':'截止时间: 2021年6月21日 14:00',
-      'description':'这是一段描述性文字，仅用于测试。这是一段测试组件是否可以正常换行的文字……',
-      'initiator':'',
-      'peopleCount':'0/5',
-      'postingPic':''
-    }
-    ],
+    }],
     jishiItemList : [
       {
         'labelText':'教务',
-        'title':'学生评学评教通知',
+        'title':'暂无数据',
         'rightTagText':'',
         'userName':'新生院张老师',
         'publishTime':'2天前',
         
-        'description':'请大家登陆1.tongji.edu.cn，尽快完成评学评教！超过九月一号未完成的同学不能参加下学期的',
+        'description':'数据加载中',
         'postingPic':''
       },
-      {
-        'labelText':'活动',
-        'title':'十大歌手领票',
-        'rightTagText':'我发布的',
-        'userName':'学生会小王',
-        'publishTime':'1天前',
-        'description':'这是一段描述性文字，仅用于测试。这是一段……',
-        'postingPic':''
-      },
-      {
-        'labelText':'教务',
-        'title':'学生评学评教通知',
-        'rightTagText':'',
-        'userName':'新生院张老师',
-        'publishTime':'2天前',
-        
-        'description':'请大家登陆1.tongji.edu.cn，尽快完成评学评教！超过九月一号未完成的同学不能参加下学期的',
-        'postingPic':''
-      },
-      {
-        'labelText':'活动',
-        'title':'十大歌手领票',
-        'rightTagText':'我发布的',
-        'userName':'学生会小王',
-        'publishTime':'1天前',
-        'description':'这是一段描述性文字，仅用于测试。这是一段……',
-        'postingPic':''
-      },
-      {
-        'labelText':'教务',
-        'title':'学生评学评教通知',
-        'rightTagText':'',
-        'userName':'新生院张老师',
-        'publishTime':'2天前',
-        
-        'description':'请大家登陆1.tongji.edu.cn，尽快完成评学评教！超过九月一号未完成的同学不能参加下学期的',
-        'postingPic':''
-      },
-      {
-        'labelText':'活动',
-        'title':'十大歌手领票',
-        'rightTagText':'我发布的',
-        'userName':'学生会小王',
-        'publishTime':'1天前',
-        'description':'这是一段描述性文字，仅用于测试。这是一段……',
-        'postingPic':''
-      }
     ]
   },
 //以下两个事件为：点击帖子(收藏或管理)按钮，或者点击组队(收藏或管理)按钮.
@@ -154,7 +84,7 @@ Page({
     // 采用Promise.all 并行处理两个请求-------------------
     Promise.all([favouritePosting,favouriteTeam])
       .then(result => {
-        console.log(result[0].data.data[0]);
+        // console.log(result[0].data.data[0]);
         // 处理收藏组队的数据------------------
         let jirenItemList = result[1].data.data.map( v=>{
           let team = {
@@ -224,7 +154,7 @@ Page({
           let tempList = {
             labelText : v.labelContent,
             title : v.title,
-            description : v.content,
+            description : v.brief,
             userName : v.initiatorNickName,
             userAvatar : v.initiatorAvatar,
             postingPic : v.firstPicUrl,
@@ -426,7 +356,7 @@ function dealWithPosting(res) {
       let tempList = {
         labelText : v.labelContent,
         title : v.title,
-        description : v.content,
+        description : v.brief,
         userName : v.initiatorNickName,
         userAvatar : v.initiatorAvatar,
         postingPic : v.firstPicUrl,
