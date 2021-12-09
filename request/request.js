@@ -1,6 +1,6 @@
 // http://101.132.130.199:8080
 // 说明：将 wx.request 封装成 promise ,并提取了公共路径；
-export const request = (params)=> {
+const request = (params)=> {
   const baseUrl  = 'https://jixingyun.tongji.edu.cn/api/';
   // const baseUrl = "https://www.wallbreaker.top";
   //const baseUrl  = 'http://localhost:8080';
@@ -16,4 +16,8 @@ export const request = (params)=> {
       }
     })
   })
+}
+
+module.exports = {
+  request
 }

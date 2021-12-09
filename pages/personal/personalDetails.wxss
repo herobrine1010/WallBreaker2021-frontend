@@ -46,7 +46,7 @@
   height: 44rpx;
   background: #FFFFFF;
   border-radius: 30rpx;
-  margin-right: 30rpx;
+  margin-right: 25rpx;
   padding-left: 20rpx;
 
   font-family: PingFang SC;
@@ -59,6 +59,15 @@
   width: 360rpx;
   height: 40rpx;
 }
+.switch-name{
+  position: relative;
+  left: -17rpx;
+  font-family: PingFang SC;
+  font-size: 26rpx;
+  line-height: 44rpx;
+  color: #4A5559;
+}
+
 .wxid-popover{
   position: relative;
   width: 242rpx;
@@ -67,10 +76,16 @@
   left: -460rpx;
 }
 
+.wx-description{
+  position: absolute;
+  top: -36rpx;
+  left: 48rpx;
+}
 .warn{
+  position: relative;
   height: 40rpx;
   width: 100%;
-  margin-bottom: 15rpx;
+  margin-top: 15rpx;
   text-align: center;
   font-family: PingFang SC;
   font-style: normal;

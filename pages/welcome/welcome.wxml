@@ -12,5 +12,5 @@
     <view class="line"></view>
   </view>
 
-  <image class="logo-tj" src="../../static/icon/logo-tj3.png"></image>
+  <image class="logo-tj" src="../../static/icon/logo-tj-pb.png"></image>
 </view>
