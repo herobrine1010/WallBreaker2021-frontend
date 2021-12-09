@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 450rpx;
+  width: 480rpx;
   height: 192rpx;
   top: 400rpx;
   left: 170rpx;

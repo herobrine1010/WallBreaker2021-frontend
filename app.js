@@ -1,7 +1,14 @@
 // app.js
 App({
   //onLaunch函数在小程序初始化完成后触发，全局只触发一次。
-  onLaunch() {
+  onLaunch(msg) {
+    console.log(msg); // 转发！
+    wx.getShareInfo({
+      shareTicket: msg.shareTicket,
+    }).then(res => {
+      console.log(res);
+    })
+    
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -28,7 +35,8 @@ App({
   globalData: {
     userInfo: null,
     personalManagementOrCollection : 1,
-    url:'https://www.wallbreaker.top'
+    url:'https://jixingyun.tongji.edu.cn/api/'
+    // url:'https://www.wallbreaker.top'
     //url:'http://localhost:8080'
   }
 })

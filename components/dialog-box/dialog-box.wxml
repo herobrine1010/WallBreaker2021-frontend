@@ -11,7 +11,7 @@
         <image wx:if="{{infoDetail.copyEnable}}" src="/static/icon/copy-tongde.png" class="copyBtn" bindtap="tapCopy"></image><!-- 图标待改 -->
     </view>
     
-    <text class="dialog-box-tip">{{tip}}</text>
+    <text class="dialog-box-tip" selectable="{{true}}">{{tip}}</text>
     <view class="dialog-btn-box">
       <view class="dialog-box-cancel" bindtap="tapCancel">{{cancelText}}</view>
       <view class="dialog-box-ok" bindtap="tapOk">{{okText}}</view>

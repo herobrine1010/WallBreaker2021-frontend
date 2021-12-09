@@ -23,7 +23,7 @@
       <!-- 状态量为0的时候，循环加载 帖子 卡片 -->
       <!--  -->
       <block wx:if="{{isNoticeOrTeam===0}}" wx:for="{{jishiItemList}}" wx:key="{{index}}">
-        <navigator url="../jishi/detail?postId={{item.id}}" class="team-item">
+        <navigator url="../jishi/detail-new?postingId={{item.id}}" class="team-item">
           <card-notice 
           labelText="{{item.labelText}}"
           title="{{item.title}}"
