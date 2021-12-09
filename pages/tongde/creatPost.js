@@ -199,7 +199,7 @@ Page({
     ],
     // 选中标签列表
     selectedLabelList: [],
-    defaultObject: {id:0,name:'联系渠道'},
+    defaultObject: {id:39,name:'微信'},
     height:'auto',
     //------------确认提交的弹窗，用于渲染------------
     isDialogShow:false,
