@@ -65,6 +65,7 @@ Page({
         }
         this.setData({
           title,
+          postingId,
           isPostingCollected,
           name,
           initiatorAvatar,
@@ -116,24 +117,57 @@ Page({
       }
     }
   },
+
+
+  // -------- ----------- 收藏 、 取消 ------------------- --------------- ---------------------
+
   collect:function(){
-    this.setData({
-      isPostingCollected : 1
-    });
-    wx.showToast({
-      title: '收藏成功',
-      icon:'success'
+    request({
+      url : `/userFavouritePosting/addToMyFavouritePosting/${this.data.postingId}`,
+      method : "POST",
+      header:{'cookie':wx.getStorageSync('token')},
+    }).then(res => {
+      if (res.statusCode == 200 && res.data.success) {
+        this.setData({
+          isPostingCollected : 1
+        });
+        wx.showToast({
+          title: '收藏成功',
+          icon:'success'
+        })
+      } else {
+        wx.showToast({
+          title: '网络错误请重试',
+          icon:'warn'
+        })
+      }
     })
+
   },
   cancelCollect:function(){
-    this.setData({
-      isPostingCollected : 0
-    });
-    wx.showToast({
-      title: '取消收藏',
-      icon:'success'
+    request({
+      url : `/userFavouritePosting/RemoveFromMyFavouritePosting/${this.data.postingId}`,
+      method:"DELETE",
+      header:{'cookie':wx.getStorageSync('token')},
+    }).then( res => {
+      if (res.statusCode == 200 && res.data.success) {
+        this.setData({
+          isPostingCollected : 0
+        });
+        wx.showToast({
+          title: '取消收藏',
+          icon:'success'
+        })
+      } else {
+        wx.showToast({
+          title: '网络错误请重试',
+          icon:'warn'
+        })
+      }
     })
   },
+
+  
   attachNavgitor:function(e){
     let linkUrl = e.currentTarget.dataset.link;
     wx.navigateTo({

@@ -1,10 +1,11 @@
 <!--pages/personal/main.wxml-->
 <!-- 页面主要容器及背景 -->
-<view class="background">
+<view class="background"></view>
   <!-- nav 组件调用 -->
+<view>
   <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="关于我们"></mp-navigation-bar>
   <!-- 以下是container，包含了除标题外的其余内容 -->
-  <view class="per-container">
+  <view class="per-con">
     <view class="product-head">{{productHead}}</view>
     <view class="product-body">
       <text>{{productBody}}</text>
@@ -14,10 +15,33 @@
       <text>{{teamBody}}</text>
     </view>
     <view class="officialAccount-head">{{officialAccountHead}}</view>
-    <view class="officialAccount-body">{{officialAccountBody}}</view>
+    <view class="officialAccount-body">
+      {{officialAccountBody}}
+      <view class="officialAccount-body-pic-area">
+        <view class="pic-head">
+          <text>破济er壁 公众号</text>
+          <text>喵济 表情包</text>
+        </view>
+        <view class="pic-body">
+          <image src="../../static/icon/offocoal-account.jpg" mode="aspectFill" alt="破济er壁 公众号(二维码)"></image>
+          <image src="../../static/icon/offocoal-account-meme.png" mode="aspectFill" alt="喵济 表情包(二维码)" style="height: 264rpx; width : 264rpx;"></image>
+        </view>
+      </view>
+    </view>
+
     <view class="contactUs-head">{{contactUsHead}}</view>
     <view class="contactUs-body">
       <text decode="{{true}}" user-select="{{true}}">{{contactUsBody}}</text>
+      <text decode="{{true}}" user-select="{{true}}" style="font-style:italic; text-align : center;">{{pobyWords}}</text>
+      <text decode="{{true}}" user-select="{{true}}">{{wxId}}</text>
+    </view>
+    <view class="apply-pic-area">
+        <view class="pic-head">
+          <text>报名问卷</text>
+        </view>
+        <view class="pic-body">
+          <image src="../../static/icon/apply.png" mode="aspectFill" alt="报名问卷"></image>
+        </view>
     </view>
   </view>
 </view>

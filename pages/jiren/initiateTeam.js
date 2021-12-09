@@ -317,6 +317,16 @@ Page({
                 tapCancelEvent:"tapCancelForAddWxId",
                 isDialogShow:true,
               });
+            }else if(res.data.msg == "当前用户已被禁言"){
+              that.setData({
+                dialogContent:"您已被禁言！",
+                dialogTip:"您因违规行为暂被禁言，如需申诉请联系 TongjiPoby@163.com",
+                dialogCancelText:"取消",
+                dialogOkText:"确定",
+                tapOkEvent:"hideDialog",
+                tapCancelEvent:"hideDialog",
+                isDialogShow:true,
+              });
             }else{  // 其余接口错误（网络不好）
               wx.showToast({
                 title: '网络异常，请重试 :(',
@@ -348,6 +358,12 @@ Page({
     })
   },
   tapCancelForAddWxId(){
+    this.setData({
+      isDialogShow:false,
+    })
+  },
+
+  hideDialog(){
     this.setData({
       isDialogShow:false,
     })

@@ -28,7 +28,8 @@ App({
   globalData: {
     userInfo: null,
     personalManagementOrCollection : 1,
-    url:'https://www.wallbreaker.top'
+    url:'https://jixingyun.tongji.edu.cn/api/'
+    // url:'https://www.wallbreaker.top'
     //url:'http://localhost:8080'
   }
 })
