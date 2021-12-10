@@ -26,7 +26,6 @@ async function getTeamWithPage(pageNo, keyword,labelId,timeIndex) {
     url : '/team/jirenGetTeamWithPage',
     header: {
       'content-type': 'x-www-form-urlencoded',
-      'cookie':wx.getStorageSync("token")
     },
     data : setRequestData(pageNo, keyword,labelId,timeIndex)
   });
@@ -86,9 +85,10 @@ async function setTeamDataInFirstPage(that , pageNo = 1, keyword, labelId, timeI
     firstPageData['isRefresherOpen'] = false;
     // setData是page对象里才有的办法，所以在调用函数时，要把page对象传入进来；
     that.setData(firstPageData);
-    getNextPostingPage(that , keyword, labelId, timeIndex); //获取并处理下一页；
+    getNextTeamPage(that , keyword, labelId, timeIndex); //获取并处理下一页；
   } catch (error) {
     // 超时提示
+    console.log(error);
     wx.showToast({
       title: error,
       icon: 'error'
