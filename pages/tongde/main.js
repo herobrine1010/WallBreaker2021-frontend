@@ -249,7 +249,7 @@ Component({
    */
   observers: {
     "tab, selectedLabelList[0].id, keyword": function(tab, id, keyword) {
-      console.log("数据监听器",tab,id, keyword);
+      // console.log("数据监听器",tab,id, keyword);
       this.setData({
         id,
         current: 1
@@ -278,12 +278,12 @@ Component({
         pageSize : 4
       }
     }).then(res => {
-      console.log(res);
+      // console.log(res);
     })
 
   },
   onShow: function(options) {
-    console.log("in tongde main page", options);
+    // console.log("in tongde main page", options);
     // getThenUpdateLostFoundList(this,this.data.tab,null,null,1);
     // updateCache(this,this.data.tab,null,null,2);
   },
@@ -318,7 +318,7 @@ Component({
     if(this.data.current<=this.data.pages) {
     updateCache(this, this.data.tab, this.data.id, this.data.keyword, this.data.current+1);
     }
-    console.log("reachBottom",this.data.current)
+    // console.log("reachBottom",this.data.current)
 
   },
   // 跳转：发起组队事件：------------- --------- ------ ------- --

@@ -21,17 +21,17 @@ Page({
    */
   data: {
     condition:'寻物中',/* 别的状态(?) */
-    title:'机器学习算法书',
+    title:'遗失物品',
     userAvatar:'/static/icon/default-user-big.png',
     userName:"破壁者1号",
     time:'2021年6月9日 21:40',
     tag:['#雨伞','#其他'],
-    description:"9.9晚上在嘉定博楼217捡到一本机器学习算法书",
-    location:'在嘉定博楼217靠窗第一排座位捡到',
+    description:"数据加载中...",
+    location:'数据加载中...',
     number:'15615333420',
     type:0,//物品遗失0 寻找失主1
     closed:false,
-    pictures:['https://img-blog.csdnimg.cn/2021092014302085.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAYWFhc2h1b3c=,size_20,color_FFFFFF,t_70,g_se,x_16','','','','','','',''],
+    pictures:['','','','','','','',''],
     userId: 10,
     personalInfo:{
         "avatar":"https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02",
@@ -208,7 +208,8 @@ Page({
         contact: data.contact,
         type: data.type,//物品遗失0寻找失主1
         closed: data.closed,
-        pictures: data.allPicUrl.split(','), //字符串拆成列表
+        //pictures: data.allPicUrl ? data.allPicUrl.split(','):['/static/icon/tongde-default-image.png'], //留一个页面
+        pictures: data.allPicUrl.split(','),
         'dialog.infoDetail.Value': data.contact,
         'dialog.infoDetail.Key': contactTypeText.filter(item => item.id==data.contactType)[0].content + ": "
       });

@@ -65,7 +65,7 @@
           <text class="title">{{"遗失/捡到地点"}}</text>
         </view>
         <view class="input-location-box input-box">
-          <input name="location" class="input-location" maxlength="25" placeholder="寻找失主信息必填，物品遗失信息可选填选项" placeholder-class="input-placeholder" />
+          <input name="location" class="input-location" maxlength="25" placeholder="寻找失主信息必填，物品遗失信息可选填" placeholder-class="input-placeholder" />
           <view class="error-wrap"  wx:if="{{ errors.location }}">
             <image src="/static/icon/Alert-warning.png" class="icon"></image>
             <text class="error-tip">{{ errors.location }}</text>
