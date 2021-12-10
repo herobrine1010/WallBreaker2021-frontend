@@ -56,9 +56,12 @@ Page({
         registered,
         code : status
       } = res.data.data;
-      wx.setStorageSync( 'openid' , openId);
-      wx.setStorageSync('registered', registered);
-      wx.setStorageSync("token", res.cookies[0]);
+      app.globalData.token = res.cookies[0];
+      app.globalData.openId = openId;
+      app.globalData.registered = registered;
+      // wx.setStorageSync( 'openid' , openId);
+      // wx.setStorageSync('registered', registered);
+      // wx.setStorageSync("token", res.cookies[0]);
       if(status == 'registered'){// 完成了统一身份认证
         if(res.data.data.jirenMsgNum>0){
           app.globalData.noticeNum = res.data.data.jirenMsgNum

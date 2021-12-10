@@ -27,8 +27,7 @@ async function getPostingWithPage(pageNo, keyword,labelId,timeIndex) {
   let p1 = request({
     url : '/posting/jishiGetPostingWithPage',
     header: {
-      'content-type': 'x-www-form-urlencoded',
-      'cookie':wx.getStorageSync("token")
+      'content-type': 'x-www-form-urlencoded'
     },
     data : setRequestData(pageNo, keyword,labelId,timeIndex)
   });

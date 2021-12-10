@@ -42,7 +42,7 @@ const getNotice = param => {
   wx.request({
     url:app.globalData.url+ '/user/redPointRelated',
     method:"GET",
-    header:{cookie:wx.getStorageSync('token')},
+    header:{'cookie':app.globalData.token},
     success:function(res){
       if(res.statusCode==200){
         console.log('消息总数',res.data.data);
