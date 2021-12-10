@@ -28,6 +28,7 @@
   justify-content: center;
   letter-spacing: 1px;
   float:left;
+  opacity: 50%;
   /* z-index:3; */
   /* Button/blue1 */
   background: #F2FCFF;
@@ -110,14 +111,14 @@ page {
   height:9vw;
   width:9vw;
   right: 5.9%;
-  bottom: 21%;
+  bottom: 20vw;
  }
  .addButton{
   position: fixed;
   height:15vw;
   width:15vw;
   right: 3%;
-  bottom: 12%;
+  bottom: 12px;
  }
 
  /**/

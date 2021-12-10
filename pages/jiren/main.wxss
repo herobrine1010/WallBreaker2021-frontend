@@ -233,14 +233,14 @@ border-style: solid;
   height:9vw;
   width:9vw;
   right: 5.9%;
-  bottom: 21%;
+  bottom: 20vw;
  }
  .addButton{
   position: fixed;
   height:15vw;
   width:15vw;
   right: 3%;
-  bottom: 12%;
+  bottom: 12px;
  }
  /* ------------------- 以上是排序和筛选 的样式- end  ----------------- */
 
