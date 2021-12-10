@@ -41,10 +41,11 @@ Component({
       var that = this;
       let editList = this.data.value
       wx.chooseImage({
-        count: 9,　　　　　　　　　　　　　　　　　　    // 最多可以选择的图片张数
-        sizeType: ['original', 'compressed'],      // 选择图片的尺寸
+        count: 9-editList.length,　　　　　　　　　　　　　　　　　　    // 最多可以选择的图片张数,每次选择后减少之后选择的总数
+        sizeType: ['compressed'],      // 选择图片的尺寸
         sourceType: ['album', 'camera'],           // 选择图片的来源
         success: function(res) {
+          let imageSize = res.tempFiles[0].size;
           editList = editList.concat(res.tempFilePaths)   //向后追加，数组连接
           that.setData({
             value: editList
