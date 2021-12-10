@@ -76,7 +76,7 @@ Component({
         url: "/userLostFound/removeMyLostFound",
         header: {
           'content-type': 'application/json',
-          'cookie':wx.getStorageSync("token")
+           
         },
         method : 'POST',
 

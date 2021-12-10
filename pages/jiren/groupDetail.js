@@ -168,7 +168,7 @@ Page({
     return request({
       url: '/team/getTeamAndCheckStatus/'+teamId,
       header:{
-        'cookie':wx.getStorageSync('token')
+         
       }
     })
     .then(res=>{
@@ -242,7 +242,7 @@ Page({
         url: '/user/userInfo',
         data:{userId:temp.initiatorId},
         header:{
-          'cookie':wx.getStorageSync('token'),
+           
         }
       })
       .then(res =>{
@@ -333,7 +333,7 @@ Page({
           url:app.globalData.url+ '/userTeam/applicantCheckNotice',
           method:"POST",
           data:{teamId:that.data.teamId},
-          header:{cookie:wx.getStorageSync('token')}
+          header:{cookie:app.globalData.token}
         })
         //再弹窗提示对应消息
         if(applyClosed){ //优先处理close
@@ -361,7 +361,7 @@ Page({
     let self = this;
     return request({
       url: '/userTeam/getAllMemberInfoByTeamId/'+teamId,
-      header:{'cookie':wx.getStorageSync('token')}
+      header:{ }
     })
     .then(res=>{
       if(res.statusCode>=200&&res.statusCode<300){
@@ -597,7 +597,7 @@ copyWxId(){
         },
         header:{
           'content-type': 'application/x-www-form-urlencoded',
-          'cookie':wx.getStorageSync('token')
+           
         },
       }).then(res=>{
         if(res.statusCode>=200&&res.statusCode<300){
@@ -702,7 +702,7 @@ copyWxId(){
       url: '/userTeam/approveApplication',
       header:{
         'content-type':'application/json',
-        'cookie':wx.getStorageSync('token')
+         
       },
       data:{
         userId:this.data.targetId,
@@ -760,7 +760,7 @@ copyWxId(){
       url: '/userTeam/rejectApplication',
       header:{
         'content-type':'application/json',
-        'cookie':wx.getStorageSync('token')
+         
       },
       data:{
         userId:that.data.targetId,
@@ -827,7 +827,7 @@ copyWxId(){
     request({
       url: '/userTeam/autoApproveByTeamId/'+this.data.teamId,
       header:{
-        'cookie':wx.getStorageSync('token')
+         
       },
     }).then(res=>{
       // 重新请求获取 成员列表、申请者列表数据
@@ -854,7 +854,7 @@ copyWxId(){
       wx.request({
         url: app.globalData.url+'/userFavouriteTeam/addToMyFavouriteTeam/'+this.data.teamId,
         header:{
-          'cookie':wx.getStorageSync('token')
+          'cookie':app.globalData.token
         },
         method:'POST',
         success:function(){
@@ -870,7 +870,7 @@ copyWxId(){
       wx.request({
         url: app.globalData.url+'/userFavouriteTeam/RemoveFromMyFavouriteTeam/'+this.data.teamId,
         header:{
-          'cookie':wx.getStorageSync('token')
+          'cookie':app.globalData.token
         },
         method:'DELETE',
         success:function(){
@@ -941,7 +941,7 @@ copyWxId(){
         request({
           url:'/userTeam/apply',
           method:"POST",
-          header:{'cookie':wx.getStorageSync('token')},
+          header:{ },
           data:{
             teamId:that.data.teamId,
           },
@@ -1054,7 +1054,7 @@ copyWxId(){
         teamId:that.data.teamId
       },
       method:'POST',
-      header:{'cookie':wx.getStorageSync('token')},
+      header:{ },
     }).then(res => {
       if(res.statusCode>=200&&res.statusCode<300){
         return that.getTeamDetail(that.data.teamId);

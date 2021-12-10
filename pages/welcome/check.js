@@ -37,7 +37,7 @@ Page({
                 method:'POST',
                 header:{
                   'content-type':'application/json',
-                  'cookie' : wx.getStorageSync('token')
+                  'cookie':app.globalData.token
                 },
                 success: res => {
                   let openid = res.data.data.openId;

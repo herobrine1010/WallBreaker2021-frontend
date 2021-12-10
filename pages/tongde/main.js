@@ -39,7 +39,7 @@ function requestWithPage(that, type=0, labelId='', keyword='',pageNo) {
     url: '/lostfound/tongdeGetLostFoundWithPage',
     header: {
       'content-type': 'application/x-www-form-urlencoded',
-      'cookie':wx.getStorageSync("token")
+       
     },
     method : 'GET',
     data: {...setRequestData(keyword, labelId, type, pageNo), pageSize: 6}
@@ -270,7 +270,7 @@ Component({
       url: '/lostfound/tongdeGetLostFoundWithPage',
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       },
       method : 'GET',
       data: {

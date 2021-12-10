@@ -115,7 +115,7 @@ Page({
       url : '/userTeam/teamAppliedByMe',
       header: {
         'content-type': 'x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       }
     }).then(res => {
       console.log(res);

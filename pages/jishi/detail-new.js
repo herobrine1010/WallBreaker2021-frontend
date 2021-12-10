@@ -36,7 +36,7 @@ Page({
       url : '/posting/getPosting/' + postingId,
       header: {
         // 'content-type': 'x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       },
     }).then(res => {
       console.log("posting request",res.data.data);
@@ -125,7 +125,7 @@ Page({
     request({
       url : `/userFavouritePosting/addToMyFavouritePosting/${this.data.postingId}`,
       method : "POST",
-      header:{'cookie':wx.getStorageSync('token')},
+      header:{ },
     }).then(res => {
       if (res.statusCode == 200 && res.data.success) {
         this.setData({
@@ -148,7 +148,7 @@ Page({
     request({
       url : `/userFavouritePosting/RemoveFromMyFavouritePosting/${this.data.postingId}`,
       method:"DELETE",
-      header:{'cookie':wx.getStorageSync('token')},
+      header:{ },
     }).then( res => {
       if (res.statusCode == 200 && res.data.success) {
         this.setData({

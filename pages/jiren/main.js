@@ -125,7 +125,7 @@ function getTeamList(that,keyword,labelId,timeIndex){
     url : '/team/jirenGetTeam',
     header: {
       'content-type': 'x-www-form-urlencoded',
-      'cookie':wx.getStorageSync("token")
+       
     },
     data : setRequestData(keyword, labelId, timeIndex)
   }).then(res => {

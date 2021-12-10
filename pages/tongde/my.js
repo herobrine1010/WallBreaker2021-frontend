@@ -31,7 +31,7 @@ Component({
       url: "/userLostFound/getMYLostFound",
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       },
       method : 'GET',
     }).then(res => {

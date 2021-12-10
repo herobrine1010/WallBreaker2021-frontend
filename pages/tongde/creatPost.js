@@ -18,7 +18,7 @@ function mergePathThenUploadImage(imagePath) {
     method: 'POST',
     header: {
       'content-type': data.contentType,
-      'cookie':wx.getStorageSync("token")
+       
     },
     data : data.buffer
   });
@@ -43,7 +43,7 @@ function createPostRequest(formValue) {
     url: '/lostfound/initializeLostFound', 
     header: {
       'content-type': 'application/json',
-      'cookie':wx.getStorageSync("token")
+       
     },
     method : 'POST',
     data: formValue

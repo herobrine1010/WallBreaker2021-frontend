@@ -28,7 +28,7 @@ Page({
           method : 'POST',
           header : {
             'content-type' :  'application/x-www-form-urlencoded',
-            'cookie':wx.getStorageSync("token")
+             
           },
           data : {
             'content' : text

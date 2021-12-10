@@ -100,7 +100,7 @@ Page({
       url : '/userTeam/teamInitiatedByMe',
       header: {
         'content-type': 'x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       }
     }).then(res => {
       if(res.statusCode >=200 && res.statusCode <300){

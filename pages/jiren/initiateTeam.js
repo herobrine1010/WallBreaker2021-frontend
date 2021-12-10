@@ -263,7 +263,7 @@ Page({
       method: 'POST',
       header: {
         'content-type': data.contentType,
-        'cookie':wx.getStorageSync("token")
+         
       },
       data : data.buffer
     }).then(res => { //上传图片成功的回调
@@ -287,7 +287,7 @@ Page({
           method: 'POST',
           header: {
             'content-type': 'application/json',
-            'cookie':wx.getStorageSync("token")
+             
           },
           data: that.data.payload,
         }).then( res => {

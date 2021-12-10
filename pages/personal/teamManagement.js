@@ -62,7 +62,7 @@ Page({
       url : '/userTeam/teamAppliedByMeWithPage',
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       },
       data : {
         pageNo : 1
@@ -75,7 +75,7 @@ Page({
       url : '/userLostFound/getMyLostFoundWithPage',
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       },
       data : {
         pageNo : 1
@@ -88,7 +88,7 @@ Page({
       url : '/userTeam/teamInitiatedByMeWithPage',
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       },
       data : {
         pageNo : 1
@@ -102,14 +102,14 @@ Page({
       url : '/userTeam/teamAppliedByMe',
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       }
     });
     let teamInitiatedByMe=request({
       url : '/userTeam/teamInitiatedByMe',
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       }
     });
     Promise.all([teamAppliedByMe,teamInitiatedByMe])

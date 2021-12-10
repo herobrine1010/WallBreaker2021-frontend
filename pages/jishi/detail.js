@@ -41,7 +41,7 @@ Page({
     let that=this;
     wx.request({
       url: app.globalData.url+'/posting/getPosting/'+that.data.postingId,
-      header:{'cookie':wx.getStorageSync('token')},
+      header:{'cookie':app.globalData.token},
       success:function(res){
         if(res.statusCode==200){
           let postingdata=res.data.data;
@@ -116,7 +116,7 @@ Page({
     wx.request({
       url: app.globalData.url+'/userFavouritePosting/addToMyFavouritePosting/'+this.data.postingId,
       method:"POST",
-      header:{'cookie':wx.getStorageSync('token')},
+      header:{'cookie':app.globalData.token},
       success:function(res){
         if(res.statusCode==200){
           that.setData({
@@ -132,7 +132,7 @@ Page({
     wx.request({
       url: app.globalData.url+'/userFavouritePosting/RemoveFromMyFavouritePosting/'+this.data.postingId,
       method:"DELETE",
-      header:{'cookie':wx.getStorageSync('token')},
+      header:{'cookie':app.globalData.token},
       success:function(res){
         if(res.statusCode==200){
           that.setData({

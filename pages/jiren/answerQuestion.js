@@ -51,7 +51,7 @@ Page({
       wx.request({
         url: app.globalData.url+'/team/getTeam/'+options.teamId,
         // data:{question},
-        header:{'cookie':wx.getStorageSync('token')},
+        header:{'cookie':app.globalData.token},
         success:function(res){
           let question=JSON.parse(res.data.data.question);
  
@@ -158,7 +158,7 @@ Page({
     wx.request({
       url: app.globalData.url+'/userTeam/apply',
       method:"POST",
-      header:{'cookie':wx.getStorageSync('token')},
+      header:{'cookie':app.globalData.token},
       data:{
         teamId:that.data.teamId,
         // answer:that.data.answerList,

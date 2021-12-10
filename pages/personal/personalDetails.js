@@ -128,7 +128,7 @@ Page({
           url : '/user/editMyInfo',
           header: {
             'content-type': 'application/json',
-            'cookie':wx.getStorageSync("token")
+             
           },
           method : 'PUT',
           data :  that.data.userDetails
@@ -143,7 +143,7 @@ Page({
         url : '/user/editMyInfo',
         header: {
           'content-type': 'application/json',
-          'cookie':wx.getStorageSync("token")
+           
         },
         method : 'PUT',
         data : that.data.userDetails
@@ -157,7 +157,7 @@ Page({
       url : '/userPublicInfo/editMyPublicInfo',
       header: {
         'content-type': 'application/json',
-        'cookie':wx.getStorageSync("token")
+         
       },
       method : 'PUT',
       data : {
@@ -184,7 +184,7 @@ Page({
       url : '/userLabel/editMyLabel',
       header: {
         'content-type': 'application/json',
-        'cookie':wx.getStorageSync("token")
+         
       },
       method : 'POST',
       data : labels
@@ -254,7 +254,7 @@ Page({
       url : "/user/myInfoWithLabel",
       header: {
         'content-type': 'x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       }
     }).then( res => {
       let result = res.data.data;

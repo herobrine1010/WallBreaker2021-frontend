@@ -71,14 +71,14 @@ Page({
       url : '/userFavouritePosting/getMyFavouritePosting',
       header: {
         'content-type': 'applicationx-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       }
     });
     let favouriteTeam = request({
       url : '/userFavouriteTeam/getMyFavouriteTeam',
       header: {
         'content-type': 'applicationx-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       }
     });
     // 采用Promise.all 并行处理两个请求-------------------
@@ -324,7 +324,7 @@ async function getPostingData(pageNo, pageSize = 10) {
     url : '/userFavouritePosting/getMyFavouritePostingByPage',
     header: {
       'content-type': 'applicationx-www-form-urlencoded',
-      'cookie':wx.getStorageSync("token")
+       
     },
     data : {
       pageNo,
@@ -337,7 +337,7 @@ async function getTeamData(pageNo, pageSize = 10) {
     url : '/userFavouriteTeam/getMyFavouriteTeamWithPage',
     header: {
       'content-type': 'applicationx-www-form-urlencoded',
-      'cookie':wx.getStorageSync("token")
+       
     },
     data : {
       pageNo,

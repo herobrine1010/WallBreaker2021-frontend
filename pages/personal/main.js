@@ -2,7 +2,7 @@
 // 首先引入封装成promise的 request
 import { request } from "../../request/request.js";
 import util from "../../utils/util.js";
-
+const app = getApp();
 Page({
 
   /**
@@ -49,14 +49,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    let registered = wx.getStorageSync('registered');
+    let registered = app.globalData.registered;
     if(!registered){ // 注册完成后首次进入
-      let openid = wx.getStorageSync('openid');
+      let openid = app.globalData.openId;
       request({
         url : `/user/setUserRegisteredTrueByOpenId/${openid}`,
         header: {
           'content-type': 'x-www-form-urlencoded',
-          'cookie':wx.getStorageSync("token")
+           
         }
       }).then(res => {
         console.log('更改请求状态接口',res);
@@ -108,7 +108,7 @@ Page({
       url : "/user/myInfo",
       header: {
         'content-type': 'x-www-form-urlencoded',
-        'cookie':wx.getStorageSync("token")
+         
       }
     }).then( res => {
       let perInfo = res.data.data;
