@@ -67,6 +67,7 @@ input {
 .text-box,
 .input-box {
   display: flex;
+  justify-content: space-between;
 }
 .input-lost-name {
   height: 40rpx;
@@ -116,9 +117,7 @@ radio-group > radio {
   margin-right: 40rpx;
 }
 
-.input-location-box {
-  /* padding: 0px 0px 0px 40rpx; padding似乎对于input输入的文字不起作用*/
-}
+
 .input-location {
   margin-left: 44rpx; /*这里使用margin*/
   font-size: 20rpx;
@@ -132,13 +131,14 @@ radio-group > radio {
   margin-left: 16rpx;
   border-bottom: 1px solid #DEDEDE;
 }
-dropdown-box {
+.contact-type-picker {
   height: 36rpx;
   width: 232rpx;
   font-size: 24rpx;
   line-height: 1.5;
   color: #545454;
-  padding: 0 0 16rpx 32rpx;
+  text-align: center;
+  padding-bottom: 16rpx;
   border-bottom: 1px solid #DEDEDE;
 }
 .a-line{
@@ -152,7 +152,7 @@ dropdown-box {
   box-sizing: border-box;
   width: 686rpx !important;
   height: 80rpx;
-  margin: 250rpx auto 0;
+  margin: 192rpx auto 50rpx;
   padding: 20rpx 0 18rpx 0;
   background: #3E92CC;
   border-radius: 8rpx;
@@ -184,10 +184,17 @@ radio .wx-radio-input{
 .icon {
   height: 24rpx;
   width: 24rpx;
-  margin: 0 8rpx;
+  margin: 0 8rpx 0 0;
+  vertical-align: middle;
+}
+.error-tip {
   vertical-align: middle;
 }
 .error-wrap {
-  margin-left: 32rpx;
+  margin-left: 24rpx;
+  color: #FA5151;
+}
+.error-wrap-input {
+  margin-left: 0;
   color: #FA5151;
 }

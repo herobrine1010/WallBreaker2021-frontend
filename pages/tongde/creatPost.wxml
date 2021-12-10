@@ -16,17 +16,17 @@
       <view class="item-wrap">
         <view class="input-lost-name-box input-box">
           <input name="name" class="input-lost-name" maxlength="25" placeholder="请输入失物名称" placeholder-class="input-placeholder" />
-          <view class="error-wrap"  wx:if="{{ errors.name }}">
+        </view>
+        <view class="error-wrap-input"  wx:if="{{ errors.name }}">
           <image src="/static/icon/Alert-warning.png" class="icon"></image>
           <text class="error-tip">{{ errors.name }}</text>
-          </view> 
-        </view>
+        </view> 
       </view>
       <view class="item-wrap description">
         <view class="text-box">
           <textarea name="content" class="text-area" maxlength="500" placeholder="请输入情况说明" placeholder-class="input-placeholder"></textarea>
         </view>
-        <view class="error-wrap"  wx:if="{{ errors.content }}">
+        <view class="error-wrap-input"  wx:if="{{ errors.content }}">
           <image src="/static/icon/Alert-warning.png" class="icon"></image>
           <text class="error-tip">{{ errors.content }}</text>
         </view> 
@@ -36,7 +36,7 @@
           <image class="icon" src="../../static/icon/label.png"></image>
           <text class="title">选择标签</text>
           <image class="icon" src="/static/icon/right-arrow.svg" style="position: absolute; right:0;"/>
-          <view class="error-wrap"  wx:if="{{ errors.selectedLabels }}">
+          <view class="error-wrap" style="margin-left: 12px;"  wx:if="{{ errors.selectedLabels }}">
             <image src="/static/icon/Alert-warning.png" class="icon"></image>
             <text class="error-tip">{{ errors.selectedLabels }}</text>
           </view>
@@ -50,7 +50,7 @@
           <image class="icon" src="../../static/icon/lostType.png"></image>
           <text class="title">招领类型</text>
         </view>
-        <view class="error-wrap"  wx:if="{{ errors.type }}">
+        <view class="error-wrap" style="margin-left: -44px;" wx:if="{{ errors.type }}">
           <image src="/static/icon/Alert-warning.png" class="icon"></image>
           <text class="error-tip">{{ errors.type }}</text>
         </view>
@@ -66,7 +66,7 @@
         </view>
         <view class="input-location-box input-box">
           <input name="location" class="input-location" maxlength="25" placeholder="寻找失主信息必填，物品遗失信息可选填" placeholder-class="input-placeholder" />
-          <view class="error-wrap"  wx:if="{{ errors.location }}">
+          <view class="error-wrap" style="position: absolute;margin-right:0px;" wx:if="{{ errors.location }}">
             <image src="/static/icon/Alert-warning.png" class="icon"></image>
             <text class="error-tip">{{ errors.location }}</text>
           </view> 
@@ -78,10 +78,10 @@
           <text class="title">联系方式</text>
         </view>
         <view class="a-line">
-          <dropdown-box name="contactType" range="{{contactType}}" key="id" text="content" defaultOption="{{defaultObject}}" style="width: 200rpx;"></dropdown-box>
+          <picker name="contactType" class="contact-type-picker" mode="selector" range="{{contactType}}" range-key="content" value="{{contactTypeIndex}}" style="width: 200rpx;" bind:change="changeContact">{{contactType[contactTypeIndex].content}}</picker>
           <view class="input-contact-box input-box">
-            <input name="contact" class="input-half-line" style="width: 250rpx;" placeholder="请输入联系方式" maxlength="25"/>
-            <view class="error-wrap"  wx:if="{{ errors.contact }}">
+            <input name="contact" class="input-half-line" placeholder="请输入联系方式" maxlength="25"/>
+            <view class="error-wrap" wx:if="{{ errors.contact }}">
               <image src="/static/icon/Alert-warning.png" class="icon"></image>
               <text class="error-tip">{{ errors.contact }}</text>
             </view> 

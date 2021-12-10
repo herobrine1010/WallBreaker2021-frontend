@@ -199,7 +199,6 @@ Page({
     ],
     // 选中标签列表
     selectedLabelList: [],
-    defaultObject: {id:39,name:'微信'},
     height:'auto',
     //------------确认提交的弹窗，用于渲染------------
     isDialogShow:false,
@@ -259,7 +258,11 @@ Page({
         }
       }).then(res => {
         let data = res.data.data;
-        that.setData({contactType: data});
+        // data = data.map(item => item.content);
+        that.setData({
+          contactType: data,
+          contactTypeIndex: 1
+        });
       })
   },
   initValidate:  function(isLocationRequired) {
@@ -321,16 +324,18 @@ Page({
   },
   submitForm: function(e) {
     // 这个函数只是用来传递表单数据, 具体的事情在弹窗函数tapOk完成
+    let value = e.detail.value;
+    console.log(value);
+    value['contactType'] = value['contentType'] + 38;
     this.setData({
-      e,
+      formValue: value,
       isDialogShow: true,
       tapOkEvent : 'tapOk'
     });
   },
   tapOk: function() {
-    this.initValidate(this.data.e.detail.value.type==1); // 初始化表单校验 当type==0（物品遗失）时地点可选，当type==1寻找失主时 地点必填
-    let e = this.data.e;
-    let formValue = e.detail.value; // 用户填写的表单数据
+    this.initValidate(this.data.formValue.type==1); // 初始化表单校验 当type==0（物品遗失）时地点可选，当type==1寻找失主时 地点必填
+    let formValue = this.data.formValue; // 用户填写的表单数据
     let selectedLabels = this.data.selectedLabelList;
 
     if(this.WxValidate.checkForm({...formValue, selectedLabels})) {
@@ -370,7 +375,7 @@ Page({
       // 获取并刷新首页
       let pages = getCurrentPages();
       let prePage = pages[pages.length - 2];
-      prePage.onLoad();
+      if(prePage) prePage.onLoad();
 
       wx.showToast({
         title: '发布成功',
@@ -403,7 +408,7 @@ Page({
     // console.log("form的数据", formValue);
   } else {
     let errors = {};
-    for (e of this.WxValidate.errorList) {
+    for (let e of this.WxValidate.errorList) {
       errors[e.param] = e.msg
     }
     this.setData({errors});
@@ -418,6 +423,13 @@ Page({
     // console.log(e);
     let selectedLabelList = e.detail;
     this.setData({selectedLabelList});
+  },
+  changeContact: function(e) {
+    console.log(e);
+    let index = e.detail.value;
+    this.setData({
+      contactTypeIndex: index
+    })
   },
   changeScrollHeight:function(){
     let windowHeight;
