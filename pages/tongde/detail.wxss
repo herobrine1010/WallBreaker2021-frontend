@@ -29,7 +29,7 @@
   justify-content: flex-start;
   align-items: center;
   height: 48rpx;
-  margin:0 32rpx;
+  margin: 16px 32rpx 0;
 }
 .userAvatar{
   width: 48rpx;
@@ -61,7 +61,7 @@
 }
 .condition{
   display: inline-block;
-  position: fixed;
+  /* position: fixed; */
   right: 32rpx;
   padding: 10rpx 48rpx 8rpx;
   /* font */
@@ -144,7 +144,6 @@ line-height: 150%;
 flex: none;
 order: 0;
 flex-grow: 0;
-margin: 0 0;
 }
 
 .pictureArea{
