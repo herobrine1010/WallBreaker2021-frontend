@@ -123,8 +123,8 @@
 
 /* 第二行block2设置，包括标签 */
 .label {
-	color: #7C3ECC;
-	background: #F9F2FF;
+	color: #3E92CC;
+	background: #f2fcff;
 	border-radius: 8rpx;
 
 	margin: 0px 16rpx 0px 0px;
