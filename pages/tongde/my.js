@@ -36,12 +36,10 @@ Component({
       method : 'GET',
     }).then(res => {
       let data = res.data.data;
-      // console.log("我的失物招领返回数据：",data);
       let myLostFoundItemList = data.map(v => {
         // 分割日期字符串"2021-5-23 12:23:34" 再连接成"2021年5月23号"
         let dateList = v.createTime.split(/-|\s/,3);
         let dateString = `${dateList[0]}年${dateList[1]}月${dateList[2]}日`;
-        // console.log(dateString);
         return {
           'id': v.id, //跳转用
           'title':  v.name,

@@ -118,7 +118,6 @@ Page({
          
       }
     }).then(res => {
-      console.log(res);
       if(res.statusCode >=200 && res.statusCode <=300){
         // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
         let tempTeamList = res.data.data.map( v=>{
@@ -127,7 +126,6 @@ Page({
           
           return v;
         });
-        console.log(tempTeamList);
         let applyingTeamList = [];
         let acceptTeamList = [];
         for(let i = 0 ; i< tempTeamList.length; i++){
@@ -138,8 +136,6 @@ Page({
             applyingTeamList.push(tempTeamList[i]);
           }
         }
-        console.log(applyingTeamList);
-        console.log(acceptTeamList);
         return {acceptTeamList,applyingTeamList};
       }else{
         wx.showToast({

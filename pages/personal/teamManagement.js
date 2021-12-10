@@ -33,7 +33,6 @@ Page({
 //以下两个事件为：点击帖子(收藏或管理)按钮，或者点击组队(收藏或管理)按钮.
 //切换按钮颜色、页面背景；
   onScrollToLower:function(){
-    console.log("上拉触了滚动框的底");
   },
   onRefresherRefresh:function(){
     const self = this;
@@ -56,47 +55,6 @@ Page({
 
   //  将页面请求放到函数中，方便多次调用 
   getListData:function(self){
-
-    // ---- -----  调试分页接口 ------------------
-    request({
-      url : '/userTeam/teamAppliedByMeWithPage',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-         
-      },
-      data : {
-        pageNo : 1
-      }
-    }).then(res => {
-      console.log(res);
-    })
-    
-    request({
-      url : '/userLostFound/getMyLostFoundWithPage',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-         
-      },
-      data : {
-        pageNo : 1
-      }
-    }).then(res => {
-      console.log(res);
-    })
-
-    request({
-      url : '/userTeam/teamInitiatedByMeWithPage',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-         
-      },
-      data : {
-        pageNo : 1
-      }
-    }).then(res => {
-      console.log(res);
-    })
-    // ---- -----  调试分页接口   结束 ------------------
 
     let teamAppliedByMe=request({
       url : '/userTeam/teamAppliedByMe',
@@ -121,7 +79,6 @@ Page({
       for(myTeam of dataInitiatedByMe){
         myTeam.initializedByMe = true;
       };
-      console.log(dataAppliedByMe,dataInitiatedByMe);
       let teamList = dataAppliedByMe.concat(dataInitiatedByMe);
       dataAppliedByMe = null;
       dataInitiatedByMe = null;
@@ -200,7 +157,6 @@ Page({
     });
     let query = wx.createSelectorQuery();
     query.select('#scroll').boundingClientRect(rect=>{
-      console.log(rect)
         let top = rect.top;
         let height=windowHeight-top;
         this.setData({

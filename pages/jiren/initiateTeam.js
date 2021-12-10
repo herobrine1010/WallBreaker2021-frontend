@@ -78,7 +78,6 @@ Page({
       },
       success: function(res) {
         var thememList = res.data.data;
-        console.log(thememList);
         that.setData({
           themeOptions: thememList,
           theme: thememList[0]
@@ -91,7 +90,6 @@ Page({
     this.setData({
       theme: e.detail
     })
-    // console.log('选中主题',this.data.theme)
   },
   bindDateChange: function (e) {
     this.setData({
@@ -157,7 +155,6 @@ Page({
   },
   // 校验textarea长度是否超过上限
   checkContentLength: function (e) {
-    console.log(e);
     let textLength = e.detail.value.length;
     let id = e.currentTarget.id;
     // 三目表达式判断输入框字符数是否过长
@@ -198,7 +195,6 @@ Page({
   teamInfoSubmit:function(e) {
     var form = e.detail.value;
     //在这里做数据判空
-    console.log("表单数据", form)
     // 校验表单
     if (!this.checkForm(form)) {
       // 转到表单未填写处
@@ -268,7 +264,6 @@ Page({
       data : data.buffer
     }).then(res => { //上传图片成功的回调
       wx.hideLoading(); //图片上传成功后隐藏加载框
-      console.log("上传图片的回调res",res);
       if(res.statusCode >=200 && res.statusCode <=300) {
         // 拿到上传后的图片ossURL
         let imageURL = res.data.data;
@@ -291,7 +286,6 @@ Page({
           },
           data: that.data.payload,
         }).then( res => {
-            console.log('提交表单返回结果', res);
             if(res.data.msg == 'sensitive'){ // 敏感词
               wx.showToast({
                 title: '内容包含敏感词',
@@ -342,7 +336,6 @@ Page({
           title: '图片上传失败',
           icon: 'error'
         });
-        console.log(res);
       } 
     }).catch( err=> {
       wx.showToast({

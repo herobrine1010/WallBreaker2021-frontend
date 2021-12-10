@@ -64,10 +64,8 @@ Page({
     wx.enableAlertBeforeUnload({
       message:"您确定要退出吗？",
       success:function(res){
-        console.log("成功");
       },
       fail:function(errMsg){
-        console.log("失败");
       }
     })
   },
@@ -122,7 +120,6 @@ Page({
   },
 
   tapTextArea: function (e) {
-    console.log(e.currentTarget.dataset.showCount)
 
   },
   checkLength: function (e) {
@@ -132,7 +129,6 @@ Page({
 
     let currentIndex = e.currentTarget.dataset.index;
     this.data.questionList.forEach((item, i) => {    //手动遍历列表
-      // console.log(item);
       if (Number(i) == currentIndex) {   //找到当前事件对应的列表元素
         var setShowWarning = "questionList[" + i + "].showWarning";
         // var setShowCount = "list[" + i + "].showCount";
@@ -157,7 +153,6 @@ Page({
   },
 
   tapOk:function(e){
-    console.log("点击确认之后的业务");
     wx.showToast({
       title: '成功提交！',
       icon: 'none',

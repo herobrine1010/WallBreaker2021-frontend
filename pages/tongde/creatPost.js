@@ -325,7 +325,6 @@ Page({
   submitForm: function(e) {
     // 这个函数只是用来传递表单数据, 具体的事情在弹窗函数tapOk完成
     let value = e.detail.value;
-    console.log(value);
     value['contactType'] = value['contentType'] + 38;
     this.setData({
       formValue: value,
@@ -359,11 +358,9 @@ Page({
         return createPostRequest(formValue);
       }
     }).then(res => {
-      // console.log(res);
       if(res.statusCode >=200 && res.statusCode <=300 && res.data.success){
         let data = res.data.data;
         let lostFoundId = data.id; // 获取失物招领主键id, 之后添加标签
-      // console.log("发布失物招领响应数据", data);
         return addLabelRequest(lostFoundId, selectedLabels)
       }else if(res.data.msg == "当前用户已被禁言"){
 
@@ -383,7 +380,6 @@ Page({
         duration: 2000,
         success: wx.navigateBack({})
       });
-      // console.log("添加标签的响应数据", data);
     }).catch(err => {
       if(err == 'blocked'){
         this.setData({
@@ -405,7 +401,6 @@ Page({
 
     }) 
 
-    // console.log("form的数据", formValue);
   } else {
     let errors = {};
     for (let e of this.WxValidate.errorList) {
@@ -420,12 +415,10 @@ Page({
     selector.setLabelsSelected();
   },
   labelChanged: function(e) {
-    // console.log(e);
     let selectedLabelList = e.detail;
     this.setData({selectedLabelList});
   },
   changeContact: function(e) {
-    console.log(e);
     let index = e.detail.value;
     this.setData({
       contactTypeIndex: index
@@ -437,14 +430,11 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
           windowHeight= res.windowHeight;
-          // console.log("windows",windowHeight);
       }
     });
     let query = wx.createSelectorQuery();
     query.select('#scroll').boundingClientRect(rect=>{
-      // console.log(rect)
         let top = rect.top;
-        // console.log(top);
         let height=windowHeight-top;
         this.setData({
           height:height+'px',

@@ -69,12 +69,7 @@ Page({
       withShareTicket: true,
       menus: ['shareAppMessage', 'shareTimeline']
     })
-    if(!options.teamId){
-      // this.setData({teamId:119})
-      // 这里改成别的错误接收方法
-      console.log("未传入包含teamId的有效对象")
-    }else{
-      console.log('updateTeamId');
+    if(options.teamId){
       this.setData({teamId:options.teamId})
     }
     var that=this;
@@ -91,7 +86,7 @@ Page({
     let query = this.getTeamDetail(that.data.teamId);
     query.then(result=>{
       // 先处理组队数据，再发请求入队成员列表
-      console.log(result);
+
 
       that.setData({
         teamDetail: result,
@@ -102,7 +97,6 @@ Page({
     })
     .then(teamMemberList => {
     // 先处理头像数据，再判断是否为发起者，再发请求获取申请者数据 
-    console.log('组队成员信息',teamMemberList);
       that.setData({
         teamMemberList : teamMemberList
       })
@@ -114,9 +108,8 @@ Page({
           })
         })
       }
-    }).catch(
-      err=>{
-        console.log(err);
+    }).catch(err=>{
+      console.log(err);
     });
 
 
@@ -162,8 +155,6 @@ Page({
   // ----- -------- 页面加载相关函数 ------ 如（组队内容、成员列表、申请人列表） ---- -------- -------- --------
   // (1.1). 组队的内容：（包含发起人的数据）
   getTeamDetail(teamId){
-    console.log("(1.1). 组队的内容：（包含发起人的数据）")
-    console.log(teamId)
     let that=this;
     return request({
       url: '/team/getTeamAndCheckStatus/'+teamId,
@@ -174,7 +165,6 @@ Page({
     .then(res=>{
       if(res.statusCode>=200&&res.statusCode<300){
         let teamdata=res.data.data;
-          console.log('队伍信息？状态码',teamdata);
           let {
             applyStatus, title, content, allPicUrl, dueTime, createTime, dueMember, initializedByMe, initiatorId, myFavourite, status, question, reason,applyClosed,applyNotice,notice
           }=teamdata;
@@ -209,7 +199,6 @@ Page({
           let result = '';
           if(status >= 3){ //如果组队已关闭
             if(reason){
-              console.log(reason);
               result = '组队招募已经关闭\n发起人结束招募的原因如下：'
             }else{
               result = '组队招募已经关闭'
@@ -217,7 +206,6 @@ Page({
           }else if(applyStatus == 0){
             result = '你已经报名该组队，申请正在处理中~'
           }
-          console.log(result);
           that.setData({
             amITeamInitiator:initializedByMe,
             isFavourite:myFavourite,
@@ -287,8 +275,6 @@ Page({
   // (1.2) 对组队返回的状态数据进行处理：
   checkStatus(teamData){
     let that = this;
-    console.log("calling checkStatus")
-    console.log(teamData)
     let{
       reason,
       status,
@@ -300,7 +286,6 @@ Page({
     let amITeamInitiator = that.data.amITeamInitiator;
     //  ----- --------- -入队显示提示气泡：--- strat ------
     if(applyStatus == 1 ||amITeamInitiator){
-      console.log(111);
       that.setData({
         isPopNoticeShow : true
       });
@@ -368,7 +353,6 @@ Page({
 
         let list=[];
         let data=res.data.data;
-        console.log('接口返回的组队成员信息',data);
         for (let teamMember of data){
           let {
             initiator, me, id,  answer, nickName, avatarUrl, description, grade, gradePublic, identification, identificationPublic, major, majorPublic, school, schoolPublic, wxId, wxIdPublic, interestLabel, personalLabel
@@ -414,11 +398,9 @@ Page({
             interestLabel,
             personalLabel
           };
-          console.log('处理完的单个队伍成员信息', temp);
           if(amITeamInitiator){
             // 排除：1 answer = null;2. answer ={}（空对象）
             if(answer && (typeof answer == 'string') && answer!="{}"){
-              console.log(answer);
               answer=JSON.parse(answer)
               let values = Object.values(answer);
               temp.answer = values;
@@ -512,9 +494,7 @@ Page({
 tapAvatar(e){
   const that = this;
   let index=e.currentTarget.dataset.index;
-  console.log(index);
   let avatar = that.data.teamMemberList[index];
-  console.log(avatar);
   if(!avatar.description){
     avatar.description = '这位同济er暂时没有话想说～';
   }
@@ -522,7 +502,6 @@ tapAvatar(e){
   if(index == 0 && (applyStatus==1||applyStatus==2)){
     avatar.wxIdPublic = true;
   };
-  console.log(avatar);
   that.setData({
     isPersonalInfoShow:true,
     avatar
@@ -532,7 +511,6 @@ tapInitiatorAvatar(){
   const that = this;
   let teamDetail = that.data.teamDetail;
   let applyStatus = teamDetail.applyStatus;
-  // console.log(teamDetail);
   if(applyStatus==1||applyStatus==2){
     teamDetail.wxIdPublic = true;
   }else{
@@ -547,9 +525,7 @@ tapInitiatorAvatar(){
 tapApplierAvatar(e){
   const that = this;
   let index=e.currentTarget.dataset.index;
-  console.log(index);
   let avatar = this.data.applierList[index];
-  console.log(avatar);
   that.setData({
     isPersonalInfoShow:true,
     avatar
@@ -606,7 +582,6 @@ copyWxId(){
             icon:'success'
           })
 
-          console.log("刷新");
           that.onLoad({"teamId":teamId});
           
           //return that.getTeamDetail(teamId);
@@ -623,11 +598,7 @@ copyWxId(){
   showAnswers:function(e){// wxml页面上还存在点问题，待更改！！！！！！！！！！！！！！！！！！
     let that = this;
     let index=e.currentTarget.dataset.index;
-    console.log(index);
     let applier = that.data.applierList[index]
-    console.log(applier.nickName);
-    console.log(that.data.applierList[index].answer);
-    console.log(that.data.teamDetail.question);
     let answer = {
       answerList : that.data.applierList[index].answer,
       questionList : that.data.teamDetail.question,
@@ -676,7 +647,6 @@ copyWxId(){
   
   acceptApplying: function(e){
     let applyer = e.currentTarget.dataset;
-    console.log(applyer);
     this.setData({ 
       targetId:applyer.applyerId,
       targetName:applyer.applyerName,
@@ -697,7 +667,6 @@ copyWxId(){
   dialogTapOkForAcceptApplying:function(){
     let app=getApp();
     let that=this;
-    console.log(this.data.targetId);
     request({
       url: '/userTeam/approveApplication',
       header:{
@@ -710,7 +679,6 @@ copyWxId(){
       },
       method:'POST'
     }).then(res => {
-      console.log(res);
       that.showTipBox(that.data.targetName+'已成功入队！可点击头像查看微信号，快去与ta联系吧！');
 
       // 重新请求获取 成员列表、申请者列表数据
@@ -718,7 +686,6 @@ copyWxId(){
       let getApplierList = that.getApplierList(that.data.teamId);
       return Promise.all([getTeamMemberList,getApplierList])
     }).then(res => {
-      console.log(res);
       that.setData({
         teamMemberList : res[0],
         applierList : res[1],
@@ -733,12 +700,10 @@ copyWxId(){
 
   refuseApplying: function(e){
     let applyer = e.currentTarget.dataset;
-    console.log(applyer);
     this.setData({ 
       targetId:applyer.applyerId,
       targetName : applyer.applyerName
     });
-    // console.log(this.data.targetId);
     let dialog = {
       isDialogShow: true,
       content:'确定拒绝 ' + applyer.applyerName  + ' 加入组队？',
@@ -755,7 +720,6 @@ copyWxId(){
   dialogTapOkForRefuseApplying:function(){//待解决 ： initializeResult 和 changeScrollHeight 作用
     let app=getApp();
     let that=this;
-    console.log(this.data.targetId);
     request({
       url: '/userTeam/rejectApplication',
       header:{
@@ -788,7 +752,6 @@ copyWxId(){
   },
 
   seeDetail:function(e){//样式 待调整
-    console.log("查看全部");
     let teamDetail=this.data.teamDetail;
     let dialog2={
       isDialogShow:true,
@@ -946,7 +909,6 @@ copyWxId(){
             teamId:that.data.teamId,
           },
         }).then(res => {
-          console.log(res);
           if(res.statusCode>=200&&res.statusCode<300 && res.data.success){
             wx.showToast({
               title: '申请已提交',
@@ -1002,7 +964,6 @@ copyWxId(){
               }
               that.getTeamDetail(that.data.teamId)
               .then(result=>{
-                console.log(result);
                 that.setData({
                   teamDetail: result,
                   timeIsOver:(result.status>2?true:false)
@@ -1018,7 +979,6 @@ copyWxId(){
       };
     }
     
-    console.log("over");
   },
   // 完善微信号的两个事件
   tapOkForAddWxId(){
@@ -1062,7 +1022,6 @@ copyWxId(){
         throw new Error('网络故障，请重试')
       }
     }).then(result=>{
-      console.log(result);
       that.setData({
         teamDetail: result,
         timeIsOver:(result.status>2?true:false)
@@ -1075,38 +1034,7 @@ copyWxId(){
 
 
 
-  // initializeResult:function(e){
-  //   let data=this.data;
-  //   if(data.timeIsOver){
-  //     this.setData({
-  //       result:"组队招募已经结束",
-  //       over:true
-  //     })
-  //   }else if(data.memberFull){
-  //     this.setData({
-  //       result:"队伍成员已满",
-  //       over:true,
-  //     })
-  //   }else if(data.beClosedInAdvance){
-  //     this.setData({
-  //       result:"组队招募已经关闭\n发起人关闭的原因如下：",
-  //       reply:this.data.teamDetail.reason,
-  //       over:true
-  //     })
-  //   }else if(data.haveJoinedIn){
-  //     this.setData({
-  //       result:"您已成功入队"
-  //     })
-  //   }else if(data.beRefused){
-  //     this.setData({
-  //       result:'您的申请被拒绝'
-  //     })
-  //   }else if(data.haveSignedUp){
-  //     this.setData({
-  //       result:"您已报名该组队，申请正在处理中~"
-  //     })
-  //   }
-  // },
+
 
 
 
@@ -1132,10 +1060,8 @@ copyWxId(){
     var that=this;
     var windowHeight=this.windowHeight
     
-    // console.log(this);
     let query = wx.createSelectorQuery();
     query.select('#scroll').boundingClientRect(rect=>{
-      console.log(rect)
         let maxHeight = rect.height;
         if(maxHeight>windowHeight*0.7){
           that.setData({
@@ -1148,7 +1074,6 @@ copyWxId(){
     // var that=this;
     let query = wx.createSelectorQuery();
     query.select('#initiator-scroll').boundingClientRect(rect=>{
-      console.log(rect)
         let top = rect.top;
         let height=this.data.windowHeight-top;
         this.setData({

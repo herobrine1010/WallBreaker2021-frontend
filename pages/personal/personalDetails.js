@@ -65,10 +65,9 @@ Page({
 
   // 定义表单提交事件 formSubmit，并且拿到表单的数据
   formSubmit : function(e){
-    console.log(e.detail.value);
     let detail = e.detail.value;
     this.setData({
-      userDetails:e.detail.value
+      userDetails:detail
     });
   },
   // ------- 隐藏 微信号提示气泡 -------------
@@ -133,8 +132,6 @@ Page({
           method : 'PUT',
           data :  that.data.userDetails
         })
-      }).then( res => {
-        console.log(res);
       });
       requestList.push(p1);
     //------ --- 如果头像没有更改，则 修改个人资料请求 不包括头像----- --------- -------
@@ -230,7 +227,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
     let source = options.source;
     if(source == 'needWxId'){
       this.setData({
@@ -258,7 +254,6 @@ Page({
       }
     }).then( res => {
       let result = res.data.data;
-      console.log(result);
       // 提取用户的头像、昵称等个人信息--------
       let userDetails = {
         nickName: result.nickName ,

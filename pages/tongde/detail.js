@@ -112,7 +112,6 @@ Page({
   tapCopy:function(e){
     let that = this;
     let info = that.data.dialog.infoDetail.Value;
-    console.log(info)
     wx.setClipboardData({
       data: info,
       success:function(res){
@@ -144,8 +143,6 @@ Page({
       method : 'GET',
     }).then(res => {
       let data = res.data.data;
-      console.log('获取失物招领详情返回数据', data)
-      console.log('获取失物招领详情返回数据', res)
 
       const typeText = ["寻物中","寻主中"];
       const contactTypeText = [

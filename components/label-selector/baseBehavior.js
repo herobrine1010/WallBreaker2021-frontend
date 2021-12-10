@@ -72,7 +72,6 @@ module.exports = Behavior({
         });
         this.triggerEvent('change',this.data.selectedLabelList);
         this.close();
-        // console.log("on",this.data.isFilterOn);
       },
       tapCancel: function() {
         this.close();
@@ -93,7 +92,6 @@ module.exports = Behavior({
         for(let key in tagList){
           tagList[key].selected=false;
           for(let key2 in tagChoosenList){
-            console.log(tagChoosenList)
             if(tagList[key].id==tagChoosenList[key2].id){
               tagList[key].selected=true;
               break;

@@ -58,7 +58,6 @@ Component({
       });
     },
     'selectedLabelList': function (list) {
-      console.log("selectedList",list.length)
       this.setData({isFilterOn: (list.length != 0)});
     }
   },
@@ -76,7 +75,6 @@ Component({
     tapComfirm: function(e) {
       this.triggerEvent('change',this.data.selectedLabelList);
       this.close();
-      console.log("on",this.data.isFilterOn);
     },
     tapCancel: function() {
       this.close();

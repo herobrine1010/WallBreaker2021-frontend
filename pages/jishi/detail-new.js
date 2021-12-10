@@ -30,7 +30,6 @@ Page({
   onLoad: function (options) {
 
 
-    console.log(options);
     let postingId = options.postingId;
     request({
       url : '/posting/getPosting/' + postingId,
@@ -39,10 +38,8 @@ Page({
          
       },
     }).then(res => {
-      console.log("posting request",res.data.data);
       if(res.statusCode >=200 && res.statusCode <=300){
         // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
-        console.log(res);
 
         let {
           title,

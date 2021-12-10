@@ -85,7 +85,6 @@ Component({
         }
       }).then(res => {
         let data = res.data.data;
-        console.log(res)
       })
     },
     navigateToDetail: function() {

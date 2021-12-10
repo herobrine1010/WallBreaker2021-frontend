@@ -97,7 +97,6 @@ Page({
     wx.getUserProfile({
       desc: '用于完善会员资料', 
       success: (res) => {
-        console.log(res.userInfo)
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
@@ -110,7 +109,6 @@ Page({
     this.setData({
       loginLock: true
     })
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -124,7 +122,6 @@ Page({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log(res.code)
         wx.setStorage({
           data: res.code,
           key: 'code',
@@ -141,10 +138,7 @@ Page({
             'content-type': 'application/json'
             },
           success: function(res2){
-            console.log(res2);
-            console.log("openid:"+res2.data.openid);
             if(typeof(res2.data) == 'string'){
-              console.log(res2.cookies[0])
               wx.setStorageSync("token", res2.cookies[0])
               // wx.navigateTo({
               //   // url: '/pages/character/character',
@@ -163,7 +157,6 @@ Page({
             })
           },
           fail: function(e){
-            console.log(e)
             self.setData({
               loginLock: false
             })

@@ -55,7 +55,6 @@ Page({
   // 测试从组件中获取数据
   btnTap: function()  {
     const childData = this.selectComponent('#personal-label').data;
-    console.log(childData);
   },
   /**
    * 生命周期函数--监听页面加载

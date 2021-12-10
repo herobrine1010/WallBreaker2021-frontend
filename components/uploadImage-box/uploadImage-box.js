@@ -57,7 +57,6 @@ Component({
     deleteImage: function(e) {
       //获取要删除的图片序号
       let delIndex = e.currentTarget.dataset.index
-      console.log('删除序号',delIndex)
       this.data.value.splice(delIndex,1)
       this.setData({
         value: this.data.value

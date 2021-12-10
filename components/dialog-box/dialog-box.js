@@ -67,11 +67,9 @@ Component({
       this.setData({isShow:false});
     },
     finishInput:function(e){
-      console.log(e)
       this.setData({reason:e.detail.value})
     },
     tapCopy:function(e){
-      console.log(e)
       this.triggerEvent('tapCopy',this.data.detail);
     },
   }

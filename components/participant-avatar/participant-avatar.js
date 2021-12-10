@@ -31,7 +31,6 @@ Component({
       //在子组件绑定的函数中，取值在e.currentTarget.dataset.xxx下取
       //在父组件绑定的函数中，取值在e.detail.xxx下取
       var t=e.currentTarget.dataset;
-      //console.log(t);
       //使用triggerEvent传值，第一参数为字串形式的函数名(父组件使用的函数名，推荐与本函数同名),
       //第二参数为需要传递的值，推荐不要在子组件做拆分，直接把dataset传过去在父组件里拆
       this.triggerEvent('tapAvatar',t)

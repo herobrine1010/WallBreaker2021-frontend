@@ -100,7 +100,6 @@ Page({
   },
   tapOk:function(e){
     var that = this;
-    console.log(e)
     wx.showToast({
       title: '成功关闭帖子',
     })

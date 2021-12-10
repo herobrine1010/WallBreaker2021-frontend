@@ -65,7 +65,6 @@ Component({
    */
   methods: {
     tapClose:function(e){
-      console.log(e)
       this.triggerEvent('tapClose',this.data.detail);
     },
     

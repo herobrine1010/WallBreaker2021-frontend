@@ -61,7 +61,6 @@ Component({
       });
       let query = this.createSelectorQuery();
       query.select('#scroll').boundingClientRect(rect=>{
-        console.log(rect)
           let maxHeight = rect.height;
           if(maxHeight>windowHeight*0.7){
             that.setData({

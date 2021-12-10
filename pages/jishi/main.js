@@ -41,14 +41,12 @@ async function getPostingWithPage(pageNo, keyword,labelId,timeIndex) {
 };
 function dealWithPostingAndError(res) {
   if(res.statusCode >=200 && res.statusCode <=300){
-    console.log(res.data.data);
     let { current , pages , records } = res.data.data;
     let isLastPage = false;
     let jishiItemList = records.map( v=>{
       v.createTime = util.getDateDiff(v.createTime);
       return v;
     });
-    console.log("jishiItemList",jishiItemList)
     if(current == pages || pages == 0){
       isLastPage = true; // 判断是否是最后一页
     }
@@ -176,7 +174,6 @@ Page({
         type: "jishi"
       }
     }).then( res => {
-      console.log("label",res.data.data)
       this.setData({
         postingLabels: res.data.data,
       })
@@ -209,11 +206,6 @@ Page({
         selected: 1 //0,1,2 0-济事  1-济人  2-我的
       })
    };
-
-    //获取帖子列表，posting表
-    //  getPostingList(this, this.data.keyword, this.data.labelId, this.data.timeIndex);
-
-   console.log(this.data.jishiItemList)
 
   },
   jumpToDetail:function(e){
@@ -289,35 +281,7 @@ Page({
       this.setData({'conditionFilterOpen':true})
     }
   },
-  /* 废弃的筛选标签方法
-  clickConditionBlue:function(){
-    let l=[];
-    for(let i in this.data.conditionsSelected){
-      l.push(false);
-    }
-    this.setData({
-      conditionIndex:'',
-      conditionsSelected:l,
-      conditionFilterOpen:false
-    });
-    //this.onLoad();
-  },
-  clickConditionGray:function(e){
-    let keyword=e.currentTarget.dataset.condition;
-    console.log("选中标签",keyword)
-    let l=[];
-    for(let i=0;i<this.data.conditionsSelected.length;i++){
-      if (this.data.conditions[i]==keyword)l.push(true);
-      else l.push(false);
-    }
-    this.setData({
-      conditionIndex:keyword,
-      conditionsSelected:l,
-      conditionFilterOpen:false
-    })
-    console.log(this.data.conditionsSelected)
-    // this.onLoad()
-  }, */
+  
   clickLabel:function(e){
     // 1.首先：更改页面：选中的teamLabel变为蓝色；并且拿到选中的labelId:---------------------------
     //    拿到 index 序列
@@ -339,7 +303,6 @@ Page({
         postingLabels[i].selected = false;
       };
       postingLabels[index].selected = true;
-      console.log("postingLabels[index]",postingLabels[index]) 
       this.setData({
         conditionFilterOpen:false,
         postingLabels,
@@ -403,11 +366,6 @@ Page({
     this.setData({
      topNum:  0
     });
-/*     在当前的绑定下，设置topNum后返回顶部按钮就会消失，不用单独设置
-    setTimeout(function () {
-      that.setData({showGoTopButton:false})
-      console.log("test")
-     }, 100) */
    },
    onMyScroll:function(e){
     if(e.detail.scrollTop>100){
@@ -422,10 +380,8 @@ Page({
     let isLastPage = that.data.isLastPage;
     if(!isLastPage){ //没到最后一页
       let {isLastPage, current, pages,  jishiItemList : nextlist} = that.data.nextPageData;
-      console.log('nextlist:',nextlist);
       let jishiItemList = that.data.jishiItemList;
       jishiItemList = jishiItemList.concat(nextlist);
-      console.log('jishiItemList：',jishiItemList);
       that.setData({
         isLastPage, 
         current, 

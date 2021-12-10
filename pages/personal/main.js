@@ -59,7 +59,6 @@ Page({
            
         }
       }).then(res => {
-        console.log('更改请求状态接口',res);
         this.setData({
             dialogContent:"请完善个人信息",
             dialogTip:"为了更好地使用功能，请完善个人信息",
@@ -112,7 +111,6 @@ Page({
       }
     }).then( res => {
       let perInfo = res.data.data;
-      console.log(perInfo);
       // ---------------以下是对头像，昵称，专业等进行  更改；
       let personBrief = {
         avatarPath : perInfo.avatarUrl,

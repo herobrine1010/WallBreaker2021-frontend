@@ -20,9 +20,7 @@ Page({
       wx.getUserProfile({
         desc: '获取您的信息用于注册账号~', 
         success: (res) => {
-          console.log('微信获取用户信息',res.data);
           var myInfo =res.userInfo
-          // console.log(myInfo)
           wx.login({
             success:res=>{
               wx.request({

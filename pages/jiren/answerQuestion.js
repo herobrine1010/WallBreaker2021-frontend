@@ -45,7 +45,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     let that=this;
     if(options.teamId){
       wx.request({
@@ -65,17 +64,11 @@ Page({
             teamId:options.teamId,
             questionItems:list
           })
-          console.log(question)
         }
       })
 
     }
 
-    // this.setData({
-    //   teamId:options.teamId,
-    //   questionItems:options.questions
-    // })
-    console.log(this.data)
   },
 
   /**
@@ -129,7 +122,6 @@ Page({
 
   submitAnswer: function(e) {
     var answerList = e.detail.value
-    console.log(answerList)
     this.setData({answerList:e.detail.value})
     let dialog = {
       isDialogShow: true,
@@ -146,14 +138,12 @@ Page({
   },
   dialogTapOkForSubmitAnswer:function(){
     let that=this;
-    console.log('424');
     let index=1;
     let answerList={};
     for (let key in that.data.answerList) {
         answerList[index] = that.data.answerList[key];
         index = index + 1;
     };
-    console.log(JSON.stringify(answerList))
     
     wx.request({
       url: app.globalData.url+'/userTeam/apply',
@@ -165,7 +155,6 @@ Page({
         answer:JSON.stringify(answerList)
       },
       success:function(res){
-        console.log(res.statusCode)
         if(res.statusCode==200 && res.data.success){
           const eventChannel = that.getOpenerEventChannel()
           eventChannel.emit('getResult', {data: true});
@@ -216,9 +205,7 @@ Page({
   },
   
   isMaxlength: function(e) {
-    console.log(e);
-    var textLength = e.detail.value.length
-    console.log(textLength)
+    var textLength = e.detail.value.length;
     let questions=this.data.questionItems;
     let index=e.target.dataset.index;
     if (textLength==50)

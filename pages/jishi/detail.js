@@ -23,7 +23,6 @@ Page({
     tags: ['细节控','好学小白','996','口才','设计','文字']
   },
   onLoad:function(options){
-    console.log(options);
     if(!options.postingId){
       var postingId=13;
     }else{
@@ -45,7 +44,6 @@ Page({
       success:function(res){
         if(res.statusCode==200){
           let postingdata=res.data.data;
-          console.log(postingdata);
           wx.request({
             url: app.globalData.url+'/user/userInfo',
             data:{userId:postingdata.initiatorId},

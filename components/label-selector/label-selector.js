@@ -30,7 +30,6 @@ Component({
    */
   methods: {
     onLabelTap : function(e){
-      // console.log(e.currentTarget.dataset.index);
       const index = e.currentTarget.dataset.index;
       let labels = this.data.labels;
       //判断当前选中了几个标签

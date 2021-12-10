@@ -39,7 +39,6 @@ async function getTeamWithPage(pageNo, keyword,labelId,timeIndex) {
 };
 function dealWithTeamAndError(res) {// ---- ------ 处理请求返回字段和错误 ------- ----------- ------------
   if(res.statusCode >=200 && res.statusCode <=300){
-    console.log(res.data.data);
     let { current , pages , records } = res.data.data;
     let isLastPage = false;
     let jirenItemList = records.map( v=>{
@@ -58,7 +57,6 @@ function dealWithTeamAndError(res) {// ---- ------ 处理请求返回字段和�
       v.peopleCount = (v.participantNumber + 1) + '/' + (v.dueMember + 1) ;
       return v;
     });
-    console.log("teamList",jirenItemList)
     if(current == pages || pages == 0){
       isLastPage = true; // 判断是否是最后一页
     }
@@ -129,7 +127,6 @@ function getTeamList(that,keyword,labelId,timeIndex){
     },
     data : setRequestData(keyword, labelId, timeIndex)
   }).then(res => {
-    console.log(res);
     if(res.statusCode >=200 && res.statusCode <300){
       // 有正确的返回值，则将返回结果进行处理，渲染到页面上：
       let jirenItemList = res.data.data.map( v=>{
@@ -148,7 +145,6 @@ function getTeamList(that,keyword,labelId,timeIndex){
         v.peopleCount = (v.participantNumber + 1) + '/' + (v.dueMember + 1) ;
         return v;
       });
-      // console.log(jirenItemList[2].firstPicUrl);
       // setData是page对象里才有的办法，所以在调用函数时，要把page对象传入进来；
       that.setData({
         jirenItemList,
@@ -217,7 +213,6 @@ Page({
         selected: 1 //0,1,2 0-济事  1-济人  2-我的
       })
     };
-    console.log(this.data.labelId);
     // 数据加载：---------------------- -------- --- -----------
 
 
@@ -398,19 +393,14 @@ Page({
     })
   },
   // 滚动框 上拉触底事件 加载下一页数据------- ---- --------- ------ ------- ------
-  getNextPage: function(){
-    console.log('111');
-  },
   //  --------- 滚动框：获取下一页 ------------
   getNextPage(){
     let that = this;
     let isLastPage = that.data.isLastPage;
     if(!isLastPage){ //没到最后一页
       let {isLastPage, current, pages,  jirenItemList : nextlist} = that.data.nextPageData;
-      console.log('nextlist:',nextlist);
       let jirenItemList = that.data.jirenItemList;
       jirenItemList = jirenItemList.concat(nextlist);
-      console.log('jirenItemList：',jirenItemList);
       that.setData({  
         isLastPage, 
         current, 
@@ -421,8 +411,6 @@ Page({
       //  分页获取帖子列表
       let {keyword, labelId, timeIndex} = this.data;
       getNextTeamPage(that, keyword, labelId, timeIndex);
-    }else{
-      console.log('已经到底了');
     }
   
   },

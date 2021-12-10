@@ -14,10 +14,8 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
-    console.log("onLaunchFinished")
   },
   onShow(){
-    console.log("this is on show")
     //onShow在小程序启动，或者从后台进入前台后触发
   },
   onHide(){

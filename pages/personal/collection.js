@@ -84,7 +84,6 @@ Page({
     // 采用Promise.all 并行处理两个请求-------------------
     Promise.all([favouritePosting,favouriteTeam])
       .then(result => {
-        // console.log(result[0].data.data[0]);
         // 处理收藏组队的数据------------------
         let jirenItemList = result[1].data.data.map( v=>{
           let team = {
@@ -194,7 +193,6 @@ Page({
 
   // 以下为scroll-view的事件
   onScrollToLower:function(){
-    console.log("上拉触了滚动框的底");
   },
   onRefresherRefresh(){
     const that = this;
@@ -202,7 +200,6 @@ Page({
   },
   // ------- ----- 事件： 将下一页数据加载到页面上，并继续请求 ----
   onPostingReachBottom(){
-    console.log('posting123');
     const that = this;
     let jishiIsLastPage = that.data.jishiIsLastPage;
     if(!jishiIsLastPage){
@@ -229,7 +226,6 @@ Page({
  
   },
   onTeamReachBottom(){
-    console.log('team111');
     const that = this;
     let jirenIsLastPage = that.data.jirenIsLastPage;
     if(!jirenIsLastPage){
@@ -348,7 +344,6 @@ async function getTeamData(pageNo, pageSize = 10) {
 //  2. 分别处理帖子和组队数据
 function dealWithPosting(res) {
   if(res.statusCode >=200 && res.statusCode <=300){
-    console.log(res.data.data);
 
     let { current : jishiCurrent , pages : jishiPages , records } = res.data.data;
     let jishiIsLastPage = false;
@@ -372,7 +367,6 @@ function dealWithPosting(res) {
       return tempList;
     });
 
-    console.log("postingList",jishiItemList)
     if(jishiCurrent == jishiPages || jishiPages == 0){
       jishiIsLastPage = true; // 判断是否是最后一页
     }
@@ -391,7 +385,6 @@ function dealWithPosting(res) {
 }
 function dealWithTeam(res) {
   if(res.statusCode >=200 && res.statusCode <=300){
-    console.log(res.data.data);
 
     let { current : jirenCurrent , pages : jirenPages , records } = res.data.data;
     let jirenIsLastPage = false;
@@ -456,7 +449,6 @@ function dealWithTeam(res) {
       return team;
     });
 
-    console.log("teamList",jirenItemList)
     if(jirenCurrent == jirenPages || jirenPages == 0){
       jirenIsLastPage = true; // 判断是否是最后一页
     }

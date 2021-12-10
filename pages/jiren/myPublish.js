@@ -30,7 +30,6 @@ Page({
     let that = this;
     that.getTeamList()
     .then(res => {
-      console.log(res);
       that.setData({
         myTeamList: res
       })
@@ -139,7 +138,6 @@ Page({
     let that = this;
     that.getTeamList()
     .then(res => {
-      console.log(res);
       that.setData({
         myTeamList: res,
         isRefresherOpen: false

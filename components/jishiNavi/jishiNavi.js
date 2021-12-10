@@ -15,8 +15,6 @@ Component({
       // 动态获取标题宽度：
       // var obj=wx.createSelectorQuery();
       // obj.selectAll('.nav-title').boundingClientRect(function (rect) {
-      //   console.log(rect[0].height)
-      //   console.log(rect[0].width)
       // })
       // obj.exec() ;
       this.setData({
