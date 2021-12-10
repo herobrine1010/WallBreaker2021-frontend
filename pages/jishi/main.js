@@ -194,6 +194,9 @@ Page({
       console.log(err);
     })
 
+    //  分页获取帖子列表
+    let {keyword, labelId, timeIndex} = this.data;
+    setPositingDataInFirstPage(this, 1, keyword, labelId, timeIndex);
   },
 
   /**
@@ -207,9 +210,7 @@ Page({
         selected: 1 //0,1,2 0-济事  1-济人  2-我的
       })
    };
-    //  分页获取帖子列表
-    let {keyword, labelId, timeIndex} = this.data;
-    setPositingDataInFirstPage(this, 1, keyword, labelId, timeIndex);
+
     //获取帖子列表，posting表
     //  getPostingList(this, this.data.keyword, this.data.labelId, this.data.timeIndex);
 
