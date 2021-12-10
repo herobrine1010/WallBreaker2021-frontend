@@ -50,7 +50,7 @@ Component({
           'description': v.content,
           'postingPic': v.firstPicUrl,
           'closed': v.closed,
-          'labelContent':[],
+          'labelContent': v.labelList,
           'closed': v.status // 帖子是否关闭 0--未关闭 1--关闭
         }
       });
