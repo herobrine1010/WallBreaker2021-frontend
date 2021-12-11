@@ -28,10 +28,9 @@
   justify-content: center;
   letter-spacing: 1px;
   float:left;
-  opacity: 50%;
   /* z-index:3; */
   /* Button/blue1 */
-  background: #F2FCFF;
+  background: rgb(242,252,255,0.5);
   border-radius: 75rpx;
 }
 
