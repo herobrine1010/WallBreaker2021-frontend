@@ -1,6 +1,6 @@
 const app = getApp();
 
-import {request} from "../../request/request"
+import {request, login} from "../../request/request"
 
 Page({
 
@@ -26,21 +26,11 @@ Page({
           reject(res);
         },
       })
+    }).then(res => {
+      return login(res.code);
     });
 
-    // 
-    let pLoginResult = pLogin.then(res => {
-      return request({
-        data:{
-          "code" : res.code
-        },
-        url: '/user/login',
-        method:'POST',
-        header:{
-          'content-type':'application/json'
-        },
-      })
-    })
+    
 
     let pTime = new Promise(resolve => {
       setTimeout(() => {
@@ -48,7 +38,7 @@ Page({
       }, 2000);
     })
 
-    Promise.all([pLoginResult, pTime])
+    Promise.all([pLogin, pTime])
     .then(res => {
       res = res[0];
       let {
