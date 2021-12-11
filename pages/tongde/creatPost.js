@@ -325,7 +325,7 @@ Page({
   submitForm: function(e) {
     // 这个函数只是用来传递表单数据, 具体的事情在弹窗函数tapOk完成
     let value = e.detail.value;
-    value['contactType'] = value['contentType'] + 38;
+    value['contactType'] = parseInt(value['contactType']) + 38; // 解析为数字后相加
     this.setData({
       formValue: value,
       isDialogShow: true,
