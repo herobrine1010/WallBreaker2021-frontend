@@ -6,7 +6,7 @@
   </view>
   
   <!-- 动态设置scroll-view的高度，在changeScrollHeight中 -->
-  <scroll-view class="outer-container" id="scroll" scroll-y="true" style="height:{{height}};">
+  <scroll-view show-scrollbar="{{false}}" enhanced class="outer-container" id="scroll" scroll-y="true" style="height:{{height}};">
     <view class="inner-container">
     <form bindsubmit="submitForm">
       <view class="picture-area">

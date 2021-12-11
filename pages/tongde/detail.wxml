@@ -7,7 +7,7 @@
 
   <view class="card-container">
   
-  <scroll-view class="scroll-content" scroll-y="true">
+  <scroll-view show-scrollbar="{{false}}" enhanced class="scroll-content" scroll-y="true">
     <view class="avator-list">
       <image src="{{userAvatar}}"  class="userAvatar" bindtap='showPersonDetail'></image>
       <text class="userName" bindtap="showPersonDetail">{{userName}}</text>

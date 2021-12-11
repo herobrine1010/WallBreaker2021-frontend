@@ -4,7 +4,7 @@
     <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="我的失物招领"></mp-navigation-bar>
   </view>
   <view class="jiren-container">
-    <scroll-view class="list" scroll-y="true">
+    <scroll-view show-scrollbar="{{false}}" enhanced class="list" scroll-y="true">
       <navigator url="/pages/tongde/detail.js" wx:for="{{myPostList}}" class="list-item">
         <card-lost
           cardMy="{{true}}"

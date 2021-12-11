@@ -34,7 +34,7 @@
 
   <swiper current="{{tabIndex}}" bind:change="changeTab" class = "swiperContent" duration="0">
     <swiper-item class="ListArea">
-      <!-- <scroll-view 
+      <!-- <scroll-view show-scrollbar="{{false}}" enhanced 
       enable-back-to-top="true" 
       refresher-enabled="true" 
       bindrefresherrefresh = "onRefresherRefresh"
@@ -61,7 +61,7 @@
     <swiper-item>
 
     <!-- 页面wxml完全一致，所以放在了另一个页面引用，只需要切换tongdeItemList即可展示不同的数据 -->
- <!--    <scroll-view 
+ <!--    <scroll-view show-scrollbar="{{false}}" enhanced 
       enable-back-to-top="true" 
       refresher-enabled="true" 
       bindrefresherrefresh = "onRefresherRefresh"

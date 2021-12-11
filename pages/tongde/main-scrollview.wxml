@@ -1,4 +1,4 @@
-<scroll-view 
+<scroll-view show-scrollbar="{{false}}" enhanced 
   enable-back-to-top="true" 
   refresher-enabled="true" 
   bindrefresherrefresh = "onRefresherRefresh"
