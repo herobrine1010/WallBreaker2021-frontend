@@ -92,7 +92,7 @@ page {
 
 .scroll{
   height:fit-content;
-  height: 99%;
+  height: 94%;
   width:100%;
   margin-left:12rpx;
 }
@@ -121,5 +121,14 @@ page {
  }
 
  /**/
- 
+ .bottomTip{
+  font-size: 2vh;
+  letter-spacing: 1px;
+  /* z-index: 5; */
+  display:block;
+  text-align: center;
+  clear: both;
+  color: black;
+  word-wrap: break-word;
+ }
 

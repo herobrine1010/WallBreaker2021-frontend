@@ -31,7 +31,7 @@ Page({
     number:'15615333420',
     type:0,//物品遗失0 寻找失主1
     closed:false,
-    pictures:['','','','','','','',''],
+    pictures:['/static/icon/tongde-loading-image.jpg','','','','','','',''],
     userId: 10,
     personalInfo:{
         "avatar":"https://s3-alpha.figma.com/profile/d6f5f7f8-2382-43db-bcff-8c585b068d02",
@@ -205,8 +205,8 @@ Page({
         contact: data.contact,
         type: data.type,//物品遗失0寻找失主1
         closed: data.closed,
-        //pictures: data.allPicUrl ? data.allPicUrl.split(','):['/static/icon/tongde-default-image.png'], //留一个页面
-        pictures: data.allPicUrl.split(','),
+        pictures: data.allPicUrl ? data.allPicUrl.split(','):['/static/icon/tongde-default-image.jpg'], //留一个页面
+        //pictures: data.allPicUrl.split(','),
         'dialog.infoDetail.Value': data.contact,
         'dialog.infoDetail.Key': contactTypeText.filter(item => item.id==data.contactType)[0].content + ": "
       });
