@@ -31,7 +31,7 @@ Page({
       wx.showLoading({
         title: '登录中...',
       })
-      const baseUrl  = 'https://jixingyun.tongji.edu.cn/api/';
+      const baseUrl  = 'https://jixingyun.tongji.edu.cn/api2/';
       // const baseUrl = "https://www.wallbreaker.top";
       //const baseUrl  = 'http://localhost:8080';
       return new Promise((resolve,reject)=>{
@@ -70,6 +70,7 @@ Page({
       wx.hideLoading();
       // console.log('request_________________________________________');
       res = res[0];
+      console.log(res);
       let {
         openId,
         registered,
