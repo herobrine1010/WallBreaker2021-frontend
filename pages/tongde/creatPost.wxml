@@ -15,7 +15,7 @@
       </view>
       <view class="item-wrap">
         <view class="input-lost-name-box input-box">
-          <input name="name" class="input-lost-name" maxlength="25" placeholder="请输入失物名称" placeholder-class="input-placeholder" />
+          <input name="name" class="input-lost-name" style="width: 686rpx;" maxlength="25" placeholder="请输入失物名称" placeholder-class="input-placeholder" />
         </view>
         <view class="error-wrap-input"  wx:if="{{ errors.name }}">
           <image src="/static/icon/Alert-warning.png" class="icon"></image>
