@@ -50,6 +50,11 @@
   margin:0 16rpx;
   max-width: 160rpx;
   /* width: 160rpx; */
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
 }
 .time{ 
   /* 2021年6月9日 21:40 */

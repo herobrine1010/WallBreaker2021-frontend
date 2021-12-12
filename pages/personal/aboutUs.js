@@ -13,6 +13,7 @@ Page({
     contactUsHead : "加入我们",
     contactUsBody : "欢迎对程序开发、互联网、大数据、新媒体、人工智能、产品设计等方向感兴趣的同学加入我们，一起学习交流并实践更多有趣的想法和创意。我们相信在未来传承的过程中，会孕育出更多优秀的团体同舟共济，奔赴天下。\n\n",
     pobyWords : "“面壁十年图破壁，难酬蹈海亦英雄”——周恩来\n 破壁计划——《三体》",
+    pictures:['https://wallbreaker-tongji.oss-cn-shanghai.aliyuncs.com/static-img/jishi/posting/1df021235c454360b04f27753b963ae5offocoal-account.jpg','https://wallbreaker-tongji.oss-cn-shanghai.aliyuncs.com/static-img/jishi/posting/609d8f0e3954405f8c8a055356d53a36offocoal-account-meme.png','https://wallbreaker-tongji.oss-cn-shanghai.aliyuncs.com/static-img/jishi/posting/635a2239bbd74d20959e4d43601869ccapply.png']
   },
 
   /**
@@ -73,4 +74,12 @@ Page({
       path : '/pages/welcome/welcome'
     }
   },
+
+  previewImage: function (e) {
+    console.log('ok')
+    wx.previewImage({
+      urls: this.data.pictures,
+      current: this.data.pictures[e.currentTarget.dataset.index]
+    })
+  }
 })
