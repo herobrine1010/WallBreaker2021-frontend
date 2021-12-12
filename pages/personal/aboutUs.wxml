@@ -23,8 +23,8 @@
           <text>喵济 表情包</text>
         </view>
         <view class="pic-body">
-          <image src="../../static/icon/offocoal-account.jpg" mode="aspectFill" alt="破济er壁 公众号(二维码)"></image>
-          <image src="../../static/icon/offocoal-account-meme.png" mode="aspectFill" alt="喵济 表情包(二维码)" style="height: 264rpx; width : 264rpx;"></image>
+          <image src="../../static/icon/offocoal-account.jpg" mode="aspectFill" alt="破济er壁 公众号(二维码)" bindtap="previewImage" data-index="0"></image>
+          <image src="../../static/icon/offocoal-account-meme.png" mode="aspectFill" alt="喵济 表情包(二维码)" style="height: 264rpx; width : 264rpx;" bindtap="previewImage" data-index="1"></image>
         </view>
       </view>
     </view>
@@ -40,7 +40,7 @@
           <text>报名问卷</text>
         </view>
         <view class="pic-body">
-          <image src="../../static/icon/apply.png" mode="aspectFill" alt="报名问卷"></image>
+          <image src="../../static/icon/apply.png" mode="aspectFill" alt="报名问卷" bindtap="previewImage" data-index="2"></image>
         </view>
     </view>
   </view>
