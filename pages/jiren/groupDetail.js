@@ -149,7 +149,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title : '欢迎注册使用济星云小程序！',
+      path : '/pages/welcome/welcome'
+    }
   },
 
   // ----- -------- 页面加载相关函数 ------ 如（组队内容、成员列表、申请人列表） ---- -------- -------- --------

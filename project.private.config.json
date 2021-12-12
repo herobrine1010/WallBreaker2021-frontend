@@ -65,6 +65,12 @@
           "pathName": "pages/welcome/check",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/jiren/main",
+          "pathName": "pages/jiren/main",
+          "query": "",
+          "scene": 1007
         }
       ]
     }

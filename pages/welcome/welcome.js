@@ -21,25 +21,54 @@ Page({
       wx.login({
         success: (result) => {
           resolve(result)
+          // console.log('Login __________________________');
         },
         fail: (res) => {
           reject(res);
         },
       })
     }).then(res => {
-      return login(res.code);
+      wx.showLoading({
+        title: '登录中...',
+      })
+      const baseUrl  = 'https://jixingyun.tongji.edu.cn/api/';
+      // const baseUrl = "https://www.wallbreaker.top";
+      //const baseUrl  = 'http://localhost:8080';
+      return new Promise((resolve,reject)=>{
+        wx.request({
+          url :baseUrl + 'user/login',
+          header : {
+            'content-type':'application/json'
+          },
+          data : {
+            "code" : res.code
+          },
+          method:'POST',
+          success : (result)=>{
+            resolve(result);
+          },
+          fail : (error) => {
+            reject(error);
+          }
+        })
+      })
     });
 
     
 
-    let pTime = new Promise(resolve => {
+    let pMinTime = new Promise(resolve => {
       setTimeout(() => {
-        resolve('timeArrive')
+        resolve('timeArrive');
       }, 2000);
     })
 
-    Promise.all([pLogin, pTime])
+
+    let pAll = Promise.all([pLogin, pMinTime]);
+
+    pAll
     .then(res => {
+      wx.hideLoading();
+      // console.log('request_________________________________________');
       res = res[0];
       let {
         openId,
@@ -49,7 +78,7 @@ Page({
       app.globalData.token = res.cookies[0];
       app.globalData.openId = openId;
       app.globalData.registered = registered;
-
+      // console.log(' setData__________________________________');
       if(status == 'registered'){// 完成了统一身份认证
         if(res.data.data.jirenMsgNum>0){
           app.globalData.noticeNum = res.data.data.jirenMsgNum

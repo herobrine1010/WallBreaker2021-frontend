@@ -72,7 +72,7 @@ const login = (code)=> {
   //const baseUrl  = 'http://localhost:8080';
   return new Promise((resolve,reject)=>{
     wx.request({
-      url :baseUrl + '/user/login',
+      url :baseUrl + 'user/login',
       header : {
         'content-type':'application/json'
       },

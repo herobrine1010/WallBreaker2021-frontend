@@ -249,7 +249,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title : '欢迎注册使用济星云小程序！',
+      path : '/pages/welcome/welcome'
+    }
   },
   
   // 绑定搜索事件： 光标离开触发：--- 点击叉号取消搜索 ----------------------

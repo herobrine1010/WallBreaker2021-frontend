@@ -101,12 +101,7 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
-  },
 
   // 请求函数（异步），返回acceptTeamList,applyingTeamList两个数组
           
