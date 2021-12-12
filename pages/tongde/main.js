@@ -283,6 +283,12 @@ Component({
   onShow: function(options) {
 
   },
+  onShareAppMessage: function () {
+    return {
+      title : '欢迎注册使用济星云小程序！',
+      path : '/pages/welcome/welcome'
+    }
+  },
 
   // ------------筛选框相关的函数-----------------
   clickConditionFilter: function(e) {
