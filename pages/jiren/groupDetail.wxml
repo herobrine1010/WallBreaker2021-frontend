@@ -135,7 +135,14 @@
             <text class="detail-text">{{reason}}</text>
           </view>
         </scroll-view>
+
+        <block wx:if="{{applyStatus==1 || applyStatus==2}}">
+          <image bindtap="tapFavourite" class="fav-icon" wx:if="{{isFavourite}}" src='/static/icon/collect-blue-solid.png' style="position:relative; left : 650rpx;"></image>
+          <image bindtap="tapFavourite" class="fav-icon" wx:else src='/static/icon/collect-blue.png' style="position:relative; left : 650rpx;"></image>
+      </block>
         <view style="height:6vh"></view>
+
+        
       </scroll-view>
     </view>
 
