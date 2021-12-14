@@ -9,6 +9,7 @@ import util from "../../utils/util.js";
 function setRequestData(pageNo, keyword,labelId,timeIndex){
   let data = {
     pageNo : pageNo,
+    pageSize : 5,
     order : timeIndex
   };
   if(keyword){
@@ -30,12 +31,13 @@ async function getTeamWithPage(pageNo, keyword,labelId,timeIndex) {
     data : setRequestData(pageNo, keyword,labelId,timeIndex)
   });
 
-  let p2 = new Promise((resolve,reject) => {
-    setTimeout( _ => {
-      reject("网络好像出错了");
-    },3000)
-  });
-  return Promise.race([p1,p2]);
+  // let p2 = new Promise((resolve,reject) => { // 不进行时间的判断
+  //   setTimeout( _ => {
+  //     reject("服务器加载有点慢");
+  //   },3000)
+  // });
+  // return Promise.race([p1,p2]);
+  return p1;
 };
 function dealWithTeamAndError(res) {// ---- ------ 处理请求返回字段和错误 ------- ----------- ------------
   if(res.statusCode >=200 && res.statusCode <=300){
@@ -83,7 +85,11 @@ async function setTeamDataInFirstPage(that , pageNo = 1, keyword, labelId, timeI
     firstPageData['isRefresherOpen'] = false;
     // setData是page对象里才有的办法，所以在调用函数时，要把page对象传入进来；
     that.setData(firstPageData);
-    getNextTeamPage(that , keyword, labelId, timeIndex); //获取并处理下一页；
+    console.log(!firstPageData.isLastPage);
+    if(!firstPageData.isLastPage){
+      getNextTeamPage(that , keyword, labelId, timeIndex); //获取并处理下一页；
+    }
+    
   } catch (error) {
     // 超时提示
     console.log(error);
@@ -253,7 +259,6 @@ Page({
   onShow: function () {
 
     util.getNotice();
-    this.onLoad();
   },
 
   /**

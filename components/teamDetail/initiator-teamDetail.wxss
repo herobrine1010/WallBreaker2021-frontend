@@ -2,18 +2,17 @@
 .detail-board{
   position:relative;
   width:94%;
-  height: 200rpx;
   margin: 0 auto;
   background-color: #F2FCFF;
   border-radius: 30rpx;
 }
 .detail-title{
-  position: absolute;
-  left:24rpx;
-  top:16rpx;
+  position: relative;
+  margin: 8rpx 24rpx;
+  padding-top: 8rpx;
+  width: 500rpx;
   font-size: 36rpx;
   font-weight:600;
-  letter-spacing: 0.25vw;
   color:#4A5559;
 }
 .detail-close-button{
@@ -46,11 +45,16 @@
   border-radius: 30rpx;
   color:#ffffff;
 }
-
+.detail-info-con{
+  position: relative;
+  /* background-color: pink; */
+  width: 706rpx;
+  height: 130rpx;
+}
 .detail-avatar{
   position:absolute;
   left:22rpx;
-  top:80rpx;
+  top:0rpx;
   height:80rpx;
   width:80rpx;
   border-radius: 3vh;
@@ -58,7 +62,7 @@
 .detail-username{
   position:absolute;
   left: 120rpx;
-  top: 85rpx;
+  top: 5rpx;
   font-size: 26rpx;
   letter-spacing: 0.1vw;
   color:#1D99C3;
@@ -68,7 +72,7 @@
 .detail-apply-time{
   position:absolute;
   left:120rpx;
-  top:115rpx;
+  top:35rpx;
   font-size: 26rpx;
   letter-spacing: 0.1vw;
   color:#989A9A;
@@ -77,7 +81,7 @@
 .detail-due-time{
   position:absolute;
   right:22rpx;
-  top:80rpx;
+  top:0rpx;
   font-size: 26rpx;
   letter-spacing: 0.1vw;
   color:#007399;
@@ -114,15 +118,15 @@
 }
 .box-title{
   /* 申请人： */
-  width: 114rpx;
-  height: 40rpx;
+  position: relative;
+  width: 630rpx;
   margin: 30rpx;
   font-family: Noto Sans SC;
   font-style: normal;
   font-weight: bold;
   font-size: 36rpx;
-  line-height: 40rpx;
-
+  line-height: 44rpx;
+  white-space: pre-line;
   color: #4A5559;
 }
 .box-content{
