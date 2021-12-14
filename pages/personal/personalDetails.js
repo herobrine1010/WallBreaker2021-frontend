@@ -258,13 +258,13 @@ Page({
       let userDetails = {
         nickName: result.nickName ,
         identification:result.identification ,
-        identificationPublic: result.identificationPublic ,
+        identificationPublic: result.identificationPublic===null?true :  result.identificationPublic ,
         grade: result.grade ,
-        gradePublic: result.gradePublic ,
+        gradePublic: result.gradePublic === null ? true : result.gradePublic,
         school: result.school ,
-        schoolPublic: result.schoolPublic ,
+        schoolPublic: result.schoolPublic === null ? true : result.schoolPublic,
         major: result.major ,
-        majorPublic: result.majorPublic ,
+        majorPublic: result.majorPublic === null ? true : result.majorPublic,
         wxId: result.wxId ,
         description: result.description 
       };
