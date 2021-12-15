@@ -75,37 +75,37 @@ Page({
   showPersonDetail:function(e){
     let that = this;
     // 获取头像信息
-    wx.request({
-      url: app.globalData.url+'/user/userInfo',
+    request({
+      url: '/user/userInfo',
       data:{
         userId: this.data.userId
       },
-      success:function(res){
-        let data=res.data.data;
-        let personalInfo={
-          'initiator':data.initiator,
-          'me':data.me,
-          'avatar':data.avatarUrl,
-          'id':data.id,
-          'nickname':data.nickName,
-          'wxId':data.wxId,
-          'description':data.description,
-          'school':data.school,
-          'major':data.major,
-          'grade':data.grade,
-          'identity':data.identification,
+    })
+    .then(res => {
+      let data=res.data.data;
+      let personalInfo={
+        'initiator':data.initiator,
+        'me':data.me,
+        'avatar':data.avatarUrl,
+        'id':data.id,
+        'nickname':data.nickName,
+        'wxId':data.wxId,
+        'description':data.description,
+        'school':data.school,
+        'major':data.major,
+        'grade':data.grade,
+        'identity':data.identification,
 
-          'wxIdPublic':data.wxIdPublic,
-          'schoolPublic':data.schoolPublic,
-          'majorPublic':data.majorPublic,
-          'gradePublic':data.gradePublic,
-          'identityPublic':data.identityPublic,
+        'wxIdPublic':data.wxIdPublic,
+        'schoolPublic':data.schoolPublic,
+        'majorPublic':data.majorPublic,
+        'gradePublic':data.gradePublic,
+        'identityPublic':data.identityPublic,
 
-          'personalLabel':(data.personalLabel?data.personalLabel.map(it => it.content):[]),
-          'interestLabel':(data.interestLabel?data.interestLabel.map(it => it.content):[]),
-        }
-        that.setData({personalInfo})
+        'personalLabel':(data.personalLabel?data.personalLabel.map(it => it.content):[]),
+        'interestLabel':(data.interestLabel?data.interestLabel.map(it => it.content):[]),
       }
+      that.setData({personalInfo})
     })
     this.selectComponent("#personalAnimation1").showModal();
   },
