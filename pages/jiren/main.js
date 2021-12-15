@@ -9,7 +9,7 @@ import util from "../../utils/util.js";
 function setRequestData(pageNo, keyword,labelId,timeIndex){
   let data = {
     pageNo : pageNo,
-    pageSize : 5,
+    pageSize : 10,
     order : timeIndex
   };
   if(keyword){
