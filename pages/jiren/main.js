@@ -39,6 +39,8 @@ async function getTeamWithPage(pageNo, keyword,labelId,timeIndex) {
   // return Promise.race([p1,p2]);
   return p1;
 };
+
+
 function dealWithTeamAndError(res) {// ---- ------ 处理请求返回字段和错误 ------- ----------- ------------
   if(res.statusCode >=200 && res.statusCode <=300){
     let { current , pages , records } = res.data.data;
@@ -402,13 +404,24 @@ Page({
   },
   // 滚动框 上拉触底事件 加载下一页数据------- ---- --------- ------ ------- ------
   //  --------- 滚动框：获取下一页 ------------
+  delRepeatInNextpage(oldList,newList){ // 翻页时去重
+    const firstId = newList[0].id;
+    const index = oldList.findIndex( item => item.id == firstId);
+    if(index != -1){
+      let len = oldList.length - index;
+      newList.splice(0,len);
+      return oldList.concat(newList); 
+    }else{
+      return oldList.concat(newList);  
+    }
+  },
   getNextPage(){
     let that = this;
     let isLastPage = that.data.isLastPage;
     if(!isLastPage){ //没到最后一页
       let {isLastPage, current, pages,  jirenItemList : nextlist} = that.data.nextPageData;
       let jirenItemList = that.data.jirenItemList;
-      jirenItemList = jirenItemList.concat(nextlist);
+      jirenItemList = this.delRepeatInNextpage(jirenItemList, nextlist);
       that.setData({  
         isLastPage, 
         current, 

@@ -448,6 +448,7 @@ scroll-view {
   font-size: 30rpx;
   line-height: 36rpx;
   align-items: center;
+  white-space: pre-line;
   color: #4A5559;
 }
 .answer-image{
@@ -465,6 +466,7 @@ scroll-view {
   font-weight: 600;
   font-size: 28rpx;
   line-height: 40rpx;
+  white-space: pre-line;
   color: #4A5559;
 }
 
