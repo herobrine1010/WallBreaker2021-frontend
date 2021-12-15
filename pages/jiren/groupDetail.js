@@ -813,36 +813,36 @@ copyWxId(){
     let app=getApp();
     let that=this;
     if(this.data.isFavourite==false){
-      wx.request({
-        url: app.globalData.url+'/userFavouriteTeam/addToMyFavouriteTeam/'+this.data.teamId,
+      request({
+        url: '/userFavouriteTeam/addToMyFavouriteTeam/'+this.data.teamId,
         header:{
           'cookie':app.globalData.token
         },
         method:'POST',
-        success:function(){
-          wx.showToast({
-            title: '已加入收藏',
-            icon: 'success',
-            duration: 1000
-          })
-          that.setData({isFavourite:true});
-        }
+      })
+      .then(res => {
+        wx.showToast({
+          title: '已加入收藏',
+          icon: 'success',
+          duration: 1000
+        })
+        that.setData({isFavourite:true});
       })
     }else{
-      wx.request({
-        url: app.globalData.url+'/userFavouriteTeam/RemoveFromMyFavouriteTeam/'+this.data.teamId,
+      request({
+        url: '/userFavouriteTeam/RemoveFromMyFavouriteTeam/'+this.data.teamId,
         header:{
           'cookie':app.globalData.token
         },
         method:'DELETE',
-        success:function(){
-          wx.showToast({
-            title: '已取消收藏',
-            icon: 'success',
-            duration: 1000
-          })
-          that.setData({isFavourite:false});
-        }
+      })
+      .then(res => {
+        wx.showToast({
+          title: '已取消收藏',
+          icon: 'success',
+          duration: 1000
+        })
+        that.setData({isFavourite:false});
       })
     }
     // this.onLoad();
