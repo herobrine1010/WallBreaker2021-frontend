@@ -23,9 +23,9 @@ const request = (params)=> {
         }
       })
     }).then(res => {
-      if(res.statusCode == 401){
+      if(res.statusCode == 401 || res.statusCode == 502){
         wx.showToast({
-          title: '服务器重启',
+          title: '服务器维护',
           icon : 'error'
         });
         setTimeout( _ => {
