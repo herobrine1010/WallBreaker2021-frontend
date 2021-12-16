@@ -70,6 +70,12 @@ Page({
       wx.hideLoading();
       // console.log('request_________________________________________');
       res = res[0];
+      if(res.statusCode == 502){
+        wx.showToast({
+          title: '服务器维护',
+          icon : 'error'
+        })
+      }
       console.log(res);
       let {
         openId,
