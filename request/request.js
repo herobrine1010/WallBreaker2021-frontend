@@ -26,6 +26,7 @@ const request = (params)=> {
       if(res.statusCode == 401){
         wx.showToast({
           title: '服务器重启',
+          icon : 'error'
         });
         setTimeout( _ => {
           wx.reLaunch({
