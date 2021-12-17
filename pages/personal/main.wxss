@@ -11,16 +11,15 @@
   flex-direction: column;
 }
 .item-last{
-  height: 350rpx;
+  height: 300rpx;
 }
 
 /* 以下是用户各个item的样式 */
 .per-items{
   position: relative;
-  flex: 1;
   display:flex;
   text-align: center;
-  /* height: 74rpx; */
+  height: 70rpx;
   /* height: 7vh; */
   width: 92%;
   /* 间距采用 % 单位，为了全面屏兼容    */
