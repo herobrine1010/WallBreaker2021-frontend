@@ -259,9 +259,10 @@ Page({
       }).then(res => {
         let data = res.data.data;
         // data = data.map(item => item.content);
+        data = [{content:'联系方式',id: 0}, ...data];
         that.setData({
           contactType: data,
-          contactTypeIndex: 1
+          contactTypeIndex: 0
         });
       })
   },
@@ -284,6 +285,7 @@ Page({
       },
       contactType: {
         required: true,
+        isNone: this.data.contactTypeIndex
       },
       contact: {
         required: true,
@@ -320,7 +322,10 @@ Page({
         required: '请选择标签'
       }
     }
-    this.WxValidate = new WxValidate(rules, messages)
+    this.WxValidate = new WxValidate(rules, messages);
+    this.WxValidate.addMethod('isNone', (value, param)=>{return param!=0;},'0');
+    console.log(this.WxValidate);
+
   },
   submitForm: function(e) {
     // 这个函数只是用来传递表单数据, 具体的事情在弹窗函数tapOk完成
