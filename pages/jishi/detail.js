@@ -51,12 +51,13 @@ Page({
             if(res.statusCode==200){
               let userdata=res.data.data;
               let pictures=(postingdata.allPicUrl?postingdata.allPicUrl.split(','):[])
+              console.log(postingdata.content)
               that.setData({
                 title:postingdata.title,
                 userAvatar:userdata.avatarUrl,
                 userName:userdata.nickName,
                 time:postingdata.create_time,
-                description:postingdata.content,
+                // description:postingdata.content,
                 pictures:pictures,
                 like:postingdata.myFavourite
               })

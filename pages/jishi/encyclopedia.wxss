@@ -1,0 +1,416 @@
+/* pages/jishi/communication.wxss */
+@import "/static/common.wxss";
+
+.background-shade{
+  width: 100%;
+  height: 100vh;
+  background: #f9f9f9;
+  box-shadow: 10px 10px 20px 2px rgba(160, 164, 166, 0.2);
+
+}
+/* #outer-scroll-view{
+  margin-top:8px;
+} */
+
+.tab {
+  width: 686rpx;
+  padding-top:16rpx;
+  margin:0rpx 32rpx 0;
+  height: 72rpx;
+  display: flex;
+  justify-content:space-around;
+  overflow: hidden;
+}
+.tab-item{
+  height: 56rpx;
+  font-family: PingFang SC;
+  font-style: normal;
+  font-size: 32rpx;
+  font-weight: normal;
+  line-height: 125%;
+  color: #545454;
+}
+
+.tab-item.active {
+  color: #333333;
+  font-weight: 500;
+  border-bottom: 4rpx solid #333333;
+  border-radius: 4rpx;
+}
+
+.search-area{
+  position:sticky;
+  top: 0;
+  display: flex;
+  height: 84rpx;
+  width: 100%;
+  z-index: 100;
+}
+.searchBar{
+  margin:0 10rpx ;
+  flex: 1;
+}
+.weui-search-bar__box .weui-search-bar__input{
+  color: #000000 !important;
+  padding:0 0 0 0 ;
+  height: 80rpx;
+}
+/* .question-answer-scroll-view{
+  height: 1000rpx;
+} */
+.question-answer-view{
+  padding: 0 10rpx;
+  /* padding: 0 32rpx; */
+  /* background: #F9F9F9; */
+}
+
+.question-answer-card{
+  /* height: 80rpx; */
+  background: #FFFFFF;
+  margin:  24rpx 8px;
+  padding: calc((40px - 42rpx) / 2) 24rpx;
+  border-radius: 16rpx;
+  /* height:40px; */
+}
+.question-answer-line{
+  position: relative;
+  height: 42rpx;
+  /* margin-top: rpx; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.question-answer-index-and-title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.question-answer-index{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+  border-radius: 50%;
+  border: 1px solid #545454;
+  text-align: center;
+  line-height: 34rpx;
+  font-size: 20rpx;
+}
+.question-answer-title{
+  font-size: 16px;
+}
+
+.question-answer-arrow{
+  /* position: absolute;
+  right: 0; */
+  width: 24rpx;
+  height: 24rpx;
+  /* height: 4vh; */
+  margin: auto 0rpx;
+}
+.question-answer-image-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.question-answer-image-view{
+  margin: 0 5rpx;
+}
+.question-answer-image{
+  /* width: 116rpx;
+  height: 116rpx; */
+  width:16vw;
+  height:16vw;
+}
+
+.question-answer-content{
+  margin: 10rpx;
+  /* font-family: PingFang SC; */
+  font-size: 14px;
+  line-height: 150%;
+  color: #545454;
+}
+.communication-search-row-and-filters-content{
+  position:sticky;
+  top: 0;
+  z-index: 100;
+
+}
+
+.communication-search-area{
+  display: flex;
+  height: 84rpx;
+  width: 100%;
+}
+
+
+.guide{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 84rpx;
+  width: 92rpx;
+  margin-right: 48rpx;
+  font-family: PingFang SC;
+  font-size: 22rpx;
+  line-height: 26rpx;
+  /* color: #ffffff; */
+  color: black;
+}
+.filter-icon{
+  height: 36rpx;
+  width: 36rpx;
+  margin: 10rpx 0;
+  color: #3E92CC;
+}
+.filter-text-blue{
+  color: #3E92CC;
+}
+
+.conditionFilter{
+
+  position: relative;
+  top:10%;
+
+  height:100%;
+  border-radius: 5px;
+  color:#FFFFFF;
+  align-items: center;
+  font-size:4vw;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 1px;
+  float:left;
+  /* z-index:3; */
+  background-color: #F2FCFF;
+}
+
+.conditionArea{
+  position:relative;
+  
+  top:0%;
+  background-color: #F2FCFF;
+  border-radius: 0 0 20px 20px;
+  z-index: 4;
+  
+}
+
+.whiteBG{
+
+  display: flex;flex-direction: row;
+  flex-wrap: wrap;
+  height:100%;
+  padding: 16rpx 15rpx 0;
+}
+
+.filterExtended{
+  position: absolute;
+  /* 该参数控制弹出的筛选框据顶部的高度，若无法准确对齐，可以调整百分比尝试 */
+  top:0;
+  height:100%;
+  left:0%;
+  width:100%;
+  z-index: 4;
+}
+
+
+.conditionsSelected,.conditionsNotSelected{
+  
+  height:48rpx;
+  width:135rpx;
+  margin: 0 20rpx 16rpx;
+  border-radius: 20px;
+  font-size:1.8vh;
+  letter-spacing: 1px;
+  z-index:5;
+  justify-content: center;
+  align-items: center;
+  display:flex;
+}
+.conditionsNotSelected{
+  background-color: #ffffff;
+border-color: #768185;
+color:#768185;
+border-width:1px;
+border-style: solid;
+}
+.conditionsSelected{
+  background-color: #26C9FF;
+  border: 1px solid #26C9FF;
+  color:#ffffff;
+}
+
+.shade2{
+  position: absolute;
+  top:0%;
+  height:100vh;
+  width:100%;
+  /* 使用opacity属性设置在电脑端可以正常显示，预览时没有透明度，参考dialog-box修改成rgba即可 */
+  background-color: rgba(0,0,0,0.2);
+  z-index:3;
+}
+/* .communication-scroll-view{
+  height: 1000rpx;
+} */
+.communication-view{
+  padding: 0 10rpx;
+  /* padding: 0 32rpx; */
+  /* background: #F9F9F9; */
+}
+
+.communication-card{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  /* height: 80rpx; */
+  background: #FFFFFF;
+  margin: 24rpx 8px;
+  padding: 19rpx;
+  border-radius: 16rpx;
+}
+.communication-name{
+  /* font-size: 14px; */
+  font-weight: bold;
+  color: #333333;
+}
+.communication-address{
+  font-size: 14px;
+  color: #333333;
+}
+.communication-serve-time{
+  font-size: 12px;
+  color: #868788;
+}
+.communication-column-right{
+  position: absolute;
+  right: 0;
+}
+.communication-zone{
+  background: #3A3042;
+  border-radius: 12px 0px 0px 12px;
+  color: #F7F7F7;
+  font-size: 13px;
+  padding: 0 8rpx 0 16rpx;
+  text-align: center;
+  /* width: 100rpx; */
+}
+.communication-ring-image{
+  width: 64rpx;
+  height: 64rpx;
+  /* height: 4vh; */
+  margin: 20rpx 40rpx 0;
+}
+.noData{
+  font-size:2vh;
+  letter-spacing: 1px;
+  z-index:5;
+  justify-content: center;
+  align-items: center;
+  display:flex;
+  /* color:white; */
+  margin-bottom: 10rpx;
+  
+  word-wrap: break-word;
+ }
+ .feedbackButton{
+  position: fixed;
+  height:44px;
+  width:44px;
+  right: 4vw;
+  bottom: 5vh;
+  background: #3E92CC;
+  border: 1px solid #3E92CC;
+  border-radius: 50%;
+  /* width: 48rpx;
+  height: 48rpx; */
+ }
+
+ .feedback-mask{
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #86878888;
+  align-items: center;
+  z-index: 200;
+ }
+ .feedback-modal{
+   background-color: #FFFFFF;
+   border-radius: 30rpx;
+   width: 66vw;
+   /* height: 30vh; */
+   padding: 5rpx 32rpx;
+   margin:auto;
+ }
+ .feedback-type-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20rpx 0;
+ }
+ .feedback-type-button-normal,.feedback-type-button-error-selected,.feedback-type-button-more-selected{
+   /* width: 40%; */
+   width: 94px;
+   padding: 10rpx;
+   text-align: center;
+   border-radius: 8rpx;
+   font-size: 15px;
+ }
+ .feedback-type-button-normal{
+  border: 1px solid #957D95;
+  color: #7B7482;
+ }
+ .feedback-type-button-error-selected{
+  background: #7B7482;
+  color: #FFFFFF;
+ }
+ .feedback-type-button-more-selected{
+  background: #957D95;
+  color: #FFFFFF;
+ }
+ .feedback-input{
+   width: auto;
+   height: 15vh;
+   border: 0.5px solid #868788;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 4rpx 8rpx;
+ }
+ .feedback-input-placeholder{
+   align-items: center;
+   text-align: center;
+   color: #868788;
+ }
+ .feedback-tip{
+   height: 36rpx;
+   color: red;
+   font-size: 12px;
+   text-align: center;
+ }
+ .feedback-button-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* margin: 20rpx 0; */
+  margin-bottom: 15rpx;
+ }
+ .feedback-cancel-button,.feedback-confirm-button{
+   /* width: 35%; */
+   width: 94px;
+   padding: 7rpx;
+   text-align: center;
+  border: 1px solid #3E92CC;
+  border-radius: 24rpx;
+  font-size: 14px;
+ }
+ .feedback-cancel-button{
+  color: #3E92CC;
+ }
+ .feedback-confirm-button{
+  color: #F7F7F7;
+  background: #3E92CC;
+ }

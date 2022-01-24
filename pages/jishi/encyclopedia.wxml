@@ -1,0 +1,151 @@
+<!--pages/jishi/communication.wxml-->
+<view class='background-shade'></view>
+<view class="tongde-background">
+  <view>
+    <mp-navigation-bar back="{{true}}"  style="z-index:103;" ext-class="weui-navigation-bar-tongde__centers" title="同济百科"></mp-navigation-bar>
+  </view>
+
+
+  <scroll-view id="outer-scroll-view" scroll-y="true" style="height:{{outerScrollViewHeight}};" scroll-top="{{topNum}}" bindscroll="onOuterScroll" bindscrolltolower="onScrollToLower" >
+    <view id="tab" class="tab" style="z-index:102;">
+    <view class="tab-item {{tabIndex==0?'active':''}}" bindtap="changeItem" data-item="0">常见问题
+    </view>
+    <view class="tab-item {{tabIndex==1?'active':''}}" bindtap="changeItem" data-item="1">校园电话簿</view>
+  </view>
+
+  <view wx:if="{{tabIndex==0}}">
+    <view class="search-area">
+      <view class="searchBar">
+        <mp-searchbar bindblur="onSearch" 
+        bindclear = "onCancleSearch" ext-class="weui-search-bar_focusing"></mp-searchbar>
+      </view>
+    </view>
+
+    <scroll-view id="question-answer-scroll-view" class="question-answer-scroll-view" style="height:{{question_answer_scroll_view_height}}" scroll-top="{{question_answer_scroll_view_top_num}}" scroll-y="true" bindscroll="onQuestionAnswerScroll" bindrefresherrefresh="onRefresherRefresh" refresher-enabled="{{question_answer_section.refresherEnabled}}" bindscroll="onMyScroll"  enable-back-to-top="true" refresher-triggered="{{loading}}" bindscrolltolower="onScrollToLower">
+      <view class="question-answer-view">
+        <view class="question-answer-card" wx:for="{{question_answer_section.dataList}}">
+        <view class="question-answer-line" style="margin:auto 0;" bindtap="clickQuestionAnswerLine" data-index="{{index}}" data-id="{{item.id}}">
+          <view class="question-answer-index-and-title">
+            <view class="question-answer-index">{{index+1}}</view>
+            <view class="question-answer-title">{{item.question}}</view>
+          </view>
+          <!-- <image src="{{'../../static/icon/'+item.answer_show?'down':'right'+'-arrow.svg'}}" wx:if="{{!item.answer_show}}" class="question-answer-arrow"></image> -->
+          <image src="../../static/icon/right-arrow.svg" wx:if="{{!item.answer_show}}" class="question-answer-arrow"></image>
+          <image src="../../static/icon/down-arrow.svg" wx:else class="question-answer-arrow"></image>
+        </view>
+        <view wx:if="{{item.answer_show}}">
+          <view class="question-answer-content" >{{item.answer}}</view>
+          <view class="question-answer-image-container" wx:if="{{item.allPicUrl}}" >
+            <view class="question-answer-image-view" wx:for="{{item.all_pic_url_list}}" wx:for-item="imageUrl" wx:for-index="imageIndex" bindtap="previewImage" data-image-list="{{item.all_pic_url_list}}" data-image-index="{{imageIndex}}">
+              <image src="{{imageUrl}}"  class="question-answer-image"/>        
+            </view>
+          </view>
+        </view>
+        
+      </view>
+      
+      </view>
+
+      <view wx:if="{{question_answer_section.dataList.length==0}}" class="noData">
+        暂无数据~
+      </view>    
+      <view wx:if="{{question_answer_section.dataList.length>0&&question_answer_section.isEnd}}" class="noData">
+        已经到底啦~
+      </view>   
+
+    </scroll-view>  
+  </view>
+
+  <view wx:if="{{tabIndex==1}}">
+    <view class="communication-search-row-and-filters-content">
+      <view class="communication-search-area">
+        <view class="searchBar">
+          <mp-searchbar bindblur="onSearch" 
+          bindclear = "onCancleSearch" ext-class="weui-search-bar_focusing"></mp-searchbar>
+        </view>
+        <view class="guide" wx:if="{{!communication_section.onFilter}}" bindtap="changeZoneFilterStatus">
+          <image class="filter-icon" src="/static/icon/filter.svg"/>
+          <text class="filter-text-blue">校区筛选</text>
+        </view>
+        <view class="guide" wx:else bindtap="changeZoneFilterStatus">
+          <image class="filter-icon" src="/static/icon/select-blue.png"/>
+          <text class="filter-text-blue">校区筛选</text>
+        </view>
+      </view>
+      <view style="position:relative;">
+      
+        <view wx:if="{{communication_section.filterOpen}}" class="filterExtended">
+          <view class="conditionArea">
+            <view class="whiteBG">
+            <block wx:for="{{communication_section.zoneNameList}}">
+              <view data-index="{{index}}" bindtap="chooseZone"
+              class="{{index==communication_section.zoneIndex?'conditionsSelected':'conditionsNotSelected'}}">
+                {{item}}
+              </view>
+            </block>
+          </view>
+          </view>
+          <view class="shade2" bindtap="changeZoneFilterStatus"></view>
+        </view>
+      </view>
+
+    </view>
+    
+
+    
+    
+  
+    <scroll-view class="communication-scroll-view" scroll-y="true" bindrefresherrefresh="onRefresherRefresh" refresher-enabled="{{communication_section.refresherEnabled}}"  bindscroll="onMyScroll"  enable-back-to-top="true" refresher-triggered="{{loading}}">
+      <view class="communication-view">
+        <view class="communication-card" wx:for="{{communication_section.dataList}}">
+          <view class="communication-column">
+            <view class="communication-name">{{item.name}}</view>
+            <view class="communication-address">{{item.address}}</view>
+            <view class="communication-serve-time">{{item.serveTime}}</view>
+          </view>
+          <view class="communication-column-right">
+            <view style="background-color:{{communication_section.zoneColorList[item.zoneId-56]}}" class="communication-zone">{{communication_section.zoneNameList[item.zoneId-56]+'校区'}}</view>
+            <image src="../../static/icon/ring-icon.svg" wx:if="{{!item.answer_show}}" class="communication-ring-image" bindtap="makePhoneCall" data-phone="{{item.phone}}" data-id="{{item.id}}"></image>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{communication_section.dataList.length==0}}" class="noData">
+        暂无数据~
+      </view>    
+      <view wx:if="{{communication_section.dataList.length>0&&communication_section.isEnd}}" class="noData">
+        已经到底啦~
+      </view>   
+     
+    </scroll-view>
+
+  </view>
+  
+  </scroll-view>
+
+
+
+  <image class="feedbackButton" bindtap="clickFeedbackButton" src='../../static/icon/feedback.svg'></image>
+
+  <view class="feedback-mask"  wx:if="{{feedback.modalShow}}">
+    <view class="feedback-modal">
+      <view class="feedback-type-row">
+        <view class="feedback-type-button-{{feedback.type==0?'error-selected':'normal'}}" bindtap="changeFeedbackType" data-index="0">信息有误</view>
+        <view class="feedback-type-button-{{feedback.type==1?'more-selected':'normal'}}" bindtap="changeFeedbackType" data-index="1">希望更多信息</view>
+      </view>
+      <textarea value="{{feedback.content}}" 
+              class="feedback-input" maxlength="1000"  placeholder="请填写您的反馈信息"   bindinput="inputFeedback" placeholder-class="feedback-input-placeholder"/>
+      <view class="feedback-tip">{{feedback.tip}}</view>
+      <view class="feedback-button-row">
+        <view class="feedback-cancel-button" bindtap="cancelFeedback">取消</view>
+        <view class="feedback-confirm-button" bindtap="confirmFeedback">提交</view>
+      </view>
+    </view>
+  
+  </view>
+  
+
+
+</view>
+<!-- <view style="position:fixed;width:100vw;height:10vh;z-index:0;top:0;background-color:white;"/>
+<view style="position:fixed;width:100vw;height:10vh;z-index:0;top:0;" class="tongde-background"/> -->

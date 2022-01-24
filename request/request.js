@@ -2,16 +2,12 @@
 // 说明：将 wx.request 封装成 promise ,并提取了公共路径；
 const app = getApp();
 const request = (params)=> {
-  const baseUrl  = 'https://tongji-poby.sparkxyf.com/api';
-  // const baseUrl  = 'https://jixingyun.tongji.edu.cn/api2';
-  // const baseUrl = "https://www.wallbreaker.top";
-  //const baseUrl  = 'http://localhost:8080';
   let token = app.globalData.token;
   if(token){
     return new Promise((resolve,reject)=>{
       wx.request({
         ...params,
-        url :baseUrl + params.url,
+        url :app.globalData.url + params.url,
         header : {
           ...params.header,
           'cookie': token
@@ -23,20 +19,6 @@ const request = (params)=> {
           reject(error);
         }
       })
-    }).then(res => {
-      if(res.statusCode == 401 || res.statusCode == 502){
-        wx.showToast({
-          title: '服务器维护',
-          icon : 'error'
-        });
-        setTimeout( _ => {
-          wx.reLaunch({
-            url: '/pages/welcome/welcome',
-          })
-        },1000)
-      }else{
-        return res
-      }
     })
   }else{ // 意外未获取到token的情况
     return new Promise((resolve, reject) => {
@@ -63,7 +45,7 @@ const request = (params)=> {
       return new Promise((resolve,reject)=>{
         wx.request({
           ...params,
-          url :baseUrl + params.url,
+          url :app.globalData.url + params.url,
           header : {
             ...params.header,
             'cookie': token
@@ -82,12 +64,9 @@ const request = (params)=> {
 };
 
 const login = (code)=> {
-  const baseUrl  = 'https://jixingyun.tongji.edu.cn/api2';
-  // const baseUrl = "https://www.wallbreaker.top";
-  //const baseUrl  = 'http://localhost:8080';
   return new Promise((resolve,reject)=>{
     wx.request({
-      url :baseUrl + '/user/login',
+      url :app.globalData.url + '/user/login',
       header : {
         'content-type':'application/json'
       },
