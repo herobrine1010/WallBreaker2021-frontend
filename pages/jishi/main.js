@@ -397,5 +397,10 @@ Page({
       getNextPostingPage(that, keyword, labelId, timeIndex);
     }
 
+  },
+  navToEncyclopedia:function(){
+    wx.navigateTo({
+      url: '/pages/jishi/encyclopedia',
+    })
   }
 })

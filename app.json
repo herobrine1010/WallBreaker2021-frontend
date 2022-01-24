@@ -68,7 +68,8 @@
     "pages/login/webview",
     "pages/welcome/webView",
     "pages/jiren/guide-new",
-    "pages/personal/help-new"
+    "pages/personal/help-new",
+    "pages/jishi/encyclopedia"
   ],
   "window": {
     "backgroundTextStyle": "dark",

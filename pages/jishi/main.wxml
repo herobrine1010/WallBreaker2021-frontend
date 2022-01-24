@@ -1,12 +1,20 @@
 <!--pages/jishi/main.wxml-->
-<view class="jishi-background">
+<view class='tongde-shade'></view>
+<view class="tongde-background">
   <view>
     <mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar__centers" title="济事广场"></mp-navigation-bar>
   </view>
-  <view class="searchBar">
+  <view class="search-area">
+    <view class="searchBar">
     <mp-searchbar bindblur="onSearch" 
       bindclear = "onCancleSearch" ext-class="weui-search-bar_focusing"></mp-searchbar>
+    </view>
+    <view class="guide" bindtap="navToEncyclopedia">
+        <image src="../../static/icon/encyclopedia.svg" class="guide-pic" alt=""></image>
+        <text class="guide-text">同济百科</text>
+      </view>
   </view>
+  
   <view class="area2">
     <!-- <view class="buttonArea">
     </view> -->
