@@ -46,7 +46,8 @@
     </view> -->
 
     <view class="mail-vertify">
-        <input name="sid" placeholder="请输入您的学号" placeholder-class	="placeholder" type="number" ></input> 
+        <input name="sid" placeholder="请输入以学号开头的邮箱" placeholder-class	="placeholder" type="number" ></input> 
+        <text class="mail-name-url">@tongji.edu.cn</text> 
       </view>
       <view class="vertify-warn" wx:if="{{isVertifyWarnShow}}">
         <image class="warn" src="../../static/icon/Alert-warning.png"></image>
@@ -54,7 +55,7 @@
       </view>
     </view>
     
-    <button formType="submit"  class="finish">完成认证</button>
+    <button formType="submit"  class="finish">发送验证邮件</button>
   </form>
   <button class="finish" bindtap="checkMailIsClicked">我已完成邮箱验证</button>
 </view>

@@ -12,7 +12,8 @@ Page({
     hasMail : false,
     isVertifyBolck : false,
     openid: '',
-    isSendMail: false
+    isSendMail: false,
+    isGetPhone: false
   },
   onLoad: function (options) {
     let openid = options.openid;
@@ -137,7 +138,7 @@ Page({
                 "content-type": 'application/x-www-form-urlencoded'
               },
            }).then(res => {
-             console.log(res)
+             this.setData({isGetPhone: true})
              wx.showToast({
                title: '授权成功！',
              })
@@ -155,7 +156,13 @@ Page({
 
   },
   onSubmit(e){
-
+    if(!this.data.isGetPhone) {
+      wx.showModal({
+        content: '请先完成手机号授权',
+        showCancel: false,
+      })
+      return;
+    } 
     // 1.完成邮箱认证；2.获取用户头像、昵称信息
     // {mail: "222", vertifyNum: "456"}
     // 进行邮箱验证；
@@ -203,6 +210,13 @@ Page({
   },
 
   checkMailIsClicked() {
+    if(!this.data.isGetPhone) {
+      wx.showModal({
+        content: '请先完成手机号授权',
+        showCancel: false,
+      })
+      return;
+    } 
     request({
       url: '/user/checkMailVerified/' + this.data.openid,
     }).then(res => {
