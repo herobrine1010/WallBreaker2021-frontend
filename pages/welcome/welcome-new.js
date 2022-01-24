@@ -1,6 +1,7 @@
 // pages/welcome/welcome-new.js
 import {request} from "../../request/request.js";
 const app = getApp();
+wx.cloud.init();
 Page({
 
   /**
@@ -17,8 +18,7 @@ Page({
     let openid = options.openid;
     this.setData({
       openid
-    }, this.checkMailIsClicked);
-    // this.checkMailIsClicked()
+    });
     
   },
   onInputMail(e){
@@ -203,14 +203,13 @@ Page({
   },
 
   checkMailIsClicked() {
-    if(this.data.isSendMail!=true) return;
     request({
       url: '/user/checkMailVerified/' + this.data.openid,
     }).then(res => {
-      if(res.success) {
+      if(res.data.success) {
         // 已点击流程
-        wx.redirectTo({
-          url: 'pages/main/jishi',
+        wx.navigateTo({
+          url: './welcome',
         })
       } else {
         // 未点击流程

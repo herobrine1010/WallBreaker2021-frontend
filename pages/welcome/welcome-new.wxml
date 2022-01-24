@@ -56,5 +56,5 @@
     
     <button formType="submit"  class="finish">完成认证</button>
   </form>
-  <button class="finish" wx:if="{{isSendMail}}">我已完成邮箱验证</button>
+  <button class="finish" bindtap="checkMailIsClicked">我已完成邮箱验证</button>
 </view>

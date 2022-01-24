@@ -2,7 +2,8 @@
 // 说明：将 wx.request 封装成 promise ,并提取了公共路径；
 const app = getApp();
 const request = (params)=> {
-  const baseUrl  = 'https://jixingyun.tongji.edu.cn/api2';
+  const baseUrl  = 'https://tongji-poby.sparkxyf.com/api';
+  // const baseUrl  = 'https://jixingyun.tongji.edu.cn/api2';
   // const baseUrl = "https://www.wallbreaker.top";
   //const baseUrl  = 'http://localhost:8080';
   let token = app.globalData.token;
