@@ -49,7 +49,7 @@
       <view class="item-title">关于我们</view>
     </navigator>
 
-    <view class="item-last"></view>
+    <!-- <view class="item-last"></view> -->
 
 
   </view>

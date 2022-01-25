@@ -15,7 +15,7 @@
     <view class="discription">
       <text class="poby-text bdst regular color-sec">仅用于认证，将严格保密您的信息</text>
     </view>
-    <button class="phone-btn">点击进行手机号授权</button>
+    <button class="phone-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">点击进行手机号授权</button>
   </view>
 
   <form bindsubmit="onSubmit">
@@ -26,16 +26,16 @@
       <view class="discription">
         <text class="poby-text bdst regular color-sec">仅用于认证，将严格保密您的信息</text>
       </view>
-      <view class="mail-name">
+<!--       <view class="mail-name">
         <input name="mail" placeholder="请输入您的校园邮箱" placeholder-class	="placeholder" type="text" bindinput="onInputMail"></input> 
         <text class="mail-name-url">@tongji.edu.cn</text> 
       </view>
       <view class="mail-warn" wx:if="{{isMailWarnShow}}">
         <image class="warn" src="../../static/icon/Alert-warning.png"></image>
         <text>请填写邮箱</text>
-      </view>
+      </view> -->
 
-      <view class="mail-vertify">
+<!--       <view class="mail-vertify">
         <input name="vertifyNum" placeholder="请输入邮箱收到的验证码" placeholder-class	="placeholder" type="number" bindinput="onInputVertify"></input> 
         <text class="mail-vertify-word {{hasMail?'mail-vertify-active':''}}" bindtap="getVertifyNum">{{countDownText}}</text> 
       </view>
@@ -43,8 +43,19 @@
         <image class="warn" src="../../static/icon/Alert-warning.png"></image>
         <text>请填写邮箱验证码</text>
       </view>
-    </view>
+    </view> -->
 
-    <button formType="submit"  class="finish">完成认证</button>
+    <view class="mail-vertify">
+        <input name="sid" placeholder="请输入以学号开头的邮箱" placeholder-class	="placeholder" type="number" ></input> 
+        <text class="mail-name-url">@tongji.edu.cn</text> 
+      </view>
+      <view class="vertify-warn" wx:if="{{isVertifyWarnShow}}">
+        <image class="warn" src="../../static/icon/Alert-warning.png"></image>
+        <text>请填写学号</text>
+      </view>
+    </view>
+    
+    <button formType="submit"  class="finish">发送验证邮件</button>
   </form>
+  <button class="finish" bindtap="checkMailIsClicked">我已完成邮箱验证</button>
 </view>

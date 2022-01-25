@@ -1,6 +1,7 @@
 # Windows
 [Dd]esktop.ini
 Thumbs.db
+project.private.config.json
 $RECYCLE.BIN/
 
 # macOS

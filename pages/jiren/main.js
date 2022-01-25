@@ -87,7 +87,7 @@ async function setTeamDataInFirstPage(that , pageNo = 1, keyword, labelId, timeI
     firstPageData['isRefresherOpen'] = false;
     // setData是page对象里才有的办法，所以在调用函数时，要把page对象传入进来；
     that.setData(firstPageData);
-    console.log(!firstPageData.isLastPage);
+    // console.log(!firstPageData.isLastPage);
     if(!firstPageData.isLastPage){
       getNextTeamPage(that , keyword, labelId, timeIndex); //获取并处理下一页；
     }

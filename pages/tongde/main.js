@@ -45,24 +45,9 @@ function requestWithPage(that, type=0, labelId='', keyword='',pageNo) {
     data: {...setRequestData(keyword, labelId, type, pageNo), pageSize: 6}
   })
 }
-function getThenUpdateLostFoundList(that, type=0, labelId='', keyword='',pageNo) {
+
+function updateCache(that, type, labelId, keyword,pageNo) {
   requestWithPage(that, type, labelId, keyword,pageNo).then(res => {
-    let itemList = res.data.data.records.map(v => {
-      v.createTime = getDateDiff(v.createTime);
-      return v;                                 
-    })
-
-    that.setData({
-      tongdeItemList: itemList,
-      isRefresherOpen: false,
-      current: res.data.data.current,
-      pages: res.data.data.pages
-    })
-  });
-}
-
-function updateCache(that, type=0, labelId='', keyword='',pageNo) {
-  requestWithPage(that, type=0, labelId='', keyword='',pageNo).then(res => {
     let itemList = res.data.data.records.map(v => {
       v.createTime = getDateDiff(v.createTime);
       return v;                                 
@@ -70,9 +55,41 @@ function updateCache(that, type=0, labelId='', keyword='',pageNo) {
     that.setData({
       cachedItemList:itemList,
       isRefresherOpen: false,
-      current: res.data.data.current
+      current: res.data.data.current,
+      isLastPage: res.data.data.current>=that.data.pages
     })
   })
+}
+function initPageData(that, type, labelId, keyword) {
+  requestWithPage(that, type, labelId, keyword,1).then(res => {
+    let itemList = res.data.data.records.map(v => {
+      v.createTime = getDateDiff(v.createTime);
+      return v;                                 
+    })
+    let isLastPage = res.data.data.current>=that.data.pages;
+    that.setData({
+      tongdeItemList: itemList,
+      isRefresherOpen: false,
+      current: res.data.data.current,
+      isLastPage: res.data.data.current>=res.data.data.pages,
+      pages: res.data.data.pages
+    })
+    return isLastPage;
+    }).then(res => {
+      if(res) return;
+      else return requestWithPage(that, type, labelId, keyword,2)
+    }).then(res => {
+      let itemList = res.data.data.records.map(v => {
+        v.createTime = getDateDiff(v.createTime);
+        return v;                                 
+      })
+      that.setData({
+        cachedItemList:itemList,
+        isRefresherOpen: false,
+        current: res.data.data.current,
+        isLastPage: res.data.data.current>=that.data.pages
+      })
+    })
 }
 Component({
   behaviors: [scrollBehavior, searchBehavior, swiperbehavior],
@@ -241,7 +258,8 @@ Component({
     // 用筛选框选中的标签列表， 目前为单选
     selectedLabelList: [],
     id: null, // selected labels id
-    current: 1
+    current: 1,
+    isLastPage: false
   },
   /* 
   数据监听器
@@ -253,8 +271,9 @@ Component({
         id,
         current: 1
       })
-      getThenUpdateLostFoundList(this, tab, id, keyword,1);
-      updateCache(this,tab,id,keyword,2);
+      initPageData(this, tab, id, keyword)
+      // getThenUpdateLostFoundList(this, tab, id, keyword,1);
+      // updateCache(this,tab,id,keyword,2);
     }
   },
   methods: {
@@ -262,22 +281,9 @@ Component({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    getThenUpdateLostFoundList(this,0,null,null,1);
-    updateCache(this,0,null,null,2);
-    // --------- ----- 调试同德分页接口 ------ --------
-    request({
-      url: '/lostfound/tongdeGetLostFoundWithPage',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-         
-      },
-      method : 'GET',
-      data: {
-        pageNo : 2,
-        pageSize : 4
-      }
-    }).then(res => {
-    })
+    initPageData(this)
+    // getThenUpdateLostFoundList(this,0,null,null,1);
+    // updateCache(this,0,null,null,2);
 
   },
   onShow: function(options) {
@@ -312,12 +318,12 @@ Component({
   },
   //  --------- 滚动框：获取下一页 ------------
   getNextPage(){
-    if(this.data.cachedItemList!=null) {
+    
       this.setData({
-        tongdeItemList: this.data.tongdeItemList.concat(this.data.cachedItemList)
+        tongdeItemList: this.data.tongdeItemList.concat(this.data.cachedItemList),
+        cachedItemList: []
       });
-    }
-    if(this.data.current<=this.data.pages) {
+    if(!this.data.isLastPage) {
     updateCache(this, this.data.tab, this.data.id, this.data.keyword, this.data.current+1);
     }
 

@@ -1,3 +1,4 @@
+import {request} from "../../request/request.js"
 // pages/jiren/anwserQuestion.js
 var app=getApp();
 Page({
@@ -47,24 +48,24 @@ Page({
   onLoad: function (options) {
     let that=this;
     if(options.teamId){
-      wx.request({
-        url: app.globalData.url+'/team/getTeam/'+options.teamId,
+      request({
+        url: '/team/getTeam/'+options.teamId,
         // data:{question},
         header:{'cookie':app.globalData.token},
-        success:function(res){
-          let question=JSON.parse(res.data.data.question);
+      })
+      .then(res => {
+        let question=JSON.parse(res.data.data.question);
  
-          let list=[];
-          for(let item in question){
-            list.push({
-              questionText:question[item],
-            })
-          }
-          that.setData({
-            teamId:options.teamId,
-            questionItems:list
+        let list=[];
+        for(let item in question){
+          list.push({
+            questionText:question[item],
           })
         }
+        that.setData({
+          teamId:options.teamId,
+          questionItems:list
+        })
       })
 
     }
@@ -139,9 +140,8 @@ Page({
         answerList[index] = that.data.answerList[key];
         index = index + 1;
     };
-    
-    wx.request({
-      url: app.globalData.url+'/userTeam/apply',
+    request({
+      url: '/userTeam/apply',
       method:"POST",
       header:{'cookie':app.globalData.token},
       data:{
@@ -149,40 +149,40 @@ Page({
         // answer:that.data.answerList,
         answer:JSON.stringify(answerList)
       },
-      success:function(res){
-        if(res.statusCode==200 && res.data.success){
-          const eventChannel = that.getOpenerEventChannel()
-          eventChannel.emit('getResult', {data: true});
-          //调试用
-          wx.navigateBack({
-            delta: 0,
-          });
-          wx.showToast({
-            title: '申请已提交',
-            icon:'success',
-            duration:2000
-          });
-        }else if(res.data.msg == "noWxId"){
-          let dialog = {
-            hasInputBox:false,
-            content:"请完善微信号~",
-            tip:"填写微信号可以更好地使用组队功能，保证微信号只有队伍成员可见！",
-            cancelText:"返回",
-            okText:"去填写",
-            tapOkEvent:"tapOkForAddWxId",
-            tapCancelEvent:"tapCancelForAddWxId",
-            isDialogShow:true,
-          }
-          that.setData({
-            dialog
-          });
-        }else{
-          wx.showToast({
-            title: '网络异常，请重试 :(',
-            icon: 'none',
-            duration: 1000
-          });
+    })
+    .then(res => {
+      if(res.statusCode==200 && res.data.success){
+        const eventChannel = that.getOpenerEventChannel()
+        eventChannel.emit('getResult', {data: true});
+        //调试用
+        wx.navigateBack({
+          delta: 0,
+        });
+        wx.showToast({
+          title: '申请已提交',
+          icon:'success',
+          duration:2000
+        });
+      }else if(res.data.msg == "noWxId"){
+        let dialog = {
+          hasInputBox:false,
+          content:"请完善微信号~",
+          tip:"填写微信号可以更好地使用组队功能，保证微信号只有队伍成员可见！",
+          cancelText:"返回",
+          okText:"去填写",
+          tapOkEvent:"tapOkForAddWxId",
+          tapCancelEvent:"tapCancelForAddWxId",
+          isDialogShow:true,
         }
+        that.setData({
+          dialog
+        });
+      }else{
+        wx.showToast({
+          title: '网络异常，请重试 :(',
+          icon: 'none',
+          duration: 1000
+        });
       }
     })
   },

@@ -105,7 +105,7 @@
   position: absolute;
   bottom: 96rpx;
   left: 16rpx;
-  width: 420rpx;
+  width: 480rpx;
   height: 30rpx;
 
   letter-spacing: 1rpx;

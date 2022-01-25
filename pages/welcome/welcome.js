@@ -31,7 +31,8 @@ Page({
       wx.showLoading({
         title: '登录中...',
       })
-      const baseUrl  = 'https://jixingyun.tongji.edu.cn/api2/';
+      const baseUrl  = 'https://tongji-poby.sparkxyf.com/api/';
+      // const baseUrl  = 'https://jixingyun.tongji.edu.cn/api2/';
       // const baseUrl = "https://www.wallbreaker.top";
       //const baseUrl  = 'http://localhost:8080';
       return new Promise((resolve,reject)=>{
@@ -70,6 +71,12 @@ Page({
       wx.hideLoading();
       // console.log('request_________________________________________');
       res = res[0];
+      if(res.statusCode == 401 || res.statusCode == 502){
+        wx.showToast({
+          title: '服务器维护',
+          icon : 'error'
+        })
+      }
       console.log(res);
       let {
         openId,
