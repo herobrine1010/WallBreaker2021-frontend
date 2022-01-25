@@ -125,6 +125,8 @@ Page({
       })
       .then(res=>{
         var phone = res.result.list[0].data.purePhoneNumber
+        this.setData({isGetPhone: true})
+        
         wx.cloud.callFunction({
           name: "getOpenId",
           success(res) {        
@@ -138,7 +140,6 @@ Page({
                 "content-type": 'application/x-www-form-urlencoded'
               },
            }).then(res => {
-             this.setData({isGetPhone: true})
              wx.showToast({
                title: '授权成功！',
              })
