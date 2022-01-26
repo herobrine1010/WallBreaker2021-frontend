@@ -101,7 +101,7 @@ page {
   float: left;
   box-sizing: border-box;
   overflow: hidden;
-  margin-bottom: 50rpx;
+  margin-bottom: 24rpx;
   margin-left:22rpx;
 }
 

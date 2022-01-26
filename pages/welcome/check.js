@@ -40,7 +40,7 @@ Page({
                 success: res => {
                   let openid = res.data.data.openId;
                   wx.navigateTo({
-                    url: `./webView?openid=${openid}`,
+                    url: `./welcome-new?openid=${openid}`,
                   })
                 }
               })
@@ -66,7 +66,7 @@ Page({
                 success: res => {
                   let openid = res.data.data.openId;
                   wx.redirectTo({
-                    url: `./webView?openid=${openid}`,
+                    url: `./welcome-new?openid=${openid}`,
                   })
                 }
               })
