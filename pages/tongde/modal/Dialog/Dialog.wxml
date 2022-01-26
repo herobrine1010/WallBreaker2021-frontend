@@ -1,0 +1,8 @@
+<!--pages/tongde/modal/Dialog/Dialog.wxml-->
+<popup-modal id="popup-modal">
+  <view class="dialog-box-content">{{content}}</view>
+  <view class="{{showCancel==true ? 'double' : 'single'}} dialog-btn-box">
+    <view class="dialog-box-cancel" bindtap="tapCancel" wx:if="{{showCancel}}">{{cancelText}}</view>
+    <view class="dialog-box-ok" bindtap="tapOk">{{okText}}</view>
+  </view>
+</popup-modal>

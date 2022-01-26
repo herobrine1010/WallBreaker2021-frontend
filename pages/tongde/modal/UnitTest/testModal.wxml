@@ -1,0 +1,18 @@
+<!--pages/tongde/modal/UnitTest/testModal.wxml-->
+<text>pages/tongde/modal/UnitTest/testModal.wxml</text>
+<view bind:tap="showCustomModal">Tap me</view>
+<popup-modal id="popup-modal"> 
+  <view style="display:flex; justify-content:space-between; margin:8rpx 0 32rpx; padding:0 21rpx; height:48rpx;">
+    <text style=" font-size: 28rpx; line-height: 42rpx; font-weight: bold;">请选择类型: </text>
+    <icon type="cancel" color="#aaa" size="42rpx"></icon>
+  </view>
+  <view style="display: flex; justify-content: space-between; margin: 18rpx 22rpx;">
+    <image src="/static/icon/tongde-idcard.svg" style="width: 192rpx; height: 232rpx;" />
+    <image src="/static/icon/tongde-other.svg" style="width: 192rpx; height: 232rpx;" />
+  </view>
+</popup-modal>
+
+<dialog-box id="closeDialog" content="确定关闭吗" okText="确定" cancelText="取消" ></dialog-box>
+
+
+<!-- <dialog-box id="popup-modal" content="该校园卡已被学号一致的同学发起认领，请在确认失主身份后关闭失物招领，感谢同学！" okText="确定" showCancel="{{true}}" ></dialog-box> -->
