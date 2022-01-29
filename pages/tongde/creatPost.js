@@ -1,4 +1,5 @@
 // pages/tongde/creatPost.js
+var app=getApp();
 import {request} from "../../request/request.js";
 import WxValidate from "../../utils/WxValidate"; // 表单验证
 const FormData = require('../../lib/wx-formdata-master/formData.js'); //实现文件上传
@@ -245,6 +246,13 @@ Page({
   onUnload: function () {
 
   },
+  onShareAppMessage: function () {
+    return {
+      title : '欢迎注册使用济星云小程序！',
+      path:app.getSharedUrl()
+    }
+  },
+
   initContactType: function() {
       // 初始化联系方式种类，QQ，微信，手机号，从数据库获取数据，修改页面数据
       let that = this;

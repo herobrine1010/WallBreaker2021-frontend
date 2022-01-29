@@ -1,6 +1,7 @@
 // miniprogram/pages/jishi/detail-new.js
 import { request } from "../../request/request.js";
 const util = require('../../utils/util.js');
+var app=getApp();
 
 Page({
 
@@ -96,7 +97,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
-      path : '/pages/welcome/welcome'
+      path:app.getSharedUrl()
     }
   },
 

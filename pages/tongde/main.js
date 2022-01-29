@@ -6,6 +6,7 @@ request是包装了一层promise的wx.request
 */
 import {request} from "../../request/request.js";
 import {formatTime, getDateDiff} from "../../utils/util.js";
+var app=getApp();
 
 // 引入各类behaviors
 const behaviorsPath = "../../behaviors/"
@@ -292,7 +293,7 @@ Component({
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
-      path : '/pages/welcome/welcome'
+      path:app.getSharedUrl()
     }
   },
 

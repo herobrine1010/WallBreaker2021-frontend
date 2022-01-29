@@ -85,6 +85,13 @@ Page({
       }
     })
   },
+  onShareAppMessage: function () {
+    return {
+      title : '欢迎注册使用济星云小程序！',
+      path:app.getSharedUrl()
+    }
+  },
+
   //------四个选择框的改变函数，用于初始化选择框选项、获得用户选择数据------
   dropdownChange: function (e) {
     this.setData({

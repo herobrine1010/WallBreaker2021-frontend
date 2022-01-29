@@ -124,7 +124,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log(app.getSharedUrl())
   },
 
   /**
@@ -147,7 +147,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
-      path : '/pages/welcome/welcome'
+      path:app.getSharedUrl()
     }
   },
 

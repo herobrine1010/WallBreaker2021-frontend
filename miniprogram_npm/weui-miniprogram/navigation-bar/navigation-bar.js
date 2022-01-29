@@ -143,6 +143,10 @@ Component({
     delta: {
       type: Number,
       value: 1
+    },
+    lastPage:{
+      type:String,
+      value:''
     }
   },
 
@@ -192,15 +196,22 @@ Component({
     back() {
       const data = this.data;
 
-      if (data.delta) {
-        wx.navigateBack({
+      if(getCurrentPages().length>1){
+        if (data.delta) {
+          wx.navigateBack({
+            delta: data.delta
+          });
+        }
+  
+        this.triggerEvent('back', {
           delta: data.delta
-        });
+        }, {});
+      }else if(this.data.lastPage){
+        wx.reLaunch({
+          url: this.data.lastPage,
+        })
       }
-
-      this.triggerEvent('back', {
-        delta: data.delta
-      }, {});
+      
     }
 
   }

@@ -7,7 +7,7 @@
 
 
 <view class="navi">
-  <mp-navigation-bar  ext-class="weui-navigation-bar__centers" title=" 帖子详情" background="{{navBackground}}"></mp-navigation-bar>
+  <mp-navigation-bar  ext-class="weui-navigation-bar__centers" title=" 帖子详情" background="{{navBackground}}" lastPage="/pages/jishi/main"></mp-navigation-bar>
 </view>
 
 

@@ -1,6 +1,7 @@
 // pages/jishi/communication.js
 import { request } from "../../request/request.js";
 import util from "../../utils/util.js";
+var app=getApp();
 
 Page({
 
@@ -118,7 +119,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
-      path : '/pages/welcome/welcome'
+      path:app.getSharedUrl()
     }
   },
   initOuterScrollViewHeight:function(){
