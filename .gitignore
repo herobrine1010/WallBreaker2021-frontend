@@ -3,6 +3,8 @@
 Thumbs.db
 project.private.config.json
 $RECYCLE.BIN/
+project.private.config.json
+project.config.json
 
 # macOS
 .DS_Store
