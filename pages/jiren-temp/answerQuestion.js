@@ -118,7 +118,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
-      path : '/pages/welcome/welcome'
+      path : '/pages/welcome/welcome?sharedPage=/pages/jiren/guide-new&tabbar=0'
     }
   },
 

@@ -1,0 +1,26 @@
+<scroll-view show-scrollbar="{{false}}" enhanced 
+  enable-back-to-top="true" 
+  refresher-enabled="true" 
+  bindrefresherrefresh = "onRefresherRefresh"
+  refresher-triggered = "{{isRefresherOpen}}"
+  bindscroll="onMyScroll" 
+  bindscrolltolower="getNextPage" 
+  upper-threshold="200"
+  scroll-y="true" 
+  scroll-with-animation='true' 
+  scroll-top='{{ topNum }}'
+  class="scroll">
+    <view wx:for="{{tongdeItemList}}" class="item">
+    <navigator class="lostDetail" url='/pages/tongde/detail?lostfoundId={{item.id}}'>
+      <card-lost
+      labelText="{{item.labelList}}"
+      title="{{item.name}}"
+      publishTime="{{item.createTime}}"
+      description="{{item.content}}"
+      postingPic="{{item.firstPicUrl=='' ? '/static/icon/tongde-default-image.png' : item.firstPicUrl}} "
+      ></card-lost>
+    </navigator>
+  </view>
+  <view class="bottomTip" wx:if="{{isLastPage}}">已经到底啦~</view>
+  <!-- <view class="bottomTip" wx:if="isEnd" style="display:block; margin: 40px 40px;">已经到底了</view> -->
+</scroll-view>

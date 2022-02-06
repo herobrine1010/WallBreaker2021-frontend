@@ -1,6 +1,6 @@
 <!--pages/jishi/main.wxml-->
-<view class='tongde-shade'></view>
-<view class="tongde-background">
+<view class='jishi-shade'></view>
+<view class="jishi-background">
   <view>
     <mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar__centers" title="济事广场"></mp-navigation-bar>
   </view>

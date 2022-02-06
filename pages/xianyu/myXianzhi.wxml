@@ -1,0 +1,94 @@
+<!--pages/xianyu/myXianzhi.wxml-->
+<view class='tongde-shade'></view>
+<view class="tongde-background">
+  <view>
+    <mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar-tongde__centers" title="校园闲鱼"></mp-navigation-bar>
+  </view>
+
+  
+  <view class="tab">
+    <view class="tab-item {{tabIndex==0?'active':''}}" bindtap="changeTab" data-index="0">我的出售</view>
+    <view class="tab-item {{tabIndex==1?'active':''}}" bindtap="changeTab" data-index="1">我的求购</view>
+    <view class="tab-item {{tabIndex==2?'active':''}}" bindtap="changeTab" data-index="2">我的收藏</view>
+  </view>
+  
+  <view class="search-area">
+    <view class="searchBar">
+      <mp-searchbar id="search-input" bindblur="onSearch" 
+      bindclear = "onCancleSearch" ext-class="weui-search-bar_focusing" placeholder="搜索物品名称" value="{{keyword}}"></mp-searchbar>
+    </view>
+    <view class="dropdown-picker-location">
+      <view class="dropdown-picker-box">
+        <view class="a-line dropdown-picker-item" bindtap="changeZonePickerStatus">
+          <view class="picker-text">{{zoneList[zoneIndex]}}</view>
+          <image class="down-arrow-icon" src="/static/icon/down-arrow.svg"/>
+        </view>
+        <view class="dropdown-picker-item white-background" wx:for="{{zoneList}}" wx:if="{{zonePickerShow}}" bindtap="changeZone" data-index="{{index}}">{{item}}</view>
+      </view>
+    </view>
+</view>
+
+
+  <view class="scroll-view-container">
+    <scroll-view show-scrollbar="{{false}}" enhanced 
+    enable-back-to-top="true" 
+    refresher-enabled="true" 
+    bindrefresherrefresh = "onRefresherRefresh"
+    refresher-triggered = "{{isRefresherOpen}}"
+    bindscroll="onMyScroll" 
+    bindscrolltolower="getNextPage" 
+    upper-threshold="200"
+    scroll-y="true" 
+    scroll-with-animation='true' 
+    scroll-top='{{ topNum }}'
+    class="scroll" style="height:{{scrollViewHeight}}px;" id="scroll-view" style="height:{{scrollviewHeight}};">
+
+      <navigator class="card" url='/pages/xianyu/detail?id={{item.id}}' wx:for="{{objectList}}">
+        <view class="a-line">
+          <view class="object-name">{{item.name}}</view>
+          <view class="object-zone">{{item.location}}</view>
+          <view class="object-status" style="background-color:{{item.statusColor}};">{{item.status}}</view>
+        </view>
+        <view class="object-image-and-content-box">
+          <image class="object-image" src="{{item.firstPicUrl}}" mode="aspectFill" wx:if="{{tabIndex!=1}}"/>
+          <view class="object-content-box">
+            <view class="a-line object-price-and-time">
+              <view class="object-price">
+                <text class="object-price-symbol">￥</text>
+                <text class="object-price-integer-part">{{item.price_integer}}</text>
+                <text class="object-price-fractional-part">{{item.price_fractional}}</text>
+              </view>
+              <view class="object-time">{{item.time}}</view>
+            </view>
+            <view class="object-content-and-operation">
+              <view class="object-content">{{item.content}}</view>
+              <view class="object-operation-group" wx:if="{{tabIndex==0||tabIndex==1}}">
+                <image class="object-operation-icon" src="/static/icon/edit-gray.svg" bindtap="editDetail" data-index="{{item.id}}"/>
+                <image class="object-operation-icon" src="/static/icon/undercarriage-gray.svg" bindtap="closeDetail" data-index="{{item.id}}"/>
+                <image class="object-operation-icon" src="/static/icon/delete-gray.svg" bindtap="deleteDetail" data-index="{{item.id}}"/>
+              </view>
+              <view class="cancel-like-button" wx:if="{{tabIndex==2}}">取消收藏</view>
+            </view>
+          </view>
+        </view>
+
+      </navigator>
+
+    </scroll-view>
+
+  </view>
+</view>
+
+
+<dialog-box 
+id="dialogBox"
+title="{{dialog.title}}"
+content="{{dialog.content}}"
+okText="确定"
+cancelText="取消"
+isShow="{{dialog.isDialogShow}}"
+buttonColor="blue"
+bind:tapCancel="{{dialog.tapCancelEvent}}"
+bind:tapOk="{{dialog.tapOkEvent}}"
+>
+</dialog-box>

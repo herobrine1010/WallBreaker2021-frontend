@@ -8,7 +8,7 @@
       <image class="userImage" src="{{item}}" mode="aspectFill" data-pic-url="{{item}}" bind:tap="zoomInDetailPicture"></image>
     </view>
   </block>
-  <view class="addImage" bindtap="uploadImage" wx:if="{{value.length < 9}}">
+  <view class="addImage" bindtap="uploadImage" wx:if="{{value.length < maxLength}}">
     <image class="addImage-icon" src="/static/icon/add-grey.png"></image>
   </view>
 </view>

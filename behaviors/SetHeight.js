@@ -3,12 +3,17 @@
 
 module.exports = Behavior({
   data: {
-      scrollviewHeight: '',
+      scrollviewHeight: 'auto',
+  },
+  lifetimes:{
+    attached:function(e){
+      this.changeScrollHeight();
+    }
   },
   methods: {
-    onShow: function() {
-      this.changeScrollHeight();
-    },
+    // onShow: function() {
+    //   this.changeScrollHeight();
+    // },
     changeScrollHeight:function(){
       let windowHeight;
       //设置scroll-view高度
@@ -18,7 +23,7 @@ module.exports = Behavior({
         }
       });
       let query = wx.createSelectorQuery();
-      query.select('#scroll').boundingClientRect(rect=>{
+      query.select('#scroll-view').boundingClientRect(rect=>{
           let top = rect.top;
           let height=windowHeight-top;
           this.setData({
