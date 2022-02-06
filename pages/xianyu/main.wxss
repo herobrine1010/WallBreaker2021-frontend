@@ -10,7 +10,11 @@ Page {
 
   color: #545454;
 }
-
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
 .a-line{
   position: relative;
   display: flex;

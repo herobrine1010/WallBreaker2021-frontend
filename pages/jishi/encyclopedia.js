@@ -16,6 +16,14 @@ Page({
     tabHeight:36,
     baseQuestionAnswerScrollViewHeight:0,
     question_answer_scroll_view_height:'auto',
+    communication_scroll_view_height:'auto',
+    scroll_view:{
+      outer_top_num:0,
+      inner_top_num:0,
+      inner_height:'auto',
+      refresherEnabled:true,
+      loading:false,
+    },
     question_answer_section:{
       current:1,
       pages:1,
@@ -66,8 +74,9 @@ Page({
    */
   onLoad: function (options) {
     this.initOuterScrollViewHeight();
-    this.initQuestionAnswerScrollViewHeight();
     this.getTabHeight();
+    this.initInnerScrollViewHeight();
+    
     this.getData(true);
   },
 
@@ -109,14 +118,22 @@ Page({
         });
       }).exec();
   },
+  initInnerScrollViewHeight:function(){
+    let query = wx.createSelectorQuery();
+    query.select('#inner-scroll-view').boundingClientRect(rect=>{
+        let top = rect.top;
+        let height=this.data.windowHeight-top+this.data.tabHeight;
+        this.setData({
+          ['scroll_view.inner_height']:height+'px',
+        });
+      }).exec();
+  },
   getTabHeight:function(){
     let query = wx.createSelectorQuery();
     query.select('#tab').boundingClientRect(rect=>{
       console.log(rect);
       console.log('tabTop'+rect.top)
         let height=rect.height;
-        // let top = rect.top;
-        // let height=this.data.windowHeight-top;
         this.setData({
           tabTop:rect.top,
           tabHeight:height,
@@ -137,59 +154,37 @@ Page({
     this.getData();
   },
   onOuterScroll:function(e){
-    // this.setData({[this.data.sectionName+'.topNum']:e.detail.scrollTop})
-    // console.log(this.data[this.data.sectionName].topNum)
-    let enabled=this.data.sectionName+'.refresherEnabled'
+    this.setData({
+      ['scroll_view.outer_top_num']:e.detail.scrollTop
+    })
     if(e.detail.scrollTop>20){
-      this.setData({[enabled]:false})
+      this.setData({['scroll_view.refresherEnabled']:false})
     }else{
-      this.setData({[enabled]:true})
+      this.setData({['scroll_view.refresherEnabled']:true})
     }
-
-    console.log(this.data.sectionName)
-    if(this.data.sectionName=='question_answer_section'){
-      this.onQuestionAnswerScroll();
-    }
-    
-  },
-  onQuestionAnswerScroll:function(e){
-    let query = wx.createSelectorQuery();
-    query.select('#tab').boundingClientRect(rect=>{
-      let bottom=rect.bottom;
-        if(bottom<this.data.tabTop+2){
-          if(!this.data.questionAnswerScrollViewShrinkage){
-            console.log(12)
-            this.setData({
-              questionAnswerScrollViewShrinkage:true,
-              question_answer_scroll_view_height:this.data.baseQuestionAnswerScrollViewHeight+this.data.tabHeight+'px',
-              // question_answer_scroll_view_top_num:e.detail.scrollTop-this.data.tabHeight
-            })  
-          }
-        }else{
-          if(this.data.questionAnswerScrollViewShrinkage){
-            console.log(34)
-            this.setData({
-              questionAnswerScrollViewShrinkage:false,
-              question_answer_scroll_view_height:'auto'
-              })
-          }
-          
-        }
-      }).exec();
-    console.log(this.data.tabBottom,this.data.tabTop)
-    
   },
 
-  onMyScroll:function(e){
-    // let button=this.data.sectionName+'.showGoTopButton'
-    // if(e.detail.scrollTop>100){
-    //   this.setData({[button]:true})
-    // }else if(this.data.showGoTopButton){
-    //   this.setData({[button]:false})
-    // }
-    
-   },
+  onInnerScroll:function(e){
+    if(this.data.loading)return
+    let innerNum=e.detail.scrollTop
+    let outerNum=this.data.scroll_view.outer_top_num
+    let tabHeight=this.data.tabHeight
+    console.log(innerNum,outerNum)
+    if(innerNum>0 &&outerNum<tabHeight){
+      if(innerNum+outerNum<tabHeight){
+        this.setData({
+          ['scroll_view.inner_top_num']:0,
+          ['scroll_view.outer_top_num']:outerNum+innerNum
+        })
+      }else{
+        this.setData({
+          ['scroll_view.inner_top_num']:innerNum+outerNum-tabHeight,
+          ['scroll_view.outer_top_num']:tabHeight
+        })
+      }
 
+    }
+  },
 
   onSearch:function(e){
     this.setData({[this.data.sectionName+'.keyword']:e.detail.value})
@@ -202,15 +197,12 @@ Page({
     this.getData(true);
   },
   getData: function (reset) {
-    console.log('uuu')
-    console.log(reset)
     if(this.data.loading)return
     var that=this;
     let data =this.data[this.data.sectionName];
     let {current,pageSize,keyword,zoneId,isEnd}=data;
     current++;
     if(reset){
-      console.log('iii')
       current=1;
       this.setData({[this.data.sectionName+'.dataList']:[]})
     }else if(isEnd){
@@ -230,7 +222,6 @@ Page({
       data:sendData
     })
     .then(res => {
-      // console.log(res)
       let {current,pages,records} =res.data.data
       if(this.data.sectionName=='question_answer_section'){
         console.log('sfs')
