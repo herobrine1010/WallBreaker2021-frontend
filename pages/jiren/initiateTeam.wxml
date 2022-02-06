@@ -1,6 +1,6 @@
 <!--pages/jiren/initiateTeam.wxml-->
 <view class="jiren-background">
-  <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="发起组队"></mp-navigation-bar>
+  <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="发起组队" lastPage="/pages/jiren/main"></mp-navigation-bar>
   <view class="area2">
     <view class="shade"></view>
 

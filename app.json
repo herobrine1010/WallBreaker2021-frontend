@@ -69,7 +69,11 @@
     "pages/welcome/webView",
     "pages/jiren/guide-new",
     "pages/personal/help-new",
-    "pages/jishi/encyclopedia"
+    "pages/jishi/encyclopedia",
+    "pages/xianyu/main",
+    "pages/xianyu/detail",
+    "pages/xianyu/publish",
+    "pages/xianyu/myXianzhi"
   ],
   "window": {
     "backgroundTextStyle": "dark",

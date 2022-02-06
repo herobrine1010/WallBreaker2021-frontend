@@ -2,7 +2,7 @@
 <view class='background-shade'></view>
 <view class="tongde-background">
   <view>
-    <mp-navigation-bar back="{{true}}"  style="z-index:103;" ext-class="weui-navigation-bar-tongde__centers" title="同济百科"></mp-navigation-bar>
+    <mp-navigation-bar back="{{true}}"  style="z-index:103;" ext-class="weui-navigation-bar-tongde__centers" title="同济百科" lastPage="/pages/jishi/main"></mp-navigation-bar>
   </view>
 
 

@@ -27,8 +27,8 @@ bottom: 0%;
 }
 .tongde-shade{
   width:100%;
-  height:100%;
-  background: #F9F9F9;
+  height:100vh;
+  background: #f9f9f9;
   box-shadow: 10px 10px 20px 2px rgba(160, 164, 166, 0.2);
 }
 .tongde-background {
@@ -40,6 +40,27 @@ bottom: 0%;
   left: 0;
   background: linear-gradient(180deg,rgba(62,146,204,1) -720rpx, rgba(23, 178, 229, 0) 400rpx);
   /* opacity: 0.6; 将不透明度写到rgba中*/
+}
+.xianyu-shade{
+  width:100%;
+  height:100%;
+  background: #F9F9F9;
+  box-shadow: 10px 10px 20px 2px rgba(160, 164, 166, 0.2);
+}
+.xianyu-background{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+
+  background: linear-gradient(180deg, rgba(149,125,149,1) -720rpx, rgba(139, 46, 231, 0) 400rpx);
+
+  /* background: linear-gradient(180deg, rgba(182, 90, 182,1) -720rpx, rgba(139, 46, 231, 0) 400rpx); */
+
+  /* background: linear-gradient(180deg, #957D95 -180.91%, rgba(139, 46, 231, 0) 100%);
+  opacity: 0.6; */
+
 }
 .background{
   /* position */

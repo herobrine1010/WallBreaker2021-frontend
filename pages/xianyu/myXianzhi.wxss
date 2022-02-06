@@ -1,0 +1,251 @@
+/* pages/xianyu/myXianzhi.wxss */
+@import "/static/common.wxss";
+
+Page {
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28rpx;
+  line-height: 1.5;
+
+  color: #545454;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.a-line{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+/*上部 tab*/
+.tab {
+  width: 686rpx;
+  margin:24rpx 32rpx;
+  /* height: 72rpx; */
+  display: flex;
+  justify-content:space-around;
+  overflow: hidden;
+}
+.tab-item{
+  height: 40rpx;
+  font-size: 32rpx;
+  color: #545454;
+  padding-bottom: 12rpx;
+}
+
+.tab-item.active {
+  color: #333333;
+  font-weight: 500;
+  border-bottom: 4rpx solid #333333;
+  border-radius: 4rpx;
+}
+
+
+.search-area{
+  display: flex;
+  height: 84rpx;
+  width: 95%;
+  align-items: center;
+}
+.searchBar{
+  margin:0 16rpx;
+  flex: 1;
+}
+/* 搜索栏输入框字体颜色 */
+.weui-search-bar__box .weui-search-bar__input{
+  color: #000000 !important;
+  padding:0 0 0 0 ;
+  height: 80rpx;
+}
+.dropdown-picker-location{
+  position: relative;
+  width: 160rpx;
+  height: 60rpx;
+}
+
+.dropdown-picker-box{
+  position: absolute;
+  top: 0;
+  width: 160rpx;
+  border-radius: 32rpx;
+  /* justify-content: center; */
+  align-items: center;
+  background-color:rgba(255, 255, 255, 0.5);
+  z-index: 101;
+  border: 0.2px solid #957D95;
+  font-size: 24rpx;
+}
+
+.dropdown-picker-item{
+  /* width: 160rpx; */
+  height: 60rpx;
+  line-height: 60rpx;
+  justify-content: center;
+  text-align: center;
+  border-top: 0.2px solid #957D95;
+}
+.dropdown-picker-item:first-child{
+  border-top: 0;
+}
+.dropdown-picker-item:last-child{
+  border-radius: 0 0 32rpx 32rpx;
+}
+.white-background{
+  background-color: white;
+}
+
+.picker-section{
+  width: 160rpx;
+  display: flex;
+  flex-direction: row;
+  background-color:rgba(255, 255, 255, 0.5);
+  height: 60rpx;
+  border-radius: 32rpx;
+  justify-content: center;
+  align-items: center;
+
+}
+.picker-text{
+  /* width: 130rpx; */
+  text-align: center;
+  color: #545454;
+  font-size: 24rpx;
+}
+
+.down-arrow-icon{
+  height: 16rpx;
+  width: 16rpx;
+  margin: auto 0;
+  margin-left:8rpx;
+}
+
+.scroll-view-container{
+  margin-top: 8rpx;
+}
+
+.card{
+  position: relative;
+  padding-top: 25rpx;
+  padding-left: 20rpx;
+  padding-bottom: 12rpx;
+  width: 686rpx;
+  margin: 0 auto 24rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+}
+
+.object-image-and-content-box{
+  margin-top: 15rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.object-content-box{
+  margin-left: 16rpx;
+}
+
+.object-name{
+  max-width: 500rpx;
+  overflow: hidden;  
+  white-space: nowrap;    
+  /* 末尾加省略号 */
+  text-overflow:ellipsis;
+  color: #333333;
+}
+
+.object-zone{
+  color: #7C3ECC;
+  background: #F9F2FF;
+  font-size: 20rpx;
+  margin-left:16rpx;
+}
+
+.object-status{
+  position: absolute;
+  right: 0;
+  color: #f7f7f7;
+  font-size: 20rpx;
+  padding: 6rpx 28rpx 6rpx 16rpx;
+  border-radius: 24rpx 0px 0px 24rpx;
+}
+
+.object-image{
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.object-price-and-time{
+  margin-bottom: 16rpx;
+}
+
+.object-price{
+  color: #7C3ECC;
+}
+
+.object-price-symbol{
+  font-size: 28rpx;
+}
+.object-price-integer-part{
+  font-size: 36rpx;
+}
+.object-price-fractional-part{
+  font-size: 28rpx;
+}
+
+.object-time{
+  margin-left: 8rpx;
+  padding-top: 8rpx;
+  font-size: 20rpx;
+}
+
+
+.object-content-and-operation{
+  display: flex;
+  flex-direction: row;
+  margin-top: 16rpx;
+}
+
+.object-content{
+  /* height: 68rpx; */
+  width: 300rpx;
+  overflow: hidden;     
+  /* 末尾加省略号 */
+  text-overflow: ellipsis;  
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  /* 行数，也可以设为1，用来做单行 */
+  -webkit-line-clamp:2;
+  font-size: 20rpx;
+  color: #868788;
+}
+
+.object-operation-group{
+  position: absolute;
+  right: 0;
+}
+
+.object-operation-icon{
+  height: 48rpx;
+  width: 48rpx;
+  margin-right: 16rpx;
+}
+
+.cancel-like-button{
+  position: absolute;
+  right: 16rpx;
+  width: 172rpx;
+  height: 44rpx;
+  line-height: 48rpx;
+  text-align: center;
+  font-size: 20rpx;
+  color: #3E92CC;
+  border: 1px solid #3E92CC;
+  border-radius: 12px;
+
+}

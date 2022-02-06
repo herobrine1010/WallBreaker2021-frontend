@@ -1,0 +1,125 @@
+/* components/dialog-box/dialog-box.wxss */
+Page{
+  font-family: PingFang SC;
+}
+
+.dialog-box-shade{
+  position:fixed;
+  display: flex;
+  background-color: rgba(0,0,0,0.2);
+  width:100%;
+  height:100%;
+  left:0;
+  top:0;
+  z-index: 100;
+}
+
+.dialog-box-white-bg{
+
+  /* position: absolute; */
+  margin: auto auto;
+  width: 520rpx;
+  height: auto;
+  /* left: 100rpx; */
+  /* top: 500rpx; */
+  border-radius: 50rpx;
+  z-index: 101;
+  background-color: #FAFEFF;
+}
+
+.dialog-box-title{
+  display: flex;
+  margin: 48rpx auto 24rpx;
+
+  font-size: 28rpx;
+  font-weight: 500;
+
+  text-align: center;
+  color: #333333;
+  justify-content: center;
+  order: 0;
+}
+
+.dialog-box-content{
+  display: flex;
+  /* width: 400rpx; */
+  margin: 24rpx 75rpx 12rpx;
+
+  font-size: 28rpx;
+  font-weight: 400;
+
+  /* line-height: 40rpx; */
+  text-align: center;
+  color:#4A5559;
+  justify-content:center;
+  order: 1;
+  
+}
+
+.dialog-btn-box{
+  display: flex;
+  /* width: 400rpx; */
+  /* height: 80rpx; */
+  margin: 0rpx auto 48rpx;
+  padding: 24rpx 50rpx 0;
+  justify-content: space-around;
+}
+
+
+.dialog-box-cancel,.dialog-box-ok{
+  height: 48rpx;
+  width: 164rpx;
+  border: 2rpx solid   #17B2E5;
+  border-radius: 24rpx;
+
+  line-height:48rpx;
+  font-size: 20rpx;
+  text-align: center;
+  letter-spacing: 0.2vw;
+}
+.dialog-box-ok{ 
+  color:#FAFEFF;
+  background-color: #17B2E5;
+}
+.dialog-box-cancel{
+  color:#17B2E5;
+}
+
+/********** 信息区域的格式等到设计稿出来再详细改 ***********/
+.dialog-box-contact-box{
+  
+  margin: 0 auto;
+  /* justify-content: center; */
+  font-size: 28rpx;
+  color: #333333;
+  /* width: auto; */
+  /* padding-left: 80rpx; */
+
+}
+.dialog-box-contact{
+  display: flex;
+  flex-direction: row;
+  /* width: auto; */
+  justify-content: center;
+}
+.contact-key{
+  /* display: inline-block; */
+  width: 100rpx;
+  text-align: right;
+}
+.contact-value{
+  display: inline-block;
+
+}
+.infoItem{
+  width:100%;
+  height:80rpx;
+  justify-content: center;
+  margin-left: 30rpx;
+}
+
+.copyBtn{
+  margin-left: 2rpx;
+  height:36rpx;
+  width: 30rpx;
+}

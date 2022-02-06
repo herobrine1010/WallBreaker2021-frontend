@@ -1,0 +1,70 @@
+<!--pages/xianyu/detail.wxml-->
+<view class='xianyu-shade'></view>
+<view class="xianyu-background">
+  <view class="navi">
+    <mp-navigation-bar ext-class="weui-navigation-bar__tongde" title="{{typeName}}详情" lastPage="/pages/xianyu/main"></mp-navigation-bar>
+  </view>
+
+
+  <view class="page">
+    <view class="a-line header">
+      <image class="initiator-avatar" src="{{detail.initiatorAvatar||'/static/icon/default-user-big.png'}}"/>
+      <view class="initiator-name-and-time">
+        <view class="initiator-name">{{detail.initiatorName}}</view>
+        <view class="initiator-time">{{detail.createTime}}</view>
+      </view>
+      <view class="star-detail">
+        <view class="star-text">已有{{detail.starNumber}}人收藏</view>
+        <image class="star-icon" wx:if="{{!like}}" src="/static/icon/star.svg" bindtap="collectDetail"/>
+        <image class="star-icon" wx:else src="/static/icon/star-solid.svg" bindtap="cancelCollectDetail"/>
+      </view>
+    </view>
+
+    <scroll-view class="detail" id="scroll-view" scroll-y="true" style="height:{{scrollViewHeight}}px;" show-scrollbar="{{false}}" enhanced="true"  scroll-with-animation='true' >
+      <view class="a-line">
+        <view class="object-name">{{detail.name}}</view>
+        <view class="object-zone">{{detail.location}}</view>
+      </view>
+      <view class="object-price">
+        <text class="object-price-symbol">￥</text>
+        <text class="object-price-integer-part">{{detail.price_integer}}</text>
+        <text class="object-price-fractional-part">{{detail.price_fractional}}</text>
+      </view>
+      <view class="object-content">{{detail.content}}</view>
+      <view class="object-image-container">
+        <image class="object-image" wx:for="{{detail.allPicUrl}}" src="{{item}}" mode="widthFix"/>
+      </view>
+    
+    </scroll-view>
+    
+
+
+    <view class="operation-button">
+      <view class="contact-button" wx:if="{{!initializedByMe}}" bindtap="showContactListModal">联系TA</view>
+      <view wx:else class="operation-button-group">
+        <view class="initiator-button" bindtap="editDetail">编辑</view>
+        <view class="initiator-button-hollow" bindtap="closeDetail">下架</view>
+        <view class="initiator-button-hollow" bindtap="deleteDetail">删除</view>
+      </view>
+    </view>
+  
+  
+  </view>
+</view>
+
+
+
+<dialog-box 
+id="dialogBox"
+title="{{dialog.title}}"
+content="{{dialog.content}}"
+hideCancelButton="{{dialog.hideCancelButton}}"
+okText="确定"
+cancelText="取消"
+isShow="{{dialog.isDialogShow}}"
+contactList="{{dialog.contactList}}"
+buttonColor="purple"
+bind:tapCancel="{{dialog.tapCancelEvent}}"
+bind:tapOk="{{dialog.tapOkEvent}}"
+>
+</dialog-box>

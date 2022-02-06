@@ -16,6 +16,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    let sharedPage=app.globalData.sharedPage
+    if(!sharedPage&&options.sharedPage){
+      app.globalData.sharedPage=options.sharedPage
+    }
+
     //先发一个login确认有没有注册过
     let pLogin = new Promise((resolve, reject) => {
       wx.login({
@@ -31,13 +37,9 @@ Page({
       wx.showLoading({
         title: '登录中...',
       })
-      const baseUrl  = 'https://tongji-poby.sparkxyf.com/api/';
-      // const baseUrl  = 'https://jixingyun.tongji.edu.cn/api2/';
-      // const baseUrl = "https://www.wallbreaker.top";
-      //const baseUrl  = 'http://localhost:8080';
       return new Promise((resolve,reject)=>{
         wx.request({
-          url :baseUrl + 'user/login',
+          url :app.globalData.url + '/user/login',
           header : {
             'content-type':'application/json'
           },
@@ -91,9 +93,19 @@ Page({
         if(res.data.data.jirenMsgNum>0){
           app.globalData.noticeNum = res.data.data.jirenMsgNum
         }
-        wx.switchTab({
-          url: '/pages/jishi/main',
-        })
+        
+        let sharedPage=app.globalData.sharedPage
+        if(sharedPage){
+          app.globalData.sharedPage=undefined
+          let page=sharedPage.replace('●','?').replace('◆','&')
+          wx.reLaunch({
+            url: page,
+          })
+        }else{
+          wx.switchTab({
+            url: '/pages/jishi/main',
+          })            
+        }
       }else if(status == 'blocked'){ // 用户被禁言
         wx.redirectTo({
           url: '/pages/welcome/blocked',
