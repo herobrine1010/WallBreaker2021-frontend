@@ -50,13 +50,13 @@ Page({
     
     priceInputWidth:12,
 
-    contactTypeRange:['请选择联系渠道','微信','QQ','手机号','邮箱','其他'],
+    contactTypeRange:['微信','QQ','手机号','邮箱','其他'],
     objectTypeList:['图书','美妆','日用','数码','虚拟商品','出行','其他'],
     zoneList:['四平路校区','彰武路校区','嘉定校区','沪西校区','沪北校区','铁岭校区','线上'],
     detail:{
       // content:'something'
       contactList:[{
-        index:0,
+        index:-1,
         type:'',
       }]
     }
@@ -109,6 +109,7 @@ Page({
     let editHistory=wx.getStorageSync('xianyuEditHistory')
     this.setData({detail:editHistory})
     wx.removeStorageSync('xianyuEditHistory')
+    this.changePriceInputWidth()
   },
   onShareAppMessage: function () {
     return {
@@ -131,7 +132,7 @@ Page({
       let wxId=res.data.data.wxId
       if(wxId){
         this.setData({['detail.contactList']:[{
-          index:1,
+          index:0,
           type:'微信',
           content:wxId,
         }]})
@@ -198,7 +199,7 @@ Page({
       haveEdited:true,
     })
   },
-  
+
   changeContactType:function(e){
     console.log(e)
     this.setData({
@@ -206,9 +207,21 @@ Page({
       haveEdited:true,
     })
   },
+  
+  changePrice:function(e){
+    let value=e.detail.value
+    this.setData({
+      ['detail.price']:value,
+      haveEdited:true,
+    })
+    if(value){
+      this.setData({['errors.price']:''})
+    }
+    this.changePriceInputWidth()
+  },
 
   changePriceInputWidth(e){
-    let value=e.detail.value
+    let value=this.data.detail.price
     let length;
     if(value){
       length=6+11*value.replace(/[^\x00-\xff]/g, "ab").length
@@ -217,19 +230,15 @@ Page({
       length=12
     }
     this.setData({
-      ['detail.price']:value,
       priceInputWidth:length,
-      haveEdited:true,
     })
-    if(value){
-      this.setData({['errors.price']:''})
-    }
+    
   },
 
   addNewContact:function(e){
     let list=this.data.detail.contactList
     list.push({
-      index:0,
+      index:-1,
       type:'',
       content:''
     })

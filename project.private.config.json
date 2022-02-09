@@ -71,6 +71,42 @@
           "pathName": "pages/jiren/main",
           "query": "",
           "scene": 1007
+        },
+        {
+          "name": "pages/welcome/check",
+          "pathName": "pages/welcome/check",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/jishi/encyclopedia",
+          "pathName": "pages/jishi/encyclopedia",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/xianyu/main",
+          "pathName": "pages/xianyu/main",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/xianyu/detail",
+          "pathName": "pages/xianyu/detail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/xianyu/publish",
+          "pathName": "pages/xianyu/publish",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/xianyu/myXianzhi",
+          "pathName": "pages/xianyu/myXianzhi",
+          "query": "",
+          "scene": null
         }
       ]
     }

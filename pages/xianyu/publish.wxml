@@ -71,14 +71,14 @@
       <view class="item-wrap type-container" style="padding:24rpx 0;">
         <view class="icon-with-title" style="margin-bottom:0;">
           <image class="icon" src="../../static/icon/price.svg"/>
-          <text class="title">预期价格</text>
+          <text class="title">{{type=='sale'?'售价':'预期价格'}}</text>
         </view>
         <view class="error-wrap" style="margin-left: -96px;" wx:if="{{ errors.price }}">
           <image src="/static/icon/Alert-warning.png" class="icon"/>
           <text class="error-tip">{{ errors.price }}</text>
         </view>
         <view class="price-view">￥
-          <input class="price-input" style="width:{{priceInputWidth}}px;" bindinput="changePriceInputWidth"  value="{{detail.price}}" type="digit"/>
+          <input class="price-input" style="width:{{priceInputWidth}}px;" bindinput="changePrice"  value="{{detail.price}}" type="digit"/>
           <image class="down-arrow-icon" src="/static/icon/right-arrow.svg"/>
         </view>
       </view>
@@ -93,7 +93,13 @@
           </view> 
         </view>
         <view class="contact-a-line" wx:for="{{detail.contactList}}">
-          <picker name="contactType" class="contact-type-picker" mode="selector" range="{{contactTypeRange}}" value="{{item.index}}" data-index="{{index}}" bind:change="changeContactType">{{contactTypeRange[item.index]}}</picker>
+          <picker name="contactType" class="contact-type-picker" mode="selector" range="{{contactTypeRange}}" value="{{item.index}}" data-index="{{index}}" bind:change="changeContactType">
+            <view class="contact-picker-a-line">
+              <view class="picker-text">{{item.index>-1?contactTypeRange[item.index]:'请选择联系渠道'}}</view>
+              <image class="contact-picker-down-arrow-icon" src="/static/icon/down-arrow.svg"/>
+            </view>
+            
+          </picker>
           <view class="input-contact-box input-box">
             <input name="contact" class="input-half-line" placeholder="请输入您的联系方式" maxlength="25" value="{{item.content}}"/>
             

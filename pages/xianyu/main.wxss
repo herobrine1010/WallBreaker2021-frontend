@@ -10,6 +10,9 @@ Page {
 
   color: #545454;
 }
+.xianyu-background{
+  background: linear-gradient(180deg, #957D95ff -720rpx, rgba(139, 46, 231, 0) 500rpx);
+}
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -33,7 +36,7 @@ Page {
 .tab-item{
   height: 40rpx;
   font-size: 32rpx;
-  color: #545454;
+  color: #957D95;
   padding-bottom: 12rpx;
 }
 
@@ -60,6 +63,9 @@ Page {
   color: #000000 !important;
   padding:0 0 0 0 ;
   height: 80rpx;
+}
+.weui-search-bar__form {
+  background: rgba(255, 252, 255, 0.7);
 }
 .dropdown-picker-location{
   position: relative;
@@ -163,7 +169,7 @@ Page {
   bottom: 0;
   display: flex;
   align-items: center;
-  background-color: #F6F6F6;
+  /* background-color: #F6F6F6; */
 }
 
 .double-right-arrow-icon{
@@ -221,7 +227,7 @@ Page {
   background-color: #ffffff;
   width: 304rpx;
   height: 162rpx;/* 高度复刻问题 */
-  padding: 14rpx 16rpx 24rpx;
+  padding: 12rpx 16rpx 24rpx;
 }
 
 .sale-object-name{
@@ -234,7 +240,7 @@ Page {
   font-weight: 600;
   font-size: 14px;
   color: #333333;
-  margin: 8rpx 0;
+  margin: 0 0 4rpx;
 }
 
 .sale-object-content{
@@ -268,13 +274,15 @@ Page {
   font-size: 28rpx;
 }
 
-.zone{
+.sale-object-zone{
   position: absolute;
   bottom: 6rpx;
   right: 20rpx;
+  padding: 0 8rpx;
   color: #7C3ECC;
   background: #F9F2FF;
   font-size: 20rpx;
+  border-radius: 8rpx;
 }
 
 .need-card{
@@ -287,7 +295,7 @@ Page {
 .need-object-detail-box{
   border-radius: 24rpx 24rpx 24rpx 24rpx;
   background-color: #ffffff;
-  width: 304rpx;
+  /* width: 304rpx; */
   height: auto;
   padding: 14rpx 24rpx 16rpx;
 }
@@ -299,7 +307,7 @@ Page {
   font-weight: 600;
   font-size: 14px;
   color: #333333;
-  margin-top: 14rpx;
+  /* margin-top: 14rpx; */
 }
 .need-object-content{
   height: 60rpx;
@@ -315,7 +323,16 @@ Page {
   -webkit-line-clamp:2;
   font-size: 20rpx;
 }
-
+.need-object-zone{
+  position: absolute;
+  bottom: 6rpx;
+  right: -4rpx;
+  padding: 0 8rpx;
+  color: #7C3ECC;
+  background: #F9F2FF;
+  font-size: 20rpx;
+  border-radius: 8rpx;
+}
 
 .backTopButton{
   position: fixed;

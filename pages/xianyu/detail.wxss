@@ -105,8 +105,18 @@ page{
   color: #545454;
 }
 
+.object-image-container{
+  margin-top: 24rpx;
+}
+
 .object-image{
   width: 100%;
+}
+.object-image:first-child{
+  border-radius: 24rpx 24rpx 0px 0px;
+}
+.object-image:last-child{
+  border-radius:  0px 0px 24rpx 24rpx;
 }
 
 .operation-button{

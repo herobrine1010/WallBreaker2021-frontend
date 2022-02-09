@@ -35,7 +35,6 @@
     refresher-enabled="true" 
     bindrefresherrefresh = "onRefresherRefresh"
     refresher-triggered = "{{isRefresherOpen}}"
-    bindscroll="onMyScroll" 
     bindscrolltolower="getNextPage" 
     upper-threshold="200"
     scroll-y="true" 
@@ -63,11 +62,11 @@
             <view class="object-content-and-operation">
               <view class="object-content">{{item.content}}</view>
               <view class="object-operation-group" wx:if="{{tabIndex==0||tabIndex==1}}">
-                <image class="object-operation-icon" src="/static/icon/edit-gray.svg" bindtap="editDetail" data-index="{{item.id}}"/>
-                <image class="object-operation-icon" src="/static/icon/undercarriage-gray.svg" bindtap="closeDetail" data-index="{{item.id}}"/>
-                <image class="object-operation-icon" src="/static/icon/delete-gray.svg" bindtap="deleteDetail" data-index="{{item.id}}"/>
+                <image class="object-operation-icon" src="/static/icon/edit-gray.svg" bindtap="editDetail" data-id="{{item.id}}"/>
+                <image class="object-operation-icon" src="/static/icon/undercarriage-gray.svg" bindtap="closeDetail" data-id="{{item.id}}"/>
+                <image class="object-operation-icon" src="/static/icon/delete-gray.svg" bindtap="deleteDetail" data-id="{{item.id}}"/>
               </view>
-              <view class="cancel-like-button" wx:if="{{tabIndex==2}}">取消收藏</view>
+              <view class="cancel-like-button" wx:if="{{tabIndex==2}}" data-id="{{item.id}}" catchtap="cancelLike">取消收藏</view>
             </view>
           </view>
         </view>

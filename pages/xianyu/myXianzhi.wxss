@@ -10,6 +10,9 @@ Page {
 
   color: #545454;
 }
+.xianyu-background{
+  background: linear-gradient(180deg, #957D95ff -720rpx, rgba(139, 46, 231, 0) 500rpx);
+}
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -131,9 +134,9 @@ Page {
 .card{
   position: relative;
   padding-top: 25rpx;
-  padding-left: 20rpx;
+  padding-left: 24rpx;
   padding-bottom: 12rpx;
-  width: 686rpx;
+  width: 664rpx;
   margin: 0 auto 24rpx;
   background-color: #ffffff;
   border-radius: 16rpx;
@@ -141,6 +144,7 @@ Page {
 
 .object-image-and-content-box{
   margin-top: 15rpx;
+  margin-bottom: 12rpx;
   display: flex;
   flex-direction: row;
 }
@@ -162,6 +166,7 @@ Page {
   color: #7C3ECC;
   background: #F9F2FF;
   font-size: 20rpx;
+  padding: 0 8rpx;
   margin-left:16rpx;
 }
 

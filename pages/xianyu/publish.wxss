@@ -33,10 +33,13 @@ input {
   color: #989a9a;
 }
 /* 设置整体样式 */
+.outer-container{
+  padding:10rpx 0;
+}
 .inner-container{
   width: 686rpx;
-  margin: 10rpx 32rpx;
-  height: 100%;
+  margin: 0rpx 32rpx;
+  /* height: 100%; */
 }
 .item-wrap {
   width: auto; /*子元素（包括content+padding+border+margin）撑满整个父元素的content区域。*/
@@ -50,7 +53,7 @@ input {
 /* 设置标题及图标 */
 .title{
   /* height: 60rpx; */
-  font-size: 24rpx;
+  font-size: 28rpx;
   font-weight: bold;
   line-height: 1.5;
 }
@@ -63,8 +66,8 @@ input {
   align-items: center;
 }
 .icon {
-  height: 24rpx;
-  width: 24rpx;
+  height: 32rpx;
+  width: 32rpx;
 
   margin-right: 8rpx;
 }
@@ -72,7 +75,7 @@ input {
   height: 40rpx;
   width: 40rpx;
 
-  margin-right: 8rpx;
+  margin-left: 28rpx;
 }
 .tip {
   font-size: 10px;
@@ -82,6 +85,9 @@ input {
 }
 /* -----------总体公用样式设置结束------------ */
 
+.description{
+  border-bottom: none;
+}
 
 .text-box,
 .input-box {
@@ -95,10 +101,11 @@ input {
   color: #333333;
 }
 .text-box {
-  height: 200rpx;
+  height: 370rpx;
 }
 .text-area {
-  height: 200rpx;
+  height: auto;
+  width: 100%;
 }
 .type-container {
   width: 686rpx;
@@ -149,14 +156,16 @@ radio-group > radio {
   padding: 0 1vw 16rpx 1vw;
   margin-left: 16rpx;
   border-bottom: 1px solid #DEDEDE;
-  font-size: 24rpx;
 }
 .contact-type-picker {
+  position: relative;
+  display: flex;
+  flex-direction: row;
   height: 36rpx;
   width: 274rpx;
-  font-size: 24rpx;
-  line-height: 1.5;
+  font-size: 28rpx;
   color: #545454;
+  justify-content: center;
   text-align: center;
   padding-bottom: 16rpx;
   border-bottom: 1px solid #DEDEDE;
@@ -226,13 +235,20 @@ radio-group > radio {
   height: auto;
 }
 
-/* 表单校验的错误的信息和提示 */
-.icon {
-  height: 24rpx;
-  width: 24rpx;
-  margin: 0 8rpx 0 0;
-  vertical-align: middle;
+.contact-picker-a-line{
+  display: flex;
+  flex-direction: row;
 }
+
+.contact-picker-down-arrow-icon{
+  position: absolute;
+  right: 0;
+  bottom: 24rpx;
+  height: 16rpx;
+  width: 16rpx;
+}
+
+/* 表单校验的错误的信息和提示 */
 .error-tip {
   vertical-align: middle;
 }

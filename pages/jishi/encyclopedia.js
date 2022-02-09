@@ -224,7 +224,6 @@ Page({
     .then(res => {
       let {current,pages,records} =res.data.data
       if(this.data.sectionName=='question_answer_section'){
-        console.log('sfs')
         records=records.map(item => {
           if(item.allPicUrl)
             item.all_pic_url_list=item.allPicUrl.split(',')

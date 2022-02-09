@@ -14,7 +14,7 @@ Component({
    * 页面的初始数据
    */
   data: {
-    tabIndex:1,
+    tabIndex:0,
     scrollViewHeight:'auto',
 
     zoneList:['全部帖子','四平','嘉定','沪西','沪北','铁岭','线上'],

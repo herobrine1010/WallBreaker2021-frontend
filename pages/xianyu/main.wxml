@@ -67,7 +67,7 @@
                     <text class="object-price-integer-part">{{item.price_integer}}</text>
                     <text class="object-price-fractional-part">{{item.price_fractional}}</text>
                   </view>
-                  <view class="zone right">{{item.zone}}</view>
+                  <view class="sale-object-zone right">{{item.zone}}</view>
                 </view>
             </view>
           </view>
@@ -85,7 +85,7 @@
                     <text class="object-price-integer-part">{{item.price_integer}}</text>
                     <text class="object-price-fractional-part">{{item.price_fractional}}</text>
                   </view>
-                  <view class="zone right">{{item.zone}}</view>
+                  <view class="need-object-zone right">{{item.zone}}</view>
                 </view>
             </view>
           </view>
