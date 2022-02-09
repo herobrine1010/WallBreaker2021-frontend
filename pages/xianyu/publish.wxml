@@ -70,7 +70,7 @@
 
       <view class="item-wrap type-container" style="padding:24rpx 0;">
         <view class="icon-with-title" style="margin-bottom:0;">
-          <image class="icon" src="../../static/icon/price.svg"/>
+          <image class="price-icon" src="../../static/icon/price.svg"/>
           <text class="title">{{type=='sale'?'售价':'预期价格'}}</text>
         </view>
         <view class="error-wrap" style="margin-left: -96px;" wx:if="{{ errors.price }}">

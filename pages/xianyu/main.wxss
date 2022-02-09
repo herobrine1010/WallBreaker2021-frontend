@@ -36,14 +36,14 @@ Page {
 .tab-item{
   height: 40rpx;
   font-size: 32rpx;
-  color: #957D95;
+  color: #333333;
   padding-bottom: 12rpx;
 }
 
 .tab-item.active {
   color: #333333;
   font-weight: 500;
-  border-bottom: 4rpx solid #333333;
+  border-bottom: 4rpx solid #957D95;
   border-radius: 4rpx;
 }
 
@@ -80,7 +80,7 @@ Page {
   border-radius: 32rpx;
   /* justify-content: center; */
   align-items: center;
-  background-color:rgba(255, 255, 255, 0.5);
+  background-color:rgba(255, 255, 255, 0.7);
   z-index: 101;
   border: 0.2px solid #957D95;
   font-size: 24rpx;
@@ -135,7 +135,8 @@ Page {
   white-space: nowrap;
   margin: 0 auto;
   margin-bottom: 20rpx;
-  width: 90vw;
+  padding-right: 40rpx;
+  width: calc(90vw - 40rpx);
 }
 
 .navigation-item,.navigation-item-selected{
@@ -231,7 +232,7 @@ Page {
 }
 
 .sale-object-name{
-  width: 300rpx;
+  /* width: 300rpx; */
   /* 只显示一行，并在末尾加省略号 */
   overflow: hidden;  
   white-space: nowrap;    
@@ -244,9 +245,9 @@ Page {
 }
 
 .sale-object-content{
-  width: 300rpx;
+  /* width: 300rpx; */
   height: 60rpx;
-  margin-bottom: 16rpx;
+  margin-bottom: 12rpx;
   color:#868788;
   /* 超出部分隐藏 */
   overflow: hidden;     
@@ -276,8 +277,8 @@ Page {
 
 .sale-object-zone{
   position: absolute;
-  bottom: 6rpx;
-  right: 20rpx;
+  bottom: 8rpx;
+  right: 0;
   padding: 0 8rpx;
   color: #7C3ECC;
   background: #F9F2FF;
@@ -300,7 +301,7 @@ Page {
   padding: 14rpx 24rpx 16rpx;
 }
 .need-object-name{
-  width: 300rpx;
+  /* width: 300rpx; */
   overflow: hidden;  
   white-space: nowrap;    
   text-overflow:ellipsis;
@@ -311,9 +312,9 @@ Page {
 }
 .need-object-content{
   height: 60rpx;
-  width: 300rpx;
+  /* width: 300rpx; */
   font-size: 20rpx;
-  margin: 18rpx 0 36rpx;
+  margin: 18rpx 0 32rpx;
   color:#868788;
   overflow: hidden;     
   text-overflow: ellipsis;  
@@ -325,8 +326,8 @@ Page {
 }
 .need-object-zone{
   position: absolute;
-  bottom: 6rpx;
-  right: -4rpx;
+  bottom: 8rpx;
+  right: -0;
   padding: 0 8rpx;
   color: #7C3ECC;
   background: #F9F2FF;

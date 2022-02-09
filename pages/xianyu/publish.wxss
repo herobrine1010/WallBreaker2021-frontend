@@ -71,6 +71,12 @@ input {
 
   margin-right: 8rpx;
 }
+.price-icon{
+  height: 36rpx;
+  width: 36rpx;
+
+  margin-right: 8rpx;
+}
 .operation-icon {
   height: 40rpx;
   width: 40rpx;
@@ -154,7 +160,7 @@ radio-group > radio {
   height: 36rpx;
   width: 294rpx;
   padding: 0 1vw 16rpx 1vw;
-  margin-left: 16rpx;
+  margin-left: 50rpx;
   border-bottom: 1px solid #DEDEDE;
 }
 .contact-type-picker {
