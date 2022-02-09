@@ -330,9 +330,25 @@ Component({
   },
   // 跳转：发起组队事件：------------- --------- ------ ------- --
   createNewPost:function(){
-    wx.navigateTo({
-      url: '/pages/tongde/creatPost',
-    })
+    const vm = this.selectComponent('#popup-modal');
+    vm.open();
   },
+  closePopup() {
+    const vm = this.selectComponent('#popup-modal');
+    vm.close();
+  },
+  toIdCard() {
+    wx.navigateTo({
+      url: './creatPost?isIdCard=1',
+    })
+    this.closePopup();
+  },
+  toOther() {
+    wx.navigateTo({
+      url: './creatPost?isIdCard=0',
+    })
+    this.closePopup();
+
+  }
   }
 })

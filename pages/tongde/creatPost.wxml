@@ -31,7 +31,7 @@
           <text class="error-tip">{{ errors.content }}</text>
         </view> 
       </view>
-      <view class="item-wrap">
+      <view class="item-wrap" wx:if="{{isIdCard==1}}">
         <view class="icon-with-title" style="position: relative;">
           <image class="icon" src="../../static/icon/label.png"></image>
           <text class="title">丢失校园卡学号</text>
@@ -43,9 +43,6 @@
             <image src="/static/icon/Alert-warning.png" class="icon"></image>
             <text class="error-tip">{{ errors.selectedLabels }}</text>
           </view>
-        </view>
-        <view>
-          <text name="test" class="label-show" wx:for="{{selectedLabelList}}" wx:key="*this">#{{item.content}}</text>
         </view>
       </view>
       <view class="item-wrap" bindtap="clickToChooseTag">
@@ -72,8 +69,8 @@
           <text class="error-tip">{{ errors.type }}</text>
         </view>
         <radio-group name="type" class="a-line">
-          <radio value="0" id="lost" color="#fff">物品遗失</radio>
-          <radio value="1" id="found" color="#fff">寻找失主</radio>
+          <radio value="0" id="lost" color="#fff" disabled>物品遗失</radio>
+          <radio value="1" id="found" color="#fff" checked="{{isIdCard==1}}">寻找失主</radio>
         </radio-group>
       </view>
       <view class="item-wrap">
