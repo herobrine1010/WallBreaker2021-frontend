@@ -38,7 +38,7 @@
 
         </view>
         <view class="left-icon-align input-box">
-          <input type="number" name="cardID" class="input-half-line" placeholder-class="input-placeholder" placeholder="用于联系失主，不对外展示" maxlength="15" style="width:150px;"/>
+          <input type="number" name="cardID" class="input-nowrap" placeholder-class="input-placeholder" placeholder="用于联系失主，不对外展示" maxlength="15" style="width:150px;"/>
           <view class="error-wrap" style="margin-left: 12px;"  wx:if="{{ errors.selectedLabels }}">
             <image src="/static/icon/Alert-warning.png" class="icon"></image>
             <text class="error-tip">{{ errors.selectedLabels }}</text>
