@@ -27,7 +27,7 @@ Page({
           url: '/feedback/feedBack',
           method : 'POST',
           header : {
-            'content-type' :  'application/x-www-form-urlencoded',
+            'content-type' :  'application/json',
              
           },
           data : {
