@@ -2,28 +2,28 @@
 <view class='xianyu-shade'></view>
 <view class="xianyu-background">
   <view class="navi">
-    <mp-navigation-bar ext-class="weui-navigation-bar__tongde" title="{{typeName}}详情" lastPage="/pages/xianyu/main"></mp-navigation-bar>
+    <mp-navigation-bar id="navigation-bar" ext-class="weui-navigation-bar__tongde" title="{{typeName}}详情" lastPage="/pages/xianyu/main"></mp-navigation-bar>
   </view>
 
 
   <view class="page">
     <view class="a-line header">
-      <image class="initiator-avatar" src="{{detail.initiatorAvatar||'/static/icon/default-user-big.png'}}"/>
+      <image class="initiator-avatar" src="{{detail.initiatorAvatar||'/static/icon/default-user-big.png'}}" bindtap="showInitiatorInformation"/>
       <view class="initiator-name-and-time">
-        <view class="initiator-name">{{detail.initiatorName}}</view>
+        <view class="initiator-name" bindtap="showInitiatorInformation">{{detail.initiatorNickName}}</view>
         <view class="initiator-time">{{detail.createTime}}</view>
       </view>
-      <view class="star-detail">
-        <view class="star-text">已有{{detail.starNumber}}人收藏</view>
+      <view class="star-detail" wx:if="{{type==0}}">
+        <view class="star-text">已有{{detail.countFavourite}}人收藏</view>
         <image class="star-icon" wx:if="{{!like}}" src="/static/icon/star.svg" bindtap="collectDetail"/>
         <image class="star-icon" wx:else src="/static/icon/star-solid.svg" bindtap="cancelCollectDetail"/>
       </view>
     </view>
 
     <scroll-view class="detail" id="scroll-view" scroll-y="true" style="height:{{scrollViewHeight}}px;" show-scrollbar="{{false}}" enhanced="true"  scroll-with-animation='true' >
-      <view class="a-line">
+      <view class="a-line object-name-and-zone">
         <view class="object-name">{{detail.name}}</view>
-        <view class="object-zone">{{detail.location}}</view>
+        <view class="object-zone">{{detail.zone}}</view>
       </view>
       <view class="object-price">
         <text class="object-price-symbol">￥</text>
@@ -32,18 +32,20 @@
       </view>
       <view class="object-content">{{detail.content}}</view>
       <view class="object-image-container">
-        <image class="object-image" wx:for="{{detail.allPicUrl}}" src="{{item}}" mode="widthFix"/>
+        <image class="object-image" wx:for="{{detail.allPicUrl}}" src="{{item}}" mode="widthFix" bindtap="zoomInDetailPicture" data-index="{{index}}"/>
       </view>
-    
+      <view style="height:40rpx;"></view>
     </scroll-view>
     
 
 
-    <view class="operation-button">
-      <view class="contact-button" wx:if="{{!initializedByMe}}" bindtap="showContactListModal">联系TA</view>
-      <view wx:else class="operation-button-group">
-        <view class="initiator-button" bindtap="editDetail">编辑</view>
-        <view class="initiator-button-hollow" bindtap="closeDetail">下架</view>
+    <view id="operation-area" class="operation-button">
+      <view class="contact-button" wx:if="{{initializedByMe==false}}" bindtap="showContactListModal">联系TA</view>
+      <view class="operation-button-group" wx:if="{{initializedByMe==true}}">
+        <view class="initiator-button" bindtap="editDetail" wx:if="{{!detail.hidden}}">编辑</view>
+        <view class="initiator-button-disabled" wx:else>编辑</view>
+        <view class="initiator-button-hollow" bindtap="closeDetail" wx:if="{{!detail.hidden}}">下架</view>
+        <view class="initiator-button-disabled" wx:else>下架</view>
         <view class="initiator-button-hollow" bindtap="deleteDetail">删除</view>
       </view>
     </view>
@@ -68,3 +70,5 @@ bind:tapCancel="{{dialog.tapCancelEvent}}"
 bind:tapOk="{{dialog.tapOkEvent}}"
 >
 </dialog-box>
+
+<personal-animation id="personalAnimation"   personalInfo="{{initiatorDetail}}" isPersonalInfoShow="{{isPersonalInfoShow}}" ></personal-animation>

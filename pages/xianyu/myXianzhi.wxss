@@ -10,6 +10,9 @@ Page {
 
   color: #545454;
 }
+.xianyu-background{
+  background: linear-gradient(180deg, #957D95ff -720rpx, rgba(139, 46, 231, 0) 500rpx);
+}
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -35,7 +38,7 @@ Page {
   height: 40rpx;
   font-size: 32rpx;
   color: #545454;
-  padding-bottom: 12rpx;
+  padding: 0 4rpx 12rpx;
 }
 
 .tab-item.active {
@@ -43,10 +46,12 @@ Page {
   font-weight: 500;
   border-bottom: 4rpx solid #333333;
   border-radius: 4rpx;
+  box-shadow: 0 4rpx rgba(192, 203, 206, 0.8);
 }
 
 
 .search-area{
+  position: relative;
   display: flex;
   height: 84rpx;
   width: 95%;
@@ -73,13 +78,23 @@ Page {
   top: 0;
   width: 160rpx;
   border-radius: 32rpx;
-  /* justify-content: center; */
   align-items: center;
-  background-color:rgba(255, 255, 255, 0.5);
+  background-color:rgba(255, 255, 255, 0.2);
   z-index: 101;
-  border: 0.2px solid #957D95;
+  border: 0.2px solid #3E92CC;
   font-size: 24rpx;
 }
+
+.dropdown-picker-mask{
+  position: absolute;
+  top: 84rpx;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.2);
+  z-index: 90;
+}
+
 
 .dropdown-picker-item{
   /* width: 160rpx; */
@@ -87,7 +102,7 @@ Page {
   line-height: 60rpx;
   justify-content: center;
   text-align: center;
-  border-top: 0.2px solid #957D95;
+  border-top: 0.2px solid #3E92CC;
 }
 .dropdown-picker-item:first-child{
   border-top: 0;
@@ -131,9 +146,9 @@ Page {
 .card{
   position: relative;
   padding-top: 25rpx;
-  padding-left: 20rpx;
+  padding-left: 24rpx;
   padding-bottom: 12rpx;
-  width: 686rpx;
+  width: 664rpx;
   margin: 0 auto 24rpx;
   background-color: #ffffff;
   border-radius: 16rpx;
@@ -141,13 +156,18 @@ Page {
 
 .object-image-and-content-box{
   margin-top: 15rpx;
+  margin-bottom: 12rpx;
   display: flex;
   flex-direction: row;
 }
 
 .object-content-box{
-  margin-left: 16rpx;
+  margin-left: 0;
 }
+
+/* .need-object-content-box{
+  margin-left: 0;
+} */
 
 .object-name{
   max-width: 500rpx;
@@ -162,7 +182,9 @@ Page {
   color: #7C3ECC;
   background: #F9F2FF;
   font-size: 20rpx;
+  padding: 0 8rpx;
   margin-left:16rpx;
+  border-radius: 8rpx;
 }
 
 .object-status{
@@ -177,6 +199,8 @@ Page {
 .object-image{
   width: 120rpx;
   height: 120rpx;
+  border-radius: 8rpx;
+  margin-right: 16rpx;
 }
 
 .object-price-and-time{
@@ -201,6 +225,7 @@ Page {
   margin-left: 8rpx;
   padding-top: 8rpx;
   font-size: 20rpx;
+  color: #868788;
 }
 
 
@@ -211,7 +236,7 @@ Page {
 }
 
 .object-content{
-  /* height: 68rpx; */
+  height: 68rpx;
   width: 300rpx;
   overflow: hidden;     
   /* 末尾加省略号 */
@@ -231,9 +256,9 @@ Page {
 }
 
 .object-operation-icon{
-  height: 48rpx;
-  width: 48rpx;
-  margin-right: 16rpx;
+  height: 60rpx;
+  width: 60rpx;
+  margin-right: 8rpx;
 }
 
 .cancel-like-button{
@@ -249,3 +274,16 @@ Page {
   border-radius: 12px;
 
 }
+
+.noData{
+  font-size:2vh;
+  letter-spacing: 1px;
+  z-index:5;
+  justify-content: center;
+  align-items: center;
+  display:flex;
+  /* color:white; */
+  margin-bottom: 10rpx;
+  
+  word-wrap: break-word;
+ }

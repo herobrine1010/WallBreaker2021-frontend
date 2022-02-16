@@ -54,6 +54,7 @@ Component({
           that.setData({
             value: editList
           })
+          that.triggerEvent('operate',that,properties.value)
         },
       })
       
@@ -65,6 +66,7 @@ Component({
       this.setData({
         value: this.data.value
       })
+      this.triggerEvent('operate',this.properties.value)
     },
     zoomInDetailPicture:function(e){
       var imgUrl = this.data.value;

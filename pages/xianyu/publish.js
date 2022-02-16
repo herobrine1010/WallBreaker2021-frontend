@@ -1,31 +1,35 @@
 // pages/xianyu/publish.js
 var app=getApp();
 import {request} from "../../request/request.js";
-import WxValidate from "../../utils/WxValidate"; // 表单验证
+import {parseDetail} from "./tool.js"
 const FormData = require('../../lib/wx-formdata-master/formData.js'); //实现文件上传
-function mergePathThenUploadImage(imagePath) {
-  /* 上传图片的请求封装
-  根据图片的本地路径获取的二进制数据,打包为formData形式,之后上传多张图片
-  参数：imagePath: 传入图片路径,数组
-  返回：promise对象
-  */
-  var imageData = new FormData();
-  for (let i in imagePath) {
-    imageData.appendFile("files",imagePath[i])
-  }
-  var data = imageData.getData();
-  var promise = request({
-    url : '/team/jirenUploadPhotos',
-    method: 'POST',
-    header: {
-      'content-type': data.contentType,
-       
-    },
-    data : data.buffer
-  });
-  return promise;
-};
-
+const categoryList=[
+  {id:64,value:'图书'},
+  {id:65,value:'美妆'},
+  {id:66,value:'日用'},
+  {id:67,value:'数码'},
+  {id:68,value:'虚拟商品'},
+  {id:69,value:'票务'},
+  {id:70,value:'服饰'},
+  {id:71,value:'出行'},
+  {id:72,value:'其他'}]
+const zoneList=[
+  {id:56,value:'四平路校区',},
+  {id:58,value:'彰武路校区'},
+  {id:57,value:'嘉定校区'},
+  {id:60,value:'沪西校区'},
+  {id:61,value:'沪北校区'},
+  {id:59,value:'铁岭'},
+  {id:63,value:'线上'},
+  {id:62,value:'不限地点'},
+]
+const contactTypeList=[
+  {id:39,value:'微信'},
+  {id:38,value:'QQ'},
+  {id:40,value:'手机号'},
+  {id:41,value:'邮箱'},
+  {id:42,value:'其他'},
+]
 Page({
 
   /**
@@ -44,20 +48,21 @@ Page({
 
 
 
-    type:'sale',
+    type:0,
     typeName:'出售',
     haveEdited:false,
     
     priceInputWidth:12,
 
-    contactTypeRange:['请选择联系渠道','微信','QQ','手机号','邮箱','其他'],
-    objectTypeList:['图书','美妆','日用','数码','虚拟商品','出行','其他'],
-    zoneList:['四平路校区','彰武路校区','嘉定校区','沪西校区','沪北校区','铁岭校区','线上'],
+    contactTypeRange:contactTypeList,
+    categoryList:categoryList,
+    zoneList:zoneList,
     detail:{
-      // content:'something'
       contactList:[{
-        index:0,
+        index:-1,
         type:'',
+        content:'',
+        status:'new',
       }]
     }
   },
@@ -66,29 +71,46 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+
     let typeName
-    if(options.type=='sale'){
+    if(options.type==0){
       typeName='出售'
-    }else if(options.type=='need'){
+    }else if(options.type==1){
       typeName='求购'
     }
     this.setData({
       type:options.type,
       typeName,
       id:options.id,
-      mode:options.mode,
+      mode:options.mode||'new',
     })
     if(options.mode=='edit'){
       this.initializeAll()
     }else if(options.mode=='new'){
       this.initializeWx()
+      this.askIfContinueEditing()
     }
 
     this.changeScrollHeight();
-    this.initContactType();
-
     
-    let editHistory=wx.getStorageSync('xianyuEditHistory')
+  },
+  onUnload:function(e){
+    if(this.data.mode=='new'&&this.data.haveEdited){
+      uploadPictures(this.selectComponent("#image-box").image).then(res=>{
+        if(res.allPicUrl){
+          res.allPicUrl=res.allPicUrl.split(',')
+        }
+        wx.setStorageSync('xianyuEditHistory'+this.data.type, {
+          ...this.data.detail,
+          ...res,
+        })
+
+      })
+    }
+  },
+  askIfContinueEditing:function(e){
+    let editHistory=wx.getStorageSync('xianyuEditHistory'+this.data.type)
     console.log(editHistory)
     if(editHistory){
       this.setData({
@@ -100,15 +122,13 @@ Page({
       })
     }
   },
-  onUnload:function(e){
-    if(this.data.mode=='new'&&this.data.haveEdited){
-      wx.setStorageSync('xianyuEditHistory', this.data.detail)
-    }
-  },
   confirmRestoreEditedContent:function(e){
-    let editHistory=wx.getStorageSync('xianyuEditHistory')
-    this.setData({detail:editHistory})
-    wx.removeStorageSync('xianyuEditHistory')
+    let editHistory=wx.getStorageSync('xianyuEditHistory'+this.data.type)
+    this.setData({
+      detail:editHistory,
+      haveEdited:false,
+    })
+    this.changePriceInputWidth()
   },
   onShareAppMessage: function () {
     return {
@@ -117,7 +137,27 @@ Page({
     }
   },
   initializeAll:function(e){
-    
+    let that=this
+    let id=20
+    if(this.data.id) id=this.data.id
+    request({
+      url: '/market/getMarket/' + id,
+      method: 'GET',
+      header: {
+        'content-type': 'application/json'
+      },
+    }).then(res=>{
+      console.log(res.data)
+      that.setData({
+        detail:{
+          ...parseDetail(res.data.data),
+          ...parseIdToIndex(res.data.data),
+          contactList:parseContactList(res.data.data),
+        }
+      })
+      that.changePriceInputWidth()
+
+    })
   },
   initializeWx:function(e){
     console.log('?')
@@ -131,16 +171,17 @@ Page({
       let wxId=res.data.data.wxId
       if(wxId){
         this.setData({['detail.contactList']:[{
-          index:1,
+          index:0,
           type:'微信',
           content:wxId,
+          status:'new',
         }]})
       }
     })
   },
 
   goBack:function(e){
-    console.log('www')
+    console.log(this.data.haveEdited)
     if(this.data.mode=='edit'&&this.data.haveEdited){
       this.setData({
         dialog:{
@@ -183,10 +224,18 @@ Page({
     })
   },
 
-  changeObjectType(e){
+  changeImage(e){
     this.setData({
-      ['detail.typeIndex']:e.detail.value,
-      ['errors.type']:'',
+      haveEdited:true,
+      ['errors.images']:'',
+    })
+    console.log('change')
+  },
+
+  changeCategory(e){
+    this.setData({
+      ['detail.categoryIndex']:e.detail.value,
+      ['errors.category']:'',
       haveEdited:true,
     })
   },
@@ -198,17 +247,21 @@ Page({
       haveEdited:true,
     })
   },
-  
-  changeContactType:function(e){
-    console.log(e)
+
+  changePrice:function(e){
+    let value=e.detail.value
     this.setData({
-      ['detail.contactList['+e.currentTarget.dataset.index+'].index']:e.detail.value,
+      ['detail.price']:value,
       haveEdited:true,
     })
+    if(value){
+      this.setData({['errors.price']:''})
+    }
+    this.changePriceInputWidth()
   },
 
   changePriceInputWidth(e){
-    let value=e.detail.value
+    let value=String(this.data.detail.price)
     let length;
     if(value){
       length=6+11*value.replace(/[^\x00-\xff]/g, "ab").length
@@ -217,32 +270,90 @@ Page({
       length=12
     }
     this.setData({
-      ['detail.price']:value,
       priceInputWidth:length,
+    })
+    
+  },
+
+  changeContactType:function(e){
+    console.log(e)
+    this.setData({
+      ['detail.contactList['+e.currentTarget.dataset.index+'].index']:e.detail.value,
       haveEdited:true,
     })
-    if(value){
-      this.setData({['errors.price']:''})
+    this.changeContactError()
+    this.changeContactStatus(e.currentTarget.dataset.index)
+  },
+
+  changeContact:function(e){
+    this.setData({
+      ['detail.contactList['+e.currentTarget.dataset.index+'].content']:e.detail.value,
+      haveEdited:true,
+    })
+    this.changeContactError()
+    this.changeContactStatus(e.currentTarget.dataset.index)
+  },
+
+  changeContactError:function(){
+    let contactError=false
+    let status
+    for(let item of this.data.detail.contactList){
+      status=item.status
+      if(status=='new'||status=='modified'){
+        if(item.index<0||item.content.trim()==''){
+          contactError=true
+          break
+        }
+      }else{
+        continue
+      }
+    }
+    if(!contactError){
+      this.setData({
+        ['errors.contact']:'',
+      })
     }
   },
 
+  changeContactStatus:function(index){
+    let status=this.data.detail.contactList[index].status
+    if(status=='complete'){
+      this.setData({
+        ['detail.contactList['+index+'].status']:'modified'
+      })
+    }else{
+
+    }
+  },
+  
   addNewContact:function(e){
     let list=this.data.detail.contactList
     list.push({
-      index:0,
+      index:-1,
       type:'',
-      content:''
+      content:'',
+      status:'new',
     })
-    this.setData({['detail.contactList']:list})
+    this.setData({
+      ['detail.contactList']:list,
+      haveEdited:true
+    })
   },
 
   deleteContact:function(e){
-    let list=this.data.detail.contactList
-    list.splice(e.currentTarget.dataset.index,1)
-    this.setData({['detail.contactList']:list})
+    let status=this.data.detail.contactList[e.currentTarget.dataset.index].status
+    if(status=='new'){
+      status='ignore'
+    }else{    //'modified' 'complete'
+      status='deleted'
+    }
+    this.setData({
+      ['detail.contactList['+e.currentTarget.dataset.index+'].status']:status,
+      haveEdited:true
+    })
   },
 
-  formValidation:function(e){
+  formValidationError:function(e){
     let errors={}
     let detail=this.data.detail
     if(!detail.name){
@@ -251,239 +362,71 @@ Page({
     if(!detail.content){
       errors.content='该项未填写'
     }
+    if(!this.selectComponent('#image-box').image.length){
+      if(this.data.type==0){
+        errors.images='请至少选择一张图片上传'
+      }
+    }
     if(!detail.price){
       errors.price='该项未填写'
     }
-    if(!detail.typeIndex){
-      errors.type='该项未填写'
+    if(!detail.categoryIndex){
+      errors.category='该项未填写'
     }
     if(!detail.zoneIndex){
       errors.location='该项未填写'
     }
-    for(let i=0;i<detail.contactList.length;i++){
-      if(detail.contactList[i].index==0||detail.contactList[i].content.trim()==''){
-        errors.contact='请至少选择一种联系方式'
-        break
+
+    let contactError=false
+    let status
+    for(let item of detail.contactList){
+      status=item.status
+      if(status=='new'||status=='modified'){
+        if(item.index<0||item.content.trim()==''){
+          contactError=true
+          break
+        }
+      }else{
+        continue
       }
+    }
+    if(contactError){
+      errors.contact='请将联系方式补充完整'
     }
     this.setData({errors})
     return Object.keys(errors).length
   },
 
-  // haveEdited:function(){
-  //   let detail=this.data.detail
-  //   if(detail.name||detail.content||detail.price||detail.typeIndex||detail.zoneIndex){
-  //     return true
-  //   }
-  //   return false
-  // },
   cancelPublishDetail:function(e){
 
   },
 
   publishDetail:function(e){
-    this.setData({
-      dialog:{
-        isDialogShow: true,
-        title:'确定发布出售帖子？',
-        tapOkEvent:"dialogTapOkForAcceptAllApplications"
-      },
-    })
-    if(this.formValidation()){
+
+    if(this.formValidationError()){
       return
     }else{
-
-    }
-  },
-
-
-  initContactType: function() {
-      // 初始化联系方式种类，QQ，微信，手机号，从数据库获取数据，修改页面数据
-      let that = this;
-      request({
-        url : "/label",
-        header: {
-          'content-type': 'x-www-form-urlencoded',
+      this.setData({
+        dialog:{
+          isDialogShow: true,
+          title:'确定发布出售帖子？',
+          tapOkEvent:"confirmPublishDetail"
         },
-        data: {
-          type: "contactType"
-        }
-      }).then(res => {
-        let data = res.data.data;
-        // data = data.map(item => item.content);
-        data = [{content:'联系方式',id: 0}, ...data];
-        that.setData({
-          contactType: data,
-          contactTypeIndex: 0
-        });
-        console.log(data)
       })
-  },
-  initValidate:  function(isLocationRequired) {
-    const rules = {
-      name: {
-        required: true,
-        maxlength:24 // input组件设置了maxlength=25, 这里-1才能触发条件
-      },
-      content: {
-        required: true,
-        maxlength: 499
-      },
-      type: {
-        required: true,
-      },
-      location: {
-        required: isLocationRequired,
-        maxlength:24 
-      },
-      contactType: {
-        required: true,
-        isNone: this.data.contactTypeIndex
-      },
-      contact: {
-        required: true,
-      },
-      selectedLabels: {
-        required: true
-      }
+      
     }
-
-    const messages = {
-      name: {
-        required: '该项未填写',
-        maxlength:'字符数已达上限!'
-      },
-      content: {
-        required: '该项未填写',
-        maxlength:'字符数已达上限!'
-      },
-      type: {
-        required: '该项未填写',
-        minlength:'请输入正确的名称'
-      },
-      location: {
-        required: '该项未填写',
-        maxlength:'字符数已达上限!'
-      },
-      contactType: {
-        required: '该项未填写',
-      },
-      contact: {
-        required: '该项未填写',
-      },
-      selectedLabels: {
-        required: '请选择标签'
-      }
-    }
-    this.WxValidate = new WxValidate(rules, messages);
-    this.WxValidate.addMethod('isNone', (value, param)=>{return param!=0;},'0');
-    console.log(this.WxValidate);
-
   },
-  submitForm: function(e) {
-    // 这个函数只是用来传递表单数据, 具体的事情在弹窗函数tapOk完成
-    let value = e.detail.value;
-    value['contactType'] = parseInt(value['contactType']) + 38; // 解析为数字后相加
-    this.setData({
-      formValue: value,
-      isDialogShow: true,
-      tapOkEvent : 'tapOk'
-    });
+
+  confirmPublishDetail:function(){
+    let detail=this.data.detail
+    detail.type=this.data.type
+    initializeMarket.bind(this)(detail,this.selectComponent("#image-box").image)
   },
-  tapOk: function() {
-    this.initValidate(this.data.formValue.type==1); // 初始化表单校验 当type==0（物品遗失）时地点可选，当type==1寻找失主时 地点必填
-    let formValue = this.data.formValue; // 用户填写的表单数据
-    let selectedLabels = this.data.selectedLabelList;
 
-    if(this.WxValidate.checkForm({...formValue, selectedLabels})) {
-    // 上传本地图片,拿到oss图片url
-    let imagePromise= mergePathThenUploadImage(formValue.allPicPaths);
-    wx.showLoading({
-      title: '图片上传中',
-      mask: true
-    });
-    imagePromise.then(res => { //上传图片成功的回调
-      wx.hideLoading(); //图片上传成功后隐藏加载框z
-      if(res.statusCode >=200 && res.statusCode <=300) {
-        // 拿到上传后的图片ossURL
-        let imageURL = res.data.data;
-        // 分割字符串获得头图，如果firstImgURL包含多个http链接，济人首页图片无法正常加载
-        let firstImgURL = imageURL.split(',',1)[0];
-        // console.log("图片路径",imageURL, firstImgURL);
-        // 添加至payload，同时修改对象的属性名以对接接口命名
-        formValue.allPicUrl = imageURL;
-        formValue.firstPicUrl = firstImgURL;
-        return createPostRequest(formValue);
-      }
-    }).then(res => {
-      if(res.statusCode >=200 && res.statusCode <=300 && res.data.success){
-        let data = res.data.data;
-        let lostFoundId = data.id; // 获取失物招领主键id, 之后添加标签
-        return addLabelRequest(lostFoundId, selectedLabels)
-      }else if(res.data.msg == "当前用户已被禁言"){
-
-        return Promise.reject("blocked")
-      }
-
-    }).then(res => {
-      let data = res.data.data;
-      // 获取并刷新首页
-      let pages = getCurrentPages();
-      let prePage = pages[pages.length - 2];
-      if(prePage) prePage.onLoad();
-
-      wx.showToast({
-        title: '发布成功',
-        icon: 'success',
-        duration: 2000,
-        success: wx.navigateBack({})
-      });
-    }).catch(err => {
-      if(err == 'blocked'){
-        this.setData({
-            dialogContent:"您已被禁言！",
-            dialogTip:"您因违规行为暂被禁言，如需申诉请联系 TongjiPoby@163.com",
-            dialogCancelText:"取消",
-            dialogOkText:"确定",
-            tapOkEvent:"hideDialog",
-            tapCancelEvent:"hideDialog",
-            isDialogShow:true,
-        })
-      }else{
-        wx.showToast({
-          title: '网络错误',
-          icon: 'error',
-          duration: 2000
-        })
-      }
-
-    }) 
-
-  } else {
-    let errors = {};
-    for (let e of this.WxValidate.errorList) {
-      errors[e.param] = e.msg
-    }
-    this.setData({errors});
-  }
-  },
-  clickToChooseTag:function(){
-    let selector = this.selectComponent('#dialog-label-selector');
-    selector.openClose(); //不用全局变量,即可弹出关闭dailog筛选标签
-    selector.setLabelsSelected();
-  },
-  labelChanged: function(e) {
-    let selectedLabelList = e.detail;
-    this.setData({selectedLabelList});
-  },
-  changeContact: function(e) {
-    let index = e.detail.value;
-    this.setData({
-      contactTypeIndex: index
-    })
-  },
+  
   changeScrollHeight:function(){
     let windowHeight;
+    let operationAreaHeight;
     //设置scroll-view高度
     wx.getSystemInfo({
       success: function (res) {
@@ -491,9 +434,12 @@ Page({
       }
     });
     let query = wx.createSelectorQuery();
+    query.select('#operation-area').boundingClientRect(rect=>{
+      operationAreaHeight=rect.height
+    }).exec();
     query.select('#scroll').boundingClientRect(rect=>{
         let top = rect.top;
-        let height=windowHeight-top;
+        let height=windowHeight-top-operationAreaHeight;
         this.setData({
           height:height+'px',
         });
@@ -506,3 +452,248 @@ Page({
     })
   }
 })
+
+async function uploadPictures(images){
+  if(!images.length)return {}
+  let resultList=[],uploadList=[]
+  for(let image of images){
+    if(image.indexOf('wallbreaker')>-1){
+      resultList.push(image)
+    }else{
+      resultList.push(null)
+      uploadList.push(image)
+    }
+  }
+  console.log(resultList)
+  console.log(uploadList)
+
+  let resultData={}
+  if(uploadList.length){
+    let imageData = new FormData();
+    for (let image of uploadList) {
+      imageData.appendFile("files",image)
+    }
+    var data = imageData.getData();
+    await request({
+      url : '/market/marketUploadPhotos',
+      method: 'POST',
+      header: {
+        'content-type': data.contentType,
+      },
+      data : data.buffer
+    }).then(res=>{
+      if(res.data.success){
+        uploadList=res.data.data.split(',')
+        for(let key in resultList){
+          if(!resultList[key]){
+            resultList[key]=uploadList.shift()
+          }
+        }
+      }
+    })
+  }
+  resultData.allPicUrl=resultList.join(',')
+  resultData.firstPicUrl=resultList[0]
+
+  return resultData
+}
+
+async function initializeMarket(detail,images){
+  let that=this
+
+  this.setData({haveEdited:false})
+
+  let imageUrlData
+  await uploadPictures(images).then(res=>{
+    imageUrlData=res
+    console.log(imageUrlData)
+  })
+
+  let {type,name,content,categoryIndex,zoneIndex,price,contactList}=detail
+  type=type==1?true:false
+
+  let data={
+    type,
+    name,
+    content,
+    category:categoryList[categoryIndex].id,
+    location:zoneList[zoneIndex].id,
+    price,
+    ...imageUrlData,
+    released:1,
+  }
+
+  let url
+  if(this.data.mode=='new'){
+    url='/market/initializeMarket'
+  }else if(this.data.mode=='edit'){
+    url='/userMarket/editMyMarket'
+    data.id=detail.id
+  }else{
+    console.log(this.data.mode)
+    wx.showToast({
+      title: 'error',
+      icon:'error',
+    })
+    return
+  }
+  
+  console.log(data)
+  
+  request({
+    url: url, 
+    header: {
+      'content-type': 'application/json',
+    },
+    method : 'POST',
+    data: data
+  }).then(res=>{
+    console.log(res)
+    if(res.data.success||res.statusCode==200){
+      let id
+      if(that.data.mode=='new'){
+        id=res.data.data.id
+      }else if(that.data.mode=='edit'){
+        id=detail.id
+      }
+      uploadContactList(id,contactList).then(results=>{
+        console.log(results)
+
+        if(this.data.mode=='new'){
+          wx.removeStorageSync('xianyuEditHistory'+this.data.type)
+          that.setData({
+            haveEdited:false,
+          })
+        }else if(this.data.mode=='edit'){
+          app.globalData.xianyuRefresh=true
+        }
+
+        wx.showToast({
+          title: '发布成功',
+          icon: 'success',
+          duration: 2000,
+          success: that.goBack()
+        });
+
+
+      })
+    }else{
+      console.log('fail')
+    }
+  })
+
+}
+
+async function uploadContactList(id,contactList){
+  let status
+  let data
+  let newList=[]
+  let editList=[]
+  let requestList=[]
+  for(let item of contactList){
+    data={
+      contactType:contactTypeList[item.index].id,
+      contact:item.content,
+    }
+    switch(item.status){
+      case 'ignore':
+      case 'complete':
+        continue
+      case 'new':
+        newList.push(data)
+        break
+      case 'modified':
+        editList.push({
+          ...data,
+          id:item.id,
+        })
+        break
+      case 'deleted':
+        requestList.push(request({
+          url: '/market/deleteMarketContact/'+item.id, 
+          header: {
+            'content-type': 'application/json',
+          },
+          method : 'POST',
+        }))
+    }
+    
+  }
+  if(newList.length){
+    requestList.push(request({
+      url: '/market/postMarketContact/' + id,
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'
+      },
+      data:newList
+    }))  
+  }
+  if(editList.length){
+    requestList.push(request({
+      url: '/market/editMarketContact/' + id,
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'
+      },
+      data:editList
+    }))  
+  }
+  console.log('newList',newList)
+  console.log('editList',editList)
+  console.log('requestList',requestList)
+
+  return Promise.all(requestList)
+
+}
+
+function parseIdToIndex(detail){
+  let {category,location}=detail
+  let categoryIndex,zoneIndex
+  for(let index in categoryList){
+    if(category==categoryList[index].id){
+      categoryIndex=index
+      break
+    }
+  }
+  for(let index in zoneList){
+    if(location==zoneList[index].id){
+      zoneIndex=index
+      break
+    }
+  }
+  return {
+    categoryIndex,zoneIndex,
+  }
+}
+
+function parseContactList(detail){
+  let contactList=detail.marketContactList
+  let index
+  if(contactList.length){
+    return detail.marketContactList.map((item,i)=>{
+      for(let j in contactTypeList){
+        if(item.contactType==contactTypeList[j].id){
+          index=j
+          break
+        }
+      }
+
+      return {
+        id:item.id,
+        index:i,
+        type:contactTypeList[index].value,
+        content:item.contact,
+        status:'complete',
+      }
+    })
+  }else{
+    return [{
+      index:-1,
+      type:'',
+      content:'',
+      status:'new',
+    }]
+  }
+  
+}

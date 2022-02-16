@@ -20,19 +20,22 @@
     <view class="dropdown-picker-location">
       <view class="dropdown-picker-box">
         <view class="a-line dropdown-picker-item" bindtap="changeZonePickerStatus">
-          <view class="picker-text">{{zoneList[zoneIndex]}}</view>
+          <view class="picker-text">{{zoneList[zoneIndex].value}}</view>
           <image class="down-arrow-icon" src="/static/icon/down-arrow.svg"/>
         </view>
-        <view class="dropdown-picker-item white-background" wx:for="{{zoneList}}" wx:if="{{zonePickerShow}}" bindtap="changeZone" data-index="{{index}}">{{item}}</view>
+        <view class="dropdown-picker-item white-background" wx:for="{{zoneList}}" wx:if="{{zonePickerShow}}" bindtap="changeZone" data-index="{{index}}">{{item.value}}</view>
       </view>
     </view>
 
+    <view class="dropdown-picker-mask" wx:if="{{zonePickerShow}}" catchtap="changeZonePickerStatus"/>
   
   </view>
 
+
+
   <view class="navigation-view">
     <scroll-view scroll-x class="navigation" scroll-with-animation scroll-left="{{scrollLeft}}">
-      <view class="navigation-item {{index==navigationIndex?'navigation-item-selected':''}}" wx:for="{{navigationList}}" wx:key bindtap="changeCategory" data-index="{{index}}">{{item}}</view>
+      <view class="navigation-item {{index==navigationIndex?'navigation-item-selected':''}}" wx:for="{{navigationList}}" wx:key bindtap="changeCategory" data-index="{{index}}">{{item.value}}</view>
       <view class="navigation-placehold"></view>
     </scroll-view>
     <view class="double-right-arrow-view">
@@ -55,7 +58,7 @@
     scroll-top='{{ topNum }}'
     class="scroll" style="height:{{scrollViewHeight}}px;" id="scroll-view">
       <view wx:for="{{objectList}}" class="item" wx:if="{{tabIndex==0}}">
-        <navigator class="lostDetail" url='/pages/xianyu/detail?type=sale&id={{item.id}}'>
+        <navigator class="lostDetail" url='/pages/xianyu/detail?type=0&id={{item.id}}'>
           <view class="sale-card">
             <image class="image" src="{{item.firstPicUrl}}" mode="aspectFill"></image>
             <view class="sale-object-detail-box">
@@ -67,14 +70,14 @@
                     <text class="object-price-integer-part">{{item.price_integer}}</text>
                     <text class="object-price-fractional-part">{{item.price_fractional}}</text>
                   </view>
-                  <view class="zone right">{{item.zone}}</view>
+                  <view class="sale-object-zone right">{{item.zone}}</view>
                 </view>
             </view>
           </view>
         </navigator>
       </view>
       <view wx:for="{{objectList}}" class="item" wx:if="{{tabIndex==1}}">
-        <navigator class="lostDetail" url='/pages/xianyu/detail?type=need&id={{item.id}}'>
+        <navigator class="lostDetail" url='/pages/xianyu/detail?type=1&id={{item.id}}'>
           <view class="need-card">
             <view class="need-object-detail-box">
                 <view class="need-object-name">{{item.name}}</view> 
@@ -85,13 +88,15 @@
                     <text class="object-price-integer-part">{{item.price_integer}}</text>
                     <text class="object-price-fractional-part">{{item.price_fractional}}</text>
                   </view>
-                  <view class="zone right">{{item.zone}}</view>
+                  <view class="need-object-zone right">{{item.zone}}</view>
                 </view>
             </view>
           </view>
         </navigator>
       </view>
-    <view class="bottomTip" wx:if="{{isLastPage}}">已经到底啦~</view>
+    <view class="bottomTip" wx:if="{{loading}}">加载中~</view>
+    <view class="bottomTip" wx:if="{{!loading&&!objectList.length}}">暂无数据哦~</view>
+    <view class="bottomTip" wx:if="{{!loading&&objectList.length&&isLastPage}}">已经到底啦~</view>
     <!-- <view class="bottomTip" wx:if="isEnd" style="display:block; margin: 40px 40px;">已经到底了</view> -->
   </scroll-view>
   
@@ -100,8 +105,8 @@
 <view class="content">
 
   <view>
-    <image hidden="{{!showGoTopButton}}" class="backTopButton" bindtap="returnTop" src="/static/icon/back-to-top-blue-circle.png"></image>
-    <image class="addButton" bindtap="createNewPost" src='/static/icon/add-purple-big.svg'></image>
+    <image hidden="{{!showGoTopButton}}" class="backTopButton" bindtap="returnTop" src="/static/icon/back-to-top-purple-circle.svg"></image>
+    <image class="addButton" bindtap="goToPublishPage" src='/static/icon/add-purple-big.svg'></image>
   </view>
 </view>
 

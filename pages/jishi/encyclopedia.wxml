@@ -6,12 +6,12 @@
   </view>
 
 
-  <scroll-view id="outer-scroll-view" scroll-y="true" style="height:{{outerScrollViewHeight}};" scroll-top="{{topNum}}" bindscroll="onOuterScroll" bindscrolltolower="onScrollToLower" >
+  <scroll-view id="outer-scroll-view" scroll-y="true" style="height:{{outerScrollViewHeight}};" scroll-top="{{scroll_view.outer_top_num}}" bindscroll="onOuterScroll"  >
     <view id="tab" class="tab" style="z-index:102;">
-    <view class="tab-item {{tabIndex==0?'active':''}}" bindtap="changeItem" data-item="0">常见问题
+      <view class="tab-item {{tabIndex==0?'active':''}}" bindtap="changeItem" data-item="0">常见问题
+      </view>
+      <view class="tab-item {{tabIndex==1?'active':''}}" bindtap="changeItem" data-item="1">校园电话簿</view>
     </view>
-    <view class="tab-item {{tabIndex==1?'active':''}}" bindtap="changeItem" data-item="1">校园电话簿</view>
-  </view>
 
   <view wx:if="{{tabIndex==0}}">
     <view class="search-area">
@@ -20,40 +20,7 @@
         bindclear = "onCancleSearch" ext-class="weui-search-bar_focusing"></mp-searchbar>
       </view>
     </view>
-
-    <scroll-view id="question-answer-scroll-view" class="question-answer-scroll-view" style="height:{{question_answer_scroll_view_height}}" scroll-top="{{question_answer_scroll_view_top_num}}" scroll-y="true" bindscroll="onQuestionAnswerScroll" bindrefresherrefresh="onRefresherRefresh" refresher-enabled="{{question_answer_section.refresherEnabled}}" bindscroll="onMyScroll"  enable-back-to-top="true" refresher-triggered="{{loading}}" bindscrolltolower="onScrollToLower">
-      <view class="question-answer-view">
-        <view class="question-answer-card" wx:for="{{question_answer_section.dataList}}">
-        <view class="question-answer-line" style="margin:auto 0;" bindtap="clickQuestionAnswerLine" data-index="{{index}}" data-id="{{item.id}}">
-          <view class="question-answer-index-and-title">
-            <view class="question-answer-index">{{index+1}}</view>
-            <view class="question-answer-title">{{item.question}}</view>
-          </view>
-          <!-- <image src="{{'../../static/icon/'+item.answer_show?'down':'right'+'-arrow.svg'}}" wx:if="{{!item.answer_show}}" class="question-answer-arrow"></image> -->
-          <image src="../../static/icon/right-arrow.svg" wx:if="{{!item.answer_show}}" class="question-answer-arrow"></image>
-          <image src="../../static/icon/down-arrow.svg" wx:else class="question-answer-arrow"></image>
-        </view>
-        <view wx:if="{{item.answer_show}}">
-          <view class="question-answer-content" >{{item.answer}}</view>
-          <view class="question-answer-image-container" wx:if="{{item.allPicUrl}}" >
-            <view class="question-answer-image-view" wx:for="{{item.all_pic_url_list}}" wx:for-item="imageUrl" wx:for-index="imageIndex" bindtap="previewImage" data-image-list="{{item.all_pic_url_list}}" data-image-index="{{imageIndex}}">
-              <image src="{{imageUrl}}"  class="question-answer-image"/>        
-            </view>
-          </view>
-        </view>
-        
-      </view>
-      
-      </view>
-
-      <view wx:if="{{question_answer_section.dataList.length==0}}" class="noData">
-        暂无数据~
-      </view>    
-      <view wx:if="{{question_answer_section.dataList.length>0&&question_answer_section.isEnd}}" class="noData">
-        已经到底啦~
-      </view>   
-
-    </scroll-view>  
+ 
   </view>
 
   <view wx:if="{{tabIndex==1}}">
@@ -90,13 +57,55 @@
       </view>
 
     </view>
-    
 
-    
-    
+  </view>
+
   
-    <scroll-view class="communication-scroll-view" scroll-y="true" bindrefresherrefresh="onRefresherRefresh" refresher-enabled="{{communication_section.refresherEnabled}}"  bindscroll="onMyScroll"  enable-back-to-top="true" refresher-triggered="{{loading}}">
-      <view class="communication-view">
+  <scroll-view
+  id="inner-scroll-view"
+  class="inner-scroll-view"
+  scroll-y="true"
+  scroll-top="{{scroll_view.inner_top_num}}"
+  style="height:{{scroll_view.inner_height}}"
+  bindrefresherrefresh="onRefresherRefresh"
+  refresher-enabled="{{scroll_view.refresherEnabled}}"  bindscroll="onInnerScroll"
+  enable-back-to-top="true"
+  refresher-triggered="{{loading}}"
+  bindscrolltolower="onScrollToLower"
+    >
+    <view class="question-answer-view" wx:if="{{tabIndex==0}}">
+      <view class="question-answer-card" wx:for="{{question_answer_section.dataList}}">
+      <view class="question-answer-line" style="margin:auto 0;" bindtap="clickQuestionAnswerLine" data-index="{{index}}" data-id="{{item.id}}">
+        <view class="question-answer-index-and-title">
+          <view class="question-answer-index">{{index+1}}</view>
+          <view class="question-answer-title">{{item.question}}</view>
+        </view>
+        <!-- <image src="{{'../../static/icon/'+item.answer_show?'down':'right'+'-arrow.svg'}}" wx:if="{{!item.answer_show}}" class="question-answer-arrow"></image> -->
+        <image src="../../static/icon/right-arrow.svg" wx:if="{{!item.answer_show}}" class="question-answer-arrow"></image>
+        <image src="../../static/icon/down-arrow.svg" wx:else class="question-answer-arrow"></image>
+      </view>
+      <view wx:if="{{item.answer_show}}">
+        <view class="question-answer-content" >{{item.answer}}</view>
+        <view class="question-answer-image-container" wx:if="{{item.allPicUrl}}" >
+          <view class="question-answer-image-view" wx:for="{{item.all_pic_url_list}}" wx:for-item="imageUrl" wx:for-index="imageIndex" bindtap="previewImage" data-image-list="{{item.all_pic_url_list}}" data-image-index="{{imageIndex}}">
+            <image src="{{imageUrl}}"  class="question-answer-image"/>        
+          </view>
+        </view>
+      </view>
+      
+    </view>
+    
+      <view wx:if="{{question_answer_section.dataList.length==0}}" class="noData">
+        暂无数据~
+      </view>    
+      <view wx:if="{{question_answer_section.dataList.length>0&&question_answer_section.isEnd}}" class="noData">
+        已经到底啦~
+      </view>   
+    </view>
+
+
+
+      <view class="communication-view" wx:if="{{tabIndex==1}}">
         <view class="communication-card" wx:for="{{communication_section.dataList}}">
           <view class="communication-column">
             <view class="communication-name">{{item.name}}</view>
@@ -108,21 +117,22 @@
             <image src="../../static/icon/ring-icon.svg" wx:if="{{!item.answer_show}}" class="communication-ring-image" bindtap="makePhoneCall" data-phone="{{item.phone}}" data-id="{{item.id}}"></image>
           </view>
         </view>
+        
+        <view wx:if="{{communication_section.dataList.length==0}}" class="noData">
+          暂无数据~
+        </view>    
+        <view wx:if="{{communication.dataList.length>0&&communication_section.isEnd}}" class="noData">
+          已经到底啦~
+        </view>   
       </view>
 
-      <view wx:if="{{communication_section.dataList.length==0}}" class="noData">
-        暂无数据~
-      </view>    
-      <view wx:if="{{communication_section.dataList.length>0&&communication_section.isEnd}}" class="noData">
-        已经到底啦~
-      </view>   
      
     </scroll-view>
 
-  </view>
-  
   </scroll-view>
 
+
+  
 
 
   <image class="feedbackButton" bindtap="clickFeedbackButton" src='../../static/icon/feedback.svg'></image>
@@ -144,8 +154,6 @@
   
   </view>
   
-
-
 </view>
 <!-- <view style="position:fixed;width:100vw;height:10vh;z-index:0;top:0;background-color:white;"/>
 <view style="position:fixed;width:100vw;height:10vh;z-index:0;top:0;" class="tongde-background"/> -->

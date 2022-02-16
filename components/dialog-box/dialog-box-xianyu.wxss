@@ -92,7 +92,7 @@ Page{
   /* justify-content: center; */
   font-size: 28rpx;
   color: #333333;
-  /* width: auto; */
+  width: fit-content;
   /* padding-left: 80rpx; */
 
 }
@@ -101,10 +101,15 @@ Page{
   flex-direction: row;
   /* width: auto; */
   justify-content: center;
+  width: fit-content;
 }
+.dialog-box-contact>view,.dialog-box-contact>image{
+  display: inline-block;
+}
+
 .contact-key{
   /* display: inline-block; */
-  width: 100rpx;
+  width: 120rpx;
   text-align: right;
 }
 .contact-value{

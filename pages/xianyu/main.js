@@ -1,5 +1,6 @@
 // pages/xianyu/main.js
 import {request} from "../../request/request.js";
+import {parseDetail} from "./tool.js"
 import {formatTime, getDateDiff} from "../../utils/util.js";
 var app=getApp();
 
@@ -7,6 +8,8 @@ var app=getApp();
 const behaviorsPath = "../../behaviors/"
 const scrollBehavior = require(behaviorsPath + "ScrollView.js");
 const searchBehavior = require(behaviorsPath + "Search.js");
+
+const zoneMap={56:'四平',57:'嘉定',58:'彰武',60:'沪西',61:'沪北',59:'铁岭',63:'线上',62:'不限地点'}
 // 定义函数编写请求参数：-----------------------------------------
 Component({
   behaviors: [scrollBehavior, searchBehavior],
@@ -14,12 +17,33 @@ Component({
    * 页面的初始数据
    */
   data: {
-    tabIndex:1,
+    tabIndex:0,
     scrollViewHeight:'auto',
 
-    zoneList:['全部帖子','四平','嘉定','沪西','沪北','铁岭','线上'],
-    zoneIndex:0,
-    navigationList:['全部','图书','美妆','日用','数码','虚拟商品','票务','服饰','出行','其他'],
+    zoneMap:zoneMap,
+    zoneList:[
+      {id:56,value:'四平',},
+      {id:57,value:'嘉定'},
+      {id:58,value:'彰武'},
+      {id:60,value:'沪西'},
+      {id:61,value:'沪北'},
+      {id:59,value:'铁岭'},
+      {id:63,value:'线上'},
+      {id:62,value:'不限地点'},
+      {id:null,value:'全部帖子',},
+    ],
+    zoneIndex:8,
+    navigationList:[
+      {id:null,value:'全部'},
+      {id:64,value:'图书'},
+      {id:65,value:'美妆'},
+      {id:66,value:'日用'},
+      {id:67,value:'数码'},
+      {id:68,value:'虚拟商品'},
+      {id:69,value:'票务'},
+      {id:70,value:'服饰'},
+      {id:71,value:'出行'},
+      {id:72,value:'其他'}],
     navigationIndex:0,
 
     objectList:[],
@@ -64,9 +88,13 @@ Component({
     // updateCache(this,0,null,null,2);
 
   },
-  onShow: function(options) {
-
+  onShow:function(options){
+    if(app.globalData.xianyuRefresh){
+      app.globalData.xianyuRefresh=false
+      this.getData(true)
+    }
   },
+
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
@@ -101,6 +129,9 @@ Component({
       this.setData({
         tabIndex:Number(e.currentTarget.dataset.index),
         keyword:'',
+        zoneIndex:8,
+        navigationIndex:0,
+        zonePickerShow:false,
       })
       // this.clearInput()
       this.getData(true)
@@ -133,11 +164,13 @@ Component({
       zoneIndex:e.currentTarget.dataset.index,
       zonePickerShow:false,
     })
+    this.getData(true)
   },
 
 
   changeCategory:function(e){
     this.setData({navigationIndex:e.currentTarget.dataset.index})
+    this.getData(true)
   },
   getData:function(reset=false){
     let {pageNo,pages}=this.data
@@ -151,19 +184,24 @@ Component({
       this.setData({pageNo:pageNo+1})
     }
 
+    this.setData({loading:true})
+
     let that=this
     let params={
       pageNo:this.data.pageNo,
       type:this.data.tabIndex,
-      pageSize:this.data.tabIndex?12:8
+      pageSize:this.data.tabIndex?12:8,
+      deleted:0,
     }
     console.log(params)
     if(this.data.keyword)params.keyword=this.data.keyword
-    if(this.data.zoneIndex>0)params.location=this.data.zoneIndex
-    if(this.data.navigationIndex>0)params.category=this.data.category
+    let zoneId=this.data.zoneList[this.data.zoneIndex].id
+    if(zoneId)params.location=zoneId
+    let categoryId=this.data.navigationList[this.data.navigationIndex].id
+    if(categoryId)params.category=categoryId
 
     return request({
-      url: '/lostfound/tongdeGetLostFoundWithPage',
+      url: '/market/GetMarketWithPage',
       header: {
         'content-type': 'application/x-www-form-urlencoded',
       },
@@ -172,15 +210,9 @@ Component({
     }).then(res=>{
       console.log(res)
       let list=that.data.objectList
-      list=list.concat(res.data.data.records.map(item=>{
-        return {
-          ...item,
-          price_integer:299,
-          price_fractional:'.50',
-          zone:'四平'
-        }
-      }))
+      list=list.concat(res.data.data.records.map(item=>parseDetail(item)))
       that.setData({
+        loading:false,
         objectList:list,
         pages:res.data.data.pages,
         isRefresherOpen:false,
@@ -205,12 +237,12 @@ Component({
     this.getData(false)
   },
   // 跳转：发起组队事件：------------- --------- ------ ------- --
-  createNewPost:function(){
+  goToPublishPage:function(){
     let type
-    if(this.data.tabIndex==0){type='sale'}
-    else if(this.data.tabIndex==1){type='need'}
+    // if(this.data.tabIndex==0){type='sale'}
+    // else if(this.data.tabIndex==1){type='need'}
     wx.navigateTo({
-      url: '/pages/xianyu/publish?mode=new&type='+type,
+      url: '/pages/xianyu/publish?mode=new&type='+this.data.tabIndex,
     })
   },
   }

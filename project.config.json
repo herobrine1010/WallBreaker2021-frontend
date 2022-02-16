@@ -5,7 +5,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
     "enhance": true,
     "postcss": true,
@@ -39,7 +39,7 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.18.0",
+  "libVersion": "2.22.0",
   "appid": "wx159a303f3c74803f",
   "projectname": "wallbreaker",
   "debugOptions": {

@@ -19,13 +19,15 @@
     </view>
     <view class="dropdown-picker-location">
       <view class="dropdown-picker-box">
-        <view class="a-line dropdown-picker-item" bindtap="changeZonePickerStatus">
-          <view class="picker-text">{{zoneList[zoneIndex]}}</view>
+        <view class="a-line dropdown-picker-item" bindtap="changeStatusPickerStatus">
+          <view class="picker-text">{{statusList[statusIndex].value}}</view>
           <image class="down-arrow-icon" src="/static/icon/down-arrow.svg"/>
         </view>
-        <view class="dropdown-picker-item white-background" wx:for="{{zoneList}}" wx:if="{{zonePickerShow}}" bindtap="changeZone" data-index="{{index}}">{{item}}</view>
+        <view class="dropdown-picker-item white-background" wx:for="{{statusList}}" wx:if="{{statusPickerShow}}" bindtap="changeStatus" data-index="{{index}}">{{item.value}}</view>
       </view>
     </view>
+    <view class="dropdown-picker-mask" wx:if="{{statusPickerShow}}" catchtap="changeStatusPickerStatus"/>
+
 </view>
 
 
@@ -35,7 +37,6 @@
     refresher-enabled="true" 
     bindrefresherrefresh = "onRefresherRefresh"
     refresher-triggered = "{{isRefresherOpen}}"
-    bindscroll="onMyScroll" 
     bindscrolltolower="getNextPage" 
     upper-threshold="200"
     scroll-y="true" 
@@ -43,10 +44,10 @@
     scroll-top='{{ topNum }}'
     class="scroll" style="height:{{scrollViewHeight}}px;" id="scroll-view" style="height:{{scrollviewHeight}};">
 
-      <navigator class="card" url='/pages/xianyu/detail?id={{item.id}}' wx:for="{{objectList}}">
+      <view class="card" bindtap="goToDetail" data-id='{{item.id}}' data-index="{{index}}" wx:for="{{objectList}}">
         <view class="a-line">
           <view class="object-name">{{item.name}}</view>
-          <view class="object-zone">{{item.location}}</view>
+          <view class="object-zone">{{item.zone}}</view>
           <view class="object-status" style="background-color:{{item.statusColor}};">{{item.status}}</view>
         </view>
         <view class="object-image-and-content-box">
@@ -63,17 +64,23 @@
             <view class="object-content-and-operation">
               <view class="object-content">{{item.content}}</view>
               <view class="object-operation-group" wx:if="{{tabIndex==0||tabIndex==1}}">
-                <image class="object-operation-icon" src="/static/icon/edit-gray.svg" bindtap="editDetail" data-index="{{item.id}}"/>
-                <image class="object-operation-icon" src="/static/icon/undercarriage-gray.svg" bindtap="closeDetail" data-index="{{item.id}}"/>
-                <image class="object-operation-icon" src="/static/icon/delete-gray.svg" bindtap="deleteDetail" data-index="{{item.id}}"/>
+                <image class="object-operation-icon" src="/static/icon/edit-gray.svg" catchtap="editDetail" data-id="{{item.id}}" data-detail="{{item}}" wx:if="{{!item.hidden}}"/>
+                <image class="object-operation-icon" src="/static/icon/edit-disabled.svg" catchtap="none" wx:else/>
+                <image class="object-operation-icon" src="/static/icon/undercarriage-gray.svg" catchtap="closeDetail" data-id="{{item.id}}" data-index="{{index}}" wx:if="{{!item.hidden}}"/>
+                <image class="object-operation-icon" src="/static/icon/undercarriage-disabled.svg" catchtap="none" wx:else/>
+                <image class="object-operation-icon" src="/static/icon/delete-gray.svg" catchtap="deleteDetail" data-id="{{item.id}}" data-index="{{index}}"/>
               </view>
-              <view class="cancel-like-button" wx:if="{{tabIndex==2}}">取消收藏</view>
+              <view class="cancel-like-button" wx:if="{{tabIndex==2}}" data-id="{{item.id}}" data-index="{{index}}" catchtap="cancelLike">取消收藏</view>
             </view>
           </view>
         </view>
 
-      </navigator>
+      </view>
 
+
+      <view wx:if="{{loading}}" class="noData">加载中~</view>
+      <view wx:if="{{!loading&&objectList.length==0}}" class="noData">暂无数据~</view>
+      <view wx:if="{{!loading&&objectList.length>0&&isLastPage}}" class="noData">已经到底啦~</view>   
     </scroll-view>
 
   </view>
@@ -86,6 +93,7 @@ title="{{dialog.title}}"
 content="{{dialog.content}}"
 okText="确定"
 cancelText="取消"
+hideCancelButton="{{dialog.hideCancelButton}}"
 isShow="{{dialog.isDialogShow}}"
 buttonColor="blue"
 bind:tapCancel="{{dialog.tapCancelEvent}}"

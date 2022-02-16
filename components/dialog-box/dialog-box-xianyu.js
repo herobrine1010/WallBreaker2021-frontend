@@ -37,11 +37,7 @@ Component({
     },
     contactList:{
       type:Array,
-      value:[{
-        key:'微信',
-        value:'1289uasdj',
-        copyEnable:true,
-      }]
+      value:[]
     
     },
     buttonColor:{
