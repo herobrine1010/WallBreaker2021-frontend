@@ -14,7 +14,7 @@
         <view class="initiator-time">{{detail.createTime}}</view>
       </view>
       <view class="star-detail" wx:if="{{type==0}}">
-        <view class="star-text">已有{{detail.starNumber}}人收藏</view>
+        <view class="star-text">已有{{detail.countFavourite}}人收藏</view>
         <image class="star-icon" wx:if="{{!like}}" src="/static/icon/star.svg" bindtap="collectDetail"/>
         <image class="star-icon" wx:else src="/static/icon/star-solid.svg" bindtap="cancelCollectDetail"/>
       </view>

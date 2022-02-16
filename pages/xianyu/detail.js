@@ -59,7 +59,6 @@ Page({
 
     this.initializeScrollViewHeight()
     this.getDetail()
-    this.getInitiatorDetail()
 
   },
   onShow:function(options){
@@ -111,10 +110,9 @@ Page({
     }).then(res=>{
       console.log(res.data)
       that.setData({
-        like:false,
+        like:res.data.data.myFavourite,
         initializedByMe:res.data.data.initializedByMe,
         detail:{
-          starNumber:0,
           ...parseDetail(res.data.data),
           contactList:parseContactList(res.data.data),
         }

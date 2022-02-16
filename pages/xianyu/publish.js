@@ -101,7 +101,7 @@ Page({
         if(res.allPicUrl){
           res.allPicUrl=res.allPicUrl.split(',')
         }
-        wx.setStorageSync('xianyuEditHistory', {
+        wx.setStorageSync('xianyuEditHistory'+this.data.type, {
           ...this.data.detail,
           ...res,
         })
@@ -110,7 +110,7 @@ Page({
     }
   },
   askIfContinueEditing:function(e){
-    let editHistory=wx.getStorageSync('xianyuEditHistory')
+    let editHistory=wx.getStorageSync('xianyuEditHistory'+this.data.type)
     console.log(editHistory)
     if(editHistory){
       this.setData({
@@ -123,7 +123,7 @@ Page({
     }
   },
   confirmRestoreEditedContent:function(e){
-    let editHistory=wx.getStorageSync('xianyuEditHistory')
+    let editHistory=wx.getStorageSync('xianyuEditHistory'+this.data.type)
     this.setData({
       detail:editHistory,
       haveEdited:false,
@@ -560,7 +560,7 @@ async function initializeMarket(detail,images){
         console.log(results)
 
         if(this.data.mode=='new'){
-          wx.removeStorageSync('xianyuEditHistory')
+          wx.removeStorageSync('xianyuEditHistory'+this.data.type)
           that.setData({
             haveEdited:false,
           })
