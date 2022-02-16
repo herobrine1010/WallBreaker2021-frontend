@@ -327,6 +327,7 @@ Page({
   },
   
   addNewContact:function(e){
+    
     let list=this.data.detail.contactList
     list.push({
       index:-1,
@@ -338,6 +339,7 @@ Page({
       ['detail.contactList']:list,
       haveEdited:true
     })
+    this.countContactNumber()
   },
 
   deleteContact:function(e){
@@ -350,6 +352,20 @@ Page({
     this.setData({
       ['detail.contactList['+e.currentTarget.dataset.index+'].status']:status,
       haveEdited:true
+    })
+    this.countContactNumber()
+  },
+
+  countContactNumber:function(){
+    let count=0
+    for(let item of this.data.detail.contactList){
+      if(item.status!='ignore'&&item.status!='delete'){
+        count++
+      }
+    }
+    console.log(count)
+    this.setData({
+      ['detail.contactLimit']:count>=4?true:false,
     })
   },
 
@@ -510,7 +526,7 @@ async function initializeMarket(detail,images){
   })
 
   let {type,name,content,categoryIndex,zoneIndex,price,contactList}=detail
-  type=type==1?true:false
+  // type=type==1?true:false
 
   let data={
     type,
@@ -565,8 +581,10 @@ async function initializeMarket(detail,images){
             haveEdited:false,
           })
         }else if(this.data.mode=='edit'){
-          app.globalData.xianyuRefresh=true
+
         }
+
+        app.globalData.xianyuRefresh=true
 
         wx.showToast({
           title: '发布成功',

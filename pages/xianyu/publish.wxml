@@ -108,7 +108,7 @@
             <input name="contact" class="input-half-line" placeholder="请输入您的联系方式" maxlength="25" value="{{item.content}}" data-index="{{index}}" bindinput="changeContact"/>
             
           </view>
-          <image src="/static/icon/add-grey.svg" class="operation-icon" wx:if="{{index==detail.contactList.length-1}}" bindtap="addNewContact"/>
+          <image src="/static/icon/add-grey.svg" class="operation-icon" wx:if="{{index==detail.contactList.length-1&&!detail.contactLimit}}" bindtap="addNewContact"/>
           <image src="/static/icon/minus-red.svg" class="operation-icon" wx:else bindtap="deleteContact" data-index="{{index}}"/>
         </view>
         <view class="tip" style="margin:16rpx 20rpx; font-size: 10px; line-height: 150%;">
