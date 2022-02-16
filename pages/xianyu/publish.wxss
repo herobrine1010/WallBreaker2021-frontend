@@ -50,6 +50,8 @@ input {
   border-bottom: none;
 }
 
+
+
 /* 设置标题及图标 */
 .title{
   /* height: 60rpx; */
@@ -100,7 +102,8 @@ input {
   display: flex;
   justify-content: space-between;
 }
-.input-lost-name {
+.input-name-box {
+  padding-left: 8rpx;
   height: 40rpx;
   font-size: 32rpx;
   line-height: 1.25;
@@ -255,11 +258,21 @@ radio-group > radio {
 }
 
 /* 表单校验的错误的信息和提示 */
+.error-icon{
+  height: 24rpx;
+  width: 24rpx;
+  margin-right: 8rpx;
+}
 .error-tip {
   vertical-align: middle;
+  font-size: 20rpx;
+  height: 24rpx;
+  line-height: 24rpx;
 }
 .error-wrap {
-  margin-left: 24rpx;
+  display: flex;
+  flex-direction: row;
+  /* margin-left: 24rpx; */
   color: #FA5151;
 }
 .error-wrap-input {

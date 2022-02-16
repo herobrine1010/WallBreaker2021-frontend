@@ -11,7 +11,7 @@ Page {
   color: #545454;
 }
 .xianyu-background{
-  background: linear-gradient(180deg, #957D95ff -720rpx, rgba(139, 46, 231, 0) 500rpx);
+  background: linear-gradient(180deg, rgba(218, 181, 218, 1) -720rpx, rgba(139, 46, 231, 0) 460rpx);
 }
 ::-webkit-scrollbar {
   width: 0;
@@ -35,9 +35,10 @@ Page {
 }
 .tab-item{
   height: 40rpx;
+  font-weight: 400;
   font-size: 32rpx;
-  color: #333333;
-  padding-bottom: 12rpx;
+  color: #545454;
+  padding: 0 4rpx 4rpx;
 }
 
 .tab-item.active {
@@ -45,10 +46,12 @@ Page {
   font-weight: 500;
   border-bottom: 4rpx solid #957D95;
   border-radius: 4rpx;
+  box-shadow: 0 4rpx rgba(192, 203, 206, 0.8);
 }
 
 
 .search-area{
+  position: relative;
   display: flex;
   height: 84rpx;
   width: 95%;
@@ -65,7 +68,7 @@ Page {
   height: 80rpx;
 }
 .weui-search-bar__form {
-  background: rgba(255, 252, 255, 0.7);
+  background: rgba(255, 252, 255, 0.5);
 }
 .dropdown-picker-location{
   position: relative;
@@ -80,10 +83,21 @@ Page {
   border-radius: 32rpx;
   /* justify-content: center; */
   align-items: center;
-  background-color:rgba(255, 255, 255, 0.7);
+  background-color:rgba(255, 255, 255, 0.5);
   z-index: 101;
   border: 0.2px solid #957D95;
   font-size: 24rpx;
+}
+
+.dropdown-picker-mask{
+  position: absolute;
+  top: 84rpx;
+  left: 0;
+  
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.2);
+  z-index: 90;
 }
 
 .dropdown-picker-item{
@@ -108,7 +122,7 @@ Page {
   width: 160rpx;
   display: flex;
   flex-direction: row;
-  background-color:rgba(255, 255, 255, 0.5);
+  background-color:rgba(255, 255, 255, 0.2);
   height: 60rpx;
   border-radius: 32rpx;
   justify-content: center;
@@ -136,14 +150,15 @@ Page {
   margin: 0 auto;
   margin-bottom: 20rpx;
   padding-right: 40rpx;
-  width: calc(90vw - 40rpx);
+  width: calc(90vw - 20rpx);
 }
 
 .navigation-item,.navigation-item-selected{
   display: inline-block;
-  margin: 0 20rpx;
+  margin: 0 8rpx;
   color: #545454;
   font-size: 28rpx;
+  padding: 0 12rpx;
 }
 
 .navigation-item:first-child{
@@ -154,7 +169,9 @@ Page {
 }
 
 .navigation-item-selected{
-  border-bottom: 4rpx solid;
+  border-bottom: 4rpx solid #957D95;
+  border-radius: 4rpx;
+  box-shadow: 0 4rpx rgba(192, 203, 206, 0.8);
   color: #333333;
 }
 .navigation-placehold{
@@ -174,8 +191,8 @@ Page {
 }
 
 .double-right-arrow-icon{
-  width: 30rpx;
-  height: 30rpx;
+  width: 20rpx;
+  height: 20rpx;
 }
 
 
@@ -226,9 +243,9 @@ Page {
   bottom: 0;
   border-radius: 0 0 24rpx 24rpx;
   background-color: #ffffff;
-  width: 304rpx;
+  width: calc(100% - 32rpx);
   height: 162rpx;/* 高度复刻问题 */
-  padding: 12rpx 16rpx 24rpx;
+  padding: 12rpx 16rpx 16rpx;
 }
 
 .sale-object-name{
@@ -238,7 +255,7 @@ Page {
   white-space: nowrap;    
   /* 末尾加省略号 */
   text-overflow:ellipsis;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
   color: #333333;
   margin: 0 0 4rpx;
@@ -298,14 +315,14 @@ Page {
   background-color: #ffffff;
   /* width: 304rpx; */
   height: auto;
-  padding: 14rpx 24rpx 16rpx;
+  padding: 16rpx 24rpx 16rpx;
 }
 .need-object-name{
   /* width: 300rpx; */
   overflow: hidden;  
   white-space: nowrap;    
   text-overflow:ellipsis;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
   color: #333333;
   /* margin-top: 14rpx; */
