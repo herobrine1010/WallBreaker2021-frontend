@@ -127,7 +127,7 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      data:{userId:103}
+      data:{userId:this.data.detail.userId}
     }).then(res=>{
       console.log(res)
       let data=res.data.data
@@ -165,7 +165,7 @@ Page({
       if(res.data.success){
         this.setData({
           like:true,
-          ['detail.starNumber']:this.data.detail.starNumber+1,
+          ['detail.countFavourite']:this.data.detail.countFavourite+1,
         })
     
       }
@@ -184,7 +184,7 @@ Page({
       if(res.data.success){
         this.setData({
           like:false,
-          ['detail.starNumber']:this.data.detail.starNumber-1,
+          ['detail.countFavourite']:this.data.detail.countFavourite-1,
         })
     
       }

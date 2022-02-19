@@ -32,7 +32,7 @@
       </view>
       <view class="object-content">{{detail.content}}</view>
       <view class="object-image-container">
-        <image class="object-image" wx:for="{{detail.allPicUrl}}" src="{{item}}" mode="widthFix" bindtap="zoomInDetailPicture" data-index="{{index}}"/>
+        <image class="object-image" wx:for="{{detail.allPicUrl}}" wx:key="{{item}}" src="{{item}}" mode="widthFix" bindtap="zoomInDetailPicture" data-index="{{index}}"/>
       </view>
       <view style="height:40rpx;"></view>
     </scroll-view>

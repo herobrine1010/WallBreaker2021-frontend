@@ -20,7 +20,7 @@ Component({
    */
   data: {
     tabIndex:0,
-    scrollViewHeight:'auto',
+    scrollViewHeight:'0',
 
     zoneMap:zoneMap,
     zoneList:[
@@ -154,6 +154,7 @@ Component({
     this.getData(true)
   },
   getData:function(reset=false){
+    if(this.data.loading)return
     let {pageNo,pages}=this.data
     if(reset){
       this.setData({
@@ -174,8 +175,8 @@ Component({
       pageSize:this.data.tabIndex?12:8,
       deleted:0,
     }
-    console.log(params)
     if(this.data.keyword)params.keyword=this.data.keyword
+    console.log(params)
     let zoneId=this.data.zoneList[this.data.zoneIndex].id
     if(zoneId)params.location=zoneId
     let categoryId=this.data.navigationList[this.data.navigationIndex].id
@@ -196,7 +197,7 @@ Component({
         loading:false,
         objectList:list,
         pages:res.data.data.pages,
-        // isRefresherOpen:false,
+        isRefresherOpen:false,
         isLastPage:this.data.pageNo>=res.data.data.pages?true:false,
       })
       console.log(that.data.objectList)

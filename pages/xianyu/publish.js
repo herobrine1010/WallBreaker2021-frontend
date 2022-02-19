@@ -261,7 +261,7 @@ Page({
   },
 
   changePriceInputWidth(e){
-    let value=String(this.data.detail.price)
+    let value=String(this.data.detail.price||'')
     let length;
     if(value){
       length=6+11*value.replace(/[^\x00-\xff]/g, "ab").length

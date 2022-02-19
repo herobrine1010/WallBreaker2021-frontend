@@ -36,6 +36,10 @@
       <image src="../../static/icon/my-lost.svg" class="icon"></image>
       <view class="item-title">我的失物招领</view>
     </navigator>
+    <navigator url="/pages/xianyu/myXianzhi" class="per-items">
+      <image src="../../static/icon/my-xianzhi.svg" class="icon"></image>
+      <view class="item-title">我的闲置</view>
+    </navigator>
     <navigator url="../personal/help-new" class="per-items">
       <image src="../../static/icon/help.svg" class="icon"></image>
       <view class="item-title">新手帮助</view>
