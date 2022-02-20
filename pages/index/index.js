@@ -110,7 +110,7 @@ async function getNextPostingPage(that , keyword, labelId, timeIndex) {
 Component({
   behaviors: [filterBehavior],
   data: {
-    bannerItem: [
+    entryItem: [
       {
       icon: '失物招领icon.png',
       text: '失物招领',
@@ -131,7 +131,7 @@ Component({
         text: '校园咸鱼',
         path: '/pages/xianyu/main'
       },
-  ],
+    ],
     isRefresherOpen : false,
     showGoTopButton:false, 
     timeIndex:'desc',
@@ -147,11 +147,7 @@ Component({
         selected: false,
       }
     ],
-    tempBanner: [
-      'https://assets.leetcode.com/users/images/44ae5833-3cd4-4573-9f63-01d6c2fb51f3_1642233885.6646452.png',
-      'https://assets.leetcode.com/users/images/44ae5833-3cd4-4573-9f63-01d6c2fb51f3_1642233885.6646452.png',
-      'https://assets.leetcode.com/users/images/44ae5833-3cd4-4573-9f63-01d6c2fb51f3_1642233885.6646452.png'
-    ],
+    banner: [],
     // conditionFilterOpen:false,
     jishiItemList:[
       {
@@ -216,6 +212,16 @@ Component({
         })
       }).catch( err => {
         console.log(err);
+      })
+
+      // 获取 banner 信息
+      request({
+        url : "/banner/getAllBanner",
+      }).then(res => {
+        const data = res.data.data;
+        this.setData({
+          banner: data
+        })
       })
   
 

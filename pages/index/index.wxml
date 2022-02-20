@@ -8,15 +8,17 @@
   <view class="inner">
     <!-- banner 位 -->
     <swiper indicator-dots 	indicator-color='#dedede' indicator-active-color='#fff' class="pictureArea" id="banner">
-      <swiper-item wx:for="{{tempBanner}}">
-        <image src='{{item}}' class='img' mode="aspectFill"/>
+      <swiper-item wx:for="{{banner}}">
+        <navigator url="{{ item.pageUrl }}">
+          <image src='{{item.ossImageUrl}}' class='img' mode="aspectFill"/>
+        </navigator>
       </swiper-item>
     </swiper>
 
     <!-- 金刚位 -->
     <swiper class="flex-container" id="index-entry">
       <swiper-item>
-        <block wx:for="{{bannerItem}}">
+        <block wx:for="{{entryItem}}">
         <navigator url="{{ item.path }}" id="entry-item" class="horizon-cneter">
           <image id="entry-item__icon" class="horizon-cneter" src="/static/icon/{{ item.icon }}"></image>
           <view class="poby-text bdst" style="line-height:0;">{{ item.text }}</view>
