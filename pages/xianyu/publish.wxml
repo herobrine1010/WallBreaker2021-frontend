@@ -21,11 +21,16 @@
 
       <view class="item-wrap description">
         <view class="text-box">
-          <textarea  class="text-area" maxlength="200" placeholder="请输入物品描述，如品牌型号、几成新、已用年份、保质日期、购入渠道、转手原因…" placeholder-class="input-placeholder" value="{{detail.content}}" bindinput="changeContent"></textarea>
+          <textarea  class="text-area" maxlength="200" placeholder="请输入物品描述，如品牌型号、几成新、已用年份、保质日期、购入渠道、转手原因…" placeholder-class="input-placeholder" value="{{detail.content}}" bindinput="changeContent">
+            <view class="error-wrap error-content-none"  wx:if="{{ errors.contentNone }}">
+              <image src="/static/icon/Alert-warning.png" class="error-icon"/>
+              <text class="error-tip">{{ errors.contentNone }}</text>
+            </view>
+          </textarea>
         </view>
-        <view class="error-wrap"  wx:if="{{ errors.content }}">
+        <view class="error-wrap"  wx:if="{{ errors.contentLimit }}">
           <image src="/static/icon/Alert-warning.png" class="error-icon"/>
-          <text class="error-tip">{{ errors.content }}</text>
+          <text class="error-tip">{{ errors.contentLimit }}</text>
         </view> 
       </view>
 
@@ -96,7 +101,7 @@
             <text class="error-tip">{{ errors.contact }}</text>
           </view> 
         </view>
-        <view class="contact-a-line" wx:for="{{detail.contactList}}" wx:if="{{item.status!='delete'&&item.status!='ignore'}}">
+        <view class="contact-a-line" wx:for="{{detail.contactList}}" wx:key="*this" wx:if="{{item.status!='delete'&&item.status!='ignore'}}">
           <picker name="contactType" class="contact-type-picker" mode="selector" range="{{contactTypeRange}}" range-key='value' value="{{item.index}}" data-index="{{index}}" bind:change="changeContactType">
             <view class="contact-picker-a-line">
               <view class="picker-text">{{item.index>-1?contactTypeRange[item.index].value:'请选择联系渠道'}}</view>
@@ -108,8 +113,10 @@
             <input name="contact" class="input-half-line" placeholder="请输入您的联系方式" maxlength="25" value="{{item.content}}" data-index="{{index}}" bindinput="changeContact"/>
             
           </view>
-          <image src="/static/icon/add-grey.svg" class="operation-icon" wx:if="{{index==detail.contactList.length-1}}" bindtap="addNewContact"/>
-          <image src="/static/icon/minus-red.svg" class="operation-icon" wx:else bindtap="deleteContact" data-index="{{index}}"/>
+          <image src="/static/icon/minus-red.svg" class="operation-icon" style="margin-right:10rpx;" wx:if="{{detail.showMinusButton}}" bindtap="deleteContact" data-index="{{index}}"/>
+          <image src="/static/icon/add-grey.svg" class="operation-icon" wx:if="{{detail.showAddButton&&index==detail.lastContactIndex}}" bindtap="addNewContact"/>
+          <view class="operation-icon" wx:else/>
+          <view class="operation-icon" style="margin-left:10rpx;" wx:if="{{detail.countContactNumber==1}}"/>
         </view>
         <view class="tip" style="margin:16rpx 20rpx; font-size: 10px; line-height: 150%;">
         <view>提示：联系方式可能被其他用户查看，请选择相对安全的联系渠道</view>
@@ -117,14 +124,15 @@
         </view>
       </view>
 
-      <view id="operation-area" class="operation-button-group">
-        <view class="operation-button-hollow" bindtap="goBack">取消</view>
-        <view class="operation-button-solid" bindtap="publishDetail">发布</view>
-      </view>
+      
 
     </view>
   </scroll-view>
 
+  <view id="operation-area" class="operation-button-group">
+    <view class="operation-button-hollow" bindtap="goBack">取消</view>
+    <view class="operation-button-solid" bindtap="publishDetail">发布</view>
+  </view>
 
 
 <dialog-box 

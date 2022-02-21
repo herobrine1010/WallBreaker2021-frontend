@@ -182,6 +182,13 @@ Component({
       this.triggerEvent('blur', e.detail);
     },
 
+    inputConfirm(e) {
+      this.setData({
+        focus: false
+      });
+      this.triggerEvent('confirm', e.detail);
+    },
+
     showInput() {
       this.setData({
         focus: true,

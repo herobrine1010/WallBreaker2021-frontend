@@ -14,7 +14,7 @@
   
   <view class="search-area">
     <view class="searchBar">
-      <mp-searchbar id="search-input" bindblur="onSearch" 
+      <mp-searchbar id="search-input" bindconfirm="onSearch" 
       bindclear = "onCancleSearch" ext-class="weui-search-bar_focusing" placeholder="搜索物品名称" value="{{keyword}}"></mp-searchbar>
     </view>
     <view class="dropdown-picker-location">
@@ -23,7 +23,7 @@
           <view class="picker-text">{{zoneList[zoneIndex].value}}</view>
           <image class="down-arrow-icon" src="/static/icon/down-arrow.svg"/>
         </view>
-        <view class="dropdown-picker-item white-background" wx:for="{{zoneList}}" wx:if="{{zonePickerShow}}" bindtap="changeZone" data-index="{{index}}">{{item.value}}</view>
+        <view class="dropdown-picker-item white-background" wx:for="{{zoneList}}" wx:key="id" wx:if="{{zonePickerShow}}" bindtap="changeZone" data-index="{{index}}">{{item.value}}</view>
       </view>
     </view>
 
@@ -35,7 +35,7 @@
 
   <view class="navigation-view">
     <scroll-view scroll-x class="navigation" scroll-with-animation scroll-left="{{scrollLeft}}">
-      <view class="navigation-item {{index==navigationIndex?'navigation-item-selected':''}}" wx:for="{{navigationList}}" wx:key bindtap="changeCategory" data-index="{{index}}">{{item.value}}</view>
+      <view class="navigation-item {{index==navigationIndex?'navigation-item-selected':''}}" wx:for="{{navigationList}}"  wx:key="id" bindtap="changeCategory" data-index="{{index}}">{{item.value}}</view>
       <view class="navigation-placehold"></view>
     </scroll-view>
     <view class="double-right-arrow-view">
@@ -50,14 +50,13 @@
     refresher-enabled="true" 
     bindrefresherrefresh = "onRefresherRefresh"
     refresher-triggered = "{{isRefresherOpen}}"
-    bindscroll="onMyScroll" 
     bindscrolltolower="getNextPage" 
     upper-threshold="200"
     scroll-y="true" 
     scroll-with-animation='true' 
     scroll-top='{{ topNum }}'
-    class="scroll" style="height:{{scrollViewHeight}}px;" id="scroll-view">
-      <view wx:for="{{objectList}}" class="item" wx:if="{{tabIndex==0}}">
+    class="scroll" style="height:{{scrollViewHeight}};" id="scroll-view">
+      <view wx:for="{{objectList}}" wx:key="id" class="item" wx:if="{{tabIndex==0}}">
         <navigator class="lostDetail" url='/pages/xianyu/detail?type=0&id={{item.id}}'>
           <view class="sale-card">
             <image class="image" src="{{item.firstPicUrl}}" mode="aspectFill"></image>
@@ -76,7 +75,7 @@
           </view>
         </navigator>
       </view>
-      <view wx:for="{{objectList}}" class="item" wx:if="{{tabIndex==1}}">
+      <view wx:for="{{objectList}}" wx:key="id" class="item" wx:if="{{tabIndex==1}}">
         <navigator class="lostDetail" url='/pages/xianyu/detail?type=1&id={{item.id}}'>
           <view class="need-card">
             <view class="need-object-detail-box">

@@ -5,7 +5,7 @@ const parseDetail=function(item){
   // let {id,name,content,category,location,contactList}=item
 
   let priceData={}
-  if(item.price){
+  if(item.price!=undefined&&item.price!=null){
     let priceList=String(item.price).split('.')
     priceData.price_integer=priceList[0]
     if(priceList.length>1){
@@ -14,7 +14,6 @@ const parseDetail=function(item){
   }
   
   if(item.allPicUrl){
-    console.log(item.allPicUrl)
     item.allPicUrl=item.allPicUrl.split(',')
   }
 

@@ -27,7 +27,7 @@ Page({
     question_answer_section:{
       current:1,
       pages:1,
-      pageSize:15,
+      pageSize:20,
       keyword:'',
       loadingTimeout:2000,
       dataList:[],
@@ -169,7 +169,6 @@ Page({
     let innerNum=e.detail.scrollTop
     let outerNum=this.data.scroll_view.outer_top_num
     let tabHeight=this.data.tabHeight
-    console.log(innerNum,outerNum)
     if(innerNum>0 &&outerNum<tabHeight){
       if(innerNum+outerNum<tabHeight){
         this.setData({
@@ -243,7 +242,6 @@ Page({
           isEnd:current==pages?true:false,
         }
       })
-      console.log(that.data)
     })      
   },
   detectLoadingTimeout: function(){

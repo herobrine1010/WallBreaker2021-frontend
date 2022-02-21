@@ -83,7 +83,7 @@ Page {
   border-radius: 32rpx;
   /* justify-content: center; */
   align-items: center;
-  background-color:rgba(255, 255, 255, 0.5);
+  background-color:rgba(255, 255, 255, 0.2);
   z-index: 101;
   border: 0.2px solid #957D95;
   font-size: 24rpx;

@@ -54,7 +54,7 @@ Component({
           that.setData({
             value: editList
           })
-          that.triggerEvent('operate',that,properties.value)
+          that.triggerEvent('operate',that.properties.value)
         },
       })
       
