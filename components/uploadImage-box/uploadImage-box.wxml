@@ -3,7 +3,7 @@
   <block wx:for="{{value}}" wx:key="*this">
     <view class="image-wrap" >
       <view class="deleteTopRight" bindtap="deleteImage" data-index="{{index}}">
-        <image class="deleteTopRight-icon" src="/static/icon/cross-grey.png"></image>
+        <image class="deleteTopRight-icon" src="/static/icon/cross-grey.svg"></image>
       </view>
       <image class="userImage" src="{{item}}" mode="aspectFill" data-pic-url="{{item}}" bind:tap="zoomInDetailPicture"></image>
     </view>

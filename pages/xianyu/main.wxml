@@ -23,7 +23,7 @@
           <view class="picker-text">{{zoneList[zoneIndex].value}}</view>
           <image class="down-arrow-icon" src="/static/icon/down-arrow.svg"/>
         </view>
-        <view class="dropdown-picker-item white-background" wx:for="{{zoneList}}" wx:key="{{item.id}}" wx:if="{{zonePickerShow}}" bindtap="changeZone" data-index="{{index}}">{{item.value}}</view>
+        <view class="dropdown-picker-item white-background" wx:for="{{zoneList}}" wx:key="id" wx:if="{{zonePickerShow}}" bindtap="changeZone" data-index="{{index}}">{{item.value}}</view>
       </view>
     </view>
 
@@ -35,7 +35,7 @@
 
   <view class="navigation-view">
     <scroll-view scroll-x class="navigation" scroll-with-animation scroll-left="{{scrollLeft}}">
-      <view class="navigation-item {{index==navigationIndex?'navigation-item-selected':''}}" wx:for="{{navigationList}}"  wx:key="{{item.id}}" wx:key bindtap="changeCategory" data-index="{{index}}">{{item.value}}</view>
+      <view class="navigation-item {{index==navigationIndex?'navigation-item-selected':''}}" wx:for="{{navigationList}}"  wx:key="id" bindtap="changeCategory" data-index="{{index}}">{{item.value}}</view>
       <view class="navigation-placehold"></view>
     </scroll-view>
     <view class="double-right-arrow-view">
@@ -56,7 +56,7 @@
     scroll-with-animation='true' 
     scroll-top='{{ topNum }}'
     class="scroll" style="height:{{scrollViewHeight}};" id="scroll-view">
-      <view wx:for="{{objectList}}" wx:key="{{item.id}}" class="item" wx:if="{{tabIndex==0}}">
+      <view wx:for="{{objectList}}" wx:key="id" class="item" wx:if="{{tabIndex==0}}">
         <navigator class="lostDetail" url='/pages/xianyu/detail?type=0&id={{item.id}}'>
           <view class="sale-card">
             <image class="image" src="{{item.firstPicUrl}}" mode="aspectFill"></image>
@@ -75,7 +75,7 @@
           </view>
         </navigator>
       </view>
-      <view wx:for="{{objectList}}" wx:key="{{item.id}}" class="item" wx:if="{{tabIndex==1}}">
+      <view wx:for="{{objectList}}" wx:key="id" class="item" wx:if="{{tabIndex==1}}">
         <navigator class="lostDetail" url='/pages/xianyu/detail?type=1&id={{item.id}}'>
           <view class="need-card">
             <view class="need-object-detail-box">

@@ -122,10 +122,12 @@ page{
   width: 100%;
 }
 .object-image:first-child{
-  border-radius: 24rpx 24rpx 0px 0px;
+  border-top-left-radius: 24rpx;
+  border-top-right-radius: 24rpx;
 }
 .object-image:last-child{
-  border-radius:  0px 0px 24rpx 24rpx;
+  border-bottom-left-radius: 24rpx;
+  border-bottom-right-radius: 24rpx;
 }
 
 .operation-button{

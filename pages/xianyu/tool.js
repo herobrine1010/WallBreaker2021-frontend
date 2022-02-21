@@ -14,7 +14,6 @@ const parseDetail=function(item){
   }
   
   if(item.allPicUrl){
-    console.log(item.allPicUrl)
     item.allPicUrl=item.allPicUrl.split(',')
   }
 

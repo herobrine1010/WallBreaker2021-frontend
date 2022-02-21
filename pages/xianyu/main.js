@@ -190,7 +190,6 @@ Component({
       method : 'GET',
       data: params
     }).then(res=>{
-      console.log(res)
       let list=that.data.objectList
       list=list.concat(res.data.data.records.map(item=>parseDetail(item)))
       that.setData({
@@ -200,8 +199,7 @@ Component({
         isRefresherOpen:false,
         isLastPage:this.data.pageNo>=res.data.data.pages?true:false,
       })
-      console.log(that.data.objectList)
-      console.log(this.data.pageNo,this.data.pages)
+      // console.log(that.data.objectList)
     })
 
 

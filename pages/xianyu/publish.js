@@ -58,6 +58,9 @@ Page({
     categoryList:categoryList,
     zoneList:zoneList,
     detail:{
+      lastContactIndex:0,
+      countContactNumber:1,
+      showAddButton:true,
       contactList:[{
         index:-1,
         type:'',
@@ -71,7 +74,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    // console.log(options)
 
     let typeName
     if(options.type==0){
@@ -111,7 +114,8 @@ Page({
   },
   askIfContinueEditing:function(e){
     let editHistory=wx.getStorageSync('xianyuEditHistory'+this.data.type)
-    console.log(editHistory)
+    // console.log(editHistory)
+    console.log('pictureList',editHistory.allPicUrl||[])
     if(editHistory){
       this.setData({
         dialog:{
@@ -147,7 +151,7 @@ Page({
         'content-type': 'application/json'
       },
     }).then(res=>{
-      console.log(res.data)
+      // console.log(res.data)
       that.setData({
         detail:{
           ...parseDetail(res.data.data),
@@ -160,7 +164,6 @@ Page({
     })
   },
   initializeWx:function(e){
-    console.log('?')
     request({
       url : "/user/myInfo",
       header: {
@@ -175,13 +178,13 @@ Page({
           type:'微信',
           content:wxId,
           status:'new',
+          showAddButton:true,
         }]})
       }
     })
   },
 
   goBack:function(e){
-    console.log(this.data.haveEdited)
     if(this.data.mode=='edit'&&this.data.haveEdited){
       this.setData({
         dialog:{
@@ -211,7 +214,7 @@ Page({
   changeName(e){
     this.setData({
       ['detail.name']:e.detail.value,
-      ['errors.name']:e.detail.value.length>=12?'字数已达上线':'',
+      ['errors.name']:e.detail.value.length>=12?'字数已达上限':'',
       haveEdited:true,
     })
   },
@@ -219,7 +222,8 @@ Page({
   changeContent(e){
     this.setData({
       ['detail.content']:e.detail.value,
-      ['errors.content']:e.detail.value.length>=200?'字数已达上线':'',
+      ['errors.contentLimit']:e.detail.value.length>=200?'字数已达上限':'',
+      ['errors.contentNone']:'',
       haveEdited:true,
     })
   },
@@ -229,7 +233,7 @@ Page({
       haveEdited:true,
       ['errors.images']:'',
     })
-    console.log('change')
+    // console.log('change')
   },
 
   changeCategory(e){
@@ -327,7 +331,8 @@ Page({
   },
   
   addNewContact:function(e){
-    
+    console.log(this.data.detail.contactList)
+    let countContactNumber=this.data.detail.countContactNumber+1
     let list=this.data.detail.contactList
     list.push({
       index:-1,
@@ -337,23 +342,50 @@ Page({
     })
     this.setData({
       ['detail.contactList']:list,
-      haveEdited:true
+      ['detail.showMinusButton']:true,
+      ['detail.lastContactIndex']:list.length-1,
+      ['detail.countContactNumber']:countContactNumber,
+      ['detail.showAddButton']:countContactNumber>=4?false:true,
+      haveEdited:true,
     })
-    this.countContactNumber()
+    // this.countContactNumber()
   },
 
   deleteContact:function(e){
-    let status=this.data.detail.contactList[e.currentTarget.dataset.index].status
+    console.log(this.data.detail.contactList)
+    let countContactNumber=this.data.detail.countContactNumber-1
+    let list=this.data.detail.contactList
+    let deleteItem=list[e.currentTarget.dataset.index]
+    let status=deleteItem.status
     if(status=='new'){
-      status='ignore'
+      deleteItem.status='ignore'
     }else{    //'modified' 'complete'
-      status='deleted'
+      deleteItem.status='deleted'
+    }
+    let lastContactIndex=this.data.detail.lastContactIndex
+    if(e.currentTarget.dataset.index==lastContactIndex){
+      for(let i=lastContactIndex-1;i>=0;i--){
+        status=list[i].status
+        if(status!='ignore'&&status!='deleted'){
+          lastContactIndex=i
+          break
+        }
+      }
     }
     this.setData({
-      ['detail.contactList['+e.currentTarget.dataset.index+'].status']:status,
+      // ['detail.contactList['+e.currentTarget.dataset.index+'].status']:status,
+      ['detail.contactList']:list,
+      ['detail.showMinusButton']:countContactNumber<=1?false:true,
+      ['detail.lastContactIndex']:lastContactIndex,
+      ['detail.countContactNumber']:countContactNumber,
+      ['detail.showAddButton']:countContactNumber>=4?false:true,
       haveEdited:true
     })
-    this.countContactNumber()
+    // this.countContactNumber()
+  },
+
+  printContactList:function(){
+    console.log(this.data.detail)
   },
 
   countContactNumber:function(){
@@ -376,7 +408,7 @@ Page({
       errors.name='该项未填写'
     }
     if(!detail.content){
-      errors.content='该项未填写'
+      errors.contentNone='该项未填写'
     }
     if(!this.selectComponent('#image-box').image.length){
       if(this.data.type==0){
@@ -434,6 +466,10 @@ Page({
   },
 
   confirmPublishDetail:function(){
+    if(this.data.publishing)return
+    this.setData({
+      publishing:true,
+    })
     let detail=this.data.detail
     detail.type=this.data.type
     initializeMarket.bind(this)(detail,this.selectComponent("#image-box").image)
@@ -480,8 +516,8 @@ async function uploadPictures(images){
       uploadList.push(image)
     }
   }
-  console.log(resultList)
-  console.log(uploadList)
+  // console.log(resultList)
+  // console.log(uploadList)
 
   let resultData={}
   if(uploadList.length){
@@ -498,6 +534,7 @@ async function uploadPictures(images){
       },
       data : data.buffer
     }).then(res=>{
+      console.log(res)
       if(res.data.success){
         uploadList=res.data.data.split(',')
         for(let key in resultList){
@@ -522,7 +559,6 @@ async function initializeMarket(detail,images){
   let imageUrlData
   await uploadPictures(images).then(res=>{
     imageUrlData=res
-    console.log(imageUrlData)
   })
 
   let {type,name,content,categoryIndex,zoneIndex,price,contactList}=detail

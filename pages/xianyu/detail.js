@@ -19,7 +19,7 @@ Page({
   data: {
     scrollViewHeight:'auto',
 
-    initializedByMe:undefined,
+    initializedByMe:false,
     type:'',
     typeName:'',
 
@@ -87,6 +87,7 @@ Page({
     let query = wx.createSelectorQuery();
     query.select('#operation-area').boundingClientRect(rect=>{
       operationAreaHeight=rect.height
+      console.log(operationAreaHeight)
     }).exec();
     query.select('#scroll-view').boundingClientRect(rect=>{
         let top = rect.top;
