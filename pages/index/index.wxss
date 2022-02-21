@@ -86,7 +86,7 @@
   margin: 24rpx 0;
 }
 .searchBar{
-  margin:0 16rpx;
+  margin:0 16rpx 0 0;
   flex: 1;
 }
 /* 搜索栏输入框字体颜色 */

@@ -19,7 +19,7 @@
     <swiper class="flex-container" id="index-entry">
       <swiper-item>
         <block wx:for="{{entryItem}}">
-        <navigator url="{{ item.path }}" id="entry-item" class="horizon-cneter">
+        <navigator url="{{ item.path }}" open-type="{{ item.opentype}}" id="entry-item" class="horizon-cneter">
           <image id="entry-item__icon" class="horizon-cneter" src="/static/icon/{{ item.icon }}"></image>
           <view class="poby-text bdst" style="line-height:0;">{{ item.text }}</view>
         </navigator>

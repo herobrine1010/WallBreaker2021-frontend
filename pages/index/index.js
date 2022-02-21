@@ -110,26 +110,43 @@ async function getNextPostingPage(that , keyword, labelId, timeIndex) {
 Component({
   behaviors: [filterBehavior],
   data: {
+    // 金刚位入口
     entryItem: [
       {
       icon: '失物招领icon.png',
       text: '失物招领',
-      path: '/pages/tongde/main'
+      path: '/pages/tongde/main',
+      opentype: 'navigate',
       },
       {
         icon: '同济百科icon.png',
         text: '同济百科',
-        path: '/pages/jishi/encyclopedia'
+        path: '/pages/jishi/encyclopedia',
+        opentype: 'navigate',
       },
       {
         icon: '组队攒局icon.png',
         text: '组队攒局',
-        path: '/pages/jiren/main'
+        path: '/pages/jiren/main',
+        opentype: 'switchTab',
       },
       {
         icon: '校园咸鱼icon.png',
         text: '校园咸鱼',
-        path: '/pages/xianyu/main'
+        path: '/pages/xianyu/main',
+        opentype: 'navigate',
+      },
+      {
+        icon: '组队攒局icon.png',
+        text: '组队攒局',
+        path: '/pages/jiren/main',
+        opentype: 'switchTab',
+      },
+      {
+        icon: '校园咸鱼icon.png',
+        text: '校园咸鱼',
+        path: '/pages/xianyu/main',
+        opentype: 'navigate',
       },
     ],
     isRefresherOpen : false,
