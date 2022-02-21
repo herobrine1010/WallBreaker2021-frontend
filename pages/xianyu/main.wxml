@@ -3,7 +3,7 @@
 <view class='xianyu-shade'></view>
 <view class="xianyu-background">
   <view>
-    <mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar-tongde__centers" title="校园闲鱼"></mp-navigation-bar>
+    <mp-navigation-bar back="{{true}}" ext-class="weui-navigation-bar-tongde__centers" title="校园闲鱼"></mp-navigation-bar>
   </view>
 
   
