@@ -1,14 +1,13 @@
 {
-  
   "usingComponents": {
     "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
     "mp-searchbar": "weui-miniprogram/searchbar/searchbar",
-    "avatar-list":"/components/participant-avatar/participant-avatar",
-    "dialog-box":"/components/dialog-box/dialog-box",
-    "personal-animation":"/components/personal-animation/personal-animation",
-    "team-detail":"/components/teamDetail/teamDetail",
-    "initiator-teamDetail":"/components/teamDetail/initiator-teamDetail",
-    "dialog2-box":"/components/dialog-box/dialog2-box"
+    "avatar-list": "/components/participant-avatar/participant-avatar",
+    "dialog-box": "/components/dialog-box/dialog-box",
+    "personal-animation": "/components/personal-animation/personal-animation",
+    "team-detail": "/components/teamDetail/teamDetail",
+    "initiator-teamDetail": "/components/teamDetail/initiator-teamDetail",
+    "dialog2-box": "/components/dialog-box/dialog2-box"
   },
   "navigationStyle": "custom"
 }

@@ -5,7 +5,7 @@ function matchPropName(list) {
 Component({
   behaviors: ['wx://form-field'],
   properties: {
-    //承接父组件传值
+    // 承接父组件传值
     range: {
       type: Array,
       value: [{
@@ -13,7 +13,7 @@ Component({
         name: 'test'
       }]
     },
-    //默认显示
+    // 默认显示
     defaultOption: {
       type: Object,
       value: {
@@ -21,7 +21,7 @@ Component({
         name: '全部城市'
       }
     },
-    //key,text实现字符转换
+    // key,text实现字符转换
     key: {
       type: String,
       value: 'id'
@@ -90,7 +90,7 @@ Component({
       }
       this.setData({
         // 初始化后未选择，current显示defaultOption
-        current: Object.assign({}, this.data.defaultOption), 
+        current: { ...this.data.defaultOption}, 
         result
       })
     }

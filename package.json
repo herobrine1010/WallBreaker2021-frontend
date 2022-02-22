@@ -4,13 +4,25 @@
   "description": "破壁（一期）",
   "main": "app.js",
   "dependencies": {
+    "@babel/eslint-parser": "^7.5.4",
+    "eslint-config-alloy": "^4.4.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "kbone": "0.0.1",
     "miniprogram-sm-crypto": "^0.3.0",
+    "prettier": "^2.5.1",
+    "prettier-eslint-cli": "^5.0.1",
     "weui-miniprogram": "^1.0.8"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "eslint-config-google": "^0.14.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint ./ --ext .js",
+    "eslint:fix": "eslint --fix ./ --ext .js",
+    "prettier:fix": "prettier --config .prettierrc.js --write './**/*.{js,css,less,scss,json}'"
   },
   "repository": {
     "type": "git",

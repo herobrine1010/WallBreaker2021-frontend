@@ -1,0 +1,22 @@
+*.min.js
+/node_modules
+/dist
+# OS
+.DS_Store
+.idea
+.editorconfig
+.npmrc
+package-lock.json
+.eslintignore
+.eslintrc.js
+lib
+miniprogram_npm
+# Ignored suffix
+*.log
+*.md
+*.svg
+*.png
+*ignore
+## Built-files
+.cache
+dist

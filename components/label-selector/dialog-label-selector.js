@@ -2,4 +2,4 @@
 const baseSelectBehavior = require("./baseBehavior.js");
 Component({
   behaviors: [baseSelectBehavior]
-})
+});

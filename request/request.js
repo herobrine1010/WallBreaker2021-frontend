@@ -1,26 +1,26 @@
 // http://101.132.130.199:8080
 // 说明：将 wx.request 封装成 promise ,并提取了公共路径；
 const app = getApp();
-const request = (params)=> {
+const request = (params) => {
   let token = app.globalData.token;
-  if(token){
-    return new Promise((resolve,reject)=>{
+  if (token) {
+    return new Promise((resolve, reject) => {
       wx.request({
         ...params,
-        url :app.globalData.url + params.url,
-        header : {
+        url: app.globalData.url + params.url,
+        header: {
           ...params.header,
           'cookie': token
         },
-        success : (result)=>{
+        success: (result) => {
           resolve(result);
         },
-        fail : (error) => {
+        fail: (error) => {
           reject(error);
         }
       })
     })
-  }else{ // 意外未获取到token的情况
+  } else { // 意外未获取到token的情况
     return new Promise((resolve, reject) => {
       wx.login({
         success: (result) => {
@@ -42,18 +42,18 @@ const request = (params)=> {
       app.globalData.registered = registered;
       return res.cookies[0]
     }).then(token => {
-      return new Promise((resolve,reject)=>{
+      return new Promise((resolve, reject) => {
         wx.request({
           ...params,
-          url :app.globalData.url + params.url,
-          header : {
+          url: app.globalData.url + params.url,
+          header: {
             ...params.header,
             'cookie': token
           },
-          success : (result)=>{
+          success: (result) => {
             resolve(result);
           },
-          fail : (error) => {
+          fail: (error) => {
             reject(error);
           }
         })
@@ -63,21 +63,21 @@ const request = (params)=> {
 
 };
 
-const login = (code)=> {
-  return new Promise((resolve,reject)=>{
+const login = (code) => {
+  return new Promise((resolve, reject) => {
     wx.request({
-      url :app.globalData.url + '/user/login',
-      header : {
-        'content-type':'application/json'
+      url: app.globalData.url + '/user/login',
+      header: {
+        'content-type': 'application/json'
       },
-      data : {
-        "code" : code
+      data: {
+        "code": code
       },
-      method:'POST',
-      success : (result)=>{
+      method: 'POST',
+      success: (result) => {
         resolve(result);
       },
-      fail : (error) => {
+      fail: (error) => {
         reject(error);
       }
     })

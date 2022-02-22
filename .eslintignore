@@ -1,0 +1,5 @@
+*.min.js
+typings
+node_modules
+lib
+miniprogram_npm

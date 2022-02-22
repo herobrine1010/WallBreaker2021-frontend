@@ -3,70 +3,66 @@ Component({
   /**
    * 组件的属性列表
    */
-  
 
-  /*externalClasses:['card','image','tag','description','time','B'],外部样式类*/
+  /* externalClasses:['card','image','tag','description','time','B'],外部样式类 */
 
-  properties:{
-
-    labelText:{
-      type:Array,
-      value:['雨伞','口红']
+  properties: {
+    labelText: {
+      type: Array,
+      value: ["雨伞", "口红"]
     },
-    title:{
-      type:String,
-      value:'物品名称'
+    title: {
+      type: String,
+      value: "物品名称"
     },
-    publishTime:{
-      type:String,
-      value:'1天前'
+    publishTime: {
+      type: String,
+      value: "1天前"
     },
 
-    description:{
-      type:String,
-      value:'简要描述简要描述简要描述捡到东西的地方是哪里...'
+    description: {
+      type: String,
+      value: "简要描述简要描述简要描述捡到东西的地方是哪里..."
     },
-    postingPic:{
-      type:String,
-      value:''
+    postingPic: {
+      type: String,
+      value: ""
     },
-    isShowClose:{
-      type:Boolean,
-      value:false
+    isShowClose: {
+      type: Boolean,
+      value: false
     },
-    closed:{
-      type:Boolean,
-      value:false
+    closed: {
+      type: Boolean,
+      value: false
     },
-    isShowKind:{
-      type:Boolean,
-      value:false
+    isShowKind: {
+      type: Boolean,
+      value: false
     },
-    kind:{
-      type:String,
-      value:'失物招领'
+    kind: {
+      type: String,
+      value: "失物招领"
     },
-    cardMy:{
-      type:Boolean,
-      value:false
+    cardMy: {
+      type: Boolean,
+      value: false
     }
-
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    post_index:1,
+    post_index: 1
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    tapClose:function(e){
-      this.triggerEvent('tapClose',this.data.detail);
-    },
-    
+    tapClose: function (e) {
+      this.triggerEvent("tapClose", this.data.detail);
+    }
   }
-})
+});

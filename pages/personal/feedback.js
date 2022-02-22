@@ -8,32 +8,32 @@ Page({
    * 页面的初始数据
    */
   data: {
-    feedbackMessage : "",
+    feedbackMessage: "",
     lock: false
   },
-  formSubmit: function(e){
-//   防止重复点击提交，添加锁
-    if(this.data.lock == false){
+  formSubmit: function (e) {
+    //   防止重复点击提交，添加锁
+    if (this.data.lock == false) {
       this.data.lock == true;
       let text = e.detail.value.feedbackText;
-      let str = text.trim();//去除收尾字符串
+      let str = text.trim();// 去除收尾字符串
       // 判断是否全是空格 空字符串
-      if(str == null || str == '' || str == undefined){
+      if (str == null || str == '' || str == undefined) {
         this.setData({
-          feedbackMessage : "该项未填写！"
+          feedbackMessage: "该项未填写！"
         });
-      }else{   
+      } else {
         request({
           url: '/feedback/feedBack',
-          method : 'POST',
-          header : {
-            'content-type' :  'application/json',
-             
+          method: 'POST',
+          header: {
+            'content-type': 'application/json',
+
           },
-          data : {
-            'content' : text
+          data: {
+            'content': text
           }
-        }).then(res =>{
+        }).then(res => {
           wx.showToast({
             title: '感谢您的反馈！',
             icon: 'success'
@@ -43,9 +43,9 @@ Page({
             wx.navigateBack({
               delta: 1,
             })
-          },1000)
+          }, 1000)
 
-        }).catch(err=>{
+        }).catch(err => {
           wx.showToast({
             title: '请求失败，请稍后再试',
             icon: 'error'
@@ -53,13 +53,13 @@ Page({
         })
       }
     }
-    
+
 
   },
-  handleInput: function(e){
-    if(e.detail.cursor>=310){
+  handleInput: function (e) {
+    if (e.detail.cursor >= 310) {
       this.setData({
-        feedbackMessage : "字符已达上限！"
+        feedbackMessage: "字符已达上限！"
       });
     }
   },

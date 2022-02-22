@@ -1,10 +1,10 @@
 // 云函数入口文件
-const cloud = require('wx-server-sdk')
+const cloud = require("wx-server-sdk");
 
-cloud.init()
+cloud.init();
 
 // 云函数入口函数
-exports.main = async (event,context) => {
+exports.main = async (event, context) => {
   // const result = await cloud.openapi.phonenumber.getPhoneNumber({
   //   code:code
   // })
@@ -14,4 +14,4 @@ exports.main = async (event,context) => {
     list: [event.cloudID]
   });
   return res;
-}
+};

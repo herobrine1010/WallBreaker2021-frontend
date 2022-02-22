@@ -1,7 +1,5 @@
 {
   "permissions": {
-    "openapi": [
-      "phonenumber.getPhoneNumber"
-    ]
+    "openapi": ["phonenumber.getPhoneNumber"]
   }
 }

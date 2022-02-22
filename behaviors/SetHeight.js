@@ -1,4 +1,4 @@
-// 对应的html应为<scroll-view id="scroll" style="height: {{scrollviewHeight}};"></scroll-view> 
+// 对应的html应为<scroll-view id="scroll" style="height: {{scrollviewHeight}};"></scroll-view>
 // 这个behavior将scrollview高度改为占满整个页面 除了自定义navigator
 
 module.exports = Behavior({
@@ -16,10 +16,10 @@ module.exports = Behavior({
     // },
     changeScrollHeight:function(){
       let windowHeight;
-      //设置scroll-view高度
+      // 设置scroll-view高度
       wx.getSystemInfo({
         success: function (res) {
-            windowHeight= res.windowHeight;
+          windowHeight = res.windowHeight;
         }
       });
       let query = wx.createSelectorQuery();
@@ -27,10 +27,10 @@ module.exports = Behavior({
           let top = rect.top;
           let height=windowHeight-top;
           this.setData({
-            scrollviewHeight:height+'px',
+            scrollviewHeight: height + "px"
           });
-        }).exec();
-        
-    },
+        })
+        .exec();
+    }
   }
-})
+});

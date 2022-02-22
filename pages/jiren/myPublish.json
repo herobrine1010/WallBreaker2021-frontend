@@ -1,10 +1,9 @@
 {
-  
   "usingComponents": {
     "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
     "mp-searchbar": "weui-miniprogram/searchbar/searchbar",
-    "card-me":"/components/card-team/card",
-    "my-navi":"/components/jishiNavi/jishiNavi"
+    "card-me": "/components/card-team/card",
+    "my-navi": "/components/jishiNavi/jishiNavi"
   },
   "navigationStyle": "custom"
 }

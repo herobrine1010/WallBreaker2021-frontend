@@ -1,13 +1,12 @@
 // pages/jishi/detail.js
-var app=getApp();
+const app = getApp();
 
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    like:false,
+    like: false,
     // title:'破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！',
     // userAvatar:'/static/icon/default-user-big.png',
     // userName:"破壁者1号",
@@ -15,35 +14,33 @@ Page({
     // description:"为了增进学院同学对本专业就业领域和就业方向的了解，提升就业技巧，获取就业信息，学院于……",
     // pictures:['','','','','','','',''],
 
-
-    isPersonalInfoShow : false,
-    animationData:{},
-    signature:'这是一段个性签名',
-    identity:'建筑学院 风景园林 2018级 本科生',
-    tags: ['细节控','好学小白','996','口才','设计','文字']
+    isPersonalInfoShow: false,
+    animationData: {},
+    signature: "这是一段个性签名",
+    identity: "建筑学院 风景园林 2018级 本科生",
+    tags: ["细节控", "好学小白", "996", "口才", "设计", "文字"]
   },
-  onLoad:function(options){
-    if(!options.postingId){
-      var postingId=13;
-    }else{
-      var postingId=options.postingId
-    };
+  onLoad: function (options) {
+    if (!options.postingId) {
+      var postingId = 13;
+    } else {
+      var postingId = options.postingId;
+    }
 
-    this.setData({postingId:postingId})
+    this.setData({ postingId: postingId });
 
     this.changeDetail();
     // this.setUserInfo();
   },
 
-
-  changeDetail:function(){
-    let that=this;
+  changeDetail: function () {
+    const that = this;
     wx.request({
-      url: app.globalData.url+'/posting/getPosting/'+that.data.postingId,
-      header:{'cookie':app.globalData.token},
-      success:function(res){
-        if(res.statusCode==200){
-          let postingdata=res.data.data;
+      url: app.globalData.url + "/posting/getPosting/" + that.data.postingId,
+      header: { cookie: app.globalData.token },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          const postingdata = res.data.data;
           wx.request({
             url: app.globalData.url+'/user/userInfo',
             data:{userId:postingdata.initiatorId},
@@ -65,83 +62,80 @@ Page({
             }
           });
           wx.request({
-            url: app.globalData.url+'/user/userInfo',
-            data:{
-              userId:postingdata.initiatorId
+            url: app.globalData.url + "/user/userInfo",
+            data: {
+              userId: postingdata.initiatorId
             },
-            success:function(res){
-              let data=res.data.data;
-              let personalInfo={
-                'initiator':data.initiator,
-                'me':data.me,
-                'avatar':data.avatarUrl,
-                'id':data.id,
-                'nickname':data.nickName,
-                'wxId':data.wxId,
-                'description':data.description,
-                'school':data.school,
-                'major':data.major,
-                'grade':data.grade,
-                'identity':data.identification,
+            success: function (res) {
+              const data = res.data.data;
+              const personalInfo = {
+                initiator: data.initiator,
+                me: data.me,
+                avatar: data.avatarUrl,
+                id: data.id,
+                nickname: data.nickName,
+                wxId: data.wxId,
+                description: data.description,
+                school: data.school,
+                major: data.major,
+                grade: data.grade,
+                identity: data.identification,
 
-                'wxIdPublic':data.wxIdPublic,
-                'schoolPublic':data.schoolPublic,
-                'majorPublic':data.majorPublic,
-                'gradePublic':data.gradePublic,
-                'identityPublic':data.identityPublic,
+                wxIdPublic: data.wxIdPublic,
+                schoolPublic: data.schoolPublic,
+                majorPublic: data.majorPublic,
+                gradePublic: data.gradePublic,
+                identityPublic: data.identityPublic,
 
-                'personalLabel':(data.personalLabel?data.personalLabel.map(that.getContent):[]),
-                'interestLabel':(data.interestLabel?data.interestLabel.map(that.getContent):[]),
-              }
-              that.setData({personalInfo})
+                personalLabel: data.personalLabel ? data.personalLabel.map(that.getContent) : [],
+                interestLabel: data.interestLabel ? data.interestLabel.map(that.getContent) : []
+              };
+              that.setData({ personalInfo });
             }
-          })
+          });
         }
       }
-    })
-
-
+    });
   },
   // setUserInfo:function(){
-    
+
   // },
-  getContent:function(item){
-    return item.content
+  getContent: function (item) {
+    return item.content;
   },
 
-
-  Like:function(){
-    let that=this;
+  Like: function () {
+    const that = this;
     wx.request({
-      url: app.globalData.url+'/userFavouritePosting/addToMyFavouritePosting/'+this.data.postingId,
-      method:"POST",
-      header:{'cookie':app.globalData.token},
-      success:function(res){
-        if(res.statusCode==200){
+      url: app.globalData.url + "/userFavouritePosting/addToMyFavouritePosting/" + this.data.postingId,
+      method: "POST",
+      header: { cookie: app.globalData.token },
+      success: function (res) {
+        if (res.statusCode == 200) {
           that.setData({
             like: true
-          })
+          });
         }
       }
-    })
+    });
   },
-  cancelLike:function(){
-    let app=getApp();
-    let that=this;
+  cancelLike: function () {
+    const app = getApp();
+    const that = this;
     wx.request({
-      url: app.globalData.url+'/userFavouritePosting/RemoveFromMyFavouritePosting/'+this.data.postingId,
-      method:"DELETE",
-      header:{'cookie':app.globalData.token},
-      success:function(res){
-        if(res.statusCode==200){
+      url: app.globalData.url + "/userFavouritePosting/RemoveFromMyFavouritePosting/" + this.data.postingId,
+      method: "DELETE",
+      header: { cookie: app.globalData.token },
+      success: function (res) {
+        if (res.statusCode == 200) {
           that.setData({
             like: false
-          })
+          });
         }
       }
-    })
+    });
   },
-  showPersonDetail:function(e){
+  showPersonDetail: function (e) {
     this.selectComponent("#personalAnimation1").showModal();
   },
   // chooseSezi:function(e){
@@ -183,7 +177,7 @@ Page({
   //   animation.translateY(200).step()
   //   that.setData({
   //     animationData:animation.export()
-      
+
   //   })
   //   setTimeout(function () {
   //     animation.translateY(0).step()
@@ -191,7 +185,7 @@ Page({
   //       animationData: animation.export(),
   //       chooseSize: false
   //     })
-  //   }, 200) 
+  //   }, 200)
   // },
 
   /**
@@ -204,52 +198,40 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
-  },
+  onReady: function () {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-
-  },
+  onHide: function () {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
-  },
+  onUnload: function () {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
-  },
+  onPullDownRefresh: function () {},
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
-  },
+  onReachBottom: function () {},
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
     return {
-      title : '欢迎注册使用济星云小程序！',
-      path : '/pages/welcome/welcome'
-    }
-  },
-})
+      title: "欢迎注册使用济星云小程序！",
+      path: "/pages/welcome/welcome"
+    };
+  }
+});

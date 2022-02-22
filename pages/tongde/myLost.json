@@ -1,8 +1,8 @@
 {
   "usingComponents": {
     "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
-    "card-lost":"/components/card-lost/card",
-    "dialog-box":"/components/dialog-box/dialog-box"
+    "card-lost": "/components/card-lost/card",
+    "dialog-box": "/components/dialog-box/dialog-box"
   },
   "navigationStyle": "custom"
 }

@@ -1,0 +1,61 @@
+module.exports = {
+  root: true,
+  parser: "@babel/eslint-parser",
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
+    commonjs: true
+  },
+  extends: ["alloy"],
+  plugins: ["prettier"],
+  globals: {
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly",
+    __DEV__: true,
+    __WECHAT__: true,
+    __ALIPAY__: true,
+    App: true,
+    Page: true,
+    Component: true,
+    Behavior: true,
+    wx: true,
+    my: true,
+    swan: true,
+    getApp: true,
+    getCurrentPages: true
+  },
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: "module"
+  },
+  rules: {
+    "no-debugger": 2,
+    "no-unused-vars": 0,
+    "no-var": 0,
+    "no-param-reassign": 0,
+    "no-irregular-whitespace": 0,
+    "no-useless-catch": 1,
+    "max-params": 0,
+    "array-callback-return": 1,
+    "radix": 0,
+    "eqeqeq": 0,
+    "guard-for-in": 0,
+    "no-eq-null": 0,
+    "no-return-assign": 0,
+    "no-void": 0,
+    "no-inner-declarations": 0,
+    "complexity": 0,
+    "no-invalid-this": 0,
+    "no-unused-expressions": 0,
+    "no-sequences": 0,
+    "max-depth": 0,
+    "no-array-constructor": 0,
+    "no-proto": 0,
+    "no-undef": 0,
+    "no-promise-executor-return": 0,
+    "new-cap": 0,
+    "no-extend-native": 0,
+    "prefer-promise-reject-errors": 0
+  }
+}

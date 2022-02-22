@@ -2,16 +2,16 @@ Component({
   /**
    * 组件的属性列表
    */
-  behaviors: ['wx://form-field-group'],
+  behaviors: ["wx://form-field-group"],
   properties: {
-    //表单form中的name
-    name:{
+    // 表单form中的name
+    name: {
       type: String,
-      value: '',
+      value: ""
     },
     value: {
       type: String,
-      value: ''
+      value: ""
     },
     maxlength: {
       type: Number,
@@ -19,9 +19,9 @@ Component({
     },
     placeholder: {
       type: String,
-      value: ''
+      value: ""
     },
-    //用于与页面属性交互
+    // 用于与页面属性交互
     isShowTip: {
       type: Boolean,
       value: true
@@ -32,37 +32,33 @@ Component({
    * 组件的初始数据
    */
   data: {
-    tip: '',
+    tip: ""
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    checkLength: function(e) {
-      let textLength = e.detail.value.length
-      if (textLength >= this.data.maxlength)
-      {
+    checkLength: function (e) {
+      const textLength = e.detail.value.length;
+      if (textLength >= this.data.maxlength) {
         this.setData({
-          tip: '字符数已达上限!'
-        })
-      }
-      else{
+          tip: "字符数已达上限!"
+        });
+      } else {
         this.setData({
-          tip: ''
-        })
-
+          tip: ""
+        });
       }
     },
-    checkEmpty: function(e) {
-      let value = e.detail.value;
-      let textLength = value.trim();
-      if (textLength == "")
-      {
+    checkEmpty: function (e) {
+      const value = e.detail.value;
+      const textLength = value.trim();
+      if (textLength == "") {
         this.setData({
-          tip: '该项未填写'
-        })
+          tip: "该项未填写"
+        });
       }
     }
   }
-})
+});

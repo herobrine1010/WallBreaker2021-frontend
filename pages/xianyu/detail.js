@@ -166,7 +166,7 @@ Page({
       if(res.data.success){
         this.setData({
           like:true,
-          ['detail.countFavourite']:this.data.detail.countFavourite+1,
+          'detail.countFavourite':this.data.detail.countFavourite+1,
         })
     
       }
@@ -185,7 +185,7 @@ Page({
       if(res.data.success){
         this.setData({
           like:false,
-          ['detail.countFavourite']:this.data.detail.countFavourite-1,
+          'detail.countFavourite':this.data.detail.countFavourite-1,
         })
     
       }
@@ -196,8 +196,8 @@ Page({
   zoomInDetailPicture:function(e){
     var imgUrl = this.data.detail.allPicUrl;
     wx.previewImage({
-      urls: imgUrl,//注意这个urls,如果原来是数组就直接用,如果原来就一张图需要加中括号强制把他变成数组
-      current: imgUrl[e.currentTarget.dataset.index],//不写值的话默认是上面那个数组的第一个元素,只有写了点击对应图片才能点哪张放大哪张   
+      urls: imgUrl,// 注意这个urls,如果原来是数组就直接用,如果原来就一张图需要加中括号强制把他变成数组
+      current: imgUrl[e.currentTarget.dataset.index],// 不写值的话默认是上面那个数组的第一个元素,只有写了点击对应图片才能点哪张放大哪张   
       // ||后面是发起者视角的自定义组件，传来的picUrl
     })
   },
@@ -216,7 +216,7 @@ Page({
   },
 
   hideModal:function(e){
-    this.setData({['dialog.isDialogShow']:false})
+    this.setData({'dialog.isDialogShow':false})
   },
 
   editDetail:function(e){
@@ -266,7 +266,7 @@ Page({
           icon:'success',
         })
         this.setData({
-          ['detail.hidden']:1,
+          'detail.hidden':1,
         })
         app.globalData.xianyuRefresh=true
       }

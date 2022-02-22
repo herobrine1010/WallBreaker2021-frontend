@@ -1,7 +1,7 @@
 {
   "usingComponents": {
     "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
-    "my-navi":"/components/jishiNavi/jishiNavi"
+    "my-navi": "/components/jishiNavi/jishiNavi"
   },
   "navigationStyle": "custom"
 }

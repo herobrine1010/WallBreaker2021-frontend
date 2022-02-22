@@ -1,7 +1,7 @@
 // pages/jishi/communication.js
 import { request } from "../../request/request.js";
 import util from "../../utils/util.js";
-var app=getApp();
+var app = getApp();
 
 Page({
 
@@ -9,63 +9,62 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabIndex:0,
-    sectionName:'question_answer_section',
+    tabIndex: 0,
+    sectionName: 'question_answer_section',
     // sectionName:'communication_section',
-    url_suffix_list:['QuestionAnswer','Communication'],
-    tabHeight:36,
-    baseQuestionAnswerScrollViewHeight:0,
-    question_answer_scroll_view_height:'auto',
-    communication_scroll_view_height:'auto',
-    scroll_view:{
-      outer_top_num:0,
-      inner_top_num:0,
-      inner_height:'auto',
-      refresherEnabled:true,
-      loading:false,
+    url_suffix_list: ['QuestionAnswer', 'Communication'],
+    tabHeight: 36,
+    baseQuestionAnswerScrollViewHeight: 0,
+    question_answer_scroll_view_height: 'auto',
+    communication_scroll_view_height: 'auto',
+    scroll_view: {
+      outer_top_num: 0,
+      inner_top_num: 0,
+      inner_height: 'auto',
+      refresherEnabled: true,
+      loading: false,
     },
-    question_answer_section:{
-      current:1,
-      pages:1,
-      pageSize:20,
-      keyword:'',
-      loadingTimeout:2000,
-      dataList:[],
-      showGoTopButton:false,
-      refresherEnabled:true,
-      scrollViewHeight:'auto',
-      isEnd:false,
+    question_answer_section: {
+      current: 1,
+      pages: 1,
+      pageSize: 20,
+      keyword: '',
+      loadingTimeout: 2000,
+      dataList: [],
+      showGoTopButton: false,
+      refresherEnabled: true,
+      scrollViewHeight: 'auto',
+      isEnd: false,
     },
-    communication_section:{
-      filterOpen:false,
-      current:1,
-      pages:1,
-      pageSize:10,
-      keyword:'',
-      loadingTimeout:2000,
-      dataList:[],
-      zoneIdList:[56,57,58,59,60,61],
-      zoneNameList:['四平','嘉定','彰武','铁岭','沪西','沪北'],
-      zoneColorList:['#3A3042','#7C3ECC','#957D95','#3E92CC','#17B2E5','#BA75FF'],
+    communication_section: {
+      filterOpen: false,
+      current: 1,
+      pages: 1,
+      pageSize: 10,
+      keyword: '',
+      loadingTimeout: 2000,
+      dataList: [],
+      zoneIdList: [56, 57, 58, 59, 60, 61],
+      zoneNameList: ['四平', '嘉定', '彰武', '铁岭', '沪西', '沪北'],
+      zoneColorList: ['#3A3042', '#7C3ECC', '#957D95', '#3E92CC', '#17B2E5', '#BA75FF'],
       // zoneNameList:['四平校区','嘉定校区','彰武校区','铁岭校区','沪西校区','沪北'],
-      zoneIndex:null,
-      onFilter:false,
-      refresherEnabled:true,
-      scrollViewHeight:'auto',
-      isEnd:false,
+      zoneIndex: null,
+      onFilter: false,
+      refresherEnabled: true,
+      scrollViewHeight: 'auto',
+      isEnd: false,
     },
-    feedback:{
-      modalShow:false,
-      content:'',
-      type:null,
-      content:'',
-      tip:'',
+    feedback: {
+      modalShow: false,
+      content: '',
+      type: null,
+      tip: '',
     },
 
-    topNum:0,
-    loading:false,
-    submitFeedbackLock:false,
-    outerScrollViewHeight:'auto',
+    topNum: 0,
+    loading: false,
+    submitFeedbackLock: false,
+    outerScrollViewHeight: 'auto',
 
   },
 
@@ -76,7 +75,7 @@ Page({
     this.initOuterScrollViewHeight();
     this.getTabHeight();
     this.initInnerScrollViewHeight();
-    
+
     this.getData(true);
   },
 
@@ -85,197 +84,197 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title : '欢迎注册使用济星云小程序！',
-      path:app.getSharedUrl()
+      title: '欢迎注册使用济星云小程序！',
+      path: app.getSharedUrl()
     }
   },
-  initOuterScrollViewHeight:function(){
-    var that=this;
+  initOuterScrollViewHeight: function () {
+    var that = this;
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          windowHeight:res.windowHeight
+          windowHeight: res.windowHeight
         })
       }
     });
     console.log(this.data.windowHeight)
     let query = wx.createSelectorQuery();
-    query.select('#outer-scroll-view').boundingClientRect(rect=>{
-        let top = rect.top;
-        let height=this.data.windowHeight-top;
-        this.setData({
-          outerScrollViewHeight:height+'px',
-        });
-      }).exec();
+    query.select('#outer-scroll-view').boundingClientRect(rect => {
+      let top = rect.top;
+      let height = this.data.windowHeight - top;
+      this.setData({
+        outerScrollViewHeight: height + 'px',
+      });
+    }).exec();
   },
-  initQuestionAnswerScrollViewHeight:function(){
+  initQuestionAnswerScrollViewHeight: function () {
     let query = wx.createSelectorQuery();
-    query.select('#question-answer-scroll-view').boundingClientRect(rect=>{
-        let top = rect.top;
-        let height=this.data.windowHeight-top;
-        this.setData({
-          baseQuestionAnswerScrollViewHeight:height,
-        });
-      }).exec();
+    query.select('#question-answer-scroll-view').boundingClientRect(rect => {
+      let top = rect.top;
+      let height = this.data.windowHeight - top;
+      this.setData({
+        baseQuestionAnswerScrollViewHeight: height,
+      });
+    }).exec();
   },
-  initInnerScrollViewHeight:function(){
+  initInnerScrollViewHeight: function () {
     let query = wx.createSelectorQuery();
-    query.select('#inner-scroll-view').boundingClientRect(rect=>{
-        let top = rect.top;
-        let height=this.data.windowHeight-top+this.data.tabHeight;
-        this.setData({
-          ['scroll_view.inner_height']:height+'px',
-        });
-      }).exec();
+    query.select('#inner-scroll-view').boundingClientRect(rect => {
+      let top = rect.top;
+      let height = this.data.windowHeight - top + this.data.tabHeight;
+      this.setData({
+        'scroll_view.inner_height': height + 'px',
+      });
+    }).exec();
   },
-  getTabHeight:function(){
+  getTabHeight: function () {
     let query = wx.createSelectorQuery();
-    query.select('#tab').boundingClientRect(rect=>{
+    query.select('#tab').boundingClientRect(rect => {
       console.log(rect);
-      console.log('tabTop'+rect.top)
-        let height=rect.height;
-        this.setData({
-          tabTop:rect.top,
-          tabHeight:height,
-        });
-      }).exec();
+      console.log('tabTop' + rect.top)
+      let height = rect.height;
+      this.setData({
+        tabTop: rect.top,
+        tabHeight: height,
+      });
+    }).exec();
   },
-  updateTabBottom:function(){
-    
+  updateTabBottom: function () {
+
   },
-  changeScrollViewHeight:function(){
+  changeScrollViewHeight: function () {
 
   },
 
-  onRefresherRefresh(){
+  onRefresherRefresh() {
     this.getData(true);
   },
-  onScrollToLower(){
+  onScrollToLower() {
     this.getData();
   },
-  onOuterScroll:function(e){
+  onOuterScroll: function (e) {
     this.setData({
-      ['scroll_view.outer_top_num']:e.detail.scrollTop
+      'scroll_view.outer_top_num': e.detail.scrollTop
     })
-    if(e.detail.scrollTop>20){
-      this.setData({['scroll_view.refresherEnabled']:false})
-    }else{
-      this.setData({['scroll_view.refresherEnabled']:true})
+    if (e.detail.scrollTop > 20) {
+      this.setData({ 'scroll_view.refresherEnabled': false })
+    } else {
+      this.setData({ 'scroll_view.refresherEnabled': true })
     }
   },
 
-  onInnerScroll:function(e){
-    if(this.data.loading)return
-    let innerNum=e.detail.scrollTop
-    let outerNum=this.data.scroll_view.outer_top_num
-    let tabHeight=this.data.tabHeight
-    if(innerNum>0 &&outerNum<tabHeight){
-      if(innerNum+outerNum<tabHeight){
+  onInnerScroll: function (e) {
+    if (this.data.loading) return
+    let innerNum = e.detail.scrollTop
+    let outerNum = this.data.scroll_view.outer_top_num
+    let tabHeight = this.data.tabHeight
+    if (innerNum > 0 && outerNum < tabHeight) {
+      if (innerNum + outerNum < tabHeight) {
         this.setData({
-          ['scroll_view.inner_top_num']:0,
-          ['scroll_view.outer_top_num']:outerNum+innerNum
+          'scroll_view.inner_top_num': 0,
+          'scroll_view.outer_top_num': outerNum + innerNum
         })
-      }else{
+      } else {
         this.setData({
-          ['scroll_view.inner_top_num']:innerNum+outerNum-tabHeight,
-          ['scroll_view.outer_top_num']:tabHeight
+          'scroll_view.inner_top_num': innerNum + outerNum - tabHeight,
+          'scroll_view.outer_top_num': tabHeight
         })
       }
 
     }
   },
 
-  onSearch:function(e){
-    this.setData({[this.data.sectionName+'.keyword']:e.detail.value})
+  onSearch: function (e) {
+    this.setData({ [this.data.sectionName + '.keyword']: e.detail.value })
     this.getData(true);
   },
-  onCancleSearch:function(e){
-    this.setData({[this.data.sectionName+'.keyword']:''})
+  onCancleSearch: function (e) {
+    this.setData({ [this.data.sectionName + '.keyword']: '' })
     console.log(this.data)
     console.log(this.data[this.data.sectionName])
     this.getData(true);
   },
   getData: function (reset) {
-    if(this.data.loading)return
-    var that=this;
-    let data =this.data[this.data.sectionName];
-    let {current,pageSize,keyword,zoneId,isEnd}=data;
+    if (this.data.loading) return
+    var that = this;
+    let data = this.data[this.data.sectionName];
+    let { current, pageSize, keyword, zoneId, isEnd } = data;
     current++;
-    if(reset){
-      current=1;
-      this.setData({[this.data.sectionName+'.dataList']:[]})
-    }else if(isEnd){
+    if (reset) {
+      current = 1;
+      this.setData({ [this.data.sectionName + '.dataList']: [] })
+    } else if (isEnd) {
       return
     }
-    this.setData({loading:true})
-    let sendData={pageNo:current,pageSize,keyword}
-    if(zoneId)sendData.zoneId=zoneId;
+    this.setData({ loading: true })
+    let sendData = { pageNo: current, pageSize, keyword }
+    if (zoneId) sendData.zoneId = zoneId;
     setTimeout(() => {
       this.detectLoadingTimeout.bind(this)
     }, this.data.loadingTimeout);
     request({
-      url: '/encyclopedia/encyclopediaGet'+that.data.url_suffix_list[that.data.tabIndex],
+      url: '/encyclopedia/encyclopediaGet' + that.data.url_suffix_list[that.data.tabIndex],
       header: {
         'content-type': 'x-www-form-urlencoded',
       },
-      data:sendData
+      data: sendData
     })
-    .then(res => {
-      let {current,pages,records} =res.data.data
-      if(this.data.sectionName=='question_answer_section'){
-        records=records.map(item => {
-          if(item.allPicUrl)
-            item.all_pic_url_list=item.allPicUrl.split(',')
-          return item;
-        })
-      }
-      let {dataList}=that.data[this.data.sectionName]
-      dataList=dataList.concat(records)
-      let data=that.data[that.data.sectionName]
-      that.setData({
-        loading:false,
-        [that.data.sectionName]:{
-          ...data,
-          current,
-          pages,
-          dataList,
-          isEnd:current==pages?true:false,
+      .then(res => {
+        let { current, pages, records } = res.data.data
+        if (this.data.sectionName == 'question_answer_section') {
+          records = records.map(item => {
+            if (item.allPicUrl)
+              item.all_pic_url_list = item.allPicUrl.split(',')
+            return item;
+          })
         }
+        let { dataList } = that.data[this.data.sectionName]
+        dataList = dataList.concat(records)
+        let data = that.data[that.data.sectionName]
+        that.setData({
+          loading: false,
+          [that.data.sectionName]: {
+            ...data,
+            current,
+            pages,
+            dataList,
+            isEnd: current == pages ? true : false,
+          }
+        })
       })
-    })      
   },
-  detectLoadingTimeout: function(){
-    if(this.data.loading){
+  detectLoadingTimeout: function () {
+    if (this.data.loading) {
       wx.showToast({
         title: '请求失败',
         icon: 'error'
       })
-      this.setData({loading:false})
+      this.setData({ loading: false })
     }
   },
-  changeItem:function(e){
-    let index=e.currentTarget.dataset.item
-    if(index==0){
+  changeItem: function (e) {
+    let index = e.currentTarget.dataset.item
+    if (index == 0) {
       this.setData({
-        tabIndex:e.currentTarget.dataset.item,
-        sectionName:'question_answer_section'
-      })  
-    }else if(index==1){
+        tabIndex: e.currentTarget.dataset.item,
+        sectionName: 'question_answer_section'
+      })
+    } else if (index == 1) {
       this.setData({
-        tabIndex:e.currentTarget.dataset.item,
-        sectionName:'communication_section'
+        tabIndex: e.currentTarget.dataset.item,
+        sectionName: 'communication_section'
       })
     }
     this.getData(true)
   },
-  clickQuestionAnswerLine:function(e){
-    let index=e.currentTarget.dataset.index;
-    let status=this.data.question_answer_section.dataList[index].answer_show;
-    this.setData({['question_answer_section.dataList['+index+'].answer_show']:!status})
-    if(!status){
+  clickQuestionAnswerLine: function (e) {
+    let index = e.currentTarget.dataset.index;
+    let status = this.data.question_answer_section.dataList[index].answer_show;
+    this.setData({ ['question_answer_section.dataList[' + index + '].answer_show']: !status })
+    if (!status) {
       request({
-        url: '/encyclopedia/viewQuestionAnswer/'+e.currentTarget.dataset.id,
-        method:'get',
+        url: '/encyclopedia/viewQuestionAnswer/' + e.currentTarget.dataset.id,
+        method: 'get',
         header: {
           'content-type': 'x-www-form-urlencoded',
         },
@@ -283,39 +282,39 @@ Page({
       })
     }
   },
-  previewImage:function(e){
+  previewImage: function (e) {
     console.log(e.currentTarget.dataset)
     wx.previewImage({
-      urls: e.currentTarget.dataset.imageList,//注意这个urls,如果原来是数组就直接用,如果原来就一张图需要加中括号强制把他变成数组
-      current: e.currentTarget.dataset.imageIndex,//不写值的话默认是上面那个数组的第一个元素,只有写了点击对应图片才能点哪张放大哪张   
+      urls: e.currentTarget.dataset.imageList,// 注意这个urls,如果原来是数组就直接用,如果原来就一张图需要加中括号强制把他变成数组
+      current: e.currentTarget.dataset.imageIndex,// 不写值的话默认是上面那个数组的第一个元素,只有写了点击对应图片才能点哪张放大哪张   
       // ||后面是发起者视角的自定义组件，传来的picUrl
     })
   },
-  changeZoneFilterStatus:function(){
-    this.setData({['communication_section.filterOpen']:!this.data.communication_section.filterOpen})
+  changeZoneFilterStatus: function () {
+    this.setData({ 'communication_section.filterOpen': !this.data.communication_section.filterOpen })
   },
-  chooseZone:function(e){
-    let index = e.currentTarget.dataset.index; 
-    let {zoneIndex}=this.data.communication_section;
+  chooseZone: function (e) {
+    let index = e.currentTarget.dataset.index;
+    let { zoneIndex } = this.data.communication_section;
     this.setData({
-      communication_section:{
+      communication_section: {
         ...this.data.communication_section,
-        filterOpen:false,
-        zoneId:index==zoneIndex?null:this.data.communication_section.zoneIdList[index],
-        zoneIndex:index==zoneIndex?null:index,
-        onFilter:index==zoneIndex?false:true,
+        filterOpen: false,
+        zoneId: index == zoneIndex ? null : this.data.communication_section.zoneIdList[index],
+        zoneIndex: index == zoneIndex ? null : index,
+        onFilter: index == zoneIndex ? false : true,
       }
     })
     this.getData(true);
   },
-  makePhoneCall:function(e){
+  makePhoneCall: function (e) {
     console.log(e.currentTarget.dataset)
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.phone,
-      success:() => {
+      success: () => {
         request({
-          url: '/encyclopedia/callCommunication/'+e.currentTarget.dataset.id,
-          method:'get',
+          url: '/encyclopedia/callCommunication/' + e.currentTarget.dataset.id,
+          method: 'get',
           header: {
             'content-type': 'x-www-form-urlencoded',
           },
@@ -324,102 +323,101 @@ Page({
       }
     })
   },
-  changeFeedbackType:function(e){
-    this.setData({['feedback.type']:e.currentTarget.dataset.index})
-    if(this.data.feedback.tip=='请选择反馈类型')
-      this.setData({['feedback.tip']:''})
+  changeFeedbackType: function (e) {
+    this.setData({ 'feedback.type': e.currentTarget.dataset.index })
+    if (this.data.feedback.tip == '请选择反馈类型')
+      this.setData({ 'feedback.tip': '' })
   },
-  inputFeedback:function(e){
-    this.setData({['feedback.content']:e.detail.value})
-    if(this.data.feedback.tip=='请输入反馈信息')
-      this.setData({['feedback.tip']:''})
+  inputFeedback: function (e) {
+    this.setData({ 'feedback.content': e.detail.value })
+    if (this.data.feedback.tip == '请输入反馈信息')
+      this.setData({ 'feedback.tip': '' })
   },
-  clickFeedbackButton:function(){
-    this.setData({['feedback.modalShow']:true})
+  clickFeedbackButton: function () {
+    this.setData({ 'feedback.modalShow': true })
   },
-  cancelFeedback:function(){
+  cancelFeedback: function () {
     this.setData({
-      feedback:{
-        modalShow:false,
-        content:'',
-        type:null,
-        content:'',
-        tip:'',
+      feedback: {
+        modalShow: false,
+        content: '',
+        type: null,
+        tip: '',
       }
     })
   },
-  setFeedbackContent(e){
-    this.setData({['feedback.content']:e.detail.value})
+  setFeedbackContent(e) {
+    this.setData({ 'feedback.content': e.detail.value })
   },
-  confirmFeedback:function(e){
+  confirmFeedback: function (e) {
     console.log(this.data.feedback.content)
-    if(!this.data.feedback.type){
-      this.setData({['feedback.tip']:'请选择反馈类型'})
+    if (!this.data.feedback.type) {
+      this.setData({ 'feedback.tip': '请选择反馈类型' })
       return
-    }else if(this.data.feedback.content.trim().length==0){
-      this.setData({['feedback.tip']:'请输入反馈信息'})
+    } else if (this.data.feedback.content.trim().length == 0) {
+      this.setData({ 'feedback.tip': '请输入反馈信息' })
       return
-    }else{
-      let that=this;
+    } else {
+      let that = this;
       request({
         url: '/feedback/feedBack',
-        method : 'POST',
+        method: 'POST',
         // header : {'content-type' :  'application/x-www-form-urlencoded',},
-        data : {
-          content : this.data.feedback.content,
+        data: {
+          content: this.data.feedback.content,
           type: this.data.feedback.type,
-          source:1,
+          source: 1,
         }
-      }).then(res =>{
+      }).then(res => {
         that.cancelFeedback();
         wx.showToast({
           title: '感谢您的反馈！',
           icon: 'success'
         });
-     })
+      })
     }
   },
-  formSubmit: function(e){
+  formSubmit: function (e) {
     //   防止重复点击提交，添加锁
-        if(this.data.submitFeedbackLock == false){
-          this.data.submitFeedbackLock == true;
-          let type=e.detail.value.type;
-          let text = e.detail.value.feedbackText;
-          let str = text.trim();//去除收尾字符串
-          // 判断是否全是空格 空字符串
-          if(str == null || str == '' || str == undefined){
-            this.setData({
-              feedbackMessage : "该项未填写！"
-            });
-          }else{   
-            request({
-              url: '/feedback/feedBack',
-              method : 'POST',
-              header : {'content-type' :  'application/x-www-form-urlencoded',},
-              data : {
-                'content' : text,
-                'source':1,
-                type
-              }
-            }).then(res =>{
-              wx.showToast({
-                title: '感谢您的反馈！',
-                icon: 'success'
-              });
-              this.data.submitFeedbackLock = false;
-              setTimeout(_ => {
-                wx.navigateBack({
-                  delta: 1,
-                })
-              },1000)
-    
-            }).catch(err=>{
-              wx.showToast({
-                title: '请求失败，请稍后再试',
-                icon: 'error'
-              })
-            })
+    if (this.data.submitFeedbackLock == false) {
+      this.data.submitFeedbackLock == true;
+      let type = e.detail.value.type;
+      let text = e.detail.value.feedbackText;
+      let str = text.trim();// 去除收尾字符串
+      // 判断是否全是空格 空字符串
+      if (str == null || str == '' || str == undefined) {
+        this.setData({
+          feedbackMessage: "该项未填写！"
+        });
+      } else {
+        request({
+          url: '/feedback/feedBack',
+          method: 'POST',
+          header: { 'content-type': 'application/x-www-form-urlencoded', },
+          data: {
+            'content': text,
+            'source': 1,
+            type
           }
-        }
-      },
+        }).then(res => {
+          wx.showToast({
+            title: '感谢您的反馈！',
+            icon: 'success'
+          });
+          this.data.submitFeedbackLock = false;
+          setTimeout(_ => {
+            wx.navigateBack({
+              delta: 1,
+            })
+          }, 1000)
+
+        }).catch(err => {
+          wx.showToast({
+            title: '请求失败，请稍后再试',
+            icon: 'error'
+          })
+        })
+      }
+    }
+  },
 })
