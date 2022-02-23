@@ -25,24 +25,12 @@ Page({
           feedbackMessage : "该项未填写！"
         });
       }else{   
-<<<<<<< Updated upstream
-        request({
-          url: '/feedback/feedBack',
-          method : 'POST',
-          header : {
-            'content-type' :  'application/x-www-form-urlencoded',
-             
-          },
-          data : {
-            'content' : text
-=======
         let images=this.selectComponent("#image-box").image
         let promise
         if(images.length){
           let imageData = new FormData();
           for (let image of images) {
             imageData.appendFile("files",image)
->>>>>>> Stashed changes
           }
           imageData = imageData.getData();
           promise=request({
