@@ -2,7 +2,7 @@
 <!-- 页面主要容器及背景 -->
 <view class="background">
   <!-- nav 组件调用 -->
-  <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="个人资料"></mp-navigation-bar>
+  <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="个人资料" lastPage="/pages/personal/main"></mp-navigation-bar>
   <!-- 以下是container，包含了除标题外的其余内容 -->
   <view class="per-container">
     <view class="personal-image">
@@ -15,7 +15,7 @@
       <view class="detail-items">
         <view class="item-title">昵称：</view>
         <view class="item-body">
-          <input name="nickName" type="text" value="{{userDetails.nickName}}"></input>
+          <input name="nickName" type="text" value="{{userDetails.nickName}}" disabled="{{!userDetails.canChangeName}}" bindtap="clickNickNameInput"></input>
         </view>
         <view class="switch-name"> 隐藏/公开</view>
       </view>
@@ -110,6 +110,7 @@
     tip="{{dialog.tip}}"
     okText="{{dialog.okText}}"
     cancelText="{{dialog.cancelText}}"
+    hideCancelButton="{{dialog.hideCancelButton}}"
     isShow="{{dialog.isDialogShow}}"
     bind:tapOk="{{dialog.tapOkEvent}}"
     >

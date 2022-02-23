@@ -20,6 +20,10 @@ Component({
       type:String,
       value:'取消'
     },
+    hideCancelButton:{
+      type:Boolean,
+      value:false,
+    },
     isShow:{
       type:Boolean,
       value:false
@@ -62,9 +66,17 @@ Component({
     },
     tapOk:function(e){
       // var t=e.currentTarget.dataset;
-      this.triggerEvent('tapOk',this.data.detail);
-      if(this.data.hasInputBox&&!this.data.reason){return}
-      this.setData({isShow:false});
+      if(this.data.hasInputBox){
+        if(!this.data.reason)return
+        this.triggerEvent('tapOk',this.data.detail);
+        this.setData({isShow:false})
+      }else{
+        this.setData({
+          isShow:false,
+          hideCancelButton:false,
+        });
+        this.triggerEvent('tapOk',this.data.detail);
+      }      
     },
     finishInput:function(e){
       this.setData({reason:e.detail.value})

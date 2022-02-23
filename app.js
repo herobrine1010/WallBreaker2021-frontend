@@ -30,7 +30,7 @@ App({
     // url: 'https://tongji-poby.sparkxyf.com/api'
     // url:'https://jixingyun.tongji.edu.cn/api1'
     url:'https://www.wallbreaker.top'
-    // url:'http://localhost:8080'
+    // url:'http://localhost:9000'
   },
   getSharedUrl(){
     let pages=getCurrentPages()

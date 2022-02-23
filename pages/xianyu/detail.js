@@ -168,6 +168,10 @@ Page({
           like:true,
           ['detail.countFavourite']:this.data.detail.countFavourite+1,
         })
+        wx.showToast({
+          title: '收藏成功',
+          icon:'success',
+        })
     
       }
     })
@@ -187,7 +191,10 @@ Page({
           like:false,
           ['detail.countFavourite']:this.data.detail.countFavourite-1,
         })
-    
+        wx.showToast({
+          title: '取消收藏成功',
+          icon:'success',
+        })
       }
     })
     
