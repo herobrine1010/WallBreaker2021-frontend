@@ -59,19 +59,19 @@
 /* -----金刚位样式-------- */
 #index-entry {
   box-sizing: border-box;
-  height: 140px;
-  padding: 8px 0px 12px;
+  height: 280rpx;
+  padding: 16rpx 0px 24rpx;
 
   background: #FFFFFF;
-  border-radius: 8px;
+  border-radius: 16rpx;
 
   /* Inside auto layout */
-  margin: 24px 0px;
+  margin: 32rpx 0px 48rpx;
 }
 #entry-item {
   display:inline-block; 
-  width:84px; 
-  height:56px;
+  width:168rpx; 
+  height:112rpx;
   margin-bottom: 16rpx;
 }
 #entry-item__icon {
@@ -114,4 +114,12 @@
 }
 .margin-horizon {
   margin: 0 8rpx;
+}
+
+.noData {
+  width: 450rpx;
+  height: 120rpx;
+
+  overflow: hidden;
+  margin: 0 auto;
 }

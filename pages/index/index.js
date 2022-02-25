@@ -113,41 +113,29 @@ Component({
     // 金刚位入口
     entryItem: [
       {
-      icon: '失物招领icon.png',
+      icon: 'lost-icon.png',
       text: '失物招领',
       path: '/pages/tongde/main',
       opentype: 'navigate',
       },
       {
-        icon: '同济百科icon.png',
+        icon: 'encyclopedia-icon.png',
         text: '同济百科',
         path: '/pages/jishi/encyclopedia',
         opentype: 'navigate',
       },
       {
-        icon: '组队攒局icon.png',
+        icon: 'jiren-icon.png',
         text: '组队攒局',
         path: '/pages/jiren/main',
         opentype: 'switchTab',
       },
       {
-        icon: '校园咸鱼icon.png',
+        icon: 'xianyu-icon.png',
         text: '校园咸鱼',
         path: '/pages/xianyu/main',
         opentype: 'navigate',
-      },
-      {
-        icon: '组队攒局icon.png',
-        text: '组队攒局',
-        path: '/pages/jiren/main',
-        opentype: 'switchTab',
-      },
-      {
-        icon: '校园咸鱼icon.png',
-        text: '校园咸鱼',
-        path: '/pages/xianyu/main',
-        opentype: 'navigate',
-      },
+      }
     ],
     isRefresherOpen : false,
     showGoTopButton:false, 
@@ -265,7 +253,7 @@ Component({
       if(e.scrollTop>10){
         if(this.data.navBackground==''){
           this.setData({
-            navBackground:'#f9f9f9'
+            navBackground:'#DAECF3'
           })
         }
       }
@@ -378,6 +366,12 @@ Component({
     navToEncyclopedia:function(){
       wx.navigateTo({
         url: '/pages/jishi/encyclopedia',
+      })
+    },
+    // ----- 显示: 提示框  -------------
+    showComingTip() {
+      wx.showModal({
+        content: "功能开发中..."
       })
     }
   }

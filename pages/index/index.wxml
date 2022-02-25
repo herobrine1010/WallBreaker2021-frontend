@@ -24,6 +24,11 @@
           <view class="poby-text bdst" style="line-height:0;">{{ item.text }}</view>
         </navigator>
         </block>
+        <!-- 以下是占位入口, 为开发中功能 -->
+        <view class="horizon-cneter" id="entry-item" bindtap="showComingTip">
+          <image id="entry-item__icon" class="horizon-cneter" src="/static/icon/xianyu-icon.png"></image>
+          <view class="poby-text bdst" style="line-height:0;">校园闲鱼</view>
+        </view>
 
       </swiper-item>
     </swiper>
@@ -45,10 +50,10 @@
       <!-- 筛选 -->
       <view class="icon-wrap margin-horizon" bindtap="clickConditionFilter">
         <block wx:if="{{selectedLabelList.length==0}}">
-          <image class="icon" src="/static/icon/select-tongde-false.png"></image>
+          <image class="icon" src="/static/icon/select-index-false.png"></image>
         </block>
         <block wx:else>
-          <image class="icon" src="/static/icon/select-tongde-true.png"></image>
+          <image class="icon" src="/static/icon/select-index-true.png"></image>
         </block>
       </view>
 
@@ -71,8 +76,10 @@
       <view wx:if="{{jishiItemList.length==0}}" class="noData">
         暂无数据~
       </view>    
-      <view wx:if="{{isLastPage}}" class="noData">
-        已经到底啦~
+      <view wx:if="{{isLastPage && jishiItemList.length!=0}}" class="noData flex-container">
+        <text class="poby-text h6 bold" style="line-height:100rpx;">已经到底啦~</text>
+        <image src="../../static/icon/reachBottom.png" style="width:200rpx; height:120rpx;" class="horizon-cneter"></image>
       </view>   
   </view>
   <dialog-label id="dialog-label-selector" labels="{{labelList}}" bind:change="labelChanged"></dialog-label>
+  
