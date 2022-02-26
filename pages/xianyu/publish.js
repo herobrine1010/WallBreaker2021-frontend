@@ -19,7 +19,7 @@ const zoneList=[
   {id:57,value:'嘉定校区'},
   {id:60,value:'沪西校区'},
   {id:61,value:'沪北校区'},
-  {id:59,value:'铁岭'},
+  {id:59,value:'铁岭校区'},
   {id:63,value:'线上'},
   {id:62,value:'不限地点'},
 ]
@@ -100,6 +100,7 @@ Page({
   },
   onUnload:function(e){
     if(this.data.mode=='new'&&this.data.haveEdited){
+      app.globalData.xianyuSaving=true
       uploadPictures(this.selectComponent("#image-box").image).then(res=>{
         if(res.allPicUrl){
           res.allPicUrl=res.allPicUrl.split(',')
@@ -108,7 +109,7 @@ Page({
           ...this.data.detail,
           ...res,
         })
-
+        app.globalData.xianyuSaving=false
       })
     }
   },
@@ -127,6 +128,31 @@ Page({
     }
   },
   confirmRestoreEditedContent:function(e){
+    let that=this
+    let countDown=10
+    waitAfterSavedContent(10)
+
+    function waitAfterSavedContent(){
+      if(app.globalData.xianyuSaving==true){
+        if(countDown==10){
+          wx.showLoading({
+            title: '加载中',
+          })
+        }else if(countDown==0){
+          that.restoreEditedContent()
+          wx.hideLoading({
+            success: (res) => {},
+          })
+          return
+        }
+        countDown--
+        setTimeout(waitAfterSavedContent, 100);
+      }else{
+        that.restoreEditedContent()
+      }
+    }
+  },
+  restoreEditedContent:function(e){
     let editHistory=wx.getStorageSync('xianyuEditHistory'+this.data.type)
     this.setData({
       detail:editHistory,

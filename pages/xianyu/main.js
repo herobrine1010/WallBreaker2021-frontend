@@ -62,6 +62,9 @@ Component({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options.tabIndex==1){
+      this.setData({tabIndex:1})
+    }
     this.initializeScrollViewHeight()
     this.getData(true)
 
@@ -79,7 +82,7 @@ Component({
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
-      path:app.getSharedUrl()
+      path:app.getSharedUrl()+'◆tabIndex='+this.data.tabIndex
     }
   },
 
