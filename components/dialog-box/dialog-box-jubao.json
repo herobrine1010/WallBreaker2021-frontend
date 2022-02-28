@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "image-box": "/components/uploadImage-box/uploadImage-box"
+  }
+}

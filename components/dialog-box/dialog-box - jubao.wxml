@@ -1,0 +1,37 @@
+<!--components/dialog-box/dialog-box.wxml-->
+<block wx:if="{{isShow}}">
+  <view class="dialog-box-shade">
+    <view class="dialog-box-white-bg">
+    
+    <!-- title -->
+    <text class="dialog-box-title">{{title}}</text>
+     <!-- content -->
+    <text class="dialog-box-content" wx:if="{{content}}">{{content}}</text>
+
+    <view wx:if="{{reportReason.length}}" class="dialog-box-report-reason-box" >
+      <view class="dialog-box-report-reason" wx:for="{{reportReason}}">
+        <view class="reason-key">·</view>
+        <view class="reason">{{item.value}}</view>
+        <image src="/static/icon/copy-tongde.png" class="copyBtn" bindtap="tapCopy" data-value="{{item.value}}"/><!-- 图标待改 -->        
+      </view>
+    </view>
+    <!-- 列举所有的原因 -->
+
+
+    <!-- 输入框 -->
+
+    
+    <!-- 图片上传框 -->
+
+    
+    <text class="dialog-box-tip" selectable="{{true}}">{{tip}}</text>
+
+
+    <view class="dialog-btn-box">
+      <view class="dialog-box-cancel" bindtap="tapCancel">{{cancelText}}</view>
+      <view class="dialog-box-ok" bindtap="tapOk">{{okText}}</view>
+    </view>
+  </view>
+  </view>
+  
+</block>

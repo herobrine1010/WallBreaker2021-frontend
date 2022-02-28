@@ -2,6 +2,7 @@
 <block wx:if="{{isShow}}">
   <view class="dialog-box-shade">
     <view class="dialog-box-white-bg">
+    
     <text class="dialog-box-content">{{content}}</text>
     <textarea wx:if="{{hasInputBox}}" name="closeReason" id="closeReason" placeholder="请输入结束组队的原因" class="dialog-input" bindinput="finishInput"></textarea>
 
@@ -10,8 +11,10 @@
         <view class="infoValue">{{infoDetail.Value}}</view>
         <image wx:if="{{infoDetail.copyEnable}}" src="/static/icon/copy-tongde.png" class="copyBtn" bindtap="tapCopy"></image><!-- 图标待改 -->
     </view>
+
     
     <text class="dialog-box-tip" selectable="{{true}}">{{tip}}</text>
+
     <view class="dialog-btn-box">
       <view class="dialog-box-cancel" bindtap="tapCancel">{{cancelText}}</view>
       <view class="dialog-box-ok" bindtap="tapOk">{{okText}}</view>

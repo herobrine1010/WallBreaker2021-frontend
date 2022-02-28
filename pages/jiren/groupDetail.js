@@ -28,6 +28,7 @@ Page({
       pictures:[],
       botton:"返回"
     },
+
     teamDetail:{
 
     },
@@ -60,7 +61,20 @@ Page({
     targetId:null,
     personalInfoList:{},
     // over:true,
-    isPopNoticeShow : false
+    isPopNoticeShow : false,
+
+    /** 举报原因 */
+    dialogReport:{
+      isDialogShow: false,
+      content:"爬爬爬爬爬爬爬爬啊啊啊啊啊啊啊啊啊啊啊",
+      reportReason:['违法违规','色情低俗','赌博诈骗','人身攻击',
+      '侵犯隐私','敏感词汇','与该板块主题无关','其他'],
+      hasInputBox:false,
+      cancelText:"取消",
+      okText:"确认",
+      tapOkEvent:"",
+    },
+
   },
 
   // 生命周期函数： ------- ----------- -------- ：
@@ -1089,6 +1103,59 @@ copyWxId(){
       current: e.currentTarget.dataset.picUrl||e.detail.picUrl,//不写值的话默认是上面那个数组的第一个元素,只有写了点击对应图片才能点哪张放大哪张   
       // ||后面是发起者视角的自定义组件，传来的picUrl
     })
-  }
+  },
+
+
+
+  
+// 举报动态
+tapReportDetail: function(e){
+  let dialog = {
+    isDialogShow: true,
+    title:"举报动态",
+    content:'举报原因（必选）',
+    hasInputBox:false,
+    cancelText:"取消",
+    hideOkButton:true,
+    reportReason:['违法违规','色情低俗','赌博诈骗','人身攻击',
+    '侵犯隐私','敏感词汇','与该板块主题无关','其他'],
+    tapDetail:"tapReportDetailEvent",
+  };
+  this.setData({
+    dialogReport:dialog
+  })
+},
+//举报详情 -- 需要一个id 根据id选择两种可能性
+//[0]
+
+tapReportDetailEvent: function(e){
+  //根据内容进行区分成两个页面
+  //
+  let dialog = {
+    isDialogShow: true,
+    title:"举报动态",
+    hasInputBox:true,
+    inputPlaceholder:'请详细描述举报理由（0~300字）',
+    cancelText:"返回",
+    okText:"提交",
+    hasPictureBox:true,
+    tip:'证据截图（0~5张）',
+    tapDetail:"tapReportDetailEvent",
+    //tapCancelEvent:"",
+    tapOkEvent:"submitReportEvent",
+  };
+
+  this.setData({
+    dialogReport:dialog
+  })
+},
+submitReportEvent:function(e){
+  this.setData({
+    dialogReport:{isDialogShow:false}
+  })
+  wx.showToast({
+    title: '已提交',
+  })
+},
 
 })
