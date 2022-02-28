@@ -160,12 +160,12 @@ Page({
     })
     this.changePriceInputWidth()
   },
-  onShareAppMessage: function () {
-    return {
-      title : '欢迎注册使用济星云小程序！',
-      path:app.getSharedUrl()
-    }
-  },
+  // onShareAppMessage: function () {
+  //   return {
+  //     title : '欢迎注册使用济星云小程序！',
+  //     path:app.getSharedUrl()
+  //   }
+  // },
   initializeAll:function(e){
     let that=this
     let id=20
