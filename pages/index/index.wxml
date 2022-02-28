@@ -1,34 +1,85 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <block wx:if="{{canIUseOpenData}}" calss="userinfo-opendata">
-      <view class="userinfo-avatar" bindtap="bindViewTap">
-        <open-data type="userAvatarUrl"></open-data>
-      </view>
-      <open-data type="userNickName"></open-data>
-    </block>
-   
-    <block wx:elif="{{!hasUserInfo}}">
-      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
-    </block>
-    
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="page">
-    <view class="page__hd">
-    </view>
-    <view>
-    </view>
-    <my-tabbar></my-tabbar>
+<view class='background'></view>
+<!-- 自定义指示栏 -->
+<view class="navi">
+  <mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar__centers" background="{{navBackground}}" title="济星云"></mp-navigation-bar>
 </view>
 
-  <view class="usermotto">
-    <my-component my-property="example" />
-    <text class="user-motto">{{motto}}</text>
+
+  <view class="inner">
+    <!-- banner 位 -->
+    <swiper indicator-dots 	indicator-color='#dedede' indicator-active-color='#fff' class="pictureArea" id="banner">
+      <swiper-item wx:for="{{banner}}">
+        <navigator url="{{ item.pageUrl }}">
+          <image src='{{item.ossImageUrl}}' class='img' mode="aspectFill"/>
+        </navigator>
+      </swiper-item>
+    </swiper>
+
+    <!-- 金刚位 -->
+    <swiper class="flex-container" id="index-entry">
+      <swiper-item>
+        <block wx:for="{{entryItem}}">
+        <navigator url="{{ item.path }}" open-type="{{ item.opentype}}" id="entry-item" class="horizon-cneter">
+          <image id="entry-item__icon" class="horizon-cneter" src="/static/icon/{{ item.icon }}"></image>
+          <view class="poby-text bdst" style="line-height:0;">{{ item.text }}</view>
+        </navigator>
+        </block>
+        <!-- 以下是占位入口, 为开发中功能 -->
+        <view class="horizon-cneter" id="entry-item" bindtap="showComingTip">
+          <image id="entry-item__icon" class="horizon-cneter" src="/static/icon/xianyu-icon.png"></image>
+          <view class="poby-text bdst" style="line-height:0;">校园闲鱼</view>
+        </view>
+
+      </swiper-item>
+    </swiper>
+
+    <!-- 搜索筛选 -->
+    <view class="top-line flex-container" style="height: 64rpx;">
+      <view class="searchBar">
+        <mp-searchbar bindblur="onSearch" bindclear = "onCancleSearch" ext-class="weui-search-bar_focusing"></mp-searchbar>
+      </view>
+      <!-- 按时间排序 -->
+      <view class="icon-wrap margin-horizon" bindtap="clickTimeIndex">
+        <block wx:if="{{timeIndex=='desc'}}">
+          <image class="icon" src="/static/icon/sort-new.png"></image>
+        </block>
+        <block wx:if="{{timeIndex=='asc'}}">
+          <image class="icon rotate" src="/static/icon/sort-new.png"></image>
+        </block>
+      </view>
+      <!-- 筛选 -->
+      <view class="icon-wrap margin-horizon" bindtap="clickConditionFilter">
+        <block wx:if="{{selectedLabelList.length==0}}">
+          <image class="icon" src="/static/icon/select-index-false.png"></image>
+        </block>
+        <block wx:else>
+          <image class="icon" src="/static/icon/select-index-true.png"></image>
+        </block>
+      </view>
+
+    </view>
+    <block wx:for="{{jishiItemList}}" wx:if="{{jishiItemList.length>0}}" >
+        <view  class="list-item" bindtap="jumpToDetail" data-postingid="{{item.id}}" data-index="{{index}}">
+        <card-notice 
+        labelId="{{item.labelId}}"
+        labelText="{{item.labelContent}}"
+        title="{{item.title}}"
+        rightTagText="{{item.rightTagText}}"
+        description="{{item.brief}}"
+        publishTime="{{item.createTime}}"
+        postingPic="{{item.firstPicUrl}}" 
+        userName="{{item.initiatorNickName}}"
+        userAvatar="{{item.initiatorAvatar}}"
+        ></card-notice>
+        </view>
+      </block>
+      <view wx:if="{{jishiItemList.length==0}}" class="noData">
+        暂无数据~
+      </view>    
+      <view wx:if="{{isLastPage && jishiItemList.length!=0}}" class="noData flex-container">
+        <text class="poby-text h6 bold" style="line-height:100rpx;">已经到底啦~</text>
+        <image src="../../static/icon/reachBottom.png" style="width:200rpx; height:120rpx;" class="horizon-cneter"></image>
+      </view>   
   </view>
-</view>
+  <dialog-label id="dialog-label-selector" labels="{{labelList}}" bind:change="labelChanged"></dialog-label>
+  

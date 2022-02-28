@@ -83,7 +83,8 @@ module.exports = Behavior({
         for (let item of labels) {
           item.selected = false;
         }
-        this.setData({labelList: labels});
+        const complement = this.getComplement(labels);
+        this.setData({labelList: labels, complement});
       },
       setLabelsSelected: function() {
       /* 根据已选标签设置所有标签的选中性 */
@@ -100,8 +101,15 @@ module.exports = Behavior({
         };
         this.setData({labelList: tagList});
       },
-      checkLength:  function() {
-  
+      getComplement:  function(arr) {
+        // 根据标签数组的长度补齐至3的倍数 (方便 flex 布局)
+        // 末尾用最后一个元素补齐
+        const len = (arr.length/3 + 1) * 3; 
+        let complementArr = [];
+        for(let i=arr.length; i<len; i++) {
+          complementArr.push(null);
+        }
+        return complementArr;
       },
       // ------ 显示\展示相关函数
       openClose: function(e) {

@@ -4,22 +4,16 @@
     "selectedColor": "#3E92CC",
     "list": [
       {
-        "pagePath": "pages/jishi/main",
-        "text": "济事",
+        "pagePath": "pages/index/index",
+        "text": "首页",
         "iconPath": "static/icon/jishi.png",
         "selectedIconPath": "static/icon/jishi-solid.png"
       },
       {
         "pagePath": "pages/jiren/main",
-        "text": "济人",
+        "text": "组队攒局",
         "iconPath": "static/icon/jiren.png",
         "selectedIconPath": "static/icon/jiren-solid.png"
-      },
-      {
-        "pagePath": "pages/tongde/main",
-        "text": "同德",
-        "iconPath": "static/icon/tongde.png",
-        "selectedIconPath": "static/icon/tongde-solid.png"
       },
       {
         "pagePath": "pages/personal/main",

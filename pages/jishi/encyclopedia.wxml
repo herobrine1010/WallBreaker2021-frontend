@@ -85,7 +85,7 @@
         <image src="../../static/icon/down-arrow.svg" wx:else class="question-answer-arrow"></image>
       </view>
       <view wx:if="{{item.answer_show}}">
-        <view class="question-answer-content" >{{item.answer}}</view>
+        <text class="question-answer-content" >{{item.answer}}</text>
         <view class="question-answer-image-container" wx:if="{{item.allPicUrl}}" >
           <view class="question-answer-image-view" wx:for="{{item.all_pic_url_list}}" wx:for-item="imageUrl" wx:for-index="imageIndex" bindtap="previewImage" data-image-list="{{item.all_pic_url_list}}" data-image-index="{{imageIndex}}">
             <image src="{{imageUrl}}"  class="question-answer-image"/>        

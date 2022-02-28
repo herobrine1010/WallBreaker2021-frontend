@@ -6,6 +6,7 @@
       </view>
       <view class="tag-area">
         <view class="{{item.selected?'tag-choosen':'tag-normal'}}" wx:for="{{labelList}}" wx:key="id" wx:for-index="index" bindtap="tapLabel" data-index="{{index}}">#{{item.content}}</view>
+        <view wx:for="{{complement}}" class="tag-normal" style="visibility: hidden;">占位</view>
       </view>
       <view wx:if="{{isWarnVisiable}}" class="label-warn">
       <image src="/static/icon/Alert-warning.png" class="icon"></image>

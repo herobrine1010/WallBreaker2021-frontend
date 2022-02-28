@@ -1,8 +1,11 @@
 {
   "usingComponents": {
-    "my-component":"/components/testComponent/testComponent",
-    "mp-tabbar": "weui-miniprogram/tabbar/tabbar",
-    "my-card":"/components/card-notice/card"
+    "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
+    "mp-searchbar": "weui-miniprogram/searchbar/searchbar",
+    "card-notice":"/components/card-notice/card",
+    "my-navi":"/components/jishiNavi/jishiNavi",
+    "dialog-label": "/components/label-selector/dialog-radio"
+  },
+  "navigationStyle": "custom"
 
-  }
 }

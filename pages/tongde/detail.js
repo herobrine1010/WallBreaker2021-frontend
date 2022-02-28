@@ -139,7 +139,7 @@ Page({
       url: '/lostfound/getLostFound/' + id,
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-         
+        'cookie':app.globalData.token
       },
       method : 'GET',
     }).then(res => {

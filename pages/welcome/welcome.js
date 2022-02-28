@@ -103,7 +103,7 @@ Page({
           })
         }else{
           wx.switchTab({
-            url: '/pages/jishi/main',
+            url: '/pages/index/index', // 跳转首页
           })            
         }
       }else if(status == 'blocked'){ // 用户被禁言

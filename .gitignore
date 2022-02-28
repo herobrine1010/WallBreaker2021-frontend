@@ -16,3 +16,5 @@ project.config.json
 # Node.js
 node_modules/
 project.private.config.json
+project.private.config.json
+project.config.json
