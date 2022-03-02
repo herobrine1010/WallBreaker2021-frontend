@@ -2,7 +2,6 @@
 <block wx:if="{{isShow}}">
   <view class="dialog-box-shade">
     <view class="dialog-box-white-bg">
-    
     <text class="dialog-box-title">{{title}}</text>
     <text class="dialog-box-content" wx:if="{{content}}">{{content}}</text>
 
