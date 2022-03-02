@@ -16,7 +16,7 @@
     <text class="dialog-box-tip" selectable="{{true}}">{{tip}}</text>
 
     <view class="dialog-btn-box">
-      <view class="dialog-box-cancel" bindtap="tapCancel">{{cancelText}}</view>
+      <view wx:if="{{!hideCancelButton}}" class="dialog-box-cancel" bindtap="tapCancel">{{cancelText}}</view>
       <view class="dialog-box-ok" bindtap="tapOk">{{okText}}</view>
     </view>
   </view>

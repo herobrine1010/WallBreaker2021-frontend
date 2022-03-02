@@ -103,6 +103,10 @@
 }
 .question-answer-title{
   font-size: 16px;
+  overflow: hidden;  
+  white-space: nowrap;    
+  text-overflow:ellipsis;
+  width: 576rpx;
 }
 
 .question-answer-arrow{
