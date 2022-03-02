@@ -4,8 +4,15 @@
   <image src="{{avatarPath}}" class="photo" mode="scaleToFill"></image>
   <view class="container">
     <view class="briefs">
-      <view class="nickname">{{personBrief.nickname}}</view>
-      <view class="school">{{personBrief.school +' '+ personBrief.major +' '+ personBrief.grade +' '+ personBrief.identification}}</view>
+      <view class="nickname-and-identification">
+        <view class="nickname">{{personBrief.nickname}}</view>
+        <view style="background-color:#3E92CC;" class="identification" wx:if="{{personBrief.identification=='本'}}">本</view>
+        <view style="background-color:#957D95;" class="identification" wx:if="{{personBrief.identification=='硕'}}">硕</view>
+        <view style="background-color:#3A3042;" class="identification" wx:if="{{personBrief.identification=='博'}}">博</view>
+        <view style="background-color:#EDCB96;" class="identification" wx:if="{{personBrief.identification=='教'}}">教</view>
+      </view>
+      <view class="school">{{personBrief.school +' '+ personBrief.major +' '+ personBrief.grade + '级'}}</view>
+      <view class="description" wx:if="{{personBrief.description}}">{{personBrief.description}}</view>
     </view> 
     <view class="labels-container">
       <view wx:for="{{labels}}" class="label {{'labelColor-'+item.type}}">{{item.name}}</view>

@@ -1,10 +1,11 @@
 <!--pages/personal/main.wxml-->
 <!-- 页面主要容器及背景 -->
-<view class="background">
+<view class="my-shade"></view>
+<view class="my-background">
   <!-- nav 组件调用 -->
   <mp-navigation-bar  ext-class="weui-navigation-bar__centers" back="{{false}}" title="我的"></mp-navigation-bar>
   <!-- 以下是per-container组件，包含除nav外的个人全部内容 -->
-  <view class="per-container">
+
     <!-- 以下是用户头像、昵称、学院、标签等简要信息 -->
     <personal-brief
     avatarPath = "{{personBrief.avatarPath}}"
@@ -14,16 +15,23 @@
     bindtap="onAvatorTap"
     ></personal-brief> 
     <!-- 以下是资料、组队管理、收藏、帮助、反馈、破壁简介等item -->
-    <navigator url="../personal/personalDetails" class="per-items">
+    <navigator url="../personal/personalDetails" class="per-items big-margin">
       <image src="../../static/icon/self-profile.svg" class="icon"></image>
       <view class="item-title">个人资料</view>
+      <view class="right-item">
+        <image class="right-arrow-icon" src="/static/icon/right-arrow.svg"/>
+      </view>
     </navigator>
     
     <!-- 界面相似，帖子·组队管理 和 我的收藏 共用一个页面
     通过personalManagementOrCollection这个全局的状态量，决定进入哪个页面 -->
-    <navigator url="../personal/teamManagement" class="per-items" >
+    <navigator url="../personal/teamManagement" class="per-items big-margin" >
       <image src="../../static/icon/team-arrangement.svg" class="icon"></image>
       <view class="item-title">组队管理</view>
+      <view class="right-item">
+        <view class="red-circle" wx:if="{{true}}"></view>
+        <image class="right-arrow-icon" src="/static/icon/right-arrow.svg"/>
+      </view>
       <view wx:if="{{isJirenMsgExist}}" class="red-message poby-text bds">
         <text class="red-message-word">{{jirenMsgNum}}</text>
       </view>
@@ -31,32 +39,54 @@
     <navigator url="../personal/collection" class="per-items">
       <image src="../../static/icon/favourite.svg" class="icon"></image>
       <view class="item-title">我的收藏</view>
+      <view class="right-item">
+        <view class="red-circle" wx:if="{{true}}"></view>
+        <image class="right-arrow-icon" src="/static/icon/right-arrow.svg"/>
+      </view>
     </navigator>
     <navigator url="/pages/tongde/my" class="per-items">
       <image src="../../static/icon/my-lost.svg" class="icon"></image>
       <view class="item-title">我的失物招领</view>
+      <view class="right-item">
+        <view class="red-circle" wx:if="{{true}}"></view>
+        <image class="right-arrow-icon" src="/static/icon/right-arrow.svg"/>
+      </view>
     </navigator>
     <navigator url="/pages/xianyu/myXianzhi" class="per-items">
       <image src="../../static/icon/my-xianzhi.svg" class="icon"></image>
       <view class="item-title">我的闲置</view>
+      <view class="right-item">
+        <view class="red-circle" wx:if="{{true}}"></view>
+        <image class="right-arrow-icon" src="/static/icon/right-arrow.svg"/>
+      </view>
     </navigator>
-    <navigator url="../personal/help-new" class="per-items">
+
+
+    <navigator url="../personal/help-new" class="per-items big-margin">
       <image src="../../static/icon/help.svg" class="icon"></image>
       <view class="item-title">新手帮助</view>
+      <view class="right-item">
+        <image class="right-arrow-icon" src="/static/icon/right-arrow.svg"/>
+      </view>
     </navigator>
     <navigator url="../personal/feedback" class="per-items">
       <image src="../../static/icon/suggestions.svg" class="icon"></image>
       <view class="item-title">用户反馈</view>
+      <view class="right-item">
+        <image class="right-arrow-icon" src="/static/icon/right-arrow.svg"/>
+      </view>
     </navigator>
     <navigator url="../personal/aboutUs" class="per-items">
       <image src="../../static/icon/about-us.svg" class="icon"></image>
       <view class="item-title">关于我们</view>
+      <view class="right-item">
+        <image class="right-arrow-icon" src="/static/icon/right-arrow.svg"/>
+      </view>
     </navigator>
 
     <!-- <view class="item-last"></view> -->
 
 
-  </view>
 </view>
 
 <!-- 弹出的用于确认的提示框，电脑端模拟器、预览均没问题，但真机调试无法正确覆盖 -->

@@ -24,6 +24,10 @@ Page({
         this.setData({
           feedbackMessage : "该项未填写！"
         });
+        wx.showToast({
+          title: '该项未填写',
+          icon:'error',
+        })
       }else{   
         let images=this.selectComponent("#image-box").image
         let promise
@@ -91,6 +95,12 @@ Page({
     this.setData({
       feedbackMessage : e.detail.cursor>=310?"字符已达上限！":''
     });
+    if(e.detail.cursor>=310){
+      wx.showToast({
+        title: '字数已达上限',
+        icon:'error',
+      })
+    }
   },
 
   /**
