@@ -72,7 +72,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title : '欢迎注册使用济星云小程序！',
+      path:app.getSharedUrl()
+    }
   },
 
   initializeScrollViewHeight:function(){
@@ -168,6 +171,10 @@ Page({
           like:true,
           ['detail.countFavourite']:this.data.detail.countFavourite+1,
         })
+        wx.showToast({
+          title: '收藏成功',
+          icon:'success',
+        })
     
       }
     })
@@ -187,7 +194,10 @@ Page({
           like:false,
           ['detail.countFavourite']:this.data.detail.countFavourite-1,
         })
-    
+        wx.showToast({
+          title: '取消收藏成功',
+          icon:'success',
+        })
       }
     })
     

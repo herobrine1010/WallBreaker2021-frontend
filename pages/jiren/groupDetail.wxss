@@ -276,17 +276,27 @@ scroll-view {
 .board-view{
   margin:0 3vw;
 }
-
-.detail-title{
+.detail-headline{
   display: flex;
+  align-items: center;
+}
+.detail-title{
+  /* display: flex; */
   text-align: justify;
-  width: 64vw;
+  width: 488rpx;
   /* margin: 24rpx 16rpx 12rpx; */
   font-size:36rpx;
   font-weight:600;
   letter-spacing:0.25vw;
   color:#4A5559;
   white-space: pre-line;
+  overflow: hidden;
+}
+.detail-report{
+  position: absolute;
+  right: 45rpx;
+  width: 32rpx;
+  height: 32rpx;
 
 }
 .detail-a-line{

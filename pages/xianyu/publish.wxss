@@ -10,6 +10,11 @@ Page {
   color: #545454;
 }
 
+.xianyu-background{
+  background: linear-gradient(180deg, rgba(218, 181, 218, 1) -360rpx, rgba(139, 46, 231, 0) 200rpx);
+}
+
+
 .userImage, .addImage {
   height: 192rpx;
   width: 152rpx;

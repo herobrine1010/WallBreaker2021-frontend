@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: { 
+    initiatorTmpId:'zw9cJ9Z9vTvOAzprBzzJ1W0K8qS5wxq-tj6PgEalRfc',
     
     amITeamInitiator:true,
     title:'破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！破壁者首次文艺汇演来啦！！',
@@ -60,7 +61,20 @@ Page({
     targetId:null,
     personalInfoList:{},
     // over:true,
-    isPopNoticeShow : false
+    isPopNoticeShow : false,
+
+    /** 举报原因 */
+    dialogReport:{
+      isDialogShow: false,
+      content:"爬爬爬爬爬爬爬爬啊啊啊啊啊啊啊啊啊啊啊",
+      reportReason:['违法违规','色情低俗','赌博诈骗','人身攻击',
+      '侵犯隐私','敏感词汇','与该板块主题无关','其他'],
+      hasInputBox:false,
+      cancelText:"取消",
+      okText:"确认",
+      tapOkEvent:"",
+    },
+
   },
 
   // 生命周期函数： ------- ----------- -------- ：
@@ -114,34 +128,6 @@ Page({
   },
   
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    console.log(app.getSharedUrl())
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
@@ -162,6 +148,7 @@ Page({
       }
     })
     .then(res=>{
+      console.log(res)
       if(res.statusCode>=200&&res.statusCode<300){
         let teamdata=res.data.data;
           let {
@@ -664,6 +651,23 @@ copyWxId(){
     })
   },
   dialogTapOkForAcceptApplying:function(){
+    let that=this;
+    if(this.judgeIfRequestSubscribe()==true){
+      wx.requestSubscribeMessage({
+        tmplIds: [this.data.initiatorTmpId],
+        success(res){
+          that.requestAcceptApplying()
+          that.initiatorChangeSubscribeStatus(res)
+        }
+      })
+    }else{
+      that.requestAcceptApplying()
+    }
+    
+    // this.initializeResult();
+  },
+
+  requestAcceptApplying:function(){
     let app=getApp();
     let that=this;
     request({
@@ -694,7 +698,6 @@ copyWxId(){
       console.log(err);
     })
 
-    // this.initializeResult();
   },
 
   refuseApplying: function(e){
@@ -717,6 +720,21 @@ copyWxId(){
     })
   },
   dialogTapOkForRefuseApplying:function(){//待解决 ： initializeResult 和 changeScrollHeight 作用
+    let that=this;
+    if(this.judgeIfRequestSubscribe()==true){
+      wx.requestSubscribeMessage({
+        tmplIds: [this.data.initiatorTmpId],
+        success(res){
+          that.requestRefuseApplying()
+          that.initiatorChangeSubscribeStatus(res)
+        }
+      })
+    }else{
+      that.requestRefuseApplying()
+    }
+    
+  },
+  requestRefuseApplying:function(){
     let app=getApp();
     let that=this;
     request({
@@ -786,26 +804,61 @@ copyWxId(){
   },
   dialogTapOkForAcceptAllApplications(){
     let that=this;
-    request({
-      url: '/userTeam/autoApproveByTeamId/'+this.data.teamId,
-      header:{
-         
-      },
-    }).then(res=>{
-      // 重新请求获取 成员列表、申请者列表数据
-      let getTeamMemberList = that.getTeamMemberList(that.data.teamId, that.data. amITeamInitiator, that.data.teamDetail.dueMember);
-      let getApplierList = that.getApplierList(that.data.teamId);
-      return Promise.all([getTeamMemberList,getApplierList]);
-    }).then(res => {
-      that.showTipBox('入队申请已全部接受，可点击头像查看微信号，快去与ta联系吧！');
-      that.setData({
-        teamMemberList : res[0],
-        applierList : res[1],
-        haveJoinedIn:true
-      })
-    }).catch( err=>{
-      console.log(err);
-    });
+    wx.requestSubscribeMessage({
+      tmplIds: [this.data.initiatorTmpId],
+      success(res){
+        that.initiatorChangeSubscribeStatus(res)
+
+        request({
+          url: '/userTeam/autoApproveByTeamId/'+that.data.teamId,
+          header:{
+             
+          },
+        }).then(res=>{
+          // 重新请求获取 成员列表、申请者列表数据
+          let getTeamMemberList = that.getTeamMemberList(that.data.teamId, that.data. amITeamInitiator, that.data.teamDetail.dueMember);
+          let getApplierList = that.getApplierList(that.data.teamId);
+          return Promise.all([getTeamMemberList,getApplierList]);
+        }).then(res => {
+          that.showTipBox('入队申请已全部接受，可点击头像查看微信号，快去与ta联系吧！');
+          that.setData({
+            teamMemberList : res[0],
+            applierList : res[1],
+            haveJoinedIn:true
+          })
+        }).catch( err=>{
+          console.log(err);
+        });
+      }
+    })
+    
+  },
+  judgeIfRequestSubscribe(){
+    if(this.data.applierList.length==1){
+      let tag=false
+      let list=this.data.teamMemberList
+      for(let item of list){
+        if(item.avatar==undefined){
+          tag=true
+          break
+        }
+      }
+      if(tag)return true
+    }
+  },
+
+  initiatorChangeSubscribeStatus(res){
+    if(res['zw9cJ9Z9vTvOAzprBzzJ1W0K8qS5wxq-tj6PgEalRfc']=='accept'){
+      // request({
+      //   url: '/userTeam/apply',
+      //   method:"POST",
+      //   header:{'cookie':app.globalData.token},
+      //   data:{
+      //     teamId:that.data.teamId,
+      //     agreeReceiveMsg:result,
+      //   },
+      // })
+    }
   },
 
   //------- ------ ------- 以下是和 申请者 applicant 有关的操作事件 -------- --------- ---
@@ -900,53 +953,67 @@ copyWxId(){
       })
     } else {
       if(this.data.teamDetail.question.length==0){
-        request({
-          url:'/userTeam/apply',
-          method:"POST",
-          header:{ },
-          data:{
-            teamId:that.data.teamId,
-          },
-        }).then(res => {
-          if(res.statusCode>=200&&res.statusCode<300 && res.data.success){
-            wx.showToast({
-              title: '申请已提交',
-              icon:'success',
-              duration:2000
-            });
-            return that.getTeamDetail(that.data.teamId);
-          }else if(res.data.msg == "noWxId"){
-            let dialog = {
-              hasInputBox:false,
-              content:"请完善微信号~",
-              tip:"填写微信号可以更好地使用组队功能，保证微信号只有队伍成员可见！",
-              cancelText:"返回",
-              okText:"去填写",
-              tapOkEvent:"tapOkForAddWxId",
-              tapCancelEvent:"tapCancelForAddWxId",
-              isDialogShow:true,
-            }
-            that.setData({
-              dialog
-            });
-          }else{
-            wx.showToast({
-              title: '网络异常，请重试 :(',
-              icon: 'none',
-              duration: 1000
-            });
-          }
-        }).then(result => {
-          if(result){
-            that.setData({
-              teamDetail: result,
-              timeIsOver:(result.status>2?true:false)
+        let tmpId='mTc40P4CHN8U-FKjtSDTCSjo3YGFi0d3PRse-aPGRC4'
+        wx.requestSubscribeMessage({
+          tmplIds: [tmpId],
+          success (res) {
+            let result;
+            if(res[tmpId]=='accept')
+              result=true
+            else if(res[tmpId]=='reject')
+              result=false
+            
+            request({
+              url:'/userTeam/apply',
+              method:"POST",
+              header:{ },
+              data:{
+                teamId:that.data.teamId,
+                agreeReceiveMsg:result
+              },
+            }).then(res => {
+              if(res.statusCode>=200&&res.statusCode<300 && res.data.success){
+                wx.showToast({
+                  title: '申请已提交',
+                  icon:'success',
+                  duration:2000
+                });
+                return that.getTeamDetail(that.data.teamId);
+              }else if(res.data.msg == "noWxId"){
+                let dialog = {
+                  hasInputBox:false,
+                  content:"请完善微信号~",
+                  tip:"填写微信号可以更好地使用组队功能，保证微信号只有队伍成员可见！",
+                  cancelText:"返回",
+                  okText:"去填写",
+                  tapOkEvent:"tapOkForAddWxId",
+                  tapCancelEvent:"tapCancelForAddWxId",
+                  isDialogShow:true,
+                }
+                that.setData({
+                  dialog
+                });
+              }else{
+                wx.showToast({
+                  title: '网络异常，请重试 :(',
+                  icon: 'none',
+                  duration: 1000
+                });
+              }
+            }).then(result => {
+              if(result){
+                that.setData({
+                  teamDetail: result,
+                  timeIsOver:(result.status>2?true:false)
+                })
+                that.checkStatus(result);
+              }
+            }).catch(err => {
+              console.log(err);
             })
-            that.checkStatus(result);
           }
-        }).catch(err => {
-          console.log(err);
         })
+        
       }else{
         wx.navigateTo({
           url: '/pages/jiren/answerQuestion?teamId='+that.data.teamId,
@@ -1089,6 +1156,57 @@ copyWxId(){
       current: e.currentTarget.dataset.picUrl||e.detail.picUrl,//不写值的话默认是上面那个数组的第一个元素,只有写了点击对应图片才能点哪张放大哪张   
       // ||后面是发起者视角的自定义组件，传来的picUrl
     })
-  }
+  },
+
+    
+// 举报动态
+tapReportDetail: function(e){
+  let dialog = {
+    isDialogShow: true,
+    title:"举报动态",
+    content:'举报原因（必选）',
+    hasInputBox:false,
+    cancelText:"取消",
+    hideOkButton:true,
+    reportReason:['违法违规','色情低俗','赌博诈骗','人身攻击',
+    '侵犯隐私','敏感词汇','与该板块主题无关','其他'],
+    tapDetail:"tapReportDetailEvent",
+  };
+  this.setData({
+    dialogReport:dialog
+  })
+},
+//举报详情 -- 需要一个id 根据id选择两种可能性
+//[0]
+
+tapReportDetailEvent: function(e){
+  //根据内容进行区分成两个页面
+  //
+  let dialog = {
+    isDialogShow: true,
+    title:"举报动态",
+    hasInputBox:true,
+    inputPlaceholder:'请详细描述举报理由（0~300字）',
+    cancelText:"返回",
+    okText:"提交",
+    hasPictureBox:true,
+    tip:'证据截图（0~5张）',
+    tapDetail:"tapReportDetailEvent",
+    //tapCancelEvent:"",
+    tapOkEvent:"submitReportEvent",
+  };
+
+  this.setData({
+    dialogReport:dialog
+  })
+},
+submitReportEvent:function(e){
+  this.setData({
+    dialogReport:{isDialogShow:false}
+  })
+  wx.showToast({
+    title: '已提交',
+  })
+},
 
 })

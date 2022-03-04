@@ -23,21 +23,11 @@
   background-color: #FAFEFF;
 }
 
-.dialog-box-content{
-  display: flex;
-  /* width: 400rpx; */
-  margin: 30rpx 75rpx 10rpx;
-  font-weight: bold;
-
-  font-family: Noto Sans SC;
-  font-style: normal;
-  font-size: 32rpx;
-  line-height: 40rpx;
-  text-align: center;
-  color:#4A5559;
-  justify-content:center;
+.dialog-input-box{
   
 }
+
+
 .dialog-input{
   height: 200rpx;
   width: 476rpx;
@@ -129,3 +119,65 @@
   width: 30rpx;
 }
 
+/*************** 举报部分新增内容 ****************/
+.dialog-box-reportReason-box{
+  width:452rpx;
+  margin:0 auto;
+}
+
+.dialog-box-reportReason{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.5px solid #DEDEDE ;
+
+}
+.rightArrow{
+  height:24rpx;
+  width:15rpx;
+  padding-bottom: 12rpx;
+  padding-top: 8rpx;
+}
+.dialog-box-title{
+  display: flex;
+  margin: 30rpx 75rpx 10rpx;
+
+  
+  font-family: PingFang SC;
+  font-size: 28rpx;
+  font-weight: bold;
+  
+  line-height: 150%;
+  text-align: center;
+  justify-content: center;
+  color: #333333;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 8px 0px;
+}
+.dialog-box-content{
+  /* 后面有了content和title的区分 */
+    display: flex;
+    margin: 30rpx 75rpx 10rpx;
+
+    font-family: PingFang SC;
+    font-size: 24rpx;
+    line-height: 150%;
+    text-align: center;
+    justify-content:center;
+    color: #545454;
+    flex: none;
+    order: 1;
+    margin: 8px 0px;
+}
+.reason{
+
+  font-family: PingFang SC;
+  font-style: normal;
+  font-size: 24rpx;
+  line-height: 150%;
+  color: #333333;
+  padding-bottom: 12rpx;
+  padding-top: 8rpx;
+}

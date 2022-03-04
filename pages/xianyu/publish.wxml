@@ -13,8 +13,8 @@
         <view class="input-name-box input-box">
           <input class="input-lost-name" style="width: 686rpx;" maxlength="12" placeholder="请输入{{typeName}}物品名称" placeholder-class="input-placeholder" value="{{detail.name}}" bindinput="changeName"/>
         </view>
-        <view class="error-wrap"  wx:if="{{ errors.name }}">
-          <image src="/static/icon/Alert-warning.png" class="error-icon"/>
+        <view class="error-wrap" style="padding-left:8rpx;" wx:if="{{ errors.name }}">
+          <image src="/static/icon/Alert-warning.svg" class="error-icon"/>
           <text class="error-tip">{{ errors.name }}</text>
         </view> 
       </view>
@@ -23,13 +23,13 @@
         <view class="text-box">
           <textarea  class="text-area" maxlength="200" placeholder="请输入物品描述，如品牌型号、几成新、已用年份、保质日期、购入渠道、转手原因…" placeholder-class="input-placeholder" value="{{detail.content}}" bindinput="changeContent">
             <view class="error-wrap error-content-none"  wx:if="{{ errors.contentNone }}">
-              <image src="/static/icon/Alert-warning.png" class="error-icon"/>
+              <image src="/static/icon/Alert-warning.svg" class="error-icon"/>
               <text class="error-tip">{{ errors.contentNone }}</text>
             </view>
           </textarea>
         </view>
         <view class="error-wrap"  wx:if="{{ errors.contentLimit }}">
-          <image src="/static/icon/Alert-warning.png" class="error-icon"/>
+          <image src="/static/icon/Alert-warning.svg" class="error-icon"/>
           <text class="error-tip">{{ errors.contentLimit }}</text>
         </view> 
       </view>
@@ -37,7 +37,7 @@
 
       <image-box id="image-box" value="{{detail.allPicUrl}}" maxLength="4" bind:operate="changeImage"></image-box>
       <view class="error-wrap" wx:if="{{ errors.images }}">
-        <image src="/static/icon/Alert-warning.png" class="error-icon"></image>
+        <image src="/static/icon/Alert-warning.svg" class="error-icon"></image>
         <text class="error-tip">{{ errors.images }}</text>
       </view> 
 
@@ -47,7 +47,7 @@
           <text class="title">物品类型</text>
         </view>
         <view class="error-wrap" style="margin-left: -44px;" wx:if="{{ errors.category }}">
-          <image src="/static/icon/Alert-warning.png" class="error-icon"/>
+          <image src="/static/icon/Alert-warning.svg" class="error-icon"/>
           <text class="error-tip">{{ errors.category }}</text>
         </view>
         <picker class="picker-section" mode="selector" range="{{categoryList}}" range-key="value" value="{{detail.typeIndex}}" bindchange="changeCategory">
@@ -65,7 +65,7 @@
           <text class="title">交易地点</text>
         </view>
         <view class="error-wrap" style="margin-left: -44px;" wx:if="{{ errors.location }}">
-          <image src="/static/icon/Alert-warning.png" class="error-icon"/>
+          <image src="/static/icon/Alert-warning.svg" class="error-icon"/>
           <text class="error-tip">{{ errors.location }}</text>
         </view>
         <picker class="picker-section" mode="selector" range="{{zoneList}}" range-key='value' value="{{detail.zoneIndex}}" bindchange="changeZone">
@@ -83,7 +83,7 @@
           <text class="title">{{type=='sale'?'售价':'预期价格'}}</text>
         </view>
         <view class="error-wrap" style="margin-left: -108px;" wx:if="{{ errors.price }}">
-          <image src="/static/icon/Alert-warning.png" class="error-icon"/>
+          <image src="/static/icon/Alert-warning.svg" class="error-icon"/>
           <text class="error-tip">{{ errors.price }}</text>
         </view>
         <view class="price-view">￥
@@ -97,7 +97,7 @@
           <image class="icon" src="../../static/icon/contact.svg"></image>
           <text class="title">联系方式</text>
           <view style="margin-left:40rpx;" class="error-wrap" wx:if="{{ errors.contact }}">
-            <image src="/static/icon/Alert-warning.png" class="error-icon"></image>
+            <image src="/static/icon/Alert-warning.svg" class="error-icon"></image>
             <text class="error-tip">{{ errors.contact }}</text>
           </view> 
         </view>

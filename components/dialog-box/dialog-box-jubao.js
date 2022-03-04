@@ -4,6 +4,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    title:{
+      type:String,
+      value:''
+    },
     content:{
       type:String,
       value:'请填写结束招募理由，\n理由将被队内成员看到。'
@@ -19,10 +23,6 @@ Component({
     cancelText:{
       type:String,
       value:'取消'
-    },
-    hideCancelButton:{
-      type:Boolean,
-      value:false,
     },
     isShow:{
       type:Boolean,
@@ -45,6 +45,28 @@ Component({
       }
     },
 
+    /** 举报功能新增变量  */
+    reportReason:{
+      type:Array,
+      value:[]
+    },
+    hideOkButton:{
+      type:Boolean,
+      value:false
+    },
+    hideCancelButton:{
+      type:Boolean,
+      value:false
+    },
+    inputPlaceholder:{
+      type:String,
+      value:'请输入结束组队的原因'
+    },
+    hasPictureBox:{
+      type:Boolean,
+      value:true
+    },
+
   },
 
   /**
@@ -61,22 +83,18 @@ Component({
     tapCancel:function(e){
 
       this.triggerEvent('tapCancel',this.data.detail);
+      if(this.data.hasInputBox)
+      {
+        return
+      }
+
       this.setData({isShow:false});
-      // if(this.data.hasInputBox&&!this.data.reason){return}
     },
     tapOk:function(e){
       // var t=e.currentTarget.dataset;
-      if(this.data.hasInputBox){
-        if(!this.data.reason)return
-        this.triggerEvent('tapOk',this.data.detail);
-        this.setData({isShow:false})
-      }else{
-        this.setData({
-          isShow:false,
-          hideCancelButton:false,
-        });
-        this.triggerEvent('tapOk',this.data.detail);
-      }      
+      this.triggerEvent('tapOk',this.data.detail);
+      if(this.data.hasInputBox&&!this.data.reason){return}
+      this.setData({isShow:false});
     },
     finishInput:function(e){
       this.setData({reason:e.detail.value})
