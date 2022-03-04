@@ -7,7 +7,7 @@
 
   <view class="inner">
     <!-- banner 位 -->
-    <swiper indicator-dots 	indicator-color='#dedede' indicator-active-color='#fff' class="pictureArea" id="banner">
+    <swiper indicator-dots 	indicator-color='#dedede' indicator-active-color='#fff' class="pictureArea" id="banner" autoplay="{{true}}" interval="{{2500}}">
       <swiper-item wx:for="{{banner}}">
         <navigator url="{{ item.pageUrl }}">
           <image src='{{item.ossImageUrl}}' class='img' mode="aspectFill"/>
@@ -19,15 +19,16 @@
     <swiper class="flex-container" id="index-entry">
       <swiper-item>
         <block wx:for="{{entryItem}}">
-        <navigator url="{{ item.path }}" open-type="{{ item.opentype}}" id="entry-item" class="horizon-cneter">
+        <navigator url="{{ item.path }}" open-type="{{ item.opentype}}" id="entry-item" class="horizon-cneter rela">
+          <image wx:if="{{item.isNew && isNewLabelShow}}" id="new-label" class="abs-rightupper" src="/static/icon/new-label.png"></image>
           <image id="entry-item__icon" class="horizon-cneter" src="/static/icon/{{ item.icon }}"></image>
           <view class="poby-text bdst" style="line-height:0;">{{ item.text }}</view>
         </navigator>
         </block>
         <!-- 以下是占位入口, 为开发中功能 -->
         <view class="horizon-cneter" id="entry-item" bindtap="showComingTip">
-          <image id="entry-item__icon" class="horizon-cneter" src="/static/icon/xianyu-icon.png"></image>
-          <view class="poby-text bdst" style="line-height:0;">校园闲鱼</view>
+          <image id="entry-item__icon" class="horizon-cneter" src="/static/icon/student-rights.png"></image>
+          <view class="poby-text bdst" style="line-height:0;">权益反馈</view>
         </view>
 
       </swiper-item>

@@ -57,6 +57,18 @@
   background-position: center 0;
 }
 /* -----金刚位样式-------- */
+#new-label {
+  width: 64rpx;
+  height: 32rpx;
+}
+.abs-rightupper {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.rela {
+  position: relative;
+}
 #index-entry {
   box-sizing: border-box;
   height: 280rpx;

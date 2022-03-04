@@ -110,19 +110,16 @@ async function getNextPostingPage(that , keyword, labelId, timeIndex) {
 Component({
   behaviors: [filterBehavior],
   data: {
+    // new 标签
+    isNewLabelShow: Date.now() < new Date(2022,3,4), // 4月4号标签失效
     // 金刚位入口
     entryItem: [
       {
-      icon: 'lost-icon.png',
-      text: '失物招领',
-      path: '/pages/tongde/main',
-      opentype: 'navigate',
-      },
-      {
-        icon: 'encyclopedia-icon.png',
-        text: '同济百科',
-        path: '/pages/jishi/encyclopedia',
+        icon: 'xianyu-icon.png',
+        text: '校园闲鱼',
+        path: '/pages/xianyu/main',
         opentype: 'navigate',
+        isNew: true
       },
       {
         icon: 'jiren-icon.png',
@@ -131,11 +128,18 @@ Component({
         opentype: 'switchTab',
       },
       {
-        icon: 'xianyu-icon.png',
-        text: '校园咸鱼',
-        path: '/pages/xianyu/main',
+        icon: 'encyclopedia-icon.png',
+        text: '同济百科',
+        path: '/pages/jishi/encyclopedia',
         opentype: 'navigate',
-      }
+        isNew: true
+      },
+      {
+        icon: 'lost-icon.png',
+        text: '失物招领',
+        path: '/pages/tongde/main',
+        opentype: 'navigate',
+      },
     ],
     isRefresherOpen : false,
     showGoTopButton:false, 
@@ -223,7 +227,7 @@ Component({
       request({
         url : "/banner/getAllBanner",
       }).then(res => {
-        const data = res.data.data;
+        const data = res.data.data.filter(e => e.isPublished);
         this.setData({
           banner: data
         })
@@ -371,7 +375,9 @@ Component({
     // ----- 显示: 提示框  -------------
     showComingTip() {
       wx.showModal({
-        content: "功能开发中..."
+        content: "紧锣密鼓开发中, 敬请期待",
+        showCancel: false,
+        confirmText: "知道啦"
       })
     }
   }
