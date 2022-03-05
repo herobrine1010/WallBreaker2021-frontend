@@ -652,7 +652,7 @@ copyWxId(){
   },
   dialogTapOkForAcceptApplying:function(){
     let that=this;
-    if(this.judgeIfRequestSubscribe()==true){
+    if(this.judgeIfRequestSubscribe(true)==true){
       wx.requestSubscribeMessage({
         tmplIds: [this.data.initiatorTmpId],
         success(res){
@@ -678,10 +678,12 @@ copyWxId(){
       },
       data:{
         userId:this.data.targetId,
-        teamId:this.data.teamId
+        teamId:this.data.teamId,
+        page:app.getSharedUrl() 
       },
       method:'POST'
     }).then(res => {
+      console.log(res)
       that.showTipBox(that.data.targetName+'已成功入队！可点击头像查看微信号，快去与ta联系吧！');
 
       // 重新请求获取 成员列表、申请者列表数据
@@ -721,7 +723,7 @@ copyWxId(){
   },
   dialogTapOkForRefuseApplying:function(){//待解决 ： initializeResult 和 changeScrollHeight 作用
     let that=this;
-    if(this.judgeIfRequestSubscribe()==true){
+    if(this.judgeIfRequestSubscribe(false)==true){
       wx.requestSubscribeMessage({
         tmplIds: [this.data.initiatorTmpId],
         success(res){
@@ -745,10 +747,12 @@ copyWxId(){
       },
       data:{
         userId:that.data.targetId,
-        teamId:that.data.teamId
+        teamId:that.data.teamId,
+        page:app.getSharedUrl()
       },
       method:'POST',
     }).then(res => {
+      console.log(res)
       wx.showToast({
         title: '已拒绝'+that.data.targetName+'的申请',
         icon: 'success'
@@ -814,6 +818,9 @@ copyWxId(){
           header:{
              
           },
+          data:{
+            page:app.getSharedUrl()
+          }
         }).then(res=>{
           // 重新请求获取 成员列表、申请者列表数据
           let getTeamMemberList = that.getTeamMemberList(that.data.teamId, that.data. amITeamInitiator, that.data.teamDetail.dueMember);
@@ -833,31 +840,31 @@ copyWxId(){
     })
     
   },
-  judgeIfRequestSubscribe(){
+  judgeIfRequestSubscribe(accept){
     if(this.data.applierList.length==1){
-      let tag=false
+      let count=accept?2:1
       let list=this.data.teamMemberList
       for(let item of list){
         if(item.avatar==undefined){
-          tag=true
-          break
+          count--
+          if(count<=0)return true
         }
       }
-      if(tag)return true
     }
+    return false
   },
 
   initiatorChangeSubscribeStatus(res){
-    if(res['zw9cJ9Z9vTvOAzprBzzJ1W0K8qS5wxq-tj6PgEalRfc']=='accept'){
-      // request({
-      //   url: '/userTeam/apply',
-      //   method:"POST",
-      //   header:{'cookie':app.globalData.token},
-      //   data:{
-      //     teamId:that.data.teamId,
-      //     agreeReceiveMsg:result,
-      //   },
-      // })
+    if(res[this.data.initiatorTmpId]=='accept'){
+      request({
+        url: '/team/modifySitePost',
+        method:"POST",
+        header:{'cookie':app.globalData.token},
+        data:{
+          teamId:this.data.teamId,
+          agreeReceiveMsg:true,
+        },
+      })
     }
   },
 
@@ -969,9 +976,11 @@ copyWxId(){
               header:{ },
               data:{
                 teamId:that.data.teamId,
-                agreeReceiveMsg:result
+                agreeReceiveMsg:result,
+                page:'/pages/welcome/welcome',
               },
             }).then(res => {
+              console.log(res)
               if(res.statusCode>=200&&res.statusCode<300 && res.data.success){
                 wx.showToast({
                   title: '申请已提交',

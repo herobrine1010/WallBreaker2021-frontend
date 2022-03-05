@@ -105,7 +105,7 @@
           <view class="board-view">
             <view class="detail-headline">
               <view class="detail-title">{{teamDetail.title}}</view> 
-              <image class="detail-report" src="/static/icon/report.png" bindtap="tapReportDetail" ></image>
+              <!-- <image class="detail-report" src="/static/icon/report.png" bindtap="tapReportDetail" ></image> -->
             </view>
         
             <view class="detail-a-line">

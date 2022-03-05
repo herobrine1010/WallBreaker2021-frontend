@@ -141,7 +141,7 @@ Page({
         index = index + 1;
     };
 
-    let tmpId='zw9cJ9Z9vTvOAzprBzzJ1W0K8qS5wxq-tj6PgEalRfc'
+    let tmpId='mTc40P4CHN8U-FKjtSDTCSjo3YGFi0d3PRse-aPGRC4'
     wx.requestSubscribeMessage({
       tmplIds: [tmpId],
       success (res) {
