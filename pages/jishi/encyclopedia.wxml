@@ -108,14 +108,15 @@
       <view class="communication-view" wx:if="{{tabIndex==1}}">
         <view class="communication-card" wx:for="{{communication_section.dataList}}">
           <view class="communication-column">
-            <view class="communication-name">{{item.name}}</view>
-            <view class="communication-address">{{item.address}}</view>
-            <view class="communication-serve-time">{{item.serveTime}}</view>
+            <view class="communication-name two-line-text">{{item.name}}</view>
+            <view class="communication-address two-line-text">{{item.address}}</view>
+            <view class="communication-serve-time two-line-text">{{item.serveTime}}</view>
           </view>
           <view class="communication-column-right">
-            <view style="background-color:{{communication_section.zoneColorList[item.zoneId-56]}}" class="communication-zone">{{communication_section.zoneNameList[item.zoneId-56]+'校区'}}</view>
-            <image src="../../static/icon/ring-icon.svg" wx:if="{{!item.answer_show}}" class="communication-ring-image" bindtap="makePhoneCall" data-phone="{{item.phone}}" data-id="{{item.id}}"></image>
+            <view style="background-color:{{item.zone.color}}" class="communication-zone">{{item.zone.value}}</view>
           </view>
+          <image src="../../static/icon/ring-icon.svg" wx:if="{{!item.answer_show}}" class="communication-ring-image" bindtap="makePhoneCall" data-phone="{{item.phone}}" data-id="{{item.id}}"></image>
+
         </view>
         
         <view wx:if="{{communication_section.dataList.length==0}}" class="noData">

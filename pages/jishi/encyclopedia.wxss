@@ -134,7 +134,7 @@
 }
 
 .question-answer-content{
-  margin: 10rpx;
+  /* margin: 10rpx; */
   /* font-family: PingFang SC; */
   font-size: 14px;
   line-height: 150%;
@@ -240,10 +240,11 @@
 }
 .conditionsNotSelected{
   background-color: #ffffff;
-border-color: #768185;
-color:#768185;
-border-width:1px;
-border-style: solid;
+  border-color: #768185;
+  color:#768185;
+  border-width:1px;
+  border-style: solid;
+  font-size: 24rpx;
 }
 .conditionsSelected{
   background-color: #26C9FF;
@@ -283,20 +284,36 @@ border-style: solid;
   /* font-size: 14px; */
   font-weight: bold;
   color: #333333;
+  width: 518rpx;
 }
 .communication-address{
   font-size: 14px;
   color: #333333;
+  width: 518rpx;
 }
 .communication-serve-time{
   font-size: 12px;
   color: #868788;
+  width: 518rpx;
+}
+.two-line-text{
+  overflow: hidden;     
+  /* 末尾加省略号 */
+  text-overflow: ellipsis;  
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  /* 行数，也可以设为1，用来做单行 */
+  -webkit-line-clamp:2;
 }
 .communication-column-right{
   position: absolute;
   right: 0;
+  /* top: 0;
+  bottom: 0; */
 }
 .communication-zone{
+  /* width: 104rpx; */
   background: #3A3042;
   border-radius: 12px 0px 0px 12px;
   color: #F7F7F7;
@@ -306,10 +323,13 @@ border-style: solid;
   /* width: 100rpx; */
 }
 .communication-ring-image{
+  position: absolute;
+  bottom: 16rpx;
+  right: 24rpx;
   width: 64rpx;
   height: 64rpx;
   /* height: 4vh; */
-  margin: 20rpx 40rpx 0;
+  /* margin: 20rpx 40rpx 0; */
 }
 .noData{
   font-size:2vh;

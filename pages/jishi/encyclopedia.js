@@ -44,10 +44,19 @@ Page({
       keyword:'',
       loadingTimeout:2000,
       dataList:[],
-      zoneIdList:[56,57,58,59,60,61],
-      zoneNameList:['四平','嘉定','彰武','铁岭','沪西','沪北'],
-      zoneColorList:['#3A3042','#7C3ECC','#957D95','#3E92CC','#17B2E5','#BA75FF'],
-      // zoneNameList:['四平校区','嘉定校区','彰武校区','铁岭校区','沪西校区','沪北'],
+      zoneIdList:[56,57,58,59,60,61,73],
+      // zoneNameList:['四平','嘉定','彰武','铁岭','沪西','沪北'],
+      zoneColorList:['#3A3042','#7C3ECC','#7C3ECC','#7C3ECC','#17B2E5','#BA75FF'],
+      zoneNameList:['四平校区','嘉定校区','彰武校区','铁岭校区','沪西校区','沪北校区','校外'],
+      zoneMap:{
+        56:{value:'四平校区',color:'#3A3042'},
+        57:{value:'嘉定校区',color:'#7C3ECC'},
+        58:{value:'彰武校区',color:'#3A3042'},
+        59:{value:'铁岭校区',color:'#7C3ECC'},
+        60:{value:'沪西校区',color:'#7C3ECC'},
+        61:{value:'沪北校区',color:'#17B2E5'},
+        73:{value:'校外',color:'#C0C0C0'}
+      },
       zoneIndex:null,
       onFilter:false,
       refresherEnabled:true,
@@ -235,6 +244,13 @@ Page({
           if(item.allPicUrl)
             item.all_pic_url_list=item.allPicUrl.split(',')
           return item;
+        })
+      }
+      if(this.data.sectionName=='communication_section'){
+        let zoneMap=this.data.communication_section.zoneMap
+        records=records.map(item=>{
+          item.zone=zoneMap[item.zoneId]
+          return item
         })
       }
       let {dataList}=that.data[this.data.sectionName]
