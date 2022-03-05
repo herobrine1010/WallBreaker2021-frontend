@@ -46,9 +46,9 @@ const getNotice = param => {
     success:function(res){
       if(res.statusCode==200){
         if(res.data.data.jirenMsgExist){
-          wx.showTabBarRedDot({index:3})
+          wx.showTabBarRedDot({index:2})
         }else{
-          wx.hideTabBarRedDot({index:3})
+          wx.hideTabBarRedDot({index:2})
         }
         return(res.data.data);
       }

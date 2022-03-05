@@ -30,6 +30,7 @@
   cancelText="{{dialog.cancelText}}"
   isShow="{{dialog.isDialogShow}}"
   isShowInfo="{{dialog.isShowInfo}}"
+	buttonColor="#3E92CC"
   bind:tapOk="tapOk"
 >
 </dialog-box>

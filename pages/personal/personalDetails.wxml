@@ -125,6 +125,7 @@
     okText="{{dialog.okText}}"
     cancelText="{{dialog.cancelText}}"
     hideCancelButton="{{dialog.hideCancelButton}}"
+    buttonColor="#3E92CC"
     isShow="{{dialog.isDialogShow}}"
     bind:tapOk="{{dialog.tapOkEvent}}"
     >
