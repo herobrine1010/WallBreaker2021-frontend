@@ -9,7 +9,7 @@
     <!-- banner 位 -->
     <swiper indicator-dots 	indicator-color='#dedede' indicator-active-color='#fff' class="pictureArea" id="banner" autoplay="{{true}}" interval="{{2500}}">
       <swiper-item wx:for="{{banner}}">
-        <navigator url="{{ item.pageUrl }}">
+        <navigator url="../jishi/link?linkUrl={{ item.pageUrl }}">
           <image src='{{item.ossImageUrl}}' class='img' mode="aspectFill"/>
         </navigator>
       </swiper-item>
