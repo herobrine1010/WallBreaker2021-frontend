@@ -95,7 +95,7 @@ okText="确定"
 cancelText="取消"
 hideCancelButton="{{dialog.hideCancelButton}}"
 isShow="{{dialog.isDialogShow}}"
-buttonColor="blue"
+buttonColor="#3E92CC"
 bind:tapCancel="{{dialog.tapCancelEvent}}"
 bind:tapOk="{{dialog.tapOkEvent}}"
 >

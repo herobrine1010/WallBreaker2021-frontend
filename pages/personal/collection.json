@@ -1,8 +1,8 @@
 {
   "usingComponents": {
     "mp-navigation-bar" : "weui-miniprogram/navigation-bar/navigation-bar",
-    "card-team":"../../components/card-team/card",
-    "card-notice":"../../components/card-notice/card"
+    "card-team":"../../components/card-team/card-new2",
+    "card-notice":"../../components/card-notice/card-new2"
   },
   "navigationStyle": "custom" 
 

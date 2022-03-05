@@ -11,8 +11,6 @@ Page({
 
   data: {
     collectionTitle : "我的收藏",
-    leftButtonTitle : "帖子收藏",
-    rightButtonTitle : "组队收藏",
     //默认初试选择左边 帖子按钮 
     isNoticeOrTeam : 0,
     background : "backgroundLeft",

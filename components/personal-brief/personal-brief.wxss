@@ -4,9 +4,13 @@
   display: flex;
   flex-direction: row;
   position: relative;
+  justify-content: space-around;
+  align-items: center;
   /* height: 250rpx; */
-  width: 90%;
-  margin: 3% 5%;
+  /* width: 90%; */
+  margin: 3% 0;
+  margin-left: 40rpx;
+  margin-right: calc(32rpx - 8rpx);
 }
 .photo{
   /* position: absolute; */
@@ -16,7 +20,8 @@
   border-radius: 100rpx;
 }
 .container{
-  margin-left: 16rpx;
+  width: calc(144rpx * 3 + 8rpx * 3);
+  /* margin-left: 24rpx; */
   /* position: absolute;
   left: 240rpx;
   top: 30rpx; */
@@ -33,7 +38,7 @@
 .nickname{
   height: 48rpx;
   font-size: 36rpx;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 48rpx;
   margin-bottom: 8rpx;
   margin-right: 14rpx;
@@ -51,7 +56,7 @@
 .school{
   /* height: 24rpx; */
   font-size: 24rpx;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 36rpx;
 }
 .description{
@@ -65,13 +70,14 @@
   font-family: PingFang SC;
   margin-left: -8rpx;
   margin-top: 16rpx;
+  width: 480rpx;
 }
 .label{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 32rpx;
-  width: 128rpx;
+  width: 144rpx;
   margin: 5rpx 8rpx;
   border-radius: 8rpx;
   background: rgba(23, 178, 230, 0.8);

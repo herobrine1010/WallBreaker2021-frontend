@@ -1,0 +1,160 @@
+/* components/card/card.js.wxss */
+.card{
+  position: relative;
+  width: 100%;
+  height: 224rpx;
+  margin-bottom: 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+}
+
+.tag{
+  position: absolute;
+  left: 24rpx;
+  top: 26rpx;
+  width: 96rpx;
+  height: 40rpx;
+  text-align: center;
+  /* Purple3 */
+  background: #3E92CC;
+  border-radius: 8rpx;
+
+  font-family: Noto Sans SC;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20rpx;
+  line-height: 40rpx;
+  /* white */
+  color: #FFFFFF;
+}
+
+.title{
+  /* 帖子标题、位置 */
+  position: absolute;
+  left: 136rpx;
+  top: 25rpx;
+  height: 42rpx;
+  width: 530rpx;
+
+    /* 只显示一行，并在末尾加省略号 */
+    overflow: hidden;  
+    white-space: nowrap;    
+    /* 末尾加省略号 */
+    text-overflow:ellipsis;
+  /* 字体/bold/14 */
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28rpx;
+  line-height: 42rpx;
+  color: #524A59;
+}
+.rightTag{
+  /* JiRen/Home/Card/右侧标签 */
+  /* 不设定高度，设置行高=36rpx；无内容时标签不显示 */
+  position: absolute;
+  right: -2rpx;
+  top: 21rpx;
+  width: 105rpx;
+  background: rgba(23, 178, 230, 0.8);
+  border-radius: 20px 0px 0px 20px;
+  /* 文字格式 */
+  font-family: PingFang SC;
+  font-size: 24rpx;
+  line-height: 34rpx;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.icon{
+  /* Icon/User01 */
+  height: 40rpx;
+  width: 40rpx;
+  border-radius: 50%; /*使头像变成圆形*/
+  position: absolute;
+  left: 24rpx;
+  top: 82rpx;
+}
+.userName{
+  /* 用户昵称 不超过6个字符*/
+  position: absolute;
+  left: 72rpx;
+  top: 84rpx;
+  max-width: 246rpx;
+  height: 36rpx;
+  /* 只显示一行，并在末尾加省略号 */
+  overflow: hidden;  
+  white-space: nowrap;    
+  /* 末尾加省略号 */
+  text-overflow:ellipsis;
+
+  /* tag/medium/11 */
+  font-family: PingFang SC;
+  font-size: 24rpx;
+  font-weight: medium;
+  line-height: 36rpx;
+  /* Purple3 */
+  color: #333333;
+}
+.time{
+  /* 用户昵称后的：发布时间 */
+  position: absolute;
+  left: 315rpx;
+  top: 87rpx;
+  height: 30rpx;
+  /* content/regular/10 */
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20rpx;
+  line-height: 30rpx;
+/* gray3_P */
+  color: #7E7685;
+}
+/* 以下是存放内容简介的container 样式=-------------------- */
+.description-contain{
+  display: flex;
+  position: absolute;
+  /* width: 540rpx; */
+  /* width: 650rpx; */
+  /* height: 138rpx; */
+  left: 24rpx;
+  bottom: 20rpx;
+  align-items:center;
+
+  font-family: PingFang SC;
+  font-size: 20rpx;
+  line-height: 30rpx;
+/* gray2_P */
+  color: #99989A;
+}
+.description-short{
+  width: 500rpx;
+}
+.description-long{
+  width: 650rpx;
+}
+.description{
+  height: 68rpx;
+  /* 超出部分隐藏 */
+  overflow: hidden;     
+  /* 末尾加省略号 */
+  text-overflow:ellipsis;  
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  /* 行数，也可以设为1，用来做单行 */
+  -webkit-line-clamp:2;
+}
+
+.image{/* Rectangle 15 */
+
+  position: absolute;
+  width: 120rpx;
+  height: 120rpx;
+  bottom: 24rpx;
+  right: 24rpx;
+  /* Gray1 */
+  background: #E6E6E6;
+  border-radius: 8rpx;
+  }

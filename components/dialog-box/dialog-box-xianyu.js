@@ -57,6 +57,8 @@ Component({
       let buttonColor=this.properties.buttonColor
       if(buttonColor=='purple'){
         this.setData({button_color:'#957D95'})
+      }else{
+        this.setData({button_color:buttonColor})
       }
     },
   },

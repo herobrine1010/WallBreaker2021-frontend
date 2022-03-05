@@ -288,6 +288,7 @@ radio-group > radio {
 .error-content-none{
   position: absolute;
   top:80rpx;
+  left:8rpx;
 }
 
 

@@ -106,7 +106,7 @@ Page({
   getDetail(){
     let that=this
     request({
-      url: '/market/getMarket/' + this.data.id,
+      url: '/market/getMarket/' + this.data.id+'/true',
       method: 'GET',
       header: {
         'content-type': 'application/json'

@@ -6,63 +6,79 @@
   background-image: linear-gradient(199.75deg, rgba(140, 26, 255, 0.18) 40.18%, rgba(140, 26, 255, 0) 90.9%), linear-gradient(195.29deg, #DCBCFB 2.51%, #A2E4FA 27.51%);
 }
 
+.background-image{
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: -1;
+}
+.icon{
+  width: 32rpx;
+  height: 32rpx;
+  /* height: 4vh; */
+  /* margin: auto 20rpx; */
+  margin-right: 10rpx;
+}
+
 /* 以下是intro-container组件的样式 */
 .per-con{
   position: relative;
   top: 12%;
   /* display: flex; */
   width: 100%;
-  background: rgba(242, 252, 255, 0.35);
+  /* background: rgba(242, 252, 255, 0.35); */
   border-radius: 50rpx 50rpx 0 0;
-  background-color: #F2FCFF;
+  /* background-color: #F2FCFF; */
 
 }
 
 /* 以下是介绍文本的样式 */
 .product-head{
   width: 92%;
-  padding: 50rpx 4% 22rpx 4%;
+  padding: 32rpx 4% 48rpx 4%;
 
   font-family: Noto Sans SC;
   font-style: normal;
-  font-weight: bold;
-  font-size: 38rpx;
+  font-weight: medium;
+  font-size: 28rpx;
   line-height: 42rpx;
   display: flex;
   align-items: center;
-  color: #4A5559;
+  color: #333333;
 }
 .product-body{
   width: 92%;
-  margin: 0 4% 66rpx 4%;
+  margin: 0 4% 48rpx 4%;
 
   font-family: PingFang SC;
-  font-size: 30rpx;
+  font-size: 24rpx;
+  font-weight: normal;
   line-height: 42rpx;
-  color: #4A5559;
+  color: #333333;
 }
 
 .team-head{
   width: 92%;
-  padding: 0 4% 22rpx 4%;
+  padding: 0 4% 48rpx 4%;
 
   font-family: Noto Sans SC;
   font-style: normal;
-  font-weight: bold;
-  font-size: 38rpx;
+  font-weight: medium;
+  font-size: 28rpx;
   line-height: 42rpx;
   display: flex;
   align-items: center;
-  color: #4A5559;
+  color: #333333;
 }
 .team-body{
   width: 92%;
   margin: 0 4% 66rpx 4%;
 
   font-family: PingFang SC;
-  font-size: 30rpx;
+  font-size: 24rpx;
+  font-weight: 400;
   line-height: 42rpx;
-  color: #4A5559;
+  color: #333333;
 }
 .officialAccount-head{
   width: 92%;
@@ -84,12 +100,13 @@
 .pic-head{
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-around;
+  margin: 0 4% 48rpx 4%;
+  /* justify-content: space-around; */
 
   font-family: Noto Sans SC;
   font-style: normal;
-  font-weight: bold;
-  font-size: 36rpx;
+  font-weight: medium;
+  font-size: 28rpx;
   line-height: 42rpx;
   display: flex;
   align-items: center;
@@ -98,23 +115,23 @@
 .pic-body{
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-evenly;
+  margin: 0 4% 0 4%;
+  /* justify-content: space-evenly; */
   align-items: center;
-  padding-bottom: 100rpx;
 }
 
 .pic-body image{
-  width: 300rpx;
-  height: 300rpx;
+  width: 222rpx;
+  height: 222rpx;
 }
 .contactUs-head{
   width: 92%;
-  padding: 0 4% 22rpx 4%;
+  padding: 0rpx 4% 48rpx 4%;
 
   font-family: Noto Sans SC;
   font-style: normal;
-  font-weight: bold;
-  font-size: 38rpx;
+  font-weight: medium;
+  font-size: 28rpx;
   line-height: 42rpx;
   display: flex;
   align-items: center;
@@ -125,7 +142,8 @@
   margin: 0 4% 66rpx 4%;
 
   font-family: PingFang SC;
-  font-size: 30rpx;
+  font-size: 24rpx;
+  font-weight: normal;
   line-height: 42rpx;
   color: #4A5559;
 }

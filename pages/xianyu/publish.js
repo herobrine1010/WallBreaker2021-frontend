@@ -58,6 +58,11 @@ Page({
     categoryList:categoryList,
     zoneList:zoneList,
     detail:{
+      contactController:{
+        lastIndex:0,
+        count:1,
+        showAddButton:true,
+      },
       lastContactIndex:0,
       countContactNumber:1,
       showAddButton:true,
@@ -170,8 +175,9 @@ Page({
     let that=this
     let id=20
     if(this.data.id) id=this.data.id
+    console.log('yi')
     request({
-      url: '/market/getMarket/' + id,
+      url: '/market/getMarket/' + id+'/false',
       method: 'GET',
       header: {
         'content-type': 'application/json'
@@ -183,6 +189,7 @@ Page({
           ...parseDetail(res.data.data),
           ...parseIdToIndex(res.data.data),
           contactList:parseContactList(res.data.data),
+          contactController:parseContactController(res.data.data),
         }
       })
       that.changePriceInputWidth()
@@ -358,7 +365,7 @@ Page({
   
   addNewContact:function(e){
     console.log(this.data.detail.contactList)
-    let countContactNumber=this.data.detail.countContactNumber+1
+    let count=this.data.detail.contactController.count+1
     let list=this.data.detail.contactList
     list.push({
       index:-1,
@@ -368,10 +375,12 @@ Page({
     })
     this.setData({
       ['detail.contactList']:list,
-      ['detail.showMinusButton']:true,
-      ['detail.lastContactIndex']:list.length-1,
-      ['detail.countContactNumber']:countContactNumber,
-      ['detail.showAddButton']:countContactNumber>=4?false:true,
+      ['detail.contactController']:{
+        lastIndex:list.length-1,
+        count:count,
+        showAddButton:count>=4?false:true,
+        showMinusButton:true,
+      },
       haveEdited:true,
     })
     // this.countContactNumber()
@@ -379,7 +388,7 @@ Page({
 
   deleteContact:function(e){
     console.log(this.data.detail.contactList)
-    let countContactNumber=this.data.detail.countContactNumber-1
+    let count=this.data.detail.contactController.count-1
     let list=this.data.detail.contactList
     let deleteItem=list[e.currentTarget.dataset.index]
     let status=deleteItem.status
@@ -388,7 +397,7 @@ Page({
     }else{    //'modified' 'complete'
       deleteItem.status='deleted'
     }
-    let lastContactIndex=this.data.detail.lastContactIndex
+    let lastContactIndex=this.data.detail.contactController.lastIndex
     if(e.currentTarget.dataset.index==lastContactIndex){
       for(let i=lastContactIndex-1;i>=0;i--){
         status=list[i].status
@@ -401,10 +410,12 @@ Page({
     this.setData({
       // ['detail.contactList['+e.currentTarget.dataset.index+'].status']:status,
       ['detail.contactList']:list,
-      ['detail.showMinusButton']:countContactNumber<=1?false:true,
-      ['detail.lastContactIndex']:lastContactIndex,
-      ['detail.countContactNumber']:countContactNumber,
-      ['detail.showAddButton']:countContactNumber>=4?false:true,
+      ['detail.contactController']:{
+        lastIndex:lastContactIndex,
+        count:count,
+        showAddButton:count>=4?false:true,
+        showMinusButton:count<=1?false:true,
+      },
       haveEdited:true
     })
     // this.countContactNumber()
@@ -671,6 +682,8 @@ async function uploadContactList(id,contactList){
   let editList=[]
   let requestList=[]
   for(let item of contactList){
+    console.log(item)
+    if(item.index<0)continue
     data={
       contactType:contactTypeList[item.index].id,
       contact:item.content,
@@ -748,6 +761,7 @@ function parseIdToIndex(detail){
 }
 
 function parseContactList(detail){
+  console.log(detail)
   let contactList=detail.marketContactList
   let index
   if(contactList.length){
@@ -776,4 +790,18 @@ function parseContactList(detail){
     }]
   }
   
+}
+
+function parseContactController(detail){
+  let list=detail.marketContactList
+  let count=list.length
+  let data={
+    lastIndex:list.length-1,
+    count:count,
+    showAddButton:count>=4?false:true,
+    showMinusButton:count<=1?false:true,
+  }
+  console.log(data)
+  return data
+
 }

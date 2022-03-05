@@ -6,9 +6,9 @@
     <view class="briefs">
       <view class="nickname-and-identification">
         <view class="nickname">{{personBrief.nickname}}</view>
-        <view style="background-color:#3E92CC;" class="identification" wx:if="{{personBrief.identification=='本'}}">本</view>
-        <view style="background-color:#957D95;" class="identification" wx:if="{{personBrief.identification=='硕'}}">硕</view>
-        <view style="background-color:#3A3042;" class="identification" wx:if="{{personBrief.identification=='博'}}">博</view>
+        <view style="background-color:#A7A7A7;" class="identification" wx:if="{{personBrief.identification=='本'}}">本</view>
+        <view style="background-color:#3EB2CC;" class="identification" wx:if="{{personBrief.identification=='硕'}}">硕</view>
+        <view style="background-color:#BA699A;" class="identification" wx:if="{{personBrief.identification=='博'}}">博</view>
         <view style="background-color:#EDCB96;" class="identification" wx:if="{{personBrief.identification=='教'}}">教</view>
       </view>
       <view class="school">{{personBrief.school +' '+ personBrief.major +' '+ personBrief.grade + '级'}}</view>

@@ -29,18 +29,21 @@
       <image src="../../static/icon/team-arrangement.svg" class="icon"></image>
       <view class="item-title">组队管理</view>
       <view class="right-item">
-        <view class="red-circle" wx:if="{{true}}"></view>
+        <!-- <view class="red-circle" wx:if="{{isJirenMsgExist}}"></view> -->
+        <view wx:if="{{isJirenMsgExist}}" class="red-message">
+          <text class="red-message-word">{{jirenMsgNum}}</text>
+        </view>
         <image class="right-arrow-icon" src="/static/icon/right-arrow.svg"/>
       </view>
-      <view wx:if="{{isJirenMsgExist}}" class="red-message poby-text bds">
+      <!-- <view wx:if="{{isJirenMsgExist}}" class="red-message poby-text bds">
         <text class="red-message-word">{{jirenMsgNum}}</text>
-      </view>
+      </view> -->
     </navigator>
     <navigator url="../personal/collection" class="per-items">
       <image src="../../static/icon/favourite.svg" class="icon"></image>
       <view class="item-title">我的收藏</view>
       <view class="right-item">
-        <view class="red-circle" wx:if="{{true}}"></view>
+        <!-- <view class="red-circle" wx:if="{{true}}"></view> -->
         <image class="right-arrow-icon" src="/static/icon/right-arrow.svg"/>
       </view>
     </navigator>
@@ -48,7 +51,7 @@
       <image src="../../static/icon/my-lost.svg" class="icon"></image>
       <view class="item-title">我的失物招领</view>
       <view class="right-item">
-        <view class="red-circle" wx:if="{{true}}"></view>
+        <!-- <view class="red-circle" wx:if="{{true}}"></view> -->
         <image class="right-arrow-icon" src="/static/icon/right-arrow.svg"/>
       </view>
     </navigator>
@@ -56,7 +59,7 @@
       <image src="../../static/icon/my-xianzhi.svg" class="icon"></image>
       <view class="item-title">我的闲置</view>
       <view class="right-item">
-        <view class="red-circle" wx:if="{{true}}"></view>
+        <!-- <view class="red-circle" wx:if="{{true}}"></view> -->
         <image class="right-arrow-icon" src="/static/icon/right-arrow.svg"/>
       </view>
     </navigator>

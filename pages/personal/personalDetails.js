@@ -129,6 +129,7 @@ Page({
 
   // 用户在对话框中点击确定后，会触发以下事件，并向服务器发送请求
   dialogTapOkForChangePersonalDetail:function(){
+    console.log(this.data)
     let that = this ;
     let labels = that.data.labels;
     let requestList = [];
@@ -326,6 +327,31 @@ Page({
         icon: 'error'
       })
     })
+
+    this.initializeScrollViewHeight()
+  },
+
+  initializeScrollViewHeight:function(){
+    var that=this;
+    let windowHeight
+    let operationAreaHeight
+    wx.getSystemInfo({
+      success: function (res) {
+        windowHeight=res.windowHeight
+      }
+    });
+    let query = wx.createSelectorQuery();
+    query.select('#operation-area').boundingClientRect(rect=>{
+      operationAreaHeight=rect.height
+    }).exec();
+    query.select('#scroll-view').boundingClientRect(rect=>{
+        let top = rect.top;
+        let height=windowHeight-top-operationAreaHeight;
+        this.setData({
+          scrollViewHeight:height+'px',
+        });
+      }).exec();
+      
   },
 
   clickNickNameInput:function(e){
