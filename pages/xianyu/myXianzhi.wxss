@@ -236,7 +236,7 @@ Page {
 }
 
 .object-content{
-  height: 68rpx;
+  height: 60rpx;
   width: 300rpx;
   overflow: hidden;     
   /* 末尾加省略号 */
