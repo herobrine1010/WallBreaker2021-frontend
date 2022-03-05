@@ -1,41 +1,40 @@
 <!--pages/collection/collection.wxml-->
-<view class="background {{background}}">
+<view class="my-shade"/>
+<view class="my-background">
   <!-- nav 组件调用 -->
   <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="组队管理"></mp-navigation-bar>
   <!-- 以下是container，包含了除标题外的其余内容 -->
-  <view class="per-container">
-    <scroll-view 
-    scroll-y="true" style="height:{{height}}"
-    refresher-enabled="true" id="scroll"
-    bindscrolltolower = "onScrollToLower"
-    bindrefresherrefresh = "onRefresherRefresh"
-    refresher-triggered = "{{isRefresherOpen}}"
-    class="collection-body">
-      
-    <view class="inner-body" >
-    <!-- <view style="height:3vh"></view> -->
-      <navigator url="../jiren/groupDetail?teamId={{item.id}}"  wx:for="{{jirenItemList}}">
-        <card-team
-        labelText="{{item.labelContent}}"
-        haveNotice="{{item.haveNotice}}"
-        title="{{item.title}}"
-        teamCondition="{{item.teamCondition}}"
-        rightTagText="{{item.rightTagText}}"  
-        dueTime="{{item.dueTime}}"
-        description="{{item.content}}"
-        initiator="{{item.initiatorNickName}}"
-        badgeType="{{item.badgeType}}"
-        peopleCount="{{item.peopleCount}}"
-        postingPic="{{item.firstPicUrl}}" 
-        ></card-team>
-      </navigator>
-
-    </view>
-
+  <scroll-view 
+  scroll-y="true" style="height:{{height}}"
+  refresher-enabled="true" id="scroll"
+  bindscrolltolower = "onScrollToLower"
+  bindrefresherrefresh = "onRefresherRefresh"
+  refresher-triggered = "{{isRefresherOpen}}"
+  class="collection-body">
     
+  <view class="inner-body" >
+  <!-- <view style="height:3vh"></view> -->
+    <navigator url="../jiren/groupDetail?teamId={{item.id}}"  wx:for="{{jirenItemList}}">
+      <card-team
+      labelText="{{item.labelContent}}"
+      haveNotice="{{item.haveNotice}}"
+      title="{{item.title}}"
+      teamCondition="{{item.teamCondition}}"
+      rightTagText="{{item.rightTagText}}"  
+      dueTime="{{item.dueTime}}"
+      description="{{item.content}}"
+      initiator="{{item.initiatorNickName}}"
+      badgeType="{{item.badgeType}}"
+      peopleCount="{{item.peopleCount}}"
+      postingPic="{{item.firstPicUrl}}" 
+      ></card-team>
+    </navigator>
 
-    </scroll-view>
-     
-    
   </view>
+
+  
+
+  </scroll-view>
+  
+  
 </view>

@@ -1,14 +1,17 @@
 /* components/label-selector/label-selector.wxss */
 .container{
-  width: 650rpx;
+  /* width: 650rpx; */
   margin: 0 auto;
+  /* margin-left: 40rpx; */
 } 
 .label-title{
   display: flex;
   height: 70rpx;
+  margin-left: 40rpx;
 
   font-family: PingFang SC;
-  font-size: 30rpx;
+  font-size: 28rpx;
+  font-weight: medium;
   line-height: 70rpx;
   color: #4A5559;
 }
@@ -24,18 +27,21 @@
   color: #989A9A;
 }
 .label-body{
+  width: calc(4 * (160rpx + 12rpx));
   display: flex;
   flex-wrap: wrap;
-  width: 650rpx;
+  margin: 0 auto;
+  /* width: 650rpx; */
 }
 .label-item{
   display: flex;
-  width: 130rpx;
-  height: 40rpx;
-  margin-right: 32rpx;
-  margin-bottom: 16rpx;
+  width: 156rpx;
+  height: 48rpx;
+  margin-left: 6rpx;
+  margin-right: 6rpx;
+  margin-bottom: 24rpx;
   background: #FFFFFF;
-  border-radius: 20rpx;
+  border-radius: 8rpx;
 
   font-family: PingFang SC;
   font-size: 22rpx;
@@ -43,8 +49,9 @@
   justify-content: center;
   align-items: center;
   color: #4A5559;
+  border: 2rpx solid #3E92CC;
 }
 .label-active{
-  background: #26C9FF;
+  background: #3E92CC;
   color: #FFFFFF;
 }

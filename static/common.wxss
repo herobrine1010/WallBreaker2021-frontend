@@ -88,14 +88,14 @@ bottom: 0%;
 .weui-navigation-bar__centers{
   font-family: PingFang SC;
   font-style: normal;
-  font-weight: bold;
-  font-size: 36rpx;
+  font-weight: 400;
+  font-size: 34rpx;
   line-height: 50rpx;
   display: flex;
   align-items: center;
   text-align: center;
   letter-spacing: 4rpx;
-  color: #FFFFFF;
+  /* color: #FFFFFF; */
   }
 /* 顶部导航栏  返回按钮大小： */
 .weui-navigation-bar__inner .weui-navigation-bar__left .weui-navigation-bar__btn_goback {
@@ -172,5 +172,11 @@ bottom: 0%;
   width: 100%;
   background: rgba(242, 252, 255, 0.35);
   border-radius: 50rpx 50rpx 0 0;
+}
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }
  

@@ -9,29 +9,32 @@
   display: flex;
   height: 160rpx;
   width: 100%;
-  padding: 1.2vh 0;
+  padding: 32rpx 0 40rpx;
   /* padding-bottom: 16rpx; */
   justify-content: center;
 }
 .personal-image image{
-  height: 150rpx;
-  width: 150rpx;
-  border-radius: 75rpx;
+  height: 176rpx;
+  width: 176rpx;
+  border-radius: 50%;
 }
 .detail-items{
   display: flex;
-  height: 44rpx;
-  width: 100%;
-  margin-bottom: 24rpx;
+  align-items: center;
+  height: 80rpx;
+  width: 686rpx;
+  margin: 0 auto;
+  /* margin-bottom: 24rpx; */
   align-content: center;
+  border-bottom: 2rpx solid #dedede;
 }
 .item-title{
   height: 44rpx;
-  width: 120rpx;
-  margin-left: 50rpx;
+  width: 84rpx;
+  margin-left: 8rpx;
 
   font-family: PingFang SC;
-  font-size: 30rpx;
+  font-size: 28rpx;
   line-height: 44rpx;
   text-align: justify;
   color: #4A5559;
@@ -44,10 +47,10 @@
 .item-body{
   width: 400rpx;
   height: 44rpx;
-  background: #FFFFFF;
+  /* background: #FFFFFF; */
   border-radius: 30rpx;
-  margin-right: 25rpx;
-  padding-left: 20rpx;
+  margin-right: 20rpx;
+  margin-left: 64rpx;
 
   font-family: PingFang SC;
   font-size: 30rpx;
@@ -59,11 +62,21 @@
   width: 360rpx;
   height: 40rpx;
 }
+.placeholder-text{
+  font-size: 24rpx;
+  font-size: 400;
+  color: #989A9A;
+}
+.input-text{
+  font-size: 24rpx;
+  font-size: 400;
+  color: #545454;
+}
 .switch-name{
   position: relative;
-  left: -13rpx;
+  left: -0rpx;
   font-family: PingFang SC;
-  font-size: 22rpx;
+  font-size: 24rpx;
   line-height: 44rpx;
   color: #4A5559;
 }
@@ -77,7 +90,7 @@
 }
 
 .wx-description{
-  position: absolute;
+  /* position: absolute; */
   top: -36rpx;
   left: 48rpx;
 }
@@ -97,14 +110,14 @@
 
 .intro-title{
   height: 44rpx;
-  width: 180rpx;
-  margin-left: 50rpx;
+  width: 84rpx;
+  margin-left: 8rpx;
 
   font-family: PingFang SC;
-  font-size: 30rpx;
+  font-size: 28rpx;
   line-height: 44rpx;
   text-align: justify;
-  color: #4A5559;
+  color: #333333;
 }
 .intro-title::after{
   width: 100%;
@@ -112,27 +125,32 @@
   content: "";
 }
 .intro-body{
-  width: 450rpx;
-  height: 44rpx;
+  display: flex;
+  width: calc(554rpx - 16rpx);
+  height: 80rpx;
   background: #FFFFFF;
-  border-radius: 30rpx;
-  margin-right: 30rpx;
-
+  border-radius: 8rpx;
+  /* margin-right: 30rpx; */
+  margin-left: 48rpx;
+  padding-left: 16rpx;
+  
   font-family: PingFang SC;
   font-size: 28rpx;
   line-height: 44rpx;
   text-align: justify;
+  align-items: center;
   color: #4A5559;
 }
 .intro-body input{
-  width: 410rpx;
+  width: 100%;
   height: 44rpx;
-  padding: 0 20rpx;
+  border-radius: 8rpx;
+  /* padding: 0 20rpx; */
 }
 
 
 .detail-btn{
-  position: absolute;
+  /* position: absolute; */
   top: 90%;
   left: 190rpx;
   height: 70rpx;
@@ -152,17 +170,46 @@
 }
 /* 为了解决全面屏的适配问题 */
 .block-2{
-  position: absolute;
+  /* position: absolute; */
   left: 20rpx;
   top: 16%;
 }
 .block-3{
-  position: absolute;
+  /* position: absolute; */
   left: 50rpx;
   top: 59%;
 }
 .block-4{
-  position: absolute;
+  /* position: abxsolute; */
   left: 50rpx;
   top: 73%;
 }
+
+
+
+.operation-button-group{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 32rpx;
+  /* background-color: #ffffff; */
+  z-index: 10;
+}
+
+.operation-button{
+  line-height: 80rpx;
+  height: 80rpx;
+  margin: 24rpx 0;
+  color: #f7f7f7;
+  background: #3E92CC;
+  border-radius: 8rpx;
+  text-align: center;
+  width: 686rpx;
+  font-size: 24rpx;
+  font-weight: 400;
+}
+

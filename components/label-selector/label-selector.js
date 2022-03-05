@@ -15,6 +15,10 @@ Component({
     labels : {
       type : Array,
       value : []
+    },
+    styleColor:{
+      type:String,
+      value:'#3E92CC',
     }
   },
 

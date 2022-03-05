@@ -9,10 +9,12 @@
   </view>
   <form bindsubmit="formSubmit">
     <view class="feedback-body">
-    <textarea name="feedbackText"  maxlength="310" placeholder="请输入您的建议！(不超过300字)" bindinput="handleInput" value="{{text}}"></textarea>
-    <!-- <view class="feedback-tag-lie" -->
-    <view class="feedback-message">限300字</view>
-    <image-box id="image-box" value="{{detail.allPicUrl}}" maxLength="3" bind:operate="changeImage"></image-box>
+      <view class="feedback-input">
+        <textarea name="feedbackText" class="feedback-textarea" maxlength="310" placeholder="请输入您的意见，限300字" bindinput="handleInput" value="{{text}}"></textarea>      
+      </view>
+      <!-- <view class="feedback-tag-lie" -->
+      <!-- <view class="feedback-message">限300字</view> -->
+      <image-box id="image-box" value="{{detail.allPicUrl}}" maxLength="3" bind:operate="changeImage"></image-box>
     </view>
     
     <view id="operation-area" class="operation-button-group">

@@ -1,59 +1,60 @@
 <!--pages/collection/collection.wxml-->
-<view class="background {{background}}">
+<view class="my-shade"/>
+<view class="my-background">
   <!-- nav 组件调用 -->
   <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="{{collectionTitle}}"></mp-navigation-bar>
   <!-- 以下是container，包含了除标题外的其余内容 -->
-  <view class="per-container">
-    <view class="collection-head"> 
-      <view class="collection-btn {{btnColor1}}" bindtap="onLeftNoticeBtnTap">{{leftButtonTitle}}</view> 
-      <view class="collection-btn {{btnColor2}}" bindtap="onRightTeamBtnTap">{{rightButtonTitle}}</view>
-    </view>
-    <scroll-view 
-    scroll-y="true"
-    refresher-enabled="true"
-    bindrefresherrefresh = "onRefresherRefresh"
-    refresher-triggered = "{{isRefresherOpen}}"
-    with-animation='true' 
-    bindscrolltolower = "{{isNoticeOrTeam?onPostingReachBottom:onTeamReachBottom}}"
-    class="collection-body">
-      <!-- <scroll-view class="listArea" scroll-y="true">
-      <view class="list-item"> -->
-      <!-- </view> 
-    </scroll-view> -->
-      <!-- 状态量为0的时候，循环加载 帖子 卡片 -->
-      <!--  -->
-      <block wx:if="{{isNoticeOrTeam===0}}" wx:for="{{jishiItemList}}" wx:key="{{index}}">
-        <navigator url="../jishi/detail-new?postingId={{item.id}}" class="team-item">
-          <card-notice 
-          labelText="{{item.labelText}}"
-          title="{{item.title}}"
-          rightTagText = "{{item.rightTagText}}"
-          userName="{{item.userName}}" 
-          userAvatar = "{{item.userAvatar}}"
-          publishTime="{{item.publishTime}}"
-          description="{{item.description}}"
-          postingPic="{{item.postingPic}}" 
-          ></card-notice>
-        </navigator>
-      </block>
-    <!-- 状态量为1的时候，循环加在 组队 卡片 -->
-      <block wx:for="{{jirenItemList}}" wx:if="{{isNoticeOrTeam}}" wx:key="{{index}}">
-        <navigator url="../jiren/groupDetail?teamId={{item.id}}" class="team-item">
-          <card-team 
-          labelText="{{item.labelText}}"
-          title="{{item.title}}"
-          teamCondition = "{{item.teamCondition}}"
-          rightTagText = "{{item.rightTagText}}"
-          dueTime="{{item.dueTime}}"
-          description="{{item.description}}"
-          initiator="{{item.initiator}}"
-          badgeType="{{item.badgeType}}"
-          peopleCount="{{item.peopleCount}}"
-          postingPic="{{item.firstPicUrl}}"
-          ></card-team>
-        </navigator>
-      </block>
-      
-    </scroll-view>
+  <view class="tab">
+    <view class="tab-item {{btnColor1=='btnColorLeft'?'active':''}}" bindtap="onLeftNoticeBtnTap" data-index="0">帖子收藏</view>
+    <view class="tab-item {{btnColor2=='btnColorRight'?'active':''}}" bindtap="onRightTeamBtnTap" data-index="1">组队收藏</view>
   </view>
+
+
+  <scroll-view 
+  scroll-y="true"
+  refresher-enabled="true"
+  bindrefresherrefresh = "onRefresherRefresh"
+  refresher-triggered = "{{isRefresherOpen}}"
+  with-animation='true' 
+  bindscrolltolower = "{{isNoticeOrTeam?onPostingReachBottom:onTeamReachBottom}}"
+  class="collection-body">
+    <!-- <scroll-view class="listArea" scroll-y="true">
+    <view class="list-item"> -->
+    <!-- </view> 
+  </scroll-view> -->
+    <!-- 状态量为0的时候，循环加载 帖子 卡片 -->
+    <!--  -->
+    <block wx:if="{{isNoticeOrTeam===0}}" wx:for="{{jishiItemList}}" wx:key="{{index}}">
+      <navigator url="../jishi/detail-new?postingId={{item.id}}" class="team-item">
+        <card-notice 
+        labelText="{{item.labelText}}"
+        title="{{item.title}}"
+        rightTagText = "{{item.rightTagText}}"
+        userName="{{item.userName}}" 
+        userAvatar = "{{item.userAvatar}}"
+        publishTime="{{item.publishTime}}"
+        description="{{item.description}}"
+        postingPic="{{item.postingPic}}" 
+        ></card-notice>
+      </navigator>
+    </block>
+  <!-- 状态量为1的时候，循环加在 组队 卡片 -->
+    <block wx:for="{{jirenItemList}}" wx:if="{{isNoticeOrTeam}}" wx:key="{{index}}">
+      <navigator url="../jiren/groupDetail?teamId={{item.id}}" class="team-item">
+        <card-team 
+        labelText="{{item.labelText}}"
+        title="{{item.title}}"
+        teamCondition = "{{item.teamCondition}}"
+        rightTagText = "{{item.rightTagText}}"
+        dueTime="{{item.dueTime}}"
+        description="{{item.description}}"
+        initiator="{{item.initiator}}"
+        badgeType="{{item.badgeType}}"
+        peopleCount="{{item.peopleCount}}"
+        postingPic="{{item.firstPicUrl}}"
+        ></card-team>
+      </navigator>
+    </block>
+    
+  </scroll-view>
 </view>
