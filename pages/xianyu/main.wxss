@@ -1,0 +1,380 @@
+/* pages/xianyu/main.wxss */
+@import "/static/common.wxss";
+
+Page {
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28rpx;
+  line-height: 1.5;
+
+  color: #545454;
+}
+.xianyu-background{
+  background: linear-gradient(180deg, rgba(218, 181, 218, 1) -720rpx, rgba(139, 46, 231, 0) 460rpx);
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.a-line{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+/*上部 tab*/
+.tab {
+  width: 686rpx;
+  margin:24rpx 32rpx;
+  /* height: 72rpx; */
+  display: flex;
+  justify-content:space-around;
+  overflow: hidden;
+}
+.tab-item{
+  height: 40rpx;
+  font-weight: 400;
+  font-size: 32rpx;
+  color: #545454;
+  padding: 0 4rpx 4rpx;
+}
+
+.tab-item.active {
+  color: #333333;
+  font-weight: 500;
+  border-bottom: 4rpx solid #957D95;
+  border-radius: 4rpx;
+  box-shadow: 0 4rpx rgba(192, 203, 206, 0.8);
+}
+
+
+.search-area{
+  position: relative;
+  display: flex;
+  height: 84rpx;
+  width: 95%;
+  align-items: center;
+}
+.searchBar{
+  margin:0 16rpx;
+  flex: 1;
+}
+/* 搜索栏输入框字体颜色 */
+.weui-search-bar__box .weui-search-bar__input{
+  color: #000000 !important;
+  padding:0 0 0 0 ;
+  height: 80rpx;
+}
+.weui-search-bar__form {
+  background: rgba(255, 252, 255, 0.5);
+}
+.dropdown-picker-location{
+  position: relative;
+  width: 160rpx;
+  height: 60rpx;
+}
+
+.dropdown-picker-box{
+  position: absolute;
+  top: 0;
+  width: 160rpx;
+  border-radius: 32rpx;
+  /* justify-content: center; */
+  align-items: center;
+  background-color:rgba(255, 255, 255, 0.2);
+  z-index: 101;
+  border: 0.2px solid #957D95;
+  font-size: 24rpx;
+}
+
+.dropdown-picker-mask{
+  position: absolute;
+  top: 84rpx;
+  left: 0;
+  
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.2);
+  z-index: 90;
+}
+
+.dropdown-picker-item{
+  /* width: 160rpx; */
+  height: 60rpx;
+  line-height: 60rpx;
+  justify-content: center;
+  text-align: center;
+  border-top: 0.2px solid #957D95;
+}
+.dropdown-picker-item:first-child{
+  border-top: 0;
+}
+.dropdown-picker-item:last-child{
+  border-radius: 0 0 32rpx 32rpx;
+}
+.white-background{
+  background-color: white;
+}
+
+.picker-section{
+  width: 160rpx;
+  display: flex;
+  flex-direction: row;
+  background-color:rgba(255, 255, 255, 0.2);
+  height: 60rpx;
+  border-radius: 32rpx;
+  justify-content: center;
+  align-items: center;
+
+}
+.picker-text{
+  text-align: center;
+  color: #545454;
+  font-size: 24rpx;
+}
+.down-arrow-icon{
+  height: 16rpx;
+  width: 16rpx;
+  margin: auto 0;
+  margin-left:16rpx;
+}
+
+.navigation-view{
+  position: relative;
+}
+
+.navigation{
+  white-space: nowrap;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+  padding-right: 40rpx;
+  width: calc(90vw - 20rpx);
+}
+
+.navigation-item,.navigation-item-selected{
+  display: inline-block;
+  margin: 0 8rpx;
+  color: #545454;
+  font-size: 28rpx;
+  padding: 0 12rpx;
+}
+
+.navigation-item:first-child{
+  margin-left:0;
+}
+.navigation-item:nth-last-child(2){
+  margin-right: 0;
+}
+
+.navigation-item-selected{
+  border-bottom: 4rpx solid #957D95;
+  border-radius: 4rpx;
+  box-shadow: 0 4rpx rgba(192, 203, 206, 0.8);
+  color: #333333;
+}
+.navigation-placehold{
+  display: inline-block;
+  width: 5vw;
+  height: auto;
+}
+
+.double-right-arrow-view{
+  position: absolute;
+  right: 5vw;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  /* background-color: #F6F6F6; */
+}
+
+.double-right-arrow-icon{
+  width: 20rpx;
+  height: 20rpx;
+}
+
+
+/*中间 content*/
+.content {
+  flex-grow: 1;
+  height: 80%;
+}
+.content > swiper {
+  /*子代选择器 content类的且swiper子元素*/
+  height:fit-content;
+  height: 100%;
+  background: rgba(238, 238, 238, 0) ;
+}
+
+.scroll{
+  height:fit-content;
+  height: 94%;
+  width:100%;
+  margin-left:12rpx;
+}
+.item{
+  width: 332rpx;
+  float: left;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin-bottom: 24rpx;
+  margin-left:22rpx;
+}
+
+
+.sale-card{
+  height:496rpx;
+  width: 332rpx;
+  position:relative;
+}
+
+.image{/* Rectangle 15 */
+  height:354rpx;
+  width: 332rpx;
+  border-radius: 24rpx;
+  background-size: cover;
+  background-color: #F2FCFF;
+}
+
+.sale-object-detail-box{
+  position: absolute;
+  bottom: 0;
+  border-radius: 0 0 24rpx 24rpx;
+  background-color: #ffffff;
+  width: calc(100% - 32rpx);
+  height: 162rpx;/* 高度复刻问题 */
+  padding: 12rpx 16rpx 16rpx;
+}
+
+.sale-object-name{
+  /* width: 300rpx; */
+  /* 只显示一行，并在末尾加省略号 */
+  overflow: hidden;  
+  white-space: nowrap;    
+  /* 末尾加省略号 */
+  text-overflow:ellipsis;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333333;
+  margin: 0 0 4rpx;
+}
+
+.sale-object-content{
+  /* width: 300rpx; */
+  height: 60rpx;
+  margin-bottom: 12rpx;
+  color:#868788;
+  /* 超出部分隐藏 */
+  overflow: hidden;     
+  /* 末尾加省略号 */
+  text-overflow: ellipsis;  
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  /* 行数，也可以设为1，用来做单行 */
+  -webkit-line-clamp:2;
+  font-size: 20rpx;
+}
+
+.object-price{
+  color: #7C3ECC;
+}
+
+.object-price-symbol{
+  font-size: 28rpx;
+}
+.object-price-integer-part{
+  font-size: 36rpx;
+}
+.object-price-fractional-part{
+  font-size: 28rpx;
+}
+
+.sale-object-zone{
+  position: absolute;
+  bottom: 8rpx;
+  right: 0;
+  padding: 0 8rpx;
+  color: #7C3ECC;
+  background: #F9F2FF;
+  font-size: 20rpx;
+  border-radius: 8rpx;
+}
+
+.need-card{
+  /* height:232rpx; */
+  width: 332rpx;
+  position:relative;
+
+}
+
+.need-object-detail-box{
+  border-radius: 24rpx 24rpx 24rpx 24rpx;
+  background-color: #ffffff;
+  /* width: 304rpx; */
+  height: auto;
+  padding: 16rpx 24rpx 16rpx;
+}
+.need-object-name{
+  /* width: 300rpx; */
+  overflow: hidden;  
+  white-space: nowrap;    
+  text-overflow:ellipsis;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333333;
+  /* margin-top: 14rpx; */
+}
+.need-object-content{
+  height: 60rpx;
+  /* width: 300rpx; */
+  font-size: 20rpx;
+  margin: 18rpx 0 32rpx;
+  color:#868788;
+  overflow: hidden;     
+  text-overflow: ellipsis;  
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2;
+  font-size: 20rpx;
+}
+.need-object-zone{
+  position: absolute;
+  bottom: 8rpx;
+  right: -0;
+  padding: 0 8rpx;
+  color: #7C3ECC;
+  background: #F9F2FF;
+  font-size: 20rpx;
+  border-radius: 8rpx;
+}
+
+.backTopButton{
+  position: fixed;
+  height:9vw;
+  width:9vw;
+  right: 5.9%;
+  bottom: 16vh;
+ }
+ .addButton{
+  position: fixed;
+  height:15vw;
+  width:15vw;
+  right: 3%;
+  bottom: 8vh;
+ }
+
+ /**/
+ .bottomTip{
+  font-size: 2vh;
+  letter-spacing: 1px;
+  display:block;
+  text-align: center;
+  clear: both;
+  color: black;
+  word-wrap: break-word;
+ }
+

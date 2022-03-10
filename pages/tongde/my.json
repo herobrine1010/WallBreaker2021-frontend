@@ -2,7 +2,7 @@
   "usingComponents": {
     "card-my": "/components/card-lost/card-my",
     "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
-    "dialog-box": "/components/dialog-box/dialog-box"
+    "dialog-box": "/components/dialog-box/dialog-box-xianyu"
   },
   "navigationStyle": "custom",
   "disableScroll": true

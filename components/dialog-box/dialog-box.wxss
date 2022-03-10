@@ -27,10 +27,10 @@
   display: flex;
   /* width: 400rpx; */
   margin: 30rpx 75rpx 10rpx;
+  font-weight: bold;
 
   font-family: Noto Sans SC;
   font-style: normal;
-  font-weight: bold;
   font-size: 32rpx;
   line-height: 40rpx;
   text-align: center;
@@ -128,3 +128,4 @@
   height:36rpx;
   width: 30rpx;
 }
+

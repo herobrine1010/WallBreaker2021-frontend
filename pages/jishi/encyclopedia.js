@@ -1,6 +1,7 @@
 // pages/jishi/communication.js
 import { request } from "../../request/request.js";
 import util from "../../utils/util.js";
+var app=getApp();
 
 Page({
 
@@ -15,10 +16,18 @@ Page({
     tabHeight:36,
     baseQuestionAnswerScrollViewHeight:0,
     question_answer_scroll_view_height:'auto',
+    communication_scroll_view_height:'auto',
+    scroll_view:{
+      outer_top_num:0,
+      inner_top_num:0,
+      inner_height:'auto',
+      refresherEnabled:true,
+      loading:false,
+    },
     question_answer_section:{
       current:1,
       pages:1,
-      pageSize:15,
+      pageSize:20,
       keyword:'',
       loadingTimeout:2000,
       dataList:[],
@@ -35,10 +44,19 @@ Page({
       keyword:'',
       loadingTimeout:2000,
       dataList:[],
-      zoneIdList:[56,57,58,59,60,61],
-      zoneNameList:['四平','嘉定','彰武','铁岭','沪西','沪北'],
-      zoneColorList:['#3A3042','#7C3ECC','#957D95','#3E92CC','#17B2E5','#BA75FF'],
-      // zoneNameList:['四平校区','嘉定校区','彰武校区','铁岭校区','沪西校区','沪北'],
+      zoneIdList:[56,57,58,59,60,61,73],
+      // zoneNameList:['四平','嘉定','彰武','铁岭','沪西','沪北'],
+      zoneColorList:['#3A3042','#7C3ECC','#7C3ECC','#7C3ECC','#17B2E5','#BA75FF'],
+      zoneNameList:['四平校区','嘉定校区','彰武校区','铁岭校区','沪西校区','沪北校区','校外'],
+      zoneMap:{
+        56:{value:'四平校区',color:'#3A3042'},
+        57:{value:'嘉定校区',color:'#7C3ECC'},
+        58:{value:'彰武校区',color:'#3A3042'},
+        59:{value:'铁岭校区',color:'#7C3ECC'},
+        60:{value:'沪西校区',color:'#7C3ECC'},
+        61:{value:'沪北校区',color:'#17B2E5'},
+        73:{value:'校外',color:'#C0C0C0'}
+      },
       zoneIndex:null,
       onFilter:false,
       refresherEnabled:true,
@@ -64,52 +82,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options.tabIndex==1){
+      this.setData({
+        tabIndex:1,
+        sectionName:'communication_section',
+      })
+    }
+
     this.initOuterScrollViewHeight();
-    this.initQuestionAnswerScrollViewHeight();
     this.getTabHeight();
+    this.initInnerScrollViewHeight();
+    
     this.getData(true);
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    // util.getNotice();  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
   },
 
   /**
@@ -118,7 +102,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
-      path : '/pages/welcome/welcome'
+      path:app.getSharedUrl()+'◆tabIndex='+this.data.tabIndex
     }
   },
   initOuterScrollViewHeight:function(){
@@ -150,14 +134,22 @@ Page({
         });
       }).exec();
   },
+  initInnerScrollViewHeight:function(){
+    let query = wx.createSelectorQuery();
+    query.select('#inner-scroll-view').boundingClientRect(rect=>{
+        let top = rect.top;
+        let height=this.data.windowHeight-top+this.data.tabHeight;
+        this.setData({
+          ['scroll_view.inner_height']:height+'px',
+        });
+      }).exec();
+  },
   getTabHeight:function(){
     let query = wx.createSelectorQuery();
     query.select('#tab').boundingClientRect(rect=>{
       console.log(rect);
       console.log('tabTop'+rect.top)
         let height=rect.height;
-        // let top = rect.top;
-        // let height=this.data.windowHeight-top;
         this.setData({
           tabTop:rect.top,
           tabHeight:height,
@@ -178,59 +170,36 @@ Page({
     this.getData();
   },
   onOuterScroll:function(e){
-    // this.setData({[this.data.sectionName+'.topNum']:e.detail.scrollTop})
-    // console.log(this.data[this.data.sectionName].topNum)
-    let enabled=this.data.sectionName+'.refresherEnabled'
+    this.setData({
+      ['scroll_view.outer_top_num']:e.detail.scrollTop
+    })
     if(e.detail.scrollTop>20){
-      this.setData({[enabled]:false})
+      this.setData({['scroll_view.refresherEnabled']:false})
     }else{
-      this.setData({[enabled]:true})
+      this.setData({['scroll_view.refresherEnabled']:true})
     }
-
-    console.log(this.data.sectionName)
-    if(this.data.sectionName=='question_answer_section'){
-      this.onQuestionAnswerScroll();
-    }
-    
-  },
-  onQuestionAnswerScroll:function(e){
-    let query = wx.createSelectorQuery();
-    query.select('#tab').boundingClientRect(rect=>{
-      let bottom=rect.bottom;
-        if(bottom<this.data.tabTop+2){
-          if(!this.data.questionAnswerScrollViewShrinkage){
-            console.log(12)
-            this.setData({
-              questionAnswerScrollViewShrinkage:true,
-              question_answer_scroll_view_height:this.data.baseQuestionAnswerScrollViewHeight+this.data.tabHeight+'px',
-              // question_answer_scroll_view_top_num:e.detail.scrollTop-this.data.tabHeight
-            })  
-          }
-        }else{
-          if(this.data.questionAnswerScrollViewShrinkage){
-            console.log(34)
-            this.setData({
-              questionAnswerScrollViewShrinkage:false,
-              question_answer_scroll_view_height:'auto'
-              })
-          }
-          
-        }
-      }).exec();
-    console.log(this.data.tabBottom,this.data.tabTop)
-    
   },
 
-  onMyScroll:function(e){
-    // let button=this.data.sectionName+'.showGoTopButton'
-    // if(e.detail.scrollTop>100){
-    //   this.setData({[button]:true})
-    // }else if(this.data.showGoTopButton){
-    //   this.setData({[button]:false})
-    // }
-    
-   },
+  onInnerScroll:function(e){
+    if(this.data.loading)return
+    let innerNum=e.detail.scrollTop
+    let outerNum=this.data.scroll_view.outer_top_num
+    let tabHeight=this.data.tabHeight
+    if(innerNum>0 &&outerNum<tabHeight){
+      if(innerNum+outerNum<tabHeight){
+        this.setData({
+          ['scroll_view.inner_top_num']:0,
+          ['scroll_view.outer_top_num']:outerNum+innerNum
+        })
+      }else{
+        this.setData({
+          ['scroll_view.inner_top_num']:innerNum+outerNum-tabHeight,
+          ['scroll_view.outer_top_num']:tabHeight
+        })
+      }
 
+    }
+  },
 
   onSearch:function(e){
     this.setData({[this.data.sectionName+'.keyword']:e.detail.value})
@@ -243,15 +212,13 @@ Page({
     this.getData(true);
   },
   getData: function (reset) {
-    console.log('uuu')
-    console.log(reset)
+    console.log('getdata')
     if(this.data.loading)return
     var that=this;
     let data =this.data[this.data.sectionName];
     let {current,pageSize,keyword,zoneId,isEnd}=data;
     current++;
     if(reset){
-      console.log('iii')
       current=1;
       this.setData({[this.data.sectionName+'.dataList']:[]})
     }else if(isEnd){
@@ -271,14 +238,19 @@ Page({
       data:sendData
     })
     .then(res => {
-      // console.log(res)
       let {current,pages,records} =res.data.data
       if(this.data.sectionName=='question_answer_section'){
-        console.log('sfs')
         records=records.map(item => {
           if(item.allPicUrl)
             item.all_pic_url_list=item.allPicUrl.split(',')
           return item;
+        })
+      }
+      if(this.data.sectionName=='communication_section'){
+        let zoneMap=this.data.communication_section.zoneMap
+        records=records.map(item=>{
+          item.zone=zoneMap[item.zoneId]
+          return item
         })
       }
       let {dataList}=that.data[this.data.sectionName]
@@ -294,7 +266,6 @@ Page({
           isEnd:current==pages?true:false,
         }
       })
-      console.log(that.data)
     })      
   },
   detectLoadingTimeout: function(){

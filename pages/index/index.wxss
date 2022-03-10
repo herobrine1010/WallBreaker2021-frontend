@@ -1,19 +1,137 @@
-/**index.wxss**/
-.userinfo {
+@import "/static/poby.wxss";
+.background {
+  /* position */
+  position: fixed;
+  width: 750rpx;
+  height: 400rpx;
+  background: linear-gradient(180deg, #3E92CC -180.91%, rgba(23, 178, 229, 0) 100%);
+  opacity: 0.6;
+}
+
+/* ----------------------  顶部导航栏相关（重载） ------------------- */
+.weui-navigation-bar__centers{
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36rpx;
+  line-height: 50rpx;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  color: #aaa;
+  text-align: center;
+  letter-spacing: 4rpx;
+  color: #000;
+  /* opacity: 0.9; */
+}
+.inner {
+  background: #f9f9f9;
+  /* 宽度一定, 水平居中 */
+  width: 686rpx;
+  padding: 0 32rpx;
 }
 
-.userinfo-avatar {
+/* -----flex样式----- */
+.flex-container {
+  width: 686rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.horizon-cneter {
+  margin: 0 auto;
+  text-align: center;
+}
+/* -----banner 对应图片样式------ */
+#banner {
+  width: 686rpx;
+  height: 264rpx;
+  margin: 44rpx 0 20rpx 0;
+}
+.img{
+  width: 686rpx;
+  height: 264rpx;
+  border-radius: 16rpx;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-position: center 0;
+}
+/* -----金刚位样式-------- */
+#new-label {
+  width: 64rpx;
+  height: 32rpx;
+}
+.abs-rightupper {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.rela {
+  position: relative;
+}
+#index-entry {
+  box-sizing: border-box;
+  height: 280rpx;
+  padding: 16rpx 0px 24rpx;
+
+  background: #FFFFFF;
+  border-radius: 16rpx;
+
+  /* Inside auto layout */
+  margin: 32rpx 0px 48rpx;
+}
+#entry-item {
+  display:inline-block; 
+  width:168rpx; 
+  height:112rpx;
+  margin-bottom: 16rpx;
+}
+#entry-item__icon {
+  width: 80rpx;
+  height: 80rpx;
+  /* margin-bottom: 2rpx; */
+}
+/* ----------------顶部搜索框及筛选---------------- */
+.top-line {
+  justify-content: space-between;
+
+  margin: 24rpx 0;
+}
+.searchBar{
+  margin:0 16rpx 0 0;
+  flex: 1;
+}
+/* 搜索栏输入框字体颜色 */
+.weui-search-bar {
+  padding: 0;
+}
+.weui-search-bar__form {
+  height: 64rpx;
+}
+.weui-search-bar__box .weui-search-bar__input{
+  color: #000000 !important;
+  padding:0 0 0 0 ;
+  height: 80rpx;
+}
+
+
+.icon {
+  position:relative;
+  float: left;
+  height:64rpx;
+  width: 64rpx;
+}
+.rotate {
+  transform: rotate(180deg);
+}
+.margin-horizon {
+  margin: 0 8rpx;
+}
+
+.noData {
+  width: 450rpx;
+  height: 120rpx;
+
   overflow: hidden;
-  width: 128rpx;
-  height: 128rpx;
-  margin: 10rpx;
-  border-radius: 100%;
-}
-
-.usermotto {
-  margin-top: 200px;
+  margin: 0 auto;
 }

@@ -1,6 +1,6 @@
 <view class="jiren-background" >
   <view>
-    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="组队详情"></mp-navigation-bar>
+    <mp-navigation-bar ext-class="weui-navigation-bar__centers" title="组队详情" lastPage="/pages/jiren/main"></mp-navigation-bar>
   </view>
 
  <!-- <view class="area2"> -->
@@ -103,7 +103,11 @@
       <!-- <view class="detail-board">     style="height:{{maxHeight}}" -->
         <scroll-view id="scroll-1" class="board" scroll-y="true" >
           <view class="board-view">
-            <view class="detail-title">{{teamDetail.title}}</view> 
+            <view class="detail-headline">
+              <view class="detail-title">{{teamDetail.title}}</view> 
+              <!-- <image class="detail-report" src="/static/icon/report.png" bindtap="tapReportDetail" ></image> -->
+            </view>
+        
             <view class="detail-a-line">
               <view class="detail-avatar">
                 <image src="{{teamDetail.avatar}}" style="width:80rpx; height:80rpx;border-radius:50%" bindtap="tapInitiatorAvatar" ></image>
@@ -187,6 +191,26 @@ button="{{dialog2.button}}">
 </dialog2-box>
 
 
+<dialog-box-jubao
+id="dialogBoxReport"
+isShow="{{dialogReport.isDialogShow}}"
+title="{{dialogReport.title}}"
+content="{{dialogReport.content}}"
+hasInputBox="{{dialogReport.hasInputBox}}"
+
+tip="{{dialogReport.tip}}"
+okText="{{dialogReport.okText}}"
+cancelText="{{dialogReport.cancelText}}"
+hideOkButton="{{dialogReport.hideOkButton}}"
+
+reportReason="{{dialogReport.reportReason}}"
+bind:tapCancel="{{dialogReport.tapCancelEvent}}"
+bind:tapOk="{{dialogReport.tapOkEvent}}"
+bind:tapDetail="{{dialogReport.tapReportDetailEvent}}"
+
+>
+</dialog-box-jubao>
+
 <view wx:if="{{tipBox.show}}">
   <view class="tip-shade"></view>
   <view class="tip-box">
@@ -213,6 +237,7 @@ button="{{dialog2.button}}">
       </view>
     </view>
   </scroll-view>
+
 
 
 </view>

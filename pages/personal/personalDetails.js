@@ -67,8 +67,29 @@ Page({
   formSubmit : function(e){
     let detail = e.detail.value;
     this.setData({
-      userDetails:detail
+      userDetails:{
+        ...this.data.userDetails,
+        ...detail,
+      }
     });
+    
+    console.log(this.data.userDetails)
+    if(this.data.userDetails.canChangeName&&this.data.userDetails.nickName!=this.data.userDetails.originalNickName){
+      this.setData({
+        dialog:{
+          isDialogShow: true,
+          content:"确认修改吗？\n昵称14天内不可再次修改噢~",
+          hasInputBox:false,
+          tip:"",
+          cancelText:"取消",
+          okText:"确认",
+          tapOkEvent:"showConfirmChangePersonalDetailModal",
+        }
+      })
+    }else{
+      this.showConfirmChangePersonalDetailModal()
+    }
+
   },
   // ------- 隐藏 微信号提示气泡 -------------
   hidePopover(){
@@ -87,24 +108,28 @@ Page({
     this.setData({
       labels
     })
-
-    
+   
     // ------------- 弹出对话框让用户确定--------------------------
-    let dialog = {
-      isDialogShow: true,
-      content:"确认修改？",
-      hasInputBox:false,
-      tip:"",
-      cancelText:"取消",
-      okText:"确认",
-      tapOkEvent:"dialogTapOkForChangePersonalDetail"
-    };
+
+  },
+
+  showConfirmChangePersonalDetailModal:function(){
     this.setData({
-      dialog
+      dialog: {
+        isDialogShow: true,
+        content:"确认提交个人资料修改吗？",
+        hasInputBox:false,
+        tip:"",
+        cancelText:"取消",
+        okText:"确认",
+        tapOkEvent:"dialogTapOkForChangePersonalDetail"
+      }
     })
   },
+
   // 用户在对话框中点击确定后，会触发以下事件，并向服务器发送请求
   dialogTapOkForChangePersonalDetail:function(){
+    console.log(this.data)
     let that = this ;
     let labels = that.data.labels;
     let requestList = [];
@@ -204,6 +229,7 @@ Page({
           icon: 'error'
         })
       }else{
+        that.setData({['userDetails.canChangeName']:false})
         wx.showToast({
           title: '上传成功'
         });
@@ -253,10 +279,13 @@ Page({
          
       }
     }).then( res => {
+      console.log(res)
       let result = res.data.data;
       // 提取用户的头像、昵称等个人信息--------
       let userDetails = {
         nickName: result.nickName ,
+        originalNickName:result.nickName,
+        canChangeName:result.canChangeName,
         identification:result.identification ,
         identificationPublic: result.identificationPublic===null?true :  result.identificationPublic ,
         grade: result.grade ,
@@ -298,6 +327,51 @@ Page({
         icon: 'error'
       })
     })
+
+    this.initializeScrollViewHeight()
+  },
+
+  initializeScrollViewHeight:function(){
+    var that=this;
+    let windowHeight
+    let operationAreaHeight
+    wx.getSystemInfo({
+      success: function (res) {
+        windowHeight=res.windowHeight
+      }
+    });
+    let query = wx.createSelectorQuery();
+    query.select('#operation-area').boundingClientRect(rect=>{
+      operationAreaHeight=rect.height
+    }).exec();
+    query.select('#scroll-view').boundingClientRect(rect=>{
+        let top = rect.top;
+        let height=windowHeight-top-operationAreaHeight;
+        this.setData({
+          scrollViewHeight:height+'px',
+        });
+      }).exec();
+      
+  },
+
+  clickNickNameInput:function(e){
+    if(!this.data.userDetails.canChangeName){
+      this.setData({
+        dialog: {
+          isDialogShow: true,
+          content:"昵称14天内不可再次修改噢~",
+          hasInputBox:false,
+          tip:"",
+          okText:"确认",
+          hideCancelButton:true,
+          tapOkEvent:"none"
+        }
+      })
+    }
+  },
+
+  none:function(){
+
   },
 
   /**
@@ -342,13 +416,4 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    return {
-      title : '欢迎注册使用济星云小程序！',
-      path : '/pages/welcome/welcome'
-    }
-  },
 })

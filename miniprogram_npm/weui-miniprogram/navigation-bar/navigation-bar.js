@@ -143,6 +143,16 @@ Component({
     delta: {
       type: Number,
       value: 1
+    },
+    lastPage:{
+      // 上一层页面，用于从分享方式进入页面，页面栈中没有上一层页面的情况
+      type:String,
+      value:''
+    },
+    forbidBack:{
+      // 禁止返回，为true时，拦截该组件中所定义的事件（直接返回上一个页面），改写事件用bind:back属性指定
+      type:Boolean,
+      value:false,
     }
   },
 
@@ -191,16 +201,25 @@ Component({
 
     back() {
       const data = this.data;
-
-      if (data.delta) {
-        wx.navigateBack({
-          delta: data.delta
-        });
-      }
-
       this.triggerEvent('back', {
         delta: data.delta
       }, {});
+
+      if(this.properties.forbidBack)return
+
+      if(getCurrentPages().length>1){
+        if (data.delta) {
+          wx.navigateBack({
+            delta: data.delta
+          });
+        }  
+        
+      }else if(this.data.lastPage){
+        wx.reLaunch({
+          url: this.data.lastPage,
+        })
+      }
+      
     }
 
   }

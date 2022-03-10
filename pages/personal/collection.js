@@ -11,8 +11,6 @@ Page({
 
   data: {
     collectionTitle : "我的收藏",
-    leftButtonTitle : "帖子收藏",
-    rightButtonTitle : "组队收藏",
     //默认初试选择左边 帖子按钮 
     isNoticeOrTeam : 0,
     background : "backgroundLeft",
@@ -305,15 +303,6 @@ Page({
   onReachBottom: function () {
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    return {
-      title : '欢迎注册使用济星云小程序！',
-      path : '/pages/welcome/welcome'
-    }
-  },
 })
 
 // ------------ functions for request data （接口有关函数）---- ----------- ---------

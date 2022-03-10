@@ -140,51 +140,68 @@ Page({
         answerList[index] = that.data.answerList[key];
         index = index + 1;
     };
-    request({
-      url: '/userTeam/apply',
-      method:"POST",
-      header:{'cookie':app.globalData.token},
-      data:{
-        teamId:that.data.teamId,
-        // answer:that.data.answerList,
-        answer:JSON.stringify(answerList)
-      },
-    })
-    .then(res => {
-      if(res.statusCode==200 && res.data.success){
-        const eventChannel = that.getOpenerEventChannel()
-        eventChannel.emit('getResult', {data: true});
-        //调试用
-        wx.navigateBack({
-          delta: 0,
-        });
-        wx.showToast({
-          title: '申请已提交',
-          icon:'success',
-          duration:2000
-        });
-      }else if(res.data.msg == "noWxId"){
-        let dialog = {
-          hasInputBox:false,
-          content:"请完善微信号~",
-          tip:"填写微信号可以更好地使用组队功能，保证微信号只有队伍成员可见！",
-          cancelText:"返回",
-          okText:"去填写",
-          tapOkEvent:"tapOkForAddWxId",
-          tapCancelEvent:"tapCancelForAddWxId",
-          isDialogShow:true,
-        }
-        that.setData({
-          dialog
-        });
-      }else{
-        wx.showToast({
-          title: '网络异常，请重试 :(',
-          icon: 'none',
-          duration: 1000
-        });
+
+    let tmpId='mTc40P4CHN8U-FKjtSDTCSjo3YGFi0d3PRse-aPGRC4'
+    wx.requestSubscribeMessage({
+      tmplIds: [tmpId],
+      success (res) {
+        let result;
+        if(res[tmpId]=='accept')
+          result=true
+        else if(res[tmpId]=='reject')
+          result=false
+        
+        request({
+          url: '/userTeam/apply',
+          method:"POST",
+          header:{'cookie':app.globalData.token},
+          data:{
+            teamId:that.data.teamId,
+            // answer:that.data.answerList,
+            answer:JSON.stringify(answerList),
+            agreeReceiveMsg:result,
+          },
+        })
+        .then(res => {
+          console.log(res)
+          if(res.statusCode==200 && res.data.success){
+            const eventChannel = that.getOpenerEventChannel()
+            eventChannel.emit('getResult', {data: true});
+            //调试用
+            wx.navigateBack({
+              delta: 0,
+            });
+            wx.showToast({
+              title: '申请已提交',
+              icon:'success',
+              duration:2000
+            });
+          }else if(res.data.msg == "noWxId"){
+            let dialog = {
+              hasInputBox:false,
+              content:"请完善微信号~",
+              tip:"填写微信号可以更好地使用组队功能，保证微信号只有队伍成员可见！",
+              cancelText:"返回",
+              okText:"去填写",
+              tapOkEvent:"tapOkForAddWxId",
+              tapCancelEvent:"tapCancelForAddWxId",
+              isDialogShow:true,
+            }
+            that.setData({
+              dialog
+            });
+          }else{
+            wx.showToast({
+              title: '网络异常，请重试 :(',
+              icon: 'none',
+              duration: 1000
+            });
+          }
+        })
+        
       }
     })
+
   },
 
   // 完善微信号的两个事件

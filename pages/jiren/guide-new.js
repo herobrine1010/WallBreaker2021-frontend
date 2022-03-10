@@ -1,3 +1,4 @@
+var app=getApp();
 // miniprogram/pages/jiren/guide-new.js
 Page({
 
@@ -63,7 +64,8 @@ Page({
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
-      path : '/pages/welcome/welcome'
+      path:app.getSharedUrl()
     }
   },
+
 })

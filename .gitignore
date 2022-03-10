@@ -3,6 +3,8 @@
 Thumbs.db
 project.private.config.json
 $RECYCLE.BIN/
+project.private.config.json
+project.config.json
 
 # macOS
 .DS_Store
@@ -13,4 +15,7 @@ $RECYCLE.BIN/
 
 # Node.js
 node_modules/
+project.private.config.json
+project.private.config.json
+project.config.json
 project.private.config.json

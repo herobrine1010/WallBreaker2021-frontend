@@ -20,6 +20,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    lostfoundId:0,
     condition:'寻物中',/* 别的状态(?) */
     title:'遗失物品',
     userAvatar:'/static/icon/default-user-big.png',
@@ -138,7 +139,7 @@ Page({
       url: '/lostfound/getLostFound/' + id,
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-         
+        'cookie':app.globalData.token
       },
       method : 'GET',
     }).then(res => {
@@ -193,6 +194,7 @@ Page({
         },
       ]
       this.setData({
+        lostfoundId:id,
         condition: typeText[data.type], // 使用type判断
         title: data.name,
         userId:  data.userId,
@@ -273,7 +275,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
-      path : '/pages/welcome/welcome'
+      path:app.getSharedUrl()
     }
   },
 })

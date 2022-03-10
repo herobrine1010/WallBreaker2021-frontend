@@ -27,8 +27,8 @@ bottom: 0%;
 }
 .tongde-shade{
   width:100%;
-  height:100%;
-  background: #F9F9F9;
+  height:100vh;
+  background: #f9f9f9;
   box-shadow: 10px 10px 20px 2px rgba(160, 164, 166, 0.2);
 }
 .tongde-background {
@@ -40,6 +40,41 @@ bottom: 0%;
   left: 0;
   background: linear-gradient(180deg,rgba(62,146,204,1) -720rpx, rgba(23, 178, 229, 0) 400rpx);
   /* opacity: 0.6; 将不透明度写到rgba中*/
+}
+.my-shade{
+  width:100%;
+  height:100vh;
+  background: #f6f6f6;
+  box-shadow: 10px 10px 20px 2px rgba(160, 164, 166, 0.2);
+}
+.my-background {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(180deg,rgba(62,146,204,1) -720rpx, rgba(23, 178, 229, 0) 400rpx);
+}
+.xianyu-shade{
+  width:100%;
+  height:100vh;
+  background: #F9F9F9;
+  box-shadow: 10px 10px 20px 2px rgba(160, 164, 166, 0.2);
+}
+.xianyu-background{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+
+  background: linear-gradient(180deg, #957D95ff -720rpx, rgba(139, 46, 231, 0) 400rpx);
+
+  /* background: linear-gradient(180deg, rgba(182, 90, 182,1) -720rpx, rgba(139, 46, 231, 0) 400rpx); */
+
+  /* background: linear-gradient(180deg, #957D95 -180.91%, rgba(139, 46, 231, 0) 100%);
+  opacity: 0.6; */
+
 }
 .background{
   /* position */
@@ -53,14 +88,14 @@ bottom: 0%;
 .weui-navigation-bar__centers{
   font-family: PingFang SC;
   font-style: normal;
-  font-weight: bold;
-  font-size: 36rpx;
+  font-weight: 400;
+  font-size: 34rpx;
   line-height: 50rpx;
   display: flex;
   align-items: center;
   text-align: center;
   letter-spacing: 4rpx;
-  color: #FFFFFF;
+  /* color: #FFFFFF; */
   }
 /* 顶部导航栏  返回按钮大小： */
 .weui-navigation-bar__inner .weui-navigation-bar__left .weui-navigation-bar__btn_goback {
@@ -137,5 +172,11 @@ bottom: 0%;
   width: 100%;
   background: rgba(242, 252, 255, 0.35);
   border-radius: 50rpx 50rpx 0 0;
+}
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }
  

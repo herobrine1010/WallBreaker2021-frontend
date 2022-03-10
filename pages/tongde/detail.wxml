@@ -2,7 +2,7 @@
 <view class="tongde-shade"></view>
 <view class='tongde-background'>
   <view class="navi">
-    <mp-navigation-bar ext-class="weui-navigation-bar__tongde" title="{{type==0?'物品遗失':'寻找失主'}}详情"></mp-navigation-bar>
+    <mp-navigation-bar ext-class="weui-navigation-bar__tongde" title="{{type==0?'物品遗失':'寻找失主'}}详情" lastPage="/pages/tongde/main"></mp-navigation-bar>
   </view>
 
   <view class="card-container">

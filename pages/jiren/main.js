@@ -3,6 +3,7 @@
 import { request } from "../../request/request.js";
 import {formatTime} from "../../utils/util.js"
 import util from "../../utils/util.js";
+var app=getApp();
 
 
 // 定义函数编写请求参数：-----------------------------------------
@@ -297,7 +298,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
-      path : '/pages/welcome/welcome'
+      path:app.getSharedUrl()
     }
   },
 

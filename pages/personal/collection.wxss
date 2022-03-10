@@ -3,6 +3,31 @@
 .background{
   background: linear-gradient(199.3deg, rgba(0, 193, 255, 0.3) -7.32%, rgba(0, 193, 255, 0) 27.37%), linear-gradient(198.24deg, rgba(140, 26, 255, 0.25) 3.34%, rgba(185, 115, 255, 0) 90.78%), linear-gradient(195.29deg, #A3E5FA 2.51%, #DCBCFB 56.49%);
 }
+
+/*上部 tab*/
+.tab {
+  width: 686rpx;
+  margin:24rpx 32rpx;
+  /* height: 72rpx; */
+  display: flex;
+  justify-content:space-around;
+  overflow: hidden;
+}
+.tab-item{
+  height: 40rpx;
+  font-size: 32rpx;
+  color: #545454;
+  padding: 0 4rpx 12rpx;
+}
+
+.tab-item.active {
+  color: #333333;
+  font-weight: 500;
+  border-bottom: 4rpx solid #333333;
+  border-radius: 4rpx;
+  box-shadow: 0 4rpx rgba(192, 203, 206, 0.8);
+}
+
 .backgroundRight{
   background-image: linear-gradient(199.75deg, rgba(140, 26, 255, 0.18) 40.18%, rgba(140, 26, 255, 0) 90.9%), linear-gradient(195.29deg, #DCBCFB 2.51%, #A2E4FA 27.51%);
 }

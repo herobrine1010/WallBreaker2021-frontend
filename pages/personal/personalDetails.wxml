@@ -1,115 +1,131 @@
 <!--pages/personalDetails/main.wxml-->
 <!-- 页面主要容器及背景 -->
-<view class="background">
-  <!-- nav 组件调用 -->
-  <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="个人资料"></mp-navigation-bar>
-  <!-- 以下是container，包含了除标题外的其余内容 -->
-  <view class="per-container">
-    <view class="personal-image">
-      <image  mode="aspectFill" src="{{avatarPath?avatarPath:'../../static/icon/default-user-big.png'}}"  bindtap="changeImage">
-      </image>
-    </view>
-    <form bindsubmit="formSubmit">
-    <view class="block-2">
-      <!-- 以下是表单中的各个输入文本框 detail-items-->
-      <view class="detail-items">
-        <view class="item-title">昵称：</view>
-        <view class="item-body">
-          <input name="nickName" type="text" value="{{userDetails.nickName}}"></input>
-        </view>
-        <view class="switch-name"> 隐藏/公开</view>
+<view class="my-shade"/>
+<form bindsubmit="formSubmit">
+  <view class="my-background">
+    <!-- nav 组件调用 -->
+    <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="个人资料" lastPage="/pages/personal/main"></mp-navigation-bar>
+    <!-- 以下是container，包含了除标题外的其余内容 -->
+    <scroll-view class="scroll-view"
+      scroll-y="true" 
+      scroll-with-animation='true' 
+      style="height:{{scrollViewHeight}};"
+      id="scroll-view">
+      <view class="personal-image">
+        <image  mode="aspectFill" src="{{avatarPath?avatarPath:'../../static/icon/default-user-big.png'}}"  bindtap="changeImage">
+        </image>
       </view>
-      <view class="detail-items">
-        <view class="item-title">学历：</view>
-        <view class="item-body">
-          <picker  bindchange="onIdentificationChange" range="{{identificationList}}">
-            <view>{{userDetails.identification?userDetails.identification:'请选择你的学历'}}</view>
-            <input name="identification" type="text" style="display : none" value="{{userDetails.identification}}"></input>
-          </picker>
+      <view class="block-2">
+        <!-- 以下是表单中的各个输入文本框 detail-items-->
+        <view class="detail-items">
+          <view class="item-title">昵称</view>
+          <view class="item-body" >
+            <input name="nickName"  class="input-text" placeholder-class="placeholder-text" type="text" value="{{userDetails.nickName}}" disabled="{{!userDetails.canChangeName}}" placeholder="请输入昵称，14天内不可再次修改" bindtap="clickNickNameInput"></input>
+          </view>
+          <view class="switch-name"> 隐藏/公开</view>
         </view>
-        <switch class="poby-switch" name="identificationPublic" color="#A3E5FA" checked="{{userDetails.identificationPublic}}"></switch>
-      </view>
-      <view class="detail-items">
-        <view class="item-title">年级：</view>
-        <view class="item-body">
-          <picker bindchange="onGradeChange" range="{{gradeList}}">
-            <view>{{userDetails.grade?userDetails.grade:'请选择你的年级'}}</view>
-            <input name="grade" type="text" style="display : none" value="{{userDetails.grade}}"></input>
-          </picker>
+        <view class="detail-items">
+          <view class="item-title">学历</view>
+          <view class="item-body">
+            <picker  bindchange="onIdentificationChange" range="{{identificationList}}">
+              <view class="placeholder-text" wx:if="{{!userDetails.identification}}">请选择你的学历</view>
+              <view class="input-text" wx:else>{{userDetails.identification}}</view>
+              <input name="identification" type="text" style="display : none" value="{{userDetails.identification}}"></input>
+            </picker>
+          </view>
+          <switch class="poby-switch large" name="identificationPublic" color="#3E92CC" checked="{{userDetails.identificationPublic}}"></switch>
         </view>
-        <switch class="poby-switch" name="gradePublic" color="#A3E5FA" checked="{{userDetails.gradePublic}}"></switch>
-      </view>
-      <view class="detail-items">
-        <view class="item-title">学院：</view>
-        <view class="item-body">
-          <picker bindchange="onSchoolChange" range="{{schoolList}}">
-            <view>{{userDetails.school?userDetails.school:'请选择你的学院'}}</view>
-            <input name="school" type="text" style="display : none" value="{{userDetails.school}}"></input>
-          </picker>
+        <view class="detail-items">
+          <view class="item-title">年级</view>
+          <view class="item-body">
+            <picker bindchange="onGradeChange" range="{{gradeList}}">
+              <view class="placeholder-text" wx:if="{{!userDetails.grade}}">请选择你的年级</view>
+              <view class="input-text" wx:else>{{userDetails.grade}}</view>
+              <input name="grade" type="text" style="display : none" value="{{userDetails.grade}}"></input>
+            </picker>
+          </view>
+          <switch class="poby-switch large" name="gradePublic" color="#3E92CC" checked="{{userDetails.gradePublic}}"></switch>
+        </view>
+        <view class="detail-items">
+          <view class="item-title">学院</view>
+          <view class="item-body">
+            <picker bindchange="onSchoolChange" range="{{schoolList}}">
+              <view class="placeholder-text" wx:if="{{!userDetails.school}}">请选择你的学院</view>
+              <view class="input-text" wx:else>{{userDetails.school}}</view>
+              <input name="school" type="text" style="display : none" value="{{userDetails.school}}"></input>
+            </picker>
 
+          </view>
+          <switch class="poby-switch large" name="schoolPublic" color="#3E92CC" checked="{{userDetails.schoolPublic}}"></switch>
         </view>
-        <switch class="poby-switch" name="schoolPublic" color="#A3E5FA" checked="{{userDetails.schoolPublic}}"></switch>
-      </view>
-      <view class="detail-items">
-        <view class="item-title">专业：</view>
-        <view class="item-body">
-          <input name="major" type="text" value="{{userDetails.major}}"></input>
+        <view class="detail-items">
+          <view class="item-title">专业</view>
+          <view class="item-body">
+            <input  name="major" class="input-text" placeholder-class="placeholder-text" type="text" placeholder="请输入专业全称" value="{{userDetails.major}}"></input>
+          </view>
+          <switch class="poby-switch large" name="majorPublic" color="#3E92CC" checked="{{userDetails.majorPublic}}"></switch>
         </view>
-        <switch class="poby-switch" name="majorPublic" color="#A3E5FA" checked="{{userDetails.majorPublic}}"></switch>
-      </view>
-      <view class="detail-items">
-        <view class="item-title">微信号：</view>
+        <view class="detail-items">
+          <view class="item-title">微信号</view>
+          
+          <view class="item-body" bindtap="hidePopover">
+            <input name="wxId"  class="input-text" placeholder-class="placeholder-text" type="text" placeholder="请输入微信号" value="{{userDetails.wxId}}"></input>
+          </view>
+          <image wx:if="{{isWxidPopoverShow}}" class="wxid-popover" src="../../static/icon/wxid-popover.png"></image>
+        </view>
+
         
-        <view class="item-body" bindtap="hidePopover">
-          <input name="wxId" type="text" value="{{userDetails.wxId}}"></input>
+        <!-- 以上是表单中的各个输入文本框 detail-items -->
+        <view class="warn">
+          <!-- <view class="wx-description">(不是昵称)</view> -->
+        <text>*您所填写的微信号仅在组队成功后与发起人互相可见，其他任何人均不可见</text>
+          
+        </view> 
+        <view class="detail-items" style="border-bottom:none;">
+          <view class="intro-title">简介</view>
+          <view class="intro-body">
+            <input name="description"  class="input-text" placeholder-class="placeholder-text" type="text" placeholder="请输入一句话介绍自己~" value="{{userDetails.description}}"></input>
+          </view>
         </view>
-        <image wx:if="{{isWxidPopoverShow}}" class="wxid-popover" src="../../static/icon/wxid-popover.png"></image>
       </view>
-
       
-      <!-- 以上是表单中的各个输入文本框 detail-items -->
-      <view class="warn">
-        <view class="wx-description">(不是昵称)</view>
-      <text>*您所填写的微信号仅在组队成功后与发起人互相可见，其他任何人均不可见</text>
-        
-      </view> 
-      <view class="detail-items">
-        <view class="intro-title">一句话简介：</view>
-        <view class="intro-body">
-          <input name="description" type="text" value="{{userDetails.description}}"></input>
-        </view>
-      </view>
-    </view>
-    
-    
-      <!-- 以下是各种标签 ---------------      begin          ------ -->
-      <label-selector
-      title = "个人标签"
-      labels = "{{personalLabel}}"
-      id="personalLabel"
-      class="block-3"
-      ></label-selector>
+      
+        <!-- 以下是各种标签 ---------------      begin          ------ -->
+        <label-selector
+        title = "个人标签"
+        labels = "{{personalLabel}}"
+        id="personalLabel"
+        class="block-3"
+        styleColor="#3E92CC"
+        ></label-selector>
 
-      <label-selector
-      title = "兴趣标签"
-      labels = "{{interestLabel}}"
-      id="interestLabel"
-      class="block-4"
-      ></label-selector>
-      <!-- 以上是各种标签          end-------- -->
-      <button class="detail-btn" form-type="submit" bindtap="btnTap"> 保存 </button>
-    </form>
-    
-    
+        <label-selector
+        title = "兴趣标签"
+        labels = "{{interestLabel}}"
+        id="interestLabel"
+        class="block-4"
+        styleColor="#957D95"
+        ></label-selector>
+        <!-- 以上是各种标签          end-------- -->
 
+    </scroll-view>
   </view>
-</view>
+
+  <view id="operation-area" class="operation-button-group">
+    <button class="operation-button" form-type="submit"  bindtap="btnTap">保存</button>
+  </view>
+
+
+</form>
+
 <dialog-box 
     content="{{dialog.content}}"
     hasInputBox="{{dialog.hasInputBox}}"
     tip="{{dialog.tip}}"
     okText="{{dialog.okText}}"
     cancelText="{{dialog.cancelText}}"
+    hideCancelButton="{{dialog.hideCancelButton}}"
+    buttonColor="#3E92CC"
     isShow="{{dialog.isDialogShow}}"
     bind:tapOk="{{dialog.tapOkEvent}}"
     >

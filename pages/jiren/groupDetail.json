@@ -8,7 +8,8 @@
     "personal-animation":"/components/personal-animation/personal-animation",
     "team-detail":"/components/teamDetail/teamDetail",
     "initiator-teamDetail":"/components/teamDetail/initiator-teamDetail",
-    "dialog2-box":"/components/dialog-box/dialog2-box"
+    "dialog2-box":"/components/dialog-box/dialog2-box",
+    "dialog-box-jubao":"/components/dialog-box/dialog-box-jubao"
   },
   "navigationStyle": "custom"
 }

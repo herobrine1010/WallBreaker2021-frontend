@@ -1,19 +1,28 @@
 <!--pages/feedback/feedback.wxml-->
-<view class="background">
+<view class="my-shade"/>
+<view class="my-background">
   <!-- nav 组件调用 -->
-  <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="用户反馈"></mp-navigation-bar>
+  <mp-navigation-bar  ext-class="weui-navigation-bar__centers"  title="用户反馈" lastPage="/pages/personal/main"></mp-navigation-bar>
   <!-- 以下是container，包含了除标题外的其余内容 -->
-  <view class="per-container">
-    <view class="feedback-title">
-      您对破壁有什么建议和意见，欢迎发送给我们，我们会认真考虑您的意见~
-    </view>
-    <form bindsubmit="formSubmit">
-      <view class="feedback-body">
-      <textarea name="feedbackText"  maxlength="310" placeholder="请输入您的建议！(不超过300字)" bindinput="handleInput"></textarea>
-      </view>
-      <view class="feedback-message">{{feedbackMessage}}</view>
-      <button class="feedback-btn" form-type="submit">提交</button>
-    </form>
-
+  <view class="feedback-title">
+    您对破壁有什么建议和意见，欢迎发送给我们，我们会认真考虑您的意见~
   </view>
+  <form bindsubmit="formSubmit">
+    <view class="feedback-body">
+      <view class="feedback-input">
+        <textarea name="feedbackText" class="feedback-textarea" maxlength="310" placeholder="请输入您的意见，限300字" bindinput="handleInput" value="{{text}}"></textarea>      
+      </view>
+      <!-- <view class="feedback-tag-lie" -->
+      <!-- <view class="feedback-message">限300字</view> -->
+      <image-box id="image-box" value="{{detail.allPicUrl}}" maxLength="3" bind:operate="changeImage"></image-box>
+    </view>
+    
+    <view id="operation-area" class="operation-button-group">
+      <button class="operation-button" form-type="submit">提交</button>
+    </view>
+  </form>
+
+
 </view>
+
+

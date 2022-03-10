@@ -1,0 +1,30 @@
+<!--components/jiren-card/card.js.wxml-->
+<view class="card">
+<view class="red-point" wx:if="{{haveNotice}}" ></view>
+<view class="tag" > 
+    {{labelText}}
+ </view>
+ <view class="title">{{title}}
+ </view> 
+
+
+ <view class="rightTag {{'rightTagColor-'+teamCondition}}">
+    {{rightTagText}}
+ </view>
+<view class="dueTime">
+{{dueTime}}
+</view>
+<image class="peopleIcon {{'iconposition-'+iconPosition}}" src="/static/icon/people-02.png"></image>
+<view class="peopleCount {{'countposition-'+iconPosition}}">{{peopleCount}}</view>
+<view class="{{lineMode=='normal'?'description-contain':'description-contain-double'}}">
+    <!-- 没有图片时，显示的文字加长 -->
+    <text class=" {{lineMode=='normal'?'description-normal':'description-double'}} {{postingPic?'description-short':'description-long'}}">{{description}}</text>
+</view>
+<view wx:if="{{initiator}}" class="initiator">发起人：{{initiator}}</view>
+<view wx:if="{{postingPic}}" >
+    <image class="image" src="{{postingPic}}" mode="aspectFill"></image> 
+</view>
+</view>
+
+
+

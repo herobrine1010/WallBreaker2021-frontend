@@ -20,6 +20,10 @@ Component({
     value: {
       type: Array,
       data:[]
+    },
+    maxLength:{
+      type:Number,
+      value:9,
     }
   },
   /**
@@ -41,7 +45,7 @@ Component({
       var that = this;
       let editList = this.data.value
       wx.chooseImage({
-        count: 9-editList.length,　　　　　　　　　　　　　　　　　　    // 最多可以选择的图片张数,每次选择后减少之后选择的总数
+        count: this.properties.maxLength-editList.length,　　　　　　　　　　　　　　　　　　    // 最多可以选择的图片张数,每次选择后减少之后选择的总数
         sizeType: ['compressed'],      // 选择图片的尺寸
         sourceType: ['album', 'camera'],           // 选择图片的来源
         success: function(res) {
@@ -50,6 +54,7 @@ Component({
           that.setData({
             value: editList
           })
+          that.triggerEvent('operate',that.properties.value)
         },
       })
       
@@ -61,6 +66,7 @@ Component({
       this.setData({
         value: this.data.value
       })
+      this.triggerEvent('operate',this.properties.value)
     },
     zoomInDetailPicture:function(e){
       var imgUrl = this.data.value;

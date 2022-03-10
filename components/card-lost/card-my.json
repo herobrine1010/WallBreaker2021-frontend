@@ -1,6 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "dialog-box": "/components/dialog-box/dialog-box"
+    "dialog-box": "/components/dialog-box/dialog-box-xianyu"
   }
 }

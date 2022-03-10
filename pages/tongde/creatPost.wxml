@@ -2,7 +2,7 @@
 <view class="tongde-background"></view>
 
   <view class="navi">
-    <mp-navigation-bar ext-class="weui-navigation-bar-tongde__centers" title=" 发布失物招领信息"></mp-navigation-bar>
+    <mp-navigation-bar ext-class="weui-navigation-bar-tongde__centers" title=" 发布失物招领信息" lastPage="/pages/tongde/main"></mp-navigation-bar>
   </view>
   
   <!-- 动态设置scroll-view的高度，在changeScrollHeight中 -->

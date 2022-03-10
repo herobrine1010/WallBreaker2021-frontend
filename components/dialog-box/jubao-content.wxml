@@ -1,0 +1,24 @@
+  <!-- content -->
+  <text class="dialog-box-content" wx:if="{{content}}">{{content}}</text>
+
+<!-- 列举所有的原因 -->
+<view wx:if="{{reportReason.length}}" class="dialog-box-reportReason-box" >
+  <view class="dialog-box-reportReason" bindtap="tapDetail" wx:for="{{reportReason}}">
+    <view class="reason">{{"· "+item}}</view>
+    <image src="/static/icon/right-arrow.png" class="rightArrow" data-value="{{item.value}}"/>
+  </view>
+</view>
+
+
+<!-- 输入框 -->
+<textarea wx:if="{{hasInputBox}}" name="closeReason" id="closeReason" placeholder="{{inputPlaceholder}}" class="dialog-input" bindinput="finishInput"></textarea>
+
+<!-- 图片上传框 -->
+
+<!-- 提示框 -->
+<text class="dialog-box-tip" selectable="{{true}}">{{tip}}</text>
+
+<view class="dialog-btn-box">
+  <view  wx:if="{{!hideCancelButton}}" class="dialog-box-cancel" bindtap="tapCancel">{{cancelText}}</view>
+  <view  wx:if="{{!hideOkButton}}" class="dialog-box-ok" bindtap="tapOk">{{okText}}</view>
+</view>

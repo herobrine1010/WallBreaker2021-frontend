@@ -1,0 +1,170 @@
+/* pages/xianyu/detail.wxss */
+@import "/static/common.wxss";
+
+page{
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.xianyu-background{
+  background: linear-gradient(180deg, rgba(218, 181, 218, 1) -360rpx, rgba(139, 46, 231, 0) 200rpx);
+}
+
+.page{
+  margin: 0 32rpx;
+  position: relative;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.header{
+  display: flex;
+  position: relative;
+  margin: 32rpx 0 16rpx;
+}
+
+.object-name-and-zone{
+  padding-top: 24rpx;
+}
+
+.a-line{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.initiator-avatar{
+  position: relative;
+  width:70rpx;
+  height:70rpx;
+  margin: auto 0;
+  border-radius: 50%;
+}
+
+.initiator-name-and-time{
+  margin-left: 16rpx;
+}
+
+.initiator-name{
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.initiator-time{
+  font-size: 10px;
+}
+
+.star-detail{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.star-text{
+  font-size: 10px;
+  color: #868788;
+}
+
+.star-icon{
+  margin-left: 10rpx;
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.object-name{
+  font-size: 16px;
+}
+
+.object-price{
+  margin-top: 24rpx;
+  margin-bottom: 24rpx;
+  color: #7C3ECC;
+}
+
+.object-price-symbol{
+  font-size: 28rpx;
+}
+.object-price-integer-part{
+  font-size: 36rpx;
+}
+.object-price-fractional-part{
+  font-size: 28rpx;
+}
+
+.object-zone{
+  border-radius: 4rpx;
+	margin-left: 36rpx;
+  padding: 0 8rpx;
+  font-size: 10px;
+  color: #7C3ECC;
+  background:#F9F2FF;
+  border-radius: 8rpx;
+}
+
+.object-content{
+  color: #545454;
+}
+
+.object-image-container{
+  margin-top: 24rpx;
+}
+
+.object-image{
+  width: 100%;
+}
+.object-image:first-child{
+  border-top-left-radius: 24rpx;
+  border-top-right-radius: 24rpx;
+}
+.object-image:last-child{
+  border-bottom-left-radius: 24rpx;
+  border-bottom-right-radius: 24rpx;
+}
+
+.operation-button{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 32rpx 32rpx;
+  background-color: #ffffff;
+}
+
+.operation-button-group{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.contact-button,.initiator-button,.initiator-button-hollow,.initiator-button-disabled{
+  line-height: 80rpx;
+  height: 80rpx;
+  margin: 24rpx 0;
+  color: #f7f7f7;
+  background: #957D95;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.initiator-button,.initiator-button-hollow,.initiator-button-disabled{
+  width: 216rpx;
+}
+
+.initiator-button-hollow{
+  background-color: #ffffff;
+  border: 1px solid #957d95;
+  color: #957D95;
+}
+
+.initiator-button-disabled{
+  background: #CCCCCC;
+}

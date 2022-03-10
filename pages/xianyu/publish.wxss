@@ -1,0 +1,323 @@
+/* pages/xianyu/publish.wxss */
+@import "/static/common.wxss";
+Page {
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28rpx;
+  line-height: 1.5;
+
+  color: #545454;
+}
+
+.xianyu-background{
+  background: linear-gradient(180deg, rgba(218, 181, 218, 1) -360rpx, rgba(139, 46, 231, 0) 200rpx);
+}
+
+
+.userImage, .addImage {
+  height: 192rpx;
+  width: 152rpx;
+  margin: 13rpx;
+  border-radius: 16rpx;
+}
+.addImage-icon {
+  height: 192rpx;
+  width: 152rpx;
+  border-radius: 16rpx;
+}
+
+/* input为原生组件，要用height，min-height覆盖原有属性 */
+input {
+  /* height: 30rpx; */
+  min-height: 0rpx;
+  /* line-height: 30rpx; */
+}
+.input-placeholder {
+  /* font-size: 24rpx; */
+  color: #989a9a;
+}
+/* 设置整体样式 */
+.outer-container{
+  padding:10rpx 0;
+}
+.inner-container{
+  width: 686rpx;
+  margin: 0rpx 32rpx;
+  /* height: 100%; */
+}
+.item-wrap {
+  width: auto; /*子元素（包括content+padding+border+margin）撑满整个父元素的content区域。*/
+  padding: 24rpx 0 16rpx 0;
+  border-bottom: 1px solid #DEDEDE;
+}
+.item-wrap-last {
+  border-bottom: none;
+}
+
+
+
+/* 设置标题及图标 */
+.title{
+  /* height: 60rpx; */
+  font-size: 28rpx;
+  font-weight: bold;
+  line-height: 1.5;
+}
+.icon-with-title {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  margin-bottom: 16rpx;
+  align-items: center;
+}
+.icon {
+  height: 32rpx;
+  width: 32rpx;
+
+  margin-right: 8rpx;
+}
+.price-icon{
+  height: 36rpx;
+  width: 36rpx;
+
+  margin-right: 8rpx;
+}
+.operation-icon {
+  height: 40rpx;
+  width: 40rpx;
+
+  /* margin-right: 10rpx; */
+}
+.tip {
+  font-size: 10px;
+  line-height: 150%;
+
+  color: #868788;
+}
+/* -----------总体公用样式设置结束------------ */
+
+.description{
+  border-bottom: none;
+}
+
+.text-box,
+.input-box {
+  display: flex;
+  justify-content: space-between;
+}
+.input-name-box {
+  padding-left: 8rpx;
+  height: 40rpx;
+  font-size: 32rpx;
+  line-height: 1.25;
+  color: #333333;
+}
+.text-box {
+  height: 370rpx;
+}
+.text-area {
+  height: auto;
+  width: 100%;
+}
+.type-container {
+  width: 686rpx;
+  height: 80rpx;
+  padding: 26rpx 0 24rpx 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+.label-show {
+  width: 26px;
+  height: 15px;
+  padding: 0 8rpx;
+  margin: 0 16rpx 0 0;
+
+  background: #F2FCFF;
+  border-radius: 4px;
+  color: #3E92CC;
+
+  font-size: 10px;
+}
+.label-show:first-child {
+  margin-left: 36rpx;
+}
+radio-group > radio {
+  font-size: 20rpx;
+  line-height: 30rpx;
+  height: 30rpx;
+  min-height: 30rpx;
+}
+#lost {
+  margin-right: 40rpx;
+}
+
+
+.input-location {
+  margin-left: 44rpx; /*这里使用margin*/
+  font-size: 20rpx;
+  width: 360rpx;
+}
+
+.input-contact-box{
+  height: 36rpx;
+  width: 294rpx;
+  padding: 0 1vw 16rpx 1vw;
+  margin-left: 18rpx;
+  margin-right: 4rpx;
+  border-bottom: 1px solid #DEDEDE;
+}
+.contact-type-picker {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: 36rpx;
+  width: 274rpx;
+  font-size: 28rpx;
+  color: #545454;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 16rpx;
+  border-bottom: 1px solid #DEDEDE;
+}
+.a-line{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+.contact-a-line{
+  margin-bottom: 16rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+
+.button{
+  box-sizing: border-box;
+  width: 686rpx !important;
+  height: 80rpx;
+  margin: 192rpx auto 50rpx;
+  padding: 20rpx 0 18rpx 0;
+  background: #3E92CC;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  line-height: 1.5;
+  color: #F7F7F7;
+  text-align: center;
+}
+
+.picker-section{
+  display: flex;
+  flex-direction: row;
+}
+
+.picker-text-placehold{
+  color:#989A9A;
+}
+
+.down-arrow-icon{
+  height: 16rpx;
+  width: 16rpx;
+  margin: auto 0;
+  margin-left:16rpx;
+}
+
+.right-arrow-icon{
+  height: 16rpx;
+  width: 16rpx;
+  margin: auto 0;
+  margin-right:8rpx;
+}
+
+.price-view{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  color: #7C3ECC;
+  font-size: 18px;
+}
+
+.price-input{
+  margin-left: 6rpx;
+  /* float: right; */
+  /* width: 20px; */
+  height: auto;
+}
+
+.contact-picker-a-line{
+  display: flex;
+  flex-direction: row;
+}
+
+.contact-picker-down-arrow-icon{
+  position: absolute;
+  right: 0;
+  bottom: 24rpx;
+  height: 16rpx;
+  width: 16rpx;
+}
+
+/* 表单校验的错误的信息和提示 */
+.error-icon{
+  height: 24rpx;
+  width: 24rpx;
+  margin-right: 8rpx;
+}
+.error-tip {
+  vertical-align: middle;
+  font-size: 20rpx;
+  height: 24rpx;
+  line-height: 24rpx;
+}
+.error-wrap {
+  display: flex;
+  flex-direction: row;
+  /* margin-left: 24rpx; */
+  color: #FA5151;
+}
+.error-wrap-input {
+  margin-left: 0;
+  color: #FA5151;
+}
+.error-content-none{
+  position: absolute;
+  top:80rpx;
+  left:8rpx;
+}
+
+
+.operation-button-group{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32rpx;
+  background-color: #ffffff;
+  z-index: 10;
+}
+
+.operation-button-solid,.operation-button-hollow{
+  line-height: 80rpx;
+  height: 80rpx;
+  margin: 24rpx 0;
+  color: #f7f7f7;
+  background: #957D95;
+  border-radius: 8rpx;
+  text-align: center;
+  width: 328rpx;
+}
+
+.operation-button-hollow{
+  background-color: #ffffff;
+  border: 1px solid #957d95;
+  color: #957D95;
+}

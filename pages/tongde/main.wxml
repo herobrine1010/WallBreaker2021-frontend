@@ -2,7 +2,7 @@
 <view class='tongde-shade'></view>
 <view class="tongde-background">
   <view>
-    <mp-navigation-bar back="{{false}}" ext-class="weui-navigation-bar-tongde__centers" title="失物招领"></mp-navigation-bar>
+    <mp-navigation-bar back="{{true}}" ext-class="weui-navigation-bar-tongde__centers" title="失物招领"></mp-navigation-bar>
   </view>
   
   <view class="search-area">

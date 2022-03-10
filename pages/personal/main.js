@@ -49,6 +49,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    return
     let registered = app.globalData.registered;
     if(!registered){ // 注册完成后首次进入
       let openid = app.globalData.openId;
@@ -118,7 +119,8 @@ Page({
         school: perInfo.school || '学院' ,
         major: perInfo.major || '专业' ,
         grade: perInfo.grade || '年级',
-        identification: perInfo.identification || '学 历'
+        identification: perInfo.identification&&perInfo.identification[0] || '学 历',
+        description:perInfo.description,
       };
       if(perInfo.avatarUrl){
         personBrief.avatarPath = perInfo.avatarUrl;
@@ -176,15 +178,6 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    return {
-      title : '欢迎注册使用济星云小程序！',
-      path : '/pages/welcome/welcome'
-    }
-  },
   onAvatorTap:function(){
     wx.navigateTo({
       url: '../personal/personalDetails',

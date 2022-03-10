@@ -85,6 +85,13 @@ Page({
       }
     })
   },
+  onShareAppMessage: function () {
+    return {
+      title : '欢迎注册使用济星云小程序！',
+      path:app.getSharedUrl()
+    }
+  },
+
   //------四个选择框的改变函数，用于初始化选择框选项、获得用户选择数据------
   dropdownChange: function (e) {
     this.setData({
@@ -193,6 +200,7 @@ Page({
   // -------有关数据提交的函数---------
   //获取、调整、校验表单数据
   teamInfoSubmit:function(e) {
+    
     var form = e.detail.value;
     //在这里做数据判空
     // 校验表单
@@ -231,14 +239,33 @@ Page({
       dialogTip:"",
       dialogCancelText:"取消",
       dialogOkText:"确认",
-      tapOkEvent:"tapOkForTeamSubmit",
+      tapOkEvent:"requestSubscribeMessage",
       isDialogShow:true,
       payload: payload,
     });
   },
 
+  requestSubscribeMessage:function(){
+    let that=this
+    let tmpId='zw9cJ9Z9vTvOAzprBzzJ1W0K8qS5wxq-tj6PgEalRfc'
+    wx.requestSubscribeMessage({
+      tmplIds: [tmpId],
+      success (res) {
+        let result;
+        if(res[tmpId]=='accept')
+          result=true
+        else if(res[tmpId]=='reject')
+          result=false
+        let payload=that.data.payload
+        payload.agreeReceiveMsg=result
+        that.setData({payload})
+        that.inititalizeTeam()
+      }
+    })
+  },
+
   //弹窗点按确认，完成图片上传、表单提交(用Promise实现先后顺序)
-  tapOkForTeamSubmit:function(e){
+  inititalizeTeam:function(e){
     var that = this;
     // 获取本地图片数据，调用库打包成data
     var imageData = new FormData();

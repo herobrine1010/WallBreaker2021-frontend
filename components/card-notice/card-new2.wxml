@@ -1,0 +1,33 @@
+<!--components/jishi-card/card.js.wxml-->
+<view class="card">
+<view class="tag" > 
+    {{labelText}}
+ </view>
+ <view class="title">{{title}}
+ </view>
+
+
+ <view class="rightTag">
+    {{rightTagText}}
+ </view>
+ <view >
+  <image src="{{userAvatar}}" class="icon" mode="scaleToFill"/>
+</view>
+<view>
+    <text class="userName">{{userName}}</text>
+</view> 
+<view>
+    <text class="time">{{publishTime}}</text>
+</view>
+<view class="description-contain">
+    <!-- 没有图片时，显示的文字加长 -->
+    <text class="description {{postingPic?'description-short':'description-long'}}">{{description}}</text>
+</view>
+<view wx:if="{{postingPic}}" class="image-wrap">
+    <!-- 修改了图片的类，裁剪模式 -->
+    <image class="image" src="{{postingPic}}" mode="aspectFill"></image>
+</view>
+</view>
+
+
+
