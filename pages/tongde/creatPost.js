@@ -302,6 +302,10 @@ Page({
         required: true,
         maxlength: 499
       },
+      ownerUserSid: {
+        required: true,
+        digits: true
+      },
       type: {
         required: true,
       },
@@ -329,6 +333,10 @@ Page({
       content: {
         required: '该项未填写',
         maxlength:'字符数已达上限!'
+      },
+      ownerUserSid: {
+        required: '该项未填写',
+        digits: '学号格式不正确'
       },
       type: {
         required: '该项未填写',

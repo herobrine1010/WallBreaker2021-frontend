@@ -146,6 +146,9 @@ radio-group > radio {
   padding-bottom: 16rpx;
   border-bottom: 1px solid #DEDEDE;
 }
+.error-bottom {
+  border-bottom: 1px solid red;
+}
 .a-line{
   position: relative;
   display: flex;
