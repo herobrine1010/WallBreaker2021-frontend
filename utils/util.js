@@ -45,7 +45,7 @@ const getNotice = param => {
     header:{'cookie':app.globalData.token},
     success:function(res){
       if(res.statusCode==200){
-        if(res.data.data.jirenMsgExist){
+        if(res.data.data.jirenMsgExist || res.data.data.lostfoundMsgExist){
           wx.showTabBarRedDot({index:2})
         }else{
           wx.hideTabBarRedDot({index:2})

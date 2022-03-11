@@ -51,6 +51,8 @@
       <image src="../../static/icon/my-lost.svg" class="icon"></image>
       <view class="item-title">我的失物招领</view>
       <view class="right-item">
+        <view wx:if="{{isLostfoundMsgExist}}" class="red-message" style="width: 16rpx; height:16rpx;">
+        </view>
         <!-- <view class="red-circle" wx:if="{{true}}"></view> -->
         <image class="right-arrow-icon" src="/static/icon/right-arrow.svg"/>
       </view>

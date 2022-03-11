@@ -131,7 +131,8 @@ Page({
       that.setData({
         personBrief,
         jirenMsgNum : perInfo.jirenMsgNum,
-        isJirenMsgExist:perInfo.jirenMsgExist
+        isJirenMsgExist:perInfo.jirenMsgExist,
+        isLostfoundMsgExist: perInfo.lostfoundMsgExist || false
       });
 
       // -----------以下是对标签进行处理  ---------------------------------------
