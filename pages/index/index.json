@@ -4,7 +4,8 @@
     "mp-searchbar": "weui-miniprogram/searchbar/searchbar",
     "card-notice":"/components/card-notice/card",
     "my-navi":"/components/jishiNavi/jishiNavi",
-    "dialog-label": "/components/label-selector/dialog-radio"
+    "dialog-label": "/components/label-selector/dialog-radio",
+    "popup-modal": "/pages/tongde/modal/PopupModal/PopupModal"
   },
   "navigationStyle": "custom"
 

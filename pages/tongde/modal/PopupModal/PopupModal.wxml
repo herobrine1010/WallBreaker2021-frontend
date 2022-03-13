@@ -1,5 +1,5 @@
 <!--pages/tongde/modal/PopupModal.wxml-->
-<view class="popup-modal" wx:if="{{isVisible}}" bindtap="close">
+<view class="popup-modal" wx:if="{{isVisible}}" bindtap="close" catchtouchmove="_preventDefault">
   <view class="window" catchtap="_none" style="width: {{width}};">
     <slot></slot>
   </view>

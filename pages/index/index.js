@@ -106,7 +106,8 @@ async function getNextPostingPage(that , keyword, labelId, timeIndex) {
   }else{
     that.setData({'nextPageData' : {}});// 筛选的时候，清空之前的nextPageData
   }
-};
+}
+
 Component({
   behaviors: [filterBehavior],
   data: {
@@ -233,10 +234,23 @@ Component({
         })
       })
   
+      // 检查用户手机号是否已入库
+      request({
+        url: "user/myInfo",
+        header: {
+          'content-type': 'x-www-form-urlencoded',
+        }
+      }).then(res => {
+        const phone = res.data.phone || null;
+        this.setData({isPhone: Boolean(phone)})
+      })
 
       //  分页获取帖子列表
       let {keyword, labelId, timeIndex} = this.data;
       setPositingDataInFirstPage(this, 1, keyword, labelId, timeIndex);
+
+      // 获取手机号弹窗
+      this.showPhoneNumberModal()
     },
   
     /**
@@ -379,6 +393,74 @@ Component({
         showCancel: false,
         confirmText: "知道啦"
       })
+    },
+    getPhoneNumber (e) {
+      var cid = e.detail.cloudID
+      console.log(cid)
+      if(cid==undefined){
+        wx.showModal({
+          showCancel:false,
+          title: '提示',
+          content: '您需要授权手机号来完成注册！',
+          success: function(res) {
+           if (res.confirm) {
+            console.log('用户点击确定')
+           }
+          }
+         })
+      }else{
+        wx.showLoading({
+          title: '正在获取手机号',
+          mask: true,
+          time:10000
+        });
+        wx.cloud.callFunction({
+          name:"getPhoneNumber",
+          data:{
+            cloudID:e.detail.cloudID
+          }
+        })
+        .then(res=>{
+          var phone = res.result.list[0].data.purePhoneNumber
+          this.setData({isGetPhone: true})
+          
+          wx.cloud.callFunction({
+            name: "getOpenId",
+            success(res) {        
+              console.log(res.result.openid)
+              var openId = res.result.openid
+              
+              request({
+                url : '/user/updateUserPhoneByOpenId/' + openId + '/' + phone,
+                method : 'GET',
+                header: {
+                  "content-type": 'application/x-www-form-urlencoded'
+                },
+             }).then(res => {
+               wx.showToast({
+                 title: '授权成功！',
+               })
+              })
+             },
+            fail(err) {      
+               console.log("获取openid失败:", err)
+            }   
+          })
+          wx.hideLoading({
+            success: (res) => {},
+          })
+        })
+      }
+    
+    },
+    showPhoneNumberModal() {
+      const vm = this.selectComponent('#popup-modal');
+      vm.open();
+
+    },
+    closeGetPhoneModal() {
+      const vm = this.selectComponent('#popup-modal');
+      vm.close();
     }
   }
 })

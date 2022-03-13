@@ -32,5 +32,6 @@ Component({
       });
     },
     _none() {}, // 空函数阻止冒泡
+    _preventDefault() {return false;}
   }
 })

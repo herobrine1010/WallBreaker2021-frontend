@@ -83,4 +83,10 @@
       </view>   
   </view>
   <dialog-label id="dialog-label-selector" labels="{{labelList}}" bind:change="labelChanged"></dialog-label>
-  
+  <popup-modal id="popup-modal"> 
+    <view style="padding: 20rpx;">
+      <view class="poby-text h3" style="margin-bottom: 20rpx; text-align: center;">失物招领「校园卡寻回」机制已上线！</view>
+      <view class="poby-text h6">当您的校园卡丢失被捡到时，我们将通过同济大学官方平台发送短信提醒您。因此我们需要获取您的手机号信息，该信息不作他用，感谢配合！</view>
+      <button class="poby-btn bg-blue" style="margin-top: 20rpx;" size="full" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" bindtap="closeGetPhoneModal">确定</button>
+    </view>
+  </popup-modal>
