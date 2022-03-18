@@ -4,6 +4,7 @@ import {request} from "../../request/request.js";
 import {parseDetail} from "./tool.js"
 const FormData = require('../../lib/wx-formdata-master/formData.js'); //实现文件上传
 const categoryList=[
+  {id:74,value:'互助'},
   {id:64,value:'图书'},
   {id:65,value:'美妆'},
   {id:66,value:'日用'},
@@ -12,7 +13,8 @@ const categoryList=[
   {id:69,value:'票务'},
   {id:70,value:'服饰'},
   {id:71,value:'出行'},
-  {id:72,value:'其他'}]
+  {id:72,value:'其他'},
+  ]
 const zoneList=[
   {id:56,value:'四平路校区',},
   {id:58,value:'彰武路校区'},
@@ -106,7 +108,9 @@ Page({
   onUnload:function(e){
     if(this.data.mode=='new'&&this.data.haveEdited){
       app.globalData.xianyuSaving=true
+      console.log(this.selectComponent('#image-box').image)
       uploadPictures(this.selectComponent("#image-box").image).then(res=>{
+        console.log(res)
         if(res.allPicUrl){
           res.allPicUrl=res.allPicUrl.split(',')
         }

@@ -168,11 +168,16 @@ Page {
   margin-right: 0;
 }
 
+
 .navigation-item-selected{
   border-bottom: 4rpx solid #957D95;
   border-radius: 4rpx;
   box-shadow: 0 4rpx rgba(192, 203, 206, 0.8);
   color: #333333;
+}
+.navigation-item-highlight{
+  font-weight: 600;
+  color: #7E17E5;
 }
 .navigation-placehold{
   display: inline-block;
