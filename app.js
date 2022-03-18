@@ -27,9 +27,9 @@ App({
   globalData: {
     userInfo: null,
     personalManagementOrCollection : 1,
-    // url: 'https://tongji-poby.sparkxyf.com/api'
+    url: 'https://tongji-poby.sparkxyf.com/api'
     // url:'https://jixingyun.tongji.edu.cn/api1'
-    url:'https://www.wallbreaker.top'
+    // url:'https://www.wallbreaker.top'
     // url:'http://localhost:9000'
   },
   getSharedUrl(){
@@ -42,5 +42,10 @@ App({
     }
     params=params.substring(0,params.length-1)
     return '/pages/welcome/welcome?sharedPage=/'+page.route+params
+  },
+
+  decodeSharedUrl(sharedPage){
+    let page=sharedPage.replace('●','?').replace('◆','&');
+    return page
   }
 })

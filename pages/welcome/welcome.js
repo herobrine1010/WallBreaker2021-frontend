@@ -97,7 +97,8 @@ Page({
         let sharedPage=app.globalData.sharedPage
         if(sharedPage){
           app.globalData.sharedPage=undefined
-          let page=sharedPage.replace('●','?').replace('◆','&')
+          // let page=sharedPage.replace('●','?').replace('◆','&')
+          let page = app.decodeSharedUrl(sharedPage)
           wx.reLaunch({
             url: page,
           })
