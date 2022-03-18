@@ -32,15 +32,18 @@ App({
     url:'https://www.wallbreaker.top'
     // url:'http://localhost:9000'
   },
-  getSharedUrl(){
+  getSharedUrl(data={}){
     let pages=getCurrentPages()
     let page=pages[pages.length-1]
-    let options=page.options
+    let options={
+      ...page.options,
+      ...data,
+    }
     let params='●'
     for(let key in options){
       params+=key+'='+options[key]+'◆'
     }
     params=params.substring(0,params.length-1)
     return '/pages/welcome/welcome?sharedPage=/'+page.route+params
-  }
+  },
 })

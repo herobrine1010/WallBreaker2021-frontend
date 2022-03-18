@@ -2,11 +2,11 @@
 <view class='background-shade'></view>
 <view class="tongde-background">
   <view>
-    <mp-navigation-bar back="{{true}}"  style="z-index:103;" ext-class="weui-navigation-bar-tongde__centers" title="同济百科" lastPage="/pages/jishi/main"></mp-navigation-bar>
+    <mp-navigation-bar back="{{true}}"  style="z-index:103;" ext-class="weui-navigation-bar-tongde__centers" title="同济百科" lastPage="/pages/index/index"></mp-navigation-bar>
   </view>
 
 
-  <scroll-view id="outer-scroll-view" scroll-y="true" style="height:{{outerScrollViewHeight}};" scroll-top="{{scroll_view.outer_top_num}}" bindscroll="onOuterScroll"  >
+  <scroll-view id="outer-scroll-view" scroll-y="{{false}}" style="height:{{outerScrollViewHeight}};" scroll-top="{{scroll_view.outer_top_num}}"   >
     <view id="tab" class="tab" style="z-index:102;">
       <view class="tab-item {{tabIndex==0?'active':''}}" bindtap="changeItem" data-item="0">常见问题
       </view>
@@ -63,12 +63,12 @@
   
   <scroll-view
   id="inner-scroll-view"
-  class="inner-scroll-view"
+  class="inner-scroll-view card-stream"
   scroll-y="true"
   scroll-top="{{scroll_view.inner_top_num}}"
   style="height:{{scroll_view.inner_height}}"
   bindrefresherrefresh="onRefresherRefresh"
-  refresher-enabled="{{scroll_view.refresherEnabled}}"  bindscroll="onInnerScroll"
+  refresher-enabled="{{scroll_view.refresherEnabled}}"  
   enable-back-to-top="true"
   refresher-triggered="{{loading}}"
   bindscrolltolower="onScrollToLower"
@@ -78,14 +78,16 @@
       <view class="question-answer-line" style="margin:auto 0;" bindtap="clickQuestionAnswerLine" data-index="{{index}}" data-id="{{item.id}}">
         <view class="question-answer-index-and-title">
           <view class="question-answer-index">{{index+1}}</view>
-          <view class="question-answer-title">{{item.question}}</view>
+          <view class="question-answer-title two-line-text">{{item.question}}</view>
         </view>
         <!-- <image src="{{'../../static/icon/'+item.answer_show?'down':'right'+'-arrow.svg'}}" wx:if="{{!item.answer_show}}" class="question-answer-arrow"></image> -->
         <image src="../../static/icon/right-arrow.svg" wx:if="{{!item.answer_show}}" class="question-answer-arrow"></image>
         <image src="../../static/icon/down-arrow.svg" wx:else class="question-answer-arrow"></image>
       </view>
       <view wx:if="{{item.answer_show}}">
-        <text class="question-answer-content" wx:if="{{item.answer}}">{{item.answer}}</text>
+        <view class="question-answer-content">
+          <text wx:if="{{item.answer}}">{{item.answer}}</text>
+        </view>
         <view class="question-answer-image-container" wx:if="{{item.allPicUrl}}" >
           <view class="question-answer-image-view" wx:for="{{item.all_pic_url_list}}" wx:for-item="imageUrl" wx:for-index="imageIndex" bindtap="previewImage" data-image-list="{{item.all_pic_url_list}}" data-image-index="{{imageIndex}}">
             <image src="{{imageUrl}}"  class="question-answer-image"/>        
