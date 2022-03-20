@@ -49,6 +49,7 @@
   display: flex;
   height: 84rpx;
   width: 100%;
+  margin-bottom: 24rpx;
   z-index: 100;
 }
 .searchBar{
@@ -72,14 +73,17 @@
 .question-answer-card{
   /* height: 80rpx; */
   background: #FFFFFF;
-  margin:  24rpx 8px;
+  margin:  20rpx 16rpx;
   padding: calc((40px - 42rpx) / 2) 24rpx;
   border-radius: 16rpx;
   /* height:40px; */
 }
+.question-answer-card:first-child{
+  margin-top: 0;
+}
 .question-answer-line{
   position: relative;
-  height: 42rpx;
+  /* height: 42rpx; */
   /* margin-top: rpx; */
   display: flex;
   flex-direction: row;
@@ -89,11 +93,12 @@
 .question-answer-index-and-title{
   display: flex;
   flex-direction: row;
-  align-items: center;
+  /* align-items: center; */
 }
 .question-answer-index{
   width: 30rpx;
   height: 30rpx;
+  margin-top: 9rpx;
   margin-right: 10rpx;
   border-radius: 50%;
   border: 1px solid #545454;
@@ -103,9 +108,9 @@
 }
 .question-answer-title{
   font-size: 16px;
-  overflow: hidden;  
-  white-space: nowrap;    
-  text-overflow:ellipsis;
+  /* overflow: hidden;   */
+  /* white-space: nowrap;     */
+  /* text-overflow:ellipsis; */
   width: 576rpx;
 }
 
@@ -124,13 +129,19 @@
 }
 
 .question-answer-image-view{
-  margin: 0 5rpx;
+  margin: 0 10rpx;
+}
+.question-answer-image-view:nth-child(4n){
+  margin-right: 0;
+}
+.question-answer-image-view:nth-child(4n+1){
+  margin-left: 0;
 }
 .question-answer-image{
-  /* width: 116rpx;
-  height: 116rpx; */
-  width:16vw;
-  height:16vw;
+  width: 144rpx;
+  height: 144rpx;
+  /* width:20vw;
+  height:20vw; */
 }
 
 .question-answer-content{
@@ -138,13 +149,14 @@
   /* font-family: PingFang SC; */
   font-size: 14px;
   line-height: 150%;
+  margin-bottom: 8rpx;
   color: #545454;
 }
 .communication-search-row-and-filters-content{
   position:sticky;
   top: 0;
   z-index: 100;
-
+  margin-bottom: 24rpx;
 }
 
 .communication-search-area{
@@ -280,11 +292,14 @@
   padding: 19rpx;
   border-radius: 16rpx;
 }
+.communication-card:first-child{
+  margin-top: 0;
+}
 .communication-name{
   /* font-size: 14px; */
   font-weight: bold;
   color: #333333;
-  width: 518rpx;
+  width: 558rpx;
 }
 .communication-address{
   font-size: 14px;

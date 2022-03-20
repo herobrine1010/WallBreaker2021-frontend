@@ -37,6 +37,7 @@ Component({
     zoneIndex:8,
     navigationList:[
       {id:null,value:'全部'},
+      {id:74,value:'互助'},
       {id:64,value:'图书'},
       {id:65,value:'美妆'},
       {id:66,value:'日用'},
@@ -45,7 +46,8 @@ Component({
       {id:69,value:'票务'},
       {id:70,value:'服饰'},
       {id:71,value:'出行'},
-      {id:72,value:'其他'}],
+      {id:72,value:'其他'},
+      ],
     navigationIndex:0,
 
     objectList:[],
@@ -67,6 +69,7 @@ Component({
     }
     this.initializeScrollViewHeight()
     this.getData(true)
+    console.log(app.getSharedUrl())
 
     // getThenUpdateLostFoundList(this,0,null,null,1);
     // updateCache(this,0,null,null,2);
@@ -82,7 +85,7 @@ Component({
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
-      path:app.getSharedUrl()+'◆tabIndex='+this.data.tabIndex
+      path:app.getSharedUrl({tabIndex:this.data.tabIndex})
     }
   },
 

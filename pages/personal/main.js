@@ -46,12 +46,16 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * 生命周期函数--监听页面加载 -- 执行任务如下：
+   * 1. 判断是否首次进入（即刚通过统一认证），调用接口完成注册；
+   * 2. 判断有无分享页面：
+   *    2.1 有 --- 跳转分享页
+   *    2.2 无 --- 完善个人资料
    */
   onLoad: function () {
-    return
-    let registered = app.globalData.registered;
-    if(!registered){ // 注册完成后首次进入
+
+    let { registered, sharedPage } = app.globalData;
+    if(!registered){  // 1.  ----- ----- 完成注册 -------- -------
       let openid = app.globalData.openId;
       request({
         url : `/user/setUserRegisteredTrueByOpenId/${openid}`,
@@ -60,7 +64,14 @@ Page({
            
         }
       }).then(res => {
-        this.setData({
+        if(sharedPage){  // 2.1 -------- 跳转分享页 ----------
+          app.globalData.sharedPage=undefined
+          let page = app.decodeSharedUrl(sharedPage)
+          wx.reLaunch({
+            url: page,
+          })
+        }else{    // 2.2 ------------- 完善个人资料 -----------
+          this.setData({
             dialogContent:"请完善个人信息",
             dialogTip:"为了更好地使用功能，请完善个人信息",
             dialogCancelText:"取消",
@@ -68,7 +79,8 @@ Page({
             tapOkEvent:"tapOkForAddPersonalInfo",
             tapCancelEvent:"tapCancelForAddPersonalInfo",
             isDialogShow:true,
-        })
+          })
+        }
       })
     }
 
