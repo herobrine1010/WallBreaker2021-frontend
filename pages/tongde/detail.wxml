@@ -43,7 +43,7 @@
   </scroll-view>
   </view>
 </view>
-<personal-animation id="personalAnimation1" personalInfo="{{personalInfo}}" bind:copyWxId="copyWxId"></personal-animation>
+<personal-animation id="personalAnimation1" personalInfo="{{personalInfo}}"></personal-animation>
 
 <dialog-box 
   content="{{dialog.content}}"
