@@ -88,6 +88,17 @@ Page({
       app.globalData.token = res.cookies[0];
       app.globalData.openId = openId;
       app.globalData.registered = registered;
+
+      //向全局维度中传入用户的维度值
+      //ToDo，在可修改维度处,同时更改全局维度值
+      app.globalData.user_attribute['user_status'] = res.data.data.code || 'unknown'
+      app.globalData.user_attribute['user_school'] = res.data.data.school || 'unknown'
+      app.globalData.user_attribute['user_identification'] = res.data.data.identification || 'unknown'
+      app.globalData.user_attribute['user_grade'] = res.data.data.grade || 0
+      console.log('the user_attribute is below')
+      console.log(app.globalData.user_attribute)
+      //上报welcome_welcome_onload埋点
+      wx.reportEvent("welcome_welcome_onload", app.globalData.user_attribute)
       // console.log(' setData__________________________________');
       if(status == 'registered'){// 完成了统一身份认证
         if(res.data.data.jirenMsgNum>0){
@@ -121,5 +132,10 @@ Page({
       console.log(err);
     })
 
-  }
+  },
+
+  onShow(){
+    wx.reportEvent("welcome_welcome_onshow", app.globalData.user_attribute)
+    //onShow在小程序启动，或者从后台进入前台后触发
+  },
 })
