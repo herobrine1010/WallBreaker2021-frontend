@@ -207,6 +207,7 @@ Component({
           type: "jishi"
         }
       }).then( res => {
+        console.log(this.data.labelList)
         this.setData({
           labelList: res.data.data,
         })
