@@ -56,22 +56,21 @@ Page({
      */
     onLoad() {
         /** 获取头像框。 */
-        wx.request({
-            url: 'https://www.gardilily.com/wallbreakertest/avatarframe/getFrames.php',
-            success: (res) => {
-                if (res.statusCode == 200) {
-                    let data = res.data.data
-                    let arr: Array<object> = []
-                    for (let it of data) {
-                        arr.push({
-                            src: it
-                        })
-                    }
-
-                    this.setData({
-                        frameCandidates: arr
+        request({
+            url: '/profilePhoto/getProfilePhotoList/1'
+        }).then(res => {
+            if (res.statusCode == 200) {
+                let data = res.data.data
+                let imgInfoArray: Array<object> = []
+                for (let it of data) {
+                    imgInfoArray.push({
+                        src: it.picUrl
                     })
                 }
+
+                this.setData({
+                    frameCandidates: imgInfoArray
+                })
             }
         })
 

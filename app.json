@@ -1,82 +1,81 @@
 {
-    "tabBar": {
-        "color": "#989A9A",
-        "selectedColor": "#3E92CC",
-        "list": [
-            {
-                "pagePath": "pages/index/index",
-                "text": "首页",
-                "iconPath": "static/icon/jishi.png",
-                "selectedIconPath": "static/icon/jishi-solid.png"
-            },
-            {
-                "pagePath": "pages/jiren/main",
-                "text": "组队攒局",
-                "iconPath": "static/icon/jiren.png",
-                "selectedIconPath": "static/icon/jiren-solid.png"
-            },
-            {
-                "pagePath": "pages/personal/main",
-                "text": "我的",
-                "iconPath": "static/icon/personal.png",
-                "selectedIconPath": "static/icon/personal-solid.png",
-                "index": 3
-            }
-        ]
-    },
-    "pages": [
-        
-        "pages/avatar-frame/avatar-frame",
-        "pages/welcome/welcome",
-        "pages/welcome/check",
-        "pages/jiren/main",
-        "pages/jiren/groupDetail",
-        "pages/jishi/detail",
-        "pages/jiren/guide",
-        "pages/jiren/myJoin",
-        "pages/jishi/main",
-        "pages/jiren/myPublish",
-        "pages/index/index",
-        "pages/logs/logs",
-        "pages/testPage/testPage",
-        "pages/login/login",
-        "pages/personal/main",
-        "pages/personal/personalDetails",
-        "pages/personal/teamManagement",
-        "pages/personal/collection",
-        "pages/personal/feedback",
-        "pages/personal/aboutUs",
-        "pages/jiren/answerQuestion",
-        "pages/testPage2/testPage",
-        "pages/jiren-temp/answerQuestion",
-        "pages/jiren/initiateTeam",
-        "pages/tongde/main",
-        "pages/tongde/detail",
-        "pages/tongde/creatPost",
-        "pages/tongde/my",
-        "pages/tongde/myLost",
-        "pages/jishi/detail-new",
-        "pages/jishi/link",
-        "pages/testPage/testfilter",
-        "pages/welcome/blocked",
-        "pages/welcome/welcome-new",
-        "pages/welcome/protocol",
-        "pages/login/webview",
-        "pages/welcome/webView",
-        "pages/jiren/guide-new",
-        "pages/personal/help-new",
-        "pages/jishi/encyclopedia",
-        "pages/xianyu/main",
-        "pages/xianyu/detail",
-        "pages/xianyu/publish",
-        "pages/xianyu/myXianzhi"
-    ],
-    "window": {
-        "backgroundTextStyle": "dark",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "济星云",
-        "navigationBarTextStyle": "black"
-    },
-    "useExtendedLib": {},
-    "sitemapLocation": "sitemap.json"
+  "tabBar": {
+    "color": "#989A9A",
+    "selectedColor": "#3E92CC",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/icon/jishi.png",
+        "selectedIconPath": "static/icon/jishi-solid.png"
+      },
+      {
+        "pagePath": "pages/jiren/main",
+        "text": "组队攒局",
+        "iconPath": "static/icon/jiren.png",
+        "selectedIconPath": "static/icon/jiren-solid.png"
+      },
+      {
+        "pagePath": "pages/personal/main",
+        "text": "我的",
+        "iconPath": "static/icon/personal.png",
+        "selectedIconPath": "static/icon/personal-solid.png",
+        "index": 3
+      }
+    ]
+  },
+  "pages": [
+    "pages/welcome/welcome",
+    "pages/welcome/check",
+    "pages/jiren/main",
+    "pages/jiren/groupDetail",
+    "pages/jishi/detail",
+    "pages/jiren/guide",
+    "pages/jiren/myJoin",
+    "pages/jishi/main",
+    "pages/jiren/myPublish",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/testPage/testPage",
+    "pages/login/login",
+    "pages/personal/main",
+    "pages/personal/personalDetails",
+    "pages/personal/teamManagement",
+    "pages/personal/collection",
+    "pages/personal/feedback",
+    "pages/personal/aboutUs",
+    "pages/jiren/answerQuestion",
+    "pages/testPage2/testPage",
+    "pages/jiren-temp/answerQuestion",
+    "pages/jiren/initiateTeam",
+    "pages/tongde/main",
+    "pages/tongde/detail",
+    "pages/tongde/creatPost",
+    "pages/tongde/my",
+    "pages/tongde/myLost",
+    "pages/jishi/detail-new",
+    "pages/jishi/link",
+    "pages/testPage/testfilter",
+    "pages/welcome/blocked",
+    "pages/welcome/welcome-new",
+    "pages/welcome/protocol",
+    "pages/login/webview",
+    "pages/welcome/webView",
+    "pages/jiren/guide-new",
+    "pages/personal/help-new",
+    "pages/jishi/encyclopedia",
+    "pages/xianyu/main",
+    "pages/xianyu/detail",
+    "pages/xianyu/publish",
+    "pages/xianyu/myXianzhi",
+    "pages/avatar-frame/avatar-frame"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "济星云",
+    "navigationBarTextStyle": "black"
+  },
+  "useExtendedLib": {},
+  "sitemapLocation": "sitemap.json"
 }
