@@ -7,8 +7,8 @@ var app=getApp();
 
 // 引入各类behaviors
 const behaviorsPath = "../../behaviors/"
-const scrollBehavior = require(behaviorsPath + "ScrollView.js");
-const searchBehavior = require(behaviorsPath + "Search.js");
+const scrollBehavior = require("../../behaviors/ScrollView.js");
+const searchBehavior = require("../../behaviors/Search.js");
 const setHeight = require("../../behaviors/SetHeight.js")
 
 const zoneMap={56:'四平',57:'嘉定',58:'彰武',60:'沪西',61:'沪北',59:'铁岭',63:'线上',62:'不限地点'}
