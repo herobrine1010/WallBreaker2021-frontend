@@ -75,11 +75,20 @@ Page({
         })
 
         this.data.canvas = new WxCanvasPlus('#avatar-frame-canvas', () => {
+            const imgLoadErrorHandler = ()=>{
+                wx.showToast({
+                    title: '网络异常',
+                    icon: 'error'
+                })
+            }
+
             this.data.avatarImg = this.data.canvas.getCanvas().createImage()
             this.data.frameImg = this.data.canvas.getCanvas().createImage()
             this.data.frameImg.onload = () => {
                 this.redrawAvatarAndFrame()
             }
+            this.data.avatarImg.onerror = imgLoadErrorHandler
+            this.data.frameImg.onerror = imgLoadErrorHandler
         })
     },
 
@@ -139,7 +148,7 @@ Page({
                 wx.getUserProfile({
                     desc: "获取用户头像"
                 }).then(res => {
-                    this.data.avatarImg.src = res.userInfo.avatarUrl
+                    this.data.avatarImg.src = res.userInfo.avatarUrl.substr(0, res.userInfo.avatarUrl.length - 3) + '0' // 这种写法很垃圾……但我想偷懒qwq
                     this.data.avatarImg.onload = () => {
                         this.redrawAvatarAndFrame()
                     }
@@ -152,7 +161,9 @@ Page({
 
             case 'saveImg': // 保存图片
                 wx.canvasToTempFilePath({
-                    canvas: this.data.canvas.getCanvas()
+                    canvas: this.data.canvas.getCanvas(),
+                    destWidth: 512,
+                    destHeight: 512 // 这样直接写死很不优雅。但是我懒...
                 }).then(res => {
                     wx.saveImageToPhotosAlbum({
                         filePath: res.tempFilePath
@@ -178,9 +189,6 @@ Page({
      * 画板触控事件处理回调。
      */
     canvasTouchHandler(event: any) {
-        //console.log("event in:")
-        //console.log(event)
-
         /**
          * 处理触控信息。
          * 我们假设之前已经有触控记录了。只需要从之前的触控记录里寻找1或2条，完成相关计算。
@@ -258,7 +266,6 @@ Page({
                 break
             case 'touchstart':
                 for (let it of event.changedTouches) {
-                    console.log(it)
                     this.data.prevCanvasTouches.push(it)
                 }
                 break

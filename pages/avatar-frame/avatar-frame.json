@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
-  "navigationStyle": "custom",
-  "disableScroll": false
+  "navigationBarBackgroundColor": "#fed6e3",
+  "disableScroll": false,
+  "navigationBarTitleText": "头像边框"
 }
