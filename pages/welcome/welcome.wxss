@@ -5,11 +5,14 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #111 url(https://wallbreaker-tongji.oss-cn-shanghai.aliyuncs.com/static-img/loginTJ/3haowu-tj.png) no-repeat;
-  animation: animatedBackground 1.7s linear 0.5s;
+  
+  background: #111 url(https://wallbreaker-tongji.oss-cn-shanghai.aliyuncs.com/static-img/loginTJ/welcome-dahuangmiao.png)  no-repeat ;
+  background-size: 750rpx;
 
+  /* background: #111 url(https://wallbreaker-tongji.oss-cn-shanghai.aliyuncs.com/static-img/loginTJ/3haowu-tj.png) no-repeat;  */
+  /* animation: animatedBackground 1.7s linear 0.5s;
   background-position: -362rpx -81rpx; 
-  background-size: 1380rpx 1841rpx;
+  background-size: 1380rpx 1841rpx; */
 }
 
 .bg-color{

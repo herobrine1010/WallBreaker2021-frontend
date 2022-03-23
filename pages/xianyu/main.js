@@ -7,8 +7,8 @@ var app=getApp();
 
 // 引入各类behaviors
 const behaviorsPath = "../../behaviors/"
-const scrollBehavior = require(behaviorsPath + "ScrollView.js");
-const searchBehavior = require(behaviorsPath + "Search.js");
+const scrollBehavior = require("../../behaviors/ScrollView.js");
+const searchBehavior = require("../../behaviors/Search.js");
 const setHeight = require("../../behaviors/SetHeight.js")
 
 const zoneMap={56:'四平',57:'嘉定',58:'彰武',60:'沪西',61:'沪北',59:'铁岭',63:'线上',62:'不限地点'}
@@ -37,6 +37,7 @@ Component({
     zoneIndex:8,
     navigationList:[
       {id:null,value:'全部'},
+      {id:74,value:'互助'},
       {id:64,value:'图书'},
       {id:65,value:'美妆'},
       {id:66,value:'日用'},
@@ -45,7 +46,8 @@ Component({
       {id:69,value:'票务'},
       {id:70,value:'服饰'},
       {id:71,value:'出行'},
-      {id:72,value:'其他'}],
+      {id:72,value:'其他'},
+      ],
     navigationIndex:0,
 
     objectList:[],
@@ -67,6 +69,7 @@ Component({
     }
     this.initializeScrollViewHeight()
     this.getData(true)
+    console.log(app.getSharedUrl())
 
     // getThenUpdateLostFoundList(this,0,null,null,1);
     // updateCache(this,0,null,null,2);
@@ -82,7 +85,7 @@ Component({
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
-      path:app.getSharedUrl()+'◆tabIndex='+this.data.tabIndex
+      path:app.getSharedUrl({tabIndex:this.data.tabIndex})
     }
   },
 

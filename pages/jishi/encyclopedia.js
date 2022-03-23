@@ -20,7 +20,7 @@ Page({
     scroll_view:{
       outer_top_num:0,
       inner_top_num:0,
-      inner_height:'auto',
+      inner_height:'70vh',
       refresherEnabled:true,
       loading:false,
     },
@@ -47,14 +47,15 @@ Page({
       zoneIdList:[56,57,58,59,60,61,73],
       // zoneNameList:['四平','嘉定','彰武','铁岭','沪西','沪北'],
       zoneColorList:['#3A3042','#7C3ECC','#7C3ECC','#7C3ECC','#17B2E5','#BA75FF'],
-      zoneNameList:['四平校区','嘉定校区','彰武校区','铁岭校区','沪西校区','沪北校区','校外'],
+      // zoneNameList:['四平校区','嘉定校区','彰武校区','铁岭校区','沪西校区','沪北校区','校外'],
+      zoneNameList:['四平','嘉定','彰武','铁岭','沪西','沪北','校外'],
       zoneMap:{
-        56:{value:'四平校区',color:'#3A3042'},
-        57:{value:'嘉定校区',color:'#7C3ECC'},
-        58:{value:'彰武校区',color:'#3A3042'},
-        59:{value:'铁岭校区',color:'#7C3ECC'},
-        60:{value:'沪西校区',color:'#7C3ECC'},
-        61:{value:'沪北校区',color:'#17B2E5'},
+        56:{value:'四平',color:'#3A3042'},
+        57:{value:'嘉定',color:'#7C3ECC'},
+        58:{value:'彰武',color:'#3A3042'},
+        59:{value:'铁岭',color:'#7C3ECC'},
+        60:{value:'沪西',color:'#7C3ECC'},
+        61:{value:'沪北',color:'#17B2E5'},
         73:{value:'校外',color:'#C0C0C0'}
       },
       zoneIndex:null,
@@ -102,7 +103,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title : '欢迎注册使用济星云小程序！',
-      path:app.getSharedUrl()+'◆tabIndex='+this.data.tabIndex
+      path:app.getSharedUrl({tabIndex:this.data.tabIndex})
     }
   },
   initOuterScrollViewHeight:function(){
@@ -138,7 +139,8 @@ Page({
     let query = wx.createSelectorQuery();
     query.select('#inner-scroll-view').boundingClientRect(rect=>{
         let top = rect.top;
-        let height=this.data.windowHeight-top+this.data.tabHeight;
+        // let height=this.data.windowHeight-top+this.data.tabHeight;
+        let height=this.data.windowHeight-top;
         this.setData({
           ['scroll_view.inner_height']:height+'px',
         });

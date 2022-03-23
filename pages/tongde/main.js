@@ -10,9 +10,9 @@ var app=getApp();
 
 // 引入各类behaviors
 const behaviorsPath = "../../behaviors/"
-const scrollBehavior = require(behaviorsPath + "ScrollView.js");
-const searchBehavior = require(behaviorsPath + "Search.js");
-const swiperbehavior = require(behaviorsPath + "Swiper.js");
+const scrollBehavior = require("../../behaviors/ScrollView.js");
+const searchBehavior = require("../../behaviors/Search.js");
+const swiperbehavior = require("../../behaviors/Swiper.js");
 // 定义函数编写请求参数：-----------------------------------------
 function setRequestData(keyword,labelId,type,pageNo){
   /* 设置request的参数, type必选, labelId, keyword可选 */

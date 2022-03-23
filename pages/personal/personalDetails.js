@@ -74,21 +74,22 @@ Page({
     });
     
     console.log(this.data.userDetails)
-    if(this.data.userDetails.canChangeName&&this.data.userDetails.nickName!=this.data.userDetails.originalNickName){
-      this.setData({
-        dialog:{
-          isDialogShow: true,
-          content:"确认修改吗？\n昵称14天内不可再次修改噢~",
-          hasInputBox:false,
-          tip:"",
-          cancelText:"取消",
-          okText:"确认",
-          tapOkEvent:"showConfirmChangePersonalDetailModal",
-        }
-      })
-    }else{
-      this.showConfirmChangePersonalDetailModal()
-    }
+    this.showConfirmChangePersonalDetailModal()
+    // if(this.data.userDetails.canChangeName&&this.data.userDetails.nickName!=this.data.userDetails.originalNickName){
+    //   this.setData({
+    //     dialog:{
+    //       isDialogShow: true,
+    //       content:"确认修改吗？\n昵称14天内不可再次修改噢~",
+    //       hasInputBox:false,
+    //       tip:"",
+    //       cancelText:"取消",
+    //       okText:"确认",
+    //       tapOkEvent:"showConfirmChangePersonalDetailModal",
+    //     }
+    //   })
+    // }else{
+    //   this.showConfirmChangePersonalDetailModal()
+    // }
 
   },
   // ------- 隐藏 微信号提示气泡 -------------
@@ -114,10 +115,12 @@ Page({
   },
 
   showConfirmChangePersonalDetailModal:function(){
+    let content="确认提交个人资料修改吗？"
+    content+=(this.data.userDetails.canChangeName&&this.data.userDetails.nickName!=this.data.userDetails.originalNickName)?"\n昵称14天内不可再次修改哦~":""
     this.setData({
       dialog: {
         isDialogShow: true,
-        content:"确认提交个人资料修改吗？",
+        content:content,
         hasInputBox:false,
         tip:"",
         cancelText:"取消",
@@ -359,7 +362,7 @@ Page({
       this.setData({
         dialog: {
           isDialogShow: true,
-          content:"昵称14天内不可再次修改噢~",
+          content:"昵称14天内不可再次修改哦~",
           hasInputBox:false,
           tip:"",
           okText:"确认",
