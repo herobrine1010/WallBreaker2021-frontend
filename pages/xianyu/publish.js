@@ -557,8 +557,6 @@ async function uploadPictures(images){
       uploadList.push(image)
     }
   }
-  // console.log(resultList)
-  // console.log(uploadList)
 
   let resultData={}
   if(uploadList.length){

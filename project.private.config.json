@@ -107,6 +107,36 @@
           "pathName": "pages/xianyu/myXianzhi",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/jiren/groupDetail",
+          "pathName": "pages/jiren/groupDetail",
+          "query": "teamId=294",
+          "scene": null
+        },
+        {
+          "name": "pages/tongde/detail",
+          "pathName": "pages/tongde/detail",
+          "query": "lostfoundId=158",
+          "scene": null
+        },
+        {
+          "name": "pages/xianyu/detail",
+          "pathName": "pages/xianyu/detail",
+          "query": "type=0&id=93",
+          "scene": null
+        },
+        {
+          "name": "pages/personal/personalDetails",
+          "pathName": "pages/personal/personalDetails",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/tongde/my",
+          "pathName": "pages/tongde/my",
+          "query": "",
+          "scene": null
         }
       ]
     }
