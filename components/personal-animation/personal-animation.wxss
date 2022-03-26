@@ -1,18 +1,6 @@
 /* components/personal-animation/personal-animation.wxss */
 @import "../../static/poby.wxss";
 
-.pa-choose{
-  display: flex;
-  position: fixed;
-  width: 100%;
-  bottom: 0%;
-  /* white2_P */
-  background: #FCFAFF;
-  mix-blend-mode: normal;
-  border-radius: 50rpx 50rpx 0px 0px;
-  align-items: center;
-  z-index: 11;
-}
 .pa-block{
   height: 100vh;
   width: 100vw;
@@ -21,6 +9,26 @@
   background-color: #000000;
   opacity: 0.2;
   z-index: 10;
+}
+.pa-choose{
+  display: flex;
+  position: fixed;
+  width: 100%;
+  min-height: 300rpx;
+  bottom: 0%;
+  /* white2_P */
+  background: #FCFAFF;
+  mix-blend-mode: normal;
+  border-radius: 50rpx 50rpx 0px 0px;
+  align-items: center;
+  z-index: 30;
+}
+.pa-report-icon{
+  position: absolute;
+  left: 32rpx;
+  top: 36rpx;
+  width: 32rpx;
+  height: 32rpx;
 }
 .pa-avatar-area{
   display: flex;
