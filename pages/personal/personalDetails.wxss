@@ -28,21 +28,6 @@
   align-content: center;
   border-bottom: 2rpx solid #dedede;
 }
-.detail-items-with-tip{
-  display: flex;
-  /* align-items: center; */
-  /* height: 80rpx; */
-  padding-top:19rpx;
-  width: 686rpx;
-  margin: 0 auto;
-  /* margin-bottom: 24rpx; */
-  /* align-content: center; */
-  border-bottom: 2rpx solid #dedede;
-}
-.item-title-line{
-  display: flex;
-  flex-direction: row;
-}
 .item-title{
   height: 44rpx;
   width: 84rpx;
@@ -92,28 +77,8 @@
   left: -0rpx;
   font-family: PingFang SC;
   font-size: 24rpx;
-  height: 44rpx;
   line-height: 44rpx;
   color: #4A5559;
-}
-.item-name-warning-container{
-  min-height: 19rpx;
-  max-height: 33rpx;
-}
-.item-name-warning-line{
-  display: flex;
-  flex-direction: row;
-  margin-left: 68rpx;
-  align-items: center;
-}
-.item-name-warning-icon{
-  width: 24rpx;
-  height: 24rpx;
-}
-.item-name-warning-tip{
-  font-size: 20rpx;
-  color: #3E92CC;
-  margin-left: 8rpx;
 }
 
 .wxid-popover{

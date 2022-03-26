@@ -192,11 +192,6 @@ Component({
   },
   methods: {
     onLoad: function (options) {
-      wx.showModal({
-        title:'titletitletitletitletitletitle',
-        // content:'contentcontentcontentcontentcontentcontent',
-        editable:true,
-      })
       const that = this;
       // 获取帖子标签列表
       request({
