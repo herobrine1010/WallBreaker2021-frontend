@@ -206,7 +206,7 @@ Page({
     if (onShowState) {
       //  直接复制的话为浅拷贝
       this.page_attribute = JSON.parse(JSON.stringify(app.globalData.user_attribute));
-      this.page_attribute['organization_organization_name'] = this.data.name
+      this.page_attribute['organization_organization_name'] = this.data.name || 'unknown'
       wx.reportEvent("jishi_detail_new_onshow", this.page_attribute)
     } else{
     }
