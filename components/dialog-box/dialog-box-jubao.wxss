@@ -7,38 +7,82 @@
   height:100%;
   left:0;
   top:0;
-  z-index: 100;
+  z-index: 20;
 }
 
 .dialog-box-white-bg{
 
   /* position: absolute; */
   margin: auto auto;
-  width: 650rpx;
+  width: 516rpx;
   height: auto;
   /* left: 100rpx; */
   /* top: 500rpx; */
   border-radius: 50rpx;
-  z-index: 101;
+  z-index: 40;
   background-color: #FAFEFF;
 }
 
-.dialog-input-box{
-  
+.report-reason-box{
+  margin-bottom: 36rpx;
 }
 
+.input-placeholder{
+  font-size: 24rpx;
+  color: #868788;
+}
 
-.dialog-input{
-  height: 200rpx;
-  width: 476rpx;
+.dialog-reason-input-box{
+  width: 464rpx;
+  height: 144rpx;
+  margin: 0 auto;
+  border: 0.5px solid #868788;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+}
+
+.dialog-input-box{
+  width: 464rpx;
+  height: 514rpx;
+  margin: 0 auto;
+  border: 0.5px solid #868788;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+}
+
+.dialog-reason-input{
+  height: 110rpx;
+  width: calc(452rpx - 10rpx * 2);
+  /* width: 476rpx; */
   /* width: auto; */
-  margin: 0 75rpx;
+  margin: 0 auto;
+  margin-top: 12rpx;
   padding: 10rpx;
-  border: 2rpx solid gray;
+  /* border: 2rpx solid gray; */
   border-radius: 10rpx;
   background-color: #fff;
   font-size: 28rpx;
   line-height: 40rpx;
+}
+
+.dialog-input{
+  height: 376rpx;
+  width: calc(452rpx - 10rpx * 2);
+  /* width: 476rpx; */
+  /* width: auto; */
+  margin: 0 auto;
+  margin-top: 12rpx;
+  padding: 10rpx;
+  /* border: 2rpx solid gray; */
+  border-radius: 10rpx;
+  background-color: #fff;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+.report-image-tip{
+  margin-left: 24rpx;
+  font-size: 20rpx;
+  color: #868788;
 }
 .dialog-box-tip{
   display: flex;
@@ -56,8 +100,8 @@
 .dialog-btn-box{
   display: flex;
   /* width: 400rpx; */
-  height: 80rpx;
-  margin: 0 auto;
+  /* height: 80rpx; */
+  margin: 16rpx auto 48rpx;
   justify-content: space-around;
 }
 
@@ -65,7 +109,7 @@
 .dialog-box-cancel,.dialog-box-ok{
   height: 50rpx;
   width: 180rpx;
-  border: 2rpx solid   #17B2E5;
+  border: 2rpx solid   #3E92CC;
   border-radius: 40rpx;
 
   line-height:50rpx;
@@ -76,10 +120,10 @@
 }
 .dialog-box-ok{ 
   color:#FAFEFF;
-  background-color: #17B2E5;
+  background-color: #3E92CC;
 }
 .dialog-box-cancel{
-  color:#17B2E5;
+  color:#3E92CC;
 }
 
 /********** 信息区域的格式等到设计稿出来再详细改 ***********/
@@ -133,14 +177,14 @@
 
 }
 .rightArrow{
-  height:24rpx;
-  width:15rpx;
+  height:30rpx;
+  width:18rpx;
   padding-bottom: 12rpx;
   padding-top: 8rpx;
 }
 .dialog-box-title{
   display: flex;
-  margin: 30rpx 75rpx 10rpx;
+  margin: 32rpx 75rpx 16rpx;
 
   
   font-family: PingFang SC;
@@ -154,12 +198,11 @@
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin: 8px 0px;
 }
 .dialog-box-content{
   /* 后面有了content和title的区分 */
     display: flex;
-    margin: 30rpx 75rpx 10rpx;
+    margin: 0rpx 75rpx 28rpx;
 
     font-family: PingFang SC;
     font-size: 24rpx;
@@ -169,7 +212,6 @@
     color: #545454;
     flex: none;
     order: 1;
-    margin: 8px 0px;
 }
 .reason{
 

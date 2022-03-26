@@ -26,10 +26,15 @@
 
 .avator-list{
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   height: 48rpx;
   margin: 16px 32rpx 0;
+}
+.a-line{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .userAvatar{
   width: 48rpx;
@@ -48,7 +53,7 @@
    color: #333333;
   /* Inside Auto Layout */
   margin:0 16rpx;
-  max-width: 160rpx;
+  max-width: 140rpx;
   /* width: 160rpx; */
 
   white-space: nowrap;
@@ -59,7 +64,7 @@
 .time{ 
   /* 2021年6月9日 21:40 */
   height: 30rpx;
-  width: 300rpx;
+  width: 260rpx;
   /* tag/medium/10 */
   font-size: 20rpx;
   line-height: 150%;
@@ -68,8 +73,13 @@
   color: #545454;
   /* margin-right: 70rpx; */
 }
+.report-icon{
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 12rpx;
+}
 .condition{
-  position: fixed;
+  /* position: fixed; */
   /* position: fixed; */
   right: 32rpx;
   padding: 10rpx 48rpx 8rpx;

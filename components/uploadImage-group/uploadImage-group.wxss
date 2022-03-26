@@ -1,0 +1,33 @@
+/* components/uploadImage-box/uploadImage-box.wxss */
+.image-box {
+  display: flex;
+  flex-wrap: wrap;
+  /* margin: 0 -13rpx; */
+
+}
+.image-wrap {
+  position: relative;
+
+}
+.deleteTopRight {
+  position: absolute;
+  /* top: -8rpx;
+  right: -8rpx; */
+  top: -4rpx;
+  right: -4rpx;
+}
+.deleteTopRight-icon {
+  height: 40rpx;
+  width: 40rpx;
+}
+.userImage, .addImage {
+  /* height: 152rpx; */
+  /* width: 152rpx; */
+  /* margin: 13rpx; */
+  border-radius: 16rpx;
+}
+.addImage-icon {
+  height: 152rpx;
+  width: 152rpx;
+  border-radius: 16rpx;
+}
