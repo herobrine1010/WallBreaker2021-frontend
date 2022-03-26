@@ -105,7 +105,7 @@
           <view class="board-view">
             <view class="detail-headline">
               <view class="detail-title">{{teamDetail.title}}</view> 
-              <!-- <image class="detail-report" src="/static/icon/report.png" bindtap="tapReportDetail" ></image> -->
+              <image class="detail-report" src="/static/icon/report-blue.png" bindtap="tapReportIcon" ></image>
             </view>
         
             <view class="detail-a-line">
@@ -193,23 +193,9 @@ button="{{dialog2.button}}">
 
 <dialog-box-jubao
 id="dialogBoxReport"
-isShow="{{dialogReport.isDialogShow}}"
-title="{{dialogReport.title}}"
-content="{{dialogReport.content}}"
-hasInputBox="{{dialogReport.hasInputBox}}"
-
-tip="{{dialogReport.tip}}"
-okText="{{dialogReport.okText}}"
-cancelText="{{dialogReport.cancelText}}"
-hideOkButton="{{dialogReport.hideOkButton}}"
-
-reportReason="{{dialogReport.reportReason}}"
-bind:tapCancel="{{dialogReport.tapCancelEvent}}"
-bind:tapOk="{{dialogReport.tapOkEvent}}"
-bind:tapDetail="{{dialogReport.tapReportDetailEvent}}"
-
->
-</dialog-box-jubao>
+reportSource="jiren"
+reportSourceId="{{teamId}}"
+/>
 
 <view wx:if="{{tipBox.show}}">
   <view class="tip-shade"></view>

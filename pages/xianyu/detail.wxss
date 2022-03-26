@@ -55,9 +55,19 @@ page{
   font-weight: 500;
   font-size: 12px;
 }
+.initiator-time-and-report-icon{
+  display: flex;
+  flex-direction: row;
+}
 
 .initiator-time{
+  color:#545454;
   font-size: 10px;
+}
+.report-icon{
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 6rpx;
 }
 
 .star-detail{

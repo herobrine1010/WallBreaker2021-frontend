@@ -1,6 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "image-box": "/components/uploadImage-box/uploadImage-box"
+    "image-group": "/components/uploadImage-group/uploadImage-group"
   }
 }
