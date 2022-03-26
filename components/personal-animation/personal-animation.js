@@ -106,9 +106,6 @@ Component({
     },
     copyWxId(){
       this.triggerEvent('copyWxId');
-    },
-    tapReportIcon(){
-      this.selectComponent('#dialogBoxReport').show()
     }
   },
   

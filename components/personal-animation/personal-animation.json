@@ -1,6 +1,4 @@
 {
   "component": true,
-  "usingComponents": {
-    "dialog-box-jubao":"/components/dialog-box/dialog-box-jubao"
-  }
+  "usingComponents": {}
 }

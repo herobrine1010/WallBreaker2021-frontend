@@ -14,8 +14,7 @@ Page({
     identificationList : ['本科生','硕士研究生','博士研究生','博士后'],
     schoolList : ['同心学堂','同德学堂','同舟学堂','同和学堂','济人学堂','济世学堂','济美学堂','济勤学堂','国豪学堂','建筑与城市规划学院','土木工程学院','机械与能源工程学院','经济与管理学院','环境科学与工程学院','材料科学与工程学院','电子与信息工程学院','外国语学院','航空航天与力学学院','数学科学学院','物理科学与工程学院','化学科学与工程学院','医学院','口腔医学院','交通运输工程学院','中德学院','中德工程学院','铁道与城市轨道交通研究院','职业技术教育学院','生命科学与技术学院','软件学院','汽车学院','海洋与地球科学学院','艺术与传媒学院','人文学院','体育教学部','法学院','政治与国际关系学院','马克思主义学院','设计创意学院','测绘与地理信息学院','上海国际知识产权学院','国际足球学院'],
     uploadImageLock : true,
-    isWxidPopoverShow : false,
-    errors:{},
+    isWxidPopoverShow : false
   },
 
   // ------------- ------- ----- below 以下是 自定义事件---- ------ -----
@@ -38,12 +37,6 @@ Page({
     })
   },
 
-  changeNickName(e){
-    this.setData({
-      ['userDetails.nickName']:e.detail.value,
-      ['errors.nickName']:e.detail.value.length>=16?true:false
-    })
-  },
   //  picker组件的更改事件：
   onIdentificationChange(e){
     let index = e.detail.value;

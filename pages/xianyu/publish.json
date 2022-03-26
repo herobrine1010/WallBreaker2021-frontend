@@ -3,6 +3,7 @@
     "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
     "dropdown-box": "/components/dropdown-box/dropdown-box-new",
     "image-box": "/components/uploadImage-box/uploadImage-box",
+    "dialog-label": "/components/label-selector/dialog-label-selector",
     "dialog-box": "/components/dialog-box/dialog-box-xianyu"
   },
   "navigationStyle": "custom",

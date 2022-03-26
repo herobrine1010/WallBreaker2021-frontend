@@ -1,6 +1,5 @@
 <view class="pa-block" wx:if="{{isPersonalInfoShow}}" bindtap='hideModal'></view>
 <view class='pa-choose' wx:if="{{isPersonalInfoShow}}" animation='{{animationData}}'>
-  <image class="pa-report-icon" src="/static/icon/report-blue.png" bindtap="tapReportIcon" /> 
   <view class="pa-avatar-area">
     <image class="pa-avatar" src="{{personalInfo.avatar}}"></image> 
   </view>
@@ -54,9 +53,3 @@
     </block>
   </view> -->
 </view>
-
-<dialog-box-jubao
-id="dialogBoxReport"
-reportSource="user"
-reportSourceId="{{personalInfo.id}}"
-/>

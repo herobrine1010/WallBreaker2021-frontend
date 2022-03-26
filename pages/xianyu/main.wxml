@@ -112,6 +112,7 @@
 
 
 </view>
+<dialog-label id="dialog-label-selector" labels="{{labelList}}" bind:change="labelChanged"></dialog-label>
 
 
 

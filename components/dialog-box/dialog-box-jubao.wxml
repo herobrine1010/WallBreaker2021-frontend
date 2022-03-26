@@ -16,48 +16,31 @@
 
     <text class="dialog-box-content" wx:if="{{content}}">{{content}}</text>
 
-    <view wx:if="{{step==1}}" class="report-reason-box">
-      <view wx:if="{{reportReason.length}}" class="dialog-box-reportReason-box" >
-        <view class="dialog-box-reportReason" bindtap="tapReason" wx:for="{{reportReason}}" data-index="{{index}}">
-          <view class="reason">{{"· "+item}}</view>
-          <image src="/static/icon/right-arrow.png" class="rightArrow" data-value="{{item.value}}"/>
-        </view>
+    <view wx:if="{{reportReason.length}}" class="dialog-box-reportReason-box" >
+      <view class="dialog-box-reportReason" bindtap="tapDetail" wx:for="{{reportReason}}">
+        <view class="reason">{{"· "+item}}</view>
+        <image src="/static/icon/right-arrow.png" class="rightArrow" data-value="{{item.value}}"/>
       </view>
     </view>
 
-    <view wx:if="{{step==2}}">
-      <view class="dialog-reason-input-box">
+    <view class="dialog-input-box">
       <!-- 文字输入框 -->
-        <textarea name="closeReason" class="dialog-reason-input" id="closeReason" placeholder="请填写举报原因" placeholder-class="input-placeholder" value="{{otherReason}}" bindinput="changeOtherReasonInput" maxlength="20">
-        </textarea>
-
+      <textarea wx:if="{{hasInputBox}}" name="closeReason" id="closeReason" placeholder="{{inputPlaceholder}}"bindinput="finishInput">
+      </textarea>
+      <!-- 图片上传框 -->
+      <view wx:if="{{hasPictureBox}}" class="picture-area">
+      <image-box name="allPicPaths"></image-box>
+      <view class="tip">{{tip}}</view>
       </view>
-      <view class="report-image-tip">注：必填（2-20个汉字）</view>
-
-      <text class="dialog-box-tip" selectable="{{true}}">{{tip}}</text>
-    </view>
-
-    <view wx:if="{{step==3}}">
-      <view class="dialog-input-box">
-      <!-- 文字输入框 -->
-        <textarea name="closeReason" class="dialog-input" id="closeReason" placeholder="{{inputPlaceholder}}" placeholder-class="input-placeholder" value="{{reportContent}}" bindinput="changeContentInput" maxlength="300">
-        </textarea>
-        <!-- 图片上传框 -->
-        <view wx:if="{{hasPictureBox}}" class="picture-area">
-          <image-group id="image-group" name="allPicPaths" size="64rpx" interval="24rpx" borderRadius="3rpx" maxLength="5" url="/report/UploadReportPhotos"></image-group>
-          <view class="report-image-tip">证据截图（0~5张）</view>
-        </view>
 
     </view>
-    
+  
 
-      <text class="dialog-box-tip" selectable="{{true}}">{{tip}}</text>
-    </view>
-    
+    <text class="dialog-box-tip" selectable="{{true}}">{{tip}}</text>
 
     <view class="dialog-btn-box">
-      <view  wx:if="{{!hideCancelButton}}" style="border-color:{{button_color}};color:{{button_color}};" class="dialog-box-cancel" bindtap="tapBack">{{cancelText}}</view>
-      <view  wx:if="{{!hideOkButton}}" style="border-color:{{button_color}};background-color:{{button_color}};"  class="dialog-box-ok" bindtap="{{tapOk}}">{{okText}}</view>
+      <view  wx:if="{{!hideCancelButton}}" class="dialog-box-cancel" bindtap="tapCancel">{{cancelText}}</view>
+      <view  wx:if="{{!hideOkButton}}" class="dialog-box-ok" bindtap="tapOk">{{okText}}</view>
     </view>
 
 

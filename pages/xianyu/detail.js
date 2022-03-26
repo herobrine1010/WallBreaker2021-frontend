@@ -155,9 +155,6 @@ Page({
     }
     this.setData({isPersonalInfoShow:true})
   },
-  tapReportDetail: function(e){
-    this.selectComponent('#dialogBoxReport').show()
-  },
 
   collectDetail:function(e){
     if(this.data.initializedByMe)return

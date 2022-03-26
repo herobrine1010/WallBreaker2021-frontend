@@ -63,6 +63,17 @@ Page({
     // over:true,
     isPopNoticeShow : false,
 
+    /** 举报原因 */
+    dialogReport:{
+      isDialogShow: false,
+      content:"爬爬爬爬爬爬爬爬啊啊啊啊啊啊啊啊啊啊啊",
+      reportReason:['违法违规','色情低俗','赌博诈骗','人身攻击',
+      '侵犯隐私','敏感词汇','与该板块主题无关','其他'],
+      hasInputBox:false,
+      cancelText:"取消",
+      okText:"确认",
+      tapOkEvent:"",
+    },
 
   },
 
@@ -95,7 +106,6 @@ Page({
       return that.getTeamMemberList(that.data.teamId, that.data.amITeamInitiator, result.dueMember, that.data.applyStatus);
     })
     .then(teamMemberList => {
-      console.log(teamMemberList)
     // 先处理头像数据，再判断是否为发起者，再发请求获取申请者数据 
       that.setData({
         teamMemberList : teamMemberList
@@ -478,7 +488,6 @@ tapAvatar(e){
   if(index == 0 && (applyStatus==1||applyStatus==2)){
     avatar.wxIdPublic = true;
   };
-  console.log(avatar)
   that.setData({
     isPersonalInfoShow:true,
     avatar
@@ -1160,10 +1169,46 @@ copyWxId(){
 
     
 // 举报动态
-tapReportIcon: function(e){
-  this.selectComponent('#dialogBoxReport').show()
+tapReportDetail: function(e){
+  let dialog = {
+    isDialogShow: true,
+    title:"举报动态",
+    content:'举报原因（必选）',
+    hasInputBox:false,
+    cancelText:"取消",
+    hideOkButton:true,
+    reportReason:['违法违规','色情低俗','赌博诈骗','人身攻击',
+    '侵犯隐私','敏感词汇','与该板块主题无关','其他'],
+    tapDetail:"tapReportDetailEvent",
+  };
+  this.setData({
+    dialogReport:dialog
+  })
 },
+//举报详情 -- 需要一个id 根据id选择两种可能性
+//[0]
 
+tapReportDetailEvent: function(e){
+  //根据内容进行区分成两个页面
+  //
+  let dialog = {
+    isDialogShow: true,
+    title:"举报动态",
+    hasInputBox:true,
+    inputPlaceholder:'请详细描述举报理由（0~300字）',
+    cancelText:"返回",
+    okText:"提交",
+    hasPictureBox:true,
+    tip:'证据截图（0~5张）',
+    tapDetail:"tapReportDetailEvent",
+    //tapCancelEvent:"",
+    tapOkEvent:"submitReportEvent",
+  };
+
+  this.setData({
+    dialogReport:dialog
+  })
+},
 submitReportEvent:function(e){
   this.setData({
     dialogReport:{isDialogShow:false}

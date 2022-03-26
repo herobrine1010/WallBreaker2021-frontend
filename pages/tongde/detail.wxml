@@ -9,15 +9,10 @@
   
   <scroll-view show-scrollbar="{{false}}" enhanced class="scroll-content" scroll-y="true">
     <view class="avator-list">
-      <view class="a-line">
-        <image src="{{userAvatar}}"  class="userAvatar" bindtap='showPersonDetail'></image>
-        <text class="userName" bindtap="showPersonDetail">{{userName}}</text>
-        <text class="time">{{time}}</text>
-      </view>
-      <view class="a-line">
-        <image class="report-icon" src="/static/icon/report-purple.svg" bindtap="tapReportIcon" ></image>
-        <view class="condition" style="background-color:{{type==0 ? '#957D95':'#3A3042'}};">{{condition}} <!-- 加入标记 关闭/寻物/寻主 --></view>      
-      </view>
+      <image src="{{userAvatar}}"  class="userAvatar" bindtap='showPersonDetail'></image>
+      <text class="userName" bindtap="showPersonDetail">{{userName}}</text>
+      <text class="time">{{time}}</text>
+      <view class="condition" style="background-color:{{type==0 ? '#957D95':'#3A3042'}};">{{condition}} <!-- 加入标记 关闭/寻物/寻主 --></view>
     </view>
 
 <!-- 图片滚动显示swiper -->
@@ -62,9 +57,3 @@
   bind:tapCopy="tapCopy"
 >
 </dialog-box>
-
-<dialog-box-jubao
-id="dialogBoxReport"
-reportSource="tongde"
-reportSourceId="{{lostfoundId}}"
-/>

@@ -11,10 +11,7 @@
       <image class="initiator-avatar" src="{{detail.initiatorAvatar||'/static/icon/default-user-big.png'}}" bindtap="showInitiatorInformation"/>
       <view class="initiator-name-and-time">
         <view class="initiator-name" bindtap="showInitiatorInformation">{{detail.initiatorNickName}}</view>
-        <view class="initiator-time-and-report-icon">
-          <view class="initiator-time">{{detail.createTime}}</view>
-          <image class="report-icon" src="/static/icon/report-purple.svg" bindtap="tapReportDetail" ></image>        
-        </view>
+        <view class="initiator-time">{{detail.createTime}}</view>
       </view>
       <view class="star-detail" wx:if="{{type==0}}">
         <view class="star-text">已有{{detail.countFavourite}}人收藏</view>
@@ -73,12 +70,5 @@ bind:tapCancel="{{dialog.tapCancelEvent}}"
 bind:tapOk="{{dialog.tapOkEvent}}"
 >
 </dialog-box>
-
-<dialog-box-jubao
-id="dialogBoxReport"
-reportSource="xianyu"
-reportSourceId="{{detail.id}}"
-buttonColor="#957D95"
-/>
 
 <personal-animation id="personalAnimation"   personalInfo="{{initiatorDetail}}" isPersonalInfoShow="{{isPersonalInfoShow}}" ></personal-animation>

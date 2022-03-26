@@ -2,8 +2,7 @@
   "usingComponents": {
     "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
     "personal-animation":"/components/personal-animation/personal-animation",
-    "dialog-box":"/components/dialog-box/dialog-box",
-    "dialog-box-jubao":"/components/dialog-box/dialog-box-jubao"
+    "dialog-box":"/components/dialog-box/dialog-box"
   }, 
   "navigationStyle": "custom"
 }
