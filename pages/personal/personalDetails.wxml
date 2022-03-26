@@ -17,11 +17,21 @@
       </view>
       <view class="block-2">
         <!-- 以下是表单中的各个输入文本框 detail-items-->
-        <view class="detail-items">
+        <view class="detail-items-with-tip">
           <view class="item-title">昵称</view>
-          <view class="item-body" >
-            <input name="nickName"  class="input-text" placeholder-class="placeholder-text" type="text" value="{{userDetails.nickName}}" disabled="{{!userDetails.canChangeName}}" placeholder="请输入昵称，14天内不可再次修改" bindtap="clickNickNameInput"></input>
+          <view class="item-title-input-line">
+            <view class="item-body" >
+              <input name="nickName"  class="input-text" placeholder-class="placeholder-text" type="text" value="{{userDetails.nickName}}" disabled="{{!userDetails.canChangeName}}" placeholder="请输入昵称，14天内不可再次修改" bindtap="clickNickNameInput" bindinput="changeNickName" maxlength="16"></input>
+            </view>
+            <view class="item-name-warning-container">
+              <view class="item-name-warning-line"  wx:if="{{errors.nickName}}">
+                <image class="item-name-warning-icon" src="../../static/icon/warning-blue.svg"/>
+                <view class="item-name-warning-tip" >昵称输入已达上限（16字）</view>
+              </view>            
+            </view>
           </view>
+          
+
           <view class="switch-name"> 隐藏/公开</view>
         </view>
         <view class="detail-items">
