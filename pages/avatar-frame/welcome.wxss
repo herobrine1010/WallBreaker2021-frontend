@@ -1,0 +1,16 @@
+/* pages/avatar-frame/welcome.wxss */
+
+.avatar-frame-welcome-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.avatar-frame-welcome-enter-btn {
+    position: absolute;
+    bottom: 14%;
+    width: 86%;
+    height: 16%;
+    z-index: 2;
+}

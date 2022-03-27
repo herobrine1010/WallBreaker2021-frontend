@@ -5,7 +5,7 @@
     上海市嘉定区
 -->
 
-<view class="mainlayout">
+<view class="mainlayout" style="z-index:2;background-image:url(./resources/main_page_background.jpg);background-size:100% 100%;">
 
     <!-- 
       使用“线性布局”包裹操作功能区。
@@ -30,7 +30,4 @@
         <button class="btn-select-avatar" data-btnid="saveImg" bindtap="btnClickHandler" style="margin-top: 36rpx;">保存图片到相册</button>
         
     </view>
-
-
-
 </view>

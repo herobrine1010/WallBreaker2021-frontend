@@ -145,7 +145,7 @@ Component({
       {
         icon: 'lost-icon.png',
         text: '头像框（测）',
-        path: '/pages/avatar-frame/avatar-frame',
+        path: '/pages/avatar-frame/welcome',
         opentype: 'navigate',
       },
     ],
