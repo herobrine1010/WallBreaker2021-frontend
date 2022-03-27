@@ -6,8 +6,8 @@
  * 上海市嘉定区
  */
 
-import { request } from "../../request/request";
-import {WxCanvasPlus} from "../../utils/WxCanvasPlus"
+import { request } from "../../../request/request";
+import {WxCanvasPlus} from "../../../utils/WxCanvasPlus"
 
 // pages/avatar-frame/avatar-frame.ts
 Page({
@@ -23,6 +23,8 @@ Page({
         avatarImgLeftOffset: 0,
         avatarImgTopOffset: 0,
         frameImg: null, // 头像框对象
+
+        avatarImgUrl: '',
 
         /**
          * 头像框候选。
@@ -54,7 +56,16 @@ Page({
     /**
      * Lifecycle function--Called when page load
      */
-    onLoad() {
+    onLoad(options: any) {
+        /** 获取上一个页面传入的参数。获取失败则跳转到图片选择页面。 */
+        try {
+            this.data.avatarImgUrl = options.imgUrl
+        } catch (e: any) {
+            wx.navigateTo({
+                url: '../page-select-backimg/select-back-img'
+            })
+        }
+
         /** 获取头像框。 */
         request({
             url: '/profilePhoto/getProfilePhotoList/1'
@@ -74,6 +85,7 @@ Page({
             }
         })
 
+        /** 初始化 Canvas 对象 */
         this.data.canvas = new WxCanvasPlus('#avatar-frame-canvas', () => {
             const imgLoadErrorHandler = ()=>{
                 wx.showToast({
@@ -83,6 +95,28 @@ Page({
             }
 
             this.data.avatarImg = this.data.canvas.getCanvas().createImage()
+            this.data.avatarImg.src = this.data.avatarImgUrl
+
+            this.data.avatarImg.onload = () => {
+                let imgW = this.data.avatarImg.width
+                let imgH = this.data.avatarImg.height
+                let aspectRatio = imgW / imgH
+                let canvasL = this.data.canvas.getWidth()
+                if (imgW < imgH) {
+                    imgW = canvasL
+                    imgH = imgW / aspectRatio
+                    this.data.avatarImgTopOffset = -(imgH - canvasL) / 2
+                } else {
+                    imgH = canvasL
+                    imgW = imgH * aspectRatio
+                    this.data.avatarImgLeftOffset = -(imgW - canvasL) / 2
+                }
+                this.data.avatarImgWidth = imgW
+                this.data.avatarImgHeight = imgH
+
+                this.redrawAvatarAndFrame()
+            }
+            
             this.data.frameImg = this.data.canvas.getCanvas().createImage()
             this.data.frameImg.onload = () => {
                 this.redrawAvatarAndFrame()
@@ -115,50 +149,6 @@ Page({
     btnClickHandler(event: any) {
         const btnid = event.currentTarget.dataset.btnid
         switch (btnid) {
-            case 'selectFromCamOrAlbum': // 从相机或相册选择
-                wx.chooseImage({
-                    count: 1,
-                    sizeType: ['compressed'],
-                    sourceType: ['camera', 'album'],
-
-                }).then(res => {
-                    this.data.avatarImg.src = res.tempFilePaths
-                    this.data.avatarImg.onload = () => {
-                        let imgW = this.data.avatarImg.width
-                        let imgH = this.data.avatarImg.height
-                        let aspectRatio = imgW / imgH
-                        let canvasL = this.data.canvas.getWidth()
-                        if (imgW < imgH) {
-                            imgW = canvasL
-                            imgH = imgW / aspectRatio
-                            this.data.avatarImgTopOffset = -(imgH - canvasL) / 2
-                        } else {
-                            imgH = canvasL
-                            imgW = imgH * aspectRatio
-                            this.data.avatarImgLeftOffset = -(imgW - canvasL) / 2
-                        }
-                        this.data.avatarImgWidth = imgW
-                        this.data.avatarImgHeight = imgH
-                        this.redrawAvatarAndFrame()
-                    }
-                })
-                break
-
-            case 'selectFromAvatar': // 获取用户头像
-                wx.getUserProfile({
-                    desc: "获取用户头像"
-                }).then(res => {
-                    this.data.avatarImg.src = res.userInfo.avatarUrl.substr(0, res.userInfo.avatarUrl.length - 3) + '0' // 这种写法很垃圾……但我想偷懒qwq
-                    this.data.avatarImg.onload = () => {
-                        this.redrawAvatarAndFrame()
-                    }
-                    this.data.avatarImgLeftOffset = 0
-                    this.data.avatarImgTopOffset = 0
-                    this.data.avatarImgHeight = this.data.canvas.getHeight()
-                    this.data.avatarImgWidth = this.data.canvas.getWidth()
-                })
-                break
-
             case 'saveImg': // 保存图片
                 wx.canvasToTempFilePath({
                     canvas: this.data.canvas.getCanvas(),
@@ -168,10 +158,26 @@ Page({
                     wx.saveImageToPhotosAlbum({
                         filePath: res.tempFilePath
                     }).then(res => {
-
+                        wx.showToast({
+                            title: "保存成功啦",
+                            icon: "success"
+                        })
+                    }).catch(e => {
+                        wx.showModal({
+                            title: "失败了呜呜",
+                            content: "去设置里看看是不是没有允许“保存图片到相册”呢？",
+                            showCancel: false,
+                            confirmText: "嗯嗯"
+                        })
                     })
                 })
 
+                break
+
+            case "reselect-backimg":
+                wx.redirectTo({
+                    url: '../page-select-backimg/select-back-img'
+                })
                 break
         }
     },
@@ -282,5 +288,6 @@ Page({
                 break
         }
 
-    }
+    },
+
 })

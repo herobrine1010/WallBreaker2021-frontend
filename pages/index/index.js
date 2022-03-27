@@ -134,6 +134,7 @@ Component({
         opentype: 'navigate',
         isNew: true
       },
+
       {
         icon: 'lost-icon.png',
         text: '失物招领',
@@ -141,13 +142,15 @@ Component({
         opentype: 'navigate',
       },
 
-      /** 头像框（测试功能）。 */
-      {
-        icon: 'lost-icon.png',
-        text: '头像框（测）',
-        path: '/pages/avatar-frame/welcome',
+       /** 头像框。 */
+       {
+        icon: 'avatar-frame.png',
+        text: '樱花头像',
+        path: '/package_avatar_frame/avatar-frame/page-welcome/welcome',
         opentype: 'navigate',
       },
+
+     
     ],
     isRefresherOpen : false,
     showGoTopButton:false, 

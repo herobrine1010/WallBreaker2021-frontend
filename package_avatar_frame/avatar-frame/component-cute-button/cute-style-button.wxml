@@ -1,0 +1,6 @@
+<!--pages/avatar-frame/cute-style-button.wxml-->
+
+<button class="cute-style-button" style="background-color: {{bgcolor}};border-radius: 24rpx; color: #fff;width: {{cuteBtnWidth}};height: {{cuteBtnHeight}};font-size: {{cuteBtnFontSize}};">
+    <image src="../resources/cute-palm.png" mode="aspectFit" class="cute-palm"/>
+    <slot></slot>
+</button>

@@ -1,0 +1,30 @@
+/* package_avatar_frame/avatar-frame/page-select-backimg/select-back-img.wxss */
+
+
+.mainlayout {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.linearcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*width: 622rpx;*/
+    width: max-content;
+    height: 100vh;
+}
+
+.avatar-frame-img {
+    width: 480rpx;
+    height: 480rpx;
+}
+
+.btn-select-avatar {
+    margin-top: 96rpx;
+}
+
