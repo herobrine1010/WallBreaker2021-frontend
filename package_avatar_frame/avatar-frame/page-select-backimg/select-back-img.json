@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "cute-button": "../component-cute-button/cute-style-button"
+  },
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "navigationBarTitleText": "樱花头像"
+}

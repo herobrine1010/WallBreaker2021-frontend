@@ -74,7 +74,7 @@ Page({
 
     btnEnter() {
         wx.redirectTo({
-            url: './avatar-frame'
+            url: '../page-select-backimg/select-back-img'
         })
     }
 })

@@ -1,0 +1,49 @@
+<!--pages/avatar-frame/avatar-frame.wxml-->
+<!--
+    2051565 龚天遥
+    2022年3月21日创建
+    上海市嘉定区
+-->
+
+<view class="mainlayout">
+    <image src="../resources/main_page_background.jpg" mode="scaleToFill" style="width: 750rpx;height: 100vh;position: absolute;z-index: 1;" />
+
+    <!-- 
+      使用“线性布局”包裹操作功能区。
+      -->
+    <view class="linearcontainer" style="z-index: 2;">
+
+        <canvas type="2d" id="avatar-frame-canvas" class="avatar-frame-canvas" bindtouchmove="canvasTouchHandler" bindtouchstart="canvasTouchHandler" bindtouchend="canvasTouchHandler"></canvas>
+
+        <text style="color: #0006;margin-top: 16rpx;">单指拖拽调整位置 双指缩放调整大小</text>
+
+        <!-- 头像图片选择按钮区 - 现设置为隐藏，后续合适时机删除 
+        <view style="display:flex;flex-direction:row;justify-content:space-between;margin-top:32rpx;width: 100%;opacity: 0;">
+            <cute-button class="btn-select-avatar" data-btnid="selectFromAvatar" bindtap="btnClickHandler">获取头像</cute-button>
+            <cute-button class="btn-select-avatar" data-btnid="selectFromCamOrAlbum" bindtap="btnClickHandler">相册相机</cute-button>
+        </view>-->
+
+    </view>
+
+    <!-- 头像框候选 -->
+    <scroll-view scroll-x="true" style="z-index: 2; height:340rpx;white-space:nowrap;width:100%;margin-top: 64rpx;">
+        <view style="display: flex;flex-flow: column wrap;height: 340rpx;justify-content: space-between;">
+      
+            
+            <block wx:for="{{frameCandidates}}">
+                <image src="{{item.src}}" bindtap="onImageSelect" data-imgsrc="{{item.src}}" class="candidate-img" />
+            </block>
+            
+        </view>
+   
+    </scroll-view>
+
+    <!-- 重选和保存 -->
+    <view style="position: absolute;bottom: 52rpx; display: flex;flex-direction: row;justify-content: space-between; z-index: 2;width: 480rpx;">
+        <cute-button data-btnid="reselect-backimg" bindtap="btnClickHandler" style="width: 220rpx;" cute-btn-width="240rpx" cute-btn-height="80rpx" cute-btn-font-size="18px">重新选择</cute-button>
+        <cute-button data-btnid="saveImg" bindtap="btnClickHandler" style="width: 220rpx;" cute-btn-width="240rpx" cute-btn-height="80rpx" cute-btn-font-size="18px">保存图片</cute-button>
+
+    </view>
+    
+
+</view>
