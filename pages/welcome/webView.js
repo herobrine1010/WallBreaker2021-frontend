@@ -1,4 +1,6 @@
 // miniprogram/pages/welcome/webView.js
+const app = getApp();
+
 Page({
 
   /**
@@ -18,5 +20,9 @@ Page({
     this.setData({
       tongjiUrl : `${tongjiUrl}&openid=${openid}`
     })
+  },
+
+  onShow(){
+    wx.reportEvent("welcome_webview_onshow", app.globalData.user_attribute)
   }
 })

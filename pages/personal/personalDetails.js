@@ -2,7 +2,7 @@
 // 首先引入封装成promise的 request
 import { request } from "../../request/request.js";
 const FormData = require('../../lib/wx-formdata-master/formData.js'); //实现文件上传
-
+const app = getApp()
 Page({
 
   /**
@@ -136,6 +136,11 @@ Page({
     let that = this ;
     let labels = that.data.labels;
     let requestList = [];
+    // --- --更改用户资料并确认提交后，同步修改全局变量下的user_attribute
+    app.globalData.user_attribute['user_status'] = "registered"
+    app.globalData.user_attribute['user_school'] = that.data.userDetails.school || 'unknown'
+    app.globalData.user_attribute['user_identification'] = that.data.userDetails.identification || 'unknown'
+    app.globalData.user_attribute['user_grade'] = parseInt(that.data.userDetails.grade) || 0
     // --- -- 用户更改头像之后，锁被打开 之后 --------- --------- ----- ----
     // -------  首先应根据本地路径上传图片，拿到图片的url,之后将url和表单数据一起提交 ------
     if(!that.data.uploadImageLock){
@@ -388,7 +393,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.reportEvent("personal_personaldetails_onshow", app.globalData.user_attribute)
   },
 
   /**

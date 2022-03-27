@@ -97,6 +97,10 @@ Page({
         'isUserAgree' : false
       })
     }
+  },
+
+  onShow(){
+    wx.reportEvent("welcome_check_onshow", app.globalData.user_attribute)
   }
 
 })

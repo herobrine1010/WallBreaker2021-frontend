@@ -259,7 +259,7 @@ Component({
           selected: 1 //0,1,2 0-济事  1-济人  2-我的
         })
      };
-  
+     wx.reportEvent("index_index_onshow", app.globalData.user_attribute)
     },
     // 页面拖动事件，改变顶部导航栏的背景：
     onPageScroll: function(e){
@@ -388,6 +388,7 @@ Component({
         showCancel: false,
         confirmText: "知道啦"
       })
+      wx.reportEvent("index_index_showcomingtip", app.globalData.user_attribute)
     }
   }
 })
