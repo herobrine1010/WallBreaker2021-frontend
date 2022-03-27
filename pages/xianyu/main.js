@@ -57,13 +57,15 @@ Component({
     keyword: undefined,
     id: null, // selected labels id
     current: 1,
-    isLastPage: false
+    isLastPage: false,
+    page_attribute: {},
   },
   methods: {
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.page_attribute = JSON.parse(JSON.stringify(app.globalData.user_attribute))
     if(options.tabIndex==1){
       this.setData({tabIndex:1})
     }
@@ -80,6 +82,7 @@ Component({
       app.globalData.xianyuRefresh=false
       this.getData(true)
     }
+    wx.reportEvent("xianyu_main_onshow", app.globalData.user_attribute)
   },
 
   onShareAppMessage: function () {
@@ -109,6 +112,8 @@ Component({
 
   changeTab:function(e){
     let newIndex=e.currentTarget.dataset.index
+    // console.log('here is the newIndex')
+    // console.log(newIndex)
     let oldIndex=this.data.tabIndex
     console.log(e)
     console.log(e.currentTarget.dataset)
@@ -159,6 +164,7 @@ Component({
     this.setData({navigationIndex:e.currentTarget.dataset.index})
     this.getData(true)
   },
+
   getData:function(reset=false){
     if(this.data.loading)return
     let {pageNo,pages}=this.data
@@ -206,6 +212,13 @@ Component({
         isLastPage:this.data.pageNo>=res.data.data.pages?true:false,
       })
       // console.log(that.data.objectList)
+      if(reset){
+        this.page_attribute['market_type'] = params.type
+        this.page_attribute['market_category'] = params.category || -1
+        this.page_attribute['market_location'] = params.location || -1
+
+        wx.reportEvent("xianyu_main_getdata_reset", this.page_attribute)
+      }
     })
 
 
