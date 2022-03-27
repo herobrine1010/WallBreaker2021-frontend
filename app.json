@@ -25,6 +25,10 @@
     ]
   },
   "pages": [
+
+    "pages/avatar-frame/welcome",
+    "pages/avatar-frame/avatar-frame",
+    
     "pages/welcome/welcome",
     "pages/welcome/check",
     "pages/jiren/main",
@@ -68,6 +72,7 @@
     "pages/xianyu/detail",
     "pages/xianyu/publish",
     "pages/xianyu/myXianzhi"
+    
   ],
   "window": {
     "backgroundTextStyle": "dark",

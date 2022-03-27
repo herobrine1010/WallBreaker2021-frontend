@@ -14,15 +14,15 @@
         <view class="tip">上传证件相关照片时请记得打码保护隐私哦~</view>
       </view>
       <view class="item-wrap">
-        <view class="input-lost-name-box input-box">
-          <input name="name" class="input-lost-name" style="width: 686rpx;" maxlength="25" placeholder="请输入失物名称" placeholder-class="input-placeholder" />
+        <view class="input-box">
+          <input name="name" class="input-big input-line" maxlength="25" placeholder="请输入失物名称" placeholder-class="input-placeholder" />
         </view>
         <view class="error-wrap-input"  wx:if="{{ errors.name }}">
           <image src="/static/icon/Alert-warning.png" class="icon"></image>
           <text class="error-tip">{{ errors.name }}</text>
         </view> 
       </view>
-      <view class="item-wrap description">
+      <view class="item-wrap">
         <view class="text-box">
           <textarea name="content" class="text-area" maxlength="500" placeholder="请输入情况说明" placeholder-class="input-placeholder"></textarea>
         </view>
@@ -30,6 +30,20 @@
           <image src="/static/icon/Alert-warning.png" class="icon"></image>
           <text class="error-tip">{{ errors.content }}</text>
         </view> 
+      </view>
+      <view class="item-wrap" wx:if="{{isIdCard==1}}">
+        <view class="icon-with-title" style="position: relative;">
+          <image class="icon" src="../../static/icon/label.png"></image>
+          <text class="title">丢失校园卡学号</text>
+
+        </view>
+        <view class="left-icon-align input-box">
+          <input type="number" name="cardID" class="input-nowrap" placeholder-class="input-placeholder" placeholder="用于联系失主，不对外展示" maxlength="15" style="width:150px;"/>
+          <view class="error-wrap" style="margin-left: 12px;"  wx:if="{{ errors.selectedLabels }}">
+            <image src="/static/icon/Alert-warning.png" class="icon"></image>
+            <text class="error-tip">{{ errors.selectedLabels }}</text>
+          </view>
+        </view>
       </view>
       <view class="item-wrap" bindtap="clickToChooseTag">
         <view class="icon-with-title" style="margin-bottom:0;position: relative;">
@@ -55,8 +69,8 @@
           <text class="error-tip">{{ errors.type }}</text>
         </view>
         <radio-group name="type" class="a-line">
-          <radio value="0" id="lost" color="#fff">物品遗失</radio>
-          <radio value="1" id="found" color="#fff">寻找失主</radio>
+          <radio value="0" id="lost" color="#fff" disabled>物品遗失</radio>
+          <radio value="1" id="found" color="#fff" checked="{{isIdCard==1}}">寻找失主</radio>
         </radio-group>
       </view>
       <view class="item-wrap">
@@ -64,9 +78,9 @@
           <image class="icon" src="../../static/icon/location.png"></image>
           <text class="title">{{"遗失/捡到地点"}}</text>
         </view>
-        <view class="input-location-box input-box">
-          <input name="location" class="input-location" maxlength="25" placeholder="寻找失主信息必填，物品遗失信息可选填" placeholder-class="input-placeholder" />
-          <view class="error-wrap" style="position: absolute;margin-right:0px;" wx:if="{{ errors.location }}">
+        <view class="input-box left-icon-align" style="position: relative;">
+          <input name="location" class="input-nowrap" maxlength="25" placeholder="寻找失主信息必填，物品遗失信息可选填" placeholder-class="input-placeholder" />
+          <view class="error-wrap right-align"  wx:if="{{ errors.location }}">
             <image src="/static/icon/Alert-warning.png" class="icon"></image>
             <text class="error-tip">{{ errors.location }}</text>
           </view> 
@@ -80,8 +94,8 @@
         <view class="a-line">
           <picker name="contactType" class="contact-type-picker" mode="selector" range="{{contactType}}" range-key="content" value="{{contactTypeIndex}}" style="width: 200rpx;" bind:change="changeContact">{{contactType[contactTypeIndex].content}}</picker>
           <view class="input-contact-box input-box">
-            <input name="contact" class="input-half-line" placeholder="请输入联系方式" maxlength="25"/>
-            <view class="error-wrap" wx:if="{{ errors.contact }}">
+            <input name="contact" class="input-half-line" placeholder="请输入联系方式" placeholder-class="input-placeholder" maxlength="25"/>
+            <view class="error-wrap right-align" wx:if="{{ errors.contact }}">
               <image src="/static/icon/Alert-warning.png" class="icon"></image>
               <text class="error-tip">{{ errors.contact }}</text>
             </view> 

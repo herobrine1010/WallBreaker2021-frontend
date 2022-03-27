@@ -1,0 +1,6 @@
+<!--pages/avatar-frame/welcome.wxml-->
+
+<view style="display: flex;justify-content: center;">
+    <image src="./resources/welcome_background.jpg" class="avatar-frame-welcome-background"/>
+    <image class="avatar-frame-welcome-enter-btn" src="./resources/welcome_enter.png" mode="aspectFit" bindtap="btnEnter"/>
+</view>

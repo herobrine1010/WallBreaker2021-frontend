@@ -1,0 +1,33 @@
+<!--pages/avatar-frame/avatar-frame.wxml-->
+<!--
+    2051565 龚天遥
+    2022年3月21日创建
+    上海市嘉定区
+-->
+
+<view class="mainlayout" style="z-index:2;background-image:url(./resources/main_page_background.jpg);background-size:100% 100%;">
+
+    <!-- 
+      使用“线性布局”包裹操作功能区。
+      -->
+    <view class="linearcontainer">
+
+        <canvas type="2d" id="avatar-frame-canvas" class="avatar-frame-canvas" bindtouchmove="canvasTouchHandler" bindtouchstart="canvasTouchHandler" bindtouchend="canvasTouchHandler"></canvas>
+
+        <!-- 头像图片选择按钮区 -->
+        <view style="display:flex;flex-direction:row;justify-content:space-between;margin-top:36rpx;">
+            <button class="btn-select-avatar" data-btnid="selectFromAvatar" bindtap="btnClickHandler">获取头像</button>
+            <button class="btn-select-avatar" data-btnid="selectFromCamOrAlbum" bindtap="btnClickHandler">相机或拍摄</button>
+        </view>
+
+        <!-- 头像框候选 -->
+        <scroll-view scroll-x="true" style="height:200rpx;white-space:nowrap;width:100%;margin-top: 36rpx;">
+            <image wx:for="{{frameCandidates}}" src="{{item.src}}" bindtap="onImageSelect" data-imgsrc="{{item.src}}" class="candidate-img" />
+    
+        </scroll-view>
+
+        <!-- 保存 -->
+        <button class="btn-select-avatar" data-btnid="saveImg" bindtap="btnClickHandler" style="margin-top: 36rpx;">保存图片到相册</button>
+        
+    </view>
+</view>

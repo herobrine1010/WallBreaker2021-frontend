@@ -19,6 +19,20 @@ const request = (params)=> {
           reject(error);
         }
       })
+    }).then(res => {
+      if(res.statusCode == 401 || res.statusCode == 502){
+        wx.showToast({
+          title: '服务器维护',
+          icon : 'error'
+        });
+        setTimeout( _ => {
+          wx.reLaunch({
+            url: '/pages/welcome/welcome',
+          })
+        },1000)
+      }else{
+        return res
+      }
     })
   }else{ // 意外未获取到token的情况
     return new Promise((resolve, reject) => {

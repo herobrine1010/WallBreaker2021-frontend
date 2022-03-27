@@ -140,6 +140,14 @@ Component({
         path: '/pages/tongde/main',
         opentype: 'navigate',
       },
+
+      /** 头像框（测试功能）。 */
+      {
+        icon: 'lost-icon.png',
+        text: '头像框（测）',
+        path: '/pages/avatar-frame/welcome',
+        opentype: 'navigate',
+      },
     ],
     isRefresherOpen : false,
     showGoTopButton:false, 

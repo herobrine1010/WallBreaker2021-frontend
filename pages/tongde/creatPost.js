@@ -213,8 +213,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-
+    // 检查页面类型
+    const {isIdCard} = {...options};
+    this.setData({
+      isIdCard
+    })
+    if(isIdCard==1) {
+      // 选中标签 ‘#证件’
+      this.setData({
+        selectedLabelList: [{
+          content: '证件',
+          id: 28
+        }]
+      })
+      // 禁用选择标签
+      this.clickToChooseTag = () => {
+        wx.showToast({
+          title: '已选择标签',
+        })
+      };
+    }
     this.changeScrollHeight();
     this.initContactType();
   },
