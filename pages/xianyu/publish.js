@@ -543,6 +543,10 @@ Page({
     this.setData({
       isDialogShow:false,
     })
+  },
+  onShow(){
+    console.log('here is onshow of xianyu publish')
+    console.log(this.options.type)
   }
 })
 
