@@ -26,10 +26,13 @@
   },
   "pages": [
 
-    "pages/avatar-frame/welcome",
-    "pages/avatar-frame/avatar-frame",
+    
     
     "pages/welcome/welcome",
+
+    "pages/avatar-frame/welcome",
+    "pages/avatar-frame/avatar-frame",
+
     "pages/welcome/check",
     "pages/jiren/main",
     "pages/jiren/groupDetail",
