@@ -22,9 +22,10 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    /*width: 622rpx;*/
-    width: max-content;
-    margin-top: 220rpx;
+    width: 100%;
+    bottom: 92rpx;
+    position: fixed;
+
 }
 
 .avatar-frame-canvas {
