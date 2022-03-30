@@ -4,7 +4,7 @@ const app = getApp()
 import { request } from "../../request/request.js";
 const util = require('../../utils/util.js');
 const filterBehavior = require('../../behaviors/Filter-dialog.js')
-
+const updateManager=wx.getUpdateManager()
 
 // 定义函数编写请求参数：-----------------------------------------
 function setRequestData(pageNo, keyword,labelId,timeIndex){
@@ -193,6 +193,7 @@ Component({
   methods: {
     onLoad: function (options) {
       const that = this;
+      this.judgeIfUpdateVersion()
       // 获取帖子标签列表
       request({
         url : "/label",
@@ -247,6 +248,30 @@ Component({
         })
      };
   
+    },
+
+    judgeIfUpdateVersion:function(e){
+      let that=this
+      updateManager.onUpdateReady(()=>{
+        wx.showModal({
+          title: '更新提示',
+          content: '新版本已经准备好，是否重启应用？',
+          success: function (res) {
+            if (res.confirm) {
+              // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+              updateManager.applyUpdate()
+            }
+          }
+        })
+      })
+      updateManager.onUpdateFailed(function () {
+        // 新版本下载失败
+        wx.showModal({
+          title:'更新提示',
+          content:'新版本已经准备好，请删除小程序后重新搜索打开～',
+          showCancel:false,
+        })
+      })
     },
     // 页面拖动事件，改变顶部导航栏的背景：
     onPageScroll: function(e){
