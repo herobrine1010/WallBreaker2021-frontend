@@ -29,10 +29,9 @@ App({
     personalManagementOrCollection : 1,
 
     user_attribute: {},
-
-    //url: 'https://tongji-poby.sparkxyf.com/api' // 生产环境
+    url: 'https://tongji-poby.sparkxyf.com/api'
     // url:'https://jixingyun.tongji.edu.cn/api1'
-     url:'https://www.wallbreaker.top' // 测试环境
+    // url:'https://www.wallbreaker.top'
     // url:'http://localhost:9000'
   },
   getSharedUrl(data={}){
