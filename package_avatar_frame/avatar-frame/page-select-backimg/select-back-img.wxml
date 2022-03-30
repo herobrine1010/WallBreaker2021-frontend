@@ -1,7 +1,7 @@
 <!--package_avatar_frame/avatar-frame/page-select-backimg/select-back-img.wxml-->
 
 <view class="mainlayout">
-    <image src="../resources/main_page_background.jpg" mode="scaleToFill" style="z-index: 1; width: 750rpx;height: 100vh;position: absolute;" />
+    <image src="../resources/main_page_background.jpg" mode="aspectFill" style="z-index: 1; width: 750rpx;height: 100vh;position: absolute;" />
 
     <!-- 
       使用“线性布局”包裹操作功能区。

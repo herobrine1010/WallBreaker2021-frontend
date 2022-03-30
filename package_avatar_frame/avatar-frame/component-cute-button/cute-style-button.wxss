@@ -7,8 +7,17 @@
 .cute-palm {
     height: 30rpx;
     width: 30rpx;
-    
+    z-index: 3;
     position: absolute;
-    right: 6.4%;
-    bottom: 9.8%;
+    bottom: 7.6%;
+    right: 6.46%;
+}
+
+.cute-inner-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    transform: translate(-50%, -50%);
 }
