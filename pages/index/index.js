@@ -134,12 +134,23 @@ Component({
         opentype: 'navigate',
         isNew: true
       },
+
       {
         icon: 'lost-icon.png',
         text: '失物招领',
         path: '/pages/tongde/main',
         opentype: 'navigate',
       },
+
+       /** 头像框。 */
+       {
+        icon: 'avatar-frame.png',
+        text: '头像框定制',
+        path: '/package_avatar_frame/avatar-frame/page-welcome/welcome',
+        opentype: 'navigate',
+      },
+
+     
     ],
     isRefresherOpen : false,
     showGoTopButton:false, 
@@ -251,7 +262,7 @@ Component({
           selected: 1 //0,1,2 0-济事  1-济人  2-我的
         })
      };
-  
+     wx.reportEvent("index_index_onshow", app.globalData.user_attribute)
     },
     // 页面拖动事件，改变顶部导航栏的背景：
     onPageScroll: function(e){
@@ -380,6 +391,7 @@ Component({
         showCancel: false,
         confirmText: "知道啦"
       })
+      wx.reportEvent("index_index_showcomingtip", app.globalData.user_attribute)
     }
   }
 })

@@ -1,0 +1,25 @@
+/* pages/tongde/modal/PopupModal.wxss */
+.popup-modal {
+  background-color: rgba(0,0,0,0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  z-index: 99;
+}
+
+.window {
+  background: #fff;
+  border-radius: 24rpx;
+  box-sizing: border-box;
+  width: 516rpx;
+  max-width: 375px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 32rpx;
+  z-index: 100;
+}

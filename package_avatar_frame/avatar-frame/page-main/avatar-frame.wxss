@@ -1,0 +1,48 @@
+/* pages/avatar-frame/avatar-frame.wxss */
+/*
+  2051565 龚天遥
+  2022年3月21日创建
+  上海市嘉定区
+*/
+
+.mainlayout {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.linearcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    bottom: 92rpx;
+    position: fixed;
+
+}
+
+.avatar-frame-canvas {
+    background: #4444;
+    width: 480rpx;
+    height: 480rpx;
+}
+
+.btn-select-avatar {
+    width: 217rpx;
+    height: 70rpx;
+}
+
+.candidate-img {
+    margin-left: 10rpx;
+    margin-right: 10rpx;
+    width: 160rpx;
+    height: 160rpx;
+    display: inline-block;
+}

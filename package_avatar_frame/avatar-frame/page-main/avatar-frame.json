@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "cute-button": "../component-cute-button/cute-style-button"
+  },
+  "navigationBarBackgroundColor": "#fed6e3",
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "navigationBarTitleText": "头像边框"
+}

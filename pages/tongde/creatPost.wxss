@@ -33,7 +33,9 @@ input {
 .item-wrap-last {
   border-bottom: none;
 }
-
+.left-icon-align {
+  margin-left: 40rpx;
+}
 /* 设置标题及图标 */
 .title{
   /* height: 60rpx; */
@@ -67,13 +69,17 @@ input {
 .text-box,
 .input-box {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
 }
-.input-lost-name {
+.input-big {
   height: 40rpx;
   font-size: 32rpx;
   line-height: 1.25;
   color: #333333;
+}
+.input-line {
+  width: 686rpx;
 }
 .text-box {
   height: 200rpx;
@@ -118,8 +124,7 @@ radio-group > radio {
 }
 
 
-.input-location {
-  margin-left: 44rpx; /*这里使用margin*/
+.input-nowrap {
   font-size: 20rpx;
   width: 360rpx;
 }
@@ -127,7 +132,7 @@ radio-group > radio {
 .input-contact-box{
   height: 36rpx;
   width: 500rpx;
-  padding: 0 1vw 16rpx 1vw;
+  padding: 0 0 16rpx 0;
   margin-left: 16rpx;
   border-bottom: 1px solid #DEDEDE;
 }
@@ -219,4 +224,8 @@ radio .wx-radio-input{
 .error-wrap-input {
   margin-left: 0;
   color: #FA5151;
+}
+.right-align {
+  position: absolute;
+  right: 0;
 }

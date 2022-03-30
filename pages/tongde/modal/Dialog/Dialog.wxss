@@ -1,0 +1,50 @@
+/* pages/tongde/modal/Dialog/Dialog.wxss */
+.dialog-box-content{
+  display: flex;
+  max-width: 336rpx;
+  margin: 8px auto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32rpx;
+  text-align: center;
+  color:#4A5559;
+  justify-content:center;
+  
+}
+
+.dialog-btn-box{
+  display: flex;
+  height: 48rpx;
+  width: 186px;
+  margin: 19px auto 8px;
+}
+.double {
+  justify-content: space-between;
+
+}
+.single {
+  justify-content: center;
+}
+
+.dialog-box-cancel,.dialog-box-ok{
+  background: #F7F7F7;
+  border: 1px solid #3E92CC;
+  box-sizing: border-box;
+  border-radius: 12px;
+  width: 84px;
+  height: 24px;
+
+  color: #3E92CC;
+  line-height:22px;
+  font-size: 10px;
+  text-align: center;
+  font-weight: normal;
+  letter-spacing: 0.2vw;
+}
+.dialog-box-ok{ 
+  color:#FAFEFF;
+  background-color: #17B2E5;
+}
+.dialog-box-cancel{
+  color:#17B2E5;
+}

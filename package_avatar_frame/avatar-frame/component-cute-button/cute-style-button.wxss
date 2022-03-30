@@ -1,0 +1,23 @@
+/* pages/avatar-frame/cute-style-button.wxss */
+
+.cute-style-button:active {
+    opacity: 0.72;
+}
+
+.cute-palm {
+    height: 30rpx;
+    width: 30rpx;
+    z-index: 3;
+    position: absolute;
+    bottom: 7.6%;
+    right: 6.46%;
+}
+
+.cute-inner-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}

@@ -1,4 +1,5 @@
 // miniprogram/pages/jishi/detail-new.js
+import { valueOf } from "../../behaviors/Filter-dialog.js";
 import { request } from "../../request/request.js";
 const util = require('../../utils/util.js');
 var app=getApp();
@@ -22,8 +23,10 @@ Page({
     hasLink : true,
     navTitle : '关于疫情的调查问卷',
     navImage : '',
-    navUrl : ''
+    navUrl : '',
+    onShowState : false
   },
+  page_attribute:{},
 
   /**
    * 生命周期函数--监听页面加载
@@ -74,8 +77,10 @@ Page({
           linkUrl,
           linkTitle,
           linkPicUrl,
-          orgenizationInfomation
+          orgenizationInfomation,
+          onShowState: true
         });
+        this.onShow()
       }else{
         wx.showToast({
           title: '请求失败',
@@ -106,6 +111,7 @@ Page({
     this.setData({
       isPersonalInfoShow : true
     })
+    wx.reportEvent("jishi_detail_new_tapavatar", this.page_attribute)
   },
 
   // 页面拖动事件，改变顶部导航栏的背景：
@@ -143,6 +149,7 @@ Page({
           title: '收藏成功',
           icon:'success'
         })
+        wx.reportEvent("jishi_detail_new_collect", this.page_attribute)
       } else {
         wx.showToast({
           title: '网络错误请重试',
@@ -178,6 +185,7 @@ Page({
   
   attachNavgitor:function(e){
     let linkUrl = e.currentTarget.dataset.link;
+    wx.reportEvent("jishi_detail_new_attachnavgitor", this.page_attribute)
     wx.navigateTo({
       url: `./link?linkUrl=${linkUrl}`,
     })
@@ -191,7 +199,16 @@ Page({
         animationClass : ''
       });
     }, 900);
+  },
+
+  onShow(){
+    let { onShowState } = this.data
+    if (onShowState) {
+      //  直接复制的话为浅拷贝
+      this.page_attribute = JSON.parse(JSON.stringify(app.globalData.user_attribute));
+      this.page_attribute['organization_organization_name'] = this.data.name || 'unknown'
+      wx.reportEvent("jishi_detail_new_onshow", this.page_attribute)
+    } else{
+    }
   }
-
-
 })

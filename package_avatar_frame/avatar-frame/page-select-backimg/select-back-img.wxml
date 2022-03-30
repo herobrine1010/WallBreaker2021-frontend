@@ -1,0 +1,20 @@
+<!--package_avatar_frame/avatar-frame/page-select-backimg/select-back-img.wxml-->
+
+<view class="mainlayout">
+    <image src="../resources/main_page_background.jpg" mode="aspectFill" style="z-index: 1; width: 750rpx;height: 100vh;position: absolute;" />
+
+    <!-- 
+      使用“线性布局”包裹操作功能区。
+      -->
+    <view class="linearcontainer" style="z-index: 2;">
+
+        <!-- 头像图片选择按钮区 -->
+
+        <cute-button class="btn-select-avatar" data-btnid="selectFromAlbum" bindtap="btnClickHandler" cute-btn-width="480rpx" cute-btn-height="120rpx" cute-btn-font-size="26px">相册</cute-button>
+        <cute-button class="btn-select-avatar" data-btnid="selectFromAvatar" bindtap="btnClickHandler" cute-btn-width="480rpx" cute-btn-height="120rpx" cute-btn-font-size="26px">微信头像</cute-button>
+        <cute-button class="btn-select-avatar" data-btnid="selectFromCam" bindtap="btnClickHandler" cute-btn-width="480rpx" cute-btn-height="120rpx" cute-btn-font-size="26px">拍照</cute-button>
+
+    </view>
+
+
+</view>

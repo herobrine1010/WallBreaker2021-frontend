@@ -67,7 +67,8 @@ Page({
                 success: res => {
                   let openid = res.data.data.openId;
                   wx.redirectTo({
-                    url: `./welcome-new?openid=${openid}`,
+                    // url: `./welcome-new?openid=${openid}`,
+                    url : `./webView?openid=${openid}`
                   })
                 }
               })
@@ -96,6 +97,10 @@ Page({
         'isUserAgree' : false
       })
     }
+  },
+
+  onShow(){
+    wx.reportEvent("welcome_check_onshow", app.globalData.user_attribute)
   }
 
 })
