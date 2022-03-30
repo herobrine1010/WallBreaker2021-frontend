@@ -132,6 +132,11 @@ radio-group > radio {
   border-bottom: 1px solid #DEDEDE;
 }
 .contact-type-picker {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
   height: 36rpx;
   width: 232rpx;
   font-size: 24rpx;
@@ -139,14 +144,31 @@ radio-group > radio {
   color: #545454;
   text-align: center;
   padding-bottom: 16rpx;
+
+  transition: border-bottom .5s;
+}
+.normal-bottom {
   border-bottom: 1px solid #DEDEDE;
+}
+.red-bottom {
+  border-bottom: 1px solid #FA5151;
 }
 .a-line{
   position: relative;
   display: flex;
   flex-direction: row;
 }
-
+.contact-picker-a-line{
+  display: flex;
+  flex-direction: row;
+}
+.contact-picker-down-arrow-icon{
+  position: absolute;
+  right: 0;
+  bottom: 24rpx;
+  height: 16rpx;
+  width: 16rpx;
+}
 
 .button{
   box-sizing: border-box;

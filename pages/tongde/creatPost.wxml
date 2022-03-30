@@ -66,7 +66,7 @@
         </view>
         <view class="input-location-box input-box">
           <input name="location" class="input-location" maxlength="25" placeholder="寻找失主信息必填，物品遗失信息可选填" placeholder-class="input-placeholder" />
-          <view class="error-wrap" style="position: absolute;margin-right:0px;" wx:if="{{ errors.location }}">
+          <view class="error-wrap" wx:if="{{ errors.location }}">
             <image src="/static/icon/Alert-warning.png" class="icon"></image>
             <text class="error-tip">{{ errors.location }}</text>
           </view> 
@@ -78,7 +78,12 @@
           <text class="title">联系方式</text>
         </view>
         <view class="a-line">
-          <picker name="contactType" class="contact-type-picker" mode="selector" range="{{contactType}}" range-key="content" value="{{contactTypeIndex}}" style="width: 200rpx;" bind:change="changeContact">{{contactType[contactTypeIndex].content}}</picker>
+          <picker name="contactType" class="contact-type-picker {{errors.contactType!=0 ? 'normal-bottom' : 'red-bottom'}}" mode="selector" range="{{contactType}}" range-key="content" value="{{contactTypeIndex}}" style="width: 200rpx;" bind:change="changeContact">
+            <view class="contact-picker-a-line">
+            <view class="picker-text">{{contactType[contactTypeIndex].content}}</view>
+            <image class="contact-picker-down-arrow-icon" src="/static/icon/down-arrow.svg"/>
+            </view>
+          </picker>
           <view class="input-contact-box input-box">
             <input name="contact" class="input-half-line" placeholder="请输入联系方式" maxlength="25"/>
             <view class="error-wrap" wx:if="{{ errors.contact }}">
