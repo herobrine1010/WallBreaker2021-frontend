@@ -4,7 +4,7 @@ const app = getApp()
 import { request } from "../../request/request.js";
 const util = require('../../utils/util.js');
 const filterBehavior = require('../../behaviors/Filter-dialog.js')
-
+wx.cloud.init()
 
 // 定义函数编写请求参数：-----------------------------------------
 function setRequestData(pageNo, keyword,labelId,timeIndex){
