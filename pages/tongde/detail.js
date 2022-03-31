@@ -196,6 +196,7 @@ Page({
       this.setData({
         lostfoundId:id,
         condition: typeText[data.type], // 使用type判断
+        status: data.status, // 1--已关闭
         title: data.name,
         userId:  data.userId,
         userAvatar: data.initiatorAvatar,

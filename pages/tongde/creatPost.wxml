@@ -69,7 +69,7 @@
           <text class="error-tip">{{ errors.type }}</text>
         </view>
         <radio-group name="type" class="a-line">
-          <radio value="0" id="lost" color="#fff" disabled>物品遗失</radio>
+          <radio value="0" id="lost" color="#fff" disabled="{{isIdCard==1}}">物品遗失</radio>
           <radio value="1" id="found" color="#fff" checked="{{isIdCard==1}}">寻找失主</radio>
         </radio-group>
       </view>
