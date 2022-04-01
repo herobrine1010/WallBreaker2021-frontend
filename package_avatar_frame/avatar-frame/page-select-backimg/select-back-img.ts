@@ -1,67 +1,23 @@
 // package_avatar_frame/avatar-frame/page-select-backimg/select-back-img.ts
+
+import {AvatarFrameSharedAssets} from '../resources/assets-base64'
+import {AvatarFrameShareInfo} from '../share-common'
+
 Page({
 
     /**
      * Page initial data
      */
     data: {
-        imgUrl: ''
-    },
-
-    /**
-     * Lifecycle function--Called when page load
-     */
-    onLoad() {
-
-    },
-
-    /**
-     * Lifecycle function--Called when page is initially rendered
-     */
-    onReady() {
-
-    },
-
-    /**
-     * Lifecycle function--Called when page show
-     */
-    onShow() {
-
-    },
-
-    /**
-     * Lifecycle function--Called when page hide
-     */
-    onHide() {
-
-    },
-
-    /**
-     * Lifecycle function--Called when page unload
-     */
-    onUnload() {
-
-    },
-
-    /**
-     * Page event handler function--Called when user drop down
-     */
-    onPullDownRefresh() {
-
-    },
-
-    /**
-     * Called when page reach bottom
-     */
-    onReachBottom() {
-
+        imgUrl: '',
+        backgroundBase64: AvatarFrameSharedAssets.mainBackground
     },
 
     /**
      * Called when user click on the top right corner to share
      */
     onShareAppMessage() {
-
+        return AvatarFrameShareInfo.data
     },
 
     

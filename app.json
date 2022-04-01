@@ -67,7 +67,8 @@
         "pages/xianyu/main",
         "pages/xianyu/detail",
         "pages/xianyu/publish",
-        "pages/xianyu/myXianzhi"
+        "pages/xianyu/myXianzhi",
+        "pages/avatar-frame-launcher/avatar-frame-launcher"
     ],
     "subpackages": [
         {

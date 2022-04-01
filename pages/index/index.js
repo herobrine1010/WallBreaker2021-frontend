@@ -148,6 +148,7 @@ Component({
         text: '头像框定制',
         path: '/package_avatar_frame/avatar-frame/page-welcome/welcome',
         opentype: 'navigate',
+        isNew: 'true'
       },
 
      

@@ -8,6 +8,8 @@
 
 import { request } from "../../../request/request";
 import {WxCanvasPlus} from "../../../utils/WxCanvasPlus"
+import {AvatarFrameSharedAssets} from "../resources/assets-base64"
+import {AvatarFrameShareInfo} from '../share-common'
 
 // pages/avatar-frame/avatar-frame.ts
 Page({
@@ -38,7 +40,9 @@ Page({
         /**
          * 上一次的 canvas 触控信息。
          */
-        prevCanvasTouches: []
+        prevCanvasTouches: [],
+
+        backgroundBase64: AvatarFrameSharedAssets.mainBackground
     },
 
     redrawAvatarAndFrame() {
@@ -128,18 +132,10 @@ Page({
 
 
     /**
-     * Lifecycle function--Called when page show
-     */
-    onShow() {
-
-    },
-
-
-    /**
      * Called when user click on the top right corner to share
      */
     onShareAppMessage() {
-
+        return AvatarFrameShareInfo.data
     },
 
     /**
