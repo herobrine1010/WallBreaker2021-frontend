@@ -262,6 +262,7 @@ Page({
   onShow: function () {
 
     util.getNotice();
+    wx.reportEvent("jiren_main_onshow", app.globalData.user_attribute)
   },
 
   /**

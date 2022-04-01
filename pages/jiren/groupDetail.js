@@ -121,10 +121,9 @@ Page({
     }).catch(err=>{
       console.log(err);
     });
-
-
-
-
+  },
+  onShow(){
+    wx.reportEvent("jiren_groupdetail_onshow", app.globalData.user_attribute)
   },
   
   /**
@@ -567,7 +566,7 @@ copyWxId(){
             title: '组队招募已结束！',
             icon:'success'
           })
-
+          wx.reportEvent("jiren_groupdetail_dialogtapokforcloseteam", app.globalData.user_attribute)
           that.onLoad({"teamId":teamId});
           
           //return that.getTeamDetail(teamId);
@@ -912,6 +911,7 @@ copyWxId(){
 // 下方申请按钮  /   最上头像列表的加号
   applyButton:function(e){
     let that=this;
+    wx.reportEvent("jiren_groupdetail_applybutton", app.globalData.user_attribute)
     let {
       notice,
       applyStatus,
@@ -987,6 +987,7 @@ copyWxId(){
                   icon:'success',
                   duration:2000
                 });
+                wx.reportEvent("jiren_groupdetail_applybutton_success", app.globalData.user_attribute)
                 return that.getTeamDetail(that.data.teamId);
               }else if(res.data.msg == "noWxId"){
                 let dialog = {

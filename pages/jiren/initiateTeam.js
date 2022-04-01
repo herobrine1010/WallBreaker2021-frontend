@@ -64,10 +64,11 @@ Page({
     dialogTip:"",
     dialogCancelText:"取消",
     dialogOkText:"确认",
-    tapOkEvent:"tapOkForTeamSubmit"
-
+    tapOkEvent:"tapOkForTeamSubmit",
+    page_attribute:{},
   },
   onLoad() {
+    this.page_attribute = JSON.parse(JSON.stringify(app.globalData.user_attribute))
     var that = this;
     //获取标签列表，渲染组队主题的选择框
     wx.request({
@@ -90,6 +91,9 @@ Page({
       title : '欢迎注册使用济星云小程序！',
       path:app.getSharedUrl()
     }
+  },
+  onShow(){
+    wx.reportEvent("jiren_initiateteam_onshow", app.globalData.user_attribute)
   },
 
   //------四个选择框的改变函数，用于初始化选择框选项、获得用户选择数据------
@@ -267,6 +271,10 @@ Page({
   //弹窗点按确认，完成图片上传、表单提交(用Promise实现先后顺序)
   inititalizeTeam:function(e){
     var that = this;
+
+    this.page_attribute["team_label_id"] = that.data.payload.labelId || 0
+    wx.reportEvent("jiren_initiateteam_inititalizeteam", this.page_attribute)
+
     // 获取本地图片数据，调用库打包成data
     var imageData = new FormData();
     var imagePath = this.selectComponent('#image-box').image; //获取图片本地路径
@@ -325,6 +333,7 @@ Page({
                 icon: 'none',
                 duration: 1000
               })
+              wx.reportEvent("jiren_initiateteam_inititalizeteam_success", this.page_attribute)
               wx.navigateBack(); //组队成功后返回上一页
 
             }
