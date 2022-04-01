@@ -1,5 +1,5 @@
 /* pages/avatar-frame/welcome.wxss */
-
+@import "/static/common.wxss";
 .avatar-frame-welcome-background {
     position: absolute;
     width: 100%;

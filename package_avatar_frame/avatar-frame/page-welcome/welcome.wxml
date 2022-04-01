@@ -1,8 +1,13 @@
 <!--pages/avatar-frame/welcome.wxml-->
 
 <view style="display: flex;justify-content: center;">
-    <image src="../resources/welcome_background.jpg" mode="scaleToFill" class="avatar-frame-welcome-background"/>
-    <image class="avatar-frame-welcome-enter-btn" src="../resources/welcome_enter.png" mode="aspectFit" bindtap="btnEnter"/>
 
-    <image src="../resources/studio_logos.png" mode="aspectFit" style="width: 326rpx;height: 160rpx;z-index: 2;position: absolute;bottom: 5.12vh;" />
+    <view>
+        <mp-navigation-bar back="{{true}}" ext-class="weui-navigation-bar-tongde__centers" title="" lastPage="/pages/index/index" style="z-index: 3;position: absolute;"></mp-navigation-bar>
+    </view>
+
+    <image src="{{backgroundBase64}}" mode="scaleToFill" class="avatar-frame-welcome-background"/>
+    <image class="avatar-frame-welcome-enter-btn" src="{{enterBtnBase64}}" mode="aspectFit" bindtap="btnEnter"/>
+
+    <image src="{{logoBase64}}" mode="aspectFit" style="width: 326rpx;height: 160rpx;z-index: 2;position: absolute;bottom: 5.12vh;" />
 </view>

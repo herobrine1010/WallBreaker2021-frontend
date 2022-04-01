@@ -6,7 +6,11 @@
 -->
 
 <view class="mainlayout">
-    <image src="../resources/main_page_background.jpg" mode="aspectFill" style="width: 750rpx;height: 100vh;position: absolute;z-index: 1;" />
+    <image src="{{backgroundBase64}}" mode="aspectFill" style="width: 750rpx;height: 100vh;position: absolute;z-index: 1;" />
+
+    <view>
+        <mp-navigation-bar back="{{true}}" ext-class="weui-navigation-bar-tongde__centers" title="" lastPage="/package_avatar_frame/avatar-frame/page-select-backimg/select-back-img" style="z-index: 3;position: absolute;"></mp-navigation-bar>
+    </view>
 
     <!-- 
       使用“线性布局”包裹操作功能区。
