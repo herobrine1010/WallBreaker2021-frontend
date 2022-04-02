@@ -74,7 +74,8 @@ Page({
         content:'',
         status:'new',
       }]
-    }
+    },
+    page_attribute:{},
   },
 
   /**
@@ -543,6 +544,11 @@ Page({
     this.setData({
       isDialogShow:false,
     })
+  },
+  onShow(){
+    this.page_attribute = JSON.parse(JSON.stringify(app.globalData.user_attribute));
+    this.page_attribute['market_type'] = parseInt(this.options.type)
+    wx.reportEvent("xianyu_publish_onshow", this.page_attribute)
   }
 })
 
@@ -669,6 +675,12 @@ async function initializeMarket(detail,images){
           duration: 2000,
           success: that.goBack()
         });
+        // 上报新建发布成功的埋点
+        if(this.data.mode=='new'){
+          this.page_attribute['market_category'] = data.category || -1
+          this.page_attribute['market_location'] = data.location || -1
+          wx.reportEvent("xianyu_publish_initializemarket", this.page_attribute)
+        }
 
 
       })

@@ -1,4 +1,7 @@
 // pages/avatar-frame/cute-style-button.ts
+
+import {CutePalmAsset} from './palm-base64'
+
 Component({
     /**
      * Component properties
@@ -26,7 +29,7 @@ Component({
      * Component initial data
      */
     data: {
-
+        palmBase64: CutePalmAsset.palm
     },
 
     /**

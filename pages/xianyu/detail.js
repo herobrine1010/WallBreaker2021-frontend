@@ -38,13 +38,16 @@ Page({
     //   allPicUrl:['https://wallbreaker-tongji.oss-cn-shanghai.aliyuncs.com/static-img/jiren/team/ee2d71c472aa4c83a4fea4943eb40afbtmp_48dfa61e3c5bbc404b2cf7920dcfdd5471fc3563ac05ae81.jpg',],
     //   contactList:[{key:'微信',value:'pobier123'},{key:'电话',value:'12121212121'},{key:'QQ',value:'141415964'}]
     // },
-    
+    onShowState : false,
+    page_attribute:{},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.page_attribute = JSON.parse(JSON.stringify(app.globalData.user_attribute))
+
     let typeName
     if(options.type==0){
       typeName='出售'
@@ -62,8 +65,15 @@ Page({
 
   },
   onShow:function(options){
+    //仅当重新编辑时调用
     if(app.globalData.xianyuRefresh){
       this.getDetail()
+    }
+    if(this.data.onShowState){
+      this.page_attribute['market_type'] = parseInt(this.data.type)
+      this.page_attribute['market_category'] = this.data.detail.category || -1
+      this.page_attribute['market_location'] = this.data.location || -1
+      wx.reportEvent("xianyu_detail_onshow", this.page_attribute)
     }
   },
 
@@ -119,8 +129,11 @@ Page({
         detail:{
           ...parseDetail(res.data.data),
           contactList:parseContactList(res.data.data),
-        }
+        },
+        location:res.data.data.location,
+        onShowState : true
       })
+      this.onShow()
     })
   },
 
@@ -222,7 +235,7 @@ Page({
         tapOkEvent:"hideModal",
       }
     })
-
+    wx.reportEvent("xianyu_detail_showcontactlistmodal", this.page_attribute)
   },
 
   hideModal:function(e){
@@ -278,6 +291,7 @@ Page({
         this.setData({
           ['detail.hidden']:1,
         })
+        wx.reportEvent("xianyu_detail_confirmclosedetail", this.page_attribute)
         app.globalData.xianyuRefresh=true
       }
     })
