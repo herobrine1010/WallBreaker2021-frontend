@@ -4,11 +4,12 @@
   <view class="navigation-bar">
     <mp-navigation-bar back="{{true}}" ext-class="weui-navigation-bar-tongde__centers" title="我的失物招领"></mp-navigation-bar>
   </view>
-  <scroll-view show-scrollbar="{{false}}" enhanced id="scroll-view" class="scroll-area" scroll-y style="height: {{scrollviewHeight}};">
+  <scroll-view show-scrollbar="{{false}}" enhanced id="scroll-view" class="scroll-area" scroll-y style="height: {{scrollviewHeight}};" bindscrolltolower="getNextPage">
     <!-- card组件外包一层view，用于页面布局 -->
     <view class="card" wx:for="{{myLostFoundItemList}}" wx:for-item="item">    
       <card-my card="{{item}}" bind:close="tapClose"></card-my>
     </view>
+    <view wx:if="{{ isLoading }}" class="loader" style="height: 100rpx; width: 100rpx;"></view>
   </scroll-view>
 </view>
 
