@@ -72,7 +72,7 @@ Page({
 
         /** 获取头像框。 */
         request({
-            url: '/profilePhoto/getProfilePhotoList/1'
+            url: '/profilePhoto/getProfilePhotoList/0'
         }).then(res => {
             if (res.statusCode == 200) {
                 let data = res.data.data
