@@ -6,7 +6,7 @@
         <mp-navigation-bar back="{{true}}" ext-class="weui-navigation-bar-tongde__centers" title="" lastPage="/pages/index/index" style="z-index: 3;position: absolute;"></mp-navigation-bar>
     </view>
 
-    <image src="{{backgroundBase64}}" mode="scaleToFill" class="avatar-frame-welcome-background"/>
+    <image src="{{backgroundBase64}}" mode="aspectFill" class="avatar-frame-welcome-background"/>
     <image class="avatar-frame-welcome-enter-btn" src="{{enterBtnBase64}}" mode="aspectFit" bindtap="btnEnter"/>
 
     <image src="{{logoBase64}}" mode="aspectFit" style="width: 326rpx;height: 160rpx;z-index: 2;position: absolute;bottom: 5.12vh;" />
