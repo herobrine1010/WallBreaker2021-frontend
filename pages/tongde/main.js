@@ -331,8 +331,11 @@ Component({
   },
   // 跳转：发起组队事件：------------- --------- ------ ------- --
   createNewPost:function(){
-    const vm = this.selectComponent('#popup-modal');
-    vm.open();
+    // const vm = this.selectComponent('#popup-modal');
+    // vm.open();
+    wx.navigateTo({
+      url: './creatPost?isIdCard=0',
+    })
   },
   closePopup() {
     const vm = this.selectComponent('#popup-modal');
