@@ -76,6 +76,7 @@ Page({
         }).then(res => {
             if (res.statusCode == 200) {
                 let data = res.data.data
+                data = data.sort((a, b) => a.picOrder - b.picOrder)
                 let imgInfoArray: Array<object> = []
                 for (let it of data) {
                     imgInfoArray.push({
