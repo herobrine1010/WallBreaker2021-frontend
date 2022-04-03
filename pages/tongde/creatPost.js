@@ -207,12 +207,14 @@ Page({
     dialogTip:"",
     dialogCancelText:"取消",
     dialogOkText:"确认",
+    page_attribute:{},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.page_attribute = JSON.parse(JSON.stringify(app.globalData.user_attribute));
     // 检查页面类型
     const {isIdCard} = {...options};
     this.setData({
@@ -248,7 +250,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.reportEvent("tongde_creatpost_onshow", app.globalData.user_attribute)
   },
 
   /**
@@ -411,6 +413,8 @@ Page({
         duration: 2000,
         success: wx.navigateBack({})
       });
+      this.page_attribute['lost_found_type'] = parseInt(this.data.formValue.type) || 0
+      wx.reportEvent("tongde_creatpost_tapok", this.page_attribute)
     }).catch(err => {
       if(err == 'blocked'){
         this.setData({

@@ -91,6 +91,9 @@ function initPageData(that, type, labelId, keyword) {
         isLastPage: res.data.data.current>=that.data.pages
       })
     })
+    // 因为调用本函数时，可以不传type和labelId，type默认为0，labelId默认为全部
+    that.page_attribute['lost_found_type'] = type || 0
+    wx.reportEvent("tongde_main_initpagedata", that.page_attribute)
 }
 Component({
   behaviors: [scrollBehavior, searchBehavior, swiperbehavior],
@@ -262,6 +265,7 @@ Component({
     current: 1,
     isLastPage: false
   },
+  page_attribute:{},
   /* 
   数据监听器
   通过监听this.data中数据变化, 执行函数, 发送请求
@@ -282,13 +286,14 @@ Component({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.page_attribute = JSON.parse(JSON.stringify(app.globalData.user_attribute));
     initPageData(this)
     // getThenUpdateLostFoundList(this,0,null,null,1);
     // updateCache(this,0,null,null,2);
 
   },
   onShow: function(options) {
-
+    wx.reportEvent("tongde_main_onshow", app.globalData.user_attribute)
   },
   onShareAppMessage: function () {
     return {

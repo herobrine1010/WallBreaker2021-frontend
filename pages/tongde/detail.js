@@ -72,6 +72,8 @@ Page({
     
       /*tapOkEvent:"dialogTapOkForAcceptApplying"*/
     },
+    page_attribute:{},
+    onShowState : false
   },
   showPersonDetail:function(e){
     let that = this;
@@ -125,6 +127,7 @@ Page({
   contactDetail:function(e){
     //需要获得发布者的联系信息
     var that = this;
+    wx.reportEvent("tongde_detail_contactdetail", this.page_attribute)
     that.setData({
       'dialog.isDialogShow':true,
       // 'dialog.infoDetail.value': this.data.contact
@@ -134,6 +137,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.page_attribute = JSON.parse(JSON.stringify(app.globalData.user_attribute));
     let id = options.lostfoundId;
     request({
       url: '/lostfound/getLostFound/' + id,
@@ -211,8 +215,10 @@ Page({
         pictures: data.allPicUrl ? data.allPicUrl.split(','):['/static/icon/tongde-default-image.jpg'], //留一个页面
         //pictures: data.allPicUrl.split(','),
         'dialog.infoDetail.Value': data.contact,
-        'dialog.infoDetail.Key': contactTypeText.filter(item => item.id==data.contactType)[0].content + ": "
+        'dialog.infoDetail.Key': contactTypeText.filter(item => item.id==data.contactType)[0].content + ": ",
+        onShowState: true
       });
+      this.onShow();
     }).catch(err => {
       console.log(err);
       wx.showToast({
@@ -239,7 +245,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if(this.data.onShowState){
+      this.page_attribute['lost_found_type'] = this.data.type || 0
+      wx.reportEvent("tongde_detail_onshow", this.page_attribute)
+    }
   },
 
   /**
