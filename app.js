@@ -35,9 +35,9 @@ App({
      * 生产：https://tongji-poby.sparkxyf.com/api
      * 测试：https://www.wallbreaker.top
      */
-    // url: 'https://tongji-poby.sparkxyf.com/api'
+    url: 'https://tongji-poby.sparkxyf.com/api'
     // url:'https://jixingyun.tongji.edu.cn/api1'
-     url:'https://www.wallbreaker.top'
+    //  url:'https://www.wallbreaker.top'
     // url:'http://localhost:9000'
   },
 
