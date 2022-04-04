@@ -2,6 +2,7 @@
 
 import {AvatarFrameSharedAssets} from '../resources/assets-base64'
 import {AvatarFrameShareInfo} from '../share-common'
+var app=getApp();
 
 Page({
 
@@ -18,6 +19,10 @@ Page({
      */
     onShareAppMessage() {
         return AvatarFrameShareInfo.data
+    },
+
+    onShow(){
+        wx.reportEvent("avatar_frame_select_back_img", app.globalData.user_attribute)
     },
 
     
