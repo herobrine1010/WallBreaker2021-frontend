@@ -111,7 +111,7 @@ Component({
   behaviors: [filterBehavior],
   data: {
     // new 标签
-    isNewLabelShow: Date.now() < new Date(2022,3,4), // 4月4号标签失效
+    isNewLabelShow: Date.now() < new Date(2022,3,18), // 4月18号标签失效。这种“全局”写死的做法很糟糕，应该尽快改掉！
     // 金刚位入口
     entryItem: [
       {
@@ -119,7 +119,7 @@ Component({
         text: '校园闲鱼',
         path: '/pages/xianyu/main',
         opentype: 'navigate',
-        isNew: true
+        isNew: false
       },
       {
         icon: 'jiren-icon.png',
@@ -132,7 +132,7 @@ Component({
         text: '同济百科',
         path: '/pages/jishi/encyclopedia',
         opentype: 'navigate',
-        isNew: true
+        isNew: false
       },
 
       {
@@ -148,7 +148,7 @@ Component({
         text: '头像框定制',
         path: '/package_avatar_frame/avatar-frame/page-welcome/welcome',
         opentype: 'navigate',
-        isNew: 'true'
+        isNew: true
       },
 
      
