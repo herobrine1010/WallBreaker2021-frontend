@@ -76,6 +76,7 @@ Page({
     loading:false,
     submitFeedbackLock:false,
     outerScrollViewHeight:'auto',
+    page_attribute:{},
 
   },
 
@@ -83,6 +84,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.page_attribute = JSON.parse(JSON.stringify(app.globalData.user_attribute));
     if(options.tabIndex==1){
       this.setData({
         tabIndex:1,
@@ -268,6 +270,10 @@ Page({
           isEnd:current==pages?true:false,
         }
       })
+      if(reset){
+        this.page_attribute['encyclopedia_type'] = parseInt(that.data.tabIndex) || 0
+        wx.reportEvent("jishi_encyclopedia_getdata", this.page_attribute)
+      }
     })      
   },
   detectLoadingTimeout: function(){
@@ -307,6 +313,7 @@ Page({
         },
         // data:{communicationId:e.currentTarget.dataset.id}
       })
+      wx.reportEvent("jishi_encyclopedia_clickquestionanswerline", app.globalData.user_attribute)
     }
   },
   previewImage:function(e){
@@ -336,6 +343,7 @@ Page({
   },
   makePhoneCall:function(e){
     console.log(e.currentTarget.dataset)
+    wx.reportEvent("jishi_encyclopedia_showphonenum", app.globalData.user_attribute)
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.phone,
       success:() => {
@@ -347,6 +355,7 @@ Page({
           },
           // data:{communicationId:e.currentTarget.dataset.id}
         })
+        wx.reportEvent("jishi_encyclopedia_makephonecall", app.globalData.user_attribute)
       }
     })
   },
@@ -402,6 +411,7 @@ Page({
           title: '感谢您的反馈！',
           icon: 'success'
         });
+        wx.reportEvent("jishi_encyclopedia_clickfeedback", app.globalData.user_attribute)
      })
     }
   },
@@ -448,4 +458,7 @@ Page({
           }
         }
       },
+  onShow(){
+    wx.reportEvent("jishi_encyclopedia_onshow", app.globalData.user_attribute)
+  }
 })
