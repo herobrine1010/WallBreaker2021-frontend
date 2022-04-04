@@ -10,6 +10,7 @@ import { request } from "../../../request/request";
 import {WxCanvasPlus} from "../../../utils/WxCanvasPlus"
 import {AvatarFrameSharedAssets} from "../resources/assets-base64"
 import {AvatarFrameShareInfo} from '../share-common'
+var app=getApp();
 
 // pages/avatar-frame/avatar-frame.ts
 Page({
@@ -139,6 +140,10 @@ Page({
         return AvatarFrameShareInfo.data
     },
 
+    onShow(){
+        wx.reportEvent("avatar_frame_avatar_frame", app.globalData.user_attribute)
+    },
+
     /**
      * 页面按钮触控事件处理。
      * 按钮id放置于 data-btnid 中。
@@ -159,6 +164,7 @@ Page({
                             title: "保存成功啦",
                             icon: "success"
                         })
+                        wx.reportEvent("avatar_frame_btnclickhandler_saveimg", app.globalData.user_attribute)
                     }).catch(e => {
                         wx.showModal({
                             title: "失败了呜呜",

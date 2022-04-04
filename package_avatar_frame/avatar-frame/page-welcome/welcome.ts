@@ -10,6 +10,7 @@
 
 import {AvatarFrameSharedAssets} from '../resources/assets-base64'
 import {AvatarFrameShareInfo} from '../share-common'
+var app=getApp();
 
 Page({
 
@@ -33,5 +34,8 @@ Page({
         wx.navigateTo({
             url: '../page-select-backimg/select-back-img'
         })
+    },
+    onShow(){
+        wx.reportEvent("avatar_frame_welcome_onshow", app.globalData.user_attribute)
     }
 })
