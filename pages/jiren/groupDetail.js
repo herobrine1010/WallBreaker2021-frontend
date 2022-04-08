@@ -964,20 +964,14 @@ copyWxId(){
         wx.requestSubscribeMessage({
           tmplIds: [tmpId],
           success (res) {
-            let result;
-            if(res[tmpId]=='accept')
-              result=true
-            else if(res[tmpId]=='reject')
-              result=false
-            
             request({
               url:'/userTeam/apply',
               method:"POST",
               header:{ },
               data:{
                 teamId:that.data.teamId,
-                agreeReceiveMsg:result,
-                page:'/pages/welcome/welcome',
+                agreeReceiveMsg:res[tmpId]=='accept',
+                page:app.getSharedUrl(),
               },
             }).then(res => {
               console.log(res)

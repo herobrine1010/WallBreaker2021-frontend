@@ -252,12 +252,8 @@ Page({
       tmplIds: [tmpId],
       success (res) {
         let result;
-        if(res[tmpId]=='accept')
-          result=true
-        else if(res[tmpId]=='reject')
-          result=false
         let payload=that.data.payload
-        payload.agreeReceiveMsg=result
+        payload.agreeReceiveMsg=res[tmpId]=='accept'
         that.setData({payload})
         that.inititalizeTeam()
       }
